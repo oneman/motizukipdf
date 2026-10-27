@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IUT data types — log-theta-lattice explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>IUT data types <small>initial Θ-data → log-theta-lattice → Hodge theaters, alien copies, log-volume</small></h1>
+  <nav>
+    <button class="tab" data-tab="data">1 Θ-data &amp; validate</button>
+    <button class="tab" data-tab="lattice">2 lattice</button>
+    <button class="tab" data-tab="ht">3 Hodge theater</button>
+    <button class="tab" data-tab="alien">4 alien copies</button>
+    <button class="tab" data-tab="multi">5 multiradial / log-volume</button>
+    <button class="tab" data-tab="species">6 species</button>
+    <button class="tab" data-tab="ids">7 identifiers</button>
+  </nav>
+</header>
+
+<section id="controls">
+  <fieldset>
+    <legend>generate initial Θ-data <span class="ref">[IUTchI] Def 3.1 — Frey curve of an abc triple, F_mod = Q</span></legend>
+    <label>a <input id="in-a" type="number" min="1" size="6"></label>
+    <label>b <input id="in-b" type="number" min="1" size="6"></label>
+    <label>c <input id="in-c" type="number" min="2" size="6"></label>
+    <label>l <input id="in-l" type="number" min="5" max="67" size="3"></label>
+    <button id="btn-gen-abc">generate</button>
+    <label>example <select id="sel-example">
+      <option value="0">1 + 2³ = 3², l=7</option>
+      <option value="1">3 + 5³ = 2⁷, l=11</option>
+      <option value="2" selected>1 + 2⁵·3·5² = 7⁴, l=13</option>
+      <option value="3">5 + 3³ = 2⁵, l=7</option>
+      <option value="4">1 + 2⁴·5 = 3⁴, l=7</option>
+      <option value="5">synthetic number field</option>
+    </select></label>
+    <button id="btn-random">random</button>
+    <button id="btn-validate">validate</button>
+    <button id="btn-json">download JSON</button>
+  </fieldset>
+  <fieldset>
+    <legend>log-theta-lattice <span class="ref">[IUTchIII] Def 1.4, 3.8 — focus <b id="focus-label">(0,0)</b></span></legend>
+    <label>horizontal link <select id="sel-horizontal">
+      <option value="ThetaLink">Θ-link</option>
+      <option value="ThetaUnitsModTorsLink">Θ×μ-link</option>
+      <option value="ThetaUnitsModTorsGauLink">Θ×μ_gau-link</option>
+      <option value="ThetaUnitsModTorsLGPTorsorLink" selected>Θ×μ_LGP-link</option>
+      <option value="ThetaUnitsModTorsLgpIdealLink">Θ×μ_lgp-link</option>
+    </select></label>
+    <button id="btn-log" title="key l">log-link ↑</button>
+    <button id="btn-theta" title="key t">Θ-link →</button>
+    <button id="btn-h" title="key H">build infinite H</button>
+    <span class="arrows"><button id="btn-left">←</button><button id="btn-up">↑</button><button id="btn-down">↓</button><button id="btn-right">→</button></span>
+    <span class="name" id="data-name"></span>
+  </fieldset>
+</section>
+
+<main>
+  <div class="pane" id="pane-data">
+    <div id="data-view"></div>
+    <details><summary>JSON (same schema as <code>iut gen --json</code>)</summary><pre id="json-view"></pre></details>
+  </div>
+  <div class="pane" id="pane-lattice"><canvas id="c-lattice"></canvas></div>
+  <div class="pane" id="pane-ht"><canvas id="c-ht"></canvas></div>
+  <div class="pane" id="pane-alien"><canvas id="c-alien"></canvas></div>
+  <div class="pane" id="pane-multi"><canvas id="c-multi"></canvas></div>
+  <div class="pane" id="pane-species"><canvas id="c-species"></canvas></div>
+  <div class="pane" id="pane-ids">
+    <p>Every object whose notation contains a non-letter symbol (†, ‡, ∗, ◦, •, ⊢, ⊩, ▶, ×, μ, ±, ⋊, ⊞, ⊚, ⊛, Δ, &gt;, …) has an English-letters-only identifier, unique case-insensitively. Generated from <code>src/iut_ids.c</code>.
+      <input id="id-filter" placeholder="filter: e.g. Mono, Θ, hodgetheater, Dag" size="40"> <span id="id-count"></span></p>
+    <div id="id-table"></div>
+  </div>
+</main>
+
+<footer><span id="status"></span>
+  <span class="help">keys: ←↑↓→ focus · l log-link · t Θ-link · H infinite H · 1–7 tabs · click a vertex to focus, double-click to create one</span></footer>
+
+<script src="identifiers.js"></script>
+<script src="iut.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
