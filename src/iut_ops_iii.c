@@ -247,7 +247,7 @@ void iut_tensor_packet_build(const iut_initial_theta_data *d, unsigned j, unsign
     memset(out, 0, sizeof *out);
     out->j = j; out->nfactors = j + 1; out->vQ_p = vQ_p; out->holomorphic = holomorphic;
     out->nv_over_vQ = count_v_over(d, vQ_p);
-    unsigned long s = 1; for (unsigned k = 0; k < out->nfactors; ++k) s *= (out->nv_over_vQ ? out->nv_over_vQ : 1);
+    unsigned long long s = 1; for (unsigned k = 0; k < out->nfactors; ++k) s *= (out->nv_over_vQ ? out->nv_over_vQ : 1);
     if (vQ_p == 0) s *= (1UL << j);
     out->nsummands = s;
     out->log_volume = 0.0;
@@ -266,7 +266,7 @@ void iut_tensor_packet_global(const iut_initial_theta_data *d, unsigned j, iut_t
      * the number field F_mod tensored over Q, a direct sum of [F_mod:Q]^{j} number fields. */
     memset(out, 0, sizeof *out);
     out->j = j; out->nfactors = j + 1; out->global = 1; out->holomorphic = 1;
-    unsigned long s = 1; for (unsigned k = 0; k + 1 < out->nfactors; ++k) s *= (d->dmod ? d->dmod : 1);
+    unsigned long long s = 1; for (unsigned k = 0; k + 1 < out->nfactors; ++k) s *= (d->dmod ? d->dmod : 1);
     out->nsummands = s;
 }
 int iut_tensor_packet_localize(const iut_tensor_packet *global, const iut_tensor_packet *local, iut_report *r)
@@ -400,7 +400,7 @@ void iut_multiradial_full_build(const iut_log_theta_lattice *lat, int n, iut_mul
     iut_procession prc; iut_procession_build(d, IUT_PRC_PM, &prc);
     out->ind1_count = prc.automorphisms;
     /* (Ind2): Ism acts on each direct summand of each packet */
-    unsigned long s = 0; for (unsigned k = 0; k < out->npackets; ++k) s += out->packet[k].nsummands;
+    unsigned long long s = 0; for (unsigned k = 0; k < out->npackets; ++k) s += out->packet[k].nsummands;
     out->ind2_summands = s;
     out->ind3 = 1;
     iut_non_interference ni; iut_kummer_non_interference(d, &ni);

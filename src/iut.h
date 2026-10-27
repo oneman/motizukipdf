@@ -364,7 +364,7 @@ void iut_report_add(iut_report *r, iut_severity s, const char *cond, const char 
 
 /* ------------------------------------------------------------- generators  */
 /* Frey curve  y² = x(x−a)(x+b) of an abc triple, Fmod = Q.  [ExpEst] Thm A/B */
-int  iut_gen_from_abc(iut_initial_theta_data *d, long a, long b, long c, unsigned l);
+int  iut_gen_from_abc(iut_initial_theta_data *d, long long a, long long b, long long c, unsigned l);
 /* pseudo-random but valid-looking initial Θ-data from a seed                 */
 int  iut_gen_random(iut_initial_theta_data *d, unsigned seed);
 /* a tiny hand-made example with explicit valuations                          */
@@ -426,7 +426,7 @@ void iut_md_species(FILE *f);
 
 /* --------------------------------------------------------------- utility   */
 int  iut_is_prime(unsigned n);
-unsigned long iut_factorial(unsigned n);
+unsigned long long iut_factorial(unsigned n);
 int  iut_selftest(FILE *out);      /* returns number of failures               */
 
 /* --------------------------------------------------------------- views     */
@@ -444,7 +444,7 @@ void iut_view_idents(FILE *f, const char *filter);
 
 /* option parsing shared by CLI and TUI */
 typedef struct {
-    long a, b, c; unsigned l; int example; unsigned seed; int have_abc, have_example, have_seed;
+    long long a, b, c; unsigned l; int example; unsigned seed; int have_abc, have_example, have_seed;
     iut_link_kind horizontal; int rows; int json;
 } iut_options;
 void iut_options_default(iut_options *o);

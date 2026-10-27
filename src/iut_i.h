@@ -80,13 +80,13 @@ typedef enum {
 } iut_poly_kind;
 typedef struct {
     iut_poly_kind kind;
-    unsigned long count;       /* number of constituent morphisms (0 = "all", i.e. full) */
+    unsigned long long count;       /* number of constituent morphisms (0 = "all", i.e. full) */
     unsigned nV;               /* +-full only: signs α ∈ {±1}^V                        */
     int sign[IUT_MAX_V];
     int index_bijective;       /* capsule kinds: index map bijective                    */
     const char *ref;
 } iut_poly_morphism;
-void iut_poly_make(iut_poly_kind k, unsigned long count, iut_poly_morphism *out);
+void iut_poly_make(iut_poly_kind k, unsigned long long count, iut_poly_morphism *out);
 /* §0: the composite of two poly-morphisms is the set of composites (multiplicities ignored) */
 int  iut_poly_compose(const iut_poly_morphism *second, const iut_poly_morphism *first, iut_poly_morphism *out);
 /* Def 6.1 (iv): positive / negative / α-signed +-full poly-isomorphism */
@@ -215,7 +215,7 @@ typedef struct {
 typedef struct { unsigned ncritical, nstrictly_critical; int kappa_coric, inf_kappa_coric, inf_kappa_units_coric; const char *failed; } iut_kappa_verdict;
 void iut_kappa_coric_check(const iut_kappa_function *f, iut_kappa_verdict *out);
 /* Rem 3.1.7 (iii): Gal(K/F(μ_l)) ≅ SL_2(F_l) is the unique such subgroup; L_C(C̲_K) and L_C(κ-sol) linearly disjoint */
-typedef struct { unsigned long sl2_order; const char *k_over_F_mu_l; int linearly_disjoint, center_free; } iut_kappa_sol;
+typedef struct { unsigned long long sl2_order; const char *k_over_F_mu_l; int linearly_disjoint, center_free; } iut_kappa_sol;
 void iut_kappa_sol_get(const iut_initial_theta_data *d, iut_kappa_sol *out);
 
 /* the local Frobenioids of Ex 3.2 (v ∈ V^bad), Ex 3.3 (v ∈ V^good ∩ V^non), Ex 3.4 (v ∈ V^arc) */
@@ -316,15 +316,15 @@ typedef struct {
     /* Ex 4.3: Aut(C̲_K) ≅ Out(Π_{C̲_K}) ≅ Aut(D^⊛) ⊇ Aut_ε(C̲_K);  images in GL_2(F_l)/{±1}:
      *   Aut   ↔ Borel (∗ ∗; 0 ∗),   Aut_ε ↔ semi-unipotent (∗ ∗; 0 ±1),  Aut/Aut_ε ≅ F_l^*
      * Def 6.1 (v): Aut(D^⊚±) ↠ F_l^* with kernel Aut_±;  Aut_csp ⊆ Aut_±;  Aut_±/Aut_csp ≅ F_l^{⋊±} */
-    unsigned long aut_image_order;      /* |Borel/{±1}| = l(l−1)²/2                             */
-    unsigned long aut_eps_image_order;  /* |semi-unipotent/{±1}| = l(l−1)                       */
-    unsigned long quotient_order;       /* |Aut/Aut_ε| = l*   (D^⊛);  |Aut_±/Aut_csp| = 2l (D^⊚±) */
+    unsigned long long aut_image_order;      /* |Borel/{±1}| = l(l−1)²/2                             */
+    unsigned long long aut_eps_image_order;  /* |semi-unipotent/{±1}| = l(l−1)                       */
+    unsigned long long quotient_order;       /* |Aut/Aut_ε| = l*   (D^⊛);  |Aut_±/Aut_csp| = 2l (D^⊚±) */
     const char *quotient_group;         /* "F_l^*" / "F_l^{⋊±}"                                 */
     int double_cover;                   /* D^⊚± → D^⊛ is a double covering                       */
 } iut_global_base;
 void iut_global_base_get(const iut_initial_theta_data *d, iut_global_base_kind k, iut_global_base *out);
 /* Ex 4.3 (i), Def 6.1 (v), Rem 6.1.1: V ⊆ V^±un = Aut_ε·V = V^± = Aut_csp·V ⊆ V^Bor = Aut·V ⊆ V(K) */
-typedef struct { const char *id, *notation, *orbit_of; unsigned lower_bound; unsigned long upper_bound; } iut_valuation_orbit;
+typedef struct { const char *id, *notation, *orbit_of; unsigned lower_bound; unsigned long long upper_bound; } iut_valuation_orbit;
 unsigned iut_valuation_orbits(const iut_initial_theta_data *d, iut_valuation_orbit *out, unsigned max);
 
 /* Ex 4.4: |F_l| = F_l/{±1} ↔ cusps of C̲_v; μ_− the 2-torsion point; the evaluation
@@ -360,7 +360,7 @@ void iut_label_transport_make(const iut_initial_theta_data *d, int signed_labels
 int  iut_label_transport_check(const iut_label_transport *lt, const iut_initial_theta_data *d);
 
 /* Prop 4.8 (ΘNF) and Prop 6.6 (Θ±ell): the isomorphism torsors of bridges and Hodge theaters */
-typedef struct { const char *object, *group; unsigned long order; const char *ref; } iut_iso_torsor;
+typedef struct { const char *object, *group; unsigned long long order; const char *ref; } iut_iso_torsor;
 unsigned iut_iso_torsors(const iut_initial_theta_data *d, iut_iso_torsor *out, unsigned max);
 
 /* Prop 4.9 (ΘNF) and Prop 6.8 (Θ±ell): forgetting structure
@@ -371,9 +371,9 @@ unsigned iut_iso_torsors(const iut_initial_theta_data *d, iut_iso_torsor *out, u
 typedef struct {
     int signed_labels;
     unsigned n;                /* l* or l±                                                        */
-    unsigned long symmetric_group_order;     /* n!                                                */
+    unsigned long long symmetric_group_order;     /* n!                                                */
     double   label_assignments;              /* n^n                                               */
-    unsigned long procession_assignments;    /* n!                                                */
+    unsigned long long procession_assignments;    /* n!                                                */
     double   reduction_factor;               /* n^n / n!                                          */
     const char *transitivity;                /* "simply transitive" / "doubly transitive"         */
 } iut_forgetful_counts;
@@ -401,7 +401,7 @@ typedef struct {
 } iut_global_frobenioid;
 void iut_global_frobenioid_get(const iut_initial_theta_data *d, iut_global_frobenioid_kind k, iut_global_frobenioid *out);
 /* Ex 5.1 (vii): V_j = {v_j}, V_J = ∏_j V_j, the diagonal V_⟨J⟩ ↪ V_J */
-typedef struct { unsigned nj, nV; unsigned long total; int diagonal; const char *notation; } iut_distribution;
+typedef struct { unsigned nj, nV; unsigned long long total; int diagonal; const char *notation; } iut_distribution;
 void iut_distribution_make(const iut_initial_theta_data *d, int diagonal, iut_distribution *out);
 /* Rem 5.4.2: log-volume of the F_⟨J⟩ copy = average over j (÷ l*), of F_J = sum */
 double iut_distribution_log_volume(const iut_distribution *dist, const double *per_j, unsigned n);
@@ -421,8 +421,8 @@ typedef struct {
     unsigned n;                /* l                                                       */
     int      label[2*IUT_MAX_LSTAR+1];  /* one bijection T ≅ F_l                              */
     int      is_group;         /* 1: F_l^{⋊±}-group ({±1}-orbit), 0: torsor (F_l^{⋊±}-orbit)  */
-    unsigned long orbit_size;  /* 2 or 2l                                                 */
-    unsigned long aut_plus_order, aut_pm_order;   /* Aut_+(T) ⊆ Aut_±(T) of index 2 (groups) */
+    unsigned long long orbit_size;  /* 2 or 2l                                                 */
+    unsigned long long aut_plus_order, aut_pm_order;   /* Aut_+(T) ⊆ Aut_±(T) of index 2 (groups) */
 } iut_fl_semi_pm_set;
 void iut_fl_semi_pm_group_make(const iut_initial_theta_data *d, iut_fl_semi_pm_set *out);
 void iut_fl_semi_pm_torsor_make(const iut_initial_theta_data *d, iut_fl_semi_pm_set *out);
@@ -439,7 +439,7 @@ typedef struct {
     unsigned size;             /* l                                                       */
     int eta_zero[IUT_MAX_V];   /* †η⁰_v = 0                                                */
     int eta_pm[IUT_MAX_V];     /* †η^±_v = ±1 (we store +1; defined up to sign)             */
-    unsigned long aut_plus_index;  /* [Aut : Aut_+] = 2                                     */
+    unsigned long long aut_plus_index;  /* [Aut : Aut_+] = 2                                     */
 } iut_labcusp_pm_torsor;
 void iut_labcusp_pm_torsor_make(const iut_initial_theta_data *d, iut_labcusp_pm_torsor *out);
 int  iut_labcusp_pm_forget(const iut_initial_theta_data *d, int signed_label);   /* LabCusp± ∖ {0} → LabCusp */
@@ -447,7 +447,7 @@ int  iut_labcusp_pm_forget(const iut_initial_theta_data *d, int signed_label);  
 /* Def 6.1 (iv): Aut_+(†D) and Aut_α(†D) for α ∈ {±1}^V; signed +-full poly-isomorphisms */
 typedef struct { unsigned nV; int alpha[IUT_MAX_V]; int all_plus, all_minus; } iut_sign_vector;
 void iut_sign_vector_make(const iut_initial_theta_data *d, const int *alpha, iut_sign_vector *out);
-unsigned long iut_sign_vector_count(const iut_initial_theta_data *d);   /* |{±1}^V| = 2^|V| */
+unsigned long long iut_sign_vector_count(const iut_initial_theta_data *d);   /* |{±1}^V| = 2^|V| */
 
 /* Prop 6.7: from a D-Θ±-bridge to a D-Θ-bridge: †D_T|_{T∖{0}} → †D_{T*} (two labels ±t ↦ one |t|),
  * and the two strips †D_0, †D_⊞ ↦ the single †D_>;  +-full replaced by full (good v) / Ex 4.4 (bad v) */

@@ -44,7 +44,7 @@ int iut_pseudo_monoid_contains(iut_pseudo_monoid_kind big, iut_pseudo_monoid_kin
 
 static const char *poly_ids[IUT_POLY_COUNT] = { "PolyMorphism", "PolyIsomorphism", "FullPolyIsomorphism", "PlusFullPolyIsomorphism", "CapsuleFullPolyMorphism", "CapsuleFullPolyIsomorphism" };
 const char *iut_poly_kind_id(iut_poly_kind k) { return (unsigned)k < IUT_POLY_COUNT ? poly_ids[k] : "?"; }
-void iut_poly_make(iut_poly_kind k, unsigned long count, iut_poly_morphism *out)
+void iut_poly_make(iut_poly_kind k, unsigned long long count, iut_poly_morphism *out)
 {
     memset(out, 0, sizeof *out);
     out->kind = k; out->ref = "[IUTchI] §0";
@@ -223,7 +223,7 @@ void iut_kappa_coric_check(const iut_kappa_function *f, iut_kappa_verdict *out)
 }
 void iut_kappa_sol_get(const iut_initial_theta_data *d, iut_kappa_sol *out)
 {
-    unsigned long l = d->l;
+    unsigned long long l = d->l;
     out->sl2_order = l * (l * l - 1);          /* |SL_2(F_l)| = l(l²−1) */
     out->k_over_F_mu_l = "Gal(K/F(μ_l)) is the unique subgroup of Gal(K/F) isomorphic to SL_2(F_l)";
     out->linearly_disjoint = 1;                /* L_C(C̲_K) and L_C(κ-sol) are linearly disjoint */
@@ -385,7 +385,7 @@ int iut_labcusp_torsor_act(const iut_initial_theta_data *d, int u, int label) { 
 
 void iut_global_base_get(const iut_initial_theta_data *d, iut_global_base_kind k, iut_global_base *out)
 {
-    unsigned long l = d->l;
+    unsigned long long l = d->l;
     memset(out, 0, sizeof *out);
     out->kind = k; out->nV_section = d->nV;
     out->aut_image_order = l * (l - 1) * (l - 1) / 2;   /* Borel/{±1} */
@@ -401,12 +401,12 @@ void iut_global_base_get(const iut_initial_theta_data *d, iut_global_base_kind k
 }
 unsigned iut_valuation_orbits(const iut_initial_theta_data *d, iut_valuation_orbit *out, unsigned max)
 {
-    unsigned long l = d->l;
+    unsigned long long l = d->l;
     iut_valuation_orbit t[4] = {
         { "VSet",  "V",     "—",                     d->nV, d->nV },
         { "VPmUn", "V^±un = V^±", "Aut_ε(C̲_K)·V = Aut_csp(D^⊚±)·V  ([IUTchI] Ex 4.3 (i); Def 6.1 (v); Rem 6.1.1)", d->nV, d->nV * l * (l - 1) },
         { "VBor",  "V^Bor", "Aut(C̲_K)·V  ([IUTchI] Ex 4.3 (i))", d->nV, d->nV * l * (l - 1) * (l - 1) / 2 },
-        { "VK",    "V(K)",  "all valuations of K", d->nV, d->nV * (unsigned long)(d->dmod ? d->dK / d->dmod : d->dK) },
+        { "VK",    "V(K)",  "all valuations of K", d->nV, d->nV * (unsigned long long)(d->dmod ? d->dK / d->dmod : d->dK) },
     };
     unsigned n = 4 > max ? max : 4; memcpy(out, t, n * sizeof *out); return n;
 }
@@ -453,7 +453,7 @@ int iut_label_transport_check(const iut_label_transport *lt, const iut_initial_t
 }
 unsigned iut_iso_torsors(const iut_initial_theta_data *d, iut_iso_torsor *out, unsigned max)
 {
-    unsigned long l = d->l, twoV = 1UL << (d->nV < 63 ? d->nV : 63);
+    unsigned long long l = d->l, twoV = 1UL << (d->nV < 63 ? d->nV : 63);
     iut_iso_torsor t[] = {
         { "D-NF-bridge †φ^NF_⊛",          "F_l^*",                 d->lstar,        "[IUTchI] Prop 4.8 (i)" },
         { "D-Θ-bridge †φ^Θ_⊛",            "trivial",               1,               "[IUTchI] Prop 4.8 (ii)" },
@@ -502,7 +502,7 @@ void iut_distribution_make(const iut_initial_theta_data *d, int diagonal, iut_di
     /* [IUTchI] Ex 5.1 (vii): V_j = {v_j}_{v∈V} for j ∈ F_l^*, V_J = ∏_j V_j, and the diagonal V_⟨J⟩ ↪ V_J;
      * Rem 5.1.1: F_⟨J⟩ = "constant distribution", F_J = "arbitrary distribution" of the global data.  */
     out->nj = d->lstar; out->nV = d->nV; out->diagonal = diagonal;
-    out->total = diagonal ? d->nV : (unsigned long)d->nV * d->lstar;
+    out->total = diagonal ? d->nV : (unsigned long long)d->nV * d->lstar;
     out->notation = diagonal ? "V_⟨J⟩" : "V_J";
 }
 double iut_distribution_log_volume(const iut_distribution *dist, const double *per_j, unsigned n)
@@ -585,7 +585,7 @@ void iut_sign_vector_make(const iut_initial_theta_data *d, const int *alpha, iut
     out->nV = d->nV; out->all_plus = 1; out->all_minus = 1;
     for (unsigned i = 0; i < d->nV; ++i) { out->alpha[i] = alpha ? (alpha[i] < 0 ? -1 : 1) : 1; if (out->alpha[i] < 0) out->all_plus = 0; else out->all_minus = 0; }
 }
-unsigned long iut_sign_vector_count(const iut_initial_theta_data *d) { return 1UL << (d->nV < 63 ? d->nV : 63); }   /* |{±1}^V| */
+unsigned long long iut_sign_vector_count(const iut_initial_theta_data *d) { return 1UL << (d->nV < 63 ? d->nV : 63); }   /* |{±1}^V| */
 void iut_prop_six_seven_apply(const iut_initial_theta_data *d, iut_prop_six_seven *out)
 {
     /* [IUTchI] Prop 6.7: the D-Θ-bridge associated to a D-Θ±-bridge: restrict †D_T to T ∖ {0}, pass to the quotient

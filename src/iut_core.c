@@ -58,7 +58,7 @@ int iut_is_prime(unsigned n)
     for (unsigned d = 2; d * d <= n; ++d) if (n % d == 0) return 0;
     return 1;
 }
-unsigned long iut_factorial(unsigned n) { unsigned long f = 1; while (n > 1) f *= n--; return f; }
+unsigned long long iut_factorial(unsigned n) { unsigned long long f = 1; while (n > 1) f *= n--; return f; }
 
 /* ------------------------------------------------------------- labels    */
 int iut_label_in_Fl(const iut_initial_theta_data *d, int t)     { return t >= -(int)d->lstar && t <= (int)d->lstar; }
@@ -160,7 +160,7 @@ void iut_data_finish(iut_initial_theta_data *d)
 }
 
 /* ------------------------------------------------------------- generators */
-static unsigned ordp(long n, unsigned p) { unsigned k = 0; if (n < 0) n = -n; while (n && n % p == 0) { n /= p; ++k; } return k; }
+static unsigned ordp(long long n, unsigned p) { unsigned k = 0; if (n < 0) n = -n; while (n && n % p == 0) { n /= p; ++k; } return k; }
 
 static void add_val(iut_initial_theta_data *d, unsigned p, iut_reduction red, unsigned ordq)
 {
@@ -176,14 +176,14 @@ static void add_val(iut_initial_theta_data *d, unsigned p, iut_reduction red, un
     v->f_K = 1;
 }
 
-int iut_gen_from_abc(iut_initial_theta_data *d, long a, long b, long c, unsigned l)
+int iut_gen_from_abc(iut_initial_theta_data *d, long long a, long long b, long long c, unsigned l)
 {
     memset(d, 0, sizeof *d);
     if (a <= 0 || b <= 0 || c <= 0 || a + b != c) return -1;
     if (gcdl(a, b) != 1 || gcdl(a, c) != 1) return -2;
     if (!iut_is_prime(l) || l < 5 || l > IUT_MAX_L) return -3;
-    snprintf(d->name, sizeof d->name, "abc(%ld,%ld,%ld) l=%u", a, b, c, l);
-    snprintf(d->curve, sizeof d->curve, "Frey y^2=x(x-%ld)(x+%ld)", a, b);
+    snprintf(d->name, sizeof d->name, "abc(%lld,%lld,%lld) l=%u", a, b, c, l);
+    snprintf(d->curve, sizeof d->curve, "Frey y^2=x(x-%lld)(x+%lld)", a, b);
     d->dmod = 1;                 /* F_mod = Q(j) = Q (j ∈ Q) */
     d->l = l;
     /* Frey curve has full rational 2-torsion, so F_tpd = Q.  F ⊇ Q(√-1, E[2·3·5]). */
@@ -191,10 +191,10 @@ int iut_gen_from_abc(iut_initial_theta_data *d, long a, long b, long c, unsigned
     d->dK = d->dF * (unsigned long long)l * (l + 1) * (l - 1) * (l - 1); /* × |GL2(F_l)|, [IUTchIV] (E3) */
     d->epsilon = 0;
     /* bad primes: p | abc.  Δ = 16 (abc)²; for odd p, ord_p(j) = −2 ord_p(abc). */
-    long n = a * b * c;
+    long long n = a * b * c;
     unsigned p = 2;
     double logq2 = 0, logf = 0, logq = 0;
-    for (long m = n; m > 1 && d->nV < IUT_MAX_V - 4; ) {
+    for (long long m = n; m > 1 && d->nV < IUT_MAX_V - 4; ) {
         while (p <= 3037000 && m % p) ++p;
         if (m % p) { /* leftover prime factor larger than our trial bound */
             p = (unsigned)m;
@@ -235,22 +235,22 @@ int iut_gen_from_abc(iut_initial_theta_data *d, long a, long b, long c, unsigned
     return 0;
 }
 
-static unsigned long rng_state;
-static unsigned rnd(unsigned n) { rng_state = rng_state * 6364136223846793005UL + 1442695040888963407UL; return (unsigned)((rng_state >> 33) % (n ? n : 1)); }
+static unsigned long long rng_state;
+static unsigned rnd(unsigned n) { rng_state = rng_state * 6364136223846793005ULL + 1442695040888963407ULL; return (unsigned)((rng_state >> 33) % (n ? n : 1)); }
 
 int iut_gen_random(iut_initial_theta_data *d, unsigned seed)
 {
     static const unsigned ls[] = { 7, 11, 13, 17, 19, 23 };
-    rng_state = seed * 2654435761UL + 12345;
+    rng_state = seed * 2654435761ULL + 12345;
     if (seed % 2 == 0) {
         /* random coprime abc triple with 16 | one of them, then the Frey curve */
         for (int tries = 0; tries < 100; ++tries) {
-            long a = 1 + 2 * rnd(60), b = 16 * (1 + rnd(40));
+            long long a = 1 + 2 * rnd(60), b = 16 * (1 + rnd(40));
             if (a % 4 != 3) a += 2;
             if (gcdl(a, b) != 1) continue;
             unsigned l = ls[rnd(6)];
             if (iut_gen_from_abc(d, a, b, a + b, l) == 0) {
-                snprintf(d->name, sizeof d->name, "random#%u abc(%ld,%ld,%ld) l=%u", seed, a, b, a + b, l);
+                snprintf(d->name, sizeof d->name, "random#%u abc(%lld,%lld,%lld) l=%u", seed, a, b, a + b, l);
                 return 0;
             }
         }
@@ -273,7 +273,8 @@ int iut_gen_random(iut_initial_theta_data *d, unsigned seed)
         if (d->V[d->nV - 1].e_K < d->V[d->nV - 1].e_mod) d->V[d->nV - 1].e_K = d->V[d->nV - 1].e_mod;   /* K_v ⊇ (F_mod)_v */
     }
     for (unsigned k = 0; k < 10 && d->nV < 8; ++k) if (!used[k]) { add_val(d, ps[k], IUT_RED_GOOD, 0); used[k] = 1; }
-    add_val(d, 2, rnd(2) ? IUT_RED_GOOD : IUT_RED_BAD_MULT, 2 + 2 * rnd(3));
+    { iut_reduction red2 = rnd(2) ? IUT_RED_GOOD : IUT_RED_BAD_MULT; unsigned oq2 = 2 + 2 * rnd(3);   /* sequenced: argument evaluation order is unspecified in C */
+      add_val(d, 2, red2, oq2); }
     add_val(d, 0, IUT_RED_GOOD, 0);
     d->dF = (unsigned long long)d->dmod * 2 * 6 * 48; d->dK = d->dF * (unsigned long long)d->l * (d->l + 1) * (d->l - 1) * (d->l - 1);
     d->logdF = 0.5 + 0.1 * rnd(40);

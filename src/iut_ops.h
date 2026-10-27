@@ -85,7 +85,7 @@ typedef struct {
     unsigned nsteps;                  /* l* or l± */
     unsigned size[IUT_MAX_LPM+1];     /* |S_k| */
     int      first_label[IUT_MAX_LPM+1], last_label[IUT_MAX_LPM+1];
-    unsigned long automorphisms;      /* Π_k |S_k|!  (the (Ind1) permutations)   */
+    unsigned long long automorphisms;      /* Π_k |S_k|!  (the (Ind1) permutations)   */
     double   normalization[IUT_MAX_LPM+1]; /* 1/|S_k|: procession-normalization weight */
 } iut_procession;
 void iut_procession_build(const iut_initial_theta_data *d, iut_procession_kind k, iut_procession *out);
@@ -104,7 +104,7 @@ typedef struct {
     unsigned n_dom;                 /* capsule size l* or l                          */
     const char *dom, *cod;          /* identifiers of domain capsule / codomain strip */
     const char *symmetry;           /* group of isomorphisms: F_l^*, F_l^{⋊±}, {±1} …*/
-    unsigned long isos;             /* order of that group                           */
+    unsigned long long isos;             /* order of that group                           */
     int poly;                       /* poly-morphism (1) or morphism (0)             */
     int ok;                         /* bridge present in the Hodge theater           */
 } iut_bridge;
@@ -328,7 +328,7 @@ typedef struct {
     unsigned nfactors;
     unsigned vQ_p;                   /* rational prime (0 = archimedean)                  */
     unsigned nv_over_vQ;             /* |{v ∈ V : v | vQ}|                                 */
-    unsigned long nsummands;         /* nonarch: (nv_over_vQ)^{j+1} direct summand fields; arch: 2^{j}·|V_vQ|^{j+1} (Prop 1.5) */
+    unsigned long long nsummands;         /* nonarch: (nv_over_vQ)^{j+1} direct summand fields; arch: 2^{j}·|V_vQ|^{j+1} (Prop 1.5) */
     int holomorphic;                 /* log(^A F_vQ)  vs  mono-analytic I(^A D⊢_vQ)        */
     int global;                      /* (M_mod)_A : tensor powers of F_mod                 */
     double log_volume;               /* packet-normalized log-volume of the integral structure (0) / of the shells */
@@ -372,8 +372,8 @@ typedef struct {
     iut_tensor_packet packet[IUT_MAX_LPM];
     unsigned nsplitting;                /* (b) splitting monoids Ψ⊥_LGP at v ∈ Vbad, one per j    */
     unsigned nnumberfields;             /* (c) copies (M_MOD)_j = (M_mod)_j of F_mod^×           */
-    unsigned long ind1_count;           /* |Aut(Prc)| permutations (× Aut(G_v), symbolic)        */
-    unsigned long ind2_summands;        /* number of direct summands acted on by Ism             */
+    unsigned long long ind1_count;           /* |Aut(Prc)| permutations (× Aut(G_v), symbolic)        */
+    unsigned long long ind2_summands;        /* number of direct summands acted on by Ism             */
     int ind3;                           /* upper semi-compatibility present                      */
     int log_kummer_ok;                  /* (ii) log-Kummer correspondence (non-interference)     */
     int link_compat[4];                 /* (iii) (a)-(d) compatibility with the Θ×μ_LGP-link     */
@@ -406,7 +406,7 @@ double iut_iv_prop14_iii_dI_plus_aI_lower(const iut_local_field *k, unsigned n);
 int    iut_iv_prop14_iv(const iut_local_field *k, unsigned n);                   /* μ_log = 0 if p>2 unramified */
 
 /* ---- Prop 1.5: archimedean ------------------------------------------------ */
-unsigned long iut_iv_arch_summands(unsigned nI, unsigned nVarc);   /* 2^{|I|−1}·|V|^{|I|} */
+unsigned long long iut_iv_arch_summands(unsigned nI, unsigned nVarc);   /* 2^{|I|−1}·|V|^{|I|} */
 double iut_iv_arch_metric_factor(unsigned nI);                     /* 2^{|I|−1}            */
 double iut_iv_arch_tensor_bound(unsigned nI, double lambda);       /* ⊗m_i ∈ λ^{|I|}·B_I   */
 

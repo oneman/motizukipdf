@@ -30,12 +30,12 @@ int iut_selftest_ops(FILE *out)
       CHECK(iut_labcusp_is_bijection(&pm, &d) && iut_labcusp_is_bijection(&nf, &d) && iut_labcusp_is_bijection(&fg, &d) && fg.n == d.lstar, "[IUTchI] Prop 6.5: LabCusp± ≅ F_l, LabCusp ≅ F_l^*, forgetting the sign"); }
     { iut_procession p; iut_procession_build(&d, IUT_PRC_PM, &p); int lab[IUT_MAX_LPM + 1]; unsigned n = iut_procession_capsule_labels(&p, 2, lab);
       CHECK(p.nsteps == d.lpm && p.size[p.nsteps - 1] == d.lpm && n == 3 && lab[0] == 0 && lab[2] == 2, "[IUTchI] Prop 6.9: Prc(D_T) has l± capsules, S±_3 = {0,1,2}");
-      unsigned long a = 1; for (unsigned k = 1; k <= d.lpm; ++k) a *= iut_factorial(k); CHECK(p.automorphisms == a, "[IUTchI] Prop 6.9: |Aut Prc| = Π |S±_k|! = %lu", p.automorphisms);
+      unsigned long long a = 1; for (unsigned k = 1; k <= d.lpm; ++k) a *= iut_factorial(k); CHECK(p.automorphisms == a, "[IUTchI] Prop 6.9: |Aut Prc| = Π |S±_k|! = %llu", p.automorphisms);
       iut_procession_build(&d, IUT_PRC_NF, &p); CHECK(p.nsteps == d.lstar && p.first_label[0] == 1, "[IUTchI] Prop 4.11: Prc(D_J) has l* capsules starting at label 1"); }
     { unsigned u = 0; iut_hodge_theater *ht = iut_hodge_theater_new(&d, 0, 0, &u); iut_capsule T, J; iut_capsule_from_T(ht, &T); iut_capsule_from_J(ht, &J);
       CHECK(T.n == d.l && J.n == d.lstar && iut_capsule_full_poly_iso_count(&J) == 720, "[IUTchI] §0: capsules F_T (l members), F_J (l* members, 6! poly-isos)");
       iut_capsule_morphism m = { 2, 3, { 0, 0 } }; CHECK(!iut_capsule_morphism_valid(&m), "[IUTchI] §0: a non-injective index map is not a capsule morphism");
-      iut_bridge b; iut_bridge_build(ht, IUT_BRIDGE_THETA_PM, &b); CHECK(b.isos == (2UL << d.nV) && b.n_dom == d.l, "[IUTchI] Prop 6.6 (i): Θ±-bridge isomorphisms form a torsor over {±1} × {±1}^V (%lu)", b.isos);
+      iut_bridge b; iut_bridge_build(ht, IUT_BRIDGE_THETA_PM, &b); CHECK(b.isos == (2UL << d.nV) && b.n_dom == d.l, "[IUTchI] Prop 6.6 (i): Θ±-bridge isomorphisms form a torsor over {±1} × {±1}^V (%llu)", b.isos);
       iut_bridge_build(ht, IUT_BRIDGE_THETA_ELL, &b); CHECK(b.isos == 2UL * d.l, "[IUTchI] Prop 6.6 (ii): Θell-bridge isomorphisms form an F_l^{⋊±}-torsor (2l)");
       iut_bridge_build(ht, IUT_BRIDGE_NF, &b); CHECK(b.isos == d.lstar, "[IUTchI] Def 5.5: NF-bridge isomorphisms form an F_l^*-torsor (l*)");
       iut_d_hodge_theater D; iut_hodge_theater_to_D(ht, &D); CHECK(D.nT == d.l && D.Pi_Gt[0] == D.Pi_BoxPlus[0] && iut_d_hodge_theater_iso(&D, &D), "[IUTchI] Def 6.13: forgetful functor to the D-HT keeps the glued Π copies");
@@ -151,14 +151,14 @@ int iut_selftest_ops(FILE *out)
       CHECK(iut_theta_monoid_vertically_coric(lat, 0, &r) == 0 && iut_theta_monoid_multiradial(&r) == 0, "[IUTchIII] Prop 2.1, Thm 2.2: vertically coric and multiradial theta monoids");
       iut_radial_item it[8]; CHECK(iut_etale_radial_environment(it, 8) == 6 && !strcmp(it[0].item, "(aR)"), "[IUTchIII] Cor 2.3: radial data (aR)-(eR) + coric data");
       iut_multiradial_full M; iut_multiradial_full_build(lat, 0, &M); iut_procession prc; iut_procession_build(&d, IUT_PRC_PM, &prc);
-      CHECK(M.npackets == d.lstar + 1 && M.nnumberfields == d.lstar && M.nsplitting == d.lstar * 3 && M.ind1_count == prc.automorphisms && M.ind2_summands >= M.npackets && M.ind3 && M.log_kummer_ok, "[IUTchIII] Thm 3.11: (a) %u packets, (b) %u splitting monoids, (c) %u number fields, Ind1 = %lu", M.npackets, M.nsplitting, M.nnumberfields, M.ind1_count);
+      CHECK(M.npackets == d.lstar + 1 && M.nnumberfields == d.lstar && M.nsplitting == d.lstar * 3 && M.ind1_count == prc.automorphisms && M.ind2_summands >= M.npackets && M.ind3 && M.log_kummer_ok, "[IUTchIII] Thm 3.11: (a) %u packets, (b) %u splitting monoids, (c) %u number fields, Ind1 = %llu", M.npackets, M.nsplitting, M.nnumberfields, M.ind1_count);
       iut_named_value s[8]; unsigned n = iut_cor312_steps(lat, s, 8); CHECK(n == 7 && fabs(s[0].value + iut_log_q(&d) / 26.0) < 1e-9 && iut_cor312_holds(lat), "[IUTchIII] Cor 3.12: steps listed, −|log q| = %.4f, inequality holds", s[0].value);
       iut_apply_log_link(lat, 0, -1); CHECK(iut_LGP_link_requires_log(lat, 0, 0, &r) == 0 && iut_LGP_link_requires_log(lat, 1, 0, NULL) != 0, "[IUTchIII] Def 3.8 (ii): the Θ×μ_LGP-link needs an incoming log-link");
       iut_mutation_history H; iut_mutation_history_from_lattice(lat, &H); CHECK(H.nvertices >= 4 && H.nedges >= 3, "[IUTchIV] Def 3.3 (iii): the lattice as a mutation-history (%u vertices, %u edges)", H.nvertices, H.nedges);
       iut_lattice_free(lat); free(lat); }
     { unsigned v = 0; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].in_Vbad_mod) { v = i; break; } unsigned p = d.V[v].p; iut_tensor_packet P[IUT_MAX_LPM], G; iut_report r = {0};
       unsigned n = iut_tensor_packet_procession(&d, p, 1, P); unsigned nv = 0; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].kind == IUT_V_NONARCH && d.V[i].p == p) nv++;
-      CHECK(n == d.lstar + 1 && P[2].nfactors == 3 && P[2].nsummands == (unsigned long)nv * nv * nv && fabs(P[2].log_volume_shells - 3 * P[0].log_volume_shells) < 1e-9, "[IUTchIII] Prop 3.1: packet of S±_3 has 3 factors, |V_p|³ summands, 3× the shell log-volume");
+      CHECK(n == d.lstar + 1 && P[2].nfactors == 3 && P[2].nsummands == (unsigned long long)nv * nv * nv && fabs(P[2].log_volume_shells - 3 * P[0].log_volume_shells) < 1e-9, "[IUTchIII] Prop 3.1: packet of S±_3 has 3 factors, |V_p|³ summands, 3× the shell log-volume");
       iut_tensor_packet_build(&d, 2, 0, 0, &P[0]); unsigned na = 0; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].kind == IUT_V_ARCH) na++; CHECK(P[0].nsummands == iut_iv_arch_summands(3, na), "[IUTchIII] Prop 3.2 / [IUTchIV] Prop 1.5: archimedean packet has 2^{|I|−1}|V|^{|I|} summands");
       iut_tensor_packet_global(&d, 2, &G); iut_tensor_packet_build(&d, 2, p, 1, &P[1]); CHECK(G.global && G.nfactors == 3 && iut_tensor_packet_localize(&G, &P[1], &r) == 0 && iut_tensor_packet_localize(&P[1], &G, NULL) != 0, "[IUTchIII] Prop 3.3: global packet localizes into the local one");
       iut_monoid m; iut_lgp_monoid_build(&d, 4, v, 5, &m); CHECK(m.kind == IUT_MON_LGP && m.gen[0].num == 16 && m.split, "[IUTchIII] Prop 3.4 (ii): LGP splitting monoid at j = 4 generated by q̲^16");

@@ -61,8 +61,8 @@ double iut_iv_prop14_iii_dI_plus_aI_lower(const iut_local_field *k, unsigned n) 
 int    iut_iv_prop14_iv(const iut_local_field *k, unsigned n) { return iut_iv_prop12_iv_unramified(k, n); }  /* μ_log((R_I)~) = 0 and φ((R_I)~) ⊆ (R_I)~ */
 
 /* -------------------------------------------------------------- Prop 1.5 */
-unsigned long iut_iv_arch_summands(unsigned nI, unsigned nVarc)
-{ unsigned long s = 1; for (unsigned i = 0; i < nI; ++i) s *= (nVarc ? nVarc : 1); return nI ? s << (nI - 1) : 1; }  /* C⊗_R C ≅ C⊕C: 2^{|I|−1}·|V|^{|I|} summands */
+unsigned long long iut_iv_arch_summands(unsigned nI, unsigned nVarc)
+{ unsigned long long s = 1; for (unsigned i = 0; i < nI; ++i) s *= (nVarc ? nVarc : 1); return nI ? s << (nI - 1) : 1; }  /* C⊗_R C ≅ C⊕C: 2^{|I|−1}·|V|^{|I|} summands */
 double iut_iv_arch_metric_factor(unsigned nI) { return nI ? pow(2.0, (double)nI - 1.0) : 1.0; }                  /* direct-sum metric = 2^{|I|−1} × tensor metric */
 double iut_iv_arch_tensor_bound(unsigned nI, double lambda) { return pow(lambda, (double)nI); }                 /* ⊗ m_i ∈ λ^{|I|}·B_I */
 
