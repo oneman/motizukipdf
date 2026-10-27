@@ -201,3 +201,28 @@ Hodge theaters built so far as spokes ([IUTchIII] Cor 3.12; [IUTchI] Cor 6.10).
 
 Everything the program *does* compute is cross-checked between the C and JS
 implementations by `make test`.
+
+## 9. Where each object appears in the web app
+
+Part I of `htdocs/index.html` draws one diagram per data type of this document
+(`htdocs/diagrams.js`, `DIAGRAMS.cards`), Part II (`htdocs/processes.js`,
+`PROCESSES.list`) walks through the processes that use them:
+
+| process | objects used | sources followed |
+|---|---|---|
+| 1 abc → Θ-data | `InitialThetaData`, `VSet`, `VBadMod`, label sets, `LogQ`, `LogF` | [IUTchI] Def 3.1 via [IUTchIV] §2, [Pano] §3 |
+| 2 forgetting | the nine prime-strip kinds, `CORIC` | [IUTchI] Fig I1.2; [IUTchIII] Thm 1.5 |
+| 3 Hodge theater | `FT`, `FJ`, bridges, `FBoxPlus`, `DCircDotPm`, `FGt`, `FCircAst`, pilots | [IUTchI] Def 6.13; [Alien] Fig 3.8 |
+| 4 lattice | `LogLink`, `ThetaLink`, `NCircColumn`, `InfiniteH`, `LogShell` | [IUTchIII] Def 1.4; [Alien] Fig 3.6, 3.15 |
+| 5 Θ-link | (aΘ),(bΘ),(cΘ), `AlienCopy`, `IndOne`, `IndTwo` | [Alien] §3.3 (vii), §3.6 (iv), Fig 3.19 |
+| 6 transport | Frobenius-like / étale-like, Kummer, `KummerDetachment` | [Alien] §2.7, Fig 2.1 |
+| 7 (Stp1)–(Stp8) | labels (0,0) ⇝ (0,◦) ⇝ (0,◦)⊢ ⇝ (0,0)⊢ ⇔ (1,0)⊢, `HolomorphicHull`, `LogVolume` | [EssLgc] §3.6, §3.10 |
+| 8 ∧ vs ∨ | the numerical model A, B, ε, N | [EssLgc] §2.3, §2.4, Ex 2.4.5 |
+| 9 Gaussian integral | — (analogy) | [Alien] §1, §3.8 |
+| 10 log-volume | `MultiradialRepresentation`, `SPmJPlusOne`, `CTheta`, Thm 1.10 | [IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10 |
+
+The diagrams are drawings of the *data model*, not of the proofs: processes 6,
+7 and 9 render the structure of the arguments as described in [Alien] and
+[EssLgc] (labels, indeterminacies, which object is glued to which), while the
+anabelian reconstructions, the Kummer theory of theta functions and the
+multiradial algorithm itself remain outside the program (see §8).

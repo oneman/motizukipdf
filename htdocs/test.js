@@ -80,5 +80,18 @@ lat.applyThetaLink(0, 1); check(lat.links.length === 10 && IUT.validateLattice(l
   var L2 = new IUT.Lattice(IUT.genExample(3), h); L2.buildH(0, 0, 1); check(IUT.validateLattice(L2).errors === 0, h + ' lattice validates');
 });
 
+// Part I / Part II modules (diagrams.js, processes.js) render in node too
+global.IUT_IDENTS = IDS; global.IUT = IUT; require('./diagrams.js'); require('./processes.js');
+check(global.DIAGRAMS.cards.length >= 14 && global.PROCESSES.list.length >= 10, 'gallery has ' + global.DIAGRAMS.cards.length + ' cards, ' + global.PROCESSES.list.length + ' processes');
+var allIdents = global.DIAGRAMS.cards.every(function (c) { return c.idents.every(function (i) { return !!IDS.find(i); }); });
+check(allIdents, 'every identifier shown on a card is in the generated table');
+var dd = IUT.genExample(2), ll = new IUT.Lattice(dd); ll.buildH(0, -1, 1);
+var badCards = global.DIAGRAMS.cards.filter(function (c) { try { return !/^<svg/.test(c.draw(dd, ll)); } catch (e) { return true; } });
+check(badCards.length === 0, 'all data-type diagrams render as SVG' + (badCards.length ? ': ' + badCards.map(function (c) { return c.id; }).join(',') : ''));
+var nsteps = 0, badSteps = [];
+global.PROCESSES.list.forEach(function (p) { p.steps.forEach(function (st, i) { nsteps++; try { if (!/^<svg/.test(st.draw({ d: dd, lat: ll, params: global.PROCESSES.params }))) badSteps.push(p.id + ':' + i); } catch (e) { badSteps.push(p.id + ':' + i + ' ' + e.message); } }); });
+check(badSteps.length === 0, nsteps + ' process steps render as SVG' + (badSteps.length ? ': ' + badSteps.join(', ') : ''));
+[IUT.genExample(0), IUT.genExample(5), IUT.genRandom(3)].forEach(function (dx) { var lx = new IUT.Lattice(dx); lx.buildH(0, -1, 1); var bad = 0; global.PROCESSES.list.forEach(function (p) { p.steps.forEach(function (st) { try { st.draw({ d: dx, lat: lx, params: global.PROCESSES.params }); } catch (e) { bad++; } }); }); global.DIAGRAMS.cards.forEach(function (c) { try { c.draw(dx, lx); } catch (e) { bad++; } }); check(bad === 0, 'diagrams render for ' + dx.name); });
+
 console.log((fails ? 'FAILED' : 'PASSED') + ': ' + fails + ' failure(s) / ' + n + ' checks');
 process.exit(fails ? 1 : 0);

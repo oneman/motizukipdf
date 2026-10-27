@@ -230,6 +230,10 @@ ROW("ZFCG",            "ZFCG",            "species","[IUTchIV] §3",            
 ROW("AlienCopy",       "alien copy",      "mutation","[Alien] §1, §3",         "a copy of a ring/scheme theory related to another only via a non-ring-theoretic link"),
 ROW("BasicPrimeStrip", "BPS = F⊢×μ",      "primestrip","[FormIUT] §1",         "'basic prime-strip': the F⊢×μ-prime-strip (horizontally coric gluing datum)"),
 ROW("EtaleHodgeTheater","etHT",           "hodgetheater","[FormIUT] §1",       "étale-like Hodge theater (D-Θ±ell NF-HT) in the Formalization paper's notation"),
+ROW("InitialThetaData","(F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)","datum","[IUTchI] Def 3.1", "a collection of initial Θ-data: the input of the whole theory"),
+ROW("NCircColumn",     "(n,◦)",           "lattice","[IUTchIII] Thm 3.11; [EssLgc] §3.6", "the whole vertical line n of the log-theta-lattice, i.e. its vertically coric (étale-like) data"),
+ROW("Multiradial",     "multiradial",     "property","[IUTchII] Ex 1.7; [Alien] §3.1, Fig 3.1", "a radial algorithm compatible with arbitrary permutations of the radial data over the coric data (parallel transport)"),
+ROW("Uniradial",       "uniradial",       "property","[IUTchII] Ex 1.7; [Alien] §3.1, Fig 3.1", "a radial algorithm that is not multiradial (e.g. holomorphic structures)"),
 };
 
 const size_t iut_idents_count = sizeof iut_idents / sizeof iut_idents[0];

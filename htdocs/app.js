@@ -1,17 +1,20 @@
 /*
- * app.js — HTML5-canvas front end for the IUT data model (iut.js).
+ * app.js — the Part III explorer (HTML5 canvas) plus the glue that renders the
+ * Part I gallery (diagrams.js) and the Part II processes (processes.js) from
+ * the same state: one Lattice (iut.js) plus a focus (n,m).
  *
- * Tabs:  data · lattice · hodge theater · alien copies · multiradial · species · identifiers
- * All drawing is plain canvas 2D; the state is one Lattice (iut.js) plus a focus (n,m).
+ * Explorer tabs:  data · lattice · hodge theater · alien copies · multiradial · species · identifiers
  */
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var state = { lat: null, horizontal: 'ThetaUnitsModTorsLGPTorsorLink', seed: 2, example: 2, tab: 'lattice', hoverCell: null };
+  var IDENT_SET = {}; IUT_IDENTS.IDENTS.forEach(function (x) { IDENT_SET[x.id.toLowerCase()] = x; });
 
   var COLORS = {
-    bg: '#0f1115', grid: '#262b36', text: '#e6e6e6', dim: '#8b93a7', dag: '#f6c343', ddag: '#5ac8fa', bullet: '#c9d1d9',
-    log: '#7ee787', theta: '#ff7b72', etale: '#a5d6ff', frob: '#ffa657', shared: '#7ee787', alien: '#ff7b72', hull: '#d2a8ff', focus: '#ffffff'
+    bg: '#ffffff', grid: '#c9d0de', text: '#1c2130', dim: '#5d6578', dag: '#d9a300', ddag: '#0e9aa7', bullet: '#3a4356',
+    log: '#1f9d55', theta: '#e4572e', etale: '#2f6fde', frob: '#f29e1f', shared: '#1f9d55', alien: '#d7263d', hull: '#7b4fd1', focus: '#1c2130',
+    etaleFill: '#e4edff', frobFill: '#fff1dc', dagFill: '#fff6cc', ddagFill: '#dcf5f7', softFill: '#f3f5fa', thetaFill: '#fde3dc', panelFill: '#f7f8fc'
   };
 
   function fit(canvas) {
@@ -22,7 +25,7 @@
     return { ctx: ctx, w: w, h: h };
   }
   function text(ctx, s, x, y, opt) {
-    opt = opt || {}; ctx.font = (opt.bold ? 'bold ' : '') + (opt.size || 13) + 'px ui-monospace, Menlo, Consolas, monospace';
+    opt = opt || {}; ctx.font = (opt.bold ? 'bold ' : '') + (opt.size || 13) + 'px "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif';
     ctx.fillStyle = opt.color || COLORS.text; ctx.textAlign = opt.align || 'left'; ctx.textBaseline = opt.base || 'middle'; ctx.fillText(s, x, y);
   }
   function arrow(ctx, x1, y1, x2, y2, color, width, label) {
@@ -89,7 +92,7 @@
       var col = ht.copy === 'Dag' ? COLORS.dag : ht.copy === 'Ddag' ? COLORS.ddag : COLORS.bullet;
       if (isFocus) { ctx.strokeStyle = COLORS.focus; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, 16, 0, 7); ctx.stroke(); }
       ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 10, 0, 7); ctx.fill();
-      text(ctx, ht.copy === 'Dag' ? '†' : ht.copy === 'Ddag' ? '‡' : '•', x, y + 1, { color: '#000', bold: true, size: 13, align: 'center' });
+      text(ctx, ht.copy === 'Dag' ? '†' : ht.copy === 'Ddag' ? '‡' : '•', x, y + 1, { color: '#fff', bold: true, size: 13, align: 'center' });
       text(ctx, '#' + ht.universe + (ht.hasIncomingLog ? ' I' : ''), x + 15, y + 12, { color: COLORS.dim, size: 10 });
     });
     if (state.hoverCell) { var hc = state.hoverCell; ctx.strokeStyle = COLORS.dim; ctx.setLineDash([3, 3]); ctx.strokeRect(X(hc[0]) - cw / 2 + 4, Y(hc[1]) - rh / 2 + 4, cw - 8, rh - 8); ctx.setLineDash([]); }
@@ -110,46 +113,46 @@
     text(ctx, 'Θ±ell NF-Hodge theater ' + title + '   universe #' + ht.universe + '   log-iterate ' + ht.logIterate + '      [IUTchI] Def 6.13; [Alien] §3.3 (v) Fig 3.8      <ThetaPmEllNFHodgeTheater>', 12, 16, { size: 12, color: COLORS.dim });
     var midX = c.w / 2, leftW = c.w * 0.55, cap = ht.ThetaPmEllHodgeTheater.capsuleFT, capJ = ht.ThetaNFHodgeTheater.capsuleFJ;
     // left: Θ±ell-HT
-    box(ctx, 14, 34, leftW - 24, c.h - 150, '#3b4252', 'rgba(255,255,255,0.02)');
+    box(ctx, 14, 34, leftW - 24, c.h - 150, COLORS.grid, COLORS.panelFill);
     text(ctx, 'Θ±ell-Hodge theater  <ThetaPmEllHodgeTheater>', 24, 48, { size: 12, color: COLORS.dag });
     text(ctx, 'symmetry F_l^{⋊±} <FlSemiPm>: additive / geometric, conjugate synchronization', 24, 63, { size: 10, color: COLORS.dim });
     var tw = Math.min(34, (leftW - 60) / cap.length), ty = c.h / 2 - 20, tx0 = 30;
     cap.forEach(function (m, i) {
       var x = tx0 + i * tw, zero = m.t === 0;
-      box(ctx, x, ty, tw - 4, 34, zero ? COLORS.focus : COLORS.frob, zero ? 'rgba(255,255,255,0.12)' : 'rgba(255,166,87,0.12)', 4);
+      box(ctx, x, ty, tw - 4, 34, zero ? COLORS.theta : COLORS.frob, zero ? COLORS.thetaFill : COLORS.frobFill, 4);
       text(ctx, (m.t > 0 ? '+' : '') + m.t, x + (tw - 4) / 2, ty + 12, { size: 11, align: 'center' });
       text(ctx, '#' + (m.basepoint % 1000), x + (tw - 4) / 2, ty + 25, { size: 8, align: 'center', color: COLORS.dim });
     });
     text(ctx, 'capsule F_T,  t ∈ F_l  (' + cap.length + ' F-prime-strips, distinct basepoints)  <FT> <LabelT>', 30, ty - 14, { size: 11, color: COLORS.dim });
     // bridges
     var cx = tx0 + (cap.length * tw) / 2;
-    box(ctx, cx - 115, 80, 230, 40, COLORS.etale, 'rgba(165,214,255,0.08)');
+    box(ctx, cx - 115, 80, 230, 40, COLORS.etale, COLORS.etaleFill);
     text(ctx, 'D_⊚±  (Π_{X_K})  <DCircDotPm>', cx, 94, { size: 11, align: 'center', color: COLORS.etale });
     text(ctx, 'D-prime-strip, étale-like', cx, 110, { size: 10, align: 'center', color: COLORS.dim });
     arrow(ctx, cx, ty - 22, cx, 124, COLORS.etale, 1.5, 'Θell-bridge <ThetaEllBridge>');
-    box(ctx, cx - 90, ty + 90, 180, 40, COLORS.frob, 'rgba(255,166,87,0.08)');
+    box(ctx, cx - 90, ty + 90, 180, 40, COLORS.frob, COLORS.frobFill);
     text(ctx, 'F_⊞  <FBoxPlus>', cx, ty + 104, { size: 11, align: 'center', color: COLORS.frob });
     text(ctx, 'F-prime-strip, Frobenius-like', cx, ty + 120, { size: 10, align: 'center', color: COLORS.dim });
     arrow(ctx, cx, ty + 40, cx, ty + 86, COLORS.frob, 1.5, 'Θ±-bridge <ThetaPmBridge>');
     // right: ΘNF-HT
     var rx = leftW + 4;
-    box(ctx, rx, 34, c.w - rx - 14, c.h - 150, '#3b4252', 'rgba(255,255,255,0.02)');
+    box(ctx, rx, 34, c.w - rx - 14, c.h - 150, COLORS.grid, COLORS.panelFill);
     text(ctx, 'ΘNF-Hodge theater  <ThetaNFHodgeTheater>', rx + 10, 48, { size: 12, color: COLORS.ddag });
     text(ctx, 'symmetry F_l^* <FlStarSym>: multiplicative / arithmetic', rx + 10, 63, { size: 10, color: COLORS.dim });
     var jw = Math.min(40, (c.w - rx - 60) / capJ.length), jx0 = rx + 20;
     capJ.forEach(function (m, i) {
       var x = jx0 + i * jw;
-      box(ctx, x, ty, jw - 4, 34, COLORS.frob, 'rgba(255,166,87,0.12)', 4);
+      box(ctx, x, ty, jw - 4, 34, COLORS.frob, COLORS.frobFill, 4);
       text(ctx, String(m.j), x + (jw - 4) / 2, ty + 12, { size: 11, align: 'center' });
       text(ctx, 'q̲^' + (m.j * m.j), x + (jw - 4) / 2, ty + 25, { size: 8, align: 'center', color: COLORS.dim });
     });
     text(ctx, 'capsule F_J,  j ∈ F_l^*  (' + capJ.length + ' F-prime-strips)  <FJ> <LabelJ>', jx0, ty - 14, { size: 11, color: COLORS.dim });
     var jcx = jx0 + (capJ.length * jw) / 2;
-    box(ctx, jcx - 125, 80, 250, 40, COLORS.etale, 'rgba(165,214,255,0.08)');
+    box(ctx, jcx - 125, 80, 250, 40, COLORS.etale, COLORS.etaleFill);
     text(ctx, 'F_⊛  (Π_{C_K} ↷ F_mod^×)  <FCircAst>', jcx, 94, { size: 11, align: 'center', color: COLORS.etale });
     text(ctx, 'number-field portion', jcx, 110, { size: 10, align: 'center', color: COLORS.dim });
     arrow(ctx, jcx, ty - 22, jcx, 124, COLORS.etale, 1.5, 'NF-bridge <NFBridge>');
-    box(ctx, jcx - 125, ty + 90, 250, 40, COLORS.frob, 'rgba(255,166,87,0.08)');
+    box(ctx, jcx - 125, ty + 90, 250, 40, COLORS.frob, COLORS.frobFill);
     text(ctx, 'F_>  <FGt>', jcx, ty + 104, { size: 11, align: 'center', color: COLORS.frob });
     text(ctx, 'Θ-HT: F⊩_tht (Θ̲_v) → F⊩_mod (q̲_v)', jcx, ty + 120, { size: 10, align: 'center', color: COLORS.dim });
     arrow(ctx, jcx, ty + 40, jcx, ty + 86, COLORS.frob, 1.5, 'Θ-bridge <ThetaBridge>');
@@ -178,8 +181,8 @@
     text(ctx, 'Mutually alien copies across the ' + IUT.LINKS[lat.horizontal].notation + '  (' + n + ',' + m + ') → (' + (n + 1) + ',' + m + ')      [Alien] §1, §3.6; [IUTchII] Cor 4.10      <AlienCopy> <Dag> <Ddag>' + note, 12, 16, { size: 12, color: COLORS.dim });
     if (!A || !B || !L) { text(ctx, 'no Θ-link in the lattice yet. Press t on a vertex (or build the infinite H).', 20, 50); return; }
     var colW = (c.w - 60) / 2, lx = 20, rxx = 40 + colW, y0 = 44;
-    box(ctx, lx, y0, colW - 10, c.h - y0 - 130, COLORS.dag, 'rgba(246,195,67,0.05)');
-    box(ctx, rxx, y0, colW - 10, c.h - y0 - 130, COLORS.ddag, 'rgba(90,200,250,0.05)');
+    box(ctx, lx, y0, colW - 10, c.h - y0 - 130, COLORS.dag, COLORS.dagFill);
+    box(ctx, rxx, y0, colW - 10, c.h - y0 - 130, COLORS.ddag, COLORS.ddagFill);
     text(ctx, '†HT = ' + A.copy + '  (universe #' + A.universe + ')   domain: F⊩_LGP (Θ-pilot {q̲^{j²}})', lx + 10, y0 + 16, { color: COLORS.dag, bold: true });
     text(ctx, '‡HT = ' + B.copy + '  (universe #' + B.universe + ')   codomain: F⊩_Δ (q-pilot {q̲})', rxx + 10, y0 + 16, { color: COLORS.ddag, bold: true });
     var rowH = Math.min(58, (c.h - y0 - 170) / Math.max(1, d.VSet.length)), y = y0 + 40;
@@ -221,8 +224,8 @@
     ctx.strokeStyle = COLORS.grid; ctx.beginPath(); ctx.moveTo(left, zeroY); ctx.lineTo(left + w, zeroY); ctx.stroke();
     steps.forEach(function (s, i) {
       var x = left + i * bw + 6, ww = bw - 12;
-      ctx.fillStyle = COLORS.hull; ctx.fillRect(x, zeroY - s.hull * scale, ww / 2 - 2, s.hull * scale);
-      ctx.fillStyle = COLORS.theta; ctx.fillRect(x + ww / 2 + 2, zeroY, ww / 2 - 2, -s.thetaShift * scale);
+      ctx.fillStyle = '#c9b6ee'; ctx.fillRect(x, zeroY - s.hull * scale, ww / 2 - 2, s.hull * scale);
+      ctx.fillStyle = '#f4a893'; ctx.fillRect(x + ww / 2 + 2, zeroY, ww / 2 - 2, -s.thetaShift * scale);
       text(ctx, 'j=' + s.j, x + ww / 2, top + h + 14, { size: 11, align: 'center' });
       text(ctx, '|S±|=' + s.size + ' ' + s.perms + '!', x + ww / 2, top + h + 28, { size: 9, align: 'center', color: COLORS.dim });
       text(ctx, fmt(s.hull, 1), x + ww / 4, zeroY - s.hull * scale - 8, { size: 9, align: 'center', color: COLORS.hull });
@@ -251,7 +254,7 @@
     text(ctx, 'étale-picture', ex, ey - R - 18, { size: 11, align: 'center', color: COLORS.dim });
     var vs = lat.vertices();
     vs.forEach(function (ht, i) { var a = i / vs.length * 2 * Math.PI, x = ex + R * Math.cos(a), yy = ey + R * Math.sin(a); ctx.strokeStyle = COLORS.etale; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(x, yy); ctx.stroke(); ctx.fillStyle = ht.copy === 'Dag' ? COLORS.dag : ht.copy === 'Ddag' ? COLORS.ddag : COLORS.bullet; ctx.beginPath(); ctx.arc(x, yy, 4, 0, 7); ctx.fill(); });
-    ctx.fillStyle = COLORS.etale; ctx.beginPath(); ctx.arc(ex, ey, 9, 0, 7); ctx.fill(); text(ctx, 'D⊢', ex, ey, { size: 9, align: 'center', color: '#000', bold: true });
+    ctx.fillStyle = COLORS.etale; ctx.beginPath(); ctx.arc(ex, ey, 9, 0, 7); ctx.fill(); text(ctx, 'D⊢', ex, ey, { size: 9, align: 'center', color: '#fff', bold: true });
     text(ctx, 'bi-coric core <DMonoPrimeStrip>', ex, ey + R + 14, { size: 9, align: 'center', color: COLORS.dim });
   }
 
@@ -268,7 +271,7 @@
       var dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len;
       arrow(ctx, a[0] + ux * 70, a[1] + uy * 16, b[0] - ux * 70, b[1] - uy * 16, m.core ? COLORS.shared : COLORS.theta, 1.3, m.name);
     });
-    S.forEach(function (s) { var p = pos[s.id]; box(ctx, p[0] - 110, p[1] - 16, 220, 32, COLORS.bullet, 'rgba(15,17,21,0.95)'); text(ctx, s.id, p[0], p[1] - 5, { size: 10, align: 'center' }); text(ctx, s.name.slice(0, 34), p[0], p[1] + 8, { size: 9, align: 'center', color: COLORS.dim }); });
+    S.forEach(function (s) { var p = pos[s.id]; box(ctx, p[0] - 110, p[1] - 16, 220, 32, COLORS.bullet, '#ffffff'); text(ctx, s.id, p[0], p[1] - 5, { size: 10, align: 'center' }); text(ctx, s.name.slice(0, 34), p[0], p[1] + 8, { size: 9, align: 'center', color: COLORS.dim }); });
   }
 
   // ------------------------------------------------------------ identifiers tab (DOM)
@@ -282,10 +285,23 @@
 
   // ------------------------------------------------------------ control
   function setStatus(s) { $('status').textContent = s; }
-  function rebuild(d, keepHorizontal) {
-    state.lat = new IUT.Lattice(d, keepHorizontal ? state.horizontal : state.horizontal);
+  function rebuild(d) {
+    state.lat = new IUT.Lattice(d, state.horizontal);
     state.lat.buildH(0, -1, 1);
-    redraw();
+    redraw(); renderGallery(); PROCESSES.refresh();
+  }
+  function ctx() { return { d: state.lat.data, lat: state.lat }; }
+
+  // ------------------------------------------------------------ Part I gallery (SVG, diagrams.js)
+  function identPill(id) { var ok = IDENT_SET[id.toLowerCase()]; return '<span class="ident" data-id="' + escapeHtml(id) + '" title="' + (ok ? escapeHtml(ok.notation + ' — ' + ok.desc) : 'not in the identifier table') + '"' + (ok ? '' : ' style="background:#d7263d"') + '>' + escapeHtml(id) + '</span>'; }
+  function renderGallery() {
+    var g = $('gallery'); if (!g) return; var h = '';
+    DIAGRAMS.cards.forEach(function (c) {
+      var fig; try { fig = c.draw(state.lat.data, state.lat); } catch (e) { fig = '<p style="color:#d7263d">diagram error: ' + escapeHtml(e.message) + '</p>'; }
+      h += '<div class="card" id="card-' + c.id + '"><h3>' + escapeHtml(c.title) + '</h3><span class="ref">' + escapeHtml(c.ref) + '</span><div class="fig">' + fig + '</div><p>' + c.desc + '</p><div class="idents">' + c.idents.map(identPill).join('') + '</div></div>';
+    });
+    g.innerHTML = h;
+    g.querySelectorAll('.ident').forEach(function (p) { p.addEventListener('click', function () { $('id-filter').value = p.dataset.id; showTab('ids'); $('part-explorer').scrollIntoView(); }); });
   }
   function redraw() {
     var lat = state.lat;
@@ -299,6 +315,7 @@
     if (state.tab === 'species') drawSpecies();
     if (state.tab === 'ids') renderIdents();
   }
+  function explorerVisible() { var r = $('explorer').getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
   function showTab(t) {
     state.tab = t;
     document.querySelectorAll('.tab').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === t); });
@@ -306,6 +323,7 @@
     redraw();
   }
   function applyLog() { var f = state.lat.focus, L = state.lat.applyLogLink(f[0], f[1]); if (L) { state.lat.focus = [f[0], f[1] + 1]; setStatus('log-link (' + f + ') → (' + state.lat.focus + '): D-prime-strips shared, log-shells built in the codomain'); } else setStatus('cannot apply a log-link at the edge'); redraw(); }
+  function focusLabel(f) { return '(' + f[0] + ',' + f[1] + ')'; }
   function applyTheta() { var f = state.lat.focus, L = state.lat.applyThetaLink(f[0], f[1]); if (L) { state.lat.focus = [f[0] + 1, f[1]]; setStatus(L.notation + ' (' + f + ') → (' + state.lat.focus + '): O×μ shared, value groups dilated by ' + fmt(L.dilation, 3) + ', Π_v alien'); } else setStatus('cannot apply a Θ-link at the edge'); redraw(); }
   function buildH() { var f = state.lat.focus; state.lat.buildH(f[0], -3, 3); setStatus('built the infinite H on columns ' + f[0] + ',' + (f[0] + 1)); redraw(); }
   function moveFocus(dn, dm) { var f = state.lat.focus; if (IUT.Lattice.inRange(f[0] + dn, f[1] + dm)) state.lat.focus = [f[0] + dn, f[1] + dm]; redraw(); }
@@ -331,7 +349,7 @@
     cl.addEventListener('dblclick', function (ev) { var hit = latticeHit(ev); if (hit) { state.lat.get(hit[0], hit[1]); state.lat.focus = hit; setStatus('created a fresh Hodge theater at (' + hit + ') (no links yet)'); redraw(); } });
     cl.addEventListener('mousemove', function (ev) { state.hoverCell = latticeHit(ev); if (state.tab === 'lattice') drawLattice(); });
     document.addEventListener('keydown', function (ev) {
-      if (ev.target.tagName === 'INPUT' || ev.target.tagName === 'SELECT') return;
+      if (ev.target.tagName === 'INPUT' || ev.target.tagName === 'SELECT' || ev.target.tagName === 'TEXTAREA' || !explorerVisible()) return;
       if (ev.key === 'ArrowUp') moveFocus(0, 1); else if (ev.key === 'ArrowDown') moveFocus(0, -1); else if (ev.key === 'ArrowLeft') moveFocus(-1, 0); else if (ev.key === 'ArrowRight') moveFocus(1, 0);
       else if (ev.key === 'l') applyLog(); else if (ev.key === 't') applyTheta(); else if (ev.key === 'H') buildH();
       else if (ev.key >= '1' && ev.key <= '7') showTab(['data', 'lattice', 'ht', 'alien', 'multi', 'species', 'ids'][+ev.key - 1]);
@@ -341,7 +359,10 @@
     window.addEventListener('resize', redraw);
     var d = IUT.genExample(state.example);
     $('in-a').value = 1; $('in-b').value = 2400; $('in-c').value = 2401; $('in-l').value = 13;
+    state.lat = new IUT.Lattice(d, state.horizontal); state.lat.buildH(0, -1, 1);
+    PROCESSES.render($('processes'), ctx);
     rebuild(d); showTab('lattice'); setStatus('built the infinite H for ' + d.name + ' — click a vertex, then l / t / H');
   }
   document.addEventListener('DOMContentLoaded', init);
+  window.IUT_APP = { state: state, showTab: showTab, rebuild: rebuild, renderGallery: renderGallery };
 })();

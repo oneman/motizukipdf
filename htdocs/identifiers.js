@@ -188,7 +188,11 @@
   {"id": "ZFCG", "notation": "ZFCG", "kind": "species", "ref": "[IUTchIV] §3", "desc": "ZFC + Grothendieck's axiom on universes"},
   {"id": "AlienCopy", "notation": "alien copy", "kind": "mutation", "ref": "[Alien] §1, §3", "desc": "a copy of a ring/scheme theory related to another only via a non-ring-theoretic link"},
   {"id": "BasicPrimeStrip", "notation": "BPS = F⊢×μ", "kind": "primestrip", "ref": "[FormIUT] §1", "desc": "'basic prime-strip': the F⊢×μ-prime-strip (horizontally coric gluing datum)"},
-  {"id": "EtaleHodgeTheater", "notation": "etHT", "kind": "hodgetheater", "ref": "[FormIUT] §1", "desc": "étale-like Hodge theater (D-Θ±ell NF-HT) in the Formalization paper's notation"}
+  {"id": "EtaleHodgeTheater", "notation": "etHT", "kind": "hodgetheater", "ref": "[FormIUT] §1", "desc": "étale-like Hodge theater (D-Θ±ell NF-HT) in the Formalization paper's notation"},
+  {"id": "InitialThetaData", "notation": "(F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)", "kind": "datum", "ref": "[IUTchI] Def 3.1", "desc": "a collection of initial Θ-data: the input of the whole theory"},
+  {"id": "NCircColumn", "notation": "(n,◦)", "kind": "lattice", "ref": "[IUTchIII] Thm 3.11; [EssLgc] §3.6", "desc": "the whole vertical line n of the log-theta-lattice, i.e. its vertically coric (étale-like) data"},
+  {"id": "Multiradial", "notation": "multiradial", "kind": "property", "ref": "[IUTchII] Ex 1.7; [Alien] §3.1, Fig 3.1", "desc": "a radial algorithm compatible with arbitrary permutations of the radial data over the coric data (parallel transport)"},
+  {"id": "Uniradial", "notation": "uniradial", "kind": "property", "ref": "[IUTchII] Ex 1.7; [Alien] §3.1, Fig 3.1", "desc": "a radial algorithm that is not multiradial (e.g. holomorphic structures)"}
 ]
   ;
   var SPECIES = [
