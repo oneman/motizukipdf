@@ -269,6 +269,7 @@ int iut_gen_random(iut_initial_theta_data *d, unsigned seed)
         unsigned k; do { k = rnd(10); } while (used[k]); used[k] = 1;
         add_val(d, ps[k], IUT_RED_BAD_MULT, 1 + rnd(6));
         d->V[d->nV - 1].e_mod = 1 + rnd(d->dmod); d->V[d->nV - 1].f_mod = 1;
+        if (d->V[d->nV - 1].e_K < d->V[d->nV - 1].e_mod) d->V[d->nV - 1].e_K = d->V[d->nV - 1].e_mod;   /* K_v ⊇ (F_mod)_v */
     }
     for (unsigned k = 0; k < 10 && d->nV < 8; ++k) if (!used[k]) { add_val(d, ps[k], IUT_RED_GOOD, 0); used[k] = 1; }
     add_val(d, 2, rnd(2) ? IUT_RED_GOOD : IUT_RED_BAD_MULT, 2 + 2 * rnd(3));
