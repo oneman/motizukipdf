@@ -7,8 +7,10 @@ objects introduced in IUT I–IV into concrete data types**, with generators,
 validators, a terminal UI and a web app:
 
 * `src/` — C11 library + CLI + ncurses TUI (`iut`),
-* `htdocs/` — plain-JavaScript web app with the same model: the data types as
-  diagrams, the processes as step-by-step progressions, and a canvas explorer,
+* `htdocs/` — static web app that runs the C toolkit itself, compiled to
+  WebAssembly: every data type in its form, every process run live, a
+  log-theta-lattice explorer and worked examples that step through the
+  processes,
 * `docs/IDENTIFIERS.md` — the table of **English-letters-only identifiers** for
   every object whose notation uses symbols (†HT → `DagHodgeTheater`,
   F⊢×μ → `FMonoUnitsModTorsPrimeStrip`, Θ×μ_LGP-link →
@@ -19,7 +21,7 @@ validators, a terminal UI and a web app:
 * `docs/PROCESSES.md` — the **operations layer**: every step / process of
   [IUTchI–IV], [EssLgc] and [Alien] that acts on the data types, captured as
   C functions (`src/iut_ops_*.c`) behind a registry of 73 named processes
-  (`iut procs`, `iut run <id>`), mirrored one to one in `htdocs/ops.js`,
+  (`iut procs`, `iut run <id>`), run on the command line and in the web app,
 * `lean/` — the same data types in **Lean 4 / Mathlib**, with proofs that the
   constructed objects exist and satisfy the validators, and of the elementary
   facts behind them (see `lean/README.md`).
@@ -32,7 +34,7 @@ view carries a citation such as `[IUTchIII] Def 1.1` or `[Alien] §3.7 (iv)`.
 ```sh
 cd src
 make            # builds ./iut; uses ncurses(w) if present, text-only otherwise
-make test       # C self-tests (model + operations layer) + node tests of the web model and ops.js
+make test       # C self-tests (model + operations layer) + node tests of the web engine (wasm build)
 ./iut gen      --abc 1 2400 2401 --l 13      # generate initial Θ-data from an abc triple
 ./iut validate --example 1                   # validate it (exit code = number of errors)
 ./iut walk     --example 2 --rows 2          # build the "infinite H" of the log-theta-lattice:
@@ -77,57 +79,68 @@ random data; `a` type an abc triple; `q` quit.
 ## Web app
 
 Open `htdocs/index.html` in a browser (or `scripts/serve.sh` and visit
-http://localhost:8000/). No build step and no dependencies. The page is a
-single bright document in three parts, all computed from the initial Θ-data
-chosen in the bench at the top (abc triple → Frey curve, the five examples, a
-random synthetic number field):
+http://localhost:8000/). No build step, no server and no dependencies: the page
+is the C toolkit `src/*.c` compiled to WebAssembly (`htdocs/engine/iut.wasm.js`)
+and a few plain-JavaScript files. Every number, transcript and diagram is
+computed by the engine, so the page cannot drift from the C data model or the
+process registry. The *bench* at the top picks the initial Θ-data everything
+works on (a built-in example, an abc triple and a prime l, or a random synthetic
+number field), the horizontal link flavour and the size of the lattice; change
+it and every view recomputes.
 
-**Part I · Data types** — one diagram per mathematical object, with its
-citations and its letters-only identifiers: initial Θ-data (field tower, curves,
-V ≅ V_mod, V^bad_mod), label sets F_l / |F_l| / F_l^* and their symmetries,
-the prime-strip forgetful ladder with the coricity of each kind, the local datum
-at v (Π_v ↠ G_v, O▷ ≅ O▶ × O×, O×μ, Kummer), the Θ±ell NF-Hodge theater
-([Alien] Fig 3.8), the Θ-Hodge theater and the two pilots, log-link vs Θ-link,
-the log-theta-lattice ⊇ the infinite H ([Alien] Fig 3.6), log-shells, the three
-indeterminacies, the multiradial representation ([Alien] Fig 3.18), the
-étale-picture, species and mutations, the identifier rule.
+* **Data types** — one card per mathematical object: a diagram, the *live
+  instance* the engine builds from the selected data (`iut gen`, `iut walk`),
+  and the *form* of the object, i.e. the C struct or enum field by field with
+  the comment on every field (`htdocs/data/types.js`, generated from the
+  headers). Below the featured types, the complete catalogue of all 448
+  identifiers grouped by kind, each with its form.
+* **Processes** — the 73 processes of the registry, grouped by paper, each run
+  live on the selected data with its inputs → outputs, the C functions behind
+  it and the transcript of `iut run <id>`; *run all* runs the whole registry
+  (`iut run --all`) in a few milliseconds and lists the verdicts.
+* **Lattice** — the log-theta-lattice built by `iut walk`, drawn on a canvas:
+  click a vertex for its Hodge theater (capsules, bridges, prime-strips,
+  log-shells, pilots), click an arrow for the link record (what is shared, what
+  is alien, the dilation), or build the lattice one link at a time in the order
+  the C program applies them. Tabs show the alien copies across the Θ-link, the
+  multiradial representation and the log-volume numbers, the étale-picture and
+  the validation report.
+* **Worked examples** — nine walks through the theory, step by step (54 steps):
+  from an abc triple to initial Θ-data; labels, symmetries and cusps;
+  prime-strips and the forgetful ladder; assembling a Θ±ell NF-Hodge theater;
+  the Θ-link and the mutually alien copies; walking the log-theta-lattice; from
+  the multiradial representation to Cor 3.12, Thm 1.10 and abc; the logical
+  structure ∧ versus ∨ and (Stp1)–(Stp8); mono-anabelian transport and the
+  Gaussian integral. Each step explains what happens, draws it, and shows its
+  *evidence*: the transcript of the process that performs it, run by the engine.
+* **Identifiers** — the 448 letters-only identifiers, searchable and filterable
+  by kind; each opens a panel with its notation, reference, description, the
+  struct that implements it and the processes that use it.
 
-**Part II · Processes** — ten steppable progressions (62 steps) showing how the
-objects are used:
+```
+htdocs/index.html            the page (hash routes: #types, #processes/<id>, #lattice, #examples/<key>/<step>, #identifiers)
+htdocs/engine/iut.wasm.js    src/*.c compiled to wasm32-wasi, base64-embedded   (generated: scripts/web/build-engine.sh)
+htdocs/data/types.js         the form of every struct and enum of the headers    (generated: scripts/web/gen-types.js)
+htdocs/js/engine.js          runs the engine: IUT.exec(['run', 'MapLabels', '--example', '2']) → { code, out, err, ms }
+htdocs/js/model.js           the selected Θ-data, memoised engine calls
+htdocs/js/draw.js            canvas kit · js/diagrams.js  the 23 diagrams · js/ui.js  DOM helpers, transcripts, forms
+htdocs/js/views/             types.js · procs.js · lattice.js · examples.js · ids.js
+htdocs/test.js               node tests of the engine (selftest, all processes on all examples, byte-identical with src/iut)
+```
 
-1. from an abc triple to initial Θ-data (Frey curve, valuations, l, invariants, validation);
-2. forgetting down the prime-strip ladder F → F⊢ → F⊢× → F⊢×μ → D⊢, and F⊩▶×μ;
-3. assembling a Hodge theater (capsule F_T, Θ±/Θell-bridges, capsule F_J, Θ/NF-bridges, the gluing 0,⊞ ↦ >);
-4. building the log-theta-lattice: log-links, the 0-column and its coric ◦, the Θ-link, the 1-column, the H;
-5. the Θ-link: gluing data (aΘ),(bΘ),(cΘ) ≅ (aq),(bq),(cq), what is *not* glued, [Alien] Fig 3.19;
-6. mono-anabelian transport ([Alien] Fig 2.1);
-7. the chain of logical AND relations (FxGl), (Stp1)–(Stp8) of [EssLgc] §3.10 and the ∧(∨̇)-chain;
-8. logical AND versus OR: segments vs loops, the numerical model of [EssLgc] Ex 2.4.5 with sliders, (ExtInd);
-9. the Gaussian-integral analogy, Steps 1–12 of [Alien] §1 and the dictionary of §3.8;
-10. from the multiradial representation to Cor 3.12, Thm 1.10 and abc, with the data's numbers.
-
-**Part III · Explorer** — the interactive log-theta-lattice on a canvas: click a
-vertex to focus, `l`/`t`/`H` or the buttons apply log-links, Θ-links and the
-infinite H; tabs for the Θ-data & validation report, the Hodge theater at the
-focus, the alien copies across a Θ-link, the multiradial / log-volume numbers,
-the species graph, the searchable identifier table and the processes table
-(tab 8: filter the 73 processes, run one or all of them on the current Θ-data
-and read the same output as `iut run`).
-
-`htdocs/iut.js` is the model (usable from node), `htdocs/ops.js` the operations
-layer (every function of `src/iut_ops_*.c` under a camelCase name, plus the
-registry with JS runners), `htdocs/diagrams.js` the SVG helpers and the Part I
-gallery, `htdocs/processes.js` the Part II progressions, `htdocs/app.js` the
-explorer and the glue; `htdocs/identifiers.js` and `htdocs/processlist.js` are
-generated.
+Rebuilding the engine after a change to `src/` needs clang with the wasm32
+target and a WASI libc (Ubuntu: `apt install clang lld wasi-libc
+libclang-rt-18-dev-wasm32`), then `make engine` in `src/` (or
+`CC=clang-18 scripts/web/build-engine.sh`). `node htdocs/test.js` checks that
+the wasm build and the native build give byte-identical output.
 
 ## The manual (PDF)
 
 `docs/IUT_MANUAL.pdf` is a generated manual / demo of the toolkit: **every data
 type** of the identifier table in its *form* (the C struct, field by field) and
 with its *reference* into the original papers (paper, section, statement and the
-page of the PDF in `pdf/`), the symbol dictionary, the ten illustrated
-progressions of the web app step by step with a diagram for every step (Hodge
+page of the PDF in `pdf/`), the symbol dictionary, ten illustrated
+progressions through the processes step by step with a diagram for every step (Hodge
 theaters, the log-theta-lattice and the infinite H, log-links and Θ-links, alien
 copies, mono-anabelian transport, the (Stp1)–(Stp8) chain, the multiradial
 representation, …), all 73 processes of the registry with the transcript of
@@ -141,22 +154,26 @@ node scripts/manual/build.js --html-only --example 3     # other demo data: --ex
 ```
 
 The generator reads `iut ids --json`, `iut procs --json`, `iut run --all`,
-`src/iut.h`, `src/iut_i.h`, `docs/DATA_MODEL.md` §8b and the `htdocs/`
-modules in node, so the manual cannot drift from the code; regenerate it after
-changing the identifier table or the registry.
+`src/iut.h`, `src/iut_i.h`, `docs/DATA_MODEL.md` §8b and the JavaScript
+diagram and progression modules in `scripts/manual/lib/` in node, so the manual
+cannot drift from the code; regenerate it after changing the identifier table
+or the registry.
 
 ## Generated files and consistency
 
 `src/iut_ids.c` is the single source of truth for the identifiers and
-`src/iut_proc.c` for the process registry. `make gen` regenerates
-`htdocs/identifiers.js`, `docs/IDENTIFIERS.md`, `htdocs/processlist.js` and
-`docs/PROCESSES.md`; `make check` fails if they drift. The C self-test and the
-node test check the same mathematical facts (label sets, symmetries, Frey-curve
-valuations, coricity, log-shell volumes, the l(l+1)/12 dilation, the infinite
-H, the inequality) and the same operations-layer facts (bridge torsors,
-procession automorphisms, Cor 2.5 theta values, bi-coricity, tensor-packet
-counts, the a_i / b_i / μ_log formulas, Thm 1.10, Cor 2.2, (Stp1)–(Stp8),
-formal sums, ∫e^{−x²} = √π), and both run all 73 processes on the examples.
+`src/iut_proc.c` for the process registry, and the headers for the form of
+every type. `make gen` regenerates `docs/IDENTIFIERS.md`, `docs/PROCESSES.md`
+and `htdocs/data/types.js`; `make check` fails if they drift; `make engine`
+recompiles the web engine. The C self-test checks the mathematical facts (label
+sets, symmetries, Frey-curve valuations, coricity, log-shell volumes, the
+l(l+1)/12 dilation, the infinite H, the inequality) and the operations-layer
+facts (bridge torsors, procession automorphisms, Cor 2.5 theta values,
+bi-coricity, tensor-packet counts, the a_i / b_i / μ_log formulas, Thm 1.10,
+Cor 2.2, (Stp1)–(Stp8), formal sums, ∫e^{−x²} = √π) and runs all 73 processes
+on the examples; `htdocs/test.js` runs the same self-test and all processes in
+the WebAssembly build and compares its output byte for byte with the native
+build.
 
 ## Layout
 
@@ -167,10 +184,11 @@ src/        iut.h (types) · iut_ids.c (identifiers, species, mutations) · iut_
             iut_i.h + iut_i.c (the data types of [IUTchI] §0–§6) ·
             iut_ops.h + iut_ops_i.c / _ii.c / _iii.c / _iv.c / _logic.c (operations layer) · iut_proc.c (process
             registry) · iut_test_ops.c
-htdocs/     index.html · style.css · iut.js (model) · ops.js (operations layer) · diagrams.js (Part I) · processes.js (Part II) ·
-            app.js (explorer) · identifiers.js, processlist.js (generated) · test.js
+htdocs/     index.html · css/app.css · engine/iut.wasm.js (generated) · data/types.js (generated) · js/ (engine, model,
+            draw, diagrams, ui, app) · js/views/ (types, procs, lattice, examples, ids) · test.js
 docs/       IDENTIFIERS.md, PROCESSES.md (generated) · DATA_MODEL.md
 lean/       lakefile.toml · IUT.lean · IUT/ (Identifiers, Labels, InitialThetaData, PrimeStrip, HodgeTheater,
             Link, LogThetaLattice, Multiradial, Species) — Lean 4 / Mathlib port with proofs
-scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check)
+scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check) · web/ (build-engine.sh,
+            gen-types.js) · manual/ (build.js, pageindex.py, lib/)
 ```

@@ -3,9 +3,9 @@
 This document explains what `src/iut.h` models, where each type comes from in
 Mochizuki's papers (all of which are PDFs in this repository), which numbers the
 program actually computes, and — just as important — what it does *not* claim to
-compute. The web app (`htdocs/iut.js`) mirrors the same model one to one; the
-node tests (`htdocs/test.js`) and the C self-tests (`iut selftest`) check the
-same facts on both sides.
+compute. The web app (`htdocs/`) runs this very code compiled to WebAssembly;
+the C self-tests (`iut selftest`) check the facts and the node tests
+(`htdocs/test.js`) check that the web build agrees with the native one.
 
 Citations: [IUTchI]–[IUTchIV] are the four IUT papers (all four are in `pdf/`;
 IUT I is cited directly, section by section, see §8b), [Pano] the Panoramic Overview, [Alien] *Mutually Alien Copies*,
@@ -22,7 +22,7 @@ log-theta-lattice is the mutation-history that matters. The toolkit takes this
 literally: every species is a C struct, every mutation a function, and the
 lattice is a graph of structs connected by applied links. The tables
 `iut_species_table` / `iut_mutation_table` (exported to `docs/IDENTIFIERS.md`
-and `htdocs/identifiers.js`) list which struct implements which species.
+and `htdocs/data/types.js`) list which struct implements which species.
 
 Because most of the notation uses symbols that are not letters (†HT, ‡HT,
 F⊢×μ-prime-strip, F⊩_Δ, Θ×μ_LGP-link, F_l^{⋊±}, S^±_{j+1}, …) every such object
@@ -198,21 +198,19 @@ Hodge theaters built so far as spokes ([IUTchIII] Cor 3.12; [IUTchI] Cor 6.10).
   estimates are coarse, and the five Def 3.1 hypotheses are asserted flags.
 * Anything about the 2-adic place beyond the Frey-curve minimal-model case.
 
-Everything the program *does* compute is cross-checked between the C and JS
-implementations by `make test`.
+Everything the program *does* compute is checked by `make test` (the C
+self-test natively and in the WebAssembly build).
 
-## 8a. The operations layer — `src/iut_ops.h`, `htdocs/ops.js`
+## 8a. The operations layer — `src/iut_ops.h`
 
 The structs above are the *nouns*; `src/iut_ops.h` holds the *verbs*: every
 step and every process of the papers that acts on these data types, one C
 function per step, grouped by paper (`iut_ops_i.c` … `iut_ops_logic.c`) and
 cited at the declaration. `src/iut_proc.c` groups them into a registry of 52
 named processes (`iut procs`), each of which `iut run <id>` demonstrates on
-given Θ-data; `docs/PROCESSES.md` is the generated table. `htdocs/ops.js`
-mirrors every function under a camelCase name (`iut_procession_build` →
-`OPS.i.processionBuild`, `iut_bicoric_check` → `OPS.iii.bicoricCheck`,
-`iut_thm110_compute` → `OPS.iv.thm110Compute`, …) and the registry
-(`OPS.PROCS`, `OPS.runAll`), and tab 8 of the explorer runs them in the browser.
+given Θ-data; `docs/PROCESSES.md` is the generated table. The web app runs the
+same registry in the browser (the *Processes* view, `iut run <id>` and
+`iut run --all` through the WebAssembly build).
 
 What the operations compute, by paper:
 
@@ -233,7 +231,7 @@ Note on the synthetic generator: `iut_gen_random` now enforces e_K ≥ e_mod at
 every place, which the validator of §2 always required and which the random
 seeds 3 and 11 used to violate.
 
-## 8b. The data types of IUT I — `src/iut_i.h`, `src/iut_i.c`, `OPS.i` in `htdocs/ops.js`
+## 8b. The data types of IUT I — `src/iut_i.h`, `src/iut_i.c`
 
 IUT I ([IUTchI], *Construction of Hodge Theaters*) introduces many objects that
 the later papers only recall in passing. They are modelled as their own types,
@@ -270,9 +268,10 @@ keeps writing it ⊞ (`BoxPlus`).
 
 ## 9. Where each object appears in the web app
 
-Part I of `htdocs/index.html` draws one diagram per data type of this document
-(`htdocs/diagrams.js`, `DIAGRAMS.cards`), Part II (`htdocs/processes.js`,
-`PROCESSES.list`) walks through the processes that use them:
+The *Data types* view of `htdocs/index.html` shows each data type of this
+document as a diagram, a live instance and its C form; the *Worked examples*
+view walks through the processes that use them (the manual's progressions, in
+`scripts/manual/lib/processes.js`, follow the same plan):
 
 | process | objects used | sources followed |
 |---|---|---|

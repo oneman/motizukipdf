@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IUT — data types and processes</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="inner">
+    <a class="brand" href="#home"><span class="mark"></span> IUT data types</a>
+    <nav class="nav" id="nav"></nav>
+    <span class="engine-status" id="engine-status">compiling engine…</span>
+  </div>
+</header>
+<div class="bench"><div class="inner" id="bench"></div></div>
+<div class="flash" id="flash"></div>
+
+<div class="loading" id="loading">
+  <p>Compiling the C engine to run in your browser…</p>
+  <div class="bar"><i></i></div>
+</div>
+
+<main id="main" style="display:none">
+  <section class="view" id="view-home"></section>
+  <section class="view" id="view-types"></section>
+  <section class="view" id="view-processes"></section>
+  <section class="view" id="view-lattice"></section>
+  <section class="view" id="view-examples"></section>
+  <section class="view" id="view-identifiers"></section>
+</main>
+
+<footer><div class="inner">
+  Everything on this page is computed by <code>src/*.c</code> (the <code>iut</code> toolkit) compiled to WebAssembly. Sources of truth: <code>src/iut.h</code>, <code>src/iut_i.h</code>, <code>src/iut_ops.h</code>, <code>src/iut_proc.c</code>, <code>src/iut_ids.c</code>, <code>docs/</code>.
+  References: [IUTchI]–[IUTchIV] Mochizuki, <em>Inter-universal Teichmüller theory I–IV</em>; [EssLgc] <em>On the essential logical structure of IUT</em>; [Alien] <em>The mathematics of mutually alien copies</em>.
+</div></footer>
+
+<script src="engine/iut.wasm.js"></script>
+<script src="data/types.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/draw.js"></script>
+<script src="js/model.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/diagrams.js"></script>
+<script src="js/views/types.js"></script>
+<script src="js/views/procs.js"></script>
+<script src="js/views/lattice.js"></script>
+<script src="js/views/examples.js"></script>
+<script src="js/views/ids.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
