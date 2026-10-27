@@ -27,7 +27,7 @@ case-insensitively, so they can be used as C identifiers, JS keys, file names an
 Numbers are spelled out (`Zero`, `One`, `TwoL`, `JSq`, `LStar`, `LPm`), and
 `l*`, `l±`, `S^±_{j+1}` become `LStar`, `LPm`, `SPmJPlusOne`.
 
-## Table (186 entries)
+## Table (190 entries)
 
 | identifier | notation | kind | introduced / recalled | description |
 |---|---|---|---|---|
@@ -217,6 +217,10 @@ Numbers are spelled out (`Zero`, `One`, `TwoL`, `JSq`, `LStar`, `LPm`), and
 | `AlienCopy` | alien copy | mutation | [Alien] §1, §3 | a copy of a ring/scheme theory related to another only via a non-ring-theoretic link |
 | `BasicPrimeStrip` | BPS = F⊢×μ | primestrip | [FormIUT] §1 | 'basic prime-strip': the F⊢×μ-prime-strip (horizontally coric gluing datum) |
 | `EtaleHodgeTheater` | etHT | hodgetheater | [FormIUT] §1 | étale-like Hodge theater (D-Θ±ell NF-HT) in the Formalization paper's notation |
+| `InitialThetaData` | (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲) | datum | [IUTchI] Def 3.1 | a collection of initial Θ-data: the input of the whole theory |
+| `NCircColumn` | (n,◦) | lattice | [IUTchIII] Thm 3.11; [EssLgc] §3.6 | the whole vertical line n of the log-theta-lattice, i.e. its vertically coric (étale-like) data |
+| `Multiradial` | multiradial | property | [IUTchII] Ex 1.7; [Alien] §3.1, Fig 3.1 | a radial algorithm compatible with arbitrary permutations of the radial data over the coric data (parallel transport) |
+| `Uniradial` | uniradial | property | [IUTchII] Ex 1.7; [Alien] §3.1, Fig 3.1 | a radial algorithm that is not multiradial (e.g. holomorphic structures) |
 
 ## Species and mutations ([IUTchIV] §3)
 

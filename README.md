@@ -7,7 +7,8 @@ objects introduced in IUT I–IV into concrete data types**, with generators,
 validators, a terminal UI and a web app:
 
 * `src/` — C11 library + CLI + ncurses TUI (`iut`),
-* `htdocs/` — plain-JavaScript / HTML5-canvas web app with the same model,
+* `htdocs/` — plain-JavaScript web app with the same model: the data types as
+  diagrams, the processes as step-by-step progressions, and a canvas explorer,
 * `docs/IDENTIFIERS.md` — the table of **English-letters-only identifiers** for
   every object whose notation uses symbols (†HT → `DagHodgeTheater`,
   F⊢×μ → `FMonoUnitsModTorsPrimeStrip`, Θ×μ_LGP-link →
@@ -48,26 +49,44 @@ random data; `a` type an abc triple; `q` quit.
 ## Web app
 
 Open `htdocs/index.html` in a browser (or `scripts/serve.sh` and visit
-http://localhost:8000/). No build step and no dependencies. Tabs:
+http://localhost:8000/). No build step and no dependencies. The page is a
+single bright document in three parts, all computed from the initial Θ-data
+chosen in the bench at the top (abc triple → Frey curve, the five examples, a
+random synthetic number field):
 
-1. **Θ-data & validate** — generator (abc triple → Frey curve, examples, random,
-   synthetic number fields), the full datum, the validation report, JSON;
-2. **lattice** — the log-theta-lattice on a canvas: click a vertex to focus,
-   `l`/`t`/`H` or the buttons apply log-links, Θ-links, the infinite H;
-3. **Hodge theater** — the Θ±ell NF-Hodge theater at the focus drawn after
-   [Alien] Fig 3.8: capsules F_T (t ∈ F_l) and F_J (j ∈ F_l^*), the four
-   bridges, the gluing 0,⊞ ↦ >, the pilots and the log-shells;
-4. **alien copies** — †HT vs ‡HT across the Θ-link: what is shared (G_v up to
-   Ind1, O×μ up to Ind2), what is dilated ({q̲^{j²}} ↦ {q̲}) and what is alien (Π_v,
-   ring structures);
-5. **multiradial / log-volume** — processions S^±_{j+1}, hull vs Θ-shift per j,
-   the exact C_Θ of [IUTchIV] Thm 1.10 and the leading-term heuristic
-   (l²/48)(6 log d^K − log q) of [Alien] §3.7 (iv), the étale-picture;
-6. **species** — the mutation-history graph ([IUTchIV] §3);
-7. **identifiers** — the searchable letters-only identifier table.
+**Part I · Data types** — one diagram per mathematical object, with its
+citations and its letters-only identifiers: initial Θ-data (field tower, curves,
+V ≅ V_mod, V^bad_mod), label sets F_l / |F_l| / F_l^* and their symmetries,
+the prime-strip forgetful ladder with the coricity of each kind, the local datum
+at v (Π_v ↠ G_v, O▷ ≅ O▶ × O×, O×μ, Kummer), the Θ±ell NF-Hodge theater
+([Alien] Fig 3.8), the Θ-Hodge theater and the two pilots, log-link vs Θ-link,
+the log-theta-lattice ⊇ the infinite H ([Alien] Fig 3.6), log-shells, the three
+indeterminacies, the multiradial representation ([Alien] Fig 3.18), the
+étale-picture, species and mutations, the identifier rule.
 
-`htdocs/iut.js` is the model (usable from node), `htdocs/app.js` the canvas UI,
-`htdocs/identifiers.js` is generated.
+**Part II · Processes** — ten steppable progressions (62 steps) showing how the
+objects are used:
+
+1. from an abc triple to initial Θ-data (Frey curve, valuations, l, invariants, validation);
+2. forgetting down the prime-strip ladder F → F⊢ → F⊢× → F⊢×μ → D⊢, and F⊩▶×μ;
+3. assembling a Hodge theater (capsule F_T, Θ±/Θell-bridges, capsule F_J, Θ/NF-bridges, the gluing 0,⊞ ↦ >);
+4. building the log-theta-lattice: log-links, the 0-column and its coric ◦, the Θ-link, the 1-column, the H;
+5. the Θ-link: gluing data (aΘ),(bΘ),(cΘ) ≅ (aq),(bq),(cq), what is *not* glued, [Alien] Fig 3.19;
+6. mono-anabelian transport ([Alien] Fig 2.1);
+7. the chain of logical AND relations (FxGl), (Stp1)–(Stp8) of [EssLgc] §3.10 and the ∧(∨̇)-chain;
+8. logical AND versus OR: segments vs loops, the numerical model of [EssLgc] Ex 2.4.5 with sliders, (ExtInd);
+9. the Gaussian-integral analogy, Steps 1–12 of [Alien] §1 and the dictionary of §3.8;
+10. from the multiradial representation to Cor 3.12, Thm 1.10 and abc, with the data's numbers.
+
+**Part III · Explorer** — the interactive log-theta-lattice on a canvas: click a
+vertex to focus, `l`/`t`/`H` or the buttons apply log-links, Θ-links and the
+infinite H; tabs for the Θ-data & validation report, the Hodge theater at the
+focus, the alien copies across a Θ-link, the multiradial / log-volume numbers,
+the species graph and the searchable identifier table.
+
+`htdocs/iut.js` is the model (usable from node), `htdocs/diagrams.js` the SVG
+helpers and the Part I gallery, `htdocs/processes.js` the Part II progressions,
+`htdocs/app.js` the explorer and the glue, `htdocs/identifiers.js` is generated.
 
 ## Generated files and consistency
 
@@ -83,7 +102,8 @@ log-shell volumes, the l(l+1)/12 dilation, the infinite H, the inequality).
 src/        iut.h (types) · iut_ids.c (identifiers, species, mutations) · iut_core.c (generators,
             validators, prime-strips, Hodge theaters, arithmetic) · iut_lattice.c (lattice, links,
             multiradial) · iut_json.c (exports) · iut_view.c (text views) · iut_tui.c · iut_main.c · Makefile
-htdocs/     index.html · style.css · iut.js (model) · app.js (canvas UI) · identifiers.js (generated) · test.js
+htdocs/     index.html · style.css · iut.js (model) · diagrams.js (Part I) · processes.js (Part II) · app.js (explorer) ·
+            identifiers.js (generated) · test.js
 docs/       IDENTIFIERS.md (generated) · DATA_MODEL.md
 scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check)
 ```
