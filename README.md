@@ -14,7 +14,10 @@ validators, a terminal UI and a web app:
   `ThetaUnitsModTorsLGPTorsorLink`, F⊩_Δ → `FMonoGlobTriangle`, S^±_{j+1} →
   `SPmJPlusOne`, …), generated from the C source,
 * `docs/DATA_MODEL.md` — what each type models, with citations into the PDFs,
-  and what the program does and does not compute.
+  and what the program does and does not compute,
+* `lean/` — the same data types in **Lean 4 / Mathlib**, with proofs that the
+  constructed objects exist and satisfy the validators, and of the elementary
+  facts behind them (see `lean/README.md`).
 
 Everything is grounded in the papers in this repository: each struct, check and
 view carries a citation such as `[IUTchIII] Def 1.1` or `[Alien] §3.7 (iv)`.
@@ -85,5 +88,7 @@ src/        iut.h (types) · iut_ids.c (identifiers, species, mutations) · iut_
             multiradial) · iut_json.c (exports) · iut_view.c (text views) · iut_tui.c · iut_main.c · Makefile
 htdocs/     index.html · style.css · iut.js (model) · app.js (canvas UI) · identifiers.js (generated) · test.js
 docs/       IDENTIFIERS.md (generated) · DATA_MODEL.md
+lean/       lakefile.toml · IUT.lean · IUT/ (Identifiers, Labels, InitialThetaData, PrimeStrip, HodgeTheater,
+            Link, LogThetaLattice, Multiradial, Species) — Lean 4 / Mathlib port with proofs
 scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check)
 ```
