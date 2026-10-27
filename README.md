@@ -121,6 +121,30 @@ gallery, `htdocs/processes.js` the Part II progressions, `htdocs/app.js` the
 explorer and the glue; `htdocs/identifiers.js` and `htdocs/processlist.js` are
 generated.
 
+## The manual (PDF)
+
+`docs/IUT_MANUAL.pdf` is a generated manual / demo of the toolkit: **every data
+type** of the identifier table in its *form* (the C struct, field by field) and
+with its *reference* into the original papers (paper, section, statement and the
+page of the PDF in `pdf/`), the symbol dictionary, the ten illustrated
+progressions of the web app step by step with a diagram for every step (Hodge
+theaters, the log-theta-lattice and the infinite H, log-links and Θ-links, alien
+copies, mono-anabelian transport, the (Stp1)–(Stp8) chain, the multiradial
+representation, …), all 73 processes of the registry with the transcript of
+`iut run` on the demo Θ-data, a demo session (`iut validate`, `iut walk`,
+`iut species`) and an index of all identifiers with page numbers.
+
+```sh
+python3 scripts/manual/pageindex.py   # pdftotext: statements / figures / sections of pdf/*.pdf → docs/manual/pageindex.json
+node scripts/manual/build.js          # → docs/manual/iut-manual.html and docs/IUT_MANUAL.pdf (Chromium via playwright)
+node scripts/manual/build.js --html-only --example 3     # other demo data: --example K or --abc A B C --l L
+```
+
+The generator reads `iut ids --json`, `iut procs --json`, `iut run --all`,
+`src/iut.h`, `src/iut_i.h`, `docs/DATA_MODEL.md` §8b and the `htdocs/`
+modules in node, so the manual cannot drift from the code; regenerate it after
+changing the identifier table or the registry.
+
 ## Generated files and consistency
 
 `src/iut_ids.c` is the single source of truth for the identifiers and
