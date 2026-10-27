@@ -128,8 +128,8 @@ static void prompt_abc(tui *T)
     clrtoeol();
     char in[80] = ""; getnstr(in, sizeof in - 1);
     noecho(); curs_set(0);
-    long a, b, c; unsigned l;
-    if (sscanf(in, "%ld %ld %ld %u", &a, &b, &c, &l) == 4) {
+    long long a, b, c; unsigned l;
+    if (sscanf(in, "%lld %lld %lld %u", &a, &b, &c, &l) == 4) {
         iut_initial_theta_data d;
         int rc = iut_gen_from_abc(&d, a, b, c, l);
         if (rc == 0) { rebuild_lattice(T, &d); snprintf(T->status, sizeof T->status, "generated %s", d.name); }

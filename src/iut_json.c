@@ -1,6 +1,6 @@
 /*
  * iut_json.c — JSON dumps of every species, and the generated identifier
- * tables:  htdocs/identifiers.js  (web app)  and  docs/IDENTIFIERS.md.
+ * tables:  docs/IDENTIFIERS.md  (and `ids --json`, which the web app reads from the wasm build).
  */
 #include <math.h>
 #include <string.h>

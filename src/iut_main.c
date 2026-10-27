@@ -47,7 +47,7 @@ int iut_options_parse(iut_options *o, int argc, char **argv, FILE *err)
 {
     for (int i = 0; i < argc; ++i) {
         const char *a = argv[i];
-        if (!strcmp(a, "--abc") && i + 3 < argc) { o->a = atol(argv[i + 1]); o->b = atol(argv[i + 2]); o->c = atol(argv[i + 3]); o->have_abc = 1; i += 3; }
+        if (!strcmp(a, "--abc") && i + 3 < argc) { o->a = atoll(argv[i + 1]); o->b = atoll(argv[i + 2]); o->c = atoll(argv[i + 3]); o->have_abc = 1; i += 3; }
         else if (!strcmp(a, "--l") && i + 1 < argc) { o->l = (unsigned)atoi(argv[++i]); }
         else if (!strcmp(a, "--example") && i + 1 < argc) { o->example = atoi(argv[++i]); o->have_example = 1; }
         else if (!strcmp(a, "--random") && i + 1 < argc) { o->seed = (unsigned)atoi(argv[++i]); o->have_seed = 1; }

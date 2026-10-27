@@ -8,7 +8,8 @@
  *   src/iut.h, src/iut_i.h                    the C structs = the *form* of every data type
  *   docs/DATA_MODEL.md §8b                    which struct implements which identifier (IUT I types)
  *   `iut run --all`, `iut walk`, `iut validate`   transcripts of the processes on the demo Θ-data
- *   htdocs/diagrams.js, htdocs/processes.js   the SVG diagrams and the ten step-by-step progressions
+ *   scripts/manual/lib/diagrams.js, processes.js   the SVG diagrams and the ten step-by-step progressions
+ *   (the former JavaScript model of the web app, kept here for the manual; htdocs/ runs the C engine itself)
  *   docs/manual/pageindex.json                statement → PDF page in pdf/ (scripts/manual/pageindex.py)
  *
  * Output: docs/manual/iut-manual.html (self-contained) and docs/IUT_MANUAL.pdf (Chromium via Playwright).
@@ -18,7 +19,7 @@
 const fs = require('fs'), path = require('path'), cp = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const SRC = path.join(ROOT, 'src'), HT = path.join(ROOT, 'htdocs'), DOCS = path.join(ROOT, 'docs');
+const SRC = path.join(ROOT, 'src'), HT = path.join(__dirname, 'lib'), DOCS = path.join(ROOT, 'docs');
 const OUTDIR = path.join(DOCS, 'manual');
 const HTML_OUT = path.join(OUTDIR, 'iut-manual.html');
 const PDF_OUT = path.join(DOCS, 'IUT_MANUAL.pdf');
@@ -366,13 +367,13 @@ body += '<section class="toc-page"><h2 class="toc-title">Contents</h2>%%TOC%%</s
 
 // ---- 0 how to read
 body += `<section class="chapter">${H(2, '0 · How to read this manual', 'how')}
-<p>This manual is generated from the toolkit's own tables, so it matches the code exactly: the identifier table <code>src/iut_ids.c</code> (also <code>docs/IDENTIFIERS.md</code>, <code>htdocs/identifiers.js</code>, <code>lean/IUT/Identifiers.lean</code>), the process registry <code>src/iut_proc.c</code> (<code>docs/PROCESSES.md</code>), the C headers <code>src/iut.h</code> and <code>src/iut_i.h</code>, the diagrams of <code>htdocs/diagrams.js</code> and the ten progressions of <code>htdocs/processes.js</code>. Each entry of Part I shows one data type or notation in three ways:</p>
+<p>This manual is generated from the toolkit's own tables, so it matches the code exactly: the identifier table <code>src/iut_ids.c</code> (also <code>docs/IDENTIFIERS.md</code>, <code>lean/IUT/Identifiers.lean</code>), the process registry <code>src/iut_proc.c</code> (<code>docs/PROCESSES.md</code>), the C headers <code>src/iut.h</code> and <code>src/iut_i.h</code>, the diagrams of <code>scripts/manual/lib/diagrams.js</code> and the ten progressions of <code>scripts/manual/lib/processes.js</code>. Each entry of Part I shows one data type or notation in three ways:</p>
 <ul>
-  <li><b>form</b> — the C struct that implements it, field by field, with the meaning of each field (the JavaScript model in <code>htdocs/iut.js</code> and the Lean port in <code>lean/IUT/</code> mirror the same fields; where a Lean structure of the same name exists it is named);</li>
+  <li><b>form</b> — the C struct that implements it, field by field, with the meaning of each field (the Lean port in <code>lean/IUT/</code> mirrors the same fields; where a Lean structure of the same name exists it is named);</li>
   <li><b>reference</b> — where the object is introduced or recalled in the papers, resolved to the paper, the section, the statement and the page of the PDF in <code>pdf/</code>, e.g. <i>[IUT I] §3, Definition 3.1 p. 61</i>. Papers are abbreviated as in the source code: ${Object.keys(PAGEIDX).map(t => `[${esc(PAPER_SHORT[t] || t)}]`).join(', ')} (see the table below);</li>
   <li><b>identifier</b> — the English-letters-only name (<code>^[A-Za-z]+$</code>, unique case-insensitively) under which it appears in the C code, the JSON, the web app and Lean, obtained from the notation through the symbol dictionary of §1.</li>
 </ul>
-<p>Part II shows the processes: the ten illustrated progressions of the web app, step by step with a diagram for every step, and then all ${PROCS.length} processes of the registry with the transcript of <code>iut run &lt;id&gt;</code> on the demo Θ-data. Part III is a demo session: generation and validation of the Θ-data and a walk through the log-theta-lattice with the text views of the C program. The appendix is an alphabetical index of all identifiers with page numbers.</p>
+<p>Part II shows the processes: the ten illustrated progressions (scripts/manual/lib/processes.js), step by step with a diagram for every step, and then all ${PROCS.length} processes of the registry with the transcript of <code>iut run &lt;id&gt;</code> on the demo Θ-data. Part III is a demo session: generation and validation of the Θ-data and a walk through the log-theta-lattice with the text views of the C program. The appendix is an alphabetical index of all identifiers with page numbers.</p>
 <p>The program models the <em>combinatorics and the numbers</em> of the theory — which labels, which copies are identified, which indeterminacies are incurred, which inequality results — not the anabelian reconstruction algorithms; see <code>docs/DATA_MODEL.md</code> §8 for what is and is not computed.</p>
 ${H(3, 'The papers', 'papers')}
 <table class="papers"><thead><tr><th>tag</th><th>title</th><th>file in <code>pdf/</code></th><th>pages</th><th>indexed statements</th></tr></thead><tbody>
@@ -411,11 +412,11 @@ ${entries.map(e => identEntry(e)).join('\n')}
 
 // ---- Part II
 body += `<section class="part"><h1 class="part-title">${mark('h:part2')}Part II<br><span>The processes</span></h1>
-<p class="part-lead">The verbs of the theory. Chapter ${chapNo} walks through the ten progressions of the web app step by step, with the diagram of every step; chapter ${chapNo + 1} lists all ${PROCS.length} processes of the registry, each with its citation and the transcript of <code>iut run</code> on the demo Θ-data (${esc(D.name)}).</p></section>`;
+<p class="part-lead">The verbs of the theory. Chapter ${chapNo} walks through the ten progressions step by step, with the diagram of every step; chapter ${chapNo + 1} lists all ${PROCS.length} processes of the registry, each with its citation and the transcript of <code>iut run</code> on the demo Θ-data (${esc(D.name)}).</p></section>`;
 TOC.push({ level: 1, title: 'Part II · The processes', anchor: 'part2' });
 
 body += `<section class="chapter">${H(2, `${chapNo} · Ten progressions, step by step`, 'progressions')}
-<p class="intro">Each progression is a sequence of states of the data model; the web app (<code>htdocs/index.html</code>, Part II) lets you step through them with the current Θ-data, and the diagrams below are the same drawings rendered for the demo data. The text under each step is the caption of the web app.</p>`;
+<p class="intro">Each progression is a sequence of states of the data model; the web app (<code>htdocs/index.html</code>, "Worked examples") walks through the same constructions on the live C engine; the diagrams below are rendered for the demo data.</p>`;
 PROCESSES.list.forEach((p, k) => {
   body += `<section class="progression">${H(3, `${chapNo}.${k + 1} ${esc(p.title.replace(/^\d+\s*·\s*/, ''))}`, 'prog-' + p.id)}
   <p class="where"><span class="lbl">sources</span> ${cite(p.ref)}</p>
@@ -434,7 +435,7 @@ chapNo++;
 // the registry, grouped by paper
 const PROC_PAPERS = ['IUTchI', 'IUTchII', 'IUTchIII', 'IUTchIV', 'EssLgc', 'Alien'];
 body += `<section class="chapter">${H(2, `${chapNo} · The registry: all ${PROCS.length} processes`, 'registry')}
-<p class="intro">Every row is a family of C functions in <code>src/iut_ops_*.c</code> (declared in <code>src/iut_ops.h</code>), mirrored one to one in <code>htdocs/ops.js</code>; <code>iut run &lt;id&gt;</code> demonstrates it on given Θ-data and <code>iut run --all</code> runs them all (exit code = number of failures). The process ids are identifiers of the table too (kind <i>process</i>).</p>
+<p class="intro">Every row is a family of C functions in <code>src/iut_ops_*.c</code> (declared in <code>src/iut_ops.h</code>), run live in the web app (<code>htdocs/index.html</code>, "Processes"); <code>iut run &lt;id&gt;</code> demonstrates it on given Θ-data and <code>iut run --all</code> runs them all (exit code = number of failures). The process ids are identifiers of the table too (kind <i>process</i>).</p>
 <table class="registry"><thead><tr><th>id</th><th>paper · section</th><th>process</th><th>inputs → outputs</th></tr></thead><tbody>
 ${PROCS.map(p => `<tr><td><a href="#proc-${esc(p.id)}"><code class="idn">${esc(p.id)}</code></a></td><td>${cite('[' + p.paper + '] ' + p.section)}</td><td>${esc(p.name)}</td><td>${esc(p.inputs)} → ${esc(p.outputs)}</td></tr>`).join('\n')}
 </tbody></table>`;

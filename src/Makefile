@@ -1,10 +1,11 @@
 # Makefile for iut — the C side of the IUT data-type toolkit.
 #
 #   make            build ./iut (ncurses TUI if available, otherwise text-only)
-#   make test       run the self-tests and the web-app model tests (node)
-#   make gen        regenerate htdocs/identifiers.js, docs/IDENTIFIERS.md (from src/iut_ids.c)
-#                   and htdocs/processlist.js, docs/PROCESSES.md (from src/iut_proc.c)
-#   make check      verify that the generated files are in sync with the C table
+#   make test       run the self-tests and the web-engine tests (node, against the wasm build in htdocs/engine)
+#   make gen        regenerate docs/IDENTIFIERS.md (from src/iut_ids.c), docs/PROCESSES.md (from src/iut_proc.c)
+#                   and htdocs/data/types.js (the struct forms, from the headers)
+#   make engine     recompile src/ to WebAssembly → htdocs/engine/iut.wasm.js (needs clang + wasi-libc, see scripts/web/build-engine.sh)
+#   make check      verify that the generated files are in sync with the C sources
 #   make clean
 
 CC      ?= cc
@@ -45,21 +46,22 @@ iut: $(OBJ)
 
 test: iut
 	./iut selftest
-	@if command -v node >/dev/null 2>&1; then node ../htdocs/test.js; else echo "node not found: skipping web-app model tests"; fi
+	@if command -v node >/dev/null 2>&1; then node ../htdocs/test.js; else echo "node not found: skipping web-engine tests"; fi
 
 gen: iut
-	./iut ids --js > ../htdocs/identifiers.js
 	./iut ids --md > ../docs/IDENTIFIERS.md
 	./iut procs --md > ../docs/PROCESSES.md
-	./iut procs --js > ../htdocs/processlist.js
+	node ../scripts/web/gen-types.js
+
+engine:
+	../scripts/web/build-engine.sh
 
 check: iut
-	@./iut ids --js | diff -q - ../htdocs/identifiers.js && echo "htdocs/identifiers.js in sync"
 	@./iut ids --md | diff -q - ../docs/IDENTIFIERS.md && echo "docs/IDENTIFIERS.md in sync"
 	@./iut procs --md | diff -q - ../docs/PROCESSES.md && echo "docs/PROCESSES.md in sync"
-	@./iut procs --js | diff -q - ../htdocs/processlist.js && echo "htdocs/processlist.js in sync"
+	@node ../scripts/web/gen-types.js --check && echo "htdocs/data/types.js in sync"
 
 clean:
 	rm -f $(OBJ) iut
 
-.PHONY: all test gen check clean
+.PHONY: all test gen engine check clean
