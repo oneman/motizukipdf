@@ -12,6 +12,8 @@ Root module: imports every module of the library.
 * `IUT.LogThetaLattice`  — the log-theta-lattice and the "infinite H"
 * `IUT.Multiradial`      — processions, (Ind1)–(Ind3), the log-volume estimate
 * `IUT.Species`          — species and mutations ([IUTchIV] §3)
+* `IUT.Construction`     — the constructions of [IUTchI] §0–§6 (`src/iut_i.h`): cusps, torsors, bridges
+* `IUT.Processes`        — the process table (`docs/PROCESSES.md`)
 -/
 import IUT.Identifiers
 import IUT.Labels
@@ -22,3 +24,5 @@ import IUT.Link
 import IUT.LogThetaLattice
 import IUT.Multiradial
 import IUT.Species
+import IUT.Construction
+import IUT.Processes

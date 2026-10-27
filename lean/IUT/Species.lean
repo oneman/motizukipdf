@@ -14,8 +14,8 @@ Main results:
   `mutations_id_nodup`: identifiers are English-letters-only and distinct;
 * `species_ids_mem_identifiers`, `mutations_ids_mem_identifiers`: which
   species and mutation identifiers are entries of the master identifier table
-  of `docs/IDENTIFIERS.md` (all links are; the forgetful constructions are
-  named only here);
+  of `docs/IDENTIFIERS.md` (every species and every link is; the forgetful
+  constructions are named only here);
 * `mutations_endpoints`: every mutation goes from a species of the table to a
   species of the table;
 * `MutationHistory.WellFormed`: consecutive mutations compose; the
@@ -116,7 +116,7 @@ theorem mutations_id_nodup : (mutations.map fun m => ciKey m.id).Nodup := by dec
 entry of the master identifier table of `docs/IDENTIFIERS.md` (the initial
 Θ-data is listed there field by field). -/
 theorem species_ids_mem_identifiers :
-    (species.filter fun s => (findIdent s.id).isNone).map (·.id) = ["InitialThetaData"] := by
+    (species.filter fun s => (findIdent s.id).isNone).map (·.id) = [] := by
   decide +kernel
 
 /-- The mutation identifiers that are links of the lattice are entries of the

@@ -206,6 +206,8 @@ structure WellFormed : Prop where
   dF_dvd_dK : d.dF ∣ d.dK
   /-- `[F : F_mod]` is prime to `l` (Def 3.1 (a)) -/
   degree_prime_to_l : ¬ d.l ∣ d.dF / d.dmod
+  /-- `l` is prime to the residue characteristics of `V^bad_mod` (Def 3.1 (c)) -/
+  l_coprime_VBadMod : ∀ v ∈ d.V, v.inVBadMod → ¬ d.l ∣ v.p
   /-- `V → V_mod` is a bijection: no place is listed twice (Def 3.1 (e)) -/
   V_nodup : (d.V.map fun v => (v.kind, v.p)).Nodup
   /-- every place is well-formed -/
@@ -219,12 +221,36 @@ structure WellFormed : Prop where
 instance : Decidable d.WellFormed :=
   decidable_of_iff
     (d.l.Prime ∧ 5 ≤ d.l ∧ 0 < d.dmod ∧ d.dmod ∣ d.dF ∧ d.dF ∣ d.dK ∧ ¬ d.l ∣ d.dF / d.dmod ∧
+      (∀ v ∈ d.V, v.inVBadMod → ¬ d.l ∣ v.p) ∧
       (d.V.map fun v => (v.kind, v.p)).Nodup ∧ (∀ v ∈ d.V, v.WellFormed) ∧
       (∃ v ∈ d.V, v.inVBadMod) ∧
       (d.hFGaloisOverFmod = true ∧ d.hFContainsSixTorsion = true ∧
         d.hImageContainsSLTwo = true ∧ d.hStableReduction = true ∧ d.hCKIsKCore = true))
-    ⟨fun ⟨a, b, c, e, f, g, h, i, j, k⟩ => ⟨a, b, c, e, f, g, h, i, j, k⟩,
-     fun ⟨a, b, c, e, f, g, h, i, j, k⟩ => ⟨a, b, c, e, f, g, h, i, j, k⟩⟩
+    ⟨fun ⟨a, b, c, e, f, g, g', h, i, j, k⟩ => ⟨a, b, c, e, f, g, g', h, i, j, k⟩,
+     fun ⟨a, b, c, e, f, g, g', h, i, j, k⟩ => ⟨a, b, c, e, f, g, g', h, i, j, k⟩⟩
+
+/-- The places of `V^bad_mod` at which `l ∣ ord_v(q_v)`.  The C validator only
+*warns* about these (the `l`-torsion is then unramified at `v`, so the `SL₂`
+condition of Def 3.1 (c) becomes fragile, cf. [IUTchIV] Prop 1.8 (vii)); they
+are not excluded by `WellFormed`. -/
+def ordqWarnings : List Valuation :=
+  d.V.filter fun v => v.inVBadMod ∧ d.l ∣ v.ordq
+
+/-- A collection of initial Θ-data is *robust* if it is well-formed and the
+validator issues no `QUnderV` warning. -/
+def Robust : Prop := d.WellFormed ∧ d.ordqWarnings = []
+
+instance : Decidable d.Robust := by unfold Robust; infer_instance
+
+/-- `l` is prime to the residue characteristic of every place of `V^bad_mod`
+(Def 3.1 (c)), in the `Valuation`-level form used by the Θ-link. -/
+theorem l_coprime_of_mem_VBadMod (h : d.WellFormed) {v : Valuation} (hv : v ∈ d.VBadMod) :
+    Nat.Coprime d.l v.p := by
+  have hv' := List.mem_filter.mp hv
+  have hp : v.p.Prime := (h.V_wf v hv'.1).p_prime (by simpa using hv'.2 : v.inVBadMod).1
+  exact (Nat.coprime_primes h.l_prime hp).mpr fun e =>
+    h.l_coprime_VBadMod v hv'.1 (by simpa using hv'.2) (e ▸ dvd_rfl)
+
 
 /-- The prime `l` of well-formed data, packaged as an `LPrime`. -/
 def toLPrime (h : d.WellFormed) : LPrime := ⟨d.l, h.l_prime, h.l_ge_five⟩
@@ -346,6 +372,11 @@ theorem exampleOne_wellFormed : exampleOne.WellFormed := by decide
 theorem exampleTwo_wellFormed : exampleTwo.WellFormed := by decide
 
 theorem exampleFive_wellFormed : exampleFive.WellFormed := by decide
+
+/-- The examples are robust: `l ∤ ord_v(q_v)` at every bad place. -/
+theorem exampleOne_robust : exampleOne.Robust := by decide
+
+theorem exampleTwo_robust : exampleTwo.Robust := by decide
 
 /-- **The species of initial Θ-data is inhabited**: there is well-formed
 initial Θ-data. -/
