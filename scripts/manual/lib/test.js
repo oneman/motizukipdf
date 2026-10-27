@@ -1,4 +1,4 @@
-// node htdocs/test.js — tests of the web-app model (iut.js) against the same facts the C selftest checks.
+// node scripts/manual/lib/test.js — tests of the manual's JavaScript model (the former web-app model) (iut.js) against the same facts the C selftest checks.
 'use strict';
 var IUT = require('./iut.js');
 var IDS = require('./identifiers.js');

@@ -5,7 +5,7 @@
  * multiradial representation and the log-volume estimate.
  *
  * Works in the browser (window.IUT) and in node (module.exports) so that the
- * model can be tested with `node htdocs/test.js`.  Identifiers used as keys are
+ * model can be tested with `node scripts/manual/lib/test.js`.  Identifiers used as keys are
  * the English-letters-only identifiers of identifiers.js / docs/IDENTIFIERS.md.
  */
 (function (root) {
