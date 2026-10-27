@@ -93,5 +93,149 @@ global.PROCESSES.list.forEach(function (p) { p.steps.forEach(function (st, i) { 
 check(badSteps.length === 0, nsteps + ' process steps render as SVG' + (badSteps.length ? ': ' + badSteps.join(', ') : ''));
 [IUT.genExample(0), IUT.genExample(5), IUT.genRandom(3)].forEach(function (dx) { var lx = new IUT.Lattice(dx); lx.buildH(0, -1, 1); var bad = 0; global.PROCESSES.list.forEach(function (p) { p.steps.forEach(function (st) { try { st.draw({ d: dx, lat: lx, params: global.PROCESSES.params }); } catch (e) { bad++; } }); }); global.DIAGRAMS.cards.forEach(function (c) { try { c.draw(dx, lx); } catch (e) { bad++; } }); check(bad === 0, 'diagrams render for ' + dx.name); });
 
+
+// ------------------------------------------------------------ operations layer (ops.js mirrors src/iut_ops_*.c; registry from processlist.js mirrors src/iut_proc.c)
+console.log('ops.js tests');
+var OPS = require('./ops.js'), PL = require('./processlist.js');
+var CTX = { species: IDS.SPECIES, mutations: IDS.MUTATIONS };
+check(OPS.PROCS.length >= 50 && OPS.PROCS.length === PL.PROCESSES.length, 'process registry loaded: ' + OPS.PROCS.length + ' processes (same list as `iut procs`)');
+check(OPS.PROCS.every(function (p) { var x = IDS.find(p.id); return x && x.kind === 'process'; }), 'every process id is in the identifier table with kind "process"');
+check(OPS.PROCS.every(function (p) { return typeof OPS.RUN[p.id] === 'function'; }), 'every process has a JS runner');
+['IUTchI', 'IUTchII', 'IUTchIII', 'IUTchIV', 'EssLgc', 'Alien'].forEach(function (pp) { check(OPS.PROCS.some(function (p) { return p.paper === pp; }), 'registry covers [' + pp + ']'); });
+check(OPS.findProc('maplabels') === OPS.PROCS[0] && !OPS.findProc('nope'), 'process lookup is case-insensitive');
+var ra = OPS.runAll(d, CTX);
+check(ra.failures === 0 && ra.results.length === OPS.PROCS.length, 'all processes run on example 2 without failure' + (ra.failures ? ': ' + ra.results.filter(function (r) { return !r.ok; }).map(function (r) { return r.id; }).join(',') : ''));
+[IUT.genExample(0), IUT.genExample(5), IUT.genRandom(3), IUT.genRandom(11), IUT.genFromAbc(3, 125, 128, 11)].forEach(function (dx) { var rx = OPS.runAll(dx, CTX); check(rx.failures === 0, 'all processes run on ' + dx.name + (rx.failures ? ': ' + rx.results.filter(function (r) { return !r.ok; }).map(function (r) { return r.id; }).join(',') : '')); });
+
+// [IUTchI]
+check(OPS.i.labelGluePmToNf(d, -4) === 4 && OPS.i.labelGluePmToNf(d, 0) === 0 && OPS.i.labelGluePmToNf(d, 7) === -1 && OPS.i.labelFlUnitsToFlStar(d, -3) === 3 && OPS.i.labelFlUnitsToFlStar(d, 0) === -1, '[IUTchI] Def 6.13: 0,⊞ ↦ >, t ↦ |t|; F_l^× ↠ F_l^*');
+check(OPS.i.labelOrbitFlSemiPm(d, 2) === 13 && OPS.i.labelOrbitFlStar(d, 2) === 6, '[IUTchI] Prop 6.6 / 4.9: orbits of size l and l*');
+var pmc = OPS.i.labcuspPmMake(d), nfc = OPS.i.labcuspMake(d), fgc = OPS.i.labcuspForgetSign(pmc);
+check(OPS.i.labcuspIsBijection(pmc, d) && OPS.i.labcuspIsBijection(nfc, d) && OPS.i.labcuspIsBijection(fgc, d) && fgc.n === d.LStar, '[IUTchI] Prop 6.5: LabCusp± ≅ F_l, LabCusp ≅ F_l^*');
+var prc = OPS.i.processionBuild(d, 'PM'), aut = 1; for (var kk = 1; kk <= d.LPm; kk++) aut *= IUT.factorial(kk);
+check(prc.nsteps === d.LPm && prc.size[prc.nsteps - 1] === d.LPm && OPS.i.processionCapsuleLabels(prc, 2).join() === '0,1,2' && prc.automorphisms === aut, '[IUTchI] Prop 6.9: Prc(D_T), |Aut| = Π |S±_k|! = ' + aut);
+check(OPS.i.processionBuild(d, 'NF').nsteps === d.LStar && OPS.i.processionBuild(d, 'NF').firstLabel[0] === 1, '[IUTchI] Prop 4.11: Prc(D_J) has l* capsules starting at label 1');
+var ht2 = IUT.newHodgeTheater(d, 0, 0, 1), capJ = OPS.i.capsuleFromJ(ht2);
+check(OPS.i.capsuleFromT(ht2).n === d.l && capJ.n === d.LStar && OPS.i.capsuleFullPolyIsoCount(capJ) === 720 && !OPS.i.capsuleMorphismValid({ nDom: 2, nCod: 3, map: [0, 0] }), '[IUTchI] §0: capsules F_T, F_J (6! poly-isos), non-injective maps rejected');
+check(OPS.i.bridgeBuild(ht2, 'ThetaPmBridge').isos === 2 * d.l && OPS.i.bridgeBuild(ht2, 'NFBridge').isos === d.LStar && OPS.i.bridgeBuild(ht2, 'ThetaBridge').isos === 1, '[IUTchI] Def 6.4 / 5.5 / 4.6: bridge isomorphism torsors 2l, l*, 1');
+var DH = OPS.i.hodgeTheaterToD(ht2);
+check(DH.nT === d.l && DH.PiGt[0] === DH.PiBoxPlus[0] && OPS.i.dHodgeTheaterIso(DH, DH), '[IUTchI] Def 6.13: forgetful functor to the D-Hodge theater');
+var g1 = OPS.i.globalNfBuild(d, 1), g2 = OPS.i.globalNfBuild(d, 2), rr = new IUT.Report(); OPS.i.globalNfKummer(g1, g2, rr);
+check(rr.errors === 0, '[IUTchI] Cor 5.3 / [IUTchII] Cor 4.8: Kummer theory of the global number-field data');
+var latO = new IUT.Lattice(IUT.genExample(2)); latO.buildH(0, -2, 2);
+var fc = OPS.i.frobeniusChainBuild(latO, 0, -2, 2), ft = OPS.i.frobeniusChainTranslate(fc, 2);
+check(fc.n === 5 && !fc.adjacentSwapAllowed && fc.translationSymmetric && ft.universe[2] === fc.universe[0], '[IUTchI] Cor 3.8: Frobenius picture chain of 5, Z-translation, no swaps');
+var ep = OPS.i.etalePictureBuild(latO, 0), pp2 = OPS.i.etalePicturePermute(ep, [4, 3, 2, 1, 0]);
+check(ep.nspokes === 5 && pp2 && pp2.spokeUniverse[0] === ep.spokeUniverse[4], '[IUTchI] Cor 3.9: étale picture with 5 spokes, permutable');
+
+// [IUTchII]
+var re = OPS.ii.radialEnvMake('F', 'D⊢', false, ''), rm = OPS.ii.radialEnvMultiradialize(re);
+check(!OPS.ii.radialEnvIsMultiradial(re) && OPS.ii.radialEnvIsMultiradial(rm) && rm.multiradialized && OPS.ii.RADIAL_EXAMPLES.length === 7 && OPS.ii.RADIAL_EXAMPLES.filter(OPS.ii.radialEnvIsMultiradial).length === 5, '[IUTchII] Ex 1.7 / 1.8 / 1.9: multiradialization, 5 of 7 examples multiradial');
+check(OPS.ii.cyclotomicRigidityGet('MonoTheta').multiradial && !OPS.ii.cyclotomicRigidityGet('MLFGaloisPair').multiradial && OPS.ii.constantMultipleRigidityOrbit() === 2, '[IUTchII] Cor 1.10 / 1.11 / 1.12: cyclotomic rigidities');
+var ti = OPS.ii.temperedIndices(d), tv = OPS.ii.thetaEvaluate(d, -3);
+check(ti.PiToPiYdd === 2 && ti.PiPmToPi === 13 && ti.PiPmToPiYdd === 26 && tv.value === 9 && tv.torsionIndeterminacy === 26 && OPS.ii.thetaEvaluateAll(d).length === 7, '[IUTchII] Cor 2.4 / 2.5: tempered indices, θ(√−q^{±3}) = q̲^9 up to μ_{2l}');
+var vb = d.VSet.map(function (v, i) { return v.inVBadMod ? i : -1; }).filter(function (i) { return i >= 0; })[0];
+var env = OPS.ii.monoidBuild(d, 'Theta', vb, 3, false), gau = OPS.ii.monoidBuild(d, 'Gaussian', vb, 3, false), cns = OPS.ii.monoidBuild(d, 'Constant', vb, 3, true), fro = OPS.ii.monoidBuild(d, 'Constant', vb, 3, false), r2 = new IUT.Report();
+check(gau.gen.length === 6 && gau.gen[5] === 36 && OPS.ii.monoidEvaluationIso(d, env, gau, r2) && r2.errors === 0, '[IUTchII] Cor 3.5 (ii): Ψ_env ≅ Ψ_gau with generators q̲^{1,4,…,36}');
+var ss = OPS.ii.monoidSemisimplify(d, cns);
+check(ss.kind === 'Semisimple' && Math.abs(ss.distinguishedLogP - Math.log(d.VSet[vb].p)) < 1e-12 && ss.unitsCopy === cns.unitsCopy, '[IUTchII] Cor 4.5 (ii): semisimplification keeps O× and log p');
+check(OPS.ii.monoidKummerIso(fro, cns) && !OPS.ii.monoidKummerIso(cns, fro), '[IUTchII] Cor 4.6: Kummer isomorphism goes from Frobenius-like to étale-like');
+var Dm = IUT.buildPrimeStrip('DMonoPrimeStrip', 'D', d, 7), Gr = OPS.ii.globalRealifiedFromDMono(d, Dm);
+check(Gr.global && Gr.species === 'FMonoGlobPrimeStrip', '[IUTchII] Cor 4.5 (ii): D⊢ ↦ D⊩(D⊢) realified global');
+var sa = OPS.ii.symmetrizeFlSemiPm(d, OPS.i.capsuleFromT(ht2)), sb = OPS.ii.symmetrizeFlStar(d, capJ);
+check(sa.nclasses === 7 && OPS.ii.conjugateSynchronized(sa) && sa.classOf[0] === 6 && sa.classOf[6] === 0 && sb.nclasses === 6 && !OPS.ii.conjugateSynchronized(sb), '[IUTchII] Cor 4.5 (iii) / 4.7 (ii): F_l^{⋊±} synchronizes conjugates, F_l^* does not');
+check(!OPS.ii.labelSubsetKeepsSymmetry(d, [1], true) && OPS.ii.labelSubsetKeepsSymmetry(d, OPS.alien.labelLineSegment(d), true), '[IUTchII] Rem 4.7.3: only the full label set keeps the symmetry');
+var src = IUT.buildPrimeStrip('FMonoGlobValUnitsModTorsPrimeStrip', 'src', d, 5, OPS.ii.thetaGauExponents(d)), lad = OPS.ii.psForgetLadder(d, src);
+check(lad.length === 5 && lad[4].kind === 'DMonoPrimeStrip' && lad[2].kind === 'FMonoUnitsModTorsPrimeStrip' && !lad[2].strip.local[0].valGroup && lad[2].strip.local[0].kummer === 'UnitsModTorsKummer' && !lad[4].strip.local[0].units, '[IUTchII] Def 4.9: forgetful ladder F⊩▶×μ → F⊢▶×μ → F⊢×μ → F⊢× → D⊢');
+check(OPS.ii.pilotObjectDegree(src) < 0 && OPS.ii.unitsModTorsKummerOrbit(src) === 2 && OPS.ii.thetaGauExponents(d).length === 6 && OPS.ii.thetaGauExponents(d)[5] === 36, '[IUTchII] Def 4.9 (viii), Rem 4.11.1: negative pilot degree, Ism-orbit, exponents (1²…(l*)²)');
+var A0 = latO.get(0, 0), B0 = latO.get(1, 0), TL = OPS.ii.thetaLinkMake(A0, B0, 'ThetaUnitsModTorsGauLink', d), r3 = new IUT.Report();
+check(TL && TL.fullPolyIsomorphism && !TL.preservesPi && TL.preservesUnitsModTors && Math.abs(TL.dilation - 13 * 14 / 12) < 1e-12 && !OPS.ii.thetaLinkMake(A0, B0, 'LogLink', d), '[IUTchII] Cor 4.10 (iii): Θ×μ_gau-link full poly-iso, dilation l(l+1)/12; log-link is not a Θ-link');
+var DL = OPS.ii.thetaLinkInducedDLink(latO.links[0]);
+check(OPS.ii.constantStripIdentify(A0, r3) && OPS.ii.envelopeIsos(A0, r3) && OPS.ii.thetaLinkCoricUnits(A0, B0, r3) && OPS.ii.coricGlobalRealified(A0, B0, r3) && r3.errors === 0 && (!DL || DL.species === 'DThetaPmEllNFLink'), '[IUTchII] Cor 4.10 (i),(ii),(iv): constant strip, envelope isos, coric units and global realified, induced D-link');
+
+// [IUTchIII]
+var s1 = OPS.iii.logShellFrom(d, 'HolF', vb, 0, 0), s2 = OPS.iii.logShellFrom(d, 'MonoDMono', vb, 0, 0), s3 = OPS.iii.logShellFrom(d, 'MonoFUnitsModTors', vb, 0, 0);
+check(s1.PStar === d.VSet[vb].p && OPS.iii.logShellIsomorphic(s1, s2) && OPS.iii.logShellIsomorphic(s2, s3) && s2.etaleLike && !s2.holomorphic && !s3.etaleLike, '[IUTchIII] Prop 1.2 (vi),(vii): the four log-shell constructions agree');
+check(OPS.iii.logShellIsoIndeterminacy(d, vb) === 'Ism' && OPS.iii.logShellIsoIndeterminacy(d, d.VSet.length - 1) === '{±1}', '[IUTchIII] Prop 1.2 (vi): indeterminacy Ism (nonarch) / ±1 (arch)');
+var badSh = 0, r4 = new IUT.Report(); d.VSet.forEach(function (v, i) { if (!OPS.iii.logShellProperties(OPS.iii.logShellMake(d, i, true, false, 0, 0), d, r4)) badSh++; });
+check(badSh === 0, '[IUTchIII] Prop 1.2 (i)-(iv): log-shell properties hold at every v');
+var stripA = IUT.buildPrimeStrip('FPrimeStrip', 'A', d, 6), LR = OPS.iii.logLinkStrip(d, stripA, false);
+check(LR.coricD && LR.coricDMono && !LR.ringStructurePreserved && LR.logVolumeCompatible && !LR.kummerCompatible && LR.shells.length === d.VSet.length && LR.strip.local[0].PiV === stripA.local[0].PiV && LR.strip.local[0].units !== stripA.local[0].units, '[IUTchIII] Def 1.1 (iii), Prop 1.2: log-link of prime-strips');
+var lc = OPS.iii.logChainBuild(latO, 0, -2, 2);
+check(lc.n === 5 && lc.kind === 'LogLink' && !lc.adjacentSwapAllowed && OPS.iii.logLinkHodgeTheaterCheck(latO.get(0, 0), latO.get(0, 1), d), '[IUTchIII] Prop 1.2 (x), Prop 1.3: vertical Frobenius picture, D-HTs coric');
+check(!OPS.iii.latticeSquareCommutes() && /LGP/.test(OPS.iii.latticeFlavour('ThetaUnitsModTorsLGPTorsorLink')) && /Gaussian/.test(OPS.iii.latticeFlavour('ThetaUnitsModTorsGauLink')) && OPS.iii.latticeHorizontalObligatesVertical(latO), '[IUTchIII] Def 1.4, Rem 1.4.1: lattice flavours, squares do not commute, Θ-links obligate log-links');
+var bc = OPS.iii.bicoricCheck(latO, 0, 0);
+check(bc && bc.verticalCoricD && bc.horizontalCoricUnits && bc.bicoricUnitsOfDMono && bc.bicoricLogShells && bc.bicoricGlobalRealified, '[IUTchIII] Thm 1.5: bi-coric F⊢×μ-prime-strips, log-shells, global realified');
+check(OPS.iii.thetaMonoidVerticallyCoric(latO, 0) && OPS.iii.thetaMonoidMultiradial() && OPS.iii.etaleRadialEnvironment().length === 6 && OPS.iii.etaleRadialEnvironment()[0].item === '(aR)', '[IUTchIII] Prop 2.1, Thm 2.2, Cor 2.3: theta monoids coric/multiradial, radial data (aR)-(eR)');
+var pbad = d.VSet[vb].p, nvp = d.VSet.filter(function (v) { return v.kind === 'VNon' && v.p === pbad; }).length, P = OPS.iii.tensorPacketProcession(d, pbad, false);
+check(P.length === d.LStar + 1 && P[2].nfactors === 3 && P[2].nsummands === nvp * nvp * nvp && Math.abs(P[2].logVolumeShells - 3 * P[0].logVolumeShells) < 1e-9, '[IUTchIII] Prop 3.1: packets over Q_p with |V_p|^{j+1} summands');
+var narc = d.VSet.filter(function (v) { return v.kind === 'VArc'; }).length, PA = OPS.iii.tensorPacketBuild(d, 2, 0, false), PG = OPS.iii.tensorPacketGlobal(d, 2), r5 = new IUT.Report();
+check(PA.nsummands === OPS.iv.archSummands(3, narc) && PG.global && PG.nfactors === 3 && OPS.iii.tensorPacketLocalize(PG, OPS.iii.tensorPacketBuild(d, 2, pbad, true), r5) && !OPS.iii.tensorPacketLocalize(PA, PG, r5), '[IUTchIII] Prop 3.2 / 3.3: archimedean packets 2^{|I|−1}|V|^{|I|}, global packets localize to holomorphic ones');
+var lgp = OPS.iii.lgpMonoidBuild(d, 4, vb, 5);
+check(lgp.kind === 'LGP' && lgp.gen[0] === 16 && lgp.split, '[IUTchIII] Prop 3.4 (ii): LGP splitting monoid at j = 4 generated by q̲^{16}');
+var u1 = OPS.iii.upperSemiCompatibility(d, vb), u2 = OPS.iii.upperSemiCompatibility(d, d.VSet.length - 1);
+check(u1.kase === 'bad' && u1.logVolumeDelta === 0 && u2.kase === 'arch', '[IUTchIII] Prop 3.5 (ii): upper semi-compatibility cases');
+var GV = OPS.iii.GLOBAL_VARIANTS;
+check(GV.MODTorsor.thetaLinkCompatible && !GV.MODTorsor.logVolumeCompatible && GV.ModIdeal.logVolumeCompatible && !GV.ModIdeal.thetaLinkCompatible, '[IUTchIII] Ex 3.6 / Prop 3.7: F_MOD (Θ-link) vs F_mod (log-volume)');
+var qp = OPS.iii.pilotMake(d, 'QPilot'), tp = OPS.iii.pilotMake(d, 'ThetaPilot');
+check(qp.exponents.length === 1 && tp.exponents.length === 6 && tp.exponents[5] === 36 && Math.abs(tp.logVolume - (91 / 6) * qp.logVolume) < 1e-9, '[IUTchIII] Def 3.8 (i): q-pilot and Θ-pilot, avg(j²) = 91/6');
+check(Math.abs(OPS.iii.logVolumeScaleByP(1, 7) - (1 - Math.log(7))) < 1e-12 && OPS.iii.logVolumeScaleByE(0) === 1 && Math.abs(OPS.iii.logVolumeProcessionNormalize([1, 2, 3]) - 2) < 1e-12 && Math.abs(OPS.iii.arithDegree(d, qp.exponents) - qp.logVolume) < 1e-12 && OPS.iii.logVolumeLogLinkCompatible(1, 1), '[IUTchIII] Prop 3.9: log-volume normalizations, arithmetic degree, log-link compatibility');
+var ni = OPS.iii.kummerNonInterference(d);
+check(ni.nonInterference && ni.torsionOrder === 2 && ni.MODCompatibleWithLGPLink && ni.modCompatibleWithLogVolume, '[IUTchIII] Prop 3.10: non-interference of Kummer theory');
+var nbad = d.VSet.filter(function (v) { return v.inVBadMod; }).length, MF = OPS.iii.multiradialFullBuild(latO, 0);
+check(MF.npackets === d.LStar + 1 && MF.nnumberfields === d.LStar && MF.nsplitting === d.LStar * nbad && MF.ind1Count === prc.automorphisms && MF.ind2Summands >= MF.npackets && MF.ind3 && MF.logKummerOk, '[IUTchIII] Thm 3.11: multiradial representation (Ind1, Ind2, Ind3)');
+var cs = OPS.iii.cor312Steps(latO);
+check(cs.length === 7 && Math.abs(cs[0].value + IUT.logQ(d) / 26) < 1e-9 && OPS.iii.cor312Holds(latO), '[IUTchIII] Cor 3.12: steps listed, −|log q| = −log q / 2l, inequality holds');
+var latL = new IUT.Lattice(IUT.genExample(2)); latL.buildH(0, 0, 1); latL.applyLogLink(0, -1);
+check(OPS.iii.LGPLinkRequiresLog(latL, 0, 0) && !OPS.iii.LGPLinkRequiresLog(latL, 1, 0), '[IUTchIII] Def 3.8 (ii): the Θ×μ_LGP-link needs an incoming log-link');
+var MH = OPS.iv.mutationHistoryFromLattice(latL);
+check(MH.nvertices >= 4 && MH.nedges >= 3, '[IUTchIV] Def 3.3 (iii): the lattice as a mutation-history');
+
+// [IUTchIV]
+var k7 = { p: 7, e: 1, f: 1, m: 0, d: 0 }, k7r = { p: 7, e: 6, f: 1, m: 0, d: 5 / 6 }, k2 = { p: 2, e: 1, f: 1, m: 1, d: 0 };
+check(OPS.iv.prop12i(k7).equalities && Math.abs(OPS.iv.a(k7) - 1) < 1e-12 && Math.abs(OPS.iv.b(k7) + 1) < 1e-12 && !OPS.iv.prop12i(k7r).equalities && Math.abs(OPS.iv.a(k7r) - 1 / 3) < 1e-12 && Math.abs(OPS.iv.a(k2) - 2) < 1e-12, '[IUTchIV] Prop 1.2: a = 1 = −b unramified; e = 6 > p − 2: a = 1/3; p = 2: a = 2');
+check(Math.abs(OPS.iv.mulogLogUnits(k2) + 2 * Math.log(2)) < 1e-12 && Math.abs(OPS.iv.mulogLogUnits(k7) + Math.log(7)) < 1e-12, '[IUTchIV] Prop 1.4 (ii): μ_log(log O×) = −(1/e + m/ef) log p');
+var I2 = [k7, k7];
+check(Math.abs(OPS.iv.prop12iiExpLog(I2, 0) + 2) < 1e-12 && Math.abs(OPS.iv.prop12iiExpTilde(I2, 0)) < 1e-12 && Math.abs(OPS.iv.prop12iiiExp(I2, 0) + 1) < 1e-12 && OPS.iv.prop12ivUnramified(I2) && OPS.iv.prop14iiiDIPlusAILower(I2) === 2 && OPS.iv.dIstar(I2, 0) === 0, '[IUTchIV] Prop 1.1 / 1.2 (ii)-(iv) / 1.4 (iii): tensor-product exponents');
+var pb = OPS.iv.prop13Bounds(k7, k7r, 1);
+check(Math.abs(pb.lo - 5 / 6) < 1e-12 && Math.abs(pb.hi - 2) < 1e-12 && pb.lo <= k7r.d && k7r.d <= pb.hi, '[IUTchIV] Prop 1.3: 5/6 ≤ d ≤ 2 for a tame sextic extension');
+check(OPS.iv.archSummands(3, 1) === 4 && OPS.iv.archMetricFactor(3) === 4 && OPS.iv.archTensorBound(2, 3) === 9, '[IUTchIV] Prop 1.5: 2^{|I|−1}|V|^{|I|} summands');
+check(OPS.iv.pntNBound(97) >= 25 && OPS.iv.pntCountBound(1e21) > 0 && OPS.iv.logLeX(13) && OPS.iv.chebyshevLo(99) < 99 && OPS.iv.chebyshevHi(99) > 99 && OPS.iv.primeInABound(1, 5) === 12, '[IUTchIV] Prop 1.6 / 2.1: prime number theorem bounds');
+check(Math.abs(OPS.iv.weightedAverage([1, 3], [1, 3]) - 2.5) < 1e-12 && OPS.iv.normalizedWeights(d, 7).length === 1 && OPS.iv.normalizedWeights(d, 7)[0] === 1, '[IUTchIV] Prop 1.7: weighted averages, λ_v = 1 for F_mod = Q');
+var Dq = OPS.iv.arithDivisorQ(d);
+check(Math.abs(OPS.iv.arithDivisorNormalizedDeg(d, Dq) - IUT.logQ(d)) < 1e-9 && OPS.iv.arithDivisorDegE(d, Dq, 7) > 0 && OPS.iv.arithDivisorDeg(d, OPS.iv.arithDivisorZero(d)) === 0 && OPS.iv.arithDivisorAdd(Dq, Dq).coeff[vb] === 2 * Dq.coeff[vb], '[IUTchIV] Def 1.9: arithmetic divisors, deg(q) = log q');
+var T = OPS.iv.thm110Compute(d);
+check(Math.abs(OPS.iv.E1(6) - 3.5) < 1e-12 && Math.abs(OPS.iv.E2(6) - 91 / 6) < 1e-12 && OPS.iv.E3(13) === 13 * 14 * 144 && T.inequalityHolds && T.cor312Holds && T.etaPrm === OPS.ETA_PRM, '[IUTchIV] Thm 1.10: (E1)-(E3), (1/6) log q ≤ (1 + 20 d_mod/l)(log d + log f) + 20(e*_mod l + η_prm)');
+var C2 = OPS.iv.cor22Compute(d);
+check(C2.delta === 4096 * 27 * 5 && C2.holds && C2.epsE > 0 && C2.logcondHi > C2.logcondLo && OPS.iv.cor23Bound(1, 0, 1, 0, 0) === 0 && OPS.iv.cor23Bound(1, 0, 1, 1, 0) === 1, '[IUTchIV] Cor 2.2 / 2.3: δ = 2^12·3^3·5·d, (C2) holds, ε_E > 0, slack');
+var r6 = new IUT.Report(); OPS.iv.torsionFacts(d, r6);
+check(r6.issues.length >= 2, '[IUTchIV] Prop 1.8: torsion-point facts reported');
+var idm = OPS.iv.mutationIdentity(IDS.SPECIES[0]), composed = null;
+IDS.MUTATIONS.forEach(function (f) { IDS.MUTATIONS.forEach(function (g) { if (!composed) composed = OPS.iv.mutationCompose(f, g); }); });
+check(idm.dom === idm.cod && idm.core && OPS.iv.speciesIsomorphic(IDS.SPECIES[0], IDS.SPECIES[0]) && composed && composed.dom !== undefined, '[IUTchIV] Def 3.1: identity mutations, isomorphic species, composition of mutations');
+check(OPS.iv.observableIsCore('DMonoPrimeStrip', IDS.MUTATIONS) && OPS.iv.observableIsCore('FMonoUnitsModTorsPrimeStrip', IDS.MUTATIONS) && !OPS.iv.observableIsCore('ThetaPmEllNFHodgeTheater', IDS.MUTATIONS), '[IUTchIV] Def 3.3 (v): D⊢, F⊢×μ are cores; the full Hodge theater is not');
+
+// [EssLgc]
+var mA = OPS.logic.modelEval(1, 1, 1, 0), mB = OPS.logic.modelEval(1, 1, 1, 1), mC = OPS.logic.modelEval(2, 1, 1, 0);
+check(mA.consistent && mA.meaningful && !mB.meaningful && !mC.consistent && OPS.logic.FLAVOURS.length === 5, '[EssLgc] Ex 2.4.5: ∧ ⇒ A = ε; ∨ ⇒ nothing; A ≠ ε is inconsistent');
+var stp = OPS.logic.stpChain(latO);
+check(stp.length === 8 && stp[0].indeterminacy === 'Ind3' && stp[1].indeterminacy === 'Ind1' && stp[2].indeterminacy === 'Ind2' && /log q/.test(stp[7].to), '[EssLgc] §3.10 (Stp1)-(Stp8): the chain of steps with Ind3, Ind1, Ind2 first');
+var rep2 = IUT.multiradial(latO, 0), fg = OPS.logic.fixAndGlue(latO), R = OPS.logic.fuzzify(fg.thetaSide, rep2.ind, 0, 0, rep2.thetaUpperBound - fg.thetaSide);
+check(fg.qSide > fg.thetaSide && OPS.logic.engulfs(R, fg.qSide) && !OPS.logic.engulfs(R, fg.thetaSide - 1) && !OPS.logic.engulfs(R, rep2.thetaUpperBound + 1), '[EssLgc] (FxGl), (Englf): the Θ-pilot region engulfs the q-pilot log-volume');
+var U = OPS.logic.extInd1Union([1, 2], [2, 3]);
+check(U.length === 3 && OPS.logic.extInd2Crush(U, Math.abs).length === 3 && /harmless/.test(OPS.logic.orIndeterminacyVerdict(true)) && /fatal/.test(OPS.logic.orIndeterminacyVerdict(false)), '[EssLgc] (ExtInd1), (ExtInd2), (logORInd): unions, crushing, OR-indeterminacy verdicts');
+
+// [Alien]
+var gs = OPS.alien.gaussSteps();
+check(gs.length === 12 && Math.abs(gs[11].value - Math.sqrt(Math.PI)) < 1e-12 && Math.abs(OPS.alien.gaussNumeric() - Math.sqrt(Math.PI)) < 1e-6, '[Alien] §1: Steps 1-12, ∫ e^{−x²} = √π');
+var tr = OPS.alien.transportRun(latO);
+check(OPS.alien.transportApparatus().length === 7 && tr.length === 4 && tr[3].value === fg.qSide, '[Alien] §2.7: 7 stages of mono-anabelian transport, 4 values');
+var fsG = OPS.alien.formalSumMake(d, 'Gt'), tot = OPS.alien.formalSumTotal(fsG), r7 = new IUT.Report();
+check(fsG.label.length === 12 && tot[0] === 1 && tot[1] === 1 && OPS.alien.formalSumTotal(OPS.alien.formalSumMake(d, 'BoxPlus')).join('/') === '1/1' && OPS.alien.formalSumCompatible(d, 'Zero', r7) && OPS.alien.formalSumCompatible(d, 'BoxPlus', r7) && OPS.alien.formalSumCompatible(d, 'Avg', r7) && r7.errors === 0, '[Alien] §3.6 (i): formal sums [0], [|j|], [⊞], [>] of total mass 1, compatible');
+check(OPS.alien.labelLineSegment(d).length === 13 && OPS.alien.labelLineSegment(d)[0] === -6 && OPS.alien.evaluationPoints(d, 2).join() === '2,-2' && OPS.alien.evaluationPoints(d, 0).length === 1, '[Alien] §3.6 (ii): the label line segment and evaluation points ±t');
+var es = OPS.alien.estimateSteps(latO);
+check(es.length === 12 && Math.abs(OPS.alien.leadingTermSum(d) - rep2.leadingTerm) < 1e-9 && Math.abs(OPS.alien.leadingTermJ(d, 1) - (2 * d.K.logDifferentEstimate - IUT.logQ(d) / (2 * d.l))) < 1e-9 && OPS.alien.lFromHeight(d) > 0, '[Alien] §3.7 (ii),(iv): (1est)-(12est), leading term Σ_j ((j+1) log d^K − (j²/2l) log q)');
+check(OPS.alien.dictionary().length === 11, '[Alien] §3.8: dictionary (1gau)-(11gau)');
+
 console.log((fails ? 'FAILED' : 'PASSED') + ': ' + fails + ' failure(s) / ' + n + ' checks');
 process.exit(fails ? 1 : 0);

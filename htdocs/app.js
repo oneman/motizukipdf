@@ -3,7 +3,8 @@
  * Part I gallery (diagrams.js) and the Part II processes (processes.js) from
  * the same state: one Lattice (iut.js) plus a focus (n,m).
  *
- * Explorer tabs:  data · lattice · hodge theater · alien copies · multiradial · species · identifiers
+ * Explorer tabs:  data · lattice · hodge theater · alien copies · multiradial · species · identifiers · processes
+ * (the processes tab runs the operations layer, ops.js, on the current Θ-data: the same registry as `iut procs` / `iut run`)
  */
 (function () {
   'use strict';
@@ -283,11 +284,42 @@
     $('id-table').innerHTML = h; $('id-count').textContent = rows.length + ' / ' + IUT_IDENTS.IDENTS.length;
   }
 
+  // ------------------------------------------------------------ processes tab (DOM; ops.js + processlist.js)
+  var procResults = {};
+  function procCtx() { return { species: IUT_IDENTS.SPECIES, mutations: IUT_IDENTS.MUTATIONS }; }
+  function procFilter() { var q = ($('proc-filter').value || '').toLowerCase(); return OPS.PROCS.filter(function (p) { return !q || (p.id + ' ' + p.paper + ' ' + p.section + ' ' + p.name + ' ' + p.inputs + ' ' + p.outputs).toLowerCase().indexOf(q) >= 0; }); }
+  function renderProcs() {
+    var rows = procFilter();
+    var h = '<table class="grid"><tr><th></th><th>process</th><th>paper</th><th>section</th><th>name</th><th>inputs</th><th>outputs</th><th>last run</th></tr>';
+    rows.forEach(function (p, i) {
+      var r = procResults[p.id];
+      h += '<tr class="proc-row" data-id="' + p.id + '"><td><button class="btn-run" data-id="' + p.id + '">run</button></td><td><code>' + p.id + '</code></td><td>' + escapeHtml(p.paper) + '</td><td class="ref">' + escapeHtml(p.section) + '</td><td>' + escapeHtml(p.name) + '</td><td>' + escapeHtml(p.inputs) + '</td><td>' + escapeHtml(p.outputs) + '</td><td class="' + (r ? (r.ok ? 'ok' : 'fail') : '') + '">' + (r ? (r.ok ? 'ok' : 'FAIL') : '') + '</td></tr>';
+    });
+    h += '</table>';
+    $('proc-table').innerHTML = h; $('proc-count').textContent = rows.length + ' / ' + OPS.PROCS.length;
+    $('proc-table').querySelectorAll('.btn-run').forEach(function (b) { b.addEventListener('click', function (ev) { ev.stopPropagation(); runProc(b.dataset.id); }); });
+    $('proc-table').querySelectorAll('tr.proc-row').forEach(function (tr) { tr.addEventListener('click', function () { var r = procResults[tr.dataset.id]; if (r) showProcOutput([r]); else runProc(tr.dataset.id); }); });
+  }
+  function showProcOutput(results) {
+    $('proc-output').textContent = results.map(function (r) { return '== ' + r.id + ' [' + r.paper + '] ' + r.section + ' — ' + r.name + '  →  ' + (r.ok ? 'ok' : 'FAIL') + '\n' + r.lines.map(function (l) { return '  ' + l; }).join('\n'); }).join('\n\n');
+  }
+  function runProc(id) {
+    var p = OPS.findProc(id); if (!p) return; var r = p.run(state.lat.data, procCtx());
+    procResults[id] = { id: p.id, paper: p.paper, section: p.section, name: p.name, ok: r.ok, lines: r.lines };
+    renderProcs(); showProcOutput([procResults[id]]); setStatus('ran ' + p.id + ' on ' + state.lat.data.name + ': ' + (r.ok ? 'ok' : 'FAIL'));
+  }
+  function runAllProcs() {
+    var rows = procFilter(), out = [], fails = 0;
+    rows.forEach(function (p) { var r = p.run(state.lat.data, procCtx()); procResults[p.id] = { id: p.id, paper: p.paper, section: p.section, name: p.name, ok: r.ok, lines: r.lines }; out.push(procResults[p.id]); if (!r.ok) fails++; });
+    renderProcs(); showProcOutput(out); setStatus('ran ' + rows.length + ' processes on ' + state.lat.data.name + ': ' + fails + ' failure(s)');
+  }
+
   // ------------------------------------------------------------ control
   function setStatus(s) { $('status').textContent = s; }
   function rebuild(d) {
     state.lat = new IUT.Lattice(d, state.horizontal);
     state.lat.buildH(0, -1, 1);
+    procResults = {}; $('proc-output').textContent = '';
     redraw(); renderGallery(); PROCESSES.refresh();
   }
   function ctx() { return { d: state.lat.data, lat: state.lat }; }
@@ -314,6 +346,7 @@
     if (state.tab === 'multi') drawMultiradial();
     if (state.tab === 'species') drawSpecies();
     if (state.tab === 'ids') renderIdents();
+    if (state.tab === 'procs') renderProcs();
   }
   function explorerVisible() { var r = $('explorer').getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
   function showTab(t) {
@@ -343,6 +376,8 @@
     $('btn-left').addEventListener('click', function () { moveFocus(-1, 0); }); $('btn-right').addEventListener('click', function () { moveFocus(1, 0); });
     $('btn-validate').addEventListener('click', function () { showTab('data'); });
     $('id-filter').addEventListener('input', renderIdents);
+    $('proc-filter').addEventListener('input', renderProcs);
+    $('btn-run-all').addEventListener('click', runAllProcs);
     $('btn-json').addEventListener('click', function () { var blob = new Blob([JSON.stringify({ data: state.lat.data, HodgeTheaters: state.lat.vertices(), links: state.lat.links }, null, 1)], { type: 'application/json' }); var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'iut-lattice.json'; a.click(); });
     var cl = $('c-lattice');
     cl.addEventListener('click', function (ev) { var hit = latticeHit(ev); if (hit) { state.lat.focus = hit; redraw(); } });
@@ -352,7 +387,7 @@
       if (ev.target.tagName === 'INPUT' || ev.target.tagName === 'SELECT' || ev.target.tagName === 'TEXTAREA' || !explorerVisible()) return;
       if (ev.key === 'ArrowUp') moveFocus(0, 1); else if (ev.key === 'ArrowDown') moveFocus(0, -1); else if (ev.key === 'ArrowLeft') moveFocus(-1, 0); else if (ev.key === 'ArrowRight') moveFocus(1, 0);
       else if (ev.key === 'l') applyLog(); else if (ev.key === 't') applyTheta(); else if (ev.key === 'H') buildH();
-      else if (ev.key >= '1' && ev.key <= '7') showTab(['data', 'lattice', 'ht', 'alien', 'multi', 'species', 'ids'][+ev.key - 1]);
+      else if (ev.key >= '1' && ev.key <= '8') showTab(['data', 'lattice', 'ht', 'alien', 'multi', 'species', 'ids', 'procs'][+ev.key - 1]);
       else return;
       ev.preventDefault();
     });
@@ -364,5 +399,5 @@
     rebuild(d); showTab('lattice'); setStatus('built the infinite H for ' + d.name + ' — click a vertex, then l / t / H');
   }
   document.addEventListener('DOMContentLoaded', init);
-  window.IUT_APP = { state: state, showTab: showTab, rebuild: rebuild, renderGallery: renderGallery };
+  window.IUT_APP = { state: state, showTab: showTab, rebuild: rebuild, renderGallery: renderGallery, runProc: runProc, runAllProcs: runAllProcs };
 })();

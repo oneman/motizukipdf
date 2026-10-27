@@ -202,6 +202,38 @@ Hodge theaters built so far as spokes ([IUTchIII] Cor 3.12; [IUTchI] Cor 6.10).
 Everything the program *does* compute is cross-checked between the C and JS
 implementations by `make test`.
 
+## 8a. The operations layer — `src/iut_ops.h`, `htdocs/ops.js`
+
+The structs above are the *nouns*; `src/iut_ops.h` holds the *verbs*: every
+step and every process of the papers that acts on these data types, one C
+function per step, grouped by paper (`iut_ops_i.c` … `iut_ops_logic.c`) and
+cited at the declaration. `src/iut_proc.c` groups them into a registry of 52
+named processes (`iut procs`), each of which `iut run <id>` demonstrates on
+given Θ-data; `docs/PROCESSES.md` is the generated table. `htdocs/ops.js`
+mirrors every function under a camelCase name (`iut_procession_build` →
+`OPS.i.processionBuild`, `iut_bicoric_check` → `OPS.iii.bicoricCheck`,
+`iut_thm110_compute` → `OPS.iv.thm110Compute`, …) and the registry
+(`OPS.PROCS`, `OPS.runAll`), and tab 8 of the explorer runs them in the browser.
+
+What the operations compute, by paper:
+
+| paper | operations | typical outputs |
+|---|---|---|
+| [IUTchI] (via recaps) | label maps F_l ⊇ F_l^× ↠ F_l^*, the gluing 0,⊞ ↦ >, orbits of F_l^{⋊±}/F_l^*; LabCusp±/LabCusp and forgetting the sign; capsules F_T, F_J, capsule morphisms, poly-isomorphism counts; processions Prc(D_J), Prc(D_T); the four bridges with their symmetry torsors (2l, l*, 1); Θ±ell NF-HT ↦ D-HT; Frobenius chains and étale pictures; global NF data, realification, Kummer | orbit sizes, |Aut Prc| = Π|S±_k|!, torsor sizes, D-HT isomorphism checks |
+| [IUTchII] | radial environments and multiradialization; the three cyclotomic rigidities; tempered indices [Π±:Π] = l, [Π:Π_Ÿ] = 2; θ(√−q^{±t}) = q̲^{t²} up to μ_{2l}; the monoids Ψ_cns, Ψ_env, Ψ_gau, …, semisimplification, Kummer and evaluation isomorphisms; F_l^{⋊±}-synchronization vs F_l^*-symmetrization; the forgetful ladder F⊩▶×μ → … → D⊢; the Θ×μ-, Θ×μ_gau-link flavours of Cor 4.10 with their coricity | values of θ, generator lists, class counts, link records with dilation l(l+1)/12 |
+| [IUTchIII] | log-shells I_v from F, F⊢×μ, D⊢, D (all isomorphic), their properties (a)–(c) and indeterminacies Ism / ±1; the log-link of prime-strips and Hodge theaters; lattice flavours, non-commuting squares, Θ-links obligating log-links; bi-coricity (Thm 1.5); vertically coric / multiradial theta monoids; tensor packets (|V_p|^{j+1}, 2^{j}|V_arc|^{j+1} summands), global packets and localization; LGP monoids; upper semi-compatibility; F_MOD vs F_mod; pilots; log-volume normalizations and arithmetic degrees; non-interference; the multiradial representation (Thm 3.11) and the seven steps of Cor 3.12 | shell radii and μ_log, summand counts, Ind1/Ind2/Ind3 bookkeeping, −|log Θ| ≥ −|log q| |
+| [IUTchIV] | a_i = (1/e)⌈e/(p−2)⌉ (or 2), b_i = ⌊log(pe/(p−1))/log p⌋ − 1/e, the exponents of Prop 1.2 (ii)–(iv), the bounds of Prop 1.3, μ_log(log O×), the archimedean summands 2^{|I|−1}|V|^{|I|}, the prime-number-theorem bounds 4x/(3 log x), weighted averages; torsion-point facts; arithmetic divisors and their degrees; (E1)–(E5) and Thm 1.10; Prop 2.1; Cor 2.2 (δ, ε_E, the range of l) and Cor 2.3; species: identities, composition, isomorphism, cores, mutation histories | numbers, inequality verdicts, composed mutations |
+| [EssLgc] | the ∧/∨ model (A, B, ε, N), consistency; (Stp1)–(Stp8) with their indeterminacies; (FxGl), (Englf), (ExtInd1), (ExtInd2), (logORInd) vs (ΘORInd) | step chains with log-volumes, regions and "engulfs" verdicts |
+| [Alien] | the twelve steps of the Gaussian integral and its numeric value; the seven stages of mono-anabelian transport and a run of it on the lattice; formal sums [0], [|j|], [⊞], [>] and their compatibility; the label line segment and evaluation points ±t; the leading term Σ_j((j+1) log d^K − (j²/2l) log q); (1est)–(12est); the dictionary (1gau)–(11gau) | √π, mass-1 sums, estimate chains |
+
+As in §8, these functions compute the *combinatorics and the numbers* of each
+step (which labels, which copies, which indeterminacy, which inequality), not
+the anabelian reconstructions that the papers perform at each step.
+
+Note on the synthetic generator: `iut_gen_random` now enforces e_K ≥ e_mod at
+every place, which the validator of §2 always required and which the random
+seeds 3 and 11 used to violate.
+
 ## 9. Where each object appears in the web app
 
 Part I of `htdocs/index.html` draws one diagram per data type of this document

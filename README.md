@@ -16,6 +16,10 @@ validators, a terminal UI and a web app:
   `SPmJPlusOne`, …), generated from the C source,
 * `docs/DATA_MODEL.md` — what each type models, with citations into the PDFs,
   and what the program does and does not compute,
+* `docs/PROCESSES.md` — the **operations layer**: every step / process of
+  [IUTchI–IV], [EssLgc] and [Alien] that acts on the data types, captured as
+  C functions (`src/iut_ops_*.c`) behind a registry of 52 named processes
+  (`iut procs`, `iut run <id>`), mirrored one to one in `htdocs/ops.js`,
 * `lean/` — the same data types in **Lean 4 / Mathlib**, with proofs that the
   constructed objects exist and satisfy the validators, and of the elementary
   facts behind them (see `lean/README.md`).
@@ -28,19 +32,39 @@ view carries a citation such as `[IUTchIII] Def 1.1` or `[Alien] §3.7 (iv)`.
 ```sh
 cd src
 make            # builds ./iut; uses ncurses(w) if present, text-only otherwise
-make test       # C self-tests (90 checks) + node tests of the web model (63 checks)
+make test       # C self-tests (model + operations layer) + node tests of the web model and ops.js
 ./iut gen      --abc 1 2400 2401 --l 13      # generate initial Θ-data from an abc triple
 ./iut validate --example 1                   # validate it (exit code = number of errors)
 ./iut walk     --example 2 --rows 2          # build the "infinite H" of the log-theta-lattice:
                                              # Hodge theaters, log-shells, alien copies, multiradial rep.
 ./iut walk     --random 4 --horizontal lgp --json   # full JSON dump
 ./iut ids Mono                               # identifiers whose id/notation/desc contain "Mono"
+./iut procs IUTchIII                         # the registry of processes (operations on the data types), filtered
+./iut run ComputeThmOneTen --abc 1 2400 2401 --l 13   # run one process on the given Θ-data
+./iut run --all --example 2                  # run all 52 processes (exit code = number of failures)
 ./iut tui      --example 3                   # interactive ncurses UI
 ```
 
-Data options accepted by `gen`, `validate`, `walk`, `tui`: `--abc A B C`, `--l L`,
+Data options accepted by `gen`, `validate`, `walk`, `run`, `tui`: `--abc A B C`, `--l L`,
 `--example K` (0–5), `--random SEED`; `walk` also takes `--rows R`,
-`--horizontal theta|xmu|gau|LGP|lgp` and `--json`.
+`--horizontal theta|xmu|gau|LGP|lgp` and `--json`; `procs` takes `--md`, `--js`,
+`--json` and an optional filter; `run` takes a process id or `--all [filter]`.
+
+### The operations layer (`src/iut_ops.h`)
+
+Going through [IUTchI] (via the recaps), [IUTchII], [IUTchIII], [IUTchIV],
+[EssLgc] and [Alien] section by section, every *step* and every *process* that
+can be performed on the data types is a C function, grouped by paper:
+
+| file | contents |
+|---|---|
+| `iut_ops_i.c` | label maps and symmetries, LabCusp, capsules and their morphisms, processions, the four bridges, the forgetful functor to D-Hodge theaters, Frobenius and étale pictures, global number-field data and its Kummer theory |
+| `iut_ops_ii.c` | radial environments and multiradialization, cyclotomic rigidities, tempered indices, theta evaluation, the seven monoids (constant, theta, Gaussian, …), semisimplification, Kummer and evaluation isomorphisms, F_l^{⋊±}/F_l^* symmetrization, the forgetful ladder of prime-strips, the Θ-link flavours of Cor 4.10 |
+| `iut_ops_iii.c` | log-shells from each of the four sources, the log-link of prime-strips and Hodge theaters, lattice flavours, bi-coricity (Thm 1.5), tensor packets and their procession, LGP monoids, upper semi-compatibility, the global variants F_MOD / F_mod, pilots, log-volume normalizations, non-interference, the multiradial representation (Thm 3.11) and the steps of Cor 3.12 |
+| `iut_ops_iv.c` | Props 1.1–1.8 (a_i, b_i, μ_log, archimedean summands, prime number theorem bounds, weighted averages, torsion points), arithmetic divisors (Def 1.9), (E1)–(E5) and Thm 1.10, Prop 2.1, Cor 2.2 / 2.3, and the species operations of §3 (identities, composition, cores, mutation histories) |
+| `iut_ops_logic.c` | the ∧/∨ model of [EssLgc] Ex 2.4.5, the chain (Stp1)–(Stp8), (FxGl), (Englf), (ExtInd1/2), (logORInd); the twelve Gaussian-integral steps, the mono-anabelian transport apparatus, formal sums of labels, (1est)–(12est) and the dictionary of [Alien] |
+| `iut_proc.c` | the registry: 52 processes, each with id (an identifier in the table), paper, section, name, inputs, outputs and a runner that demonstrates the functions on given Θ-data |
+| `iut_test_ops.c` | the paper-cited self-tests of the layer (part of `iut selftest`) |
 
 TUI keys: `1`–`9` screens (Θ-data, validate, lattice, Hodge theater, alien
 copies, multiradial / log-volume, étale-picture, species, identifiers); arrows
@@ -85,29 +109,41 @@ objects are used:
 vertex to focus, `l`/`t`/`H` or the buttons apply log-links, Θ-links and the
 infinite H; tabs for the Θ-data & validation report, the Hodge theater at the
 focus, the alien copies across a Θ-link, the multiradial / log-volume numbers,
-the species graph and the searchable identifier table.
+the species graph, the searchable identifier table and the processes table
+(tab 8: filter the 52 processes, run one or all of them on the current Θ-data
+and read the same output as `iut run`).
 
-`htdocs/iut.js` is the model (usable from node), `htdocs/diagrams.js` the SVG
-helpers and the Part I gallery, `htdocs/processes.js` the Part II progressions,
-`htdocs/app.js` the explorer and the glue, `htdocs/identifiers.js` is generated.
+`htdocs/iut.js` is the model (usable from node), `htdocs/ops.js` the operations
+layer (every function of `src/iut_ops_*.c` under a camelCase name, plus the
+registry with JS runners), `htdocs/diagrams.js` the SVG helpers and the Part I
+gallery, `htdocs/processes.js` the Part II progressions, `htdocs/app.js` the
+explorer and the glue; `htdocs/identifiers.js` and `htdocs/processlist.js` are
+generated.
 
 ## Generated files and consistency
 
-`src/iut_ids.c` is the single source of truth for the identifiers. `make gen`
-regenerates `htdocs/identifiers.js` and `docs/IDENTIFIERS.md`; `make check`
-fails if they drift. The C self-test and the node test check the same
-mathematical facts (label sets, symmetries, Frey-curve valuations, coricity,
-log-shell volumes, the l(l+1)/12 dilation, the infinite H, the inequality).
+`src/iut_ids.c` is the single source of truth for the identifiers and
+`src/iut_proc.c` for the process registry. `make gen` regenerates
+`htdocs/identifiers.js`, `docs/IDENTIFIERS.md`, `htdocs/processlist.js` and
+`docs/PROCESSES.md`; `make check` fails if they drift. The C self-test and the
+node test check the same mathematical facts (label sets, symmetries, Frey-curve
+valuations, coricity, log-shell volumes, the l(l+1)/12 dilation, the infinite
+H, the inequality) and the same operations-layer facts (bridge torsors,
+procession automorphisms, Cor 2.5 theta values, bi-coricity, tensor-packet
+counts, the a_i / b_i / μ_log formulas, Thm 1.10, Cor 2.2, (Stp1)–(Stp8),
+formal sums, ∫e^{−x²} = √π), and both run all 52 processes on the examples.
 
 ## Layout
 
 ```
 src/        iut.h (types) · iut_ids.c (identifiers, species, mutations) · iut_core.c (generators,
             validators, prime-strips, Hodge theaters, arithmetic) · iut_lattice.c (lattice, links,
-            multiradial) · iut_json.c (exports) · iut_view.c (text views) · iut_tui.c · iut_main.c · Makefile
-htdocs/     index.html · style.css · iut.js (model) · diagrams.js (Part I) · processes.js (Part II) · app.js (explorer) ·
-            identifiers.js (generated) · test.js
-docs/       IDENTIFIERS.md (generated) · DATA_MODEL.md
+            multiradial) · iut_json.c (exports) · iut_view.c (text views) · iut_tui.c · iut_main.c · Makefile ·
+            iut_ops.h + iut_ops_i.c / _ii.c / _iii.c / _iv.c / _logic.c (operations layer) · iut_proc.c (process
+            registry) · iut_test_ops.c
+htdocs/     index.html · style.css · iut.js (model) · ops.js (operations layer) · diagrams.js (Part I) · processes.js (Part II) ·
+            app.js (explorer) · identifiers.js, processlist.js (generated) · test.js
+docs/       IDENTIFIERS.md, PROCESSES.md (generated) · DATA_MODEL.md
 lean/       lakefile.toml · IUT.lean · IUT/ (Identifiers, Labels, InitialThetaData, PrimeStrip, HodgeTheater,
             Link, LogThetaLattice, Multiradial, Species) — Lean 4 / Mathlib port with proofs
 scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check)
