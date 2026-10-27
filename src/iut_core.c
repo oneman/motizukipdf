@@ -266,8 +266,9 @@ int iut_gen_random(iut_initial_theta_data *d, unsigned seed)
     static const unsigned ps[] = { 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
     unsigned used[10] = { 0 };
     for (unsigned i = 0; i < nbad; ++i) {
-        unsigned k; do { k = rnd(10); } while (used[k]); used[k] = 1;
-        add_val(d, ps[k], IUT_RED_BAD_MULT, 1 + rnd(6));
+        unsigned k, oq; do { k = rnd(10); } while (used[k] || ps[k] == d->l); used[k] = 1;   /* [IUTchI] Def 3.1 (c): l prime to p_v … */
+        do { oq = 1 + rnd(6); } while (oq % d->l == 0);                                   /* … and to ord(q_v) on V^bad_mod */
+        add_val(d, ps[k], IUT_RED_BAD_MULT, oq);
         d->V[d->nV - 1].e_mod = 1 + rnd(d->dmod); d->V[d->nV - 1].f_mod = 1;
         if (d->V[d->nV - 1].e_K < d->V[d->nV - 1].e_mod) d->V[d->nV - 1].e_K = d->V[d->nV - 1].e_mod;   /* K_v ⊇ (F_mod)_v */
     }
@@ -335,6 +336,8 @@ int iut_validate_data(const iut_initial_theta_data *d, iut_report *r)
                 iut_report_add(r, IUT_SEV_ERROR, "QUnderV", "[IUTchI] Ex 3.2", "%s: bad multiplicative reduction needs ord(q_v) > 0", v->name);
             if (v->in_Vbad_mod && v->p % 2 == 0)
                 iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (e)", "%s: V^bad_mod consists of ODD residue characteristic", v->name);
+            if (v->in_Vbad_mod && v->p == d->l)
+                iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (c)", "%s: l must be prime to the residue characteristics of V^bad_mod", v->name);
             if (d->l && v->ordq % d->l == 0)
                 iut_report_add(r, IUT_SEV_WARN, "QUnderV", "[IUTchI] Def 3.1; [IUTchIV] Prop 1.8 (vii)", "%s: l | ord(q_v) = %u (l-torsion then unramified at v; SL2 condition fragile)", v->name, v->ordq);
         }

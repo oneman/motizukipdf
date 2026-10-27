@@ -1,15 +1,19 @@
 /*
- * iut_ops_i.c — operations of [IUTchI] (Hodge theaters), cited through the
- * recaps in [IUTchII] §4, [IUTchIII] §1, [Pano] §3, [Alien] §3.3/§3.6 as well
- * as the statements of [IUTchI] itself.
+ * iut_ops_i.c — operations of [IUTchI] (Hodge theaters), cited from the paper
+ * itself (pdf/Inter-universal Teichmuller Theory I.pdf); the finer data types
+ * of IUT I (orbicurves, local Frobenioids, label torsors, automorphism groups,
+ * …) live in iut_i.h / iut_i.c.
  *
- *  §4-§6 labels:   F_l ⊇ F_l^× ↠ F_l^*, |F_l|, the two symmetries, the gluing 0,⊞ ↦ >
- *  Def 6.1/Prop 6.5 cusps:  LabCusp±(D_⊚) ≅ F_l,  LabCusp(D_⊛) ≅ F_l^*
- *  §0 capsules, Prop 4.11 / Prop 6.9 processions
- *  Def 4.6, 5.5, 6.4, 6.11 bridges;  Def 6.13 Hodge theaters and forgetful functors
- *  Cor 3.8 Frobenius picture, Cor 4.12 / 6.10 étale picture
+ *  §4-§6 labels:   F_l ⊇ F_l^× ↠ F_l^* (§4: F_l^* = F_l^×/{±1}, |F_l^*| = l*), |F_l| (Ex 4.4),
+ *                  the two symmetries (Prop 4.9 (i), Prop 6.8 (i)), the gluing 0,⊞ ↦ > (Prop 6.7, Def 6.13)
+ *  Def 4.1 (ii)/Prop 4.2, Def 6.1 (ii)-(iii)/Prop 6.5 cusps:  LabCusp(D^⊛) ≅ F_l^*,  LabCusp±(D^⊚±) ≅ F_l
+ *  §0 capsules and morphisms of capsules; Prop 4.11 / Prop 6.9 processions
+ *  Def 4.6, 5.5, 6.4, 6.11 bridges with their isomorphism torsors (Prop 4.8, Prop 6.6)
+ *  Def 6.13 Hodge theaters and the forgetful functors (Rem 6.12.2)
+ *  Cor 3.8 Frobenius-picture, Cor 3.9 / Cor 4.12 / Cor 6.10 étale-pictures
  *  Ex 5.1 / Cor 5.3 global number-field data and its Kummer isomorphism
  */
+#include <stdlib.h>
 #include <stdlib.h>
 #include <string.h>
 #include "iut_ops.h"
@@ -25,31 +29,32 @@ int iut_label_glue_pm_to_nf(const iut_initial_theta_data *d, int t)
     if (!iut_label_in_Fl(d, t)) return -1;
     return t == 0 ? 0 : iut_label_abs(t);
 }
-unsigned iut_label_orbit_FlSemiPm(const iut_initial_theta_data *d, int t) { return iut_label_in_Fl(d, t) ? d->l : 0; }     /* [IUTchI] Prop 6.6: transitive on F_l */
-unsigned iut_label_orbit_FlStar(const iut_initial_theta_data *d, int j)   { return iut_label_in_FlStar(d, j) ? d->lstar : 0; } /* [IUTchI] Prop 4.9: simply transitive on F_l^* */
+unsigned iut_label_orbit_FlSemiPm(const iut_initial_theta_data *d, int t) { return iut_label_in_Fl(d, t) ? d->l : 0; }     /* [IUTchI] Prop 6.8 (i): F_l^{⋊±} is doubly transitive on T ≅ F_l */
+unsigned iut_label_orbit_FlStar(const iut_initial_theta_data *d, int j)   { return iut_label_in_FlStar(d, j) ? d->lstar : 0; } /* [IUTchI] Prop 4.9 (i): F_l^* is simply transitive on J ≅ F_l^* */
 
 /* ------------------------------------------------------------------- cusps */
 void iut_labcusp_pm_make(const iut_initial_theta_data *d, iut_labcusp *out)
 {
-    /* [IUTchI] Def 6.1 (iii), Prop 6.5 (i); [IUTchII] Cor 4.5 (iii): the cusps of X_K
-     * (the "±-labelled" cusps of the l-th power covering) are in bijection with F_l
-     * via ζ, compatibly with the F_l^{⋊±}-action.  ε̲ is the cusp labelled by the
-     * 2-torsion shift (recorded in d->epsilon).                                     */
+    /* [IUTchI] Def 6.1 (ii)-(iii), (vi); Prop 6.5: LabCusp±(†D^⊚±), the cusps of
+     * X̲_K (D^⊚± = B(X̲_K)^0), are an F_l^{⋊±}-group ≅ F_l up to ±1, with the zero
+     * element †η⁰ and the ±-canonical element †η^± (the image of ε̲, up to sign);
+     * †ζ_± : LabCusp±(†D^⊚±) ≅ T synchronizes them with the capsule labels.        */
     memset(out, 0, sizeof *out);
     out->n = d->l; out->signed_labels = 1;
     for (unsigned i = 0; i < d->l; ++i) out->label[i] = (int)i - (int)d->lstar;
 }
 void iut_labcusp_make(const iut_initial_theta_data *d, iut_labcusp *out)
 {
-    /* [IUTchI] Def 4.1 (ii), Prop 4.2; [IUTchII] Cor 4.7 (ii): LabCusp(D_⊛) ≅ F_l^*
-     * (the cusps of C_K other than the one at 0, modulo ±).                        */
+    /* [IUTchI] Def 4.1 (ii), (v); Prop 4.2; Prop 4.7 (iii): LabCusp(†D^⊛), the label
+     * classes of cusps of C̲_K (D^⊛ = B(C̲_K)^0), form an F_l^*-torsor with canonical
+     * element †η (the image of ε̲); †ζ : LabCusp(†D^⊛) ≅ J.                         */
     memset(out, 0, sizeof *out);
     out->n = d->lstar; out->signed_labels = 0;
     for (unsigned i = 0; i < d->lstar; ++i) out->label[i] = (int)i + 1;
 }
 void iut_labcusp_forget_sign(const iut_labcusp *pm, iut_labcusp *out)
 {
-    /* LabCusp± → LabCusp: t ↦ |t|, the cusp 0 dropped  ([IUTchI] Prop 6.5 (ii), Def 6.13) */
+    /* LabCusp± → LabCusp: t ↦ |t|, the cusp 0 dropped  ([IUTchI] Def 6.1 (iii): (LabCusp± ∖ {η⁰})/{±1} ≅ LabCusp; Prop 6.7) */
     memset(out, 0, sizeof *out);
     out->signed_labels = 0;
     for (unsigned i = 0; i < pm->n; ++i) if (pm->label[i] > 0) out->label[out->n++] = pm->label[i];
@@ -129,13 +134,13 @@ void iut_bridge_build(const iut_hodge_theater *ht, iut_bridge_kind k, iut_bridge
     memset(out, 0, sizeof *out);
     out->kind = k; out->poly = 1;
     switch (k) {
-    case IUT_BRIDGE_THETA:     /* [IUTchI] Def 5.5 (ii): φ^Θ : F_J → F_>, the Θ-bridge; isomorphisms form an F_l^*-torsor only together with the NF-bridge; alone: {±1}-indeterminacy at bad v is absorbed, so the group is trivial up to the capsule permutations */
-        out->n_dom = d->lstar; out->dom = "FJ"; out->cod = "FGt"; out->symmetry = "trivial (rigid once the NF-bridge is fixed; [IUTchI] Prop 4.8 (iii), Cor 5.6 (ii))"; out->isos = 1; out->ok = ht->nf.theta_bridge_ok; break;
-    case IUT_BRIDGE_NF:        /* [IUTchI] Def 5.5 (i): φ^NF : F_J → F_⊛ via the Frobenioid F_mod^×; isomorphisms: F_l^*-torsor ([IUTchI] Prop 4.8 (ii), Prop 4.9 (iii)) */
+    case IUT_BRIDGE_THETA:     /* [IUTchI] Def 4.6 (ii), Def 5.5 (ii): φ^Θ_⊛ : F_J → F_> (constituents: evaluation sections at bad v, full poly-isos at good v, Ex 4.4 (iii)); the set of isomorphisms between two D-Θ-bridges has cardinality one ([IUTchI] Prop 4.8 (ii); Cor 5.6 (ii)) */
+        out->n_dom = d->lstar; out->dom = "FJ"; out->cod = "FGt"; out->symmetry = "trivial ([IUTchI] Prop 4.8 (ii), Cor 5.6 (ii))"; out->isos = 1; out->ok = ht->nf.theta_bridge_ok; break;
+    case IUT_BRIDGE_NF:        /* [IUTchI] Def 4.6 (i), Def 5.5 (i): φ^NF_⊛ : F_J → F^⊛ ⇝ F^⊛′ (capsule-full poly-morphism + Aut_ε(D^⊛)-orbit); isomorphisms: an F_l^*-torsor ([IUTchI] Prop 4.8 (i), Cor 5.6 (i)) */
         out->n_dom = d->lstar; out->dom = "FJ"; out->cod = "FCircAst"; out->symmetry = "F_l^*"; out->isos = d->lstar; out->ok = ht->nf.nf_bridge_ok; break;
-    case IUT_BRIDGE_THETA_PM:  /* [IUTchI] Def 6.4 (i), Def 6.11: φ^Θ± : F_T → F_⊞; isomorphisms: F_l^{⋊±}-torsor ([IUTchI] Prop 6.6 (ii)) */
-        out->n_dom = d->l; out->dom = "FT"; out->cod = "FBoxPlus"; out->symmetry = "F_l^{⋊±}"; out->isos = 2UL * d->l; out->ok = ht->pmell.theta_pm_bridge_ok; break;
-    case IUT_BRIDGE_THETA_ELL: /* [IUTchI] Def 6.4 (ii): φ^Θell : D_T → D_⊚± (étale-like, Π_{X_K}); isomorphisms: F_l^{⋊±} ([IUTchI] Prop 6.6 (iii)) */
+    case IUT_BRIDGE_THETA_PM:  /* [IUTchI] Def 6.4 (i), Def 6.11 (i): φ^Θ± : F_T → F_⊞ with T an F_l^{⋊±}-group; isomorphisms: a torsor over {±1} × {±1}^V ([IUTchI] Prop 6.6 (i); Ex 6.2 (ii)-(iii): −1_{F_l} and α^Θ±) */
+        out->n_dom = d->l; out->dom = "FT"; out->cod = "FBoxPlus"; out->symmetry = "{±1} × {±1}^V"; out->isos = 2UL << (d->nV < 62 ? d->nV : 62); out->ok = ht->pmell.theta_pm_bridge_ok; break;
+    case IUT_BRIDGE_THETA_ELL: /* [IUTchI] Def 6.4 (ii): φ^Θell : D_T → D^⊚± = B(X̲_K)^0 (étale-like, Π_{X̲_K}) with T an F_l^{⋊±}-torsor, Aut_csp-orbit; isomorphisms: an F_l^{⋊±}-torsor ([IUTchI] Prop 6.6 (ii)) */
         out->n_dom = d->l; out->dom = "DT"; out->cod = "DCircDotPm"; out->symmetry = "F_l^{⋊±}"; out->isos = 2UL * d->l; out->ok = ht->pmell.theta_ell_bridge_ok; break;
     default: break;
     }

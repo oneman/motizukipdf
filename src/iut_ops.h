@@ -34,6 +34,7 @@
 #ifndef IUT_OPS_H
 #define IUT_OPS_H
 #include "iut.h"
+#include "iut_i.h"
 
 /* =================================================================== IUTchI */
 

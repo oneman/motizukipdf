@@ -32,7 +32,7 @@ ifeq ($(strip $(CURSES_LIBS)),)
 endif
 
 SRC = iut_ids.c iut_core.c iut_lattice.c iut_json.c iut_view.c iut_main.c iut_tui.c \
-      iut_ops_i.c iut_ops_ii.c iut_ops_iii.c iut_ops_iv.c iut_ops_logic.c iut_proc.c iut_test_ops.c
+      iut_i.c iut_ops_i.c iut_ops_ii.c iut_ops_iii.c iut_ops_iv.c iut_ops_logic.c iut_proc.c iut_test_ops.c
 OBJ = $(SRC:.c=.o)
 
 all: iut
@@ -40,7 +40,7 @@ all: iut
 iut: $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDLIBS) $(CURSES_LIBS)
 
-%.o: %.c iut.h iut_ops.h
+%.o: %.c iut.h iut_ops.h iut_i.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(CURSES_CFLAGS) -c -o $@ $<
 
 test: iut

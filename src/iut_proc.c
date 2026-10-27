@@ -117,6 +117,190 @@ static int p_initial_data(const iut_initial_theta_data *d, FILE *f)
     iut_report r = {0}; fprintf(f, "    %s: l=%u, |V|=%u, log q = %.4f, log f = %.4f\n", d->name, d->l, d->nV, iut_log_q(d), iut_log_cond(d)); iut_validate_data(d, &r); return print_report(f, &r);
 }
 
+
+/* ======================================== IUTchI, read from the paper (iut_i.h) */
+static const char *yesno(int b) { return b ? "yes" : "no"; }
+static int p_pseudo_monoids(const iut_initial_theta_data *d, FILE *f)
+{
+    (void)d; int bad = 0;
+    for (int k = 0; k < IUT_PSM_COUNT; ++k) { iut_pseudo_monoid m; iut_pseudo_monoid_get((iut_pseudo_monoid_kind)k, &m); fprintf(f, "    %-22s %-12s divisible:%-3s cyclotomic:%-3s group:%-3s %s   %s\n", m.id, m.notation, yesno(m.divisible), yesno(m.cyclotomic), yesno(m.is_group), m.kummer_ready ? "Kummer-ready" : "Kummer-blind", m.ref); }
+    int c1 = iut_pseudo_monoid_contains(IUT_PSM_MCIRCAST, IUT_PSM_MCIRCAST_MOD), c2 = iut_pseudo_monoid_contains(IUT_PSM_MCIRCAST_INFKAPPA_UNITS, IUT_PSM_MCIRCAST_KAPPA), c3 = !iut_pseudo_monoid_contains(IUT_PSM_MCIRCAST_KAPPA, IUT_PSM_MCIRCAST_INFKAPPA);
+    fprintf(f, "    M^⊛_mod ⊆ M^⊛: %s;  M^⊛_κ ⊆ M^⊛_∞κ×: %s;  M^⊛_∞κ ⊄ M^⊛_κ: %s\n", yesno(c1), yesno(c2), yesno(c3)); bad += !(c1 && c2 && c3);
+    return bad;
+}
+static int p_poly_morphisms(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_poly_morphism a, b, c, pf; int alpha[IUT_MAX_V]; for (unsigned i = 0; i < d->nV; ++i) alpha[i] = (i % 2) ? -1 : 1;
+    iut_poly_make(IUT_POLY_ISOMORPHISM, 3, &a); iut_poly_make(IUT_POLY_FULL_ISOMORPHISM, 0, &b); iut_poly_compose(&b, &a, &c); iut_poly_plus_full_make(d, alpha, &pf);
+    for (int k = 0; k < IUT_POLY_COUNT; ++k) fprintf(f, "    %s%s", k ? ", " : "", iut_poly_kind_id((iut_poly_kind)k));
+    fprintf(f, "\n");
+    fprintf(f, "    (3 isomorphisms) composed with the full poly-isomorphism = %s (count %lu = all)   [IUTchI] §0\n", iut_poly_kind_id(c.kind), c.count);
+    fprintf(f, "    +-full poly-isomorphism with α = (+,−,+,…): positive %s, negative %s; |{±1}^V| = %lu   [IUTchI] Def 6.1 (iv)\n", yesno(iut_poly_plus_full_is_positive(&pf)), yesno(iut_poly_plus_full_is_negative(&pf)), iut_sign_vector_count(d));
+    iut_anabelioid an; iut_anabelioid_make(IUT_ANAB_BTEMP, "Π^tp_{X̲̲_v}", &an); fprintf(f, "    anabelioids: B(Π), B(X), B(X)^0, %s = %s of %s (connected %s, tempered %s); fields NF / MLF / CAF: K_v is %s at v0\n", an.id, an.notation, an.of, yesno(an.connected), yesno(an.tempered), iut_field_kind_id(iut_field_kind_of_valuation(&d->V[0])));
+    return !(c.kind == IUT_POLY_FULL_ISOMORPHISM && !iut_poly_plus_full_is_positive(&pf));
+}
+static int p_orbicurves(const iut_initial_theta_data *d, FILE *f)
+{
+    int bad = 0;
+    for (int k = 0; k < IUT_ORB_COUNT; ++k) { iut_orbicurve o; iut_orbicurve_get(d, (iut_orbicurve_kind)k, &o); fprintf(f, "    %-14s %-14s type %-16s over %-4s covers %-4s deg %-3u group %-28s cusps %-3d Aut_k %-3u %s\n", o.id, o.notation, o.type, o.base, o.covers, o.degree, o.covering_group, o.ncusps, o.aut_k_order, o.ref); if (!o.id) bad++; }
+    iut_orbicurve xu, cu; iut_orbicurve_get(d, IUT_ORB_XUNDER, &xu); iut_orbicurve_get(d, IUT_ORB_CUNDER, &cu);
+    bad += !(xu.ncusps == (int)d->l && cu.ncusps == (int)d->lpm);
+    return bad;
+}
+static int p_cor12(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_cusps_section_one c; iut_cor_one_two r; iut_cor_one_two_run(d, &r); iut_cusps_section_one_get(d, &c);
+    fprintf(f, "    cusps: ε = %d (of C̲), ε′ = %d, ε″ = %d (of X̲, swapped by ι), 2ε = %d (2 ≢ ±1 mod l: %s), 0 fixed by ι; |Δ_E ⊗ Z/l| = %u, rank(I_ε′×I_ε″) = %u\n", c.epsilon, c.epsilon_prime, c.epsilon_dprime, c.two_epsilon, yesno(c.two_epsilon_ok), c.delta_E_mod_l_order, c.inertia_product_rank);
+    fprintf(f, "    l² = %u = [Δ_X:Δ_X̲]·[Δ_X̲:Δ_X→] = %u·%u = [Δ_C:Δ_X→]/2 = %u/2;  Gal(X̲/C̲) = Z/%u, Gal(C→/C̲) = Z/%u, Gal(X→/C̲) = Z/%u ⊇ Gal(X→/C→) = Z/%u;  Aut_k(X→) = Z/%u, Aut_k(C→) = Z/%u\n", r.l_squared, r.idx_X_XUnder, r.idx_XUnder_XArrow, r.idx_C_XArrow, r.gal_XUnder_over_CUnder, r.gal_CArrow_over_CUnder, r.gal_XArrow_over_CUnder, r.gal_XArrow_over_CArrow, r.aut_k_XArrow, r.aut_k_CArrow);
+    for (unsigned i = 0; i < r.nsteps; ++i) fprintf(f, "    step %u: %s\n", i + 1, r.steps[i]);
+    return !(r.l_squared == r.idx_X_XUnder * r.idx_XUnder_XArrow && r.idx_C_XArrow == 2 * r.l_squared && c.two_epsilon_ok);
+}
+static int p_tempered(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_tempered_fact t[8]; unsigned n = iut_tempered_facts(t, 8); int bad = 0;
+    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %-26s %s   %s\n", t[i].id, t[i].ref, t[i].statement);
+    for (unsigned v = 0; v < d->nV; ++v) { iut_tempered_at_v a; iut_tempered_at_v_get(d, v, &a); fprintf(f, "    %-6s Π_v tempered: %-3s commensurably terminal: %-3s decomposition groups synchronized (Cor 2.5): %-3s Galois-countable: %s\n", d->V[v].name, yesno(a.tempered_available), yesno(a.commensurably_terminal), yesno(a.decomposition_groups_synchronized), yesno(a.galois_countable)); if (a.tempered_available && !a.decomposition_groups_synchronized) bad++; }
+    return bad + (n != 7);
+}
+static int p_def31(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_def_three_one_item it[6]; iut_report r = {0}; unsigned n = iut_def_three_one_check(d, it, 6, &r);
+    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %s %-4s %-16s %s\n", it[i].item, it[i].ok ? "ok" : "FAIL", it[i].machine_checked ? "(checked)" : "(asserted flag)", it[i].condition);
+    iut_theta_approach ta; iut_theta_approach_get(d, &ta); const char *det[5]; unsigned nd = iut_def_three_one_determining_data(det, 5); iut_s_mod sm; iut_s_mod_get(d, &sm);
+    fprintf(f, "    Rem 3.1.2 Θ-approach: %s; %s ≅ %s with index %u\n    Rem 3.1.3: the data is determined by", ta.applied_to, ta.cyclotome, ta.theta_cyclotome, ta.cyclotome_index); for (unsigned i = 0; i < nd; ++i) fprintf(f, " %s", det[i]); fprintf(f, "\n    Rem 3.1.5: %s, [K:F_mod] ≤ %llu, %u points\n", sm.notation, sm.gal_order_bound, sm.npoints);
+    return r.errors ? 1 : 0;
+}
+static int p_kappa(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_kappa_function good = { 1, 2, 1, 1, 1, 1, 1 }, bad1 = { 2, 2, 1, 1, 1, 0, 0 }, bad2 = { 1, 2, 1, 1, 0, 0, 0 }; iut_kappa_verdict v1, v2, v3; iut_kappa_sol ks; iut_kappa_sol_get(d, &ks);
+    iut_kappa_coric_check(&good, &v1); iut_kappa_coric_check(&bad1, &v2); iut_kappa_coric_check(&bad2, &v3);
+    fprintf(f, "    |C_L| ≅ A¹ has %u critical points, %u strictly critical   [IUTchI] Rem 3.1.7 (i)\n", v1.ncritical, v1.nstrictly_critical);
+    fprintf(f, "    (1 pole, 2 zeroes, divisor over NF avoiding critical points, roots of unity at strictly critical points): κ-coric %s, ∞κ-coric %s, ∞κ×-coric %s\n", yesno(v1.kappa_coric), yesno(v1.inf_kappa_coric), yesno(v1.inf_kappa_units_coric));
+    fprintf(f, "    two poles: %s;  non-root-of-unity value at a strictly critical point: %s\n", v2.failed, v3.failed);
+    fprintf(f, "    Rem 3.1.7 (iii): %s, |SL_2(F_l)| = %lu; linearly disjoint: %s; κ-sol-open subgroups center-free: %s\n", ks.k_over_F_mu_l, ks.sl2_order, yesno(ks.linearly_disjoint), yesno(ks.center_free));
+    return !(v1.inf_kappa_units_coric && !v2.kappa_coric && !v3.kappa_coric);
+}
+static int p_local_frobenioids(const iut_initial_theta_data *d, FILE *f)
+{
+    int bad = 0; const char *rec[6];
+    for (unsigned v = 0; v < d->nV; ++v) {
+        iut_local_frobenioid lf; iut_local_frobenioid_build(d, v, &lf); char q[32]; iut_q_fmt(lf.generator_value, q, sizeof q);
+        fprintf(f, "    %-6s %s\n      D_v: %s;  D⊢_v: %s\n      F̲_v: %s\n      C⊢_v: %s;  Φ = %s (generator %s, value %s);  Θ-version %s\n      splitting τ⊢_v: %s (indeterminacy %u);  tempered %s, split %s, Kummer structure %s\n", d->V[v].name, lf.ref, lf.D_v, lf.D_mono_v, lf.F_v, lf.C_mono_v, lf.divisor_monoid, lf.generator, q, lf.divisor_monoid_theta, lf.splitting, lf.splitting_indeterminacy, yesno(lf.is_tempered), yesno(lf.is_split), yesno(lf.has_kummer_structure));
+        if (lf.theta_function) fprintf(f, "      Θ̲_v: %s\n", lf.theta_function);
+        unsigned n = iut_local_frobenioid_reconstructions(&lf, rec, 6); for (unsigned i = 0; i < n; ++i) fprintf(f, "      reconstruct %s\n", rec[i]);
+        if (!iut_local_frobenioid_split_iso(&lf, 0, &lf, 1)) bad++;
+        if (lf.kind == IUT_LF_BAD && lf.splitting_indeterminacy != 2 * d->l) bad++;
+    }
+    fprintf(f, "    F⊢_v ≅ F^Θ_v at every v: %s   [IUTchI] Ex 3.2 (v)\n", yesno(!bad));
+    return bad;
+}
+static int p_global_realified_i(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_global_realified g[3]; for (int k = 0; k < 3; ++k) iut_global_realified_build(d, (iut_global_realified_kind)k, &g[k]);
+    fprintf(f, "    %s = %s, %s = %s, %s = %s;  Prime ≅ V_mod: %u primes\n", g[0].id, g[0].notation, g[1].id, g[1].notation, g[2].id, g[2].notation, g[0].nprimes);
+    unsigned b = first_bad(d);
+    for (unsigned v = 0; v < d->nV && v < 6; ++v) fprintf(f, "    %-6s [K_v:(F_mod)_v] = %u  ρ_v = %.4f  ρ^Θ_v(j=1) = %.4f  ρ^Θ_v(j=2) = %.4f  Frobenius element %.4f\n", d->V[v].name, g[0].local_degree[v], g[0].rho[v], iut_rho_theta_v(d, v, 1), iut_rho_theta_v(d, v, 2), g[2].frobenius_element[v]);
+    iut_f_monoglob m, t; iut_f_monoglob_build(d, 0, &m); iut_f_monoglob_build(d, 1, &t); int iso = iut_f_monoglob_iso(&m, &t);
+    fprintf(f, "    %s = (C⊩_mod, Prime ≅ V, {F⊢_v}, {ρ_v}) over %u valuations;  %s ≅ %s: %s   [IUTchI] Ex 3.5 (iii)\n", m.notation, m.nV, t.notation, m.notation, yesno(iso));
+    return !(iso && fabs(iut_rho_theta_v(d, b, 2) - 4 * iut_rho_theta_v(d, b, 1)) < 1e-9);
+}
+static int p_theta_ht_def(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_theta_hodge_theater_def h; iut_theta_hodge_theater_def_build(d, &h);
+    fprintf(f, "    †HT^Θ = ({†F̲_v}_{v∈V}, †F⊩_mod): %u local Frobenioids (bad %u, good %u, arch %u); (a) %s (b) %s (c) %s   [IUTchI] Def 3.6\n", h.nV,
+            (unsigned)({ unsigned n = 0; for (unsigned i = 0; i < h.nV; ++i) n += h.loc[i].kind == IUT_LF_BAD; n; }), (unsigned)({ unsigned n = 0; for (unsigned i = 0; i < h.nV; ++i) n += h.loc[i].kind == IUT_LF_GOOD_NONARCH; n; }), (unsigned)({ unsigned n = 0; for (unsigned i = 0; i < h.nV; ++i) n += h.loc[i].kind == IUT_LF_ARCH; n; }), yesno(h.cond_a), yesno(h.cond_b), yesno(h.cond_c));
+    iut_log_theta_lattice *lat = new_lat(d, IUT_LINK_THETA); const iut_link *lk = iut_apply_theta_link(lat, 0, 0); iut_report r = {0}; int bad = iut_theta_link_cor_three_seven(lk, &r);
+    fprintf(f, "    Θ-link (0,0) → (1,0) checked against Cor 3.7:\n"); print_report(f, &r);
+    fprintf(f, "    Cor 3.8: Frobenius-picture … → †HT^Θ → ‡HT^Θ → … with ⁿΘ̲_v ↦ ⁿ⁺¹q̲_v;  Cor 3.9: étale-picture around D⊢_v ↷ O×\n");
+    free_lat(lat); return bad + !(h.cond_a && h.cond_b && h.cond_c);
+}
+static int p_labcusp_torsors(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_labcusp_torsor t; iut_labcusp_torsor_make(d, &t); iut_labcusp_pm_torsor pm; iut_labcusp_pm_torsor_make(d, &pm);
+    fprintf(f, "    LabCusp(†D_v): F_l^*-torsor of size %u, canonical †η_v = %d at every v, compatible across V: %s   [IUTchI] Def 4.1 (ii), Prop 4.2\n", t.torsor_size, t.eta[0], yesno(t.compatible));
+    fprintf(f, "    F_l^* acts: 2 · †η_v = %d, 3 · 2 = %d\n", iut_labcusp_torsor_act(d, 2, t.eta[0]), iut_labcusp_torsor_act(d, 3, 2));
+    fprintf(f, "    LabCusp±(†D_v): size %u, †η⁰_v = %d, †η^±_v = ±%d (up to sign), [Aut : Aut_+] = %lu   [IUTchI] Def 6.1 (ii)–(iii)\n", pm.size, pm.eta_zero[0], pm.eta_pm[0], pm.aut_plus_index);
+    fprintf(f, "    (LabCusp± ∖ {η⁰})/{±1} ≅ LabCusp: "); for (int s = -(int)d->lstar; s <= (int)d->lstar; ++s) fprintf(f, "%d↦%d ", s, iut_labcusp_pm_forget(d, s)); fprintf(f, "\n");
+    return !(iut_labcusp_pm_forget(d, -2) == 2 && iut_labcusp_pm_forget(d, 0) == -1 && iut_labcusp_torsor_act(d, 2, 1) == 2);
+}
+static int p_global_bases(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_global_base a, b; iut_global_base_get(d, IUT_GB_CIRCAST, &a); iut_global_base_get(d, IUT_GB_CIRCDOTPM, &b);
+    fprintf(f, "    %s: %s, group %s, |LabCusp| = %u; Aut image Borel/{±1} of order %lu ⊇ Aut_ε image semi-unipotent/{±1} of order %lu; quotient %s of order %lu   [IUTchI] Def 4.1 (v), Ex 4.3\n", a.id, a.notation, a.group, a.labcusp_size, a.aut_image_order, a.aut_eps_image_order, a.quotient_group, a.quotient_order);
+    fprintf(f, "    %s: %s, group %s, |LabCusp±| = %u, double cover of D^⊛: %s; quotient %s of order %lu   [IUTchI] Def 6.1 (v)\n", b.id, b.notation, b.group, b.labcusp_size, yesno(b.double_cover), b.quotient_group, b.quotient_order);
+    iut_valuation_orbit o[4]; unsigned n = iut_valuation_orbits(d, o, 4); for (unsigned i = 0; i < n; ++i) fprintf(f, "    %-6s %-14s %u ≤ |·| ≤ %lu   %s\n", o[i].id, o[i].notation, o[i].lower_bound, o[i].upper_bound, o[i].orbit_of);
+    return !(a.aut_image_order / a.aut_eps_image_order == d->lstar && b.quotient_order == 2 * d->l);
+}
+static int p_evaluation(const iut_initial_theta_data *d, FILE *f)
+{
+    unsigned b = first_bad(d); iut_eval_points e; iut_eval_points_make(d, b, &e); int bad = 0;
+    fprintf(f, "    at %s: %u evaluation points labelled |F_l| = {", d->V[b].name, e.n); for (unsigned j = 0; j < e.n; ++j) fprintf(f, "%s%d", j ? "," : "", e.label[j]); fprintf(f, "}; Θ̲_v values (in units of ord q̲_v, up to μ_2l):"); for (unsigned j = 0; j < e.n; ++j) { char q[16]; iut_q_fmt(e.theta_value[j], q, sizeof q); fprintf(f, " %s", q); } fprintf(f, "\n    μ_− of order %u; K_v-rational: %s; sections G_v → Π_v group-theoretic: %s   [IUTchI] Ex 4.4 (i)–(ii)\n", e.mu_minus_order, yesno(e.K_v_rational), yesno(e.sections_group_theoretic));
+    for (unsigned v = 0; v < d->nV && v < 4; ++v) { iut_theta_bridge_piece p; iut_theta_bridge_piece_get(d, v, -3, &p); fprintf(f, "    φ^Θ_{v_j} at %s, j = −3: %s (label %d)   [IUTchI] Ex 4.4 (iii)\n", d->V[v].name, p.via_evaluation_section ? "evaluation section" : "full poly-isomorphism", p.label_used); if (p.via_evaluation_section != (d->V[v].kind == IUT_V_NONARCH && d->V[v].red == IUT_RED_BAD_MULT)) bad++; }
+    return bad + !(e.n == d->lpm && iut_q_todouble(e.theta_value[3]) == 9);
+}
+static int p_label_transport(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_label_transport nf, pm; iut_label_transport_make(d, 0, &nf); iut_label_transport_make(d, 1, &pm);
+    fprintf(f, "    ΘNF: †χ : J ≅ F_l^* = {"); for (unsigned i = 0; i < nf.n; ++i) fprintf(f, "%s%d", i ? "," : "", nf.chi[i]); fprintf(f, "}, †ζ : LabCusp(†D^⊛) ≅ J, [†ε] ↦ %d, synchronized %s   [IUTchI] Prop 4.7\n", nf.epsilon_class_image, yesno(nf.synchronized));
+    fprintf(f, "    Θ±ell: T ≅ F_l = {%d..%d}, †ζ_± : LabCusp±(†D^⊚±) ≅ T, †ξ global ±-synchronization, ε̲ ↦ ±%d   [IUTchI] Prop 6.5; Rem 6.12.4\n", pm.chi[0], pm.chi[pm.n - 1], pm.epsilon_class_image);
+    int ok = iut_label_transport_check(&nf, d) && iut_label_transport_check(&pm, d); fprintf(f, "    bijections valid: %s\n", yesno(ok)); return !ok;
+}
+static int p_iso_torsors(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_iso_torsor t[12]; unsigned n = iut_iso_torsors(d, t, 12); int bad = 0;
+    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %-44s torsor over %-26s order %-8lu %s\n", t[i].object, t[i].group, t[i].order, t[i].ref);
+    bad += !(n == 11 && t[0].order == d->lstar && t[5].order == 2 * d->l && t[6].order == 2);
+    return bad;
+}
+static int p_forgetful(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_forgetful_counts a, b; iut_forgetful_counts_get(d, 0, &a); iut_forgetful_counts_get(d, 1, &b);
+    fprintf(f, "    ΘNF (Prop 4.9, 4.11): %s; capsule of %u strips, S_{l*} of order %lu; label assignments (l*)^{l*} = %.0f, with processions l*! = %lu (factor %.1f)\n", a.transitivity, a.n, a.symmetric_group_order, a.label_assignments, a.procession_assignments, a.reduction_factor);
+    fprintf(f, "    Θ±ell (Prop 6.8, 6.9): %s; capsule of %u strips, S_{l±} of order %lu; (l±)^{l±} = %.0f, with processions l±! = %lu (factor %.1f)\n", b.transitivity, b.n, b.symmetric_group_order, b.label_assignments, b.procession_assignments, b.reduction_factor);
+    fprintf(f, "    (ii) holomorphic capsules → (iii) mono-analytic capsules: the same counts after D ↦ D⊢\n");
+    return !(a.n == d->lstar && b.n == d->lpm && a.procession_assignments == iut_factorial(d->lstar));
+}
+static int p_distributions(const iut_initial_theta_data *d, FILE *f)
+{
+    double per_j[IUT_MAX_LSTAR + 1]; for (unsigned j = 0; j < d->lstar; ++j) per_j[j] = (double)(j + 1);
+    iut_distribution diag, full; iut_distribution_make(d, 1, &diag); iut_distribution_make(d, 0, &full);
+    for (int k = 0; k < IUT_GF_COUNT; ++k) { iut_global_frobenioid g; iut_global_frobenioid_get(d, (iut_global_frobenioid_kind)k, &g); fprintf(f, "    %-18s %-22s over %-32s %-13s copies %-3u log-volume weight %.4f   %s\n", g.id, g.notation, g.base, g.kummer_ready ? "Kummer-ready" : "Kummer-blind", g.ncopies, g.log_volume_weight, g.ref); }
+    fprintf(f, "    %s: %lu valuations (diagonal), %s: %lu = |V|·l*;  log-volumes of (1,2,…,l*): F_⟨J⟩ average %.4f, F_J sum %.4f   [IUTchI] Ex 5.1 (vii), Rem 5.4.2\n", diag.notation, diag.total, full.notation, full.total, iut_distribution_log_volume(&diag, per_j, d->lstar), iut_distribution_log_volume(&full, per_j, d->lstar));
+    return !(full.total == (unsigned long)d->nV * d->lstar && fabs(iut_distribution_log_volume(&diag, per_j, d->lstar) - (d->lstar + 1) / 2.0) < 1e-9);
+}
+static int p_lift(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_strip_functor t[8]; unsigned n = iut_strip_functors(t, 8);
+    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %-18s → %-22s %-48s bijective on Isom: %-3s surjective: %-3s %s\n", t[i].from, t[i].to, t[i].name, yesno(t[i].bijective_on_isoms), yesno(t[i].surjective_on_isoms), t[i].ref);
+    iut_prime_strip D, F; iut_prime_strip_build(&D, IUT_PS_D, "lift", d, 21, NULL, 0); int ok = iut_lift_d_to_f(&D, d, &F); iut_report r = {0}; iut_validate_prime_strip(&F, d, &r);
+    fprintf(f, "    lift of the D-prime-strip (Π copies %u..) to an F-prime-strip: %s, Π copy preserved: %s   [IUTchI] Cor 5.3 (ii), Rem 5.3.1\n", D.loc[0].Pi_copy, yesno(ok), yesno(F.loc[0].Pi_copy == D.loc[0].Pi_copy));
+    return !(ok && F.kind == IUT_PS_F && !r.errors);
+}
+static int p_fl_semi_pm(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_fl_semi_pm_set G, T; iut_fl_semi_pm_group_make(d, &G); iut_fl_semi_pm_torsor_make(d, &T); int a[IUT_MAX_LPM + 1], s[IUT_MAX_LPM + 1]; unsigned na = iut_fl_semi_pm_abs(&G, a), ns = iut_fl_semi_pm_star(&G, s);
+    fprintf(f, "    F_l^{⋊±}-group T (Θ±-bridge index set): %u elements, {±1}-orbit of %lu bijections, Aut_+(T) ⊆ Aut_±(T) orders %lu ⊆ %lu   [IUTchI] Def 6.1 (i)\n", G.n, G.orbit_size, G.aut_plus_order, G.aut_pm_order);
+    fprintf(f, "    F_l^{⋊±}-torsor T (Θell-bridge index set): F_l^{⋊±}-orbit of %lu bijections, Aut_+ ⊆ Aut_± orders %lu ⊆ %lu\n", T.orbit_size, T.aut_plus_order, T.aut_pm_order);
+    fprintf(f, "    positive elements: "); for (unsigned i = 0; i < G.n; ++i) if (iut_fl_semi_pm_is_positive(d, G.label[i])) fprintf(f, "%d ", G.label[i]); fprintf(f, ";  |T| has %u elements, T* has %u   [IUTchI] Def 6.4 (i)\n", na, ns);
+    int alpha[IUT_MAX_V]; for (unsigned i = 0; i < d->nV; ++i) alpha[i] = -1; iut_sign_vector sv; iut_sign_vector_make(d, alpha, &sv);
+    fprintf(f, "    α = (−,…,−) ∈ {±1}^V: all minus %s (the −1_{F_l} of Ex 6.2 (ii)); %lu sign vectors in all\n", yesno(sv.all_minus), iut_sign_vector_count(d));
+    return !(na == d->lpm && ns == d->lstar && T.aut_pm_order == 2UL * d->l && sv.all_minus);
+}
+static int p_prop67(const iut_initial_theta_data *d, FILE *f)
+{
+    iut_prop_six_seven p; iut_prop_six_seven_apply(d, &p); iut_report r = {0}; int ok = iut_processions_compatible(d, &r);
+    fprintf(f, "    D-Θ±-bridge ⇒ D-Θ-bridge: %u strips ↦ %u, t ↦ |t|:", p.n_from, p.n_to); for (unsigned i = 0; i < p.n_from - 1; ++i) fprintf(f, " %d↦%d", p.from[i], p.to[i]); fprintf(f, "\n    %s; +-full poly-isomorphisms replaced by full (good v) / evaluation-section (bad v): %s   [IUTchI] Prop 6.7\n", p.strips_identified, yesno(p.poly_replaced));
+    print_report(f, &r); fprintf(f, "    Rem 6.12.2: the gluing isomorphism of the Θ±ell-HT to the ΘNF-HT along the Θ±-/Θ-bridges is unique\n");
+    return !(ok && p.n_to == d->lstar);
+}
+static int p_half_plane(const iut_initial_theta_data *d, FILE *f)
+{
+    (void)d; iut_half_plane_row h[3]; unsigned n = iut_half_plane_dictionary(h, 3); iut_ht_frobenioid_row fr[6]; unsigned m = iut_ht_frobenioids(fr, 6);
+    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %-52s ↔ %-50s basepoints %-40s at ∞: %s\n", h[i].iut, h[i].half_plane, h[i].basepoints, h[i].point_at_infinity);
+    fprintf(f, "    Fig 6.6, the Frobenioids of a Θ±ell NF-Hodge theater:\n"); for (unsigned i = 0; i < m; ++i) fprintf(f, "      %-16s %-28s %-52s %s\n", fr[i].id, fr[i].notation, fr[i].where, fr[i].kummer);
+    return !(n == 3 && m == 6);
+}
+
 /* =============================================================== IUTchII */
 static int p_radial_env(const iut_initial_theta_data *d, FILE *f)
 {
@@ -393,6 +577,27 @@ const iut_process iut_processes[] = {
 { "GlueHodgeTheaters",    "IUTchI",   "Prop 6.7, Def 6.13",  "gluing Θ±ell-HT to ΘNF-HT along 0,⊞ ↦ >",                          "ThetaPmEllHodgeTheater, ThetaNFHodgeTheater", "ThetaPmEllNFHodgeTheater", p_gluing },
 { "BuildPrimeStrip",      "IUTchI",   "Def 4.1, Def 5.2",    "construct and validate a prime-strip of any of the 9 kinds",     "InitialThetaData",            "prime-strip",                p_prime_strip },
 { "GenerateInitialData",  "IUTchI",   "Def 3.1",             "initial Θ-data from an abc triple / example and its validation",  "abc triple",                  "InitialThetaData, report",   p_initial_data },
+{ "ClassifyPseudoMonoids","IUTchI",  "§0, Ex 5.1 (i), Def 5.2 (v)-(vi), Rem 5.1.3", "pseudo-monoids M^⊛, M^⊛_mod, M^⊛_sol, M^⊛_κ, M^⊛_∞κ, M^⊛_∞κ×, M^⊛_κ-sol, M_v…: divisible / cyclotomic / Kummer-ready", "DCircAstGlobal, DV", "pseudo-monoid table",   p_pseudo_monoids },
+{ "ComposePolyMorphisms", "IUTchI",   "§0, Def 6.1 (iv)",    "poly-morphisms, full and +-full poly-isomorphisms, their composites; anabelioids; NF / MLF / CAF", "morphisms, α ∈ {±1}^V", "poly-morphism",      p_poly_morphisms },
+{ "ClassifyOrbicurves",   "IUTchI",   "§1, Def 1.1, Def 3.1 (b)", "the orbicurves X, C, X̲, C̲, X→, C→, X̲̲_v, C̲̲_v, C̲_v: types, degrees, cusps, covering groups", "InitialThetaData", "orbicurve table",       p_orbicurves },
+{ "ReconstructCoverings", "IUTchI",   "§1, Cor 1.2, Rem 1.2.1", "the cusps ε, ε′, ε″, 2ε and the group-theoretic reconstruction of Π_X̲, Π_C→, Π_C̲ from Π_X→", "PiXArrow",      "Π_X̲, Π_C→, Π_C̲, l",   p_cor12 },
+{ "CompareTempered",      "IUTchI",   "§2, Prop 2.1-Cor 2.8, Rem 2.5.3", "tempered versus profinite fundamental groups at v ∈ V^bad; Cor 2.5 synchronization", "InitialThetaData", "facts per v",         p_tempered },
+{ "CheckDefThreeOne",     "IUTchI",   "Def 3.1 (a)-(f), Rem 3.1.2, 3.1.3, 3.1.5", "the six conditions on initial Θ-data; the Θ-approach M_X ≅ l·Δ_Θ; the determining data; S_mod", "InitialThetaData", "report",       p_def31 },
+{ "CheckKappaCoric",      "IUTchI",   "Rem 3.1.7",           "κ-coric / ∞κ-coric / ∞κ×-coric functions, critical points, Gal(K/F(μ_l)) ≅ SL_2(F_l)", "rational function data", "verdict",           p_kappa },
+{ "BuildLocalFrobenioids","IUTchI",   "Ex 3.2, Ex 3.3, Ex 3.4", "F̲_v, C_v, C⊢_v, τ⊢_v, C^Θ_v at bad / good / archimedean v; q̲_v, Θ̲_v, log(p_v), log(Θ); F⊢_v ≅ F^Θ_v", "InitialThetaData", "FUnderV, FMonoV, FThetaV", p_local_frobenioids },
+{ "BuildGlobalRealified", "IUTchI",   "Ex 3.5",              "C⊩_mod, C⊩_tht, D⊩_mod; ρ_v, ρ^Θ_v, ρ^D_v; F⊩_mod ≅ F⊩_tht",   "InitialThetaData",            "CMonoGlobMod, FMonoGlobMod", p_global_realified_i },
+{ "AssembleThetaHodgeTheater","IUTchI","Def 3.6, Cor 3.7-3.9, Rem 3.9.3", "†HT^Θ = ({F̲_v}, F⊩_mod) with (a)(b)(c); the Θ-link as full poly-iso F⊩_tht ≅ F⊩_mod preserving D⊢_v and O×", "InitialThetaData, lattice", "ThetaHodgeTheater, report", p_theta_ht_def },
+{ "TorsorLabelCusps",     "IUTchI",   "Def 4.1 (ii), Prop 4.2, Def 6.1 (ii)-(iii)", "LabCusp(†D_v) as F_l^*-torsor with †η_v; LabCusp±(†D_v) with †η⁰_v, †η^±_v; forgetting the sign", "DPrimeStrip", "LabCusp, LabCuspPm", p_labcusp_torsors },
+{ "DescribeGlobalBases",  "IUTchI",   "Def 4.1 (v), Ex 4.3, Def 6.1 (v), Rem 6.1.1", "D^⊛ = B(C̲_K)^0, D^⊚± = B(X̲_K)^0; Aut ⊇ Aut_ε (Borel ⊇ semi-unipotent), Aut_± ⊇ Aut_csp; V ⊆ V^±un ⊆ V^Bor ⊆ V(K)", "InitialThetaData", "global bases, orbits", p_global_bases },
+{ "EvaluateAtPoints",     "IUTchI",   "Ex 4.4",              "evaluation points labelled |F_l|, Θ̲_v ↦ q̲_v^{j²}, evaluation sections G_v → Π_v, the Θ-bridge constituents φ^Θ_{v_j}", "InitialThetaData", "EvaluationPoint, PhiThetaVJ", p_evaluation },
+{ "TransportLabelClasses","IUTchI",   "Prop 4.7, Prop 6.5, Rem 6.12.4", "†χ : J ≅ F_l^*, †ζ, †ζ_±, the global ±-synchronization †ξ",   "DThetaNFHodgeTheater, DThetaPmEllHodgeTheater", "label bijections", p_label_transport },
+{ "CountIsomorphismTorsors","IUTchI", "Prop 4.8, Prop 6.6, Cor 5.6, Cor 6.12, Rem 6.12.2", "the isomorphism torsors of the four bridges, the Hodge theaters and their gluings", "InitialThetaData", "torsor table",   p_iso_torsors },
+{ "CountForgottenSymmetries","IUTchI","Prop 4.9, Prop 4.11, Prop 6.8, Prop 6.9", "(l*)^{l*} → l*! and (l±)^{l±} → l±!: what the forgetful functors lose and what processions recover", "InitialThetaData", "counts", p_forgetful },
+{ "DistributeGlobalData", "IUTchI",   "Ex 5.1 (ii)-(vii), Rem 5.1.1, Rem 5.1.3, Rem 5.4.2", "F^⊛, F^⊛′, F^⊛_mod, F^⊛_j, F^⊛_⟨J⟩, F^⊛_J; V_j, V_⟨J⟩, V_J; Kummer-ready vs Kummer-blind; averaged vs summed log-volumes", "DCircAstGlobal", "global Frobenioids", p_distributions },
+{ "LiftToFrobenioids",    "IUTchI",   "Def 5.2, Rem 5.2.1, Cor 5.3, Rem 5.3.1", "F ↦ D, F ↦ F⊢, F ↦ F⊩; Isom(F) ≅ Isom(D); lifting a D-prime-strip to an F-prime-strip", "DPrimeStrip", "FPrimeStrip",       p_lift },
+{ "StructureFlSemiPm",    "IUTchI",   "Def 6.1 (i), Def 6.4 (i), Ex 6.2", "F_l^{⋊±}-groups and -torsors, positive elements, |T| and T*, sign vectors {±1}^V and −1_{F_l}", "InitialThetaData", "FlSemiPmGroup, TAbs, TStar", p_fl_semi_pm },
+{ "ReduceThetaPmToTheta", "IUTchI",   "Prop 6.7, Prop 6.9 (iii), Rem 6.12.2", "D-Θ±-bridge ⇒ D-Θ-bridge (±t ↦ |t|, D_0, D_⊞ ↦ D_>); S*_j ↪ S^±_{j+1}; uniqueness of the gluing", "DThetaPmBridge", "DThetaBridge",     p_prop67 },
+{ "CompareHalfPlane",     "IUTchI",   "Rem 6.12.3, Fig 6.4, Fig 6.6", "the two symmetries versus the upper half-plane; the Frobenioids of a Θ±ell NF-Hodge theater", "—",             "tables",             p_half_plane },
 /* IUTchII */
 { "ClassifyRadial",       "IUTchII",  "Ex 1.7-1.9",          "radial environments, multiradiality, multiradialization",        "radial data, coric data",     "multiradial / uniradial",    p_radial_env },
 { "RigidifyCyclotomes",   "IUTchII",  "Cor 1.10-1.12",       "the three cyclotomic rigidity isomorphisms, constant multiple rigidity", "Π_v / G_v, M^Θ",       "rigidity + indeterminacy",   p_cyclotomic },
