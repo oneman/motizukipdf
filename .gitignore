@@ -1,0 +1,6 @@
+# build products
+/build/
+/src/*.o
+/src/iut
+/src/iut-nocurses
+*.dSYM/
