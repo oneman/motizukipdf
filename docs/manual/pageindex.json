@@ -1,0 +1,5870 @@
+{
+ "AbsTopIII": {
+  "file": "Topics in Absolute Anabelian Geometry III.pdf",
+  "index": {
+   "Cor 1.10": {
+    "line": "Corollary 1.10. (Reconstruction of the Function Field for MLF’s) Let",
+    "page": 41,
+    "printed": 41
+   },
+   "Cor 2.3": {
+    "line": "Corollary 2.3. (Morphisms of Aut-Holomorphic Spaces) Let X (respec-",
+    "page": 53,
+    "printed": 53
+   },
+   "Cor 2.4": {
+    "line": "Corollary 2.4. (Holomorphic Arithmeticity and Cores) Let X be a hyper-",
+    "page": 54,
+    "printed": 54
+   },
+   "Cor 2.7": {
+    "line": "Corollary 2.7. (Local Linear Holomorphic Structures via Holomorphic",
+    "page": 58,
+    "printed": 58
+   },
+   "Cor 2.8": {
+    "line": "Corollary 2.8. (Galois-theoretic Reconstruction of Aut-holomorphic",
+    "page": 63,
+    "printed": 63
+   },
+   "Cor 2.9": {
+    "line": "Corollary 2.9. (Global-Archimedean Elliptically Admissible Compat-",
+    "page": 64,
+    "printed": 64
+   },
+   "Cor 3.6": {
+    "line": "Corollary 3.6. (MLF-Galois-theoretic Mono-anabelian Log-Frobenius",
+    "page": 78,
+    "printed": 78
+   },
+   "Cor 3.7": {
+    "line": "Corollary 3.7. (MLF-Galois-theoretic Bi-anabelian Log-Frobenius In-",
+    "page": 86,
+    "printed": 86
+   },
+   "Cor 4.5": {
+    "line": "Corollary 4.5. (Aut-Holomorphic Mono-anabelian Log-Frobenius Com-",
+    "page": 107,
+    "printed": 107
+   },
+   "Cor 5.10": {
+    "line": "Corollary 5.10. (Fundamental Properties of Log-shells) In the notation",
+    "page": 145,
+    "printed": 145
+   },
+   "Cor 5.2": {
+    "line": "Corollary 5.2. (First Properties of Galois-theaters and Pairs) Let T ∈",
+    "page": 118,
+    "printed": 118
+   },
+   "Cor 5.5": {
+    "line": "Corollary 5.5. (Global and Panalocal Mono-anabelian Log-Frobenius",
+    "page": 129,
+    "printed": 129
+   },
+   "Def 1.5": {
+    "line": "Definition 1.5. Let k be a field of characteristic zero, k an algebraic closure",
+    "page": 32,
+    "printed": 32
+   },
+   "Def 1.7": {
+    "line": "Definition 1.7. Suppose that k is of characteristic zero. Let k be an algebraic",
+    "page": 35,
+    "printed": 35
+   },
+   "Def 2.1": {
+    "line": "Definition 2.1.",
+    "page": 50,
+    "printed": 50
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1.",
+    "page": 66,
+    "printed": 66
+   },
+   "Def 3.5": {
+    "line": "Definition 3.5.",
+    "page": 74,
+    "printed": 74
+   },
+   "Def 4.1": {
+    "line": "Definition 4.1.",
+    "page": 101,
+    "printed": 101
+   },
+   "Def 5.1": {
+    "line": "Definition 5.1.",
+    "page": 113,
+    "printed": 113
+   },
+   "Def 5.3": {
+    "line": "Definition 5.3. Let T ∈ {TF, TM, TLG}. We shall apply a subscript “TLG”",
+    "page": 122,
+    "printed": 122
+   },
+   "Def 5.4": {
+    "line": "Definition 5.4. Let T ∈ {TF, TM}, • ∈ { , }.",
+    "page": 124,
+    "printed": 124
+   },
+   "Def 5.6": {
+    "line": "Definition 5.6.",
+    "page": 133,
+    "printed": 133
+   },
+   "Def 5.9": {
+    "line": "Definition 5.9.",
+    "page": 143,
+    "printed": 143
+   },
+   "Fig 1": {
+    "line": "Fig. 1: Mono-anabelian comparison only requires “Galois input data”.",
+    "page": 93,
+    "printed": 93
+   },
+   "Fig 2": {
+    "line": "Fig. 2: Bi-anabelian comparison requires “arithmetic input data”.",
+    "page": 93,
+    "printed": 93
+   },
+   "Lem 3.4": {
+    "line": "Lemma 3.4. (Topological Distinguishability of Additive and Mul-",
+    "page": 74,
+    "printed": 74
+   },
+   "Lem 4.3": {
+    "line": "Lemma 4.3. (Slimness of Archimedean Fundamental Groups) Let",
+    "page": 106,
+    "printed": 106
+   },
+   "Lem 4.4": {
+    "line": "Lemma 4.4. (Topological Distinguishability of Additive and Multi-",
+    "page": 107,
+    "printed": 107
+   },
+   "Prop 1.1": {
+    "line": "Proposition 1.1. (Review of Linear Systems) Suppose that X is proper,",
+    "page": 29,
+    "printed": 29
+   },
+   "Prop 1.2": {
+    "line": "Proposition 1.2. (Additive Structure via Linear Systems) Let X, k be",
+    "page": 29,
+    "printed": 29
+   },
+   "Prop 1.3": {
+    "line": "Proposition 1.3. (Additive Structure via Valuation and Evaluation",
+    "page": 30,
+    "printed": 30
+   },
+   "Prop 1.4": {
+    "line": "Proposition 1.4. (Synchronization of Geometric Cyclotomes) Suppose",
+    "page": 31,
+    "printed": 31
+   },
+   "Prop 1.6": {
+    "line": "Proposition 1.6. (Kummer Classes of Rational Functions) In the situ-",
+    "page": 34,
+    "printed": 34
+   },
+   "Prop 1.8": {
+    "line": "Proposition 1.8. (Characterization of NF-Constants and NF-Rational",
+    "page": 36,
+    "printed": 36
+   },
+   "Prop 2.2": {
+    "line": "Proposition 2.2. (Commensurable Terminality of RC-Holomorphic",
+    "page": 52,
+    "printed": 52
+   },
+   "Prop 2.5": {
+    "line": "Proposition 2.5. (Linear Structures via Parallelograms, Rectangles, or",
+    "page": 55,
+    "printed": 55
+   },
+   "Prop 2.6": {
+    "line": "Proposition 2.6. (Local Linear Holomorphic Structures via Rectangles",
+    "page": 57,
+    "printed": 57
+   },
+   "Prop 3.2": {
+    "line": "Proposition 3.2. (Monoid Cyclotomes and Kummer Maps) Let T ∈",
+    "page": 71,
+    "printed": 71
+   },
+   "Prop 3.3": {
+    "line": "Proposition 3.3. (Unit Kummer Maps) Let T ∈ {TLG, TCG}. Let (Π",
+    "page": 73,
+    "printed": 73
+   },
+   "Prop 4.2": {
+    "line": "Proposition 4.2. (First Properties of Aut-Holomorphic Pairs)",
+    "page": 105,
+    "printed": 105
+   },
+   "Prop 5.7": {
+    "line": "Proposition 5.7. (Local Volumes) Let k be either a mixed-characteristic",
+    "page": 137,
+    "printed": 137
+   },
+   "Prop 5.8": {
+    "line": "Proposition 5.8. (Mono-analytic Reconstruction of Log-shells)",
+    "page": 139,
+    "printed": 139
+   },
+   "Rem 1.10.1": {
+    "line": "Remark 1.10.1.",
+    "page": 44,
+    "printed": 44
+   },
+   "Rem 1.10.2": {
+    "line": "Remark 1.10.2. Just as was the case with Theorem 1.9, one may give a tempered",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 1.10.3": {
+    "line": "Remark 1.10.3.",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 1.10.4": {
+    "line": "Remark 1.10.4. Here, we take the opportunity to correct an unfortunate misprint",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 1.11.1": {
+    "line": "Remark 1.11.1.",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 1.11.2": {
+    "line": "Remark 1.11.2. One may think of the argument used to prove the slimness of",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 1.11.3": {
+    "line": "Remark 1.11.3. It is interesting to note that the techniques that appear in the",
+    "page": 48,
+    "printed": 48
+   },
+   "Rem 1.11.4": {
+    "line": "Remark 1.11.4.",
+    "page": 48,
+    "printed": 48
+   },
+   "Rem 1.11.5": {
+    "line": "Remark 1.11.5. In the context of the discussion of Remark 1.11.4, if the hyper-",
+    "page": 49,
+    "printed": 49
+   },
+   "Rem 1.3.1": {
+    "line": "Remark 1.3.1. Note that if G is an abstract group, then the datum of a surjection",
+    "page": 31,
+    "printed": 31
+   },
+   "Rem 1.5.1": {
+    "line": "Remark 1.5.1. In the notation of Definition 1.5, suppose that k is a torally",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 1.5.2": {
+    "line": "Remark 1.5.2. By considering the Weil restrictions of semi-abelian varieties",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 1.5.3": {
+    "line": "Remark 1.5.3. In the following discussion, if k is a field, then we denote the",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 1.5.4": {
+    "line": "Remark 1.5.4.",
+    "page": 33,
+    "printed": 33
+   },
+   "Rem 1.7.1": {
+    "line": "Remark 1.7.1. Suppose that X is of type (g, r). Then observe that X is an",
+    "page": 35,
+    "printed": 35
+   },
+   "Rem 1.9.1": {
+    "line": "Remark 1.9.1. When k is an MLF [cf. [Mzk20], §0], one verifies immediately",
+    "page": 38,
+    "printed": 38
+   },
+   "Rem 1.9.2": {
+    "line": "Remark 1.9.2. When k is an MLF or NF [cf. [Mzk20], §0], the “extension of",
+    "page": 38,
+    "printed": 38
+   },
+   "Rem 1.9.3": {
+    "line": "Remark 1.9.3. Note that unlike the case with k NF , KZNF , the algorithm of",
+    "page": 38,
+    "printed": 38
+   },
+   "Rem 1.9.4": {
+    "line": "Remark 1.9.4. Suppose that k is an MLF. Then Gk , which is of cohomological",
+    "page": 38,
+    "printed": 38
+   },
+   "Rem 1.9.5": {
+    "line": "Remark 1.9.5.",
+    "page": 39,
+    "printed": 39
+   },
+   "Rem 1.9.6": {
+    "line": "Remark 1.9.6. By combining the theory of the present §1 with the theory",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.9.7": {
+    "line": "Remark 1.9.7. One way to think of the construction algorithm in Theorem 1.9",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.9.8": {
+    "line": "Remark 1.9.8. Typically in discussions of anabelian geometry, the term “group-",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.9.9": {
+    "line": "Remark 1.9.9. As was pointed out to the author by M. Kim, one may also think",
+    "page": 41,
+    "printed": 41
+   },
+   "Rem 2.1.1": {
+    "line": "Remark 2.1.1. One verifies immediately that there is a natural extension of",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.1.2": {
+    "line": "Remark 2.1.2. One important aspect of the “Aut-holomorphic” approach to the",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.3.1": {
+    "line": "Remark 2.3.1. Note that Corollary 2.3 may be thought of as one sort of “com-",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 2.3.2": {
+    "line": "Remark 2.3.2. It follows, in particular, from Corollary 2.3, (ii), that [in the",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 2.3.3": {
+    "line": "Remark 2.3.3. It follows immediately from Corollary 2.3, (i), that any composite",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 2.4.1": {
+    "line": "Remark 2.4.1. One verifies immediately that Corollary 2.4 admits a natural",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 2.4.2": {
+    "line": "Remark 2.4.2. Relative to the analogy with the theory of §1 [cf. Remark 2.7.3",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 2.5.1": {
+    "line": "Remark 2.5.1. We shall refer to a frame of U at p ∈ U as orthogonal if it arises",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 2.6.1": {
+    "line": "Remark 2.6.1. Thus, the algorithms of Propositions 2.5, 2.6 may be regarded",
+    "page": 58,
+    "printed": 58
+   },
+   "Rem 2.7.1": {
+    "line": "Remark 2.7.1. It is by no means the intention of the author to assert that the",
+    "page": 60,
+    "printed": 60
+   },
+   "Rem 2.7.2": {
+    "line": "Remark 2.7.2. In light of the role played by the technique of elliptic cuspidal-",
+    "page": 60,
+    "printed": 60
+   },
+   "Rem 2.7.3": {
+    "line": "Remark 2.7.3. It is interesting to note that just as the absolute Galois group",
+    "page": 61,
+    "printed": 61
+   },
+   "Rem 2.7.4": {
+    "line": "Remark 2.7.4. The usual definition of a “holomorphic structure” on a Riemann",
+    "page": 62,
+    "printed": 62
+   },
+   "Rem 2.8.1": {
+    "line": "Remark 2.8.1. One verifies immediately that the isomorphism class of the pair",
+    "page": 64,
+    "printed": 64
+   },
+   "Rem 2.8.2": {
+    "line": "Remark 2.8.2. One verifies immediately that Corollary 2.8 [as well as Corollary",
+    "page": 64,
+    "printed": 64
+   },
+   "Rem 2.8.3": {
+    "line": "Remark 2.8.3. One verifies immediately that any elliptically admissible hyper-",
+    "page": 64,
+    "printed": 64
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1. Observe that [in the notation of Definition 3.1, (i)] the topology",
+    "page": 70,
+    "printed": 70
+   },
+   "Rem 3.1.2": {
+    "line": "Remark 3.1.2. It is important to note that, by definition, the algorithms of",
+    "page": 70,
+    "printed": 70
+   },
+   "Rem 3.1.3": {
+    "line": "Remark 3.1.3. One natural variant of the notion of an “MLF-Galois T-pair",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.2.1": {
+    "line": "Remark 3.2.1. Note that the algorithm applied to construct the natural isomor-",
+    "page": 73,
+    "printed": 73
+   },
+   "Rem 3.2.2": {
+    "line": "Remark 3.2.2. Note that [cf. Remark 1.10.1, (iii)] the functoriality of Propo-",
+    "page": 73,
+    "printed": 73
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1. If one just works with diagrams of categories without considering",
+    "page": 77,
+    "printed": 77
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1.",
+    "page": 82,
+    "printed": 82
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2.",
+    "page": 83,
+    "printed": 83
+   },
+   "Rem 3.6.3": {
+    "line": "Remark 3.6.3. The diagram D of Corollary 3.6 — cf., especially, the first two",
+    "page": 84,
+    "printed": 84
+   },
+   "Rem 3.6.4": {
+    "line": "Remark 3.6.4. One verifies immediately that one may give a tempered version",
+    "page": 84,
+    "printed": 84
+   },
+   "Rem 3.6.5": {
+    "line": "Remark 3.6.5. The notions of “core” and “telecore” are reminiscent of certain",
+    "page": 84,
+    "printed": 84
+   },
+   "Rem 3.6.6": {
+    "line": "Remark 3.6.6.",
+    "page": 85,
+    "printed": 85
+   },
+   "Rem 3.6.7": {
+    "line": "Remark 3.6.7. Note that in the situation of Corollary 3.6 [cf. also the ter-",
+    "page": 85,
+    "printed": 85
+   },
+   "Rem 3.7.1": {
+    "line": "Remark 3.7.1. In some sense, the purpose of Corollary 3.7 is to examine what",
+    "page": 88,
+    "printed": 88
+   },
+   "Rem 3.7.2": {
+    "line": "Remark 3.7.2. The “Frobenius-theoretic” point of view of Remarks 3.6.2, 3.6.5,",
+    "page": 89,
+    "printed": 89
+   },
+   "Rem 3.7.3": {
+    "line": "Remark 3.7.3. The significance of Corollary 3.7 in the context of our discussion",
+    "page": 90,
+    "printed": 90
+   },
+   "Rem 3.7.4": {
+    "line": "Remark 3.7.4. In the context of the issue of distinguishing between the mono-",
+    "page": 93,
+    "printed": 93
+   },
+   "Rem 3.7.5": {
+    "line": "Remark 3.7.5.",
+    "page": 94,
+    "printed": 94
+   },
+   "Rem 3.7.6": {
+    "line": "Remark 3.7.6. With regard to the pseudo-mono-anabelian approach discussed",
+    "page": 97,
+    "printed": 97
+   },
+   "Rem 3.7.7": {
+    "line": "Remark 3.7.7.",
+    "page": 98,
+    "printed": 98
+   },
+   "Rem 3.7.8": {
+    "line": "Remark 3.7.8.",
+    "page": 100,
+    "printed": 100
+   },
+   "Rem 4.1.1": {
+    "line": "Remark 4.1.1. The topological monoid “Ok ” associated to a CAF k [cf. Defini-",
+    "page": 105,
+    "printed": 105
+   },
+   "Rem 4.1.2": {
+    "line": "Remark 4.1.2. Although, to simplify the discussion, we have chosen to require",
+    "page": 105,
+    "printed": 105
+   },
+   "Rem 4.2.1": {
+    "line": "Remark 4.2.1. Note that, unlike the case with Proposition 3.2, (iv), the id-",
+    "page": 106,
+    "printed": 106
+   },
+   "Rem 4.5.1": {
+    "line": "Remark 4.5.1.",
+    "page": 110,
+    "printed": 110
+   },
+   "Rem 4.5.2": {
+    "line": "Remark 4.5.2. By comparison to the nonarchimedean case treated in §3, certain",
+    "page": 111,
+    "printed": 111
+   },
+   "Rem 4.5.3": {
+    "line": "Remark 4.5.3.",
+    "page": 112,
+    "printed": 112
+   },
+   "Rem 5.1.1": {
+    "line": "Remark 5.1.1. Note that the reference isomorphism ψV of Definition 5.1, (iii), is",
+    "page": 118,
+    "printed": 118
+   },
+   "Rem 5.10.1": {
+    "line": "Remark 5.10.1.",
+    "page": 149,
+    "printed": 149
+   },
+   "Rem 5.10.2": {
+    "line": "Remark 5.10.2. The significance of the theory of log-shells as summarized in",
+    "page": 149,
+    "printed": 149
+   },
+   "Rem 5.10.3": {
+    "line": "Remark 5.10.3. From the point of the view of the analogy of the theory of mono-",
+    "page": 154,
+    "printed": 154
+   },
+   "Rem 5.10.4": {
+    "line": "Remark 5.10.4. The analogy with Frobenius liftings that appears in the discus-",
+    "page": 158,
+    "printed": 158
+   },
+   "Rem 5.2.1": {
+    "line": "Remark 5.2.1. Note that neither of the composite functors EA → Th , EA →",
+    "page": 121,
+    "printed": 121
+   },
+   "Rem 5.2.2": {
+    "line": "Remark 5.2.2. By applying the equivalence EA → Th of Corollary 5.2, (i),",
+    "page": 121,
+    "printed": 121
+   },
+   "Rem 5.2.3": {
+    "line": "Remark 5.2.3. A similar result to Corollary 5.2, (ii) [hence also similar re-",
+    "page": 121,
+    "printed": 121
+   },
+   "Rem 5.3.1": {
+    "line": "Remark 5.3.1. In the notation of Definition 5.3, (iii), one may define — in the",
+    "page": 124,
+    "printed": 124
+   },
+   "Rem 5.4.1": {
+    "line": "Remark 5.4.1. Note that the diagrams of Definition 5.4, (iii), (v), [hence also",
+    "page": 129,
+    "printed": 129
+   },
+   "Rem 5.4.2": {
+    "line": "Remark 5.4.2. Note that in the context of Definition 5.4, (iii), when k is not",
+    "page": 129,
+    "printed": 129
+   },
+   "Rem 5.4.3": {
+    "line": "Remark 5.4.3. The inclusions “OkΠ∼k ⊆ I”, “Ok∼ ⊆ I” of Definition 5.4, (iii), (v),",
+    "page": 129,
+    "printed": 129
+   },
+   "Rem 5.5.1": {
+    "line": "Remark 5.5.1. The “general formal content” of the remarks following Corollaries",
+    "page": 133,
+    "printed": 133
+   },
+   "Rem 5.5.2": {
+    "line": "Remark 5.5.2. Note that it does not appear realistic to attempt to construct",
+    "page": 133,
+    "printed": 133
+   },
+   "Rem 5.6.1": {
+    "line": "Remark 5.6.1.",
+    "page": 137,
+    "printed": 137
+   },
+   "Rem 5.7.1": {
+    "line": "Remark 5.7.1. The “log-compatibility” [i.e., part (c)] of Proposition 5.7, (i), (ii),",
+    "page": 139,
+    "printed": 139
+   },
+   "Rem 5.8.1": {
+    "line": "Remark 5.8.1.",
+    "page": 142,
+    "printed": 142
+   },
+   "Rem 5.9.1": {
+    "line": "Remark 5.9.1. Just as in Remark 5.3.1, one may define — in the style of",
+    "page": 144,
+    "printed": 144
+   },
+   "Rem 5.9.2": {
+    "line": "Remark 5.9.2. The significance of measuring [log-]volumes in units that belong",
+    "page": 145,
+    "printed": 145
+   },
+   "Thm 1.11": {
+    "line": "Theorem 1.11. (Semi-absolute Reconstruction of Function Fields of",
+    "page": 45,
+    "printed": 45
+   },
+   "Thm 1.9": {
+    "line": "Theorem 1.9. (The NF-portion of the Function Field via Belyi Cus-",
+    "page": 36,
+    "printed": 36
+   },
+   "§0": {
+    "line": "Section 0: Notations and Conventions",
+    "page": 25,
+    "printed": 25
+   },
+   "§0.4": {
+    "line": "§0.4. In the case of elliptic curves, the quadratic nature of the square differentials",
+    "page": 157,
+    "printed": 157
+   },
+   "§1": {
+    "line": "Section 1: Galois-theoretic Reconstruction Algorithms",
+    "page": 29,
+    "printed": 29
+   },
+   "§2": {
+    "line": "Section 2: Archimedean Reconstruction Algorithms",
+    "page": 50,
+    "printed": 50
+   },
+   "§3": {
+    "line": "Section 3: Nonarchimedean Log-Frobenius Compatibility",
+    "page": 66,
+    "printed": 66
+   },
+   "§4": {
+    "line": "Section 4: Archimedean Log-Frobenius Compatibility",
+    "page": 101,
+    "printed": 101
+   },
+   "§5": {
+    "line": "Section 5: Global Log-Frobenius Compatibility",
+    "page": 113,
+    "printed": 113
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 2,
+    "printed": 2
+   }
+  },
+  "npages": 164,
+  "title": "Topics in Absolute Anabelian Geometry III: Global Reconstruction Algorithms"
+ },
+ "Alien": {
+  "file": "Alien Copies, Gaussians, and Inter-universal Teichmuller Theory.pdf",
+  "index": {
+   "Ex 2.12.1": {
+    "line": "Example 2.12.1. Nonarchimedean multiplicative monoids of local in-",
+    "page": 32,
+    "printed": 32
+   },
+   "Ex 2.12.2": {
+    "line": "Example 2.12.2. Frobenius morphisms on nonarchimedean multiplica-",
+    "page": 36,
+    "printed": 36
+   },
+   "Ex 2.12.3": {
+    "line": "Example 2.12.3. Nonarchimedean logarithms.",
+    "page": 38,
+    "printed": 38
+   },
+   "Ex 2.13.1": {
+    "line": "Example 2.13.1. Monoids of rational functions.",
+    "page": 43,
+    "printed": 43
+   },
+   "Ex 2.14.1": {
+    "line": "Example 2.14.1. Finite discrete approximation of differential calculus",
+    "page": 46,
+    "printed": 46
+   },
+   "Ex 2.14.2": {
+    "line": "Example 2.14.2. Finite discrete approximation of Fourier analysis on",
+    "page": 46,
+    "printed": 46
+   },
+   "Ex 2.14.3": {
+    "line": "Example 2.14.3. Finite discrete approximation of harmonic analysis",
+    "page": 47,
+    "printed": 47
+   },
+   "Ex 2.5.1": {
+    "line": "Example 2.5.1. Frobenius liftings on smooth proper curves. Let p be",
+    "page": 17,
+    "printed": 17
+   },
+   "Ex 2.6.1": {
+    "line": "Example 2.6.1. Mono-anabelian transport via the Frobenius morphism",
+    "page": 18,
+    "printed": 18
+   },
+   "Ex 3.11.1": {
+    "line": "Example 3.11.1. Sum of squares of consecutive integers. For any positive",
+    "page": 134,
+    "printed": 134
+   },
+   "Ex 3.11.2": {
+    "line": "Example 3.11.2. Square of a sum. For any positive integers n and m, it",
+    "page": 134,
+    "printed": 134
+   },
+   "Ex 3.11.3": {
+    "line": "Example 3.11.3. Elementary combinatorial model of “∧ vs. “∨”, mul-",
+    "page": 141,
+    "printed": 141
+   },
+   "Ex 3.11.4": {
+    "line": "Example 3.11.4. Elementary numerical model of “∧ vs. “∨”, multiple",
+    "page": 142,
+    "printed": 142
+   },
+   "Ex 3.2.1": {
+    "line": "Example 3.2.1. Complex holomorphic structures on two-dimensional",
+    "page": 55,
+    "printed": 55
+   },
+   "Ex 3.2.2": {
+    "line": "Example 3.2.2. Arithmetic fundamental groups of hyperbolic curves",
+    "page": 56,
+    "printed": 56
+   },
+   "Fig 2.1": {
+    "line": "Fig. 2.1: Mono-anabelian transport",
+    "page": 23,
+    "printed": 23
+   },
+   "Fig 3.1": {
+    "line": "Fig. 3.1: Multiradiality vs. uniradiality",
+    "page": 52,
+    "printed": 52
+   },
+   "Fig 3.10": {
+    "line": "Fig. 3.10: Three approaches to cyclotomic rigidity",
+    "page": 84,
+    "printed": 84
+   },
+   "Fig 3.11": {
+    "line": "Fig. 3.11: The technique of Galois evaluation",
+    "page": 89,
+    "printed": 89
+   },
+   "Fig 3.12": {
+    "line": "Fig. 3.12: The multiradiality of D-Θ±ell N F -Hodge theaters",
+    "page": 90,
+    "printed": 90
+   },
+   "Fig 3.13": {
+    "line": "Fig. 3.13: Combinatorial multiradiality of F",
+    "page": 91,
+    "printed": 91
+   },
+   "Fig 3.14": {
+    "line": "Fig. 3.14: Combinatorial uniradiality of F ±",
+    "page": 91,
+    "printed": 91
+   },
+   "Fig 3.15": {
+    "line": "Fig. 3.15: A vertical line of the log-theta-lattice [shown horizontally]:",
+    "page": 99,
+    "printed": 99
+   },
+   "Fig 3.16": {
+    "line": "Fig. 3.16: Theta values acting on tensor packets",
+    "page": 103,
+    "printed": 103
+   },
+   "Fig 3.17": {
+    "line": "Fig. 3.17: Copies of Fmod acting on tensor packets",
+    "page": 103,
+    "printed": 103
+   },
+   "Fig 3.18": {
+    "line": "Fig. 3.18: The full multiradial representation",
+    "page": 104,
+    "printed": 104
+   },
+   "Fig 3.19": {
+    "line": "Fig. 3.19: The gluing, or tautological identification “=”, of the Θ-link",
+    "page": 106,
+    "printed": 106
+   },
+   "Fig 3.2": {
+    "line": "Fig. 3.2: The uniradiality of complex holomorphic structures",
+    "page": 55,
+    "printed": 55
+   },
+   "Fig 3.20.1": {
+    "line": "Fig. 3.20.1: Comparison between inter-universal Teichmüller theory",
+    "page": 113,
+    "printed": 113
+   },
+   "Fig 3.20.2": {
+    "line": "Fig. 3.20.2: Comparison between inter-universal Teichmüller theory",
+    "page": 115,
+    "printed": 115
+   },
+   "Fig 3.21": {
+    "line": "Fig. 3.21: Tripodal transport",
+    "page": 123,
+    "printed": 123
+   },
+   "Fig 3.22": {
+    "line": "Fig. 3.22: Elementary combinatorial model of the Θ-link",
+    "page": 142,
+    "printed": 142
+   },
+   "Fig 3.3": {
+    "line": "Fig. 3.3: The multiradiality of GL2 (R)-orbits of complex holomorphic structures",
+    "page": 56,
+    "printed": 56
+   },
+   "Fig 3.4": {
+    "line": "Fig. 3.4: The uniradiality of local arithmetic holomorphic structures",
+    "page": 57,
+    "printed": 57
+   },
+   "Fig 3.5": {
+    "line": "Fig. 3.5: The multiradiality of Aut(G)-orbits of",
+    "page": 57,
+    "printed": 57
+   },
+   "Fig 3.6": {
+    "line": "Fig. 3.6: The entire log-theta-lattice and the portion that is actually used",
+    "page": 60,
+    "printed": 60
+   },
+   "Fig 3.7": {
+    "line": "Fig. 3.7: Prime-strips as “sections” of Spec(K) → Spec(Fmod )",
+    "page": 65,
+    "printed": 65
+   },
+   "Fig 3.8": {
+    "line": "Fig. 3.8: The combinatorial structure of a Θ±ell N F -Hodge theater:",
+    "page": 67,
+    "printed": 67
+   },
+   "Fig 3.9": {
+    "line": "Fig. 3.9: Labels of irreducible components and orders of",
+    "page": 78,
+    "printed": 78
+   },
+   "Fig 4.1": {
+    "line": "Fig. 4.1: Comparison between class field theory and Kummer theory",
+    "page": 155,
+    "printed": 155
+   },
+   "§1": {
+    "line": "§ 1. Review of the computation of the Gaussian integral",
+    "page": 6,
+    "printed": 6
+   },
+   "§1.1": {
+    "line": "§ 1.1. Inter-universal Teichmüller theory via the Gaussian integral",
+    "page": 6,
+    "printed": 6
+   },
+   "§1.2": {
+    "line": "§ 1.2. Naive approach via changes of coordinates or partial integrations",
+    "page": 7,
+    "printed": 7
+   },
+   "§1.3": {
+    "line": "§ 1.3. Introduction of identical but mutually alien copies",
+    "page": 7,
+    "printed": 7
+   },
+   "§1.4": {
+    "line": "§ 1.4. Integrals over two-dimensional Euclidean space",
+    "page": 8,
+    "printed": 8
+   },
+   "§1.5": {
+    "line": "§ 1.5. The effect on infinitesimals of changes of coordinates",
+    "page": 9,
+    "printed": 9
+   },
+   "§1.6": {
+    "line": "§ 1.6. Passage from planar cartesian to polar coordinates",
+    "page": 10,
+    "printed": 10
+   },
+   "§1.7": {
+    "line": "§ 1.7. Justification of naive approach up to an “error factor”",
+    "page": 12,
+    "printed": 12
+   },
+   "§2": {
+    "line": "§ 2. Changes of universe as arithmetic changes of coordinates",
+    "page": 12,
+    "printed": 12
+   },
+   "§2.1": {
+    "line": "§ 2.1. The issue of bounding heights: the ABC and Szpiro Conjectures",
+    "page": 12,
+    "printed": 12
+   },
+   "§2.10": {
+    "line": "§ 2.10. Inter-universality: changes of universe as changes of coordinates",
+    "page": 27,
+    "printed": 27
+   },
+   "§2.11": {
+    "line": "§ 2.11. The two underlying combinatorial dimensions of a ring",
+    "page": 29,
+    "printed": 29
+   },
+   "§2.12": {
+    "line": "§ 2.12. Mono-anabelian transport for mixed-characteristic local fields",
+    "page": 31,
+    "printed": 31
+   },
+   "§2.13": {
+    "line": "§ 2.13. Mono-anabelian transport for monoids of rational functions",
+    "page": 42,
+    "printed": 42
+   },
+   "§2.14": {
+    "line": "§ 2.14. Finite discrete approximations of harmonic analysis",
+    "page": 46,
+    "printed": 46
+   },
+   "§2.2": {
+    "line": "§ 2.2. Arithmetic degrees as global integrals",
+    "page": 13,
+    "printed": 13
+   },
+   "§2.3": {
+    "line": "§ 2.3. Bounding heights via global multiplicative subspaces",
+    "page": 14,
+    "printed": 14
+   },
+   "§2.4": {
+    "line": "§ 2.4. Bounding heights via Frobenius morphisms on number fields",
+    "page": 15,
+    "printed": 15
+   },
+   "§2.5": {
+    "line": "§ 2.5. Fundamental example of the derivative of a Frobenius lifting",
+    "page": 16,
+    "printed": 16
+   },
+   "§2.6": {
+    "line": "§ 2.6. Positive characteristic model for mono-anabelian transport",
+    "page": 17,
+    "printed": 17
+   },
+   "§2.7": {
+    "line": "§ 2.7. The apparatus and terminology of mono-anabelian transport",
+    "page": 21,
+    "printed": 21
+   },
+   "§2.8": {
+    "line": "§ 2.8. Remark on the usage of certain terminology",
+    "page": 24,
+    "printed": 24
+   },
+   "§2.9": {
+    "line": "§ 2.9. Mono-anabelian transport and the Kodaira-Spencer morphism",
+    "page": 26,
+    "printed": 26
+   },
+   "§3": {
+    "line": "§ 3. Multiradiality: an abstract analogue of parallel transport",
+    "page": 49,
+    "printed": 49
+   },
+   "§3.1": {
+    "line": "§ 3.1. The notion of multiradiality",
+    "page": 49,
+    "printed": 49
+   },
+   "§3.10": {
+    "line": "§ 3.10. The technique of tripodal transport",
+    "page": 122,
+    "printed": 122
+   },
+   "§3.11": {
+    "line": "§ 3.11. Mathematical analysis of elementary conceptual discomfort",
+    "page": 134,
+    "printed": 134
+   },
+   "§3.2": {
+    "line": "§ 3.2. Fundamental examples of multiradiality",
+    "page": 55,
+    "printed": 55
+   },
+   "§3.3": {
+    "line": "§ 3.3. The log-theta-lattice: Θ±ell N F -Hodge theaters, log-links, Θ-links",
+    "page": 58,
+    "printed": 58
+   },
+   "§3.4": {
+    "line": "§ 3.4. Kummer theory and multiradial decouplings/cyclotomic rigidity",
+    "page": 73,
+    "printed": 73
+   },
+   "§3.5": {
+    "line": "§ 3.5. Remarks on the use of Frobenioids",
+    "page": 85,
+    "printed": 85
+   },
+   "§3.6": {
+    "line": "§ 3.6. Galois evaluation, labels, symmetries, and log-shells",
+    "page": 87,
+    "printed": 87
+   },
+   "§3.7": {
+    "line": "§ 3.7. Log-volume estimates via the multiradial representation",
+    "page": 103,
+    "printed": 103
+   },
+   "§3.8": {
+    "line": "§ 3.8. Comparison with the Gaussian integral",
+    "page": 112,
+    "printed": 112
+   },
+   "§3.9": {
+    "line": "§ 3.9. Relation to scheme-theoretic Hodge-Arakelov theory",
+    "page": 118,
+    "printed": 118
+   },
+   "§4": {
+    "line": "§ 4. Historical comparisons and analogies",
+    "page": 146,
+    "printed": 146
+   },
+   "§4.1": {
+    "line": "§ 4.1. Numerous connections to classical theories",
+    "page": 146,
+    "printed": 146
+   },
+   "§4.2": {
+    "line": "§ 4.2. Contrasting aspects of class field theory and Kummer theory",
+    "page": 151,
+    "printed": 151
+   },
+   "§4.3": {
+    "line": "§ 4.3. Arithmetic and geometric versions of the Mordell Conjecture",
+    "page": 157,
+    "printed": 157
+   },
+   "§4.4": {
+    "line": "§ 4.4. Atavistic resemblance in the development of mathematics",
+    "page": 160,
+    "printed": 160
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 3,
+    "printed": 3
+   }
+  },
+  "npages": 170,
+  "title": "The Mathematics of Mutually Alien Copies: from Gaussian Integrals to Inter-universal Teichmüller Theory"
+ },
+ "CanLift": {
+  "file": "Canonical Liftings.pdf",
+  "index": {
+   "Cor 2.5": {
+    "line": "Corollary 2.5. (Consequences for Cores and Arithmeticity) Let",
+    "page": 12,
+    "printed": 12
+   },
+   "Cor 3.8": {
+    "line": "Corollary 3.8. (Application of p-adic Teichmüller Theory)",
+    "page": 32,
+    "printed": 32
+   },
+   "Def 2.1": {
+    "line": "Definition 2.1.",
+    "page": 9,
+    "printed": 9
+   },
+   "Def 2.2": {
+    "line": "Definition 2.2. Let X be a smooth, geometrically connected, generically",
+    "page": 10,
+    "printed": 10
+   },
+   "Def 2.6": {
+    "line": "Definition 2.6. Let X be an orbicurve (cf. Definition 2.2, (i)) over a field of",
+    "page": 14,
+    "printed": 14
+   },
+   "Def 3.7": {
+    "line": "Definition 3.7. Let YL be a hyperbolic curve over a finite extension L of Qp .",
+    "page": 32,
+    "printed": 32
+   },
+   "Lem 1.5": {
+    "line": "Lemma 1.5. Write RPD for the p-adic completion of the PD-envelope of R at",
+    "page": 25,
+    "printed": 25
+   },
+   "Lem 3.1": {
+    "line": "Lemma 3.1. (Canonicality Modulo p2 ) Suppose that",
+    "page": 16,
+    "printed": 16
+   },
+   "Lem 3.2": {
+    "line": "Lemma 3.2. (The Ordinary Locus Modulo p2 ) Let VFp be a 2-",
+    "page": 19,
+    "printed": 19
+   },
+   "Lem 3.3": {
+    "line": "Lemma 3.3. (Global Logarithmic Finite Flat Group Scheme) Let",
+    "page": 22,
+    "printed": 22
+   },
+   "Lem 3.4": {
+    "line": "Lemma 3.4. (The Associated Dieudonné Crystal Modulo p) Let",
+    "page": 23,
+    "printed": 23
+   },
+   "Lem 3.5": {
+    "line": "Lemma 3.5. (Canonical Deformations Modulo Higher Powers",
+    "page": 25,
+    "printed": 25
+   },
+   "Prop 1.1": {
+    "line": "Proposition 1.1. (Group-Theoreticity of Serre-Tate Canonical Lift-",
+    "page": 6,
+    "printed": 6
+   },
+   "Prop 2.3": {
+    "line": "Proposition 2.3. (Independence of the Base Field)",
+    "page": 10,
+    "printed": 10
+   },
+   "Prop 2.7": {
+    "line": "Proposition 2.7. (Punctured Hemi-Elliptic Cores) Let k be an alge-",
+    "page": 14,
+    "printed": 14
+   },
+   "Rem 1.1.1": {
+    "line": "Remark 1.1.1. As is shown in [DO] (cf. also [OS]), for p > 2, g ≥ 4, the",
+    "page": 6,
+    "printed": 6
+   },
+   "Rem 2.1.1": {
+    "line": "Remark 2.1.1. Let k be a field. If X is a geometrically normal, geometrically",
+    "page": 9,
+    "printed": 9
+   },
+   "Rem 2.1.2": {
+    "line": "Remark 2.1.2. Thus, when k = C, a hyperbolic curve X is k-arithmetic",
+    "page": 9,
+    "printed": 9
+   },
+   "Rem 2.1.3": {
+    "line": "Remark 2.1.3. If we arbitrarily choose a finite étale structure morphism to",
+    "page": 9,
+    "printed": 9
+   },
+   "Rem 2.5.1": {
+    "line": "Remark 2.5.1. Recall from the theory of [Mzk3] (cf. Remark 2.1.2; Propo-",
+    "page": 13,
+    "printed": 13
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1. In the context of Lemma 3.1, we shall refer to the points of",
+    "page": 17,
+    "printed": 17
+   },
+   "Rem 3.1.2": {
+    "line": "Remark 3.1.2. The fact — cf. the end of the first paragraph of the proof",
+    "page": 19,
+    "printed": 19
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1. In some sense, it is natural to think of Im(κPD ) (cf. the proof",
+    "page": 27,
+    "printed": 27
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1. Thus, (cf. Remarks 1.1.1, 2.2.1) unlike the situation with",
+    "page": 28,
+    "printed": 28
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2. One interesting aspect of the theory of the present §3 is that,",
+    "page": 30,
+    "printed": 30
+   },
+   "Rem 3.6.3": {
+    "line": "Remark 3.6.3. One interesting point of view is the following:",
+    "page": 30,
+    "printed": 30
+   },
+   "Rem 3.6.4": {
+    "line": "Remark 3.6.4. The “rigidity” of canonical curves — in the sense that they",
+    "page": 31,
+    "printed": 31
+   },
+   "Rem 3.6.5": {
+    "line": "Remark 3.6.5. Just as the Serre-Tate canonical coordinates are used in",
+    "page": 31,
+    "printed": 31
+   },
+   "Thm 2.4": {
+    "line": "Theorem 2.4. (Group-Theoreticity of Correspondences) Any iso-",
+    "page": 12,
+    "printed": 12
+   },
+   "Thm 3.6": {
+    "line": "Theorem 3.6. (Group-Theoreticity of Canonical Liftings) Let p ≥ 5",
+    "page": 27,
+    "printed": 27
+   },
+   "§0": {
+    "line": "Section 0: Notations and Conventions",
+    "page": 4,
+    "printed": 4
+   },
+   "§1": {
+    "line": "Section 1: Serre-Tate Canonical Liftings",
+    "page": 6,
+    "printed": 6
+   },
+   "§2": {
+    "line": "Section 2: Arithmetic Hyperbolic Curves",
+    "page": 8,
+    "printed": 8
+   },
+   "§3": {
+    "line": "Section 3: Hyperbolically Ordinary Canonical Liftings",
+    "page": 16,
+    "printed": 16
+   }
+  },
+  "npages": 34,
+  "title": "A Theory of Ordinary p-adic Curves / Canonical Liftings"
+ },
+ "EssLgc": {
+  "file": "Essential Logical Structure of Inter-universal Teichmuller Theory.pdf",
+  "index": {
+   "Def 3.1": {
+    "line": "Definition 3.1. In particular, we recall that E = EF is an elliptic curve over the",
+    "page": 112,
+    "printed": 112
+   },
+   "Ex 1.10.1": {
+    "line": "Example 1.10.1: The Pythagorean Theorem.",
+    "page": 28,
+    "printed": 28
+   },
+   "Ex 1.12.1": {
+    "line": "Example 1.12.1: Explicit parametrization of Pythagorean triples. The",
+    "page": 38,
+    "printed": 38
+   },
+   "Ex 1.5.1": {
+    "line": "Example 1.5.1: Irrationality, impartiality, and the Voodoo Hypothesis.",
+    "page": 16,
+    "printed": 16
+   },
+   "Ex 1.5.2": {
+    "line": "Example 1.5.2: The internet/mass media as an apple of discord. In Ex-",
+    "page": 18,
+    "printed": 18
+   },
+   "Ex 1.9.1": {
+    "line": "Example 1.9.1: The insufficiency of geographical proximity. This exam-",
+    "page": 25,
+    "printed": 25
+   },
+   "Ex 1.9.2": {
+    "line": "Example 1.9.2: The remarkable potency of mathematical proximity. This",
+    "page": 26,
+    "printed": 26
+   },
+   "Ex 2.1.1": {
+    "line": "Example 2.1.1: False contradiction in the theory of integration. Consider",
+    "page": 42,
+    "printed": 42
+   },
+   "Ex 2.2.1": {
+    "line": "Example 2.2.1: Symmetry properties of derivatives. The real-valued func-",
+    "page": 43,
+    "printed": 43
+   },
+   "Ex 2.3.1": {
+    "line": "Example 2.3.1: Endpoints of an oriented line segment.",
+    "page": 43,
+    "printed": 43
+   },
+   "Ex 2.3.2": {
+    "line": "Example 2.3.2: Gluing of adjacent oriented line segments.",
+    "page": 45,
+    "printed": 45
+   },
+   "Ex 2.4.1": {
+    "line": "Example 2.4.1: “∧” vs. “∨” for adjacent oriented line segments.",
+    "page": 46,
+    "printed": 46
+   },
+   "Ex 2.4.2": {
+    "line": "Example 2.4.2: Differentials on oriented line segments.",
+    "page": 47,
+    "printed": 47
+   },
+   "Ex 2.4.3": {
+    "line": "Example 2.4.3: Representation via subgroup indices of “∧” vs. “∨”.",
+    "page": 48,
+    "printed": 48
+   },
+   "Ex 2.4.4": {
+    "line": "Example 2.4.4: Logical “∧/∨” vs. “narrative ∧/∨”. Consider the following",
+    "page": 49,
+    "printed": 49
+   },
+   "Ex 2.4.5": {
+    "line": "Example 2.4.5: Numerical representation of “∧” vs. “∨”.",
+    "page": 50,
+    "printed": 50
+   },
+   "Ex 2.4.6": {
+    "line": "Example 2.4.6: Carry operations in arithmetic, geometry, and Boolean",
+    "page": 54,
+    "printed": 54
+   },
+   "Ex 2.4.7": {
+    "line": "Example 2.4.7: The projective line as a gluing of ring schemes along a",
+    "page": 58,
+    "printed": 58
+   },
+   "Ex 2.4.8": {
+    "line": "Example 2.4.8: Gluings of rings along multiplicative monoids.",
+    "page": 62,
+    "printed": 62
+   },
+   "Ex 3.1.1": {
+    "line": "Example 3.1.1: Elementary models of gluings and intertwinings. In the",
+    "page": 67,
+    "printed": 67
+   },
+   "Ex 3.10.1": {
+    "line": "Example 3.10.1: Symmetries as a fundamental non-formal aspect of glu-",
+    "page": 148,
+    "printed": 148
+   },
+   "Ex 3.10.2": {
+    "line": "Example 3.10.2: Chains of logical AND relations via commutative dia-",
+    "page": 150,
+    "printed": 150
+   },
+   "Ex 3.2.1": {
+    "line": "Example 3.2.1: Global multiplicative subspaces and bounds on heights.",
+    "page": 75,
+    "printed": 75
+   },
+   "Ex 3.2.2": {
+    "line": "Example 3.2.2: Coricity, symmetry, and commutativity properties of the",
+    "page": 80,
+    "printed": 80
+   },
+   "Ex 3.3.1": {
+    "line": "Example 3.3.1: Classical complex Teichmüller theory. Let λ ∈ R>1 . Re-",
+    "page": 88,
+    "printed": 88
+   },
+   "Ex 3.3.2": {
+    "line": "Example 3.3.2: The Jacobi identity for the classical theta function.",
+    "page": 89,
+    "printed": 89
+   },
+   "Ex 3.3.3": {
+    "line": "Example 3.3.3: Theta functions and multiplicative structures.",
+    "page": 92,
+    "printed": 92
+   },
+   "Ex 3.5.1": {
+    "line": "Example 3.5.1: Bounded nature of log-shell automorphism indetermina-",
+    "page": 101,
+    "printed": 101
+   },
+   "Ex 3.5.2": {
+    "line": "Example 3.5.2: Examples of gluings. Distinct auxiliary structures on some",
+    "page": 102,
+    "printed": 102
+   },
+   "Ex 3.8.1": {
+    "line": "Example 3.8.1: Inevitability of inner automorphism indeterminacies.",
+    "page": 110,
+    "printed": 110
+   },
+   "Ex 3.8.2": {
+    "line": "Example 3.8.2: Inter-universality and the structure of (Θ±ell NF-)Hodge",
+    "page": 112,
+    "printed": 112
+   },
+   "Ex 3.8.3": {
+    "line": "Example 3.8.3: Truncated vs. profinite Kummer theory and compatibil-",
+    "page": 115,
+    "printed": 115
+   },
+   "Ex 3.8.4": {
+    "line": "Example 3.8.4: Symmetrizing isomorphisms, truncatibility, and the log-",
+    "page": 121,
+    "printed": 121
+   },
+   "Ex 3.9.1": {
+    "line": "Example 3.9.1: Categories of open subschemes. Let X be a scheme, T a",
+    "page": 134,
+    "printed": 134
+   },
+   "§1": {
+    "line": "Section 1: Summary of non-mathematical aspects for non-specialists",
+    "page": 6,
+    "printed": 6
+   },
+   "§1.1": {
+    "line": "§1.1. Publication of [IUTchI-IV]",
+    "page": 6,
+    "printed": 6
+   },
+   "§1.10": {
+    "line": "§1.10. Mathematical intellectual property rights",
+    "page": 26,
+    "printed": 26
+   },
+   "§1.11": {
+    "line": "§1.11. Social mirroring of mathematical logical structure",
+    "page": 31,
+    "printed": 31
+   },
+   "§1.12": {
+    "line": "§1.12. Computer verification, mathematical dialogue, and developmental",
+    "page": 33,
+    "printed": 33
+   },
+   "§1.2": {
+    "line": "§1.2. Redundancy assertions of the “redundant copies school” (RCS)",
+    "page": 7,
+    "printed": 7
+   },
+   "§1.3": {
+    "line": "§1.3. Qualitative assessment of assertions of the RCS",
+    "page": 9,
+    "printed": 9
+   },
+   "§1.4": {
+    "line": "§1.4. The importance of extensive, long-term interaction",
+    "page": 11,
+    "printed": 11
+   },
+   "§1.5": {
+    "line": "§1.5. The historical significance of detailed, explicit, accessible records",
+    "page": 12,
+    "printed": 12
+   },
+   "§1.6": {
+    "line": "§1.6. The importance of further dissemination",
+    "page": 19,
+    "printed": 19
+   },
+   "§1.7": {
+    "line": "§1.7. The notion of an “expert”",
+    "page": 20,
+    "printed": 20
+   },
+   "§1.8": {
+    "line": "§1.8. Fabricated versions spawn fabricated dramas",
+    "page": 22,
+    "printed": 22
+   },
+   "§1.9": {
+    "line": "§1.9. Geographical vs. mathematical proximity",
+    "page": 24,
+    "printed": 24
+   },
+   "§2": {
+    "line": "Section 2: Elementary mathematical aspects of “redundant copies”",
+    "page": 41,
+    "printed": 41
+   },
+   "§2.1": {
+    "line": "§2.1. The history of limits and integration",
+    "page": 41,
+    "printed": 41
+   },
+   "§2.2": {
+    "line": "§2.2. Derivatives and integrals",
+    "page": 42,
+    "printed": 42
+   },
+   "§2.3": {
+    "line": "§2.3. Line segments vs. loops",
+    "page": 43,
+    "printed": 43
+   },
+   "§2.4": {
+    "line": "§2.4. Logical AND “∧” vs. logical OR “∨”",
+    "page": 46,
+    "printed": 46
+   },
+   "§3": {
+    "line": "Section 3: The logical structure of inter-universal Teichmüller theory",
+    "page": 66,
+    "printed": 66
+   },
+   "§3.1": {
+    "line": "§3.1. One-dimensionality via identification of RCS-redundant copies",
+    "page": 66,
+    "printed": 66
+   },
+   "§3.10": {
+    "line": "§3.10. Detailed description of the chain of logical AND relations",
+    "page": 136,
+    "printed": 136
+   },
+   "§3.11": {
+    "line": "§3.11. The central importance of the log-Kummer-correspondence",
+    "page": 152,
+    "printed": 152
+   },
+   "§3.2": {
+    "line": "§3.2. RCS-redundancy of Frobenius-like/étale-like versions of objects",
+    "page": 73,
+    "printed": 73
+   },
+   "§3.3": {
+    "line": "§3.3. RCS-redundant copies in the domain/codomain of the log-link",
+    "page": 86,
+    "printed": 86
+   },
+   "§3.4": {
+    "line": "§3.4. RCS-redundant copies in the domain/codomain of the Θ-link",
+    "page": 94,
+    "printed": 94
+   },
+   "§3.5": {
+    "line": "§3.5. Gluings, indeterminacies, and pilot discrepancy",
+    "page": 98,
+    "printed": 98
+   },
+   "§3.6": {
+    "line": "§3.6. Chains of logical AND relations",
+    "page": 104,
+    "printed": 104
+   },
+   "§3.7": {
+    "line": "§3.7. Poly-morphisms and logical AND relations",
+    "page": 108,
+    "printed": 108
+   },
+   "§3.8": {
+    "line": "§3.8. Inter-universality and logical AND relations",
+    "page": 109,
+    "printed": 109
+   },
+   "§3.9": {
+    "line": "§3.9. Passage and descent to underlying structures",
+    "page": 132,
+    "printed": 132
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 3,
+    "printed": 3
+   }
+  },
+  "npages": 158,
+  "title": "On the Essential Logical Structure of Inter-universal Teichmüller Theory"
+ },
+ "EtTh": {
+  "file": "The Etale Theta Function and its Frobenioid-theoretic Manifestations.pdf",
+  "index": {
+   "Cor 2.16": {
+    "line": "Corollary 2.16. (Profinite Non-discrete-ness of Bi-theta Environments)",
+    "page": 49,
+    "printed": 49
+   },
+   "Cor 2.18": {
+    "line": "Corollary 2.18. (Group-theoretic Construction of Mono-theta Environ-",
+    "page": 54,
+    "printed": 54
+   },
+   "Cor 2.19": {
+    "line": "Corollary 2.19. (Rigidity Properties of Mono-theta Environments) In",
+    "page": 58,
+    "printed": 58
+   },
+   "Cor 2.8": {
+    "line": "Corollary 2.8. (Constant Multiple Rigidity of Roots of the Étale Theta",
+    "page": 38,
+    "printed": 38
+   },
+   "Cor 2.9": {
+    "line": "Corollary 2.9. (Labels of Cusps) Suppose that K contains a primitive l-th",
+    "page": 39,
+    "printed": 39
+   },
+   "Cor 3.8": {
+    "line": "Corollary 3.8. (Preservation of Base-field-theoretic Morphisms and",
+    "page": 73,
+    "printed": 73
+   },
+   "Cor 5.12": {
+    "line": "Corollary 5.12. (Constant Multiple Indeterminacy of Systems) In the",
+    "page": 103,
+    "printed": 103
+   },
+   "Def 1.7": {
+    "line": "Definition 1.7. We shall refer to a smooth log orbicurve over K that arises, up",
+    "page": 25,
+    "printed": 25
+   },
+   "Def 1.9": {
+    "line": "Definition 1.9. Suppose that −1 ∈ K.",
+    "page": 27,
+    "printed": 27
+   },
+   "Def 2.1": {
+    "line": "Definition 2.1. We shall refer to a smooth log orbicurve over K that arises,",
+    "page": 33,
+    "printed": 33
+   },
+   "Def 2.10": {
+    "line": "Definition 2.10. If Π GK is a topological group equipped with an augmenta-",
+    "page": 40,
+    "printed": 40
+   },
+   "Def 2.13": {
+    "line": "Definition 2.13. In the notation of the above discussion:",
+    "page": 43,
+    "printed": 43
+   },
+   "Def 2.3": {
+    "line": "Definition 2.3. We shall refer to a smooth log orbicurve over K that arises, up",
+    "page": 35,
+    "printed": 35
+   },
+   "Def 2.5": {
+    "line": "Definition 2.5. Suppose that l and the residue characteristic of K are odd, and",
+    "page": 36,
+    "printed": 36
+   },
+   "Def 2.7": {
+    "line": "Definition 2.7. If η̈ Θ,Z is of standard type, then we shall also refer to η̈ Θ,l·Z ,",
+    "page": 38,
+    "printed": 38
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1.",
+    "page": 63,
+    "printed": 63
+   },
+   "Def 3.3": {
+    "line": "Definition 3.3.",
+    "page": 65,
+    "printed": 65
+   },
+   "Def 3.6": {
+    "line": "Definition 3.6. In the notation of Definition 3.3, (iii):",
+    "page": 69,
+    "printed": 69
+   },
+   "Def 4.1": {
+    "line": "Definition 4.1. Let A ∈ Ob(C).",
+    "page": 79,
+    "printed": 79
+   },
+   "Def 5.4": {
+    "line": "Definition 5.4. We shall say that S ∈ Ob(C) is (l, N )-theta-saturated if the",
+    "page": 92,
+    "printed": 92
+   },
+   "Ex 3.9": {
+    "line": "Example 3.9. Theta Functions and Tempered Frobenioids.",
+    "page": 75,
+    "printed": 75
+   },
+   "Lem 1.2": {
+    "line": "Lemma 1.2. (Compatibility of Theta Trivializations) By modifying the",
+    "page": 18,
+    "printed": 18
+   },
+   "Lem 2.17": {
+    "line": "Lemma 2.17. (Discrete Normalizers) If G1 is a subgroup of a group G2 ,",
+    "page": 53,
+    "printed": 53
+   },
+   "Lem 3.5": {
+    "line": "Lemma 3.5. (Perfections and Realifications of Perf-factorial Sub-",
+    "page": 68,
+    "printed": 68
+   },
+   "Lem 5.11": {
+    "line": "Lemma 5.11. (Non-category-theoreticity of Particular Morphisms in",
+    "page": 102,
+    "printed": 102
+   },
+   "Lem 5.8": {
+    "line": "Lemma 5.8. (Conjugation by Constants) In the notation of the above",
+    "page": 96,
+    "printed": 96
+   },
+   "Lem 5.9": {
+    "line": "Lemma 5.9. (First Properties of Frobenioid-theoretic Theta Environ-",
+    "page": 96,
+    "printed": 96
+   },
+   "Prop 1.1": {
+    "line": "Proposition 1.1. (Theta Action of the Tempered Fundamental Group)",
+    "page": 14,
+    "printed": 14
+   },
+   "Prop 1.3": {
+    "line": "Proposition 1.3. (The Étale Theta Class) The difference between the natural",
+    "page": 18,
+    "printed": 18
+   },
+   "Prop 1.4": {
+    "line": "Proposition 1.4. (Relation to the Classical Theta Function) Set",
+    "page": 20,
+    "printed": 20
+   },
+   "Prop 1.5": {
+    "line": "Proposition 1.5. (Theta Cohomology)",
+    "page": 21,
+    "printed": 21
+   },
+   "Prop 1.8": {
+    "line": "Proposition 1.8. (Characteristic Nature of Coverings) For = α, β, let",
+    "page": 26,
+    "printed": 26
+   },
+   "Prop 2.11": {
+    "line": "Proposition 2.11. (General Properties of the Cyclotomic Envelope)",
+    "page": 41,
+    "printed": 41
+   },
+   "Prop 2.12": {
+    "line": "Proposition 2.12. (The Cyclotomic Envelope of the Theta Quotient)",
+    "page": 41,
+    "printed": 41
+   },
+   "Prop 2.14": {
+    "line": "Proposition 2.14. (Symmetries of Mono-theta and Bi-theta Environ-",
+    "page": 45,
+    "printed": 45
+   },
+   "Prop 2.15": {
+    "line": "Proposition 2.15. (Discrete Rigidity and Z-torsors) Let us regard N≥1 as",
+    "page": 47,
+    "printed": 47
+   },
+   "Prop 2.2": {
+    "line": "Proposition 2.2. (The Inversion Automorphism) Suppose that l is odd.",
+    "page": 34,
+    "printed": 34
+   },
+   "Prop 2.4": {
+    "line": "Proposition 2.4. (Characteristic Nature of Coverings) For = α, β,",
+    "page": 35,
+    "printed": 35
+   },
+   "Prop 2.6": {
+    "line": "Proposition 2.6. (Characteristic Nature of Coverings) For = α, β, let",
+    "page": 36,
+    "printed": 36
+   },
+   "Prop 3.2": {
+    "line": "Proposition 3.2. (Divisors and Rational Functions on Universal Com-",
+    "page": 64,
+    "printed": 64
+   },
+   "Prop 3.4": {
+    "line": "Proposition 3.4. (Divisor and Rational Function Monoids) In the nota-",
+    "page": 67,
+    "printed": 67
+   },
+   "Prop 4.2": {
+    "line": "Proposition 4.2. (Construction of Bi-Kummer Data I: Roots of Fraction-",
+    "page": 80,
+    "printed": 80
+   },
+   "Prop 4.3": {
+    "line": "Proposition 4.3. (Construction of Bi-Kummer Data II: Bi-Kummer",
+    "page": 82,
+    "printed": 82
+   },
+   "Prop 5.1": {
+    "line": "Proposition 5.1. (Applicability of the General Theory) The Frobenioid",
+    "page": 88,
+    "printed": 88
+   },
+   "Prop 5.2": {
+    "line": "Proposition 5.2. (Bi-Kummer Theory) In the notation of the above discus-",
+    "page": 89,
+    "printed": 89
+   },
+   "Prop 5.3": {
+    "line": "Proposition 5.3. (Category-theoreticity of the Geometry of Divisors)",
+    "page": 91,
+    "printed": 91
+   },
+   "Prop 5.5": {
+    "line": "Proposition 5.5. (Frobenioid-theoretic Cyclotomic Rigidity) In the no-",
+    "page": 92,
+    "printed": 92
+   },
+   "Rem 1.10.1": {
+    "line": "Remark 1.10.1.",
+    "page": 28,
+    "printed": 28
+   },
+   "Rem 1.10.2": {
+    "line": "Remark 1.10.2. One observation that one might make is that since Theorem",
+    "page": 28,
+    "printed": 28
+   },
+   "Rem 1.10.3": {
+    "line": "Remark 1.10.3.",
+    "page": 29,
+    "printed": 29
+   },
+   "Rem 1.10.4": {
+    "line": "Remark 1.10.4.",
+    "page": 30,
+    "printed": 30
+   },
+   "Rem 1.3.1": {
+    "line": "Remark 1.3.1. Note that the denominators “ 12 ” in Proposition 1.3 are by no",
+    "page": 19,
+    "printed": 19
+   },
+   "Rem 1.6.1": {
+    "line": "Remark 1.6.1. In the proof of Theorem 1.6, (iii), we eliminated the “indeter-",
+    "page": 23,
+    "printed": 23
+   },
+   "Rem 1.6.2": {
+    "line": "Remark 1.6.2. One way of thinking about isomorphisms of the tempered funda-",
+    "page": 23,
+    "printed": 23
+   },
+   "Rem 1.6.3": {
+    "line": "Remark 1.6.3. The interpretation of Theorem 1.6 given in Remark 1.6.2 is rem-",
+    "page": 24,
+    "printed": 24
+   },
+   "Rem 1.6.4": {
+    "line": "Remark 1.6.4. One verifies immediately that there are [easier] profinite versions",
+    "page": 24,
+    "printed": 24
+   },
+   "Rem 1.9.1": {
+    "line": "Remark 1.9.1. Observe that it is immediate from the definitions that any",
+    "page": 27,
+    "printed": 27
+   },
+   "Rem 2.1.1": {
+    "line": "Remark 2.1.1. Note that although X log → X log is [by construction] Galois,",
+    "page": 33,
+    "printed": 33
+   },
+   "Rem 2.12.1": {
+    "line": "Remark 2.12.1. Note that the inclusion of Proposition 2.12, (i) — which will",
+    "page": 42,
+    "printed": 42
+   },
+   "Rem 2.14.1": {
+    "line": "Remark 2.14.1. Note that, in the notation of Proposition 2.14, (ii), although the",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 2.14.2": {
+    "line": "Remark 2.14.2. Note that if, in the situation of Proposition 2.14, one tries",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 2.14.3": {
+    "line": "Remark 2.14.3. The existence of “shifting automorphisms” as in Proposition",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 2.15.1": {
+    "line": "Remark 2.15.1. Proposition 2.15 generalizes immediately to the case of cate-",
+    "page": 49,
+    "printed": 49
+   },
+   "Rem 2.15.2": {
+    "line": "Remark 2.15.2. Let T be a “connected temperoid” [i.e., the analogue of a",
+    "page": 49,
+    "printed": 49
+   },
+   "Rem 2.16.1": {
+    "line": "Remark 2.16.1.",
+    "page": 50,
+    "printed": 50
+   },
+   "Rem 2.16.2": {
+    "line": "Remark 2.16.2. Although the present paper is essentially only concerned with",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.16.3": {
+    "line": "Remark 2.16.3. Relative to the analogy between Galois group actions and",
+    "page": 53,
+    "printed": 53
+   },
+   "Rem 2.18.1": {
+    "line": "Remark 2.18.1. It follows immediately from Proposition 2.14, (iii), that, for",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 2.18.2": {
+    "line": "Remark 2.18.2. Thus, in a word, Corollary 2.18 may be interpreted as asserting",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 2.19.1": {
+    "line": "Remark 2.19.1. One way to try to eliminate the indeterminacy discussed in",
+    "page": 60,
+    "printed": 60
+   },
+   "Rem 2.19.2": {
+    "line": "Remark 2.19.2. The “cyclotomic rigidity” of Corollary 2.19, (i), is a consequence",
+    "page": 61,
+    "printed": 61
+   },
+   "Rem 2.19.3": {
+    "line": "Remark 2.19.3. In the context of the projective systems discussed in Corollary",
+    "page": 61,
+    "printed": 61
+   },
+   "Rem 2.19.4": {
+    "line": "Remark 2.19.4. Before proceeding, it is natural to pause and reflect on the topic",
+    "page": 62,
+    "printed": 62
+   },
+   "Rem 2.19.5": {
+    "line": "Remark 2.19.5. Recall that in the proof of [Mzk13], Theorem 4.3 [cf. especially",
+    "page": 62,
+    "printed": 62
+   },
+   "Rem 2.2.1": {
+    "line": "Remark 2.2.1. We shall not discuss the case of even l in detail here. Nevertheless,",
+    "page": 35,
+    "printed": 35
+   },
+   "Rem 2.3.1": {
+    "line": "Remark 2.3.1. Thus, one may think of the “single underline” in the notation",
+    "page": 35,
+    "printed": 35
+   },
+   "Rem 2.5.1": {
+    "line": "Remark 2.5.1. Thus, the irreducible components of the special fiber of C, Ċ may",
+    "page": 36,
+    "printed": 36
+   },
+   "Rem 2.6.1": {
+    "line": "Remark 2.6.1. Suppose, for simplicity, that K contains a primitive l-th root",
+    "page": 37,
+    "printed": 37
+   },
+   "Rem 2.9.1": {
+    "line": "Remark 2.9.1. We observe in passing that a bijection as in Corollary 2.9 fails to",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 2.9.2": {
+    "line": "Remark 2.9.2. In the situation of Corollary 2.8, (ii), we make the following",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 3.3.1": {
+    "line": "Remark 3.3.1. Note that the set of primes [cf. [Mzk17], §0] of the monoid",
+    "page": 67,
+    "printed": 67
+   },
+   "Rem 3.3.2": {
+    "line": "Remark 3.3.2. Note that by taking the extension field K used to define the",
+    "page": 67,
+    "printed": 67
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1. Observe that it follows immediately from Lemma 3.5, (i), that",
+    "page": 69,
+    "printed": 69
+   },
+   "Rem 3.5.2": {
+    "line": "Remark 3.5.2. Note that the injectivity portion of Lemma 3.5, (i), fails to hold if",
+    "page": 69,
+    "printed": 69
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1. Note that the group-saturated-ness hypothesis of Definition 3.6,",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2. Observe that the base-field-theoretic hull of Definition 3.6, (iv),",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.6.3": {
+    "line": "Remark 3.6.3. It follows immediately from Proposition 3.4, (ii), and the ex-",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.6.4": {
+    "line": "Remark 3.6.4. If Φ, C are as in Definition 3.6, (ii), then it follows from Lemma",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.6.5": {
+    "line": "Remark 3.6.5. One verifies immediately that, when applied to a tempered",
+    "page": 72,
+    "printed": 72
+   },
+   "Rem 3.6.6": {
+    "line": "Remark 3.6.6. In the situation of Definition 3.6, (ii), if one supposes further that",
+    "page": 72,
+    "printed": 72
+   },
+   "Rem 3.7.1": {
+    "line": "Remark 3.7.1. We recall [cf. [Mzk18], §0] in passing that if D is of weakly",
+    "page": 73,
+    "printed": 73
+   },
+   "Rem 3.7.2": {
+    "line": "Remark 3.7.2. We recall in passing that D0 is slim [cf. [Mzk14], Example 3.10;",
+    "page": 73,
+    "printed": 73
+   },
+   "Rem 3.8.1": {
+    "line": "Remark 3.8.1. Note that in the situation of Corollary 3.8, (ii), for suitable base",
+    "page": 74,
+    "printed": 74
+   },
+   "Rem 3.8.2": {
+    "line": "Remark 3.8.2. In the situation of Corollary 3.8, suppose further that Ψ preserves",
+    "page": 74,
+    "printed": 74
+   },
+   "Rem 4.1.1": {
+    "line": "Remark 4.1.1. Note that in the situation of Definition 4.1, (iv), if α : A → B",
+    "page": 80,
+    "printed": 80
+   },
+   "Rem 4.3.1": {
+    "line": "Remark 4.3.1. Of course, even without applying the somewhat nontrivial the-",
+    "page": 83,
+    "printed": 83
+   },
+   "Rem 4.3.2": {
+    "line": "Remark 4.3.2. Note that if N divides N ∈ N≥1 , then one verifies immediately",
+    "page": 84,
+    "printed": 84
+   },
+   "Rem 4.4.1": {
+    "line": "Remark 4.4.1. Observe that one crucial difference between the bi-Kummer",
+    "page": 86,
+    "printed": 86
+   },
+   "Rem 5.1.1": {
+    "line": "Remark 5.1.1. In Proposition 5.1, as well as in the discussion of the remainder of",
+    "page": 88,
+    "printed": 88
+   },
+   "Rem 5.10.1": {
+    "line": "Remark 5.10.1. Observe that Theorem 5.10, (iii), may be interpreted as asserting",
+    "page": 100,
+    "printed": 100
+   },
+   "Rem 5.10.2": {
+    "line": "Remark 5.10.2. The structure of a Frobenioid may be thought of as consisting",
+    "page": 100,
+    "printed": 100
+   },
+   "Rem 5.10.3": {
+    "line": "Remark 5.10.3. One key feature of a mono-theta environment is the inclusion",
+    "page": 100,
+    "printed": 100
+   },
+   "Rem 5.10.4": {
+    "line": "Remark 5.10.4.",
+    "page": 101,
+    "printed": 101
+   },
+   "Rem 5.12.1": {
+    "line": "Remark 5.12.1. Let E be a category. Then for any E ∈ Ob(E),",
+    "page": 104,
+    "printed": 104
+   },
+   "Rem 5.12.2": {
+    "line": "Remark 5.12.2. In general, if one tries to consider systems [e.g., projective",
+    "page": 105,
+    "printed": 105
+   },
+   "Rem 5.12.3": {
+    "line": "Remark 5.12.3. Now we return to our discussion of Frobenioid-theoretic mono-",
+    "page": 106,
+    "printed": 106
+   },
+   "Rem 5.12.4": {
+    "line": "Remark 5.12.4. With regard to the projective systems of mono-theta environ-",
+    "page": 107,
+    "printed": 107
+   },
+   "Rem 5.12.5": {
+    "line": "Remark 5.12.5.",
+    "page": 107,
+    "printed": 107
+   },
+   "Rem 5.12.6": {
+    "line": "Remark 5.12.6. At this point, it is useful to reflect [cf. Remark 2.19.4] on",
+    "page": 109,
+    "printed": 109
+   },
+   "Rem 5.12.7": {
+    "line": "Remark 5.12.7.",
+    "page": 109,
+    "printed": 109
+   },
+   "Rem 5.12.8": {
+    "line": "Remark 5.12.8. Of course, the automorphism indeterminacy with regard to",
+    "page": 110,
+    "printed": 110
+   },
+   "Rem 5.12.9": {
+    "line": "Remark 5.12.9. Perhaps a sort of “unifying principle” underlying the “constant",
+    "page": 110,
+    "printed": 110
+   },
+   "Rem 5.2.1": {
+    "line": "Remark 5.2.1. The natural isomorphisms of Proposition 5.2, (iii), constitute",
+    "page": 90,
+    "printed": 90
+   },
+   "Rem 5.7.1": {
+    "line": "Remark 5.7.1. Note that the “rigidity up to possible multiplication by a 2l-th",
+    "page": 95,
+    "printed": 95
+   },
+   "Thm 1.10": {
+    "line": "Theorem 1.10. (Constant Multiple Rigidity of the Étale Theta Func-",
+    "page": 27,
+    "printed": 27
+   },
+   "Thm 1.6": {
+    "line": "Theorem 1.6. (Tempered Anabelian Rigidity of the Étale Theta Func-",
+    "page": 22,
+    "printed": 22
+   },
+   "Thm 2.4": {
+    "line": "Theorem 2.4.",
+    "page": 74,
+    "printed": 74
+   },
+   "Thm 3.7": {
+    "line": "Theorem 3.7. (Basic Properties of Tempered Frobenioids) In the nota-",
+    "page": 72,
+    "printed": 72
+   },
+   "Thm 4.4": {
+    "line": "Theorem 4.4. (Category-theoreticity of Bi-Kummer Data) For i =",
+    "page": 84,
+    "printed": 84
+   },
+   "Thm 5.10": {
+    "line": "Theorem 5.10. (Category-theoreticity of Frobenioid-theoretic Theta",
+    "page": 97,
+    "printed": 97
+   },
+   "Thm 5.6": {
+    "line": "Theorem 5.6. (Category-theoreticity of Frobenioid-theoretic Cyclo-",
+    "page": 93,
+    "printed": 93
+   },
+   "Thm 5.7": {
+    "line": "Theorem 5.7. (Category-theoreticity of the Frobenioid-theoretic Theta",
+    "page": 94,
+    "printed": 94
+   },
+   "§0": {
+    "line": "Section 0: Notations and Conventions",
+    "page": 7,
+    "printed": 7
+   },
+   "§1": {
+    "line": "Section 1: The Tempered Anabelian Rigidity of the Étale Theta Function",
+    "page": 10,
+    "printed": 10
+   },
+   "§2": {
+    "line": "Section 2: The Theory of Theta Environments",
+    "page": 32,
+    "printed": 32
+   },
+   "§3": {
+    "line": "Section 3: Tempered Frobenioids",
+    "page": 63,
+    "printed": 63
+   },
+   "§4": {
+    "line": "Section 4: General Bi-Kummer Theory",
+    "page": 78,
+    "printed": 78
+   },
+   "§5": {
+    "line": "Section 5: The Étale Theta Function via Tempered Frobenioids",
+    "page": 88,
+    "printed": 88
+   }
+  },
+  "npages": 112,
+  "title": "The Étale Theta Function and its Frobenioid-theoretic Manifestations"
+ },
+ "ExpEst": {
+  "file": "Explicit estimates in IUTeich.pdf",
+  "index": {
+   "Cor 1.14": {
+    "line": "Corollary 1.14. (Upper bounds for hnon (j(E))) In the notation of Propo-",
+    "page": 19,
+    "printed": 19
+   },
+   "Cor 5.2": {
+    "line": "Corollary 5.2. (Construction of suitable μ6 -initial Θ-data) Write X",
+    "page": 35,
+    "printed": 35
+   },
+   "Cor 5.8": {
+    "line": "Corollary 5.8. (Application to “Fermat’s Last Theorem”) Let",
+    "page": 53,
+    "printed": 53
+   },
+   "Cor 5.9": {
+    "line": "Corollary 5.9. (Application to a generalized version of “Fermat’s",
+    "page": 56,
+    "printed": 56
+   },
+   "Cor C": {
+    "line": "Corollary C. (Application to “Fermat’s Last Theorem”) Let",
+    "page": 5,
+    "printed": 5
+   },
+   "Def 1.1": {
+    "line": "Definition 1.1. Let F be a number field.",
+    "page": 10,
+    "printed": 10
+   },
+   "Def 1.13": {
+    "line": "Definition 1.13. Let κ ≤ 1 be a positive real number; Σ a finite subset",
+    "page": 19,
+    "printed": 19
+   },
+   "Def 1.2": {
+    "line": "Definition 1.2. Let F be a number field. Then we shall say that F is",
+    "page": 10,
+    "printed": 10
+   },
+   "Def 1.4": {
+    "line": "Definition 1.4. Let F be a field; | · | : F → R≥0 a map satisfying the",
+    "page": 12,
+    "printed": 12
+   },
+   "Def 1.7": {
+    "line": "Definition 1.7. Let Q be an algebraic closure of Q, F ⊆ Q a number field,",
+    "page": 16,
+    "printed": 16
+   },
+   "Def 3.3": {
+    "line": "Definition 3.3. In the notation of [EtTh], Definition 1.9, suppose that K",
+    "page": 24,
+    "printed": 24
+   },
+   "Def 3.4": {
+    "line": "Definition 3.4. Let l ≥ 1 be an integer coprime to 6. In the notation of",
+    "page": 24,
+    "printed": 24
+   },
+   "Def 3.5": {
+    "line": "Definition 3.5. In the notation of Definition 3.3 and the discussion preced-",
+    "page": 25,
+    "printed": 25
+   },
+   "Def 4.1": {
+    "line": "Definition 4.1. We shall refer to as μ6 -initial Θ-data any collection of data",
+    "page": 26,
+    "printed": 26
+   },
+   "Def 4.2": {
+    "line": "Definition 4.2. Suppose that we are in the situation of [IUTchII], Remark",
+    "page": 28,
+    "printed": 28
+   },
+   "Lem 1.11": {
+    "line": "Lemma 1.11. (Linearization of logarithms) Let a ∈ R>0 be a positive",
+    "page": 18,
+    "printed": 18
+   },
+   "Lem 1.3": {
+    "line": "Lemma 1.3. (Properties of toric heights) Let F be a number field,",
+    "page": 11,
+    "printed": 11
+   },
+   "Lem 1.5": {
+    "line": "Lemma 1.5. (Comparison between J(α) and |α|2 ) In the notation of",
+    "page": 12,
+    "printed": 12
+   },
+   "Lem 1.6": {
+    "line": "Lemma 1.6. (Comparison between J(α) and J0∞ (α) · J1∞ (α) · J01 (α))",
+    "page": 13,
+    "printed": 13
+   },
+   "Lem 3.1": {
+    "line": "Lemma 3.1. (Group actions on primitive roots of unity) Let n ≥ 2",
+    "page": 22,
+    "printed": 22
+   },
+   "Lem 5.5": {
+    "line": "Lemma 5.5. (Elementary identity) Let p ≥ 3 be an odd integer; r, s",
+    "page": 48,
+    "printed": 48
+   },
+   "Lem 5.6": {
+    "line": "Lemma 5.6. (Elementary properties of possible solutions of the",
+    "page": 49,
+    "printed": 49
+   },
+   "Lem 5.7": {
+    "line": "Lemma 5.7. (Elementary estimate for possible solutions of the Fer-",
+    "page": 50,
+    "printed": 50
+   },
+   "Prop 1.10": {
+    "line": "Proposition 1.10. (Comparison between h(j(E)) and hFal (E), I) Let",
+    "page": 18,
+    "printed": 18
+   },
+   "Prop 1.12": {
+    "line": "Proposition 1.12. (Comparison between h(j(E)) and hFal (E), II) Let",
+    "page": 19,
+    "printed": 19
+   },
+   "Prop 1.8": {
+    "line": "Proposition 1.8. (Comparison between hS-tor (E) and h (j(E))) In",
+    "page": 16,
+    "printed": 16
+   },
+   "Prop 1.9": {
+    "line": "Proposition 1.9. (Comparison between hnon (j(E)) and harc (j(E))) In",
+    "page": 17,
+    "printed": 17
+   },
+   "Prop 2.1": {
+    "line": "Proposition 2.1. (j-invariants of arithmetic elliptic curves) Let F",
+    "page": 21,
+    "printed": 21
+   },
+   "Prop 2.2": {
+    "line": "Proposition 2.2. (Effective versions of the prime number theorem)",
+    "page": 21,
+    "printed": 21
+   },
+   "Prop 3.2": {
+    "line": "Proposition 3.2. (Theta values at primitive 12-th roots of unity) In",
+    "page": 23,
+    "printed": 23
+   },
+   "Rem 1.1.1": {
+    "line": "Remark 1.1.1. One verifies easily that for ∈ {non, arc, }, the quantities",
+    "page": 10,
+    "printed": 10
+   },
+   "Rem 1.10.1": {
+    "line": "Remark 1.10.1. In the notation of Proposition 1.10, we observe that",
+    "page": 18,
+    "printed": 18
+   },
+   "Rem 1.3.1": {
+    "line": "Remark 1.3.1. It may appear to the reader, at first glance, that the notion",
+    "page": 12,
+    "printed": 12
+   },
+   "Rem 1.7.1": {
+    "line": "Remark 1.7.1. One verifies easily [cf. Remark 1.1.1] that for ∈ {non, arc,",
+    "page": 16,
+    "printed": 16
+   },
+   "Rem 1.7.2": {
+    "line": "Remark 1.7.2. It follows immediately from Lemma 1.3, (i), that for ∈",
+    "page": 16,
+    "printed": 16
+   },
+   "Rem 3.2.1": {
+    "line": "Remark 3.2.1. Lemma 3.1 and Proposition 3.2 arose from observations",
+    "page": 23,
+    "printed": 23
+   },
+   "Rem 3.3.1": {
+    "line": "Remark 3.3.1. By applying Definition 4.3, together with a similar argu-",
+    "page": 24,
+    "printed": 24
+   },
+   "Rem 3.4.1": {
+    "line": "Remark 3.4.1. In the “μ6 -version” of [EtTh], Remark 2.5.1, the portion",
+    "page": 25,
+    "printed": 25
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1. By applying Definitions 3.3, 3.4, 3.5 [cf. also Remarks",
+    "page": 25,
+    "printed": 25
+   },
+   "Rem 3.5.2": {
+    "line": "Remark 3.5.2. By applying Definitions 3.3, 3.4, 3.5 [cf. also Remarks 3.3.1,",
+    "page": 25,
+    "printed": 25
+   },
+   "Rem 3.5.3": {
+    "line": "Remark 3.5.3. By applying Definitions 3.3, 3.4, 3.5 [cf. also Remarks",
+    "page": 26,
+    "printed": 26
+   },
+   "Rem 4.1.1": {
+    "line": "Remark 4.1.1. In the notation of Definition 4.1, write EF for √ the elliptic",
+    "page": 27,
+    "printed": 27
+   },
+   "Rem 4.1.2": {
+    "line": "Remark 4.1.2. By applying Definitions 3.3, 3.4, 3.5, 4.1 [cf. also Remarks",
+    "page": 27,
+    "printed": 27
+   },
+   "Rem 4.1.3": {
+    "line": "Remark 4.1.3. By applying Definitions 3.3, 3.4, 3.5, 4.1 [cf. also Remarks",
+    "page": 27,
+    "printed": 27
+   },
+   "Rem 4.2.1": {
+    "line": "Remark 4.2.1. By applying Definitions 3.3, 3.4, 3.5, 4.1, 4.2 [cf. also",
+    "page": 28,
+    "printed": 28
+   },
+   "Rem 4.2.2": {
+    "line": "Remark 4.2.2. By applying Definitions 3.3, 3.4, 3.5, 4.1, 4.2 [cf. also",
+    "page": 29,
+    "printed": 29
+   },
+   "Rem 4.2.3": {
+    "line": "Remark 4.2.3. By applying Definitions 3.3, 3.4, 3.5, 4.1, 4.2 [cf. also Re-",
+    "page": 29,
+    "printed": 29
+   },
+   "Rem 4.2.4": {
+    "line": "Remark 4.2.4. By applying Definitions 3.3, 3.4, 3.5, 4.1, 4.2 [cf. also",
+    "page": 31,
+    "printed": 31
+   },
+   "Rem 4.2.5": {
+    "line": "Remark 4.2.5. By applying Definitions 3.3, 3.4, 3.5, 4.1, 4.2 [cf. also",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 4.2.6": {
+    "line": "Remark 4.2.6. By applying Definitions 3.3, 3.4, 3.5, 4.1, 4.2 [cf. also",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 5.3.1": {
+    "line": "Remark 5.3.1. The astronomically large constants in the inequalities es-",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 5.3.2": {
+    "line": "Remark 5.3.2. The approach to applying the version of the ABC inequality",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 5.3.3": {
+    "line": "Remark 5.3.3. In the notation of Theorem 5.3, let λ ∈ L . Write Eλ for",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 5.3.4": {
+    "line": "Remark 5.3.4. Let K be a field such that 2 is invertible in K, E an elliptic",
+    "page": 46,
+    "printed": 46
+   },
+   "Rem 5.3.5": {
+    "line": "Remark 5.3.5. By combining the inequalities in the second to last display",
+    "page": 46,
+    "printed": 46
+   },
+   "Rem 5.7.1": {
+    "line": "Remark 5.7.1.",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 5.7.2": {
+    "line": "Remark 5.7.2. In the notation of Lemma 5.7, suppose that p divides xyz,",
+    "page": 53,
+    "printed": 53
+   },
+   "Rem 5.8.1": {
+    "line": "Remark 5.8.1. By combining Corollary 5.8 with the numerical estimate",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 5.8.2": {
+    "line": "Remark 5.8.2.",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 5.8.3": {
+    "line": "Remark 5.8.3.",
+    "page": 55,
+    "printed": 55
+   },
+   "Thm 5.1": {
+    "line": "Theorem 5.1. (Log-volume estimates for the “μ6 -version” of Θ-",
+    "page": 33,
+    "printed": 33
+   },
+   "Thm 5.3": {
+    "line": "Theorem 5.3. (Effective versions of ABC/Szpiro inequalities over",
+    "page": 43,
+    "printed": 43
+   },
+   "Thm 5.4": {
+    "line": "Theorem 5.4. (Effective version of a conjecture of Szpiro) Let a, b,",
+    "page": 46,
+    "printed": 46
+   },
+   "Thm 7": {
+    "line": "Theorem 7.",
+    "page": 22,
+    "printed": 22
+   },
+   "Thm A": {
+    "line": "Theorem A. (Effective versions of ABC/Szpiro inequalities over",
+    "page": 4,
+    "printed": 4
+   },
+   "Thm B": {
+    "line": "Theorem B. (Effective version of a conjecture of Szpiro) Let a, b, c",
+    "page": 4,
+    "printed": 4
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 2,
+    "printed": 2
+   }
+  },
+  "npages": 58,
+  "title": "Explicit Estimates in Inter-universal Teichmüller Theory"
+ },
+ "FormIUT": {
+  "file": "Formalization of IUT (2026-04).pdf",
+  "index": {
+   "§1": {
+    "line": "§1. Lean formalization (“LeanForm”) as a communication tool",
+    "page": 1,
+    "printed": null
+   },
+   "§2": {
+    "line": "§2. First steps toward the LeanForm of IUT",
+    "page": 1,
+    "printed": null
+   },
+   "§3": {
+    "line": "§3. Brief review of inter-universal Teichmüller theory (IUT)",
+    "page": 1,
+    "printed": null
+   },
+   "§4": {
+    "line": "§4. Skeletal Lean code for “3.11.5 =⇒ 3.12”",
+    "page": 1,
+    "printed": null
+   }
+  },
+  "npages": 14,
+  "title": "On the Formalization of Inter-universal Teichmüller Theory"
+ },
+ "FrdI": {
+  "file": "The Geometry of Frobenioids I.pdf",
+  "index": {
+   "Cor 2.6": {
+    "line": "Corollary 2.6. (Unit-wise Frobenius Functors I) Let τ be a character-",
+    "page": 50,
+    "printed": 50
+   },
+   "Cor 4.10": {
+    "line": "Corollary 4.10. (Category-theoreticity of the Birationalization) For",
+    "page": 90,
+    "printed": 90
+   },
+   "Cor 4.11": {
+    "line": "Corollary 4.11. (Category-theoreticity of the Functor to an Elementary",
+    "page": 91,
+    "printed": 91
+   },
+   "Cor 4.12": {
+    "line": "Corollary 4.12. (Category-theoreticity of the Functor to an Elementary",
+    "page": 94,
+    "printed": 94
+   },
+   "Cor 5.4": {
+    "line": "Corollary 5.4. (Category-theoreticity of the Realification) For i = 1, 2,",
+    "page": 103,
+    "printed": 103
+   },
+   "Cor 5.7": {
+    "line": "Corollary 5.7. (Category-theoreticity of Base-Sections) For i = 1, 2,",
+    "page": 107,
+    "printed": 107
+   },
+   "Def 1.1": {
+    "line": "Definition 1.1.",
+    "page": 19,
+    "printed": 19
+   },
+   "Def 1.2": {
+    "line": "Definition 1.2. Let Φ be a divisorial monoid on a connected, totally epimorphic",
+    "page": 21,
+    "printed": 21
+   },
+   "Def 1.3": {
+    "line": "Definition 1.3. Let D, Φ, C → FΦ be as in Definition 1.2. Then we shall say",
+    "page": 24,
+    "printed": 24
+   },
+   "Def 2.3": {
+    "line": "Definition 2.3. We shall refer to as a characteristic splitting on C a subfunctor",
+    "page": 47,
+    "printed": 47
+   },
+   "Def 2.4": {
+    "line": "Definition 2.4.",
+    "page": 47,
+    "printed": 47
+   },
+   "Def 2.7": {
+    "line": "Definition 2.7. Suppose that the Frobenioid C is of isotropic type.",
+    "page": 51,
+    "printed": 51
+   },
+   "Def 2.8": {
+    "line": "Definition 2.8.",
+    "page": 52,
+    "printed": 52
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1.",
+    "page": 56,
+    "printed": 56
+   },
+   "Def 4.5": {
+    "line": "Definition 4.5.",
+    "page": 86,
+    "printed": 86
+   },
+   "Ex 3.10": {
+    "line": "Example 3.10. Non-slim Base Categories. Let G be a group, whose center",
+    "page": 72,
+    "printed": 72
+   },
+   "Ex 3.5": {
+    "line": "Example 3.5. Base Categories with FSMI-endomorphisms. Let D be",
+    "page": 69,
+    "printed": 69
+   },
+   "Ex 3.6": {
+    "line": "Example 3.6. Frobenioids of Standard and Group-like Type. Let",
+    "page": 70,
+    "printed": 70
+   },
+   "Ex 3.7": {
+    "line": "Example 3.7. Dilating Monoids. Let G, D be as in Example 3.6; Φ the",
+    "page": 70,
+    "printed": 70
+   },
+   "Ex 3.8": {
+    "line": "Example 3.8. Permutation of Primes. Let α : N≥1 → N≥1 be an automor-",
+    "page": 71,
+    "printed": 71
+   },
+   "Ex 3.9": {
+    "line": "Example 3.9. Non-preservation of Units. Let N = (N≥1 )gp ; U = Q;",
+    "page": 71,
+    "printed": 71
+   },
+   "Ex 4.3": {
+    "line": "Example 4.3. Independence of Right-hand and Left-hand Isomor-",
+    "page": 81,
+    "printed": 81
+   },
+   "Ex 4.6": {
+    "line": "Example 4.6. Frobenius-normalized vs. Birationally Frobenius-normal-",
+    "page": 86,
+    "printed": 86
+   },
+   "Ex 4.7": {
+    "line": "Example 4.7. Frobenius-slim vs. Div-slim.",
+    "page": 87,
+    "printed": 87
+   },
+   "Ex 6.1": {
+    "line": "Example 6.1. A Frobenioid of Geometric Origin. Let V be a proper",
+    "page": 109,
+    "printed": 109
+   },
+   "Ex 6.3": {
+    "line": "Example 6.3. A Frobenioid of Arithmetic Origin. Let F be a number",
+    "page": 112,
+    "printed": 112
+   },
+   "Lem 6.5": {
+    "line": "Lemma 6.5. (Transcendental Properties of Logarithms of Prime",
+    "page": 116,
+    "printed": 116
+   },
+   "Prop 1.10": {
+    "line": "Proposition 1.10. (Morphisms of Frobenius Type) Let Φ be a divisorial",
+    "page": 34,
+    "printed": 34
+   },
+   "Prop 1.11": {
+    "line": "Proposition 1.11. (Pull-back and Linear Morphisms) Let Φ be a divi-",
+    "page": 36,
+    "printed": 36
+   },
+   "Prop 1.12": {
+    "line": "Proposition 1.12. (Endomorphisms) Let Φ be a divisorial monoid on",
+    "page": 39,
+    "printed": 39
+   },
+   "Prop 1.13": {
+    "line": "Proposition 1.13. (Rigidity and Slimness) Let Φ be a divisorial monoid",
+    "page": 39,
+    "printed": 39
+   },
+   "Prop 1.14": {
+    "line": "Proposition 1.14. (Irreducible Morphisms) Let Φ be a divisorial monoid",
+    "page": 41,
+    "printed": 41
+   },
+   "Prop 1.4": {
+    "line": "Proposition 1.4. (Co-angular and LB-invertible Morphisms) Let Φ be",
+    "page": 25,
+    "printed": 25
+   },
+   "Prop 1.5": {
+    "line": "Proposition 1.5. (Elementary Frobenioids are Frobenioids) Let Φ be a",
+    "page": 27,
+    "printed": 27
+   },
+   "Prop 1.6": {
+    "line": "Proposition 1.6. (Categorical Fiber Products) Let Φ be a divisorial",
+    "page": 27,
+    "printed": 27
+   },
+   "Prop 1.7": {
+    "line": "Proposition 1.7. (Composites of Morphisms) Let Φ be a divisorial",
+    "page": 28,
+    "printed": 28
+   },
+   "Prop 1.8": {
+    "line": "Proposition 1.8. (Pre-steps) Let Φ be a divisorial monoid on a connected,",
+    "page": 30,
+    "printed": 30
+   },
+   "Prop 1.9": {
+    "line": "Proposition 1.9. (Isotropic Objects and Isometries) Let Φ be a divisorial",
+    "page": 30,
+    "printed": 30
+   },
+   "Prop 2.1": {
+    "line": "Proposition 2.1. (The Naive Frobenius Functor) Let d ∈ N≥1 . Then:",
+    "page": 44,
+    "printed": 44
+   },
+   "Prop 2.2": {
+    "line": "Proposition 2.2. (The Functor O (−)) Write D ∗ for the category whose",
+    "page": 45,
+    "printed": 45
+   },
+   "Prop 2.5": {
+    "line": "Proposition 2.5. (The Unit-linear Frobenius Functor) Let τ be a charac-",
+    "page": 48,
+    "printed": 48
+   },
+   "Prop 2.9": {
+    "line": "Proposition 2.9. (Unit-wise Frobenius Functors II) Suppose that the",
+    "page": 53,
+    "printed": 53
+   },
+   "Prop 3.11": {
+    "line": "Proposition 3.11. (Frobenioids of Isotropic, Unit-trivial, and Group-",
+    "page": 73,
+    "printed": 73
+   },
+   "Prop 3.2": {
+    "line": "Proposition 3.2. (Perfections of Frobenioids) Suppose that the Frobenioid",
+    "page": 58,
+    "printed": 58
+   },
+   "Prop 3.3": {
+    "line": "Proposition 3.3. (Base-identity Pre-steps and Units)",
+    "page": 59,
+    "printed": 59
+   },
+   "Prop 4.1": {
+    "line": "Proposition 4.1. (Primary Steps) Suppose further that C is of perfect and",
+    "page": 75,
+    "printed": 75
+   },
+   "Prop 4.4": {
+    "line": "Proposition 4.4. (Birationalization of a Frobenioid I) For A, B ∈ Ob(C),",
+    "page": 82,
+    "printed": 82
+   },
+   "Prop 4.8": {
+    "line": "Proposition 4.8. (Birationalization of a Frobenioid II)",
+    "page": 88,
+    "printed": 88
+   },
+   "Prop 5.3": {
+    "line": "Proposition 5.3. (Realifications of Frobenioids) Suppose that Φ is perf-",
+    "page": 103,
+    "printed": 103
+   },
+   "Prop 5.5": {
+    "line": "Proposition 5.5. (Perfection, Unit-trivialization and Realification of",
+    "page": 104,
+    "printed": 104
+   },
+   "Prop 5.6": {
+    "line": "Proposition 5.6. (Base-Sections of Frobenius-Trivial Objects) Suppose",
+    "page": 105,
+    "printed": 105
+   },
+   "Rem 1.1.1": {
+    "line": "Remark 1.1.1. If φ ◦ ψ is a composite of morphisms φ, ψ of a pre-Frobenioid,",
+    "page": 21,
+    "printed": 21
+   },
+   "Rem 1.11.1": {
+    "line": "Remark 1.11.1. Observe that in the situation of Proposition 1.11, (iii), if α is",
+    "page": 38,
+    "printed": 38
+   },
+   "Rem 1.13.1": {
+    "line": "Remark 1.13.1. Note that if the hypothesis of Proposition 1.13, (iii), fails to",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.2.1": {
+    "line": "Remark 1.2.1. The following implications follow formally from the definitions:",
+    "page": 24,
+    "printed": 24
+   },
+   "Rem 1.3.1": {
+    "line": "Remark 1.3.1. Note that it follows from Definition 1.3, (iii), (b), (c), that if C",
+    "page": 25,
+    "printed": 25
+   },
+   "Rem 1.4.1": {
+    "line": "Remark 1.4.1. We refer to the Chart of Types of Morphisms in a Frobenioid",
+    "page": 26,
+    "printed": 26
+   },
+   "Rem 2.1.1": {
+    "line": "Remark 2.1.1. If C is of perfect type, then for any d = a/b ∈ Q>0 , where",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 2.5.1": {
+    "line": "Remark 2.5.1. If C is of isotropic and unit-trivial type, then the “unit-linear",
+    "page": 50,
+    "printed": 50
+   },
+   "Rem 2.7.1": {
+    "line": "Remark 2.7.1. The notions of a “base-section” and “Frobenius-section” are",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.7.2": {
+    "line": "Remark 2.7.2. Suppose that C is of isotropic type. Let (P, F ) be a base-Frobenius",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.9.1": {
+    "line": "Remark 2.9.1. By “base-changing” the Frobenioid C via various functors D → D",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 2.9.2": {
+    "line": "Remark 2.9.2. We shall see later [cf. Theorem 5.1, (iii)] that in fact, the",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1. Observe that:",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 3.1.2": {
+    "line": "Remark 3.1.2. Observe that for any residually finite group G [i.e., a group G",
+    "page": 58,
+    "printed": 58
+   },
+   "Rem 3.1.3": {
+    "line": "Remark 3.1.3. The phenomenon discussed in Remark 3.1.2 may be regarded as",
+    "page": 58,
+    "printed": 58
+   },
+   "Rem 3.4.1": {
+    "line": "Remark 3.4.1. With regard to assumption (b) of Theorem 3.4, (iii), (iv), (v), we",
+    "page": 69,
+    "printed": 69
+   },
+   "Rem 4.11.1": {
+    "line": "Remark 4.11.1. Note that since “slim always implies Div-slim”, it follows that,",
+    "page": 94,
+    "printed": 94
+   },
+   "Rem 4.11.2": {
+    "line": "Remark 4.11.2. Observe that in Example 3.9, since the subgroup U of G =",
+    "page": 94,
+    "printed": 94
+   },
+   "Rem 4.12.1": {
+    "line": "Remark 4.12.1. One verifies immediately that if one takes the group G of Exam-",
+    "page": 95,
+    "printed": 95
+   },
+   "Rem 4.5.1": {
+    "line": "Remark 4.5.1. We observe in passing that it is immediate from the definitions",
+    "page": 86,
+    "printed": 86
+   },
+   "Rem 4.9.1": {
+    "line": "Remark 4.9.1. One verifies immediately that the Frobenioid of Example 4.3 is",
+    "page": 90,
+    "printed": 90
+   },
+   "Rem 5.2.1": {
+    "line": "Remark 5.2.1. It follows formally from Theorem 5.2, (ii), (iv), that the Frobe-",
+    "page": 103,
+    "printed": 103
+   },
+   "Rem 5.6.1": {
+    "line": "Remark 5.6.1. The notion of a “base-section of a Frobenius-trivial object” [i.e.,",
+    "page": 107,
+    "printed": 107
+   },
+   "Rem 6.2.1": {
+    "line": "Remark 6.2.1. Theorem 6.2, (ii), constitutes the principal justification for the",
+    "page": 112,
+    "printed": 112
+   },
+   "Rem 6.3.1": {
+    "line": "Remark 6.3.1. In light of Examples 6.1, 6.3, many readers might expect that the",
+    "page": 114,
+    "printed": 114
+   },
+   "Thm 3.4": {
+    "line": "Theorem 3.4. (Category-theoreticity of the Base and Frobenius De-",
+    "page": 62,
+    "printed": 62
+   },
+   "Thm 4.2": {
+    "line": "Theorem 4.2. (Category-theoreticity of Primary Steps) For i = 1, 2,",
+    "page": 77,
+    "printed": 77
+   },
+   "Thm 4.9": {
+    "line": "Theorem 4.9. (Category-theoreticity of Divisor Monoids) For i = 1, 2,",
+    "page": 88,
+    "printed": 88
+   },
+   "Thm 5.1": {
+    "line": "Theorem 5.1. (Divisorial Descriptions) Suppose that the Frobenioid C is",
+    "page": 96,
+    "printed": 96
+   },
+   "Thm 5.2": {
+    "line": "Theorem 5.2. (Model Frobenioids) Let Φ : D → Mon be a divisorial",
+    "page": 100,
+    "printed": 100
+   },
+   "Thm 6.2": {
+    "line": "Theorem 6.2. (Geometric Frobenioids) For i = 1, 2, let Vi be a proper",
+    "page": 110,
+    "printed": 110
+   },
+   "Thm 6.4": {
+    "line": "Theorem 6.4. (Arithmetic Frobenioids) For i = 1, 2, let Fi be a number",
+    "page": 114,
+    "printed": 114
+   },
+   "§0": {
+    "line": "Section 0: Notations and Conventions",
+    "page": 10,
+    "printed": 10
+   },
+   "§1": {
+    "line": "Section 1: Definitions and First Properties",
+    "page": 19,
+    "printed": 19
+   },
+   "§2": {
+    "line": "Section 2: Frobenius Functors",
+    "page": 44,
+    "printed": 44
+   },
+   "§3": {
+    "line": "Section 3: Category-theoreticity of the Base and Frobenius Degree",
+    "page": 56,
+    "printed": 56
+   },
+   "§4": {
+    "line": "Section 4: Category-theoreticity of the Divisor Monoid",
+    "page": 75,
+    "printed": 75
+   },
+   "§5": {
+    "line": "Section 5: Model Frobenioids",
+    "page": 96,
+    "printed": 96
+   },
+   "§6": {
+    "line": "Section 6: Some Motivating Examples",
+    "page": 109,
+    "printed": 109
+   }
+  },
+  "npages": 126,
+  "title": "The Geometry of Frobenioids I: The General Theory"
+ },
+ "FrdII": {
+  "file": "The Geometry of Frobenioids II.pdf",
+  "index": {
+   "Cor 4.2": {
+    "line": "Corollary 4.2. (Category-theoreticity of Factors of Angloids) For i =",
+    "page": 42,
+    "printed": 42
+   },
+   "Def 2.1": {
+    "line": "Definition 2.1. Let C be a Frobenioid [whose Frobenioid structure is given by a",
+    "page": 16,
+    "printed": 16
+   },
+   "Def 2.2": {
+    "line": "Definition 2.2. Let H ⊆ G be a normal open subgroup; N ∈ N≥1 ; A ∈ Ob(C).",
+    "page": 17,
+    "printed": 17
+   },
+   "Def 2.3": {
+    "line": "Definition 2.3. The assignments f → κf , f → ηf determine homomorphisms",
+    "page": 19,
+    "printed": 19
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1.",
+    "page": 23,
+    "printed": 23
+   },
+   "Def 5.1": {
+    "line": "Definition 5.1.",
+    "page": 51,
+    "printed": 51
+   },
+   "Def 5.3": {
+    "line": "Definition 5.3. For i = 1, 2, let Ci be a Frobenioid over a base category Di , with",
+    "page": 54,
+    "printed": 54
+   },
+   "Ex 1.1": {
+    "line": "Example 1.1. p-adic Frobenioids.",
+    "page": 7,
+    "printed": 7
+   },
+   "Ex 1.3": {
+    "line": "Example 1.3. Connected Quasi-temperoids.",
+    "page": 10,
+    "printed": 10
+   },
+   "Ex 1.4": {
+    "line": "Example 1.4. Localizations of Number Fields.",
+    "page": 12,
+    "printed": 12
+   },
+   "Ex 3.3": {
+    "line": "Example 3.3. Archimedean Frobenioids, Angular Frobenioids, and",
+    "page": 27,
+    "printed": 27
+   },
+   "Ex 4.3": {
+    "line": "Example 4.3. Categories Associated to Hyperbolic Riemann Surfaces.",
+    "page": 47,
+    "printed": 47
+   },
+   "Ex 4.4": {
+    "line": "Example 4.4. Archimedean Quasi-temperoids.",
+    "page": 49,
+    "printed": 49
+   },
+   "Ex 5.6": {
+    "line": "Example 5.6. Poly-Frobenioids Associated to Number Fields.",
+    "page": 62,
+    "printed": 62
+   },
+   "Lem 3.2": {
+    "line": "Lemma 3.2. (Connected Open Subsets of the Circle) Let A, B ⊆ S1",
+    "page": 25,
+    "printed": 25
+   },
+   "Prop 1.5": {
+    "line": "Proposition 1.5. (Localizations of Number Fields) Let P0 , E0 be as in",
+    "page": 13,
+    "printed": 13
+   },
+   "Prop 3.4": {
+    "line": "Proposition 3.4. (FSM-Morphisms) In the notation and terminology of",
+    "page": 29,
+    "printed": 29
+   },
+   "Prop 3.5": {
+    "line": "Proposition 3.5. (Iso-subanchors) In the notation and terminology of Exam-",
+    "page": 34,
+    "printed": 34
+   },
+   "Prop 4.1": {
+    "line": "Proposition 4.1. (Basic Properties of Angloids) In the notation and ter-",
+    "page": 40,
+    "printed": 40
+   },
+   "Prop 5.2": {
+    "line": "Proposition 5.2. (Dissection of Grafted Categories) Let A, A be collec-",
+    "page": 53,
+    "printed": 53
+   },
+   "Prop 5.4": {
+    "line": "Proposition 5.4. (Birationally Tactile Factorizations) In the notation of",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 1.2.1": {
+    "line": "Remark 1.2.1. We observe in passing that if Φ is absolutely primitive, then by",
+    "page": 10,
+    "printed": 10
+   },
+   "Rem 1.2.2": {
+    "line": "Remark 1.2.2. Consider the functors “O (−)”, “O× (−)” on D determined by",
+    "page": 10,
+    "printed": 10
+   },
+   "Rem 2.2.1": {
+    "line": "Remark 2.2.1. Thus, it follows immediately from the definitions, together with",
+    "page": 18,
+    "printed": 18
+   },
+   "Rem 2.4.1": {
+    "line": "Remark 2.4.1. By allowing N ∈ N≥1 to vary, it is a routine exercise to show",
+    "page": 22,
+    "printed": 22
+   },
+   "Rem 2.4.2": {
+    "line": "Remark 2.4.2. Note [relative to Theorem 2.4, (ii)] that if the Φi are not fieldwise",
+    "page": 22,
+    "printed": 22
+   },
+   "Rem 3.3.1": {
+    "line": "Remark 3.3.1. Note that it follows immediately from the simple, explicit struc-",
+    "page": 29,
+    "printed": 29
+   },
+   "Rem 3.4.1": {
+    "line": "Remark 3.4.1. Note that there exist monomorphisms of G that do not sat-",
+    "page": 33,
+    "printed": 33
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1. In the context of Proposition 3.5, we observe that it is important",
+    "page": 36,
+    "printed": 36
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1. Note that the topology of O× (A) (∼ = S1 ), for complex isotropic A ∈",
+    "page": 39,
+    "printed": 39
+   },
+   "Rem 4.2.1": {
+    "line": "Remark 4.2.1.",
+    "page": 46,
+    "printed": 46
+   },
+   "Rem 4.3.1": {
+    "line": "Remark 4.3.1. Note that, by contrast to the categories of Riemann surfaces dis-",
+    "page": 48,
+    "printed": 48
+   },
+   "Rem 5.1.1": {
+    "line": "Remark 5.1.1. Since the local components of G are assumed to be connected",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 5.1.2": {
+    "line": "Remark 5.1.2. Let ι ∈ I. Then the following assertions follow immediately from",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 5.3.1": {
+    "line": "Remark 5.3.1. Observe that if a morphism φ of the domain Frobenioid of a",
+    "page": 56,
+    "printed": 56
+   },
+   "Rem 5.3.2": {
+    "line": "Remark 5.3.2. We observe in passing that, in the notation of Definition 5.3, (i),",
+    "page": 56,
+    "printed": 56
+   },
+   "Rem 5.3.3": {
+    "line": "Remark 5.3.3. Observe that [in the notation of Definition 5.3, (ii)] any LC-",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 5.3.4": {
+    "line": "Remark 5.3.4. It is immediate from the definitions that “birationally pre-",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 5.6.1": {
+    "line": "Remark 5.6.1. Observe that unlike the case with Frobenioids, poly-Frobenioids",
+    "page": 65,
+    "printed": 65
+   },
+   "Rem 5.6.2": {
+    "line": "Remark 5.6.2. Just as in the case of archimedean v, it is natural to consider",
+    "page": 65,
+    "printed": 65
+   },
+   "Rem 5.6.3": {
+    "line": "Remark 5.6.3. One verifies immediately that, when considering equivalences",
+    "page": 65,
+    "printed": 65
+   },
+   "Thm 1.2": {
+    "line": "Theorem 1.2. (Basic Properties of p-adic Frobenioids) In the notation",
+    "page": 9,
+    "printed": 9
+   },
+   "Thm 2.4": {
+    "line": "Theorem 2.4. (Category-theoreticity of the Kummer and Reciprocity",
+    "page": 19,
+    "printed": 19
+   },
+   "Thm 3.6": {
+    "line": "Theorem 3.6. (Basic Properties of Archimedean, Angular Frobenioids)",
+    "page": 36,
+    "printed": 36
+   },
+   "Thm 5.5": {
+    "line": "Theorem 5.5. (Category-theoreticity of Poly-Frobenioids) For i = 1, 2,",
+    "page": 58,
+    "printed": 58
+   },
+   "§0": {
+    "line": "Section 0: Notations and Conventions",
+    "page": 5,
+    "printed": 5
+   },
+   "§1": {
+    "line": "Section 1: Nonarchimedean Primes",
+    "page": 7,
+    "printed": 7
+   },
+   "§2": {
+    "line": "Section 2: The Kummer and Reciprocity Maps",
+    "page": 16,
+    "printed": 16
+   },
+   "§3": {
+    "line": "Section 3: Archimedean Primes",
+    "page": 23,
+    "printed": 23
+   },
+   "§4": {
+    "line": "Section 4: Angloids as Base Categories",
+    "page": 40,
+    "printed": 40
+   },
+   "§5": {
+    "line": "Section 5: Poly-Frobenioids",
+    "page": 51,
+    "printed": 51
+   }
+  },
+  "npages": 72,
+  "title": "The Geometry of Frobenioids II: Poly-Frobenioids"
+ },
+ "IUTchI": {
+  "file": "Inter-universal Teichmuller Theory I.pdf",
+  "index": {
+   "Cor 1.2": {
+    "line": "Corollary 1.2. (Characteristic Nature of Coverings) Suppose that k is",
+    "page": 39,
+    "printed": 39
+   },
+   "Cor 2.3": {
+    "line": "Corollary 2.3. (Subgroups of Tempered Fundamental Groups Associ-",
+    "page": 47,
+    "printed": 47
+   },
+   "Cor 2.5": {
+    "line": "Corollary 2.5. (Profinite Conjugates of Tempered Decomposition and",
+    "page": 51,
+    "printed": 51
+   },
+   "Cor 2.8": {
+    "line": "Corollary 2.8. (Subgroups of Topological Fundamental Groups of Com-",
+    "page": 59,
+    "printed": 59
+   },
+   "Cor 3.7": {
+    "line": "Corollary 3.7. (Θ-Links Between Θ-Hodge Theaters) Fix a collection of",
+    "page": 88,
+    "printed": 88
+   },
+   "Cor 3.8": {
+    "line": "Corollary 3.8. (Frobenius-pictures of Θ-Hodge Theaters) Fix a collection",
+    "page": 89,
+    "printed": 89
+   },
+   "Cor 3.9": {
+    "line": "Corollary 3.9. (Étale-pictures of Θ-Hodge Theaters) In the situation of",
+    "page": 91,
+    "printed": 91
+   },
+   "Cor 4.12": {
+    "line": "Corollary 4.12. (Étale-pictures of Base-ΘNF-Hodge Theaters) Relative",
+    "page": 121,
+    "printed": 121
+   },
+   "Cor 5.3": {
+    "line": "Corollary 5.3. (Isomorphisms of Global Frobenioids, Frobenioid-Prime-",
+    "page": 143,
+    "printed": 143
+   },
+   "Cor 5.6": {
+    "line": "Corollary 5.6. (Isomorphisms of Θ-Hodge Theaters, NF-Bridges, Θ-",
+    "page": 153,
+    "printed": 153
+   },
+   "Cor 6.10": {
+    "line": "Corollary 6.10. (Étale-pictures of Base-Θ±ell -Hodge Theaters) Relative",
+    "page": 170,
+    "printed": 170
+   },
+   "Cor 6.12": {
+    "line": "Corollary 6.12. (Isomorphisms of Θ± -Bridges, Θell -Bridges, and Θ±ell -",
+    "page": 173,
+    "printed": 173
+   },
+   "Def 1.1": {
+    "line": "Definition 1.1. We shall refer to a hyperbolic orbicurve over k that arises, up to",
+    "page": 38,
+    "printed": 38
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1. We shall refer to as initial Θ-data any collection of data",
+    "page": 61,
+    "printed": 61
+   },
+   "Def 3.6": {
+    "line": "Definition 3.6. Fix a collection of initial Θ-data (F /F, XF , l, C K , V, Vbadmod , )",
+    "page": 87,
+    "printed": 87
+   },
+   "Def 4.1": {
+    "line": "Definition 4.1.",
+    "page": 95,
+    "printed": 95
+   },
+   "Def 4.10": {
+    "line": "Definition 4.10. Let C be a category, n a positive integer. Then we shall refer",
+    "page": 119,
+    "printed": 119
+   },
+   "Def 4.6": {
+    "line": "Definition 4.6.",
+    "page": 111,
+    "printed": 111
+   },
+   "Def 5.2": {
+    "line": "Definition 5.2.",
+    "page": 134,
+    "printed": 134
+   },
+   "Def 5.5": {
+    "line": "Definition 5.5.",
+    "page": 151,
+    "printed": 151
+   },
+   "Def 6.1": {
+    "line": "Definition 6.1.",
+    "page": 155,
+    "printed": 155
+   },
+   "Def 6.11": {
+    "line": "Definition 6.11.",
+    "page": 172,
+    "printed": 172
+   },
+   "Def 6.13": {
+    "line": "Definition 6.13.",
+    "page": 182,
+    "printed": 182
+   },
+   "Def 6.4": {
+    "line": "Definition 6.4. In the following, we shall write l± = l + 1 = (l + 1)/2. [Here,",
+    "page": 162,
+    "printed": 162
+   },
+   "Ex 3.2": {
+    "line": "Example 3.2. Frobenioids at Bad Nonarchimedean Primes. Let v ∈",
+    "page": 69,
+    "printed": 69
+   },
+   "Ex 3.3": {
+    "line": "Example 3.3. Frobenioids at Good Nonarchimedean Primes. Let v ∈",
+    "page": 77,
+    "printed": 77
+   },
+   "Ex 3.4": {
+    "line": "Example 3.4. Frobenioids at Archimedean Primes. Let v ∈ Varc . Then:",
+    "page": 80,
+    "printed": 80
+   },
+   "Ex 3.5": {
+    "line": "Example 3.5. Global Realified Frobenioids.",
+    "page": 84,
+    "printed": 84
+   },
+   "Ex 4.3": {
+    "line": "Example 4.3. Model Base-NF-Bridges. In the following, we construct the",
+    "page": 98,
+    "printed": 98
+   },
+   "Ex 4.4": {
+    "line": "Example 4.4. Model Base-Θ-Bridges. In the following, we construct the",
+    "page": 105,
+    "printed": 105
+   },
+   "Ex 4.5": {
+    "line": "Example 4.5. Transport of Label Classes of Cusps via Model Base-",
+    "page": 107,
+    "printed": 107
+   },
+   "Ex 5.1": {
+    "line": "Example 5.1. Global Frobenioids.",
+    "page": 123,
+    "printed": 123
+   },
+   "Ex 5.4": {
+    "line": "Example 5.4. Model Θ- and NF-Bridges.",
+    "page": 147,
+    "printed": 147
+   },
+   "Ex 6.2": {
+    "line": "Example 6.2. Model Base-Θ± -Bridges.",
+    "page": 159,
+    "printed": 159
+   },
+   "Ex 6.3": {
+    "line": "Example 6.3. Model Base-Θell -Bridges.",
+    "page": 160,
+    "printed": 160
+   },
+   "Fig 3.1": {
+    "line": "Fig. 3.1: Frobenius-picture of Θ-Hodge theaters",
+    "page": 90,
+    "printed": 90
+   },
+   "Fig 3.2": {
+    "line": "Fig. 3.2: Étale-picture of Θ-Hodge theaters",
+    "page": 91,
+    "printed": 91
+   },
+   "Fig 3.3": {
+    "line": "Fig. 3.3: Étale-picture plus units",
+    "page": 92,
+    "printed": 92
+   },
+   "Fig 4.1": {
+    "line": "Fig. 4.1: Prime-strips as “sections” of Spec(K) → Spec(F )",
+    "page": 101,
+    "printed": 101
+   },
+   "Fig 4.2": {
+    "line": "Fig. 4.2: Prime decomposition trees",
+    "page": 102,
+    "printed": 102
+   },
+   "Fig 4.3": {
+    "line": "Fig. 4.3: Globalizability",
+    "page": 103,
+    "printed": 103
+   },
+   "Fig 4.4": {
+    "line": "Fig. 4.4: The combinatorial structure of a D-ΘNF-Hodge theater",
+    "page": 114,
+    "printed": 114
+   },
+   "Fig 4.5": {
+    "line": "Fig. 4.5: Nonsynchronized labels",
+    "page": 118,
+    "printed": 118
+   },
+   "Fig 4.6": {
+    "line": "Fig. 4.6: An l -procession of D-prime-strips",
+    "page": 120,
+    "printed": 120
+   },
+   "Fig 4.7": {
+    "line": "Fig. 4.7: Étale-picture of D-ΘNF-Hodge theaters",
+    "page": 122,
+    "printed": 122
+   },
+   "Fig 5.1": {
+    "line": "Fig. 5.1: Constant distribution",
+    "page": 131,
+    "printed": 131
+   },
+   "Fig 5.2": {
+    "line": "Fig. 5.2: Pivotal distribution",
+    "page": 150,
+    "printed": 150
+   },
+   "Fig 6.1": {
+    "line": "Fig. 6.1: The combinatorial structure of a D-Θ±ell -Hodge theater",
+    "page": 166,
+    "printed": 166
+   },
+   "Fig 6.2": {
+    "line": "Fig. 6.2: An l± -procession of D-prime-strips",
+    "page": 169,
+    "printed": 169
+   },
+   "Fig 6.3": {
+    "line": "Fig. 6.3: Étale-picture of D-Θ±ell -Hodge theaters",
+    "page": 171,
+    "printed": 171
+   },
+   "Fig 6.4": {
+    "line": "Fig. 6.4: Comparison of F ±",
+    "page": 178,
+    "printed": 178
+   },
+   "Fig 6.5": {
+    "line": "Fig. 6.5: The combinatorial structure of a Θ±ell NF-Hodge theater",
+    "page": 182,
+    "printed": 182
+   },
+   "Fig 6.6": {
+    "line": "Fig. 6.6: The Frobenioids that appear in a Θ±ell NF-Hodge theater",
+    "page": 183,
+    "printed": 183
+   },
+   "Fig I1.1": {
+    "line": "Fig. I1.1: Symmetries of coverings of XF",
+    "page": 4,
+    "printed": 4
+   },
+   "Fig I1.2": {
+    "line": "Fig. I1.2: Types of prime-strips",
+    "page": 6,
+    "printed": 6
+   },
+   "Fig I1.3": {
+    "line": "Fig. I1.3: The combinatorial structure of a D-Θ±ell NF-Hodge theater",
+    "page": 8,
+    "printed": 8
+   },
+   "Fig I1.4": {
+    "line": "Fig. I1.4: Comparison of F ±",
+    "page": 10,
+    "printed": 10
+   },
+   "Fig I1.5": {
+    "line": "Fig. I1.5: Frobenius-picture associated to the Θ-link",
+    "page": 12,
+    "printed": 12
+   },
+   "Fig I1.6": {
+    "line": "Fig. I1.6: Étale-picture of D-Θ±ell NF-Hodge theaters",
+    "page": 13,
+    "printed": 13
+   },
+   "Fig I2.1": {
+    "line": "Fig. I2.1: Depiction of Frobenius- and étale-pictures of Θ±ell NF-Hodge theaters",
+    "page": 17,
+    "printed": 17
+   },
+   "Fig I4.1": {
+    "line": "Fig. I4.1: Correspondence between inter-universal Teichmüller theory and",
+    "page": 26,
+    "printed": 26
+   },
+   "Lem 2.7": {
+    "line": "Lemma 2.7. (Well-known Properties of Free Groups and Orientable",
+    "page": 57,
+    "printed": 57
+   },
+   "Prop 2.1": {
+    "line": "Proposition 2.1. (Profinite Conjugates of Nontrivial Compact Sub-",
+    "page": 45,
+    "printed": 45
+   },
+   "Prop 2.2": {
+    "line": "Proposition 2.2. (Commensurators of Decomposition Subgroups As-",
+    "page": 45,
+    "printed": 45
+   },
+   "Prop 2.4": {
+    "line": "Proposition 2.4. (Profinite Conjugates of Nontrivial Arithmetic Com-",
+    "page": 50,
+    "printed": 50
+   },
+   "Prop 4.11": {
+    "line": "Proposition 4.11. (Processions of Base-Prime-Strips) Relative to a fixed",
+    "page": 120,
+    "printed": 120
+   },
+   "Prop 4.2": {
+    "line": "Proposition 4.2. (The Set of Label Classes of Cusps of a Base-Prime-",
+    "page": 98,
+    "printed": 98
+   },
+   "Prop 4.7": {
+    "line": "Proposition 4.7. (Transport of Label Classes of Cusps via Base-",
+    "page": 112,
+    "printed": 112
+   },
+   "Prop 4.8": {
+    "line": "Proposition 4.8. (First Properties of Base-NF-Bridges, Base-Θ-Bridges,",
+    "page": 115,
+    "printed": 115
+   },
+   "Prop 4.9": {
+    "line": "Proposition 4.9. (Symmetries arising from Forgetful Functors) Relative",
+    "page": 115,
+    "printed": 115
+   },
+   "Prop 5.6": {
+    "line": "Proposition 5.6.",
+    "page": 146,
+    "printed": 146
+   },
+   "Prop 6.5": {
+    "line": "Proposition 6.5. (Transport of ±-Label Classes of Cusps via Base-",
+    "page": 163,
+    "printed": 163
+   },
+   "Prop 6.6": {
+    "line": "Proposition 6.6. (First Properties of Base-Θ± -Bridges, Base-Θell -Bridges,",
+    "page": 165,
+    "printed": 165
+   },
+   "Prop 6.7": {
+    "line": "Proposition 6.7. (Base-Θ-Bridges Associated to Base-Θ± -Bridges) Rel-",
+    "page": 167,
+    "printed": 167
+   },
+   "Prop 6.8": {
+    "line": "Proposition 6.8. (Symmetries arising from Forgetful Functors) Relative",
+    "page": 167,
+    "printed": 167
+   },
+   "Prop 6.9": {
+    "line": "Proposition 6.9. (Processions of Base-Prime-Strips) Relative to a fixed",
+    "page": 169,
+    "printed": 169
+   },
+   "Rem 1.1.1": {
+    "line": "Remark 1.1.1. The arrow “→” in the notation “−X",
+    "page": 39,
+    "printed": 39
+   },
+   "Rem 1.1.2": {
+    "line": "Remark 1.1.2. We observe that −X",
+    "page": 39,
+    "printed": 39
+   },
+   "Rem 1.2.1": {
+    "line": "Remark 1.2.1. It follows immediately from Corollary 1.2 that",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.2.2": {
+    "line": "Remark 1.2.2. The group-theoretic algorithm for reconstructing the decomposi-",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.2.3": {
+    "line": "Remark 1.2.3. The minor, inessential inaccuracies in the group-theoretic al-",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 2.2.1": {
+    "line": "Remark 2.2.1. It follows immediately from the theory of [SemiAnbd] [cf., e.g.,",
+    "page": 46,
+    "printed": 46
+   },
+   "Rem 2.2.2": {
+    "line": "Remark 2.2.2. Recall that when Σ = Primes, the fact that",
+    "page": 46,
+    "printed": 46
+   },
+   "Rem 2.4.1": {
+    "line": "Remark 2.4.1. Thus, when Σ = Primes, the proof given above of Proposition",
+    "page": 51,
+    "printed": 51
+   },
+   "Rem 2.5.1": {
+    "line": "Remark 2.5.1. The content of Corollary 2.5 may be regarded as a sort of [very",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.5.2": {
+    "line": "Remark 2.5.2. Ultimately, when we apply Corollary 2.5 in [IUTchII], it will",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.5.3": {
+    "line": "Remark 2.5.3. In light of the importance of the theory of [SemiAnbd] in the",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.6.1": {
+    "line": "Remark 2.6.1. Note that in the situation of Theorem 2.6, if HG is abelian, then",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 2.8.1": {
+    "line": "Remark 2.8.1. Corollary 2.8 is an immediate consequence of Theorem 2.6. In",
+    "page": 59,
+    "printed": 59
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1. Relative to the notation of Definition 3.1, (e), suppose that",
+    "page": 63,
+    "printed": 63
+   },
+   "Rem 3.1.2": {
+    "line": "Remark 3.1.2.",
+    "page": 64,
+    "printed": 64
+   },
+   "Rem 3.1.3": {
+    "line": "Remark 3.1.3. Since Vbad mod = ∅ [cf. Definition 3.1, (b)], it follows immediately",
+    "page": 65,
+    "printed": 65
+   },
+   "Rem 3.1.4": {
+    "line": "Remark 3.1.4. It follows immediately from the definitions that at each v ∈ Vbad",
+    "page": 65,
+    "printed": 65
+   },
+   "Rem 3.1.5": {
+    "line": "Remark 3.1.5. Note that since the 3-torsion points of EF are rational over F ,",
+    "page": 65,
+    "printed": 65
+   },
+   "Rem 3.1.6": {
+    "line": "Remark 3.1.6. In light of the important role played by the various orbicurves",
+    "page": 66,
+    "printed": 66
+   },
+   "Rem 3.1.7": {
+    "line": "Remark 3.1.7.",
+    "page": 66,
+    "printed": 66
+   },
+   "Rem 3.2.1": {
+    "line": "Remark 3.2.1.",
+    "page": 73,
+    "printed": 73
+   },
+   "Rem 3.2.2": {
+    "line": "Remark 3.2.2. Although the submonoid ΦCv is not “absolutely primitive” in the",
+    "page": 74,
+    "printed": 74
+   },
+   "Rem 3.2.3": {
+    "line": "Remark 3.2.3.",
+    "page": 74,
+    "printed": 74
+   },
+   "Rem 3.2.4": {
+    "line": "Remark 3.2.4. Before proceeding, we pause to discuss certain minor oversights",
+    "page": 75,
+    "printed": 75
+   },
+   "Rem 3.3.1": {
+    "line": "Remark 3.3.1. A similar remark to Remark 3.2.1 [i.e., concerning the phrase",
+    "page": 79,
+    "printed": 79
+   },
+   "Rem 3.3.2": {
+    "line": "Remark 3.3.2. Note that the pv -adic Frobenioid Cv (respectively, Cv ) of Example",
+    "page": 79,
+    "printed": 79
+   },
+   "Rem 3.4.1": {
+    "line": "Remark 3.4.1. A similar remark to Remark 3.2.1 [i.e., concerning the phrase",
+    "page": 82,
+    "printed": 82
+   },
+   "Rem 3.4.2": {
+    "line": "Remark 3.4.2. One way to think of the Kummer structure",
+    "page": 82,
+    "printed": 82
+   },
+   "Rem 3.4.3": {
+    "line": "Remark 3.4.3.",
+    "page": 83,
+    "printed": 83
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1.",
+    "page": 86,
+    "printed": 86
+   },
+   "Rem 3.5.2": {
+    "line": "Remark 3.5.2. In Example 3.5, as well as in the following discussion, we shall",
+    "page": 87,
+    "printed": 87
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1. When we discuss various collections of Θ-Hodge theaters, labeled",
+    "page": 88,
+    "printed": 88
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2. If † HT Θ and ‡ HT Θ are Θ-Hodge theaters, then there is an",
+    "page": 88,
+    "printed": 88
+   },
+   "Rem 3.7.1": {
+    "line": "Remark 3.7.1. One verifies immediately that there exist many distinct isomor-",
+    "page": 89,
+    "printed": 89
+   },
+   "Rem 3.8.1": {
+    "line": "Remark 3.8.1.",
+    "page": 90,
+    "printed": 90
+   },
+   "Rem 3.9.1": {
+    "line": "Remark 3.9.1. If one formulates things relative to the language of [AbsTopIII],",
+    "page": 92,
+    "printed": 92
+   },
+   "Rem 3.9.2": {
+    "line": "Remark 3.9.2. Whereas the étale-picture of Corollary 3.9, (i), will remain valid",
+    "page": 93,
+    "printed": 93
+   },
+   "Rem 3.9.3": {
+    "line": "Remark 3.9.3.",
+    "page": 93,
+    "printed": 93
+   },
+   "Rem 3.9.4": {
+    "line": "Remark 3.9.4. At first glance, the assignment “n Θv → (n+1) q ” [cf. Remark",
+    "page": 94,
+    "printed": 94
+   },
+   "Rem 4.2.1": {
+    "line": "Remark 4.2.1. Note that if, in Examples 3.3, 3.4 — i.e., at v ∈ Vgood —",
+    "page": 98,
+    "printed": 98
+   },
+   "Rem 4.3.1": {
+    "line": "Remark 4.3.1.",
+    "page": 101,
+    "printed": 101
+   },
+   "Rem 4.3.2": {
+    "line": "Remark 4.3.2. The incompatibility of the “arithmetic local-analytic sections” of",
+    "page": 102,
+    "printed": 102
+   },
+   "Rem 4.3.3": {
+    "line": "Remark 4.3.3.",
+    "page": 104,
+    "printed": 104
+   },
+   "Rem 4.5.1": {
+    "line": "Remark 4.5.1.",
+    "page": 108,
+    "printed": 108
+   },
+   "Rem 4.7.1": {
+    "line": "Remark 4.7.1. The significance of the natural bijection † ζ of Proposition 4.7,",
+    "page": 113,
+    "printed": 113
+   },
+   "Rem 4.7.2": {
+    "line": "Remark 4.7.2.",
+    "page": 113,
+    "printed": 113
+   },
+   "Rem 4.9.1": {
+    "line": "Remark 4.9.1.",
+    "page": 116,
+    "printed": 116
+   },
+   "Rem 4.9.2": {
+    "line": "Remark 4.9.2.",
+    "page": 117,
+    "printed": 117
+   },
+   "Rem 4.9.3": {
+    "line": "Remark 4.9.3.",
+    "page": 119,
+    "printed": 119
+   },
+   "Rem 5.1.1": {
+    "line": "Remark 5.1.1. Thus, † F J may be thought of as the Frobenioid associated to",
+    "page": 131,
+    "printed": 131
+   },
+   "Rem 5.1.2": {
+    "line": "Remark 5.1.2. The constructions of Example 5.1 manifestly only require the",
+    "page": 131,
+    "printed": 131
+   },
+   "Rem 5.1.3": {
+    "line": "Remark 5.1.3. In the context of the discussion of Example 5.1, (v), (vi), we note",
+    "page": 131,
+    "printed": 131
+   },
+   "Rem 5.1.4": {
+    "line": "Remark 5.1.4. The various functorial reconstruction algorithms for number",
+    "page": 132,
+    "printed": 132
+   },
+   "Rem 5.1.5": {
+    "line": "Remark 5.1.5. Although the phenomenon of κ-sol-conjugate synchronization",
+    "page": 132,
+    "printed": 132
+   },
+   "Rem 5.2.1": {
+    "line": "Remark 5.2.1.",
+    "page": 143,
+    "printed": 143
+   },
+   "Rem 5.2.2": {
+    "line": "Remark 5.2.2. Thus, from the point of view of the discussion of Remark 5.1.3,",
+    "page": 143,
+    "printed": 143
+   },
+   "Rem 5.2.3": {
+    "line": "Remark 5.2.3. In the context of the construction of ∞ κ-coric structures from",
+    "page": 143,
+    "printed": 143
+   },
+   "Rem 5.3.1": {
+    "line": "Remark 5.3.1.",
+    "page": 145,
+    "printed": 145
+   },
+   "Rem 5.3.2": {
+    "line": "Remark 5.3.2. Just as in the case of Corollary 5.3, (i), (ii), the rigidity property",
+    "page": 146,
+    "printed": 146
+   },
+   "Rem 5.3.3": {
+    "line": "Remark 5.3.3. We take this opportunity to rectify a minor oversight in [FrdI].",
+    "page": 146,
+    "printed": 146
+   },
+   "Rem 5.4.1": {
+    "line": "Remark 5.4.1. The constructions of Example 5.4, (i), (ii) (respectively, Example",
+    "page": 151,
+    "printed": 151
+   },
+   "Rem 5.4.2": {
+    "line": "Remark 5.4.2.",
+    "page": 151,
+    "printed": 151
+   },
+   "Rem 5.6.1": {
+    "line": "Remark 5.6.1. Observe that the various “functorial dynamics” studied in",
+    "page": 154,
+    "printed": 154
+   },
+   "Rem 6.1.1": {
+    "line": "Remark 6.1.1. In fact, in the notation of Example 4.3, (i); Definition 6.1, (v), it",
+    "page": 159,
+    "printed": 159
+   },
+   "Rem 6.12.1": {
+    "line": "Remark 6.12.1. By applying Corollary 6.12, a similar remark to Remark 5.6.1",
+    "page": 174,
+    "printed": 174
+   },
+   "Rem 6.12.2": {
+    "line": "Remark 6.12.2. Relative to a fixed collection of initial Θ-data:",
+    "page": 174,
+    "printed": 174
+   },
+   "Rem 6.12.3": {
+    "line": "Remark 6.12.3.",
+    "page": 175,
+    "printed": 175
+   },
+   "Rem 6.12.4": {
+    "line": "Remark 6.12.4.",
+    "page": 177,
+    "printed": 177
+   },
+   "Rem 6.12.5": {
+    "line": "Remark 6.12.5.",
+    "page": 179,
+    "printed": 179
+   },
+   "Rem 6.12.6": {
+    "line": "Remark 6.12.6.",
+    "page": 180,
+    "printed": 180
+   },
+   "Rem 6.6.1": {
+    "line": "Remark 6.6.1. The underlying combinatorial structure of a D-Θ±ell -Hodge",
+    "page": 166,
+    "printed": 166
+   },
+   "Thm 2.6": {
+    "line": "Theorem 2.6. (Profinite Conjugates of Discrete Subgroups) Let F be",
+    "page": 56,
+    "printed": 56
+   },
+   "Thm A": {
+    "line": "Theorem A. (F ±",
+    "page": 13,
+    "printed": 13
+   },
+   "Thm B": {
+    "line": "Theorem B. (Profinite Conjugates of Tempered Decomposition and",
+    "page": 15,
+    "printed": 15
+   },
+   "§0": {
+    "line": "Section 0: Notations and Conventions",
+    "page": 33,
+    "printed": 33
+   },
+   "§1": {
+    "line": "Section 1: Complements on Coverings of Punctured Elliptic Curves",
+    "page": 37,
+    "printed": 37
+   },
+   "§2": {
+    "line": "§2. Here, we note that although, in the statement of Corollary 2.5, the hyperbolic",
+    "page": 16,
+    "printed": 16
+   },
+   "§3": {
+    "line": "Section 3: Chains of Θ-Hodge Theaters",
+    "page": 61,
+    "printed": 61
+   },
+   "§4": {
+    "line": "Section 4: Multiplicative Combinatorial Teichmüller Theory",
+    "page": 95,
+    "printed": 95
+   },
+   "§5": {
+    "line": "Section 5: ΘNF-Hodge Theaters",
+    "page": 123,
+    "printed": 123
+   },
+   "§6": {
+    "line": "§6. The left-hand portion of Fig. I1.3 corresponds to the D-Θ±ell -Hodge theater;",
+    "page": 7,
+    "printed": 7
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 2,
+    "printed": 2
+   }
+  },
+  "npages": 186,
+  "title": "Inter-universal Teichmüller Theory I: Construction of Hodge Theaters"
+ },
+ "IUTchII": {
+  "file": "Inter-universal Teichmuller Theory II.pdf",
+  "index": {
+   "Cor 1.10": {
+    "line": "Corollary 1.10. (Multiradial Mono-theta Cyclotomic Rigidity Isomor-",
+    "page": 46,
+    "printed": 46
+   },
+   "Cor 1.11": {
+    "line": "Corollary 1.11. (Multiradial MLF-Galois Pair Cyclotomic Rigidity",
+    "page": 49,
+    "printed": 49
+   },
+   "Cor 1.12": {
+    "line": "Corollary 1.12. (Multiradial Constant Multiple Rigidity) Write (R, C, Φ :",
+    "page": 55,
+    "printed": 55
+   },
+   "Cor 2.4": {
+    "line": "Corollary 2.4. (F ±",
+    "page": 69,
+    "printed": 69
+   },
+   "Cor 2.5": {
+    "line": "Corollary 2.5. (Group-theoretic Theta Evaluation) In the notation of",
+    "page": 71,
+    "printed": 71
+   },
+   "Cor 2.6": {
+    "line": "Corollary 2.6. (Splittings Defined on Subgraphs) In the notation of Corol-",
+    "page": 76,
+    "printed": 76
+   },
+   "Cor 2.8": {
+    "line": "Corollary 2.8. (Mono-theta-theoretic Theta Evaluation) In the notation",
+    "page": 81,
+    "printed": 81
+   },
+   "Cor 2.9": {
+    "line": "Corollary 2.9. (Theta Evaluation via Base-field-theoretic Cyclotomes)",
+    "page": 84,
+    "printed": 84
+   },
+   "Cor 3.5": {
+    "line": "Corollary 3.5. (Mono-theta-theoretic Gaussian Monoids) Let MΘ ∗ be as",
+    "page": 93,
+    "printed": 93
+   },
+   "Cor 3.6": {
+    "line": "Corollary 3.6. (Frobenioid-theoretic Gaussian Monoids) Suppose that we",
+    "page": 99,
+    "printed": 99
+   },
+   "Cor 3.7": {
+    "line": "Corollary 3.7. (Group-theoretic Gaussian Monoids and Uniradiality)",
+    "page": 110,
+    "printed": 110
+   },
+   "Cor 4.10": {
+    "line": "Corollary 4.10. (Frobenius-pictures of Θ±ell NF-Hodge Theaters) Fix",
+    "page": 158,
+    "printed": 158
+   },
+   "Cor 4.11": {
+    "line": "Corollary 4.11. (Étale-pictures of Base-Θ±ell NF-Hodge Theaters) Sup-",
+    "page": 163,
+    "printed": 163
+   },
+   "Cor 4.5": {
+    "line": "Corollary 4.5. (Group-theoretic Monoids Associated to Base-Θ±ell -",
+    "page": 131,
+    "printed": 131
+   },
+   "Cor 4.6": {
+    "line": "Corollary 4.6. (Frobenioid-theoretic Monoids Associated to Θ±ell -",
+    "page": 137,
+    "printed": 137
+   },
+   "Cor 4.7": {
+    "line": "Corollary 4.7. (Group-theoretic Monoids Associated to Base-ΘNF-",
+    "page": 140,
+    "printed": 140
+   },
+   "Cor 4.8": {
+    "line": "Corollary 4.8. (Frobenioid-theoretic Monoids Associated to ΘNF-",
+    "page": 149,
+    "printed": 149
+   },
+   "Def 1.1": {
+    "line": "Definition 1.1. Let",
+    "page": 20,
+    "printed": 20
+   },
+   "Def 2.3": {
+    "line": "Definition 2.3.",
+    "page": 67,
+    "printed": 67
+   },
+   "Def 2.7": {
+    "line": "Definition 2.7. In the notation of Definition 2.3: Let",
+    "page": 80,
+    "printed": 80
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1. Let",
+    "page": 158,
+    "printed": 158
+   },
+   "Def 3.8": {
+    "line": "Definition 3.8. Many of the “monoids equipped with a Galois action” that",
+    "page": 112,
+    "printed": 112
+   },
+   "Def 4.9": {
+    "line": "Definition 4.9.",
+    "page": 153,
+    "printed": 153
+   },
+   "Ex 1.7": {
+    "line": "Example 1.7. Radial and Coric Data I: Generalities.",
+    "page": 32,
+    "printed": 32
+   },
+   "Ex 1.8": {
+    "line": "Example 1.8. Radial and Coric Data II: Concrete Examples. In this",
+    "page": 35,
+    "printed": 35
+   },
+   "Ex 1.9": {
+    "line": "Example 1.9. Radial and Coric Data III: Graphs of Functorial Group-",
+    "page": 42,
+    "printed": 42
+   },
+   "Ex 3.2": {
+    "line": "Example 3.2. Theta Monoids Constructed from Tempered Frobenioids.",
+    "page": 88,
+    "printed": 88
+   },
+   "Fig 1.1": {
+    "line": "Fig. 1.1: Radial functors valued in a single coric category",
+    "page": 33,
+    "printed": 33
+   },
+   "Fig 1.2": {
+    "line": "Fig. 1.2: Different arithmetic holomorphic structures on a single coric G",
+    "page": 36,
+    "printed": 36
+   },
+   "Fig 1.3": {
+    "line": "Fig. 1.3: Uniradiality, Multiradiality, and Coricity",
+    "page": 46,
+    "printed": 46
+   },
+   "Fig 1.4": {
+    "line": "Fig. 1.4: A single coric pair G O×μ (G), regarded up to the action of Γ×μ",
+    "page": 48,
+    "printed": 48
+   },
+   "Fig 1.5": {
+    "line": "Fig. 1.5: Theta evaluation and Galois functoriality",
+    "page": 61,
+    "printed": 61
+   },
+   "Fig 1.6": {
+    "line": "Fig. 1.6: Analogy with the classical Gaussian integral",
+    "page": 62,
+    "printed": 62
+   },
+   "Fig 1.7": {
+    "line": "Fig. 1.7: Multiradial étale theta functions",
+    "page": 63,
+    "printed": 63
+   },
+   "Fig 2.1": {
+    "line": "Fig. 2.1: Independent conjugacy indeterminacies",
+    "page": 75,
+    "printed": 75
+   },
+   "Fig 3.1": {
+    "line": "Fig. 3.1: Kummer theory and Galois evaluation",
+    "page": 101,
+    "printed": 101
+   },
+   "Fig 3.2": {
+    "line": "Fig. 3.2: Étale-like versus Frobenius-like structures",
+    "page": 103,
+    "printed": 103
+   },
+   "Fig 3.3": {
+    "line": "Fig. 3.3: Gaussian distribution",
+    "page": 115,
+    "printed": 115
+   },
+   "Fig 4.1": {
+    "line": "Fig. 4.1: Étale-picture of F ±",
+    "page": 146,
+    "printed": 146
+   },
+   "Fig 4.2": {
+    "line": "Fig. 4.2: Étale-picture of F",
+    "page": 147,
+    "printed": 147
+   },
+   "Fig 4.3": {
+    "line": "Fig. 4.3: Étale-picture of D-Θ±ell NF-Hodge Theaters",
+    "page": 163,
+    "printed": 163
+   },
+   "Fig 4.4": {
+    "line": "Fig. 4.4: Correspondence of symmetries with p-adic Teichmüller theory",
+    "page": 171,
+    "printed": 171
+   },
+   "Fig I.1": {
+    "line": "Fig. I.1: The Kummer theory surrounding Hodge-Arakelov-theoretic evaluation",
+    "page": 2,
+    "printed": 2
+   },
+   "Fig I.2": {
+    "line": "Fig. I.2: Étale-picture of étale-like versions of theta functions, theta values",
+    "page": 4,
+    "printed": 4
+   },
+   "Fig I.3": {
+    "line": "Fig. I.3: Uniradiality, Multiradiality, and Coricity",
+    "page": 5,
+    "printed": 5
+   },
+   "Fig I.4": {
+    "line": "Fig. I.4: Étale-picture of F",
+    "page": 6,
+    "printed": 6
+   },
+   "Fig I.5": {
+    "line": "Fig. I.5: Étale-picture of F ±",
+    "page": 6,
+    "printed": 6
+   },
+   "Fig I.6": {
+    "line": "Fig. I.6: Mono-theta-theoretic rigidity properties in inter-universal Teichmüller",
+    "page": 9,
+    "printed": 9
+   },
+   "Fig I.7": {
+    "line": "Fig. I.7: Properties related to Hodge-Arakelov-theoretic evaluation in",
+    "page": 15,
+    "printed": 15
+   },
+   "Fig I.8": {
+    "line": "Fig. I.8: Frobenius-picture associated to the Θ×μ",
+    "page": 17,
+    "printed": 17
+   },
+   "Fig I.9": {
+    "line": "Fig. I.9: Étale-picture of D-Θ±ell NF-Hodge theaters",
+    "page": 18,
+    "printed": 18
+   },
+   "Lem 3.5": {
+    "line": "Lemma 3.5. Here, we note that this description may be summarized, in",
+    "page": 171,
+    "printed": 171
+   },
+   "Prop 1.2": {
+    "line": "Proposition 1.2. (Group- and Frobenioid-theoretic Constructions of",
+    "page": 25,
+    "printed": 25
+   },
+   "Prop 1.3": {
+    "line": "Proposition 1.3. (Compatibility of Cyclotomic Rigidity Isomorphisms)",
+    "page": 26,
+    "printed": 26
+   },
+   "Prop 1.4": {
+    "line": "Proposition 1.4. (Étale Theta Functions of Standard Type) Let Π be as",
+    "page": 27,
+    "printed": 27
+   },
+   "Prop 1.5": {
+    "line": "Proposition 1.5. (Projective Systems of Mono-theta Environments) In",
+    "page": 29,
+    "printed": 29
+   },
+   "Prop 1.6": {
+    "line": "Proposition 1.6. (Cores and Cuspidalizations) Let Π be as in Proposition",
+    "page": 31,
+    "printed": 31
+   },
+   "Prop 2.1": {
+    "line": "Proposition 2.1. (Review of Certain Tempered Coverings) Let v ∈ Vbad .",
+    "page": 64,
+    "printed": 64
+   },
+   "Prop 2.2": {
+    "line": "Proposition 2.2. (Decomposition Groups Associated to Subgraphs) In",
+    "page": 66,
+    "printed": 66
+   },
+   "Prop 3.1": {
+    "line": "Proposition 3.1. (Mono-theta-theoretic Theta Monoids) Let",
+    "page": 87,
+    "printed": 87
+   },
+   "Prop 3.3": {
+    "line": "Proposition 3.3. (Frobenioid-theoretic Theta Monoids) Suppose, in the",
+    "page": 89,
+    "printed": 89
+   },
+   "Prop 3.4": {
+    "line": "Proposition 3.4. In particular, the specification of coric data “(G O×μ (G))” in",
+    "page": 60,
+    "printed": 60
+   },
+   "Prop 4.1": {
+    "line": "Proposition 4.1. (Group-theoretic Gaussian Monoids at Good Nonar-",
+    "page": 120,
+    "printed": 120
+   },
+   "Prop 4.2": {
+    "line": "Proposition 4.2. (Frobenioid-theoretic Gaussian Monoids at Good",
+    "page": 123,
+    "printed": 123
+   },
+   "Prop 4.3": {
+    "line": "Proposition 4.3. (Aut-holomorphic-space-theoretic Gaussian Monoids",
+    "page": 127,
+    "printed": 127
+   },
+   "Prop 4.4": {
+    "line": "Proposition 4.4. (Frobenioid-theoretic Gaussian Monoids at Archime-",
+    "page": 129,
+    "printed": 129
+   },
+   "Rem 1.1.1": {
+    "line": "Remark 1.1.1. In light of its importance in the present series of papers, we",
+    "page": 21,
+    "printed": 21
+   },
+   "Rem 1.10.1": {
+    "line": "Remark 1.10.1. We recall in passing that the domain and codomain of the iso-",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 1.10.2": {
+    "line": "Remark 1.10.2. In words, the content of Corollary 1.10 may be understood as",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 1.10.3": {
+    "line": "Remark 1.10.3. In the context of Corollary 1.10, it is useful to recall the",
+    "page": 48,
+    "printed": 48
+   },
+   "Rem 1.11.1": {
+    "line": "Remark 1.11.1.",
+    "page": 49,
+    "printed": 49
+   },
+   "Rem 1.11.2": {
+    "line": "Remark 1.11.2.",
+    "page": 50,
+    "printed": 50
+   },
+   "Rem 1.11.3": {
+    "line": "Remark 1.11.3.",
+    "page": 51,
+    "printed": 51
+   },
+   "Rem 1.11.4": {
+    "line": "Remark 1.11.4.",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 1.11.5": {
+    "line": "Remark 1.11.5. Suppose that we are in the situation of Corollary 1.11.",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 1.11.6": {
+    "line": "Remark 1.11.6. The importance of cyclotomic rigidity in the theory of the",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 1.12.1": {
+    "line": "Remark 1.12.1. One verifies immediately that Corollaries 1.10, 1.11, and 1.12",
+    "page": 58,
+    "printed": 58
+   },
+   "Rem 1.12.2": {
+    "line": "Remark 1.12.2.",
+    "page": 58,
+    "printed": 58
+   },
+   "Rem 1.12.3": {
+    "line": "Remark 1.12.3. From the point of view of the discussion of Remark 1.11.3, it",
+    "page": 60,
+    "printed": 60
+   },
+   "Rem 1.12.4": {
+    "line": "Remark 1.12.4. The fact that the “theta evaluation” functorial algorithm of",
+    "page": 60,
+    "printed": 60
+   },
+   "Rem 1.12.5": {
+    "line": "Remark 1.12.5.",
+    "page": 61,
+    "printed": 61
+   },
+   "Rem 1.4.1": {
+    "line": "Remark 1.4.1. Before proceeding, let us recall from [EtTh], §1, §2, the theory",
+    "page": 27,
+    "printed": 27
+   },
+   "Rem 1.5.1": {
+    "line": "Remark 1.5.1. We recall in passing that one important consequence of the",
+    "page": 30,
+    "printed": 30
+   },
+   "Rem 1.5.2": {
+    "line": "Remark 1.5.2. Note that, in the notation of Proposition 1.5, (iii), by consider-",
+    "page": 30,
+    "printed": 30
+   },
+   "Rem 1.6.1": {
+    "line": "Remark 1.6.1. We recall in passing that the construction of Proposition 1.6,",
+    "page": 31,
+    "printed": 31
+   },
+   "Rem 1.7.1": {
+    "line": "Remark 1.7.1. One way to understand the significance of the fullness condi-",
+    "page": 35,
+    "printed": 35
+   },
+   "Rem 1.8.1": {
+    "line": "Remark 1.8.1. In the context of the various examples given in Example 1.8,",
+    "page": 41,
+    "printed": 41
+   },
+   "Rem 1.9.1": {
+    "line": "Remark 1.9.1. In general, the portion of the “functorial group-theoretic algo-",
+    "page": 44,
+    "printed": 44
+   },
+   "Rem 1.9.2": {
+    "line": "Remark 1.9.2.",
+    "page": 45,
+    "printed": 45
+   },
+   "Rem 2.1.1": {
+    "line": "Remark 2.1.1. In the notation of Proposition 2.1:",
+    "page": 65,
+    "printed": 65
+   },
+   "Rem 2.2.1": {
+    "line": "Remark 2.2.1. In the notation of Proposition 2.2, we recall that since the",
+    "page": 67,
+    "printed": 67
+   },
+   "Rem 2.3.1": {
+    "line": "Remark 2.3.1. In the situation of (iii), suppose that the inclusion Π⊆ ⊆ Π⊇ is",
+    "page": 69,
+    "printed": 69
+   },
+   "Rem 2.4.1": {
+    "line": "Remark 2.4.1. Note that by applying [IUTchI], Proposition 2.4, (i) [cf. the",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 2.5.1": {
+    "line": "Remark 2.5.1.",
+    "page": 72,
+    "printed": 72
+   },
+   "Rem 2.5.2": {
+    "line": "Remark 2.5.2.",
+    "page": 73,
+    "printed": 73
+   },
+   "Rem 2.6.1": {
+    "line": "Remark 2.6.1.",
+    "page": 76,
+    "printed": 76
+   },
+   "Rem 2.6.2": {
+    "line": "Remark 2.6.2.",
+    "page": 77,
+    "printed": 77
+   },
+   "Rem 2.6.3": {
+    "line": "Remark 2.6.3.",
+    "page": 79,
+    "printed": 79
+   },
+   "Rem 2.8.1": {
+    "line": "Remark 2.8.1. One may regard Corollaries 2.5, 2.6 as a special case of Corollary",
+    "page": 83,
+    "printed": 83
+   },
+   "Rem 2.8.2": {
+    "line": "Remark 2.8.2. The significance of the mono-theta-theoretic version of Corol-",
+    "page": 83,
+    "printed": 83
+   },
+   "Rem 2.8.3": {
+    "line": "Remark 2.8.3.",
+    "page": 83,
+    "printed": 83
+   },
+   "Rem 2.9.1": {
+    "line": "Remark 2.9.1.",
+    "page": 85,
+    "printed": 85
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1: Write Δv = Δtp tp tp cor",
+    "page": 67,
+    "printed": 67
+   },
+   "Rem 3.4.1": {
+    "line": "Remark 3.4.1.",
+    "page": 93,
+    "printed": 93
+   },
+   "Rem 3.5.1": {
+    "line": "Remark 3.5.1.",
+    "page": 96,
+    "printed": 96
+   },
+   "Rem 3.5.2": {
+    "line": "Remark 3.5.2. Before proceeding, it is useful to pause to consider the significance",
+    "page": 96,
+    "printed": 96
+   },
+   "Rem 3.5.3": {
+    "line": "Remark 3.5.3. The delicacy and subtlety of the theory surrounding Corollary",
+    "page": 99,
+    "printed": 99
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1. The “Galois compatibility” denoted by the “ ” in the third",
+    "page": 101,
+    "printed": 101
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2. The diagram in the third display of Corollary 3.6, (ii) —",
+    "page": 101,
+    "printed": 101
+   },
+   "Rem 3.6.3": {
+    "line": "Remark 3.6.3. Before proceeding, we make some observations concerning base-",
+    "page": 104,
+    "printed": 104
+   },
+   "Rem 3.6.4": {
+    "line": "Remark 3.6.4. Since the theory of mono-theta environments developed in",
+    "page": 105,
+    "printed": 105
+   },
+   "Rem 3.6.5": {
+    "line": "Remark 3.6.5. In light of the central role played by mono-theta-theoretic",
+    "page": 108,
+    "printed": 108
+   },
+   "Rem 3.7.1": {
+    "line": "Remark 3.7.1. One central consequence of the theory to be developed in",
+    "page": 112,
+    "printed": 112
+   },
+   "Rem 3.8.1": {
+    "line": "Remark 3.8.1. In the present series of papers, we follow the convention [cf.",
+    "page": 115,
+    "printed": 115
+   },
+   "Rem 3.8.2": {
+    "line": "Remark 3.8.2. At this point, it is of interest to pause to discuss the relation-",
+    "page": 116,
+    "printed": 116
+   },
+   "Rem 3.8.3": {
+    "line": "Remark 3.8.3. One central theme of the theory of the present §3 is the ap-",
+    "page": 117,
+    "printed": 117
+   },
+   "Rem 4.1.1": {
+    "line": "Remark 4.1.1.",
+    "page": 122,
+    "printed": 122
+   },
+   "Rem 4.10.1": {
+    "line": "Remark 4.10.1. Strictly speaking [cf. Remark 4.6.2, (i)], the F -prime-strips",
+    "page": 161,
+    "printed": 161
+   },
+   "Rem 4.10.2": {
+    "line": "Remark 4.10.2.",
+    "page": 162,
+    "printed": 162
+   },
+   "Rem 4.10.3": {
+    "line": "Remark 4.10.3.",
+    "page": 162,
+    "printed": 162
+   },
+   "Rem 4.11.1": {
+    "line": "Remark 4.11.1. The Θ×μgau -link of Corollary 4.10, (iii), may be thought of,",
+    "page": 164,
+    "printed": 164
+   },
+   "Rem 4.11.2": {
+    "line": "Remark 4.11.2. At this point, we pause to review the theory developed so far",
+    "page": 165,
+    "printed": 165
+   },
+   "Rem 4.11.3": {
+    "line": "Remark 4.11.3. In the context of the discussion of Remark 4.11.2, it is interesting",
+    "page": 167,
+    "printed": 167
+   },
+   "Rem 4.11.4": {
+    "line": "Remark 4.11.4.",
+    "page": 168,
+    "printed": 168
+   },
+   "Rem 4.11.5": {
+    "line": "Remark 4.11.5. We take this opportunity to correct a few notational errors",
+    "page": 172,
+    "printed": 172
+   },
+   "Rem 4.2.1": {
+    "line": "Remark 4.2.1.",
+    "page": 125,
+    "printed": 125
+   },
+   "Rem 4.3.1": {
+    "line": "Remark 4.3.1. Analogous observations to the observations made in Remark",
+    "page": 129,
+    "printed": 129
+   },
+   "Rem 4.4.1": {
+    "line": "Remark 4.4.1. In the case of v ∈ Varc , one verifies immediately that one can",
+    "page": 131,
+    "printed": 131
+   },
+   "Rem 4.5.1": {
+    "line": "Remark 4.5.1.",
+    "page": 134,
+    "printed": 134
+   },
+   "Rem 4.5.2": {
+    "line": "Remark 4.5.2.",
+    "page": 135,
+    "printed": 135
+   },
+   "Rem 4.5.3": {
+    "line": "Remark 4.5.3. Before proceeding, we pause to review the significance of the",
+    "page": 135,
+    "printed": 135
+   },
+   "Rem 4.5.4": {
+    "line": "Remark 4.5.4. In the situation of Corollary 4.5, (v), we remark that the Frobe-",
+    "page": 136,
+    "printed": 136
+   },
+   "Rem 4.6.1": {
+    "line": "Remark 4.6.1. One verifies easily that, in the case of v ∈ Vnon , the poly-",
+    "page": 139,
+    "printed": 139
+   },
+   "Rem 4.6.2": {
+    "line": "Remark 4.6.2.",
+    "page": 140,
+    "printed": 140
+   },
+   "Rem 4.7.1": {
+    "line": "Remark 4.7.1. Similar observations to the observations made in Remark 4.5.2,",
+    "page": 143,
+    "printed": 143
+   },
+   "Rem 4.7.2": {
+    "line": "Remark 4.7.2. In the context of Corollary 4.7, (ii), we recall from Remarks",
+    "page": 143,
+    "printed": 143
+   },
+   "Rem 4.7.3": {
+    "line": "Remark 4.7.3. At this point, it is of interest to review the significance of the",
+    "page": 143,
+    "printed": 143
+   },
+   "Rem 4.7.4": {
+    "line": "Remark 4.7.4.",
+    "page": 145,
+    "printed": 145
+   },
+   "Rem 4.7.5": {
+    "line": "Remark 4.7.5. In the context of the discussion of the combinatorial models",
+    "page": 147,
+    "printed": 147
+   },
+   "Rem 4.7.6": {
+    "line": "Remark 4.7.6. One important observation in the context of Corollary 4.7, (i),",
+    "page": 148,
+    "printed": 148
+   },
+   "Rem 4.7.7": {
+    "line": "Remark 4.7.7. The theory of “tempered versus profinite conjugates” developed",
+    "page": 149,
+    "printed": 149
+   },
+   "Rem 4.8.1": {
+    "line": "Remark 4.8.1.",
+    "page": 151,
+    "printed": 151
+   },
+   "Rem 4.8.2": {
+    "line": "Remark 4.8.2.",
+    "page": 153,
+    "printed": 153
+   },
+   "Rem 4.8.3": {
+    "line": "Remark 4.8.3. Similar observations to the observations made in Remark 4.5.2,",
+    "page": 153,
+    "printed": 153
+   },
+   "Thm A": {
+    "line": "Theorem A. (Frobenius-pictures of Θ±ell NF-Hodge Theaters) Fix a col-",
+    "page": 15,
+    "printed": 15
+   },
+   "Thm B": {
+    "line": "Theorem B. (Étale-pictures of Base-Θ±ell NF-Hodge Theaters) Suppose",
+    "page": 18,
+    "printed": 18
+   },
+   "§1": {
+    "line": "Section 1: Multiradial Mono-theta Environments",
+    "page": 20,
+    "printed": 20
+   },
+   "§2": {
+    "line": "Section 2: Galois-theoretic Theta Evaluation",
+    "page": 64,
+    "printed": 64
+   },
+   "§3": {
+    "line": "Section 3: Tempered Gaussian Frobenioids",
+    "page": 87,
+    "printed": 87
+   },
+   "§4": {
+    "line": "Section 4: Global Gaussian Frobenioids",
+    "page": 120,
+    "printed": 120
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 2,
+    "printed": 2
+   }
+  },
+  "npages": 174,
+  "title": "Inter-universal Teichmüller Theory II: Hodge–Arakelov-theoretic Evaluation"
+ },
+ "IUTchIII": {
+  "file": "Inter-universal Teichmuller Theory III.pdf",
+  "index": {
+   "Cor 2.3": {
+    "line": "Corollary 2.3. (Étale-picture of Multiradial Theta Monoids) In the",
+    "page": 72,
+    "printed": 72
+   },
+   "Cor 3.12": {
+    "line": "Corollary 3.12. (Log-volume Estimates for Θ-Pilot Objects) Suppose",
+    "page": 173,
+    "printed": 173
+   },
+   "Def 1.1": {
+    "line": "Definition 1.1. Let",
+    "page": 23,
+    "printed": 23
+   },
+   "Def 1.4": {
+    "line": "Definition 1.4. We maintain the notation of Proposition 1.3 [cf. also [IUTchII],",
+    "page": 45,
+    "printed": 45
+   },
+   "Def 2.4": {
+    "line": "Definition 2.4.",
+    "page": 87,
+    "printed": 87
+   },
+   "Def 3.8": {
+    "line": "Definition 3.8.",
+    "page": 112,
+    "printed": 112
+   },
+   "Ex 3.6": {
+    "line": "Example 3.6. Concrete Representations of Global Frobenioids. Before",
+    "page": 106,
+    "printed": 106
+   },
+   "Fig 1.1": {
+    "line": "Fig. 1.1: Analogy with the differential geometry of S1",
+    "page": 38,
+    "printed": 38
+   },
+   "Fig 1.2": {
+    "line": "Fig. 1.2: Independent basepoint indeterminacies obstruct relationship",
+    "page": 41,
+    "printed": 41
+   },
+   "Fig 1.3": {
+    "line": "Fig. 1.3: Analogy between the log-theta-lattice and p-adic Teichmüller theory",
+    "page": 47,
+    "printed": 47
+   },
+   "Fig 1.4": {
+    "line": "Fig. 1.4: Analogy between conjugate synchronization and the",
+    "page": 55,
+    "printed": 55
+   },
+   "Fig 2.1": {
+    "line": "Fig. 2.1: Induced Z",
+    "page": 68,
+    "printed": 68
+   },
+   "Fig 2.2": {
+    "line": "Fig. 2.2: Insulation from Z",
+    "page": 68,
+    "printed": 68
+   },
+   "Fig 2.3": {
+    "line": "Fig. 2.3: Kummer-compatible splittings via evaluation",
+    "page": 71,
+    "printed": 71
+   },
+   "Fig 2.4": {
+    "line": "Fig. 2.4: Étale-picture of radial data",
+    "page": 74,
+    "printed": 74
+   },
+   "Fig 2.5": {
+    "line": "Fig. 2.5: Orders [∈ Z] of zeroes/poles of the theta function at the cusps “∗”",
+    "page": 82,
+    "printed": 82
+   },
+   "Fig 2.6": {
+    "line": "Fig. 2.6: Orders [∈ Z] of zeroes/poles of an algebraic rational function",
+    "page": 82,
+    "printed": 82
+   },
+   "Fig 2.7": {
+    "line": "Fig. 2.7: Comparison between the theta and number field cases",
+    "page": 84,
+    "printed": 84
+   },
+   "Fig 3.1": {
+    "line": "Fig. 3.1: Splitting monoids of LGP-monoids acting on tensor packets",
+    "page": 101,
+    "printed": 101
+   },
+   "Fig 3.10": {
+    "line": "Fig. 3.10: The analogy between inter-universal Teichmüller theory",
+    "page": 197,
+    "printed": 197
+   },
+   "Fig 3.2": {
+    "line": "Fig. 3.2: FMOD /LGP-structures versus Fmod /lgp-structures",
+    "page": 151,
+    "printed": 151
+   },
+   "Fig 3.3": {
+    "line": "Fig. 3.3: Transitions from symmetries to labels to processions",
+    "page": 168,
+    "printed": 168
+   },
+   "Fig 3.4": {
+    "line": "Fig. 3.4: Invisible indeterminacies acting on theta values",
+    "page": 173,
+    "printed": 173
+   },
+   "Fig 3.5": {
+    "line": "Fig. 3.5: Invisible indeterminacies acting on copies of Fmod",
+    "page": 173,
+    "printed": 173
+   },
+   "Fig 3.6": {
+    "line": "Fig. 3.6: Relationship of theta- and number field-related objects",
+    "page": 176,
+    "printed": 176
+   },
+   "Fig 3.7": {
+    "line": "Fig. 3.7: Three approaches to cyclotomic rigidity",
+    "page": 179,
+    "printed": 179
+   },
+   "Fig 3.8": {
+    "line": "Fig. 3.8: Two tautologically equivalent ways to compute",
+    "page": 185,
+    "printed": 185
+   },
+   "Fig 3.9": {
+    "line": "Fig. 3.9: Similarities and differences, in the context of the Θ×μ",
+    "page": 193,
+    "printed": 193
+   },
+   "Fig I.1": {
+    "line": "Fig. I.1: The [LGP-Gaussian] log-theta-lattice",
+    "page": 2,
+    "printed": 2
+   },
+   "Fig I.2": {
+    "line": "Fig. I.2: Correspondence between inter-universal Teichmüller theory and",
+    "page": 7,
+    "printed": 7
+   },
+   "Fig I.3": {
+    "line": "Fig. I.3: Insulation from Z",
+    "page": 10,
+    "printed": 10
+   },
+   "Fig I.4": {
+    "line": "Fig. I.4: Splitting monoids of LGP-monoids acting on tensor packets",
+    "page": 11,
+    "printed": 11
+   },
+   "Fig I.5": {
+    "line": "Fig. I.5: Copies of Fmod acting on tensor packets",
+    "page": 12,
+    "printed": 12
+   },
+   "Fig I.6": {
+    "line": "Fig. I.6: The full multiradial representation",
+    "page": 13,
+    "printed": 13
+   },
+   "Fig I.7": {
+    "line": "Fig. I.7: FMOD versus Fmod",
+    "page": 15,
+    "printed": 15
+   },
+   "Fig I.8": {
+    "line": "Fig. I.8: Two tautologically equivalent ways to compute",
+    "page": 18,
+    "printed": 18
+   },
+   "Prop 1.2": {
+    "line": "Proposition 1.2. (log-links Between F-prime-strips) Let",
+    "page": 30,
+    "printed": 30
+   },
+   "Prop 1.3": {
+    "line": "Proposition 1.3. (log-links Between Θ±ell NF-Hodge Theaters) Let",
+    "page": 41,
+    "printed": 41
+   },
+   "Prop 2.1": {
+    "line": "Proposition 2.1. (Vertical Coricity and Kummer Theory of Theta",
+    "page": 58,
+    "printed": 58
+   },
+   "Prop 3.1": {
+    "line": "Proposition 3.1. (Local Holomorphic Tensor Packets) Let",
+    "page": 92,
+    "printed": 92
+   },
+   "Prop 3.10": {
+    "line": "Proposition 3.10. (Global Kummer Theory and Non-interference with",
+    "page": 147,
+    "printed": 147
+   },
+   "Prop 3.2": {
+    "line": "Proposition 3.2. (Local Mono-analytic Tensor Packets) Let",
+    "page": 97,
+    "printed": 97
+   },
+   "Prop 3.3": {
+    "line": "Proposition 3.3. (Global Tensor Packets) Let",
+    "page": 99,
+    "printed": 99
+   },
+   "Prop 3.4": {
+    "line": "Proposition 3.4. (Local Packet-theoretic Frobenioids)",
+    "page": 101,
+    "printed": 101
+   },
+   "Prop 3.5": {
+    "line": "Proposition 3.5. (Kummer Theory and Upper Semi-compatibility for",
+    "page": 103,
+    "printed": 103
+   },
+   "Prop 3.7": {
+    "line": "Proposition 3.7. (Global Packet-theoretic Frobenioids)",
+    "page": 109,
+    "printed": 109
+   },
+   "Prop 3.9": {
+    "line": "Proposition 3.9. (Log-volume for Packets and Processions)",
+    "page": 115,
+    "printed": 115
+   },
+   "Rem 1.1.1": {
+    "line": "Remark 1.1.1.",
+    "page": 28,
+    "printed": 28
+   },
+   "Rem 1.1.2": {
+    "line": "Remark 1.1.2.",
+    "page": 29,
+    "printed": 29
+   },
+   "Rem 1.2.1": {
+    "line": "Remark 1.2.1.",
+    "page": 35,
+    "printed": 35
+   },
+   "Rem 1.2.2": {
+    "line": "Remark 1.2.2. Before proceeding, we pause to consider the significance of the",
+    "page": 35,
+    "printed": 35
+   },
+   "Rem 1.2.3": {
+    "line": "Remark 1.2.3.",
+    "page": 39,
+    "printed": 39
+   },
+   "Rem 1.2.4": {
+    "line": "Remark 1.2.4.",
+    "page": 39,
+    "printed": 39
+   },
+   "Rem 1.2.5": {
+    "line": "Remark 1.2.5. The discussion in Remark 1.2.4 of the incompatibility of the log-",
+    "page": 41,
+    "printed": 41
+   },
+   "Rem 1.3.1": {
+    "line": "Remark 1.3.1. Note that in Proposition 1.3, (i), it was necessary to carry",
+    "page": 43,
+    "printed": 43
+   },
+   "Rem 1.3.2": {
+    "line": "Remark 1.3.2. In the construction of Proposition 1.3, (i), the constituent F-",
+    "page": 43,
+    "printed": 43
+   },
+   "Rem 1.3.3": {
+    "line": "Remark 1.3.3.",
+    "page": 44,
+    "printed": 44
+   },
+   "Rem 1.4.1": {
+    "line": "Remark 1.4.1.",
+    "page": 46,
+    "printed": 46
+   },
+   "Rem 1.4.2": {
+    "line": "Remark 1.4.2.",
+    "page": 47,
+    "printed": 47
+   },
+   "Rem 1.5.1": {
+    "line": "Remark 1.5.1.",
+    "page": 51,
+    "printed": 51
+   },
+   "Rem 1.5.2": {
+    "line": "Remark 1.5.2.",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 1.5.3": {
+    "line": "Remark 1.5.3.",
+    "page": 54,
+    "printed": 54
+   },
+   "Rem 1.5.4": {
+    "line": "Remark 1.5.4.",
+    "page": 56,
+    "printed": 56
+   },
+   "Rem 2.1.1": {
+    "line": "Remark 2.1.1. The theory of mono-theta environments [cf. Proposition 2.1,",
+    "page": 61,
+    "printed": 61
+   },
+   "Rem 2.1.2": {
+    "line": "Remark 2.1.2.",
+    "page": 64,
+    "printed": 64
+   },
+   "Rem 2.2.1": {
+    "line": "Remark 2.2.1. In light of the central importance of Theorem 2.2, (ii), in the",
+    "page": 67,
+    "printed": 67
+   },
+   "Rem 2.2.2": {
+    "line": "Remark 2.2.2.",
+    "page": 69,
+    "printed": 69
+   },
+   "Rem 2.3.1": {
+    "line": "Remark 2.3.1.",
+    "page": 75,
+    "printed": 75
+   },
+   "Rem 2.3.2": {
+    "line": "Remark 2.3.2. A similar result to Corollary 2.3 may be formulated concern-",
+    "page": 75,
+    "printed": 75
+   },
+   "Rem 2.3.3": {
+    "line": "Remark 2.3.3. In the context of Remark 2.3.2, it is of interest to compare and",
+    "page": 76,
+    "printed": 76
+   },
+   "Rem 2.3.4": {
+    "line": "Remark 2.3.4. Before proceeding, it is perhaps of interest to review once more",
+    "page": 85,
+    "printed": 85
+   },
+   "Rem 2.4.1": {
+    "line": "Remark 2.4.1.",
+    "page": 89,
+    "printed": 89
+   },
+   "Rem 2.4.2": {
+    "line": "Remark 2.4.2.",
+    "page": 89,
+    "printed": 89
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1.",
+    "page": 93,
+    "printed": 93
+   },
+   "Rem 3.1.2": {
+    "line": "Remark 3.1.2. The constructions involving local holomorphic tensor packets",
+    "page": 97,
+    "printed": 97
+   },
+   "Rem 3.10.1": {
+    "line": "Remark 3.10.1.",
+    "page": 149,
+    "printed": 149
+   },
+   "Rem 3.10.2": {
+    "line": "Remark 3.10.2. In the context of the various Kummer isomorphisms discussed",
+    "page": 151,
+    "printed": 151
+   },
+   "Rem 3.11.1": {
+    "line": "Remark 3.11.1.",
+    "page": 159,
+    "printed": 159
+   },
+   "Rem 3.11.2": {
+    "line": "Remark 3.11.2.",
+    "page": 167,
+    "printed": 167
+   },
+   "Rem 3.11.3": {
+    "line": "Remark 3.11.3. Before proceeding, we pause to discuss the relationship between",
+    "page": 169,
+    "printed": 169
+   },
+   "Rem 3.11.4": {
+    "line": "Remark 3.11.4. In the context of the compatibility discussed in the final portion",
+    "page": 171,
+    "printed": 171
+   },
+   "Rem 3.12.1": {
+    "line": "Remark 3.12.1.",
+    "page": 186,
+    "printed": 186
+   },
+   "Rem 3.12.2": {
+    "line": "Remark 3.12.2.",
+    "page": 187,
+    "printed": 187
+   },
+   "Rem 3.12.3": {
+    "line": "Remark 3.12.3.",
+    "page": 195,
+    "printed": 195
+   },
+   "Rem 3.12.4": {
+    "line": "Remark 3.12.4. In light of the discussion of Remark 3.12.3, it is of interest",
+    "page": 196,
+    "printed": 196
+   },
+   "Rem 3.2.1": {
+    "line": "Remark 3.2.1. The issue of estimating the discrepancy between the holo-",
+    "page": 99,
+    "printed": 99
+   },
+   "Rem 3.2.2": {
+    "line": "Remark 3.2.2. The constructions involving local mono-analytic tensor pack-",
+    "page": 99,
+    "printed": 99
+   },
+   "Rem 3.3.1": {
+    "line": "Remark 3.3.1. One may perform analogous constructions to the constructions",
+    "page": 100,
+    "printed": 100
+   },
+   "Rem 3.3.2": {
+    "line": "Remark 3.3.2.",
+    "page": 101,
+    "printed": 101
+   },
+   "Rem 3.3.3": {
+    "line": "Remark 3.3.3. The log-shifted nature of the localization homomorphism of",
+    "page": 101,
+    "printed": 101
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1. Note that, as far as the various constructions of Example 3.6,",
+    "page": 108,
+    "printed": 108
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2.",
+    "page": 108,
+    "printed": 108
+   },
+   "Rem 3.8.1": {
+    "line": "Remark 3.8.1. The LGP-Gaussian and lgp-Gaussian log-theta-lattices are, of",
+    "page": 114,
+    "printed": 114
+   },
+   "Rem 3.8.2": {
+    "line": "Remark 3.8.2. One verifies immediately that the main results obtained so far",
+    "page": 114,
+    "printed": 114
+   },
+   "Rem 3.8.3": {
+    "line": "Remark 3.8.3. In the definition of the various horizontal arrows of the log-",
+    "page": 115,
+    "printed": 115
+   },
+   "Rem 3.9.1": {
+    "line": "Remark 3.9.1. In the spirit of the explicit descriptions of Remark 3.1.1, (i) [cf.",
+    "page": 118,
+    "printed": 118
+   },
+   "Rem 3.9.2": {
+    "line": "Remark 3.9.2. In the situation of Proposition 3.9, (iii), one may construct",
+    "page": 119,
+    "printed": 119
+   },
+   "Rem 3.9.3": {
+    "line": "Remark 3.9.3. With regard to the procession-normalizations discussed in",
+    "page": 119,
+    "printed": 119
+   },
+   "Rem 3.9.4": {
+    "line": "Remark 3.9.4. The log-link compatibility of log-volumes discussed in Propo-",
+    "page": 120,
+    "printed": 120
+   },
+   "Rem 3.9.5": {
+    "line": "Remark 3.9.5. In situations that involve consideration of various sorts of regions",
+    "page": 126,
+    "printed": 126
+   },
+   "Rem 3.9.6": {
+    "line": "Remark 3.9.6. In the context of Proposition 3.9, (iii), (iv) [cf. also Remark",
+    "page": 145,
+    "printed": 145
+   },
+   "Rem 3.9.7": {
+    "line": "Remark 3.9.7. When computing log-volumes of various regions of the sort con-",
+    "page": 145,
+    "printed": 145
+   },
+   "Thm 1.5": {
+    "line": "Theorem 1.5. (Bi-cores of the Log-theta-lattice) Fix a collection of initial",
+    "page": 48,
+    "printed": 48
+   },
+   "Thm 2.2": {
+    "line": "Theorem 2.2. (Kummer-compatible Multiradiality of Theta Monoids)",
+    "page": 65,
+    "printed": 65
+   },
+   "Thm 3.11": {
+    "line": "Theorem 3.11. (Multiradial Algorithms via LGP-Monoids/Frobenioids)",
+    "page": 153,
+    "printed": 153
+   },
+   "Thm A": {
+    "line": "Theorem A. (Multiradial Algorithms for Logarithmic Gaussian Proces-",
+    "page": 19,
+    "printed": 19
+   },
+   "Thm B": {
+    "line": "Theorem B. (Log-volume Estimates for Multiradially Represented Split-",
+    "page": 21,
+    "printed": 21
+   },
+   "§1": {
+    "line": "Section 1: The Log-theta-lattice",
+    "page": 23,
+    "printed": 23
+   },
+   "§2": {
+    "line": "Section 2: Multiradial Theta Monoids",
+    "page": 58,
+    "printed": 58
+   },
+   "§3": {
+    "line": "Section 3: Multiradial Logarithmic Gaussian Procession Monoids",
+    "page": 92,
+    "printed": 92
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 2,
+    "printed": 2
+   }
+  },
+  "npages": 199,
+  "title": "Inter-universal Teichmüller Theory III: Canonical Splittings of the Log-theta-lattice"
+ },
+ "IUTchIV": {
+  "file": "Inter-universal Teichmuller Theory IV.pdf",
+  "index": {
+   "Cor 2.2": {
+    "line": "Corollary 2.2. (Construction of Suitable Initial Θ-Data) Suppose that",
+    "page": 41,
+    "printed": 41
+   },
+   "Cor 2.3": {
+    "line": "Corollary 2.3. (Diophantine Inequalities) Let X be a smooth, proper,",
+    "page": 54,
+    "printed": 54
+   },
+   "Def 1.9": {
+    "line": "Definition 1.9. Let F be a number field [i.e., a finite extension of the ra-",
+    "page": 21,
+    "printed": 21
+   },
+   "Def 3.1": {
+    "line": "Definition 3.1.",
+    "page": 68,
+    "printed": 68
+   },
+   "Def 3.3": {
+    "line": "Definition 3.3. Let S = (S0 , S1 ); S = (S0 , S1 ) be species.",
+    "page": 72,
+    "printed": 72
+   },
+   "Ex 3.2": {
+    "line": "Example 3.2. Categories. The notions of a [small] category and an isomor-",
+    "page": 72,
+    "printed": 72
+   },
+   "Ex 3.4": {
+    "line": "Example 3.4. Topological Spaces and Fundamental Groups.",
+    "page": 76,
+    "printed": 76
+   },
+   "Ex 3.5": {
+    "line": "Example 3.5. Absolute Anabelian Geometry.",
+    "page": 77,
+    "printed": 77
+   },
+   "Ex 3.6": {
+    "line": "Example 3.6. The Étale Site and Frobenius.",
+    "page": 78,
+    "printed": 78
+   },
+   "Fig I.1": {
+    "line": "Fig. I.1: Relativized models of conventional scheme theory over Z",
+    "page": 5,
+    "printed": 5
+   },
+   "Fig I.2": {
+    "line": "Fig. I.2: A coric container underlying a sequence of mutations",
+    "page": 7,
+    "printed": 7
+   },
+   "Prop 1.1": {
+    "line": "Proposition 1.1. (Multiple Tensor Products and Differents) Let p be",
+    "page": 9,
+    "printed": 9
+   },
+   "Prop 1.2": {
+    "line": "Proposition 1.2. (Differents and Logarithms) We continue to use the",
+    "page": 10,
+    "printed": 10
+   },
+   "Prop 1.3": {
+    "line": "Proposition 1.3. (Estimates of Differents) We continue to use the notation",
+    "page": 11,
+    "printed": 11
+   },
+   "Prop 1.4": {
+    "line": "Proposition 1.4. (Nonarchimedean Normalized Log-volume Estimates)",
+    "page": 13,
+    "printed": 13
+   },
+   "Prop 1.5": {
+    "line": "Proposition 1.5. (Archimedean Metric Estimates) In the following, we",
+    "page": 14,
+    "printed": 14
+   },
+   "Prop 1.6": {
+    "line": "Proposition 1.6. (The Prime Number Theorem) If n is a positive integer,",
+    "page": 16,
+    "printed": 16
+   },
+   "Prop 1.7": {
+    "line": "Proposition 1.7. (Weighted Averages) Let E be a nonempty finite set, n a",
+    "page": 16,
+    "printed": 16
+   },
+   "Prop 1.8": {
+    "line": "Proposition 1.8. (Torsion Points of Elliptic Curves) Let k be a perfect",
+    "page": 18,
+    "printed": 18
+   },
+   "Prop 2.1": {
+    "line": "Proposition 2.1. (Well-known Estimates)",
+    "page": 40,
+    "printed": 40
+   },
+   "Rem 1.10.1": {
+    "line": "Remark 1.10.1. One of the main original motivations for the development of",
+    "page": 31,
+    "printed": 31
+   },
+   "Rem 1.10.2": {
+    "line": "Remark 1.10.2. The computation performed in the proof of Theorem 1.10 may",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 1.10.3": {
+    "line": "Remark 1.10.3. The “terms involving l” that occur in the inequality of the",
+    "page": 32,
+    "printed": 32
+   },
+   "Rem 1.10.4": {
+    "line": "Remark 1.10.4. The various fluctuations in log-volume — i.e., whose computa-",
+    "page": 33,
+    "printed": 33
+   },
+   "Rem 1.10.5": {
+    "line": "Remark 1.10.5. The above remarks focused on the conceptual aspects of the",
+    "page": 34,
+    "printed": 34
+   },
+   "Rem 1.10.6": {
+    "line": "Remark 1.10.6.",
+    "page": 36,
+    "printed": 36
+   },
+   "Rem 1.10.7": {
+    "line": "Remark 1.10.7.",
+    "page": 38,
+    "printed": 38
+   },
+   "Rem 1.3.1": {
+    "line": "Remark 1.3.1. Similar estimates to those discussed in Proposition 1.3 may be",
+    "page": 13,
+    "printed": 13
+   },
+   "Rem 1.7.1": {
+    "line": "Remark 1.7.1. In Theorem 1.10 below, we shall apply Proposition 1.7 to com-",
+    "page": 17,
+    "printed": 17
+   },
+   "Rem 2.2.1": {
+    "line": "Remark 2.2.1.",
+    "page": 48,
+    "printed": 48
+   },
+   "Rem 2.2.2": {
+    "line": "Remark 2.2.2. In the context of the discussion of weights in Remark 2.2.1, (i),",
+    "page": 50,
+    "printed": 50
+   },
+   "Rem 2.2.3": {
+    "line": "Remark 2.2.3. The discussion of Remark 2.2.1 centers around the content of",
+    "page": 51,
+    "printed": 51
+   },
+   "Rem 2.2.4": {
+    "line": "Remark 2.2.4. Before proceeding, it is perhaps of interest to consider the ideas",
+    "page": 52,
+    "printed": 52
+   },
+   "Rem 2.3.1": {
+    "line": "Remark 2.3.1. We take this opportunity to correct some unfortunate misprints",
+    "page": 55,
+    "printed": 55
+   },
+   "Rem 2.3.2": {
+    "line": "Remark 2.3.2.",
+    "page": 56,
+    "printed": 56
+   },
+   "Rem 2.3.3": {
+    "line": "Remark 2.3.3. Corollary 2.3 may be thought of as an effective version of",
+    "page": 57,
+    "printed": 57
+   },
+   "Rem 2.3.4": {
+    "line": "Remark 2.3.4. Various aspects of the theory of the present series of papers",
+    "page": 63,
+    "printed": 63
+   },
+   "Rem 2.3.5": {
+    "line": "Remark 2.3.5. In [Par], a proof is given of the Mordell Conjecture for",
+    "page": 63,
+    "printed": 63
+   },
+   "Rem 3.1.1": {
+    "line": "Remark 3.1.1. We observe that any of the familiar descriptions of N [cf., e.g.,",
+    "page": 70,
+    "printed": 70
+   },
+   "Rem 3.1.2": {
+    "line": "Remark 3.1.2.",
+    "page": 70,
+    "printed": 70
+   },
+   "Rem 3.1.3": {
+    "line": "Remark 3.1.3.",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.1.4": {
+    "line": "Remark 3.1.4. Note that because the data involved in a species is given by",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.1.5": {
+    "line": "Remark 3.1.5. Similar remarks to the remarks made in Remarks 3.1.2, 3.1.3,",
+    "page": 71,
+    "printed": 71
+   },
+   "Rem 3.2.1": {
+    "line": "Remark 3.2.1. Note that in the case of Example 3.2, one could also define a",
+    "page": 72,
+    "printed": 72
+   },
+   "Rem 3.3.1": {
+    "line": "Remark 3.3.1.",
+    "page": 74,
+    "printed": 74
+   },
+   "Rem 3.3.2": {
+    "line": "Remark 3.3.2. One somewhat naive point of view that constituted one of",
+    "page": 76,
+    "printed": 76
+   },
+   "Rem 3.6.1": {
+    "line": "Remark 3.6.1.",
+    "page": 80,
+    "printed": 80
+   },
+   "Rem 3.6.2": {
+    "line": "Remark 3.6.2.",
+    "page": 81,
+    "printed": 81
+   },
+   "Rem 3.6.3": {
+    "line": "Remark 3.6.3.",
+    "page": 82,
+    "printed": 82
+   },
+   "Thm 1.10": {
+    "line": "Theorem 1.10. (Log-volume Estimates for Θ-Pilot Objects) Fix a col-",
+    "page": 22,
+    "printed": 22
+   },
+   "Thm A": {
+    "line": "Theorem A. (Diophantine Inequalities) Let X be a smooth, proper, geomet-",
+    "page": 3,
+    "printed": 3
+   },
+   "§1": {
+    "line": "Section 1: Log-volume Estimates",
+    "page": 9,
+    "printed": 9
+   },
+   "§2": {
+    "line": "Section 2: Diophantine Inequalities",
+    "page": 40,
+    "printed": 40
+   },
+   "§3": {
+    "line": "Section 3: Inter-universal Formalism: the Language of Species",
+    "page": 67,
+    "printed": 67
+   },
+   "§I": {
+    "line": "Introduction",
+    "page": 2,
+    "printed": 2
+   }
+  },
+  "npages": 87,
+  "title": "Inter-universal Teichmüller Theory IV: Log-volume Computations and Set-theoretic Foundations"
+ },
+ "Pano": {
+  "file": "Panoramic Overview of Inter-universal Teichmuller Theory.pdf",
+  "index": {
+   "Cor 4.2": {
+    "line": "Corollary 4.2. (Diophantine Consequences) The ABC/Szpiro Conjecture",
+    "page": 43,
+    "printed": 43
+   },
+   "Fig 1.1": {
+    "line": "Fig. 1.1: Log-volume estimate region inside a mono-analytic container",
+    "page": 12,
+    "printed": 12
+   },
+   "Fig 2.1": {
+    "line": "Fig. 2.1: One dimension is dilated, while the other is left fixed",
+    "page": 14,
+    "printed": 14
+   },
+   "Fig 2.2": {
+    "line": "Fig. 2.2: Numerous one-dimensional complex linear structures",
+    "page": 15,
+    "printed": 15
+   },
+   "Fig 2.3": {
+    "line": "Fig. 2.3: Coric, multiradial, and uniradial structures",
+    "page": 15,
+    "printed": 15
+   },
+   "Fig 2.4": {
+    "line": "Fig. 2.4: Frobenius liftings on hyperbolic curves and their moduli",
+    "page": 16,
+    "printed": 16
+   },
+   "Fig 2.5": {
+    "line": "Fig. 2.5: The analogy between inter-universal Teichmüller theory",
+    "page": 17,
+    "printed": 17
+   },
+   "Fig 2.6": {
+    "line": "Fig. 2.6: Intertwining cycles on a once-punctured elliptic curve",
+    "page": 20,
+    "printed": 20
+   },
+   "Fig 3.1": {
+    "line": "Fig. 3.1: The log-theta-lattice consists of “•” [i.e., Θ±ell NF-Hodge theaters],",
+    "page": 25,
+    "printed": 25
+   },
+   "Fig 3.2": {
+    "line": "Fig. 3.2: Prime-strips as “sections” of Spec(K) → Spec(F )",
+    "page": 26,
+    "printed": 26
+   },
+   "Fig 3.3": {
+    "line": "Fig. 3.3: Symmetries of coverings of XF",
+    "page": 28,
+    "printed": 28
+   },
+   "Fig 3.4": {
+    "line": "Fig. 3.4: Comparison of F ±",
+    "page": 29,
+    "printed": 29
+   },
+   "Fig 3.5": {
+    "line": "Fig. 3.5: The portion of the étale-picture at v ∈ Vnon",
+    "page": 33,
+    "printed": 33
+   },
+   "Fig 4.1": {
+    "line": "Fig. 4.1: Properties satisfied by the three components (a), (b), (c) of the Θ-link",
+    "page": 40,
+    "printed": 40
+   },
+   "Fig 4.2": {
+    "line": "Fig. 4.2: The analogy between inter-universal Teichmüller theory and",
+    "page": 41,
+    "printed": 41
+   },
+   "Prop 3.10": {
+    "line": "Proposition 3.10. The related Kummer theory is performed in the ΘNF-Hodge theater",
+    "page": 35,
+    "printed": 35
+   },
+   "Thm 1.1": {
+    "line": "Theorem 1.1. (“Idealized” Version of Fundamental Theorem of Hodge-",
+    "page": 3,
+    "printed": 3
+   },
+   "Thm 4.1": {
+    "line": "Theorem 4.1. (Multiradial Description of the Domain of the Θ-link)",
+    "page": 40,
+    "printed": 40
+   },
+   "§2": {
+    "line": "§ 2. Teichmüller-theoretic Deformations",
+    "page": 13,
+    "printed": 13
+   },
+   "§3": {
+    "line": "§ 3. The Log-theta-lattice",
+    "page": 22,
+    "printed": 22
+   },
+   "§4": {
+    "line": "§ 4. Inter-universality and Anabelian Geometry",
+    "page": 38,
+    "printed": 38
+   }
+  },
+  "npages": 45,
+  "title": "A Panoramic Overview of Inter-universal Teichmüller Theory"
+ }
+}
