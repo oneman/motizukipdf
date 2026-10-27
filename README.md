@@ -171,6 +171,6 @@ htdocs/     index.html · style.css · iut.js (model) · ops.js (operations laye
             app.js (explorer) · identifiers.js, processlist.js (generated) · test.js
 docs/       IDENTIFIERS.md, PROCESSES.md (generated) · DATA_MODEL.md
 lean/       lakefile.toml · IUT.lean · IUT/ (Identifiers, Labels, InitialThetaData, PrimeStrip, HodgeTheater,
-            Link, LogThetaLattice, Multiradial, Species) — Lean 4 / Mathlib port with proofs
+            Link, LogThetaLattice, Multiradial, Species, Construction, Processes) — Lean 4 / Mathlib port with proofs
 scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check)
 ```
