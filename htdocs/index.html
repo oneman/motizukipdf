@@ -55,6 +55,7 @@
       <button class="tab" data-tab="multi">5 multiradial / log-volume</button>
       <button class="tab" data-tab="species">6 species</button>
       <button class="tab" data-tab="ids">7 identifiers</button>
+      <button class="tab" data-tab="procs">8 processes</button>
     </nav>
     <section id="controls">
       <fieldset>
@@ -87,20 +88,27 @@
         <p>Filter the identifier table: <input id="id-filter" placeholder="e.g. Mono, Θ, hodgetheater, Dag" size="40"> <span id="id-count"></span></p>
         <div id="id-table"></div>
       </div>
+      <div class="pane" id="pane-procs">
+        <p>Every step / process of [IUTchI–IV], [EssLgc], [Alien] as an operation on the data types (<code>htdocs/ops.js</code>, mirroring <code>src/iut_ops_*.c</code>; same registry as <code>iut procs</code> / <code>iut run</code>). Filter: <input id="proc-filter" placeholder="e.g. IUTchIII, log, pilot, Cor 3.12" size="36"> <span id="proc-count"></span> <button id="btn-run-all">run all on the current Θ-data</button></p>
+        <div id="proc-table"></div>
+        <pre id="proc-output" class="proc-output"></pre>
+      </div>
     </main>
-    <footer>keys (when the explorer is in view): ←↑↓→ focus · l log-link · t Θ-link · H infinite H · 1–7 tabs · click a vertex to focus, double-click to create one</footer>
+    <footer>keys (when the explorer is in view): ←↑↓→ focus · l log-link · t Θ-link · H infinite H · 1–8 tabs · click a vertex to focus, double-click to create one</footer>
   </div>
 </section>
 
 <section class="part" id="part-ids">
   <h2>Identifiers <small>English-letters-only names for every symbol-bearing object</small></h2>
-  <p class="lead">Rule: <code>^[A-Za-z]+$</code>, unique case-insensitively. Symbols map to words: † Dag, ‡ Ddag, ∗ Ast, ◦ Circ, • Bullet, ⊢ Mono, ⊩ MonoGlob, ▶ Val, × Units, ×μ UnitsModTors, μ Tors, ⊥ Perp, ± Pm, ⋊ Semi, ⊞ BoxPlus, ⊚ CircDot, ⊛ CircAst, Δ Triangle, &gt; Gt, ∞ Inf, κ Kappa; e.g. F⊩▶×μ → <code>FMonoGlobValUnitsModTorsPrimeStrip</code>, Θ×μ_LGP-link → <code>ThetaUnitsModTorsLGPTorsorLink</code>, S^±_{j+1} → <code>SPmJPlusOne</code>. The complete searchable table is tab 7 of the explorer and <code>docs/IDENTIFIERS.md</code>.</p>
+  <p class="lead">Rule: <code>^[A-Za-z]+$</code>, unique case-insensitively. Symbols map to words: † Dag, ‡ Ddag, ∗ Ast, ◦ Circ, • Bullet, ⊢ Mono, ⊩ MonoGlob, ▶ Val, × Units, ×μ UnitsModTors, μ Tors, ⊥ Perp, ± Pm, ⋊ Semi, ⊞ BoxPlus, ⊚ CircDot, ⊛ CircAst, Δ Triangle, &gt; Gt, ∞ Inf, κ Kappa; e.g. F⊩▶×μ → <code>FMonoGlobValUnitsModTorsPrimeStrip</code>, Θ×μ_LGP-link → <code>ThetaUnitsModTorsLGPTorsorLink</code>, S^±_{j+1} → <code>SPmJPlusOne</code>. The complete searchable table is tab 7 of the explorer and <code>docs/IDENTIFIERS.md</code>. The processes (operations on the data types, one C function per step of the papers) are tab 8, <code>docs/PROCESSES.md</code> and <code>iut procs</code>.</p>
 </section>
 
-<footer class="page">Model: <code>htdocs/iut.js</code> (mirrors <code>src/iut.h</code>); diagrams: <code>htdocs/diagrams.js</code>; processes: <code>htdocs/processes.js</code>; explorer: <code>htdocs/app.js</code>. Citations in brackets refer to the PDFs in this repository: [IUTchII–IV], [Alien] = "Alien copies, Gaussians, and inter-universal Teichmüller theory", [EssLgc] = "Essential logical structure of inter-universal Teichmüller theory", [Pano], [ExpEst]. IUT I is cited through the recaps in those papers.</footer>
+<footer class="page">Model: <code>htdocs/iut.js</code> (mirrors <code>src/iut.h</code>); diagrams: <code>htdocs/diagrams.js</code>; processes (Part II): <code>htdocs/processes.js</code>; operations on the data types: <code>htdocs/ops.js</code> (mirrors <code>src/iut_ops_*.c</code>, registry <code>htdocs/processlist.js</code> generated from <code>src/iut_proc.c</code>); explorer: <code>htdocs/app.js</code>. Citations in brackets refer to the PDFs in <code>pdf/</code>: [IUTchI–IV] (IUT I is cited directly, section by section; its finer data types are <code>OPS.i</code>, mirroring <code>src/iut_i.h</code>), [Alien] = "Alien copies, Gaussians, and inter-universal Teichmüller theory", [EssLgc] = "Essential logical structure of inter-universal Teichmüller theory", [Pano], [ExpEst].</footer>
 
 <script src="identifiers.js"></script>
 <script src="iut.js"></script>
+<script src="processlist.js"></script>
+<script src="ops.js"></script>
 <script src="diagrams.js"></script>
 <script src="processes.js"></script>
 <script src="app.js"></script>

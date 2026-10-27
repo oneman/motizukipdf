@@ -7,9 +7,8 @@ compute. The web app (`htdocs/iut.js`) mirrors the same model one to one; the
 node tests (`htdocs/test.js`) and the C self-tests (`iut selftest`) check the
 same facts on both sides.
 
-Citations: [IUTchI]–[IUTchIV] are the four IUT papers (IUT I is cited through the
-recaps in IUT II–IV, [Pano] §3 and [Alien] §3.3, since the IUT I PDF is not in the
-repository), [Pano] the Panoramic Overview, [Alien] *Mutually Alien Copies*,
+Citations: [IUTchI]–[IUTchIV] are the four IUT papers (all four are in `pdf/`;
+IUT I is cited directly, section by section, see §8b), [Pano] the Panoramic Overview, [Alien] *Mutually Alien Copies*,
 [EssLgc] *Essential Logical Structure*, [ExpEst] *Explicit Estimates*, [FormIUT]
 *On the Formalization of IUT*, [AbsTopIII] *Absolute Anabelian Geometry III*,
 [EtTh] *The Étale Theta Function*, [FrdI/II] *Frobenioids I/II*.
@@ -201,6 +200,73 @@ Hodge theaters built so far as spokes ([IUTchIII] Cor 3.12; [IUTchI] Cor 6.10).
 
 Everything the program *does* compute is cross-checked between the C and JS
 implementations by `make test`.
+
+## 8a. The operations layer — `src/iut_ops.h`, `htdocs/ops.js`
+
+The structs above are the *nouns*; `src/iut_ops.h` holds the *verbs*: every
+step and every process of the papers that acts on these data types, one C
+function per step, grouped by paper (`iut_ops_i.c` … `iut_ops_logic.c`) and
+cited at the declaration. `src/iut_proc.c` groups them into a registry of 52
+named processes (`iut procs`), each of which `iut run <id>` demonstrates on
+given Θ-data; `docs/PROCESSES.md` is the generated table. `htdocs/ops.js`
+mirrors every function under a camelCase name (`iut_procession_build` →
+`OPS.i.processionBuild`, `iut_bicoric_check` → `OPS.iii.bicoricCheck`,
+`iut_thm110_compute` → `OPS.iv.thm110Compute`, …) and the registry
+(`OPS.PROCS`, `OPS.runAll`), and tab 8 of the explorer runs them in the browser.
+
+What the operations compute, by paper:
+
+| paper | operations | typical outputs |
+|---|---|---|
+| [IUTchI] | label maps F_l ⊇ F_l^× ↠ F_l^*, the gluing 0,⊞ ↦ >, orbits of F_l^{⋊±}/F_l^*; LabCusp±/LabCusp and forgetting the sign; capsules F_T, F_J, capsule morphisms, poly-isomorphism counts; processions Prc(D_J), Prc(D_T); the four bridges with their symmetry torsors (2l, l*, 1); Θ±ell NF-HT ↦ D-HT; Frobenius chains and étale pictures; global NF data, realification, Kummer | orbit sizes, |Aut Prc| = Π|S±_k|!, torsor sizes, D-HT isomorphism checks |
+| [IUTchII] | radial environments and multiradialization; the three cyclotomic rigidities; tempered indices [Π±:Π] = l, [Π:Π_Ÿ] = 2; θ(√−q^{±t}) = q̲^{t²} up to μ_{2l}; the monoids Ψ_cns, Ψ_env, Ψ_gau, …, semisimplification, Kummer and evaluation isomorphisms; F_l^{⋊±}-synchronization vs F_l^*-symmetrization; the forgetful ladder F⊩▶×μ → … → D⊢; the Θ×μ-, Θ×μ_gau-link flavours of Cor 4.10 with their coricity | values of θ, generator lists, class counts, link records with dilation l(l+1)/12 |
+| [IUTchIII] | log-shells I_v from F, F⊢×μ, D⊢, D (all isomorphic), their properties (a)–(c) and indeterminacies Ism / ±1; the log-link of prime-strips and Hodge theaters; lattice flavours, non-commuting squares, Θ-links obligating log-links; bi-coricity (Thm 1.5); vertically coric / multiradial theta monoids; tensor packets (|V_p|^{j+1}, 2^{j}|V_arc|^{j+1} summands), global packets and localization; LGP monoids; upper semi-compatibility; F_MOD vs F_mod; pilots; log-volume normalizations and arithmetic degrees; non-interference; the multiradial representation (Thm 3.11) and the seven steps of Cor 3.12 | shell radii and μ_log, summand counts, Ind1/Ind2/Ind3 bookkeeping, −|log Θ| ≥ −|log q| |
+| [IUTchIV] | a_i = (1/e)⌈e/(p−2)⌉ (or 2), b_i = ⌊log(pe/(p−1))/log p⌋ − 1/e, the exponents of Prop 1.2 (ii)–(iv), the bounds of Prop 1.3, μ_log(log O×), the archimedean summands 2^{|I|−1}|V|^{|I|}, the prime-number-theorem bounds 4x/(3 log x), weighted averages; torsion-point facts; arithmetic divisors and their degrees; (E1)–(E5) and Thm 1.10; Prop 2.1; Cor 2.2 (δ, ε_E, the range of l) and Cor 2.3; species: identities, composition, isomorphism, cores, mutation histories | numbers, inequality verdicts, composed mutations |
+| [EssLgc] | the ∧/∨ model (A, B, ε, N), consistency; (Stp1)–(Stp8) with their indeterminacies; (FxGl), (Englf), (ExtInd1), (ExtInd2), (logORInd) vs (ΘORInd) | step chains with log-volumes, regions and "engulfs" verdicts |
+| [Alien] | the twelve steps of the Gaussian integral and its numeric value; the seven stages of mono-anabelian transport and a run of it on the lattice; formal sums [0], [|j|], [⊞], [>] and their compatibility; the label line segment and evaluation points ±t; the leading term Σ_j((j+1) log d^K − (j²/2l) log q); (1est)–(12est); the dictionary (1gau)–(11gau) | √π, mass-1 sums, estimate chains |
+
+As in §8, these functions compute the *combinatorics and the numbers* of each
+step (which labels, which copies, which indeterminacy, which inequality), not
+the anabelian reconstructions that the papers perform at each step.
+
+Note on the synthetic generator: `iut_gen_random` now enforces e_K ≥ e_mod at
+every place, which the validator of §2 always required and which the random
+seeds 3 and 11 used to violate.
+
+## 8b. The data types of IUT I — `src/iut_i.h`, `src/iut_i.c`, `OPS.i` in `htdocs/ops.js`
+
+IUT I ([IUTchI], *Construction of Hodge Theaters*) introduces many objects that
+the later papers only recall in passing. They are modelled as their own types,
+read from the paper itself, each with a letters-only identifier (kinds
+`monoid`, `morphism`, `anabelioid`, `curve`, `cusp`, `group`, `category`,
+`frobenioid`, `theorem`, … in `docs/IDENTIFIERS.md`) and exercised by the 21
+processes `ClassifyPseudoMonoids` … `CompareHalfPlane` of the registry.
+
+| section | types (C struct · identifier) | what is recorded |
+|---|---|---|
+| §0 | `iut_pseudo_monoid` · `PseudoMonoid`, `MCircAst`, `MCircAstMod`, `MCircAstSol`, `MCircAstKappa`, `MCircAstInfKappa`, `MCircAstInfKappaUnits`, `MCircAstKappaSol`, `MV`, `MKappaV`, `MInfKappaV`, `MInfKappaUnitsV` | topological / divisible / cyclotomic / group; Kummer-ready vs Kummer-blind (Rem 5.1.3); the containments M^⊛_mod ⊆ M^⊛_sol ⊆ M^⊛, M^⊛_κ ⊆ M^⊛_∞κ ⊆ M^⊛_∞κ× |
+| §0 | `iut_poly_morphism` · `PolyMorphism`, `PolyIsomorphism`, `FullPolyIsomorphism`, `PlusFullPolyIsomorphism`, `CapsuleFullPolyMorphism`, `CapsuleFullPolyIsomorphism`, `PolyAutomorphism`, `Capsule`, `Isomorph` | the number of constituents (0 = all), composites (multiplicities ignored), the signs α ∈ {±1}^V of a +-full poly-isomorphism (Def 6.1 (iv)) |
+| §0 | `iut_anabelioid` · `BPi`, `BX`, `BXZero`, `BTemp`, `Temperoid`; `iut_field_kind` · `NF`, `MLF`, `CAF`, `PV` | connected / tempered; K_v is an MLF at v ∈ V^non and a CAF at v ∈ V^arc |
+| §1 | `iut_orbicurve` · `XF`, `COrbicurve`, `XUnderK`, `CK`, `XArrow`, `CArrow`, `XUnderUnderK`, `CUnderUnderV`, `CUnderV`, `OrbicurveType` | type (1,1), (1,l-tors), (1,l-tors)±, (1,l-tors→), (1,l-tors→)±, (1,(Z/l)^Θ)(±), (1,Z/l)±; base field; what it covers and with which degree and group; number of cusps (l for X̲, l± for C̲); Aut_k(X→) ≅ Z/2l, Aut_k(C→) ≅ Z/l (Rem 1.2.1) |
+| §1 | `iut_cusps_section_one` · `CuspEpsilon`, `CuspEpsilonPrime`, `CuspEpsilonDoublePrime`, `CuspTwoEpsilon`, `CuspZero`, `InertiaEpsilonPrime`, `DeltaEpsilon`, `DeltaE`, `JX`, `JC`, `SectionSigma`, `IotaInvolution` | ε, ε′ = +ε, ε″ = −ε, 2ε (2 ≢ ±1 mod l), the exact sequence 0 → I_ε′ × I_ε″ → Δ_ε → Δ_E ⊗ Z/l → 0 and the action of ι |
+| §1 | `iut_cor_one_two` · `CorOneTwo`, `HSubgroup`, `PiXArrow`, `PiCArrow`, `PiXUnder`, `PiCUnder` | l² = [Δ_X : Δ_X̲]·[Δ_X̲ : Δ_X→] = [Δ_C : Δ_X→]/2; Gal(X̲/C̲) ≅ Z/2, Gal(C→/C̲) ≅ Z/l, Gal(X→/C̲) ≅ Z/2l ⊇ Gal(X→/C→) ≅ Z/2; the eight steps of the reconstruction |
+| §2 | `iut_tempered_fact`, `iut_tempered_at_v` · `PiTpG`, `PiGProfinite`, `TemperedConjugates`, `CommensurablyTerminal`, `TemperedSubcover`, `TemperedVerticialEdge`, `DecompositionSynchronized`, `DiscreteAnalogue`, `GaloisCountable` | Prop 2.1 – Cor 2.8 and Rem 2.5.3 as a table; at v ∈ V^bad: Π_v tempered, commensurably terminal, decomposition groups synchronized (Cor 2.5) |
+| §3 | `iut_def_three_one_item` · `DefThreeOne`; `iut_theta_approach` · `ThetaApproach`, `MXCyclotome`, `LDeltaTheta`; `iut_s_mod` · `SMod` | (a)–(f) of Def 3.1 with (c)–(f) machine-checked ((c): l prime to the residue characteristics of V^bad_mod and to ord_v(q_v), now also enforced by the generators and validators); M_X ≅ l·Δ_Θ; the determining data (F̄/F, X_F, C̲_K, V, V^bad_mod); S_mod = Spec(O_K) // Gal(K/F_mod) |
+| §3 | `iut_kappa_function`, `iut_kappa_verdict`, `iut_kappa_sol` · `CFmod`, `CriticalPoint`, `StrictlyCriticalPoint`, `KappaCoric`, `InfKappaCoric`, `InfKappaUnitsCoric`, `KappaSolvable`, `FMuL`, `AutKappaSol` | one pole, ≥ 2 zeroes, divisor over an NF avoiding the 4 critical points, roots of unity at strictly critical points; Gal(K/F(μ_l)) ≅ SL_2(F_l) of order l(l²−1) |
+| §3 | `iut_local_frobenioid` · `DV`, `DMonoV`, `DThetaV`, `FUnderV`, `FBiratV`, `YDdotV`, `CV`, `CMonoV`, `CThetaV`, `PhiCMonoV`, `TauMonoV`, `TauThetaV`, `FMonoV`, `FThetaV`, `MuTwoL`, `LogPhi`, `LogPV`, `LogTheta`, `TMCategory`, `AutHolOrbispace`, `ABox`, `KappaKummerV` | Ex 3.2 (bad: tempered, μ_2l-orbit of splittings, Θ̲_v up to μ_2l and l·Z, six reconstructions (a)–(f)), Ex 3.3 (good: Φ = N·log(p_v)), Ex 3.4 (arch: (C_v, D_v, κ_v), D⊢_v ∈ TM); F⊢_v ≅ F^Θ_v |
+| §3 | `iut_global_realified`, `iut_f_monoglob`, `iut_theta_hodge_theater_def` · `CMonoGlobMod`, `CMonoGlobTht`, `DMonoGlobMod`, `LogModPV`, `RhoThetaV`, `RhoDV`, `FMonoGlobD`, `FrobeniusElement`, `DefThreeSix`, `CorThreeSeven`, `ThetaDilation` | Prime(C⊩_mod) ≅ V_mod; ρ_v = 1/[K_v:(F_mod)_v]; ρ^Θ_v evaluated at the label j gives j²·log p_v/[K_v:(F_mod)_v]; the Frobenius element ×e_v or ÷2π; F⊩_mod = (C⊩_mod, Prime ≅ V, {F⊢_v}, {ρ_v}) ≅ F⊩_tht; the Θ-Hodge theater ({F̲_v}, F⊩_mod) with (a)(b)(c); the Cor 3.7 checks on a Θ-link (full poly-iso, D⊢_v preserved, O× preserved, rings not) |
+| §4 | `iut_labcusp_torsor`, `iut_global_base`, `iut_valuation_orbit` · `LabCusp`, `EtaV`, `DCircAstGlobal`, `VDCircAst`, `AutEpsilon`, `AutSL`, `BorelSubgroup`, `SemiUnipotentSubgroup`, `VPmUn`, `VBor`, `VK`, `PhiNFBulletV`, `ArithLocalAnalyticSection` | LabCusp(†D_v) an F_l^*-torsor with †η_v, compatible across v (Prop 4.2); D^⊛ = B(C̲_K)^0 with \|Borel/±1\| = l(l−1)²/2 ⊇ \|semi-unipotent/±1\| = l(l−1), quotient F_l^*; the orbits V ⊆ V^±un ⊆ V^Bor ⊆ V(K) with bounds |
+| §4 | `iut_eval_points`, `iut_theta_bridge_piece`, `iut_label_transport`, `iut_iso_torsor`, `iut_forgetful_counts` · `MuMinus`, `EvaluationPoint`, `EvaluationSection`, `PhiThetaVJ`, `PhiLC`, `ChiJ`, `ZetaLabel`, `DNFBridge`, `DThetaBridge`, `DThetaNFHodgeTheater`, `DThetaNFLink`, `SynchronizedLabels` | evaluation points labelled \|F_l\| with Θ̲_v ↦ q̲_v^{j²}; φ^Θ_{v_j} via the evaluation section \|j\| at bad v, the full poly-iso at good v; †χ, †ζ; the torsors F_l^*, 1, 1, F_l^* (Prop 4.8) and {±1}×{±1}^V, F_l^{⋊±}, {±1}, F_l^{⋊±}×{±1}^V (Prop 6.6); (l*)^{l*} → l*! and (l±)^{l±} → l±! |
+| §5 | `iut_global_frobenioid`, `iut_distribution`, `iut_strip_functor` · `FCircAstGlobal`, `FCircAstPrime`, `FCircAstMod`, `FCircAstJ`, `FCircAstAngleJ`, `FCircAstJCapsule`, `PhiCircAst`, `PiRat`, `DCircAstMod`, `DistributionVJ`, `KummerReady`, `KummerBlind`, `DeltaValuation`, `PsiNFBridge`, `PsiThetaBridge`, `PivotalDistribution`, `FDCircAst`, `StripLifting` | F^⊛, F^⊛′ Kummer-ready, F^⊛_mod, F^⊛_j, F^⊛_⟨J⟩, F^⊛_J Kummer-blind; V_j, V_⟨J⟩ (diagonal), V_J = ∏ V_j; log-volumes averaged (÷ l*) on F_⟨J⟩, summed on F_J (Rem 5.4.2); F ↦ D bijective on Isom, F⊢ ↦ D⊢ only surjective (Cor 5.3); lifting a D-prime-strip to an F-prime-strip |
+| §6 | `iut_fl_semi_pm_set`, `iut_labcusp_pm_torsor`, `iut_sign_vector`, `iut_prop_six_seven` · `FlSemiPmGroup`, `FlSemiPmTorsor`, `PositiveElement`, `DPmV`, `LabCuspPm`, `EtaZeroV`, `EtaPmV`, `AutPlus`, `AutMinus`, `AutAlpha`, `SignVector`, `DCircDotPmGlobal`, `AutPm`, `AutCsp`, `VPm`, `MinusOneFl`, `AlphaThetaPm`, `PhiThetaEllBulletV`, `GammaPm`, `TAbs`, `TStar`, `DThetaPmBridge`, `DThetaEllBridge`, `DThetaPmEllHodgeTheater`, `ZetaPm`, `XiSync`, `PropSixSeven`, `DThetaPmEllLink`, `DagHTDThetaPmEllNF`, `HalfPlaneDictionary`, `GeometricBasepoint`, `FigSixSix` | F_l^{⋊±}-group ({±1}-orbit of bijections, Aut_+ ⊆ Aut_± of orders 1 ⊆ 2) vs torsor (F_l^{⋊±}-orbit, l ⊆ 2l); \|T\| = l± and T* = l*; LabCusp± with †η⁰_v, †η^±_v and [Aut : Aut_+] = 2; D^⊚± = B(X̲_K)^0 with Aut_±/Aut_csp ≅ F_l^{⋊±}; Prop 6.7: ±t ↦ \|t\|, D_0, D_⊞ ↦ D_>; S*_j ↪ S^±_{j+1}; the upper half-plane dictionary (Fig 6.4) and the Frobenioids of a Θ±ell NF-Hodge theater (Fig 6.6) |
+
+Two corrections that reading the paper forced on the earlier model: the
+isomorphisms of a Θ±-bridge form a torsor over {±1} × {±1}^V (Prop 6.6 (i)),
+not over F_l^{⋊±} (that is the Θell-bridge, Prop 6.6 (ii)); and Def 3.1 (c)
+requires l to be prime to the residue characteristics of V^bad_mod, which the
+generators and validators now enforce. The paper's own glyph for the
+Θ±-bridge target does not survive text extraction from the PDF; this toolkit
+keeps writing it ⊞ (`BoxPlus`).
 
 ## 9. Where each object appears in the web app
 

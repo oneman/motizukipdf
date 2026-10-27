@@ -105,7 +105,7 @@
     }
     var dmod = 1 + r(3), l = LS[r(6)], ps = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31], used = {}, V = [];
     var nbad = 1 + r(4);
-    for (var i = 0; i < nbad; i++) { var k; do { k = r(10); } while (used[k]); used[k] = 1; var v = val('v' + ps[k], ps[k], 'badMultiplicative', 1 + r(6)); v.eMod = v.eK = 1 + r(dmod); V.push(v); }
+    for (var i = 0; i < nbad; i++) { var k, oq; do { k = r(10); } while (used[k] || ps[k] === l); used[k] = 1; do { oq = 1 + r(6); } while (oq % l === 0); var v = val('v' + ps[k], ps[k], 'badMultiplicative', oq); v.eMod = v.eK = 1 + r(dmod); V.push(v); }   // [IUTchI] Def 3.1 (c): l prime to p_v and to ord(q_v) on V^bad_mod
     for (k = 0; k < 10 && V.length < 8; k++) if (!used[k]) { used[k] = 1; V.push(val('v' + ps[k], ps[k], 'good', 0)); }
     V.push(val('v2', 2, r(2) ? 'good' : 'badMultiplicative', 2 + 2 * r(3)));
     V.push(val('vinf', 0, 'good', 0));
@@ -145,6 +145,7 @@
       if (v.reduction === 'badMultiplicative') {
         if (v.p % 2) nbadOdd++; else nbadEven++;
         if (!(v.ordQ > 0)) r.add('error', 'QUnderV', '[IUTchI] Ex 3.2', v.name + ': bad multiplicative reduction needs ord(q_v) > 0');
+        if (v.inVBadMod && v.p === d.l) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (c)', v.name + ': l must be prime to the residue characteristics of V^bad_mod');
         if (v.inVBadMod && v.p % 2 === 0) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (e)', v.name + ': V^bad_mod has odd residue characteristic');
         if (v.ordQ % d.l === 0) r.add('warn', 'QUnderV', '[IUTchI] Def 3.1; [IUTchIV] Prop 1.8 (vii)', v.name + ': l | ord(q_v) = ' + v.ordQ);
       }
