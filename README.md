@@ -188,7 +188,7 @@ htdocs/     index.html · css/app.css · engine/iut.wasm.js (generated) · data/
             draw, diagrams, ui, app) · js/views/ (types, procs, lattice, examples, ids) · test.js
 docs/       IDENTIFIERS.md, PROCESSES.md (generated) · DATA_MODEL.md
 lean/       lakefile.toml · IUT.lean · IUT/ (Identifiers, Labels, InitialThetaData, PrimeStrip, HodgeTheater,
-            Link, LogThetaLattice, Multiradial, Species, Construction, Processes, LeanForm, StageTwo, StageThree, StageFour) — Lean 4 / Mathlib port with proofs
+            Link, LogThetaLattice, Multiradial, Species, Construction, Processes, LeanForm, StageTwo, StageThree, StageFour, StageFive) — Lean 4 / Mathlib port with proofs
 scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check) · web/ (build-engine.sh,
             gen-types.js) · manual/ (build.js, pageindex.py, lib/)
 ```
