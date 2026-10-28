@@ -16,6 +16,7 @@ Root module: imports every module of the library.
 * `IUT.Processes`        — the process table (`docs/PROCESSES.md`)
 * `IUT.LeanForm`         — Stage 1 of the LeanForm main strategy ([FormIUT] §2, §4): the four triangles, IPL, APT, "3.11.5 ⟹ 3.12"
 * `IUT.StageTwo`         — Stage 2: the proof of [IUTchIII] Thm 3.11 modulo [IUTchI-II]: inputs, steps, the data (a)(b)(c), Thm 3.11 ⟹ the comparison
+* `IUT.StageThree`       — Stage 3: [IUTchI-II] modulo the earlier results (1995–2015): the 17 papers, 22 results, 42 steps; Galois evaluation modulo [EtTh], the monoids, symmetrization, the ladder, Cor 4.10
 -/
 import IUT.Identifiers
 import IUT.Labels
@@ -30,3 +31,4 @@ import IUT.Construction
 import IUT.Processes
 import IUT.LeanForm
 import IUT.StageTwo
+import IUT.StageThree
