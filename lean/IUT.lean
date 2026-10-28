@@ -18,6 +18,7 @@ Root module: imports every module of the library.
 * `IUT.StageTwo`         — Stage 2: the proof of [IUTchIII] Thm 3.11 modulo [IUTchI-II]: inputs, steps, the data (a)(b)(c), Thm 3.11 ⟹ the comparison
 * `IUT.StageThree`       — Stage 3: [IUTchI-II] modulo the earlier results (1995–2015): the 17 papers, 22 results, 42 steps; Galois evaluation modulo [EtTh], the monoids, symmetrization, the ladder, Cor 4.10
 * `IUT.StageFour`        — Stage 4: the earlier results themselves: `l` exists, `ℚ_{>0} ∩ Ẑ× = {1}`, the theta values `q^{j²}`, elementary Frobenioids and realification, sections, slim groups, the tempered tower; the rest stated as hypotheses
+* `IUT.StageFive`        — Stage 5: the numerical aspects: [IUTchIV] Thm 1.10's inequality from `C_Θ ≥ −1`, Cor 2.2 ⟹ Cor 2.3, Bertrand in place of the prime number theorem, [ExpEst] Lemmas 5.5–5.6 and the numerics of Fermat's Last Theorem for `p > 1.615·10^14`
 -/
 import IUT.Identifiers
 import IUT.Labels
@@ -34,3 +35,4 @@ import IUT.LeanForm
 import IUT.StageTwo
 import IUT.StageThree
 import IUT.StageFour
+import IUT.StageFive
