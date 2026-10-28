@@ -14,6 +14,7 @@ Root module: imports every module of the library.
 * `IUT.Species`          — species and mutations ([IUTchIV] §3)
 * `IUT.Construction`     — the constructions of [IUTchI] §0–§6 (`src/iut_i.h`): cusps, torsors, bridges
 * `IUT.Processes`        — the process table (`docs/PROCESSES.md`)
+* `IUT.LeanForm`         — Stage 1 of the LeanForm main strategy ([FormIUT] §2, §4): the four triangles, IPL, APT, "3.11.5 ⟹ 3.12"
 -/
 import IUT.Identifiers
 import IUT.Labels
@@ -26,3 +27,4 @@ import IUT.Multiradial
 import IUT.Species
 import IUT.Construction
 import IUT.Processes
+import IUT.LeanForm
