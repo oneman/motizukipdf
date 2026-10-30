@@ -105,6 +105,14 @@ forgetful mutation between kinds; the validator checks, for instance, that a
 mono-analytic strip has forgotten Π_v, that an étale-like strip carries no
 monoid, and that F⊢×μ has no O▶.
 
+The nine kinds are drawn on one page in
+[primestrips-infographic.png](primestrips-infographic.png) (3840 × 2160; SVG
+master [primestrips-infographic.svg](primestrips-infographic.svg)): the
+forgetful functors between them and the ladder of [IUTchII] Def 4.9, the flags
+each kind carries at v, the named strips of a Hodge theater and the kind each
+link glues, the validator rule by rule, and one F⊩▶×μ-strip as the program
+prints it (`node scripts/infographic/primestrips.js`).
+
 ## 5. Hodge theaters — `iut_hodge_theater` (`ThetaPmEllNFHodgeTheater`)
 
 [IUTchI] Def 6.13 (iii); pictures in [Pano] §3 and [Alien] §3.3 (v) Fig 3.8. A

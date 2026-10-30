@@ -12,6 +12,11 @@ SVG master [identifiers-infographic.svg](identifiers-infographic.svg)) — the s
 mutations from initial Θ-data to the inequality, every identifier by family and the processes by paper.
 Regenerate it with `node scripts/infographic/build.js` after changing this table.
 
+The nine kinds of prime-strip on one page: [primestrips-infographic.png](primestrips-infographic.png) (3840 × 2160;
+SVG master [primestrips-infographic.svg](primestrips-infographic.svg)) — the forgetful functors between the kinds,
+what each kind carries at v, where each occurs, what the validator checks and one strip as the program holds it.
+Regenerate it with `node scripts/infographic/primestrips.js` after changing the kind table.
+
 ## Symbol dictionary
 
 | symbol | word | symbol | word | symbol | word |

@@ -194,6 +194,10 @@ void iut_md_idents(FILE *f)
                "SVG master [identifiers-infographic.svg](identifiers-infographic.svg)) — the symbol dictionary, the species and\n"
                "mutations from initial Θ-data to the inequality, every identifier by family and the processes by paper.\n"
                "Regenerate it with `node scripts/infographic/build.js` after changing this table.\n\n");
+    fprintf(f, "The nine kinds of prime-strip on one page: [primestrips-infographic.png](primestrips-infographic.png) (3840 × 2160;\n"
+               "SVG master [primestrips-infographic.svg](primestrips-infographic.svg)) — the forgetful functors between the kinds,\n"
+               "what each kind carries at v, where each occurs, what the validator checks and one strip as the program holds it.\n"
+               "Regenerate it with `node scripts/infographic/primestrips.js` after changing the kind table.\n\n");
     fprintf(f, "## Symbol dictionary\n\n| symbol | word | symbol | word | symbol | word |\n|---|---|---|---|---|---|\n");
     fprintf(f, "| † | Dag | ‡ | Ddag | ∗ | Ast |\n| ◦ | Circ | • | Bullet | ⊢ | Mono |\n| ⊩ | MonoGlob | ▶ | Val | × | Units |\n");
     fprintf(f, "| ×μ | UnitsModTors | μ | Tors | ⊥ | Perp |\n| ± | Pm | ⋊ | Semi | ⊞ | BoxPlus |\n| ⊚ | CircDot | ⊛ | CircAst | Δ (label) | Triangle |\n");
