@@ -190,6 +190,10 @@ void iut_md_idents(FILE *f)
                "symbol that is not an English letter (†, ‡, ∗, ◦, •, ⊢, ⊩, ▶, ×, μ, ⊥, ±, ⋊, ⊞, ⊚, ⊛, Δ, >, ∞, …)\n"
                "gets a unique identifier matching `^[A-Za-z]+$`. Identifiers are unique\n"
                "case-insensitively, so they can be used as C identifiers, JS keys, file names and URL fragments.\n\n");
+    fprintf(f, "The whole table on one page: [identifiers-infographic.png](identifiers-infographic.png) (3840 × 2160;\n"
+               "SVG master [identifiers-infographic.svg](identifiers-infographic.svg)) — the symbol dictionary, the species and\n"
+               "mutations from initial Θ-data to the inequality, every identifier by family and the processes by paper.\n"
+               "Regenerate it with `node scripts/infographic/build.js` after changing this table.\n\n");
     fprintf(f, "## Symbol dictionary\n\n| symbol | word | symbol | word | symbol | word |\n|---|---|---|---|---|---|\n");
     fprintf(f, "| † | Dag | ‡ | Ddag | ∗ | Ast |\n| ◦ | Circ | • | Bullet | ⊢ | Mono |\n| ⊩ | MonoGlob | ▶ | Val | × | Units |\n");
     fprintf(f, "| ×μ | UnitsModTors | μ | Tors | ⊥ | Perp |\n| ± | Pm | ⋊ | Semi | ⊞ | BoxPlus |\n| ⊚ | CircDot | ⊛ | CircAst | Δ (label) | Triangle |\n");

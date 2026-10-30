@@ -15,7 +15,8 @@ validators, a terminal UI and a web app:
   every object whose notation uses symbols (†HT → `DagHodgeTheater`,
   F⊢×μ → `FMonoUnitsModTorsPrimeStrip`, Θ×μ_LGP-link →
   `ThetaUnitsModTorsLGPTorsorLink`, F⊩_Δ → `FMonoGlobTriangle`, S^±_{j+1} →
-  `SPmJPlusOne`, …), generated from the C source,
+  `SPmJPlusOne`, …), generated from the C source, with a 4K infographic of the
+  whole table (`docs/identifiers-infographic.png`, `node scripts/infographic/build.js`),
 * `docs/DATA_MODEL.md` — what each type models, with citations into the PDFs,
   and what the program does and does not compute,
 * `docs/PROCESSES.md` — the **operations layer**: every step / process of
