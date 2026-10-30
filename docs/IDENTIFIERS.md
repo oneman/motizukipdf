@@ -492,6 +492,11 @@ A *species* is a set-theoretic formula defining a type of mathematical object; a
 ([IUTchIV] Def. 3.1, 3.3). The program implements each species as a C struct and each
 mutation as a function.
 
+The 13 mutations on one page: [mutations-infographic.png](mutations-infographic.png) (3840 × 2160;
+SVG master [mutations-infographic.svg](mutations-infographic.svg)) — the mutation-history they form,
+what each one carries across (Π_v, G_v, O×μ, value groups, rings, C⊩, log-volumes), one card per
+mutation with its C function and processes. Regenerate it with `node scripts/infographic/mutations.js`.
+
 | species | notation | ref | data |
 |---|---|---|---|
 | `InitialThetaData` | initial Θ-data | [IUTchI] Def 3.1 | (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲) satisfying the conditions of Def 3.1 |

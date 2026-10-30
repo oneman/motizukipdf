@@ -22,7 +22,11 @@ log-theta-lattice is the mutation-history that matters. The toolkit takes this
 literally: every species is a C struct, every mutation a function, and the
 lattice is a graph of structs connected by applied links. The tables
 `iut_species_table` / `iut_mutation_table` (exported to `docs/IDENTIFIERS.md`
-and `htdocs/data/types.js`) list which struct implements which species.
+and `htdocs/data/types.js`) list which struct implements which species. The
+13 mutations are drawn on one page in
+[mutations-infographic.png](mutations-infographic.png): the mutation-history
+they form, what each carries across a link or forgets, and the C function and
+processes behind each (`node scripts/infographic/mutations.js`).
 
 Because most of the notation uses symbols that are not letters (†HT, ‡HT,
 F⊢×μ-prime-strip, F⊩_Δ, Θ×μ_LGP-link, F_l^{⋊±}, S^±_{j+1}, …) every such object

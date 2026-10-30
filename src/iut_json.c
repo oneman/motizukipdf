@@ -216,7 +216,12 @@ void iut_md_species(FILE *f)
     fprintf(f, "A *species* is a set-theoretic formula defining a type of mathematical object; a\n"
                "*mutation* is a species-theoretic functor; the log-theta-lattice is a *mutation-history*\n"
                "([IUTchIV] Def. 3.1, 3.3). The program implements each species as a C struct and each\n"
-               "mutation as a function.\n\n| species | notation | ref | data |\n|---|---|---|---|\n");
+               "mutation as a function.\n\n");
+    fprintf(f, "The %zu mutations on one page: [mutations-infographic.png](mutations-infographic.png) (3840 × 2160;\n"
+               "SVG master [mutations-infographic.svg](mutations-infographic.svg)) — the mutation-history they form,\n"
+               "what each one carries across (Π_v, G_v, O×μ, value groups, rings, C⊩, log-volumes), one card per\n"
+               "mutation with its C function and processes. Regenerate it with `node scripts/infographic/mutations.js`.\n\n"
+               "| species | notation | ref | data |\n|---|---|---|---|\n", iut_mutation_count);
     for (size_t i = 0; i < iut_species_count; ++i)
         fprintf(f, "| `%s` | %s | %s | %s |\n", iut_species_table[i].id, iut_species_table[i].name, iut_species_table[i].ref, iut_species_table[i].species_data);
     fprintf(f, "\n| mutation | notation | domain → codomain | ref | core? |\n|---|---|---|---|---|\n");
