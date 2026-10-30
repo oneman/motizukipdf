@@ -133,7 +133,7 @@ typedef enum {
     IUT_PS_FMonoUnitsModTors,/* F⊢×μ   {G_v ↷ O×μ = O×/Oμ} + ×μ-Kummer structure (Ism-orbit) */
     IUT_PS_FMonoValUnitsModTors, /* F⊢▶×μ {G_v ↷ O▶ × O×μ}                               */
     IUT_PS_FMonoGlob,        /* F⊩     (C⊩, Prime(C⊩)→V, F⊢, {ρ_v})  + global realified Frobenioid */
-    IUT_PS_FMonoGlobValUnitsModTors, /* F⊩▶×μ  like F⊩ with F⊢▶×μ; carries a pilot object   */
+    IUT_PS_FMonoGlobValUnitsModTors, /* F⊩▶×μ (C⊩, F⊢▶×μ, {ρ_v})  like F⊩ with F⊢▶×μ; carries a pilot object */
     IUT_PS_KIND_COUNT
 } iut_ps_kind;
 

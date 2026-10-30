@@ -4828,7 +4828,7 @@
     {
      "name": "IUT_PS_FMonoGlobValUnitsModTors",
      "value": null,
-     "comment": "F⊩▶×μ like F⊩ with F⊢▶×μ; carries a pilot object"
+     "comment": "F⊩▶×μ (C⊩, F⊢▶×μ, {ρ_v}) like F⊩ with F⊢▶×μ; carries a pilot object"
     },
     {
      "name": "IUT_PS_KIND_COUNT",
