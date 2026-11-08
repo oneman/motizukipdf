@@ -1,0 +1,453 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif">
+<title>The Hodge theaters of inter-universal Teichmüller theory, with jokes — docs/DATA_MODEL.md §5</title>
+<rect x="0" y="0" width="3840" height="2160" fill="#fcfcfb"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker><marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/></marker><marker id="arrO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#eb6834"/></marker><marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1baf7a"/></marker><marker id="arrV" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6250d6"/></marker><marker id="arrM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8984"/></marker></defs>
+<text x="80.0" y="92.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="62" font-weight="700" fill="#0b0b0b" text-anchor="start">The Hodge theaters of inter-universal Teichmüller theory, with jokes</text>
+<text x="80.0" y="140.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">A Hodge theater is one complete, self-contained copy of the arithmetic of an elliptic curve over a number field: local Frobenioids at every v ∈ V, a global realified Frobenioid, and capsules of prime-strips labelled by the l-torsion, tied</text>
+<text x="80.0" y="170.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">together by bridges. Two copies living in different universes can then be compared by links that are weaker than ring isomorphisms. [IUTchI] builds them in stages: the Θ-HT (§3), the ΘNF-HT (§4–5) and the Θ±ell-HT (§6), and then glues</text>
+<text x="80.0" y="200.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">the last two into the Θ±ell NF-HT, one vertex of the log-theta-lattice ([IUTchIII] Def 1.4). Every number below is what the toolkit computes for abc(1,2400,2401) l=13 (iut walk). Every type also gets a joke from Japanese pop culture, because</text>
+<text x="80.0" y="230.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">the theory is very long and the reader deserves a break.</text>
+<rect x="2684.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="2746.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">12</text>
+<text x="2746.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">Hodge-theater ids</text>
+<rect x="2820.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="2882.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">10</text>
+<text x="2882.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">bridges</text>
+<rect x="2956.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3018.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">9</text>
+<text x="3018.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">links</text>
+<rect x="3092.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3154.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">13</text>
+<text x="3154.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">l</text>
+<rect x="3228.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3290.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">6</text>
+<text x="3290.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">l* = |J|</text>
+<rect x="3364.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3426.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">13</text>
+<text x="3426.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">|T| = |F_l|</text>
+<rect x="3500.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3562.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">6</text>
+<text x="3562.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">|V|</text>
+<rect x="3636.0" y="46.0" width="124.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3698.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="36" font-weight="600" fill="#0b0b0b" text-anchor="middle">15.17</text>
+<text x="3698.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="middle">l(l+1)/12</text>
+<rect x="80.0" y="300.0" width="2600.0" height="790.0" rx="14" fill="#f4f4f1"/>
+<text x="108.0" y="344.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="30" font-weight="600" fill="#0b0b0b" text-anchor="start">Anatomy of one vertex • : a Θ±ell NF-Hodge theater</text>
+<text x="108.0" y="376.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="19" font-weight="400" fill="#52514e" text-anchor="start">Top band: the Θ±ell-Hodge theater, built on the additive symmetry F_l^{⋊±}. Bottom band: the ΘNF-Hodge theater, built on the multiplicative symmetry F_l^*. Each band is a capsule of prime-strips with a bridge out to each side. The grey threads between the two capsules are the</text>
+<text x="108.0" y="401.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="19" font-weight="400" fill="#52514e" text-anchor="start">gluing of [IUTchI] Prop 6.7, drawn exactly as iut run MapLabels prints it: ±t ↦ |t| ∈ F_l^*, while 0 and ⊞ both go to &gt;. Bridge labels give the order of the isomorphism torsor.</text>
+<rect x="104.0" y="460.0" width="2552.0" height="210.0" rx="12" fill="rgb(237,243,248)"/>
+<rect x="104.0" y="770.0" width="2552.0" height="210.0" rx="12" fill="rgb(251,242,237)"/>
+<text x="124.0" y="490.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="600" fill="#2a78d6" text-anchor="start" letter-spacing="1.2">Θ±ell-HT · ADDITIVE / GEOMETRIC · symmetry F_l^{⋊±} = F_l ⋊ {±1} · conjugate synchronization</text>
+<text x="124.0" y="964.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="600" fill="#eb6834" text-anchor="start" letter-spacing="1.2">ΘNF-HT · MULTIPLICATIVE / ARITHMETIC · symmetry F_l^* = F_l^×/{±1} · Kummer theory of the number field</text>
+<rect x="666.0" y="516.0" width="954.0" height="120.0" rx="12" fill="none" stroke="#2a78d6" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="676.0" y="538.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#2a78d6" text-anchor="start">F_T  (t ∈ F_l)</text>
+<rect x="680.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="711.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">-6</text>
+<text x="711.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="752.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="783.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">-5</text>
+<text x="783.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="824.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="855.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">-4</text>
+<text x="855.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="896.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="927.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">-3</text>
+<text x="927.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="968.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="999.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">-2</text>
+<text x="999.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1040.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1071.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">-1</text>
+<text x="1071.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1112.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(212,238,228)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="1143.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<text x="1143.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1184.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1215.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">+1</text>
+<text x="1215.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1256.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1287.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">+2</text>
+<text x="1287.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1328.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1359.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">+3</text>
+<text x="1359.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1400.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1431.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">+4</text>
+<text x="1431.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1472.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1503.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">+5</text>
+<text x="1503.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1544.0" y="550.0" width="62.0" height="64.0" rx="8" fill="rgb(218,231,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1575.0" y="580.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">+6</text>
+<text x="1575.0" y="602.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="130.0" y="516.0" width="320.0" height="132.0" rx="10" fill="#fff" stroke="rgb(137,179,231)" stroke-width="1.5"/>
+<rect x="130.0" y="516.0" width="7.0" height="132.0" rx="3.5" fill="#2a78d6"/>
+<text x="152.0" y="558.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#0b0b0b" text-anchor="start">D^⊚±</text>
+<text x="152.0" y="586.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">B(X̲_K)^0 · Π_{X_K}</text>
+<text x="152.0" y="634.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#8a8984" text-anchor="start">DCircDotPm</text>
+<rect x="1830.0" y="516.0" width="260.0" height="132.0" rx="10" fill="#fff" stroke="rgb(137,179,231)" stroke-width="1.5"/>
+<rect x="1830.0" y="516.0" width="7.0" height="132.0" rx="3.5" fill="#2a78d6"/>
+<text x="1852.0" y="558.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#0b0b0b" text-anchor="start">F_⊞</text>
+<text x="1852.0" y="586.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">target of the Θ±-bridge</text>
+<text x="1852.0" y="634.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#8a8984" text-anchor="start">FBoxPlus</text>
+<line x1="662.0" y1="582.0" x2="456.0" y2="582.0" stroke="#2a78d6" stroke-width="2.2" marker-end="url(#arrB)"/>
+<text x="559.0" y="570.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="700" fill="#2a78d6" text-anchor="middle">Θell-bridge φ^Θell</text>
+<text x="559.0" y="606.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F_l^{⋊±}-torsor · 26</text>
+<line x1="1624.0" y1="582.0" x2="1824.0" y2="582.0" stroke="#2a78d6" stroke-width="2.2" marker-end="url(#arrB)"/>
+<text x="1724.0" y="570.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="700" fill="#2a78d6" text-anchor="middle">Θ±-bridge ψ^Θ±</text>
+<text x="1724.0" y="606.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">{±1}×{±1}^V · 128</text>
+<rect x="832.0" y="794.0" width="622.0" height="120.0" rx="12" fill="none" stroke="#eb6834" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="842.0" y="816.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="start">F_J  (j ∈ F_l^*)</text>
+<rect x="846.0" y="828.0" width="84.0" height="64.0" rx="8" fill="rgb(249,228,219)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="888.0" y="858.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<text x="888.0" y="880.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="948.0" y="828.0" width="84.0" height="64.0" rx="8" fill="rgb(249,228,219)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="990.0" y="858.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<text x="990.0" y="880.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1050.0" y="828.0" width="84.0" height="64.0" rx="8" fill="rgb(249,228,219)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="1092.0" y="858.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="1092.0" y="880.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1152.0" y="828.0" width="84.0" height="64.0" rx="8" fill="rgb(249,228,219)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="1194.0" y="858.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">4</text>
+<text x="1194.0" y="880.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1254.0" y="828.0" width="84.0" height="64.0" rx="8" fill="rgb(249,228,219)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="1296.0" y="858.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">5</text>
+<text x="1296.0" y="880.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="1356.0" y="828.0" width="84.0" height="64.0" rx="8" fill="rgb(249,228,219)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="1398.0" y="858.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#0b0b0b" text-anchor="middle">6</text>
+<text x="1398.0" y="880.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F</text>
+<rect x="130.0" y="796.0" width="320.0" height="132.0" rx="10" fill="#fff" stroke="rgb(243,171,142)" stroke-width="1.5"/>
+<rect x="130.0" y="796.0" width="7.0" height="132.0" rx="3.5" fill="#eb6834"/>
+<text x="152.0" y="838.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#0b0b0b" text-anchor="start">F_⊛</text>
+<text x="152.0" y="866.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">Π_{C_K} ↷ F_mod^×</text>
+<text x="152.0" y="914.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#8a8984" text-anchor="start">FCircAst</text>
+<rect x="1830.0" y="796.0" width="260.0" height="132.0" rx="10" fill="#fff" stroke="rgb(243,171,142)" stroke-width="1.5"/>
+<rect x="1830.0" y="796.0" width="7.0" height="132.0" rx="3.5" fill="#eb6834"/>
+<text x="1852.0" y="838.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#0b0b0b" text-anchor="start">F_&gt;</text>
+<text x="1852.0" y="866.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">target of the Θ-bridge</text>
+<text x="1852.0" y="914.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#8a8984" text-anchor="start">FGt</text>
+<line x1="828.0" y1="860.0" x2="456.0" y2="860.0" stroke="#eb6834" stroke-width="2.2" marker-end="url(#arrO)"/>
+<text x="642.0" y="848.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="700" fill="#eb6834" text-anchor="middle">NF-bridge ψ^NF</text>
+<text x="642.0" y="884.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">F_l^*-torsor · 6</text>
+<line x1="1458.0" y1="860.0" x2="1824.0" y2="860.0" stroke="#eb6834" stroke-width="2.2" marker-end="url(#arrO)"/>
+<text x="1641.0" y="848.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="700" fill="#eb6834" text-anchor="middle">Θ-bridge ψ^Θ</text>
+<text x="1641.0" y="884.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="middle">trivial · 1</text>
+<path d="M711,614 C711,674 1398,758 1398,826" fill="none" stroke="#b9b8b3" stroke-width="1.5" opacity="0.9"/>
+<path d="M783,614 C783,674 1296,758 1296,826" fill="none" stroke="#b9b8b3" stroke-width="1.5" opacity="0.9"/>
+<path d="M855,614 C855,674 1194,758 1194,826" fill="none" stroke="#b9b8b3" stroke-width="1.5" opacity="0.9"/>
+<path d="M927,614 C927,674 1092,758 1092,826" fill="none" stroke="#b9b8b3" stroke-width="1.5" opacity="0.9"/>
+<path d="M999,614 C999,674 990,758 990,826" fill="none" stroke="#b9b8b3" stroke-width="1.5" opacity="0.9"/>
+<path d="M1071,614 C1071,674 888,758 888,826" fill="none" stroke="#b9b8b3" stroke-width="1.5" opacity="0.9"/>
+<path d="M1143,614 C1143,684 1710,756 1828,826" fill="none" stroke="#1baf7a" stroke-width="1.8" marker-end="url(#arrG)" stroke-dasharray="5 4"/>
+<path d="M1215,614 C1215,674 888,758 888,826" fill="none" stroke="#52514e" stroke-width="1.5" opacity="0.9"/>
+<path d="M1287,614 C1287,674 990,758 990,826" fill="none" stroke="#52514e" stroke-width="1.5" opacity="0.9"/>
+<path d="M1359,614 C1359,674 1092,758 1092,826" fill="none" stroke="#52514e" stroke-width="1.5" opacity="0.9"/>
+<path d="M1431,614 C1431,674 1194,758 1194,826" fill="none" stroke="#52514e" stroke-width="1.5" opacity="0.9"/>
+<path d="M1503,614 C1503,674 1296,758 1296,826" fill="none" stroke="#52514e" stroke-width="1.5" opacity="0.9"/>
+<path d="M1575,614 C1575,674 1398,758 1398,826" fill="none" stroke="#52514e" stroke-width="1.5" opacity="0.9"/>
+<line x1="1955.0" y1="650.0" x2="1955.0" y2="794.0" stroke="#1baf7a" stroke-width="2.5"/>
+<line x1="1965.0" y1="650.0" x2="1965.0" y2="794.0" stroke="#1baf7a" stroke-width="2.5"/>
+<text x="1940.0" y="718.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="700" fill="#1baf7a" text-anchor="end">identified: 0, ⊞ ↦ &gt;</text>
+<text x="1940.0" y="740.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="end">gluing unique · Rem 6.12.2</text>
+<line x1="290.0" y1="652.0" x2="290.0" y2="792.0" stroke="#8a8984" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrM)"/>
+<text x="302.0" y="728.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">double cover  D^⊚± → D^⊛  (Aut ↠ F_l^*, kernel Aut_±)</text>
+<text x="1143.0" y="710.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="middle" opacity="0">F_l ⊇ F_l^× ↠ F_l^*</text>
+<rect x="2124.0" y="500.0" width="526.0" height="480.0" rx="12" fill="rgb(238,237,248)" stroke="rgb(175,166,233)" stroke-width="1.5"/>
+<text x="2142.0" y="538.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#6250d6" text-anchor="start">Θ-Hodge theater †HT^Θ</text>
+<text x="2142.0" y="564.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">reached from F_&gt; by ψ^Θ_⊛ ([IUTchI] Def 5.5)</text>
+<text x="2142.0" y="600.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="19" font-weight="700" fill="#0b0b0b" text-anchor="start">F⊩_mod  ∋ q-pilot {q̲_v}</text>
+<text x="2142.0" y="625.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">log-vol −|log q| = -0.9842</text>
+<text x="2142.0" y="660.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="19" font-weight="700" fill="#0b0b0b" text-anchor="start">F⊩_tht  ∋ Θ-pilot {q̲_v^{j²}}</text>
+<text x="2142.0" y="685.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">Θ̲_v(j), j = 1…6: q̲^1, q̲^4, q̲^9, q̲^16, q̲^25, q̲^36</text>
+<text x="2142.0" y="720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="19" font-weight="700" fill="#0b0b0b" text-anchor="start">naive log-vol of the Θ-pilot</text>
+<text x="2142.0" y="745.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">-14.9267 = l(l+1)/12 · (−|log q|)</text>
+<text x="2142.0" y="780.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="19" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ-link (to the next vertex)</text>
+<text x="2142.0" y="805.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">†F⊩_tht ≅ ‡F⊩_mod, a full poly-isomorphism</text>
+<text x="2142.0" y="840.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="19" font-weight="700" fill="#0b0b0b" text-anchor="start">Checked by iut run (Cor 3.7)</text>
+<text x="2142.0" y="865.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">✓ Θ-link is the full poly-isomorphism F⊩_tht ≅ F⊩_mod · ✓</text>
+<text x="2142.0" y="886.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">D⊢_v = {G_v} preserved, Π_v not · ✓ O×_{C⊢v} preserved</text>
+<text x="2142.0" y="907.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">· ✓ the ring structures are not related by the Θ-link</text>
+<line x1="2094.0" y1="862.0" x2="2120.0" y2="862.0" stroke="#6250d6" stroke-width="2" marker-end="url(#arrV)"/>
+<text x="108.0" y="1018.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="600" fill="#8a8984" text-anchor="start" letter-spacing="1.5">BUILT IN STAGES</text>
+<rect x="290.0" y="992.0" width="155.3" height="52.0" rx="8" fill="rgb(232,230,246)"/>
+<rect x="290.0" y="992.0" width="5.0" height="52.0" rx="2.5" fill="#6250d6"/>
+<text x="308.0" y="1014.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ-HT</text>
+<text x="308.0" y="1034.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">[IUTchI] §3, Def 3.6</text>
+<line x1="451.3" y1="1018.0" x2="475.3" y2="1018.0" stroke="#52514e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="483.3" y="992.0" width="143.9" height="52.0" rx="8" fill="rgb(250,233,225)"/>
+<rect x="483.3" y="992.0" width="5.0" height="52.0" rx="2.5" fill="#eb6834"/>
+<text x="501.3" y="1014.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">ΘNF-HT</text>
+<text x="501.3" y="1034.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">§4–5, Def 4.6, 5.5</text>
+<line x1="633.2" y1="1018.0" x2="657.2" y2="1018.0" stroke="#52514e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="665.2" y="992.0" width="133.9" height="52.0" rx="8" fill="rgb(225,235,246)"/>
+<rect x="665.2" y="992.0" width="5.0" height="52.0" rx="2.5" fill="#2a78d6"/>
+<text x="683.2" y="1014.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ±ell-HT</text>
+<text x="683.2" y="1034.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">§6, Def 6.4, 6.13</text>
+<line x1="805.1" y1="1018.0" x2="829.1" y2="1018.0" stroke="#52514e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="837.1" y="992.0" width="158.8" height="52.0" rx="8" fill="rgb(223,242,234)"/>
+<rect x="837.1" y="992.0" width="5.0" height="52.0" rx="2.5" fill="#1baf7a"/>
+<text x="855.1" y="1014.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ±ell NF-HT</text>
+<text x="855.1" y="1034.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">Def 6.13 (iii)</text>
+<line x1="1001.9" y1="1018.0" x2="1025.9" y2="1018.0" stroke="#52514e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="1033.9" y="992.0" width="181.6" height="52.0" rx="8" fill="rgb(250,240,218)"/>
+<rect x="1033.9" y="992.0" width="5.0" height="52.0" rx="2.5" fill="#eda100"/>
+<text x="1051.9" y="1014.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">D-Θ±ell NF-HT</text>
+<text x="1051.9" y="1034.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">forget to D · Def 6.13 (ii)</text>
+<line x1="1221.5" y1="1018.0" x2="1245.5" y2="1018.0" stroke="#52514e" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="1253.5" y="992.0" width="138.1" height="52.0" rx="8" fill="rgb(219,236,218)"/>
+<rect x="1253.5" y="992.0" width="5.0" height="52.0" rx="2.5" fill="#008300"/>
+<text x="1271.5" y="1014.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">{n,m}HT</text>
+<text x="1271.5" y="1034.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">[IUTchIII] Def 1.4</text>
+<line x1="1451.6" y1="1012.0" x2="1491.6" y2="1012.0" stroke="#52514e" stroke-width="1.5"/>
+<text x="1501.6" y="1017.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">thread t ↦ |t|, t &gt; 0</text>
+<line x1="1451.6" y1="1036.0" x2="1491.6" y2="1036.0" stroke="#b9b8b3" stroke-width="1.5"/>
+<text x="1501.6" y="1041.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">thread −t ↦ |t|</text>
+<line x1="1711.6" y1="1012.0" x2="1751.6" y2="1012.0" stroke="#1baf7a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="1761.6" y="1017.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">0 ↦ &gt;  (the 0-strip joins F_⊞ at F_&gt;)</text>
+<line x1="1711.6" y1="1036.0" x2="1751.6" y2="1036.0" stroke="#8a8984" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="1761.6" y="1041.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">covering of base categories</text>
+<rect x="2710.0" y="300.0" width="1050.0" height="790.0" rx="14" fill="#f4f4f1"/>
+<text x="2738.0" y="344.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="30" font-weight="600" fill="#0b0b0b" text-anchor="start">How many ways to be the same</text>
+<text x="2738.0" y="376.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="19" font-weight="400" fill="#52514e" text-anchor="start">The isomorphisms between two copies of each piece form a torsor, and its order is how much &quot;which one is</text>
+<text x="2738.0" y="401.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="19" font-weight="400" fill="#52514e" text-anchor="start">which?&quot; the theory must carry around. Bars are log-scaled. These are the counts iut run</text>
+<text x="2738.0" y="426.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="19" font-weight="400" fill="#52514e" text-anchor="start">CountIsomorphismTorsors prints for l = 13, |V| = 6.</text>
+<rect x="2728.0" y="453.0" width="1014.0" height="47.0" rx="6" fill="#fff" opacity="0.6"/>
+<text x="2744.0" y="475.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">D-NF-bridge †φ^NF_⊛</text>
+<text x="2744.0" y="493.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over F_l^* · Prop 4.8 (i)</text>
+<rect x="3190.0" y="465.0" width="111.1" height="22.0" rx="4" fill="#eb6834" opacity="1"/>
+<text x="3311.1" y="482.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">6</text>
+<text x="2744.0" y="522.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">D-Θ-bridge †φ^Θ_⊛</text>
+<text x="2744.0" y="540.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over trivial · Prop 4.8 (ii)</text>
+<rect x="3190.0" y="512.0" width="4.0" height="22.0" rx="4" fill="#eb6834" opacity="1"/>
+<text x="3204.0" y="529.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">1</text>
+<rect x="2728.0" y="547.0" width="1014.0" height="47.0" rx="6" fill="#fff" opacity="0.6"/>
+<text x="2744.0" y="569.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">D-ΘNF-Hodge theater</text>
+<text x="2744.0" y="587.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over trivial · Prop 4.8 (iii)</text>
+<rect x="3190.0" y="559.0" width="4.0" height="22.0" rx="4" fill="#eb6834" opacity="1"/>
+<text x="3204.0" y="576.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">1</text>
+<text x="2744.0" y="616.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">gluing D-NF-bridge ∪ D-Θ-bridge</text>
+<text x="2744.0" y="634.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over F_l^* · Prop 4.8 (iv)</text>
+<rect x="3190.0" y="606.0" width="111.1" height="22.0" rx="4" fill="#eb6834" opacity="1"/>
+<text x="3311.1" y="623.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">6</text>
+<rect x="2728.0" y="641.0" width="1014.0" height="47.0" rx="6" fill="#fff" opacity="0.6"/>
+<text x="2744.0" y="663.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">D-Θ±-bridge †φ^Θ±_±</text>
+<text x="2744.0" y="681.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over {±1} × {±1}^V · Prop 6.6 (i)</text>
+<rect x="3190.0" y="653.0" width="300.9" height="22.0" rx="4" fill="#2a78d6" opacity="1"/>
+<text x="3500.9" y="670.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">128</text>
+<text x="2744.0" y="710.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">D-Θell-bridge †φ^Θell_±</text>
+<text x="2744.0" y="728.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over F_l^{⋊±} · Prop 6.6 (ii)</text>
+<rect x="3190.0" y="700.0" width="202.1" height="22.0" rx="4" fill="#2a78d6" opacity="1"/>
+<text x="3402.1" y="717.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">26</text>
+<rect x="2728.0" y="735.0" width="1014.0" height="47.0" rx="6" fill="#fff" opacity="0.6"/>
+<text x="2744.0" y="757.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">D-Θ±ell-Hodge theater</text>
+<text x="2744.0" y="775.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over {±1} · Prop 6.6 (iii)</text>
+<rect x="3190.0" y="747.0" width="43.0" height="22.0" rx="4" fill="#2a78d6" opacity="1"/>
+<text x="3243.0" y="764.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2744.0" y="804.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">gluing D-Θ±-bridge ∪ D-Θell-bridge</text>
+<text x="2744.0" y="822.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over F_l^{⋊±} × {±1}^V · Prop 6.6 (iv)</text>
+<rect x="3190.0" y="794.0" width="460.0" height="22.0" rx="4" fill="#2a78d6" opacity="1"/>
+<text x="3660.0" y="811.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">1664</text>
+<rect x="2728.0" y="829.0" width="1014.0" height="47.0" rx="6" fill="#fff" opacity="0.6"/>
+<text x="2744.0" y="851.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">NF-/Θ-bridges, ΘNF-HT (F-version)</text>
+<text x="2744.0" y="869.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over same as the D-versions · Cor 5.6 (i)–(iii)</text>
+<rect x="3190.0" y="841.0" width="4.0" height="22.0" rx="4" fill="#eb6834" opacity="0.55"/>
+<text x="3204.0" y="858.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">1</text>
+<text x="2744.0" y="898.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">Θ±-/Θell-bridges, Θ±ell-HT (F-version)</text>
+<text x="2744.0" y="916.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over same as the D-versions · Cor 6.12 (i)–(iii)</text>
+<rect x="3190.0" y="888.0" width="4.0" height="22.0" rx="4" fill="#2a78d6" opacity="0.55"/>
+<text x="3204.0" y="905.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">1</text>
+<rect x="2728.0" y="923.0" width="1014.0" height="47.0" rx="6" fill="#fff" opacity="0.6"/>
+<text x="2744.0" y="945.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="start">gluing Θ±ell-HT ∪ ΘNF-HT (Prop 6.7)</text>
+<text x="2744.0" y="963.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="start">over unique · Rem 6.12.2; Def 6.13</text>
+<rect x="3190.0" y="935.0" width="4.0" height="22.0" rx="4" fill="#2a78d6" opacity="0.55"/>
+<text x="3204.0" y="952.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="16" font-weight="500" fill="#0b0b0b" text-anchor="start">1</text>
+<text x="2738.0" y="988.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">Read it as: the F-versions (Frobenius-like) have exactly as many isomorphisms as their D-versions (étale-like), so the monoids add no extra</text>
+<text x="2738.0" y="1009.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">symmetry (Cor 5.6, 6.12). The one gluing that matters, Θ±ell-HT to ΘNF-HT, is unique.</text>
+<rect x="80.0" y="1116.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="80.0" y="1116.0" width="8.0" height="488.0" rx="4" fill="#6250d6"/>
+<text x="110.0" y="1162.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ-Hodge theater</text>
+<text x="110.0" y="1188.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchI] Def 3.6</text>
+<text x="110.0" y="1224.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#6250d6" text-anchor="start">†HT^Θ = ( {†F̲_v}_{v∈V} , †F⊩_mod )</text>
+<rect x="112.0" y="1247.0" width="6.0" height="6.0" rx="3" fill="#6250d6"/>
+<text x="128.0" y="1258.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Local Frobenioids F̲_v at every v ∈ V (at bad v: the tempered one, carrying the theta function) and one</text>
+<text x="128.0" y="1279.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">global realified Frobenioid F⊩_mod, subject to (a) local models, (b) global model, (c) compatibility.</text>
+<rect x="112.0" y="1295.0" width="6.0" height="6.0" rx="3" fill="#6250d6"/>
+<text x="128.0" y="1306.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">It holds the two pilots: F⊩_mod carries the q-parameters q̲_v = q_v^{1/2l}, F⊩_tht the theta values Θ̲_v with</text>
+<text x="128.0" y="1327.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Θ̲_v(j) = q̲_v^{j²}: q̲^1, q̲^4, q̲^9, q̲^16, q̲^25, q̲^36.</text>
+<rect x="112.0" y="1343.0" width="6.0" height="6.0" rx="3" fill="#6250d6"/>
+<text x="128.0" y="1354.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">The Θ-link is the full poly-isomorphism †F⊩_tht ≅ ‡F⊩_mod. It keeps D⊢_v and O×, never Π_v or the rings</text>
+<text x="128.0" y="1375.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">(Cor 3.7 (i)–(iii)).</text>
+<text x="110.0" y="1410.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">ThetaHodgeTheater · iut run AssembleThetaHodgeTheater</text>
+<rect x="102.0" y="1422.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.2"/>
+<rect x="102.0" y="1422.0" width="250.0" height="166.0" rx="10" fill="rgb(234,231,247)"/>
+<text x="227.0" y="1504.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="46" font-weight="700" fill="#6250d6" text-anchor="middle">戦闘力</text>
+<text x="116.0" y="1540.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Dragon Ball Z · the scouter</text>
+<text x="370.0" y="1448.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#6250d6" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="370.0" y="1472.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Point a scouter at the two pilots: the Θ-pilot's value group reads l(l+1)/12 =</text>
+<text x="370.0" y="1492.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">15.17 times the q-pilot's. &quot;It's over 15.17!&quot; doesn't have quite the same ring to</text>
+<text x="370.0" y="1513.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">it. Then again, the Θ-link has no ring at all.</text>
+<rect x="1007.0" y="1116.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="1007.0" y="1116.0" width="8.0" height="488.0" rx="4" fill="#eb6834"/>
+<text x="1037.0" y="1162.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">ΘNF-Hodge theater</text>
+<text x="1037.0" y="1188.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchI] Def 4.6, 5.5</text>
+<text x="1037.0" y="1224.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#eb6834" text-anchor="start">†F^⊛  ⟵ψ^NF⟵  †F_J  ⟶ψ^Θ⟶  †F_&gt;  ⇝  †HT^Θ</text>
+<rect x="1039.0" y="1247.0" width="6.0" height="6.0" rx="3" fill="#eb6834"/>
+<text x="1055.0" y="1258.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">A capsule F_J of l* = (l−1)/2 = 6 F-prime-strips, labelled j ∈ F_l^* = F_l^×/{±1}. The multiplicative, arithmetic</text>
+<text x="1055.0" y="1279.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">half.</text>
+<rect x="1039.0" y="1295.0" width="6.0" height="6.0" rx="3" fill="#eb6834"/>
+<text x="1055.0" y="1306.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">NF-bridge F_J → F_⊛ (Π_{C_K} ↷ F_mod^×) ties the labels to the number field; its isomorphisms form an</text>
+<text x="1055.0" y="1327.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">F_l^*-torsor (6). Θ-bridge F_J → F_&gt;: evaluation points labelled j, isomorphisms trivial.</text>
+<rect x="1039.0" y="1343.0" width="6.0" height="6.0" rx="3" fill="#eb6834"/>
+<text x="1055.0" y="1354.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">The D-version †D^⊛ ← †D_J → †D_&gt; has trivial automorphisms, but gluing its two bridges is an F_l^*-torsor</text>
+<text x="1055.0" y="1375.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">(Prop 4.8 (iii), (iv)).</text>
+<text x="1037.0" y="1410.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">ThetaNFHodgeTheater · DThetaNFHodgeTheater · NFBridge · ThetaBridge</text>
+<rect x="1029.0" y="1422.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.2"/>
+<rect x="1029.0" y="1422.0" width="250.0" height="166.0" rx="10" fill="rgb(250,234,227)"/>
+<text x="1154.0" y="1504.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="38.5" font-weight="700" fill="#eb6834" text-anchor="middle">ゲットだぜ!</text>
+<text x="1043.0" y="1540.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Pokémon · &quot;gotta catch 'em all&quot;</text>
+<text x="1297.0" y="1448.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#eb6834" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="1297.0" y="1472.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Gotta catch 'em all: one F-prime-strip per j = 1…6, but only up to ±1, so −3</text>
+<text x="1297.0" y="1492.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">and 3 count as the same catch. And the NF-bridge may give your team back</text>
+<text x="1297.0" y="1513.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">relabelled by any of the 6 elements of F_l^*. A torsor of trades.</text>
+<rect x="1934.0" y="1116.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="1934.0" y="1116.0" width="8.0" height="488.0" rx="4" fill="#2a78d6"/>
+<text x="1964.0" y="1162.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ±ell-Hodge theater</text>
+<text x="1964.0" y="1188.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchI] Def 6.13</text>
+<text x="1964.0" y="1224.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#2a78d6" text-anchor="start">†D^⊚±  ⟵φ^Θell⟵  †F_T  ⟶ψ^Θ±⟶  †F_⊞</text>
+<rect x="1966.0" y="1247.0" width="6.0" height="6.0" rx="3" fill="#2a78d6"/>
+<text x="1982.0" y="1258.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">A capsule F_T of l = 13 F-prime-strips labelled t ∈ F_l, with symmetry F_l^{⋊±} = F_l ⋊ {±1}. The additive,</text>
+<text x="1982.0" y="1279.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">geometric half: it drives conjugate synchronization.</text>
+<rect x="1966.0" y="1295.0" width="6.0" height="6.0" rx="3" fill="#2a78d6"/>
+<text x="1982.0" y="1306.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Θ±-bridge F_T → F_⊞: isomorphisms a torsor over {±1} × {±1}^V (2·2^6 = 128). Θell-bridge D_T → D^⊚± =</text>
+<text x="1982.0" y="1327.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">B(X̲_K)^0: an F_l^{⋊±}-torsor (2l = 26).</text>
+<rect x="1966.0" y="1343.0" width="6.0" height="6.0" rx="3" fill="#2a78d6"/>
+<text x="1982.0" y="1354.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">The Θ±ell-HT itself is determined up to a {±1}-torsor; gluing its two bridges, up to F_l^{⋊±} × {±1}^V (Prop</text>
+<text x="1982.0" y="1375.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">6.6).</text>
+<text x="1964.0" y="1410.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">ThetaPmEllHodgeTheater · DThetaPmEllHodgeTheater · ThetaPmBridge · ThetaEllBridge</text>
+<rect x="1956.0" y="1422.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.2"/>
+<rect x="1956.0" y="1422.0" width="250.0" height="166.0" rx="10" fill="rgb(227,236,247)"/>
+<text x="2081.0" y="1504.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="46" font-weight="700" fill="#2a78d6" text-anchor="middle">君のtは。</text>
+<text x="1970.0" y="1540.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Your Name (Kimi no Na wa) · body</text>
+<text x="1970.0" y="1556.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">swap</text>
+<text x="2224.0" y="1448.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#2a78d6" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="2224.0" y="1472.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Capsule members t and −t wake up in each other's bodies: −1_{F_l} swaps D_t</text>
+<text x="2224.0" y="1492.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">≅ D_{−t} and nobody can tell. &quot;Kimi no t wa?&quot; Only |t| survives the trip over to</text>
+<text x="2224.0" y="1513.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">the ΘNF side.</text>
+<rect x="2861.0" y="1116.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="2861.0" y="1116.0" width="8.0" height="488.0" rx="4" fill="#1baf7a"/>
+<text x="2891.0" y="1162.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">Θ±ell NF-Hodge theater</text>
+<text x="2891.0" y="1188.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchI] Def 6.13 (iii)</text>
+<text x="2891.0" y="1224.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#1baf7a" text-anchor="start">†HT^{Θ±ell NF} = Θ±ell-HT  ⊔_{0, ⊞ ↦ &gt;}  ΘNF-HT</text>
+<rect x="2893.0" y="1247.0" width="6.0" height="6.0" rx="3" fill="#1baf7a"/>
+<text x="2909.0" y="1258.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Glue the two halves along F_l ⊇ F_l^× ↠ F_l^*: ±t ↦ |t|, and both 0 and ⊞ go to &gt; (Prop 6.7). F_&gt; now carries</text>
+<text x="2909.0" y="1279.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">the Π copies of F_⊞.</text>
+<rect x="2893.0" y="1295.0" width="6.0" height="6.0" rx="3" fill="#1baf7a"/>
+<text x="2909.0" y="1306.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">The gluing is unique (Rem 6.12.2), and the F-versions of bridges and theaters have exactly the</text>
+<text x="2909.0" y="1327.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">isomorphisms of their D-versions (Cor 5.6, 6.12).</text>
+<rect x="2893.0" y="1343.0" width="6.0" height="6.0" rx="3" fill="#1baf7a"/>
+<text x="2909.0" y="1354.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">This is one vertex • of the log-theta-lattice, built in its own universe with its own fresh copies of every</text>
+<text x="2909.0" y="1375.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Frobenius-like object.</text>
+<text x="2891.0" y="1410.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">iut_hodge_theater · iut run GlueHodgeTheaters · iut run BuildBridges</text>
+<rect x="2883.0" y="1422.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.2"/>
+<rect x="2883.0" y="1422.0" width="250.0" height="166.0" rx="10" fill="rgb(225,243,236)"/>
+<text x="3008.0" y="1504.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="46" font-weight="700" fill="#1baf7a" text-anchor="middle">合体!</text>
+<text x="2897.0" y="1540.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Super Sentai · the combining robot</text>
+<text x="3151.0" y="1448.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="3151.0" y="1472.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Two machines, one robot. The additive Θ±ell-HT and the multiplicative</text>
+<text x="3151.0" y="1492.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">ΘNF-HT lock together along 0,⊞ ↦ &gt;, and since the gluing is unique there is</text>
+<text x="3151.0" y="1513.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">no alternate combination sequence. Every • of the lattice is one fully</text>
+<text x="3151.0" y="1533.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">assembled robot.</text>
+<rect x="80.0" y="1628.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="80.0" y="1628.0" width="8.0" height="488.0" rx="4" fill="#eda100"/>
+<text x="110.0" y="1674.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">D-Hodge theaters (étale-like)</text>
+<text x="110.0" y="1700.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchI] Def 6.13</text>
+<text x="110.0" y="1736.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#eda100" text-anchor="start">†HT^{D-Θ±ell NF} = ( D-Θ±ell-HT , D-ΘNF-HT , gluing )</text>
+<rect x="112.0" y="1759.0" width="6.0" height="6.0" rx="3" fill="#eda100"/>
+<text x="128.0" y="1770.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Replace every F-prime-strip by its D-prime-strip: keep the base categories (Π_v, B(X̲_K)^0, B(C̲_K)^0),</text>
+<text x="128.0" y="1791.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">forget every monoid and Frobenioid.</text>
+<rect x="112.0" y="1807.0" width="6.0" height="6.0" rx="3" fill="#eda100"/>
+<text x="128.0" y="1818.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">D-ΘNF-HT †D^⊛ ← †D_J → †D_&gt;: automorphisms trivial. D-Θ±ell-HT †D_⊞ ← †D_T → †D^⊚±: a {±1}-torsor.</text>
+<text x="128.0" y="1839.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Called etHT in [FormIUT].</text>
+<rect x="112.0" y="1855.0" width="6.0" height="6.0" rx="3" fill="#eda100"/>
+<text x="128.0" y="1866.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Vertically coric: every log-link in a column of the lattice shares it, so it is the part that survives the log-wall.</text>
+<text x="110.0" y="1901.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">DThetaPmEllNFHodgeTheater · EtaleHodgeTheater · iut run ForgetToDHodgeTheater</text>
+<rect x="102.0" y="1934.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(245,211,138)" stroke-width="1.2"/>
+<rect x="102.0" y="1934.0" width="250.0" height="166.0" rx="10" fill="rgb(250,241,221)"/>
+<text x="227.0" y="2016.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="38.5" font-weight="700" fill="#eda100" text-anchor="middle">贅沢な名だね</text>
+<text x="116.0" y="2052.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Spirited Away · Yubaba takes a name</text>
+<text x="370.0" y="1960.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#eda100" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="370.0" y="1984.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;F⊩▶×μ-prime-strip? What an extravagant name.&quot; Forget the monoids, keep</text>
+<text x="370.0" y="2004.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">only the base category: from now on your name is D. And it is exactly this</text>
+<text x="370.0" y="2025.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">nameless, étale-like part that every log-link remembers.</text>
+<rect x="1007.0" y="1628.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="1007.0" y="1628.0" width="8.0" height="488.0" rx="4" fill="#e34948"/>
+<text x="1037.0" y="1674.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">†HT and ‡HT across a Θ-link</text>
+<text x="1037.0" y="1700.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchI] Cor 3.7</text>
+<text x="1037.0" y="1736.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#e34948" text-anchor="start">†F⊩_tht  ≅  ‡F⊩_mod    ( Θ̲_v ↦ q̲_v )</text>
+<rect x="1039.0" y="1759.0" width="6.0" height="6.0" rx="3" fill="#e34948"/>
+<text x="1055.0" y="1770.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">† is the domain, ‡ the codomain: two Θ±ell NF-Hodge theaters in different universes, mutually alien copies</text>
+<text x="1055.0" y="1791.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">of the same arithmetic.</text>
+<rect x="1039.0" y="1807.0" width="6.0" height="6.0" rx="3" fill="#e34948"/>
+<text x="1055.0" y="1818.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Shared (horizontally coric): G_v, i.e. D⊢_v, and the units O×μ, up to Ind1 and Ind2. Not shared: Π_v and the</text>
+<text x="1055.0" y="1839.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">ring structures. Checks: 4/4 of Cor 3.7 pass.</text>
+<rect x="1039.0" y="1855.0" width="6.0" height="6.0" rx="3" fill="#e34948"/>
+<text x="1055.0" y="1866.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Chained, they form the Frobenius picture … → †HT^Θ → ‡HT^Θ → … with ⁿΘ̲_v ↦ ⁿ⁺¹q̲_v (Cor 3.8).</text>
+<text x="1037.0" y="1901.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">DagHodgeTheater · DdagHodgeTheater · ThetaLink · iut run ChainFrobeniusPicture</text>
+<rect x="1029.0" y="1934.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(241,171,170)" stroke-width="1.2"/>
+<rect x="1029.0" y="1934.0" width="250.0" height="166.0" rx="10" fill="rgb(249,231,230)"/>
+<text x="1154.0" y="2016.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="46" font-weight="700" fill="#e34948" text-anchor="middle">異世界転生</text>
+<text x="1043.0" y="2052.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">isekai light novels · the long title</text>
+<text x="1297.0" y="1960.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="1297.0" y="1984.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;That Time I Got Reincarnated in Another Universe as ‡HT, and Only My O×μ</text>
+<text x="1297.0" y="2004.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">and G_v Came With Me.&quot; Every Θ-link is an isekai: the rings stay behind in the</text>
+<text x="1297.0" y="2025.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">old world, and Ind1, Ind2, Ind3 are the cheat skills nobody can explain.</text>
+<rect x="1934.0" y="1628.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="1934.0" y="1628.0" width="8.0" height="488.0" rx="4" fill="#008300"/>
+<text x="1964.0" y="1674.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">{n,m}HT: vertices of the log-theta-lattice</text>
+<text x="1964.0" y="1700.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchIII] Def 1.4</text>
+<text x="1964.0" y="1736.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#008300" text-anchor="start">{n,m}HT ⟶log⟶ {n,m+1}HT ,   {n,m}HT ⟶Θ×μ_LGP⟶ {n+1,m}HT</text>
+<rect x="1966.0" y="1759.0" width="6.0" height="6.0" rx="3" fill="#008300"/>
+<text x="1982.0" y="1770.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">A Z²-indexed diagram of Θ±ell NF-Hodge theaters: vertical arrows are log-links, horizontal ones</text>
+<text x="1982.0" y="1791.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Θ×μ_LGP-links ([IUTchIII] Def 1.4, 3.8).</text>
+<rect x="1966.0" y="1807.0" width="6.0" height="6.0" rx="3" fill="#008300"/>
+<text x="1982.0" y="1818.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">A log-link applies log : O×_{K_v} → K_v and yields the log-shells I_v = (p*)⁻¹·log(O×_{K_v}). It copies the</text>
+<text x="1982.0" y="1839.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">étale-like data and makes fresh Frobenius-like monoids.</text>
+<rect x="1966.0" y="1855.0" width="6.0" height="6.0" rx="3" fill="#008300"/>
+<text x="1982.0" y="1866.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">The squares do not commute (Rem 1.4.1). The proof only needs an &quot;infinite H&quot;: two columns and one Θ-link.</text>
+<text x="1964.0" y="1901.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">NMHodgeTheater · LogThetaLattice · LogLink · iut walk</text>
+<rect x="1956.0" y="1934.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(139,198,138)" stroke-width="1.2"/>
+<rect x="1956.0" y="1934.0" width="250.0" height="166.0" rx="10" fill="rgb(222,237,221)"/>
+<text x="2081.0" y="2016.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="46" font-weight="700" fill="#008300" text-anchor="middle">死に戻り</text>
+<text x="1970.0" y="2052.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Re:Zero · &quot;Return by Death&quot;</text>
+<text x="2224.0" y="1960.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#008300" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="2224.0" y="1984.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Return by Log: each log-link sends you to a fresh Hodge theater with</text>
+<text x="2224.0" y="2004.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">brand-new monoids, but you keep your memories (Π_v, G_v, the capsule</text>
+<text x="2224.0" y="2025.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">basepoints). Go once around a square and the world is literally different. The</text>
+<text x="2224.0" y="2045.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">diagram does not commute.</text>
+<rect x="2861.0" y="1628.0" width="899.0" height="488.0" rx="14" fill="#f4f4f1"/>
+<rect x="2861.0" y="1628.0" width="8.0" height="488.0" rx="4" fill="#e87ba4"/>
+<text x="2891.0" y="1674.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="27" font-weight="700" fill="#0b0b0b" text-anchor="start">The étale picture and the D-links</text>
+<text x="2891.0" y="1700.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">[IUTchIII] Cor 3.12; [IUTchI] Cor 6.10</text>
+<text x="2891.0" y="1736.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="21" font-weight="700" fill="#e87ba4" text-anchor="start">†D⊢_&gt;  ≅  ‡D⊢_&gt;    (full poly-isomorphism)</text>
+<rect x="2893.0" y="1759.0" width="6.0" height="6.0" rx="3" fill="#e87ba4"/>
+<text x="2909.0" y="1770.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">The D-ΘNF-link and D-Θ±ell-link are full poly-isomorphisms of the mono-analytic D⊢_&gt; between two</text>
+<text x="2909.0" y="1791.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">D-Hodge theaters ([IUTchI] Cor 4.12, 6.10).</text>
+<rect x="2893.0" y="1807.0" width="6.0" height="6.0" rx="3" fill="#e87ba4"/>
+<text x="2909.0" y="1818.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Gather the Hodge theaters as spokes around one bi-coric core D⊢_&gt;: the étale picture. Its symmetries</text>
+<text x="2909.0" y="1839.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">permute the spokes freely.</text>
+<rect x="2893.0" y="1855.0" width="6.0" height="6.0" rx="3" fill="#e87ba4"/>
+<text x="2909.0" y="1866.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">Whatever is written in terms of the core looks the same from every spoke: that is multiradiality, the input to</text>
+<text x="2909.0" y="1887.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="16" font-weight="400" fill="#0b0b0b" text-anchor="start">[IUTchIII] Thm 3.11 and Cor 3.12.</text>
+<text x="2891.0" y="1922.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">DThetaNFLink · DThetaPmEllLink · DThetaPmEllNFLink · EtalePicture</text>
+<rect x="2883.0" y="1934.0" width="855.0" height="166.0" rx="10" fill="#fff" stroke="rgb(243,194,212)" stroke-width="1.2"/>
+<rect x="2883.0" y="1934.0" width="250.0" height="166.0" rx="10" fill="rgb(250,237,241)"/>
+<text x="3008.0" y="2016.0" font-family="'Noto Sans CJK JP', 'Noto Sans JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif" font-size="46" font-weight="700" fill="#e87ba4" text-anchor="middle">影分身の術</text>
+<text x="2897.0" y="2052.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="start">Naruto · shadow clone technique</text>
+<text x="3151.0" y="1960.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e87ba4" text-anchor="start" letter-spacing="1.5">THE JOKE</text>
+<text x="3151.0" y="1984.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Shadow clone technique: every Hodge theater in the étale picture is a clone</text>
+<text x="3151.0" y="2004.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">radiating from one core D⊢_&gt;, and the full poly-isomorphisms shuffle the</text>
+<text x="3151.0" y="2025.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">clones at will. Which one is the real Hodge theater? From the core, it does not</text>
+<text x="3151.0" y="2045.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">matter. That is the point.</text>
+<text x="80.0" y="2146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">12 identifiers of kind hodgetheater · 10 bridges · 9 links in iut ids · example abc(1,2400,2401) l=13 · pop-culture references are text only; all titles and catchphrases belong to their owners</text>
+<text x="3760.0" y="2146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="end">oneman/motizukipdf · docs/DATA_MODEL.md §5 · generated by scripts/infographic/hodgetheaters.js from iut walk, iut ids --json and iut run</text>
+</svg>
