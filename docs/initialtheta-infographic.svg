@@ -1,0 +1,932 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif">
+<title>Initial Θ-data, built four times — [IUTchI] Def 3.1</title>
+<rect x="0" y="0" width="3840" height="2160" fill="#fcfcfb"/>
+<text x="80.0" y="92.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="60" font-weight="700" fill="#0b0b0b" text-anchor="start">Initial Θ-data, built four times: what it needs, how to make it, and the numbers</text>
+<text x="80.0" y="140.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">Everything in inter-universal Teichmüller theory starts from one tuple (F̄/F, X_F, l, C̲_K, V, V^bad_mod, ε̲), fixed in [IUTchI] Def 3.1: a number field F, a once-punctured elliptic curve X_F over it, a prime l, a curve C̲_K over K = F(E[l]) that remembers</text>
+<text x="80.0" y="170.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">one line of l-torsion, a choice V of one place of K over each place of the field of moduli, the odd places of bad multiplicative reduction V^bad_mod, and a cusp ε̲. The left column is the recipe: for each step, the clause of Def 3.1 it has to meet and</text>
+<text x="80.0" y="200.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">how to meet it (F is chosen as in [IUTchIV] Thm 1.10). The four columns run the recipe on four elliptic curves over Q, three from abc triples and one given by its equation. Every number is computed exactly from the integers of the input, the SL2</text>
+<text x="80.0" y="230.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="400" fill="#52514e" text-anchor="start">condition is proved from point counts, and the abc examples are re-checked by the toolkit's own validator. All of it is saved as JSON, one file per example.</text>
+<rect x="2722.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="2791.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">4</text>
+<text x="2791.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">curves</text>
+<rect x="2872.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="2941.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">7</text>
+<text x="2941.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">entries in the tuple</text>
+<rect x="3022.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3091.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">6</text>
+<text x="3091.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">conditions (a)–(f)</text>
+<rect x="3172.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3241.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">8</text>
+<text x="3241.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">places in V^bad_mod</text>
+<rect x="3322.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3391.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="26" font-weight="600" fill="#0b0b0b" text-anchor="middle">7·11·7·7</text>
+<text x="3391.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">the primes l</text>
+<rect x="3472.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3541.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">0</text>
+<text x="3541.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">toolkit errors</text>
+<rect x="3622.0" y="46.0" width="138.0" height="118.0" rx="12" fill="#f4f4f1"/>
+<text x="3691.0" y="112.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="46" font-weight="600" fill="#0b0b0b" text-anchor="middle">4</text>
+<text x="3691.0" y="146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="middle">JSON files</text>
+<rect x="80.0" y="280.0" width="1040.0" height="92.0" rx="12" fill="#f4f4f1"/>
+<text x="104.0" y="320.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="30" font-weight="600" fill="#0b0b0b" text-anchor="start">The recipe</text>
+<text x="104.0" y="352.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="17" font-weight="400" fill="#52514e" text-anchor="start">NEEDED: the clause of [IUTchI] Def 3.1 · HOW: the construction that meets it</text>
+<rect x="80.0" y="382.0" width="1040.0" height="176.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="414.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="421.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="144.0" y="422.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Pick the elliptic curve: X_F and F_mod</text>
+<rect x="599.4" y="403.0" width="79.4" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="607.4" y="420.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (b)</text>
+<text x="104.0" y="452.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="452.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">X_F is a once-punctured elliptic curve (type (1,1)) over F, X_F ⊆ E_F; C_F = X_F/±1; F_mod ⊆ F is the field of moduli</text>
+<text x="180.0" y="472.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">of X_F.</text>
+<text x="104.0" y="499.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="499.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Start from any E over Q; an abc triple a + b = c gives the Frey curve y² = x(x − a)(x + b). Compute b2, b4, b6, b8,</text>
+<text x="180.0" y="519.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">c4, c6, Δ and j = c4³/Δ exactly and check 1728Δ = c4³ − c6². Here j ∈ Q, so F_mod = Q(j) = Q.</text>
+<rect x="80.0" y="568.0" width="1040.0" height="300.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="600.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="607.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="144.0" y="608.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Find the bad places and their q-parameters: V^bad_mod</text>
+<rect x="814.5" y="589.0" width="79.4" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="822.5" y="606.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (b)</text>
+<text x="104.0" y="638.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="638.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">V^bad_mod ⊆ V_mod is a non-empty set of non-archimedean places of odd residue characteristic at which X_F has</text>
+<text x="180.0" y="658.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">bad (multiplicative) reduction.</text>
+<text x="104.0" y="685.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="685.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Over F the reduction is stable, so E is bad exactly where j is not integral: ord_p(j) &lt; 0. There the Tate parameter has</text>
+<text x="180.0" y="705.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">ord_p(q_p) = −ord_p(j). Its p-adic digits come from inverting j = 1/q + 744 + 196884q + …, i.e. q = x + 744x² +</text>
+<text x="180.0" y="726.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">750420x³ + … with x = 1/j. Keep the odd p. The place 2 can be bad, but it is never in V^bad_mod. The bars show</text>
+<text x="180.0" y="746.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">ord(q_v)·log p, the share of v in log q, on one scale for all four.</text>
+<rect x="80.0" y="878.0" width="1040.0" height="196.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="910.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="917.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="144.0" y="918.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Build F̄/F, and the field K</text>
+<rect x="441.5" y="899.0" width="120.1" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="449.5" y="916.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (a) (b) (c)</text>
+<text x="104.0" y="948.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="948.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">√−1 ∈ F; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F; stable reduction at every finite</text>
+<text x="180.0" y="968.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">place. K = the field cut out by E[l].</text>
+<text x="104.0" y="995.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="995.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Take F = F_mod(√−1, E[2·3·5]) and F̄ = Q̄. Gal(F/F_tpd) embeds in {±1} × GL2(F_3) × GL2(F_5) (order 2·48·480), so</text>
+<text x="180.0" y="1015.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">[F:Q] divides [F_tpd:Q]·46080 and has no prime factor ≥ 7. Since E[3], E[5] ⊆ E(F), Raynaud's criterion gives</text>
+<text x="180.0" y="1036.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">semistable reduction everywhere. Then K = F(E[l]). Bars are on a log scale, and ≤ marks a bound.</text>
+<rect x="80.0" y="1084.0" width="1040.0" height="150.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="1116.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="1123.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="144.0" y="1124.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Choose the prime l</text>
+<rect x="377.3" y="1105.0" width="78.6" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="385.3" y="1122.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (c)</text>
+<text x="104.0" y="1154.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="1154.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">l ≥ 5 prime, prime to the residue characteristics of V^bad_mod and to the orders ord(q_v) at V^bad, and the image</text>
+<text x="180.0" y="1174.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">of G_F → GL2(F_l) contains SL2(F_l).</text>
+<text x="104.0" y="1201.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="1201.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Sieve 5, 7, 11, …: 5 always fails here because F already contains E[5]; strike any l in V^bad_mod or dividing some</text>
+<text x="180.0" y="1221.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">ord(q_v); the first survivor whose SL2 condition is proved (step 5) is l. Then l* = (l − 1)/2 and l± = (l + 1)/2.</text>
+<rect x="80.0" y="1244.0" width="1040.0" height="196.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="1276.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="1283.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+<text x="144.0" y="1284.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Prove that the image of Galois contains SL2(F_l)</text>
+<rect x="715.7" y="1265.0" width="78.6" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="723.7" y="1282.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (c)</text>
+<text x="104.0" y="1314.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="1314.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Im(G_F → GL2(F_l)) ⊇ SL2(F_l).</text>
+<text x="104.0" y="1340.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="1340.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Frob_p (p ∤ lΔ) acts on E[l] with trace a_p = p + 1 − #E(F_p) and det p. By Serre (1972, §2.8 Prop 19) the image</text>
+<text x="180.0" y="1361.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">contains SL2(F_l) once it has s: tr ≠ 0 and tr² − 4det a non-zero square; s′: tr ≠ 0 and tr² − 4det a non-square; s″: u =</text>
+<text x="180.0" y="1381.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">tr²/det ∉ {0, 1, 2, 4} and u² − 3u + 1 ≠ 0. These rule out the Borel, the Cartan normalizers and A4, S4, A5. Over F</text>
+<text x="180.0" y="1402.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">the image has index dividing [F:Q], which is prime to l, so it still contains SL2.</text>
+<rect x="80.0" y="1450.0" width="1040.0" height="232.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="1482.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="1489.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+<text x="144.0" y="1490.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Choose C̲_K, V and ε̲; read off the labels</text>
+<rect x="625.5" y="1471.0" width="118.0" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="633.5" y="1488.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (d) (e) (f)</text>
+<text x="104.0" y="1520.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="1520.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">C̲_K of type (1, l-tors)± over K with K-core C_F; V ⊆ V(K) one place over each place of F_mod, of type (1, Z/lZ)± at</text>
+<text x="180.0" y="1540.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">V^bad; ε̲ a cusp from a non-zero element of Q.</text>
+<text x="104.0" y="1567.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="1567.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Pick a line in E[l] ≅ F_l². There are l + 1 lines, all K-rational. The quotient E[l] ↠ Q ≅ Z/l cuts out X̲_K, with l cusps ↔</text>
+<text x="180.0" y="1587.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">F_l, and C̲_K = X̲_K/±1, with l± cusps ↔ |F_l|. Since j ∉ Z, E has no CM, so the K-core is C_F. For each p choose a v | p</text>
+<text x="180.0" y="1608.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">in K; at a bad p, take the one where the line is the Tate subgroup μ_l. Finally ε̲ is the cusp ±1.</text>
+<rect x="80.0" y="1692.0" width="1040.0" height="196.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="1724.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="1731.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+<text x="144.0" y="1732.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Check the six conditions</text>
+<rect x="445.8" y="1713.0" width="100.2" height="22.0" rx="5" fill="rgb(225,225,223)"/>
+<text x="453.8" y="1730.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#52514e" text-anchor="start">Def 3.1 (a)–(f)</text>
+<text x="104.0" y="1762.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="1762.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">Every clause of Def 3.1 holds for the tuple.</text>
+<text x="104.0" y="1788.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="1788.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">Each clause is checked from the numbers, proved (the SL2 condition), or holds by the choice made in steps 3 and 6.</text>
+<text x="180.0" y="1809.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">The toolkit re-checks the abc examples: iut validate and iut run CheckDefThreeOne --abc a b c --l l print the same</text>
+<text x="180.0" y="1829.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">verdicts. Its CLI takes only abc triples, so 11a1 is checked by the script alone.</text>
+<rect x="80.0" y="1898.0" width="1040.0" height="214.0" rx="12" fill="#f4f4f1"/>
+<circle cx="114.0" cy="1930.0" r="18" fill="#0b0b0b"/>
+<text x="114.0" y="1937.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">8</text>
+<text x="144.0" y="1938.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b0b" text-anchor="start">Write it down: the data as JSON</text>
+<text x="104.0" y="1968.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#e34948" text-anchor="start" letter-spacing="1.4">NEEDED</text>
+<text x="180.0" y="1968.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">All the data that the rest of the theory reads: the tuple, plus the numbers it is computed from.</text>
+<text x="104.0" y="1994.5" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#1baf7a" text-anchor="start" letter-spacing="1.4">HOW</text>
+<text x="180.0" y="1994.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">docs/initial-theta-data/&lt;id&gt;.json (schema iut-initial-theta-data/1) holds every value on this page: the curve invariants</text>
+<text x="180.0" y="2015.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">and j; every place with ord(q) and the q-adic digits; the l-sieve with the Serre witnesses; the field degrees; C̲_K, V, ε̲</text>
+<text x="180.0" y="2035.5" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">and the label sets; log q; the six conditions; and the toolkit's own iut gen --json output. The excerpt shows the</text>
+<text x="180.0" y="2056.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#52514e" text-anchor="start">top-level keys.</text>
+<rect x="1138.0" y="280.0" width="642.0" height="92.0" rx="12" fill="rgb(225,235,246)"/>
+<rect x="1138.0" y="280.0" width="8.0" height="92.0" rx="4" fill="#2a78d6"/>
+<text x="1164.0" y="322.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#2a78d6" text-anchor="start">1 + 8 = 9</text>
+<text x="1164.0" y="354.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">the smallest abc hit, c &gt; rad(abc) = 6</text>
+<rect x="1798.0" y="280.0" width="642.0" height="92.0" rx="12" fill="rgb(250,233,225)"/>
+<rect x="1798.0" y="280.0" width="8.0" height="92.0" rx="4" fill="#eb6834"/>
+<text x="1824.0" y="322.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#eb6834" text-anchor="start">1 + 2400 = 2401</text>
+<text x="1824.0" y="354.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">1 + 2⁵·3·5² = 7⁴: four bad primes, and 2 is bad too</text>
+<rect x="2458.0" y="280.0" width="642.0" height="92.0" rx="12" fill="rgb(223,242,234)"/>
+<rect x="2458.0" y="280.0" width="8.0" height="92.0" rx="4" fill="#1baf7a"/>
+<text x="2484.0" y="322.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#1baf7a" text-anchor="start">2 + 3¹⁰·109 = 23⁵</text>
+<text x="2484.0" y="354.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">Reyssat's triple, the highest known abc quality 1.6299</text>
+<rect x="3118.0" y="280.0" width="642.0" height="92.0" rx="12" fill="rgb(232,230,246)"/>
+<rect x="3118.0" y="280.0" width="8.0" height="92.0" rx="4" fill="#6250d6"/>
+<text x="3144.0" y="322.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="30" font-weight="700" fill="#6250d6" text-anchor="start">the curve 11a1</text>
+<text x="3144.0" y="354.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="16" font-weight="400" fill="#52514e" text-anchor="start">given by its equation; conductor 11, the smallest over Q</text>
+<rect x="1138.0" y="382.0" width="642.0" height="176.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<text x="1160.0" y="418.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="22" font-weight="700" fill="#2a78d6" text-anchor="start">1 + 2³ = 3²</text>
+<text x="1758.0" y="418.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="end">rad = 6 · quality 1.2263</text>
+<text x="1160.0" y="450.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">E</text>
+<text x="1256.0" y="450.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="start">y² = x³ + 7x² − 8x</text>
+<text x="1160.0" y="478.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">c4 · c6</text>
+<text x="1256.0" y="478.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">1168 · -38080</text>
+<text x="1160.0" y="504.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">Δ</text>
+<text x="1256.0" y="504.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">82944 = 2¹⁰·3⁴</text>
+<text x="1160.0" y="532.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">j</text>
+<text x="1256.0" y="532.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">2²·73³ / 3⁴</text>
+<rect x="1138.0" y="568.0" width="642.0" height="300.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<line x1="1160.0" y1="680.0" x2="1758.0" y2="680.0" stroke="#e4e3df" stroke-width="1.2"/>
+<circle cx="1219.0" cy="670.0" r="7" fill="#fff" stroke="#8a8984" stroke-width="1.2"/>
+<text x="1219.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₂</text>
+<text x="1219.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 2</text>
+<text x="1219.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">add. → good</text>
+<rect x="1303.0" y="667.9" width="52.0" height="12.1" rx="4" fill="#2a78d6"/>
+<text x="1329.0" y="659.9" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#2a78d6" text-anchor="middle">4.39</text>
+<text x="1329.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#2a78d6" text-anchor="middle">v₃</text>
+<text x="1329.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -4</text>
+<text x="1329.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="middle">V^bad_mod</text>
+<circle cx="1439.0" cy="670.0" r="7" fill="rgb(212,212,209)" stroke="#8a8984" stroke-width="1.2"/>
+<text x="1439.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₅</text>
+<text x="1439.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 0</text>
+<text x="1439.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">good</text>
+<text x="1160.0" y="760.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₃ = 3⁴·(1 + 2·3 + 3⁶ + 2·3⁷ + O(3⁸))</text>
+<text x="1160.0" y="852.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="700" fill="#0b0b0b" text-anchor="start">log q = Σ ord(q_v)·log p = 4.394</text>
+<rect x="1138.0" y="878.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<text x="1160.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_mod : Q]</text>
+<rect x="1278.0" y="899.0" width="3.0" height="16.0" rx="3" fill="#2a78d6"/>
+<text x="1289.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="1160.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_tpd : Q]</text>
+<rect x="1278.0" y="926.0" width="3.0" height="16.0" rx="3" fill="#2a78d6"/>
+<text x="1289.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="1160.0" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F : Q]</text>
+<rect x="1278.0" y="953.0" width="181.4" height="16.0" rx="3" fill="rgb(179,206,238)" stroke="#2a78d6" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="1467.4" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 46,080</text>
+<text x="1160.0" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : F]</text>
+<rect x="1278.0" y="980.0" width="128.5" height="16.0" rx="3" fill="#2a78d6"/>
+<text x="1414.5" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 2,016</text>
+<text x="1160.0" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : Q]</text>
+<rect x="1278.0" y="1007.0" width="309.9" height="16.0" rx="3" fill="rgb(179,206,238)" stroke="#2a78d6" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="1595.9" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 92,897,280</text>
+<text x="1160.0" y="1056.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[30]) · E[2] already rational · [K:F] = |GL2(F_7)|</text>
+<rect x="1138.0" y="1084.0" width="642.0" height="150.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<rect x="1160.0" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="1199.3" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">5</text>
+<line x1="1170.0" y1="1144.0" x2="1228.6" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<rect x="1246.6" y="1106.0" width="78.6" height="46.0" rx="8" fill="#2a78d6" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1285.9" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+<rect x="1333.1" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="1372.4" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">11</text>
+<rect x="1419.7" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="1459.0" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">13</text>
+<rect x="1506.3" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="1545.6" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">17</text>
+<rect x="1592.9" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="1632.1" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">19</text>
+<rect x="1679.4" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="1718.7" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">23</text>
+<text x="1160.0" y="1180.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#e34948" text-anchor="start">✗ 5: E[5] ⊆ E(F)</text>
+<text x="1160.0" y="1220.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#2a78d6" text-anchor="start">l = 7 · l* = 3 · l± = 4 · green = also valid</text>
+<rect x="1138.0" y="1244.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<text x="1160.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start"></text>
+<text x="1212.9" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">p</text>
+<text x="1279.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">a_p</text>
+<text x="1353.2" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr</text>
+<text x="1415.3" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">det</text>
+<text x="1486.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr²−4det</text>
+<text x="1620.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">u = tr²/det</text>
+<text x="1160.0" y="1302.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#2a78d6" text-anchor="start">s</text>
+<text x="1212.9" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">13</text>
+<text x="1279.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">-2</text>
+<text x="1353.2" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1415.3" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">6</text>
+<text x="1486.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">1 square</text>
+<text x="1620.0" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="1160.0" y="1330.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#2a78d6" text-anchor="start">s′</text>
+<text x="1212.9" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1279.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">-2</text>
+<text x="1353.2" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1415.3" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1486.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5 non-sq.</text>
+<text x="1620.0" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1160.0" y="1358.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#2a78d6" text-anchor="start">s″</text>
+<text x="1212.9" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1279.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">-2</text>
+<text x="1353.2" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1415.3" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1486.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5 non-sq.</text>
+<text x="1620.0" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="1160.0" y="1400.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">mod 7: Frob_p has char. poly x² − a_p x + p</text>
+<text x="1160.0" y="1424.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#1baf7a" text-anchor="start">⇒ Im ⊇ SL2(F_7) over Q, and over F (index | 46080)</text>
+<rect x="1138.0" y="1450.0" width="642.0" height="232.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<text x="1160.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l ↔ cusps X̲_K</text>
+<circle cx="1300.0" cy="1478.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1300.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-3</text>
+<circle cx="1340.0" cy="1478.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1340.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-2</text>
+<circle cx="1380.0" cy="1478.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1380.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-1</text>
+<circle cx="1420.0" cy="1478.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="1420.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="1460.0" cy="1478.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1460.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="1500.0" cy="1478.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1500.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="1540.0" cy="1478.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1540.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="1160.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">|F_l| ↔ C̲_K</text>
+<circle cx="1300.0" cy="1514.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="1300.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="1340.0" cy="1514.0" r="13" fill="#2a78d6" stroke="#0b0b0b" stroke-width="2.5"/>
+<text x="1340.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="1380.0" cy="1514.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1380.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="1420.0" cy="1514.0" r="13" fill="rgb(221,232,245)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1420.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="1450.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#2a78d6" text-anchor="start">← ε̲ = ±1</text>
+<text x="1160.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l^* = J</text>
+<circle cx="1300.0" cy="1550.0" r="13" fill="rgb(214,228,244)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1300.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="1340.0" cy="1550.0" r="13" fill="rgb(214,228,244)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1340.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="1380.0" cy="1550.0" r="13" fill="rgb(214,228,244)" stroke="#2a78d6" stroke-width="1.2"/>
+<text x="1380.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="1160.0" y="1586.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">line of E[7] ≅ F_7²: 1 of 8</text>
+<rect x="1430.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="#2a78d6"/>
+<rect x="1446.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<rect x="1462.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<rect x="1478.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<rect x="1494.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<rect x="1510.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<rect x="1526.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<rect x="1542.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(210,226,244)"/>
+<text x="1160.0" y="1612.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V: v_∞, v₂, v₃, v₅, … one v | p in K for every p</text>
+<text x="1160.0" y="1634.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V^bad = {v₃}: v with the line = Tate μ_7 (type (1, Z/7Z)±)</text>
+<text x="1160.0" y="1656.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">F_l ⋊ {±1}: order 14 · F_l^*: order 3 · Θ-dilation j² = {1, 4, 9}</text>
+<rect x="1138.0" y="1692.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<text x="1160.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(a)</text>
+<rect x="1198.0" y="1704.5" width="104.5" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="1206.0" y="1720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">by construction</text>
+<text x="1310.5" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[2·3·5]) contains √−1 by construction</text>
+<text x="1758.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1160.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(b)</text>
+<rect x="1198.0" y="1726.5" width="64.1" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="1206.0" y="1742.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">checked</text>
+<text x="1270.1" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">stable (Raynaud, E[15] ⊆ E(F)); [F:Q] | 46080; V^bad_mod ≠ ∅</text>
+<text x="1758.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1160.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(c)</text>
+<rect x="1198.0" y="1748.5" width="55.3" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="1206.0" y="1764.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">proved</text>
+<text x="1261.3" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">l = 7: Serre witnesses p = 13, 5, 5; 7 ∤ 4</text>
+<text x="1758.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1160.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(d)</text>
+<rect x="1198.0" y="1770.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="1206.0" y="1786.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="1276.4" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">choose one of the 8 lines of E[7]; j ∉ Z so E has no CM</text>
+<text x="1758.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1160.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(e)</text>
+<rect x="1198.0" y="1792.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="1206.0" y="1808.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="1276.4" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">one v | p per p; at V^bad the v of the Tate μ_l</text>
+<text x="1758.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1160.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(f)</text>
+<rect x="1198.0" y="1814.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="1206.0" y="1830.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="1276.4" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">the cusp ±1</text>
+<text x="1758.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1160.0" y="1874.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="700" fill="#1baf7a" text-anchor="start">iut validate: 0 errors, 1 warning, 19 checks</text>
+<text x="1758.0" y="1874.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="end">warning: additive at 2 over Q (good over F)</text>
+<rect x="1138.0" y="1898.0" width="642.0" height="214.0" rx="12" fill="#fff" stroke="rgb(158,193,234)" stroke-width="1.4"/>
+<rect x="1148.0" y="1908.0" width="622.0" height="194.0" rx="8" fill="#f7f7f5"/>
+<text x="1160.0" y="1934.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14" font-weight="700" fill="#2a78d6" text-anchor="start">docs/initial-theta-data/frey-1-8-9.json</text>
+<text x="1160.0" y="1958.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;id&quot;: &quot;frey-1-8-9&quot;,</text>
+<text x="1160.0" y="1973.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;curve&quot;: &quot;y² = x³ + 7x² − 8x&quot;,</text>
+<text x="1160.0" y="1989.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;j&quot;: &quot;2²·73³ / 3⁴&quot;,</text>
+<text x="1160.0" y="2004.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;F&quot;: &quot;Q(√−1,E[30]), [F:Q] | 46080&quot;,</text>
+<text x="1160.0" y="2020.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;l&quot;: 7,</text>
+<text x="1160.0" y="2035.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;K&quot;: &quot;F(E[7]), [K:F] = 2016&quot;,</text>
+<text x="1160.0" y="2051.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;ordQ_VbadMod&quot;: { &quot;3&quot;: 4 },</text>
+<text x="1160.0" y="2066.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;C_K&quot;: &quot;(1, l-tors)±, 4 cusps&quot;,</text>
+<text x="1160.0" y="2082.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;epsilon&quot;: 1,</text>
+<text x="1160.0" y="2097.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;logQ&quot;: 4.394449</text>
+<rect x="1798.0" y="382.0" width="642.0" height="176.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<text x="1820.0" y="418.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="22" font-weight="700" fill="#eb6834" text-anchor="start">1 + 2⁵·3·5² = 7⁴</text>
+<text x="2418.0" y="418.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="end">rad = 210 · quality 1.4557</text>
+<text x="1820.0" y="450.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">E</text>
+<text x="1916.0" y="450.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="start">y² = x³ + 2399x² − 2400x</text>
+<text x="1820.0" y="478.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">c4 · c6</text>
+<text x="1916.0" y="478.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">92198416 · -885288729536</text>
+<text x="1820.0" y="504.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">Δ</text>
+<text x="1916.0" y="504.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">531284060160000 = 2¹⁴·3²·5⁴·7⁸</text>
+<text x="1820.0" y="532.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">j</text>
+<text x="1916.0" y="532.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">73³·193³·409³ / 2²·3²·5⁴·7⁸</text>
+<rect x="1798.0" y="568.0" width="642.0" height="300.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<line x1="1820.0" y1="680.0" x2="2418.0" y2="680.0" stroke="#e4e3df" stroke-width="1.2"/>
+<rect x="1853.0" y="676.2" width="52.0" height="3.8" rx="4" fill="#b9b8b3"/>
+<text x="1879.0" y="668.2" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#8a8984" text-anchor="middle">1.39</text>
+<text x="1879.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₂</text>
+<text x="1879.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -2</text>
+<text x="1879.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">bad, even</text>
+<rect x="1963.0" y="674.0" width="52.0" height="6.0" rx="4" fill="#eb6834"/>
+<text x="1989.0" y="666.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#eb6834" text-anchor="middle">2.20</text>
+<text x="1989.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="middle">v₃</text>
+<text x="1989.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -2</text>
+<text x="1989.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#eb6834" text-anchor="middle">V^bad_mod</text>
+<rect x="2073.0" y="662.3" width="52.0" height="17.7" rx="4" fill="#eb6834"/>
+<text x="2099.0" y="654.3" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#eb6834" text-anchor="middle">6.44</text>
+<text x="2099.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="middle">v₅</text>
+<text x="2099.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -4</text>
+<text x="2099.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#eb6834" text-anchor="middle">V^bad_mod</text>
+<rect x="2183.0" y="637.3" width="52.0" height="42.7" rx="4" fill="#eb6834"/>
+<text x="2209.0" y="629.3" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#eb6834" text-anchor="middle">15.57</text>
+<text x="2209.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="middle">v₇</text>
+<text x="2209.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -8</text>
+<text x="2209.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#eb6834" text-anchor="middle">V^bad_mod</text>
+<text x="1820.0" y="760.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#8a8984" text-anchor="start">q₂ = 2²·(1 + 2³ + 2⁴ + 2⁵ + 2⁶ + O(2⁸))</text>
+<text x="1820.0" y="780.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₃ = 3²·(1 + 2·3² + 3⁴ + 2·3⁵ + 3⁶ + O(3⁸))</text>
+<text x="1820.0" y="800.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₅ = 5⁴·(1 + 2·5 + 4·5³ + 3·5⁴ + 5⁵ + 3·5⁶ + 3·5⁷ + O(5⁸))</text>
+<text x="1820.0" y="820.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₇ = 7⁸·(2 + 7 + 4·7² + 2·7³ + 7⁴ + 5·7⁵ + 5·7⁶ + O(7⁸))</text>
+<text x="1820.0" y="852.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="700" fill="#0b0b0b" text-anchor="start">log q = Σ ord(q_v)·log p = 24.202</text>
+<text x="2418.0" y="852.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="400" fill="#8a8984" text-anchor="end">(v₂ bad but excluded: residue char. 2)</text>
+<rect x="1798.0" y="878.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<text x="1820.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_mod : Q]</text>
+<rect x="1938.0" y="899.0" width="3.0" height="16.0" rx="3" fill="#eb6834"/>
+<text x="1949.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="1820.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_tpd : Q]</text>
+<rect x="1938.0" y="926.0" width="3.0" height="16.0" rx="3" fill="#eb6834"/>
+<text x="1949.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="1820.0" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F : Q]</text>
+<rect x="1938.0" y="953.0" width="181.4" height="16.0" rx="3" fill="rgb(246,200,181)" stroke="#eb6834" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="2127.4" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 46,080</text>
+<text x="1820.0" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : F]</text>
+<rect x="1938.0" y="980.0" width="160.2" height="16.0" rx="3" fill="#eb6834"/>
+<text x="2106.2" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 13,200</text>
+<text x="1820.0" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : Q]</text>
+<rect x="1938.0" y="1007.0" width="341.6" height="16.0" rx="3" fill="rgb(246,200,181)" stroke="#eb6834" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="2287.6" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 608,256,000</text>
+<text x="1820.0" y="1056.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[30]) · E[2] already rational · [K:F] = |GL2(F_11)|</text>
+<rect x="1798.0" y="1084.0" width="642.0" height="150.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<rect x="1820.0" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="1859.3" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">5</text>
+<line x1="1830.0" y1="1144.0" x2="1888.6" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<rect x="1906.6" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="1945.9" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">7</text>
+<line x1="1916.6" y1="1144.0" x2="1975.1" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<rect x="1993.1" y="1106.0" width="78.6" height="46.0" rx="8" fill="#eb6834" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2032.4" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">11</text>
+<rect x="2079.7" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2119.0" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">13</text>
+<rect x="2166.3" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2205.6" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">17</text>
+<rect x="2252.9" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2292.1" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">19</text>
+<rect x="2339.4" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2378.7" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">23</text>
+<text x="1820.0" y="1180.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#e34948" text-anchor="start">✗ 5: E[5] ⊆ E(F), 5 ∈ V^bad_mod · 7: 7 ∈ V^bad_mod</text>
+<text x="1820.0" y="1220.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#eb6834" text-anchor="start">l = 11 · l* = 5 · l± = 6 · green = also valid</text>
+<rect x="1798.0" y="1244.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<text x="1820.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start"></text>
+<text x="1872.9" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">p</text>
+<text x="1939.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">a_p</text>
+<text x="2013.2" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr</text>
+<text x="2075.3" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">det</text>
+<text x="2146.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr²−4det</text>
+<text x="2280.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">u = tr²/det</text>
+<text x="1820.0" y="1302.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="start">s</text>
+<text x="1872.9" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">23</text>
+<text x="1939.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">8</text>
+<text x="2013.2" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">8</text>
+<text x="2075.3" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">1</text>
+<text x="2146.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5 square</text>
+<text x="2280.0" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">9</text>
+<text x="1820.0" y="1330.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="start">s′</text>
+<text x="1872.9" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">13</text>
+<text x="1939.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">-2</text>
+<text x="2013.2" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">9</text>
+<text x="2075.3" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2146.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">7 non-sq.</text>
+<text x="2280.0" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="1820.0" y="1358.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#eb6834" text-anchor="start">s″</text>
+<text x="1872.9" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">17</text>
+<text x="1939.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2013.2" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2075.3" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">6</text>
+<text x="2146.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2 non-sq.</text>
+<text x="2280.0" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">8</text>
+<text x="1820.0" y="1400.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">mod 11: Frob_p has char. poly x² − a_p x + p</text>
+<text x="1820.0" y="1424.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#1baf7a" text-anchor="start">⇒ Im ⊇ SL2(F_11) over Q, and over F (index | 46080)</text>
+<rect x="1798.0" y="1450.0" width="642.0" height="232.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<text x="1820.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l ↔ cusps X̲_K</text>
+<circle cx="1960.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="1960.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-5</text>
+<circle cx="2000.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2000.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-4</text>
+<circle cx="2040.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2040.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-3</text>
+<circle cx="2080.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2080.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-2</text>
+<circle cx="2120.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2120.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-1</text>
+<circle cx="2160.0" cy="1478.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2160.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="2200.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2200.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="2240.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2240.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="2280.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2280.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<circle cx="2320.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2320.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">4</text>
+<circle cx="2360.0" cy="1478.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2360.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">5</text>
+<text x="1820.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">|F_l| ↔ C̲_K</text>
+<circle cx="1960.0" cy="1514.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="1960.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="2000.0" cy="1514.0" r="13" fill="#eb6834" stroke="#0b0b0b" stroke-width="2.5"/>
+<text x="2000.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="2040.0" cy="1514.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2040.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="2080.0" cy="1514.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2080.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<circle cx="2120.0" cy="1514.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2120.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">4</text>
+<circle cx="2160.0" cy="1514.0" r="13" fill="rgb(249,230,221)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2160.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">5</text>
+<text x="2190.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#eb6834" text-anchor="start">← ε̲ = ±1</text>
+<text x="1820.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l^* = J</text>
+<circle cx="1960.0" cy="1550.0" r="13" fill="rgb(249,225,215)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="1960.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="2000.0" cy="1550.0" r="13" fill="rgb(249,225,215)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2000.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="2040.0" cy="1550.0" r="13" fill="rgb(249,225,215)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2040.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<circle cx="2080.0" cy="1550.0" r="13" fill="rgb(249,225,215)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2080.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">4</text>
+<circle cx="2120.0" cy="1550.0" r="13" fill="rgb(249,225,215)" stroke="#eb6834" stroke-width="1.2"/>
+<text x="2120.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">5</text>
+<text x="1820.0" y="1586.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">line of E[11] ≅ F_11²: 1 of 12</text>
+<rect x="2090.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="#eb6834"/>
+<rect x="2106.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2122.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2138.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2154.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2170.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2186.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2202.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2218.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2234.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2250.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<rect x="2266.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(249,222,211)"/>
+<text x="1820.0" y="1612.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V: v_∞, v₂, v₃, v₅, v₇, … one v | p in K for every p</text>
+<text x="1820.0" y="1634.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V^bad = {v₃, v₅, v₇}: v with the line = Tate μ_11 (type (1, Z/11Z)±)</text>
+<text x="1820.0" y="1656.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">F_l ⋊ {±1}: order 22 · F_l^*: order 5 · Θ-dilation j² = {1, 4, 9, 16, 25}</text>
+<rect x="1798.0" y="1692.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<text x="1820.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(a)</text>
+<rect x="1858.0" y="1704.5" width="104.5" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="1866.0" y="1720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">by construction</text>
+<text x="1970.5" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[2·3·5]) contains √−1 by construction</text>
+<text x="2418.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1820.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(b)</text>
+<rect x="1858.0" y="1726.5" width="64.1" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="1866.0" y="1742.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">checked</text>
+<text x="1930.1" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">stable (Raynaud, E[15] ⊆ E(F)); [F:Q] | 46080; V^bad_mod ≠ ∅</text>
+<text x="2418.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1820.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(c)</text>
+<rect x="1858.0" y="1748.5" width="55.3" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="1866.0" y="1764.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">proved</text>
+<text x="1921.3" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">l = 11: Serre witnesses p = 23, 13, 17; 11 ∤ 2, 11 ∤ 4, 11 ∤ 8</text>
+<text x="2418.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1820.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(d)</text>
+<rect x="1858.0" y="1770.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="1866.0" y="1786.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="1936.4" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">choose one of the 12 lines of E[11]; j ∉ Z so E has no CM</text>
+<text x="2418.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1820.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(e)</text>
+<rect x="1858.0" y="1792.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="1866.0" y="1808.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="1936.4" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">one v | p per p; at V^bad the v of the Tate μ_l</text>
+<text x="2418.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1820.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(f)</text>
+<rect x="1858.0" y="1814.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="1866.0" y="1830.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="1936.4" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">the cusp ±1</text>
+<text x="2418.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="1820.0" y="1874.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="700" fill="#1baf7a" text-anchor="start">iut validate: 0 errors, 0 warnings, 18 checks</text>
+<rect x="1798.0" y="1898.0" width="642.0" height="214.0" rx="12" fill="#fff" stroke="rgb(244,185,161)" stroke-width="1.4"/>
+<rect x="1808.0" y="1908.0" width="622.0" height="194.0" rx="8" fill="#f7f7f5"/>
+<text x="1820.0" y="1934.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14" font-weight="700" fill="#eb6834" text-anchor="start">docs/initial-theta-data/frey-1-2400-2401.json</text>
+<text x="1820.0" y="1958.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;id&quot;: &quot;frey-1-2400-2401&quot;,</text>
+<text x="1820.0" y="1973.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;curve&quot;: &quot;y² = x³ + 2399x² − 2400x&quot;,</text>
+<text x="1820.0" y="1989.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;j&quot;: &quot;73³·193³·409³ / 2²·3²·5⁴·7⁸&quot;,</text>
+<text x="1820.0" y="2004.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;F&quot;: &quot;Q(√−1,E[30]), [F:Q] | 46080&quot;,</text>
+<text x="1820.0" y="2020.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;l&quot;: 11,</text>
+<text x="1820.0" y="2035.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;K&quot;: &quot;F(E[11]), [K:F] = 13200&quot;,</text>
+<text x="1820.0" y="2051.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;ordQ_VbadMod&quot;: { &quot;3&quot;: 2, &quot;5&quot;: 4, &quot;7&quot;: 8 },</text>
+<text x="1820.0" y="2066.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;C_K&quot;: &quot;(1, l-tors)±, 6 cusps&quot;,</text>
+<text x="1820.0" y="2082.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;epsilon&quot;: 1,</text>
+<text x="1820.0" y="2097.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;logQ&quot;: 24.202257</text>
+<rect x="2458.0" y="382.0" width="642.0" height="176.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<text x="2480.0" y="418.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="start">2 + 3¹⁰·109 = 23⁵</text>
+<text x="3078.0" y="418.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="end">rad = 15042 · quality 1.6299</text>
+<text x="2480.0" y="450.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">E</text>
+<text x="2576.0" y="450.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="start">y² = x³ + 6436339x² − 12872682x</text>
+<text x="2480.0" y="478.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">c4 · c6</text>
+<text x="2576.0" y="478.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">662823973455472 · -17064647115828415143040</text>
+<text x="2480.0" y="504.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">Δ</text>
+<text x="2576.0" y="504.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">109833904946803852249841111616 = 2⁶·3²⁰·23¹⁰·109²</text>
+<text x="2480.0" y="532.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">j</text>
+<text x="2576.0" y="532.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">2⁶·41426498340967³ / 3²⁰·23¹⁰·109²</text>
+<rect x="2458.0" y="568.0" width="642.0" height="300.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<line x1="2480.0" y1="680.0" x2="3078.0" y2="680.0" stroke="#e4e3df" stroke-width="1.2"/>
+<circle cx="2539.0" cy="670.0" r="7" fill="#fff" stroke="#8a8984" stroke-width="1.2"/>
+<text x="2539.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₂</text>
+<text x="2539.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 6</text>
+<text x="2539.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">add. → good</text>
+<rect x="2623.0" y="619.7" width="52.0" height="60.3" rx="4" fill="#1baf7a"/>
+<text x="2649.0" y="611.7" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#1baf7a" text-anchor="middle">21.97</text>
+<text x="2649.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#1baf7a" text-anchor="middle">v₃</text>
+<text x="2649.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -20</text>
+<text x="2649.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="middle">V^bad_mod</text>
+<circle cx="2759.0" cy="670.0" r="7" fill="rgb(212,212,209)" stroke="#8a8984" stroke-width="1.2"/>
+<text x="2759.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₅</text>
+<text x="2759.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 0</text>
+<text x="2759.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">good</text>
+<rect x="2843.0" y="594.0" width="52.0" height="86.0" rx="4" fill="#1baf7a"/>
+<text x="2869.0" y="586.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#1baf7a" text-anchor="middle">31.35</text>
+<text x="2869.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#1baf7a" text-anchor="middle">v₂₃</text>
+<text x="2869.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -10</text>
+<text x="2869.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="middle">V^bad_mod</text>
+<rect x="2953.0" y="654.3" width="52.0" height="25.7" rx="4" fill="#1baf7a"/>
+<text x="2979.0" y="646.3" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#1baf7a" text-anchor="middle">9.38</text>
+<text x="2979.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#1baf7a" text-anchor="middle">v₁₀₉</text>
+<text x="2979.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -2</text>
+<text x="2979.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="middle">V^bad_mod</text>
+<text x="2480.0" y="760.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₃ = 3²⁰·(1 + 3 + 3² + 3³ + 3⁴ + 3⁵ + O(3⁸))</text>
+<text x="2480.0" y="780.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₂₃ = 23¹⁰·(2 + 6·23 + 10·23² + 6·23³ + 23⁴ + 2·23⁵ + 23⁶ + O(23⁷))</text>
+<text x="2480.0" y="800.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₁₀₉ = 109²·(88 + 62·109 + 39·109² + 20·109³ + 77·109⁴ + O(109⁵))</text>
+<text x="2480.0" y="852.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="700" fill="#0b0b0b" text-anchor="start">log q = Σ ord(q_v)·log p = 62.710</text>
+<rect x="2458.0" y="878.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<text x="2480.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_mod : Q]</text>
+<rect x="2598.0" y="899.0" width="3.0" height="16.0" rx="3" fill="#1baf7a"/>
+<text x="2609.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="2480.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_tpd : Q]</text>
+<rect x="2598.0" y="926.0" width="3.0" height="16.0" rx="3" fill="#1baf7a"/>
+<text x="2609.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="2480.0" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F : Q]</text>
+<rect x="2598.0" y="953.0" width="181.4" height="16.0" rx="3" fill="rgb(173,225,206)" stroke="#1baf7a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="2787.4" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 46,080</text>
+<text x="2480.0" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : F]</text>
+<rect x="2598.0" y="980.0" width="128.5" height="16.0" rx="3" fill="#1baf7a"/>
+<text x="2734.5" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 2,016</text>
+<text x="2480.0" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : Q]</text>
+<rect x="2598.0" y="1007.0" width="309.9" height="16.0" rx="3" fill="rgb(173,225,206)" stroke="#1baf7a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="2915.9" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 92,897,280</text>
+<text x="2480.0" y="1056.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[30]) · E[2] already rational · [K:F] = |GL2(F_7)|</text>
+<rect x="2458.0" y="1084.0" width="642.0" height="150.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<rect x="2480.0" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="2519.3" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">5</text>
+<line x1="2490.0" y1="1144.0" x2="2548.6" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<rect x="2566.6" y="1106.0" width="78.6" height="46.0" rx="8" fill="#1baf7a" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2605.9" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+<rect x="2653.1" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2692.4" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">11</text>
+<rect x="2739.7" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2779.0" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">13</text>
+<rect x="2826.3" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2865.6" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">17</text>
+<rect x="2912.9" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="2952.1" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">19</text>
+<rect x="2999.4" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="3038.7" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">23</text>
+<line x1="3009.4" y1="1144.0" x2="3068.0" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<text x="2480.0" y="1180.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#e34948" text-anchor="start">✗ 5: E[5] ⊆ E(F), 5 | ord q_3 = 20, 5 | ord q_23 = 10 · 23: 23 ∈ V^bad_mod</text>
+<text x="2480.0" y="1220.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#1baf7a" text-anchor="start">l = 7 · l* = 3 · l± = 4 · green = also valid</text>
+<rect x="2458.0" y="1244.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<text x="2480.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start"></text>
+<text x="2532.9" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">p</text>
+<text x="2599.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">a_p</text>
+<text x="2673.2" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr</text>
+<text x="2735.3" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">det</text>
+<text x="2806.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr²−4det</text>
+<text x="2940.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">u = tr²/det</text>
+<text x="2480.0" y="1302.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#1baf7a" text-anchor="start">s</text>
+<text x="2532.9" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">31</text>
+<text x="2599.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">4</text>
+<text x="2673.2" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">4</text>
+<text x="2735.3" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="2806.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">4 square</text>
+<text x="2940.0" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="2480.0" y="1330.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#1baf7a" text-anchor="start">s′</text>
+<text x="2532.9" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="2599.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2673.2" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2735.3" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="2806.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5 non-sq.</text>
+<text x="2940.0" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="2480.0" y="1358.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#1baf7a" text-anchor="start">s″</text>
+<text x="2532.9" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="2599.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2673.2" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2</text>
+<text x="2735.3" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="2806.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5 non-sq.</text>
+<text x="2940.0" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="2480.0" y="1400.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">mod 7: Frob_p has char. poly x² − a_p x + p</text>
+<text x="2480.0" y="1424.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#1baf7a" text-anchor="start">⇒ Im ⊇ SL2(F_7) over Q, and over F (index | 46080)</text>
+<rect x="2458.0" y="1450.0" width="642.0" height="232.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<text x="2480.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l ↔ cusps X̲_K</text>
+<circle cx="2620.0" cy="1478.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2620.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-3</text>
+<circle cx="2660.0" cy="1478.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2660.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-2</text>
+<circle cx="2700.0" cy="1478.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2700.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-1</text>
+<circle cx="2740.0" cy="1478.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2740.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="2780.0" cy="1478.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2780.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="2820.0" cy="1478.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2820.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="2860.0" cy="1478.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2860.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="2480.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">|F_l| ↔ C̲_K</text>
+<circle cx="2620.0" cy="1514.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2620.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="2660.0" cy="1514.0" r="13" fill="#1baf7a" stroke="#0b0b0b" stroke-width="2.5"/>
+<text x="2660.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="2700.0" cy="1514.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2700.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="2740.0" cy="1514.0" r="13" fill="rgb(218,240,232)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2740.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="2770.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#1baf7a" text-anchor="start">← ε̲ = ±1</text>
+<text x="2480.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l^* = J</text>
+<circle cx="2620.0" cy="1550.0" r="13" fill="rgb(212,238,228)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2620.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="2660.0" cy="1550.0" r="13" fill="rgb(212,238,228)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2660.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="2700.0" cy="1550.0" r="13" fill="rgb(212,238,228)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="2700.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="2480.0" y="1586.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">line of E[7] ≅ F_7²: 1 of 8</text>
+<rect x="2750.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="#1baf7a"/>
+<rect x="2766.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<rect x="2782.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<rect x="2798.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<rect x="2814.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<rect x="2830.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<rect x="2846.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<rect x="2862.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(207,237,225)"/>
+<text x="2480.0" y="1612.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V: v_∞, v₂, v₃, v₅, v₂₃, v₁₀₉, … one v | p in K for every p</text>
+<text x="2480.0" y="1634.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V^bad = {v₃, v₂₃, v₁₀₉}: v with the line = Tate μ_7 (type (1, Z/7Z)±)</text>
+<text x="2480.0" y="1656.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">F_l ⋊ {±1}: order 14 · F_l^*: order 3 · Θ-dilation j² = {1, 4, 9}</text>
+<rect x="2458.0" y="1692.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<text x="2480.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(a)</text>
+<rect x="2518.0" y="1704.5" width="104.5" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="2526.0" y="1720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">by construction</text>
+<text x="2630.5" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[2·3·5]) contains √−1 by construction</text>
+<text x="3078.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="2480.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(b)</text>
+<rect x="2518.0" y="1726.5" width="64.1" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="2526.0" y="1742.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">checked</text>
+<text x="2590.1" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">stable (Raynaud, E[15] ⊆ E(F)); [F:Q] | 46080; V^bad_mod ≠ ∅</text>
+<text x="3078.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="2480.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(c)</text>
+<rect x="2518.0" y="1748.5" width="55.3" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="2526.0" y="1764.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">proved</text>
+<text x="2581.3" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">l = 7: Serre witnesses p = 31, 5, 5; 7 ∤ 20, 7 ∤ 10, 7 ∤ 2</text>
+<text x="3078.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="2480.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(d)</text>
+<rect x="2518.0" y="1770.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="2526.0" y="1786.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="2596.4" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">choose one of the 8 lines of E[7]; j ∉ Z so E has no CM</text>
+<text x="3078.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="2480.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(e)</text>
+<rect x="2518.0" y="1792.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="2526.0" y="1808.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="2596.4" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">one v | p per p; at V^bad the v of the Tate μ_l</text>
+<text x="3078.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="2480.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(f)</text>
+<rect x="2518.0" y="1814.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="2526.0" y="1830.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="2596.4" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">the cusp ±1</text>
+<text x="3078.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="700" fill="#1baf7a" text-anchor="end">iut ✓</text>
+<text x="2480.0" y="1874.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="700" fill="#1baf7a" text-anchor="start">iut validate: 0 errors, 1 warning, 19 checks</text>
+<text x="3078.0" y="1874.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#8a8984" text-anchor="end">warning: additive at 2 over Q (good over F)</text>
+<rect x="2458.0" y="1898.0" width="642.0" height="214.0" rx="12" fill="#fff" stroke="rgb(151,217,193)" stroke-width="1.4"/>
+<rect x="2468.0" y="1908.0" width="622.0" height="194.0" rx="8" fill="#f7f7f5"/>
+<text x="2480.0" y="1934.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14" font-weight="700" fill="#1baf7a" text-anchor="start">docs/initial-theta-data/frey-2-6436341-6436343.json</text>
+<text x="2480.0" y="1958.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;id&quot;: &quot;frey-2-6436341-6436343&quot;,</text>
+<text x="2480.0" y="1973.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;curve&quot;: &quot;y² = x³ + 6436339x² − 12872682x&quot;,</text>
+<text x="2480.0" y="1989.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;j&quot;: &quot;2⁶·41426498340967³ / 3²⁰·23¹⁰·109²&quot;,</text>
+<text x="2480.0" y="2004.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;F&quot;: &quot;Q(√−1,E[30]), [F:Q] | 46080&quot;,</text>
+<text x="2480.0" y="2020.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;l&quot;: 7,</text>
+<text x="2480.0" y="2035.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;K&quot;: &quot;F(E[7]), [K:F] = 2016&quot;,</text>
+<text x="2480.0" y="2051.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;ordQ_VbadMod&quot;: { &quot;3&quot;: 20, &quot;23&quot;: 10, &quot;109&quot;: 2 },</text>
+<text x="2480.0" y="2066.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;C_K&quot;: &quot;(1, l-tors)±, 4 cusps&quot;,</text>
+<text x="2480.0" y="2082.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;epsilon&quot;: 1,</text>
+<text x="2480.0" y="2097.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;logQ&quot;: 62.709884</text>
+<rect x="3118.0" y="382.0" width="642.0" height="176.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<text x="3140.0" y="418.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="20" font-weight="700" fill="#6250d6" text-anchor="start">[a1,a2,a3,a4,a6] = [0, -1, 1, -10, -20]</text>
+<text x="3140.0" y="450.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">E</text>
+<text x="3236.0" y="450.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="start">y² + y = x³ − x² − 10x − 20</text>
+<text x="3140.0" y="478.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">c4 · c6</text>
+<text x="3236.0" y="478.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">496 · 20008</text>
+<text x="3140.0" y="504.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">Δ</text>
+<text x="3236.0" y="504.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15.5" font-weight="400" fill="#0b0b0b" text-anchor="start">-161051 = −11⁵</text>
+<text x="3140.0" y="532.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#8a8984" text-anchor="start" letter-spacing="0.8">j</text>
+<text x="3236.0" y="532.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="18" font-weight="700" fill="#0b0b0b" text-anchor="start">−2¹²·31³ / 11⁵</text>
+<rect x="3118.0" y="568.0" width="642.0" height="300.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<line x1="3140.0" y1="680.0" x2="3738.0" y2="680.0" stroke="#e4e3df" stroke-width="1.2"/>
+<circle cx="3199.0" cy="670.0" r="7" fill="rgb(212,212,209)" stroke="#8a8984" stroke-width="1.2"/>
+<text x="3199.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₂</text>
+<text x="3199.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 12</text>
+<text x="3199.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">good</text>
+<circle cx="3309.0" cy="670.0" r="7" fill="rgb(212,212,209)" stroke="#8a8984" stroke-width="1.2"/>
+<text x="3309.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₃</text>
+<text x="3309.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 0</text>
+<text x="3309.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">good</text>
+<circle cx="3419.0" cy="670.0" r="7" fill="rgb(212,212,209)" stroke="#8a8984" stroke-width="1.2"/>
+<text x="3419.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#0b0b0b" text-anchor="middle">v₅</text>
+<text x="3419.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j 0</text>
+<text x="3419.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="400" fill="#8a8984" text-anchor="middle">good</text>
+<rect x="3503.0" y="647.1" width="52.0" height="32.9" rx="4" fill="#6250d6"/>
+<text x="3529.0" y="639.1" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#6250d6" text-anchor="middle">11.99</text>
+<text x="3529.0" y="702.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#6250d6" text-anchor="middle">v₁₁</text>
+<text x="3529.0" y="720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12" font-weight="400" fill="#52514e" text-anchor="middle">ord j -5</text>
+<text x="3529.0" y="736.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#6250d6" text-anchor="middle">V^bad_mod</text>
+<text x="3140.0" y="760.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14.5" font-weight="400" fill="#0b0b0b" text-anchor="start">q₁₁ = 11⁵·(10 + 2·11 + 6·11² + 6·11³ + 5·11⁴ + 4·11⁵ + O(11⁶))</text>
+<text x="3140.0" y="852.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="700" fill="#0b0b0b" text-anchor="start">log q = Σ ord(q_v)·log p = 11.989</text>
+<rect x="3118.0" y="878.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<text x="3140.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_mod : Q]</text>
+<rect x="3258.0" y="899.0" width="3.0" height="16.0" rx="3" fill="#6250d6"/>
+<text x="3269.0" y="913.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 1</text>
+<text x="3140.0" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F_tpd : Q]</text>
+<rect x="3258.0" y="926.0" width="30.3" height="16.0" rx="3" fill="#6250d6"/>
+<text x="3296.3" y="940.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 6</text>
+<text x="3140.0" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[F : Q]</text>
+<rect x="3258.0" y="953.0" width="211.6" height="16.0" rx="3" fill="rgb(198,192,238)" stroke="#6250d6" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="3477.6" y="967.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 276,480</text>
+<text x="3140.0" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : F]</text>
+<rect x="3258.0" y="980.0" width="128.5" height="16.0" rx="3" fill="#6250d6"/>
+<text x="3394.5" y="994.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">= 2,016</text>
+<text x="3140.0" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">[K : Q]</text>
+<rect x="3258.0" y="1007.0" width="340.1" height="16.0" rx="3" fill="rgb(198,192,238)" stroke="#6250d6" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="3606.1" y="1021.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="600" fill="#0b0b0b" text-anchor="start">≤ 557,383,680</text>
+<text x="3140.0" y="1056.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[30]) · Q(E[2]) has degree 6 · [K:F] = |GL2(F_7)|</text>
+<rect x="3118.0" y="1084.0" width="642.0" height="150.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<rect x="3140.0" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="3179.3" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">5</text>
+<line x1="3150.0" y1="1144.0" x2="3208.6" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<rect x="3226.6" y="1106.0" width="78.6" height="46.0" rx="8" fill="#6250d6" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3265.9" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+<rect x="3313.1" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(250,238,237)" stroke="rgb(240,163,162)" stroke-width="1.2"/>
+<text x="3352.4" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#e34948" text-anchor="middle">11</text>
+<line x1="3323.1" y1="1144.0" x2="3381.7" y2="1114.0" stroke="#e34948" stroke-width="1.6" opacity="0.7"/>
+<rect x="3399.7" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="3439.0" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">13</text>
+<rect x="3486.3" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="3525.6" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">17</text>
+<rect x="3572.9" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="3612.1" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">19</text>
+<rect x="3659.4" y="1106.0" width="78.6" height="46.0" rx="8" fill="rgb(225,243,236)" stroke="rgb(117,206,174)" stroke-width="1.2"/>
+<text x="3698.7" y="1137.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="22" font-weight="700" fill="#1baf7a" text-anchor="middle">23</text>
+<text x="3140.0" y="1180.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#e34948" text-anchor="start">✗ 5: E[5] ⊆ E(F), 5 | ord q_11 = 5 · 11: 11 ∈ V^bad_mod</text>
+<text x="3140.0" y="1220.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#6250d6" text-anchor="start">l = 7 · l* = 3 · l± = 4 · green = also valid</text>
+<rect x="3118.0" y="1244.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<text x="3140.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start"></text>
+<text x="3192.9" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">p</text>
+<text x="3259.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">a_p</text>
+<text x="3333.2" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr</text>
+<text x="3395.3" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">det</text>
+<text x="3466.6" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">tr²−4det</text>
+<text x="3600.0" y="1274.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="12.5" font-weight="700" fill="#8a8984" text-anchor="start">u = tr²/det</text>
+<text x="3140.0" y="1302.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#6250d6" text-anchor="start">s</text>
+<text x="3192.9" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="3259.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">1</text>
+<text x="3333.2" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">1</text>
+<text x="3395.3" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="3466.6" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">2 square</text>
+<text x="3600.0" y="1302.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="3140.0" y="1330.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#6250d6" text-anchor="start">s′</text>
+<text x="3192.9" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="3259.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">-1</text>
+<text x="3333.2" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">6</text>
+<text x="3395.3" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="3466.6" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3 non-sq.</text>
+<text x="3600.0" y="1330.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="3140.0" y="1358.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="17" font-weight="700" fill="#6250d6" text-anchor="start">s″</text>
+<text x="3192.9" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="3259.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">-1</text>
+<text x="3333.2" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">6</text>
+<text x="3395.3" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3</text>
+<text x="3466.6" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">3 non-sq.</text>
+<text x="3600.0" y="1358.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">5</text>
+<text x="3140.0" y="1400.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13.5" font-weight="400" fill="#52514e" text-anchor="start">mod 7: Frob_p has char. poly x² − a_p x + p</text>
+<text x="3140.0" y="1424.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#1baf7a" text-anchor="start">⇒ Im ⊇ SL2(F_7) over Q, and over F (index | 276480)</text>
+<rect x="3118.0" y="1450.0" width="642.0" height="232.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<text x="3140.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l ↔ cusps X̲_K</text>
+<circle cx="3280.0" cy="1478.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3280.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-3</text>
+<circle cx="3320.0" cy="1478.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3320.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-2</text>
+<circle cx="3360.0" cy="1478.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3360.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">-1</text>
+<circle cx="3400.0" cy="1478.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="3400.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="3440.0" cy="1478.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3440.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="3480.0" cy="1478.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3480.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="3520.0" cy="1478.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3520.0" y="1483.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="3140.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">|F_l| ↔ C̲_K</text>
+<circle cx="3280.0" cy="1514.0" r="13" fill="rgb(196,233,219)" stroke="#1baf7a" stroke-width="1.2"/>
+<text x="3280.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">0</text>
+<circle cx="3320.0" cy="1514.0" r="13" fill="#6250d6" stroke="#0b0b0b" stroke-width="2.5"/>
+<text x="3320.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="3360.0" cy="1514.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3360.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="3400.0" cy="1514.0" r="13" fill="rgb(229,226,245)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3400.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="3430.0" y="1519.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#6250d6" text-anchor="start">← ε̲ = ±1</text>
+<text x="3140.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">F_l^* = J</text>
+<circle cx="3280.0" cy="1550.0" r="13" fill="rgb(224,221,244)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3280.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">1</text>
+<circle cx="3320.0" cy="1550.0" r="13" fill="rgb(224,221,244)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3320.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">2</text>
+<circle cx="3360.0" cy="1550.0" r="13" fill="rgb(224,221,244)" stroke="#6250d6" stroke-width="1.2"/>
+<text x="3360.0" y="1555.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="12.5" font-weight="700" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="3140.0" y="1586.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">line of E[7] ≅ F_7²: 1 of 8</text>
+<rect x="3410.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="#6250d6"/>
+<rect x="3426.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<rect x="3442.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<rect x="3458.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<rect x="3474.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<rect x="3490.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<rect x="3506.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<rect x="3522.0" y="1574.0" width="10.0" height="14.0" rx="2" fill="rgb(221,218,244)"/>
+<text x="3140.0" y="1612.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V: v_∞, v₂, v₃, v₅, v₁₁, … one v | p in K for every p</text>
+<text x="3140.0" y="1634.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#0b0b0b" text-anchor="start">V^bad = {v₁₁}: v with the line = Tate μ_7 (type (1, Z/7Z)±)</text>
+<text x="3140.0" y="1656.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">F_l ⋊ {±1}: order 14 · F_l^*: order 3 · Θ-dilation j² = {1, 4, 9}</text>
+<rect x="3118.0" y="1692.0" width="642.0" height="196.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<text x="3140.0" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(a)</text>
+<rect x="3178.0" y="1704.5" width="104.5" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="3186.0" y="1720.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">by construction</text>
+<text x="3290.5" y="1720.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">F = Q(√−1, E[2·3·5]) contains √−1 by construction</text>
+<text x="3140.0" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(b)</text>
+<rect x="3178.0" y="1726.5" width="64.1" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="3186.0" y="1742.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">checked</text>
+<text x="3250.1" y="1742.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">stable (Raynaud, E[15] ⊆ E(F)); [F:Q] | 276480; V^bad_mod ≠ ∅</text>
+<text x="3140.0" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(c)</text>
+<rect x="3178.0" y="1748.5" width="55.3" height="20.5" rx="5" fill="rgb(216,240,230)"/>
+<text x="3186.0" y="1764.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1baf7a" text-anchor="start">proved</text>
+<text x="3241.3" y="1764.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">l = 7: Serre witnesses p = 5, 3, 3; 7 ∤ 5</text>
+<text x="3140.0" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(d)</text>
+<rect x="3178.0" y="1770.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="3186.0" y="1786.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="3256.4" y="1786.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">choose one of the 8 lines of E[7]; j ∉ Z so E has no CM</text>
+<text x="3140.0" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(e)</text>
+<rect x="3178.0" y="1792.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="3186.0" y="1808.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="3256.4" y="1808.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">one v | p per p; at V^bad the v of the Tate μ_l</text>
+<text x="3140.0" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="14.5" font-weight="700" fill="#0b0b0b" text-anchor="start">(f)</text>
+<rect x="3178.0" y="1814.5" width="70.4" height="20.5" rx="5" fill="rgb(218,231,245)"/>
+<text x="3186.0" y="1830.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="11.5" font-weight="700" fill="#2a78d6" text-anchor="start">by choice</text>
+<text x="3256.4" y="1830.0" font-family="'DejaVu Sans', 'DejaVu Serif', 'FreeSerif', Inter, sans-serif" font-size="13" font-weight="400" fill="#52514e" text-anchor="start">the cusp ±1</text>
+<text x="3140.0" y="1874.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="700" fill="#52514e" text-anchor="start">not an abc triple: checked by initialtheta-data.js only</text>
+<rect x="3118.0" y="1898.0" width="642.0" height="214.0" rx="12" fill="#fff" stroke="rgb(183,175,234)" stroke-width="1.4"/>
+<rect x="3128.0" y="1908.0" width="622.0" height="194.0" rx="8" fill="#f7f7f5"/>
+<text x="3140.0" y="1934.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="14" font-weight="700" fill="#6250d6" text-anchor="start">docs/initial-theta-data/curve-11a1.json</text>
+<text x="3140.0" y="1958.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;id&quot;: &quot;curve-11a1&quot;,</text>
+<text x="3140.0" y="1973.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;curve&quot;: &quot;y² + y = x³ − x² − 10x − 20&quot;,</text>
+<text x="3140.0" y="1989.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;j&quot;: &quot;−2¹²·31³ / 11⁵&quot;,</text>
+<text x="3140.0" y="2004.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;F&quot;: &quot;Q(√−1,E[30]), [F:Q] | 276480&quot;,</text>
+<text x="3140.0" y="2020.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;l&quot;: 7,</text>
+<text x="3140.0" y="2035.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;K&quot;: &quot;F(E[7]), [K:F] = 2016&quot;,</text>
+<text x="3140.0" y="2051.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;ordQ_VbadMod&quot;: { &quot;11&quot;: 5 },</text>
+<text x="3140.0" y="2066.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;C_K&quot;: &quot;(1, l-tors)±, 4 cusps&quot;,</text>
+<text x="3140.0" y="2082.0" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;epsilon&quot;: 1,</text>
+<text x="3140.0" y="2097.5" font-family="'JetBrains Mono', 'DejaVu Sans Mono', 'Liberation Mono', Menlo, monospace" font-size="12.5" font-weight="400" fill="#0b0b0b" text-anchor="start">&quot;logQ&quot;: 11.989476</text>
+<text x="80.0" y="2146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="start">4 examples · F_mod = Q throughout · F as in [IUTchIV] Thm 1.10 · SL2 by Serre 1972 §2.8 Prop 19 from point counts · q-adic digits by inverting j(q) · abc examples re-checked with iut validate and iut run CheckDefThreeOne</text>
+<text x="3760.0" y="2146.0" font-family="Inter, 'Inter Display', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif" font-size="14" font-weight="400" fill="#8a8984" text-anchor="end">oneman/motizukipdf · docs/DATA_MODEL.md · generated 2026-11-08 by scripts/infographic/initialtheta.js</text>
+</svg>

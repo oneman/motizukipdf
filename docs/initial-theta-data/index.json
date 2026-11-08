@@ -1,0 +1,38 @@
+{
+  "schema": "iut-initial-theta-data/index/1",
+  "reference": "[IUTchI] Def 3.1",
+  "examples": [
+    {
+      "id": "frey-1-8-9",
+      "title": "1 + 8 = 9",
+      "file": "frey-1-8-9.json",
+      "curve": "y² = x³ + 7x² − 8x",
+      "l": 7,
+      "VbadMod": [3]
+    },
+    {
+      "id": "frey-1-2400-2401",
+      "title": "1 + 2400 = 2401",
+      "file": "frey-1-2400-2401.json",
+      "curve": "y² = x³ + 2399x² − 2400x",
+      "l": 11,
+      "VbadMod": [3, 5, 7]
+    },
+    {
+      "id": "frey-2-6436341-6436343",
+      "title": "2 + 3¹⁰·109 = 23⁵",
+      "file": "frey-2-6436341-6436343.json",
+      "curve": "y² = x³ + 6436339x² − 12872682x",
+      "l": 7,
+      "VbadMod": [3, 23, 109]
+    },
+    {
+      "id": "curve-11a1",
+      "title": "the curve 11a1",
+      "file": "curve-11a1.json",
+      "curve": "y² + y = x³ − x² − 10x − 20",
+      "l": 7,
+      "VbadMod": [11]
+    }
+  ]
+}

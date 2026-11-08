@@ -70,6 +70,28 @@ additive reduction (flagged: stable reduction only after the extension F_tpd of
 log(f^{F_tpd}) = log rad(abc). `iut_gen_random` makes either a random Frey
 datum or a synthetic datum over a number field of degree 1–3.
 
+**Worked examples.** [initialtheta-infographic.png](initialtheta-infographic.png)
+(3840 × 2160; SVG master [initialtheta-infographic.svg](initialtheta-infographic.svg))
+lays out the recipe step by step, with the clause of Def 3.1 each step meets, and
+runs it on four curves over Q: the Frey curves of 1 + 8 = 9, 1 + 2400 = 2401 and
+Reyssat's 2 + 3¹⁰·109 = 23⁵, and the curve 11a1 given by its equation. All the data
+is in [initial-theta-data/](initial-theta-data/), one JSON file per example. The
+numbers are computed exactly by `scripts/infographic/initialtheta-data.js`:
+
+* j and the bad places, with ord_p(q_p) = −ord_p(j) and the Tate parameter q_p to
+  8 p-adic digits, found by inverting j = 1/q + 744 + 196884q + …;
+* F = Q(√−1, E[2·3·5]) as in [IUTchIV] Thm 1.10, so that [F:Q] divides
+  [F_tpd:Q]·46080 and is prime to every l ≥ 7;
+* l, the first prime that passes the sieve of Def 3.1 (c), with the SL₂ condition
+  *proved* (not asserted) from Frobenius traces by Serre's criterion (1972, §2.8
+  Prop 19);
+* K, C̲_K, V, ε̲, the label sets, and how each of (a)–(f) is met.
+
+The abc examples are also run through `iut validate`, `iut run CheckDefThreeOne`
+and `iut gen --json`; the outputs are stored in the JSON, and the script stops if the
+toolkit's ord(q_v) differ from the exact ones. Regenerate the files with
+`node scripts/infographic/initialtheta.js`, after `make -C src`.
+
 ## 3. Label sets and symmetries
 
 F_l = {−l*,…,l*} (`Fl`), |F_l| = F_l/{±1} = {0,…,l*} (`FlAbs`), F_l^* = F_l^×/{±1}
