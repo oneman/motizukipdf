@@ -30,6 +30,10 @@ validators, a terminal UI and a web app:
 * `lean/` — the same data types in **Lean 4 / Mathlib**, with proofs that the
   constructed objects exist and satisfy the validators, and of the elementary
   facts behind them (see `lean/README.md`).
+* `funfun_iut.pdf` — a light-hearted few-page article on the characteristics of IUT
+  and some observations about it, told with Japanese pop culture jokes and the running
+  example abc(1, 2400, 2401) with l = 13; its source is `docs/funfun_iut/funfun_iut.html`
+  and every number in it is read from `src/iut` (`node scripts/funfun/build.js`).
 
 Everything is grounded in the papers in this repository: each struct, check and
 view carries a citation such as `[IUTchIII] Def 1.1` or `[Alien] §3.7 (iv)`.

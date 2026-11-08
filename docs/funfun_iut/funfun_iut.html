@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>funfun IUT</title>
+<!--
+  Source of funfun_iut.pdf. Build with: node scripts/funfun/build.js
+  Math goes between \( … \) and \[ … \] (KaTeX); {{key}} placeholders are filled in from src/iut.
+  All jokes are text only: no character art, logos or screenshots from any show or game.
+-->
+<style>
+  @page { size: A4; }
+  :root {
+    --ink: #2a2433; --soft: #6b6178; --rule: #e4dcef;
+    --sakura: #e85d8a; --sakura-bg: #fff2f6;
+    --matcha: #3f8f5a; --matcha-bg: #eff8f1;
+    --sora: #3a74c4; --sora-bg: #eef4fc;
+    --yuzu: #c98a10; --yuzu-bg: #fff8e6;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0; color: var(--ink); background: #fff;
+    font: 10.2pt/1.5 'Source Serif 4', 'Noto Serif JP', 'DejaVu Serif', serif;
+    hyphens: auto; text-align: justify;
+  }
+  .jp { font-family: 'Noto Serif JP', serif; }
+  h1, h2, h3 { font-family: Inter, 'Noto Serif JP', sans-serif; text-align: left; hyphens: none; }
+  h2 {
+    font-size: 14pt; margin: 20pt 0 6pt; padding-bottom: 3pt;
+    border-bottom: 1.5pt solid var(--rule); break-after: avoid;
+  }
+  h2 .no { color: var(--sakura); margin-right: 6pt; }
+  h2 .jp { font-size: 10pt; color: var(--soft); font-weight: 400; margin-left: 6pt; }
+  h3 { font-size: 11pt; margin: 12pt 0 3pt; break-after: avoid; }
+  p { margin: 0 0 6.5pt; }
+  em { font-style: italic; }
+  code, .mono { font-family: 'JetBrains Mono', 'DejaVu Sans Mono', monospace; font-size: 8.4pt; }
+  a { color: var(--sora); text-decoration: none; }
+
+  /* title block */
+  .masthead {
+    background: linear-gradient(120deg, #fff0f5 0%, #f1edff 55%, #eaf6ff 100%);
+    border-radius: 10pt; padding: 18pt 20pt 14pt; margin-bottom: 12pt;
+    border: 1pt solid var(--rule);
+  }
+  .kicker { font: 600 8.5pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--sakura); }
+  .masthead h1 { font-size: 27pt; line-height: 1.05; margin: 4pt 0 4pt; letter-spacing: -.01em; }
+  .masthead h1 .ff { color: var(--sakura); }
+  .masthead .sub { font-size: 11.5pt; color: var(--soft); margin: 0 0 8pt; text-align: left; }
+  .masthead .byline { font: 8.6pt Inter, sans-serif; color: var(--soft); }
+  .masthead .jpttl { font-size: 10pt; color: var(--soft); margin-left: 4pt; }
+
+  .abstract {
+    border-left: 3pt solid var(--sakura); padding: 2pt 0 2pt 10pt; margin: 0 0 10pt;
+    font-size: 9.8pt; color: #3d3546;
+  }
+  .abstract b { font-family: Inter, sans-serif; font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--sakura); }
+
+  /* boxes */
+  .box { border-radius: 7pt; padding: 7pt 10pt 4pt; margin: 8pt 0 10pt; break-inside: avoid; font-size: 9.6pt; }
+  .box .tag { font: 700 7.6pt Inter, sans-serif; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 2pt; }
+  .otaku { background: var(--sakura-bg); border: 1pt solid #f6c3d4; }
+  .otaku .tag { color: var(--sakura); }
+  .toolkit { background: var(--sora-bg); border: 1pt solid #c6d9f3; }
+  .toolkit .tag { color: var(--sora); }
+  .toolkit pre { margin: 2pt 0 5pt; white-space: pre-wrap; font: 8pt/1.35 'JetBrains Mono', monospace; color: #213a5e; }
+  .paper { background: var(--matcha-bg); border: 1pt solid #c3e3cc; }
+  .paper .tag { color: var(--matcha); }
+  .warn { background: var(--yuzu-bg); border: 1pt solid #f0d79b; }
+  .warn .tag { color: var(--yuzu); }
+
+  .float-r { float: right; width: 47%; margin: 2pt 0 8pt 12pt; }
+  .clear { clear: both; }
+
+  figure { margin: 10pt 0 12pt; break-inside: avoid; text-align: center; }
+  figcaption { font-size: 8.8pt; color: var(--soft); margin-top: 4pt; text-align: left; }
+  figcaption b { color: var(--ink); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 8.9pt; margin: 6pt 0 10pt; break-inside: avoid; }
+  th { font: 600 8pt Inter, sans-serif; text-align: left; color: var(--soft); border-bottom: 1.2pt solid var(--rule); padding: 3pt 5pt; }
+  td { border-bottom: .6pt solid var(--rule); padding: 3.2pt 5pt; vertical-align: top; text-align: left; hyphens: none; }
+  td:first-child { white-space: nowrap; }
+  tr:nth-child(even) td { background: #fbf9fd; }
+
+  .katex { font-size: 1.04em; }
+  .katex-display { margin: 6pt 0 8pt; }
+  ul, ol { margin: 0 0 7pt; padding-left: 16pt; }
+  li { margin-bottom: 2.5pt; }
+  .refs { font-size: 8.8pt; }
+  .refs li { margin-bottom: 3pt; text-align: left; }
+  .preview {
+    background: linear-gradient(120deg, #2b2340, #3b2d5c); color: #f3eefc; border-radius: 9pt;
+    padding: 10pt 14pt 6pt; margin: 12pt 0; break-inside: avoid;
+  }
+  .preview .tag { color: #ffb3cb; font: 700 8pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+  .preview p { color: #f3eefc; }
+  .page-break { break-before: page; }
+  .center { text-align: center; }
+  .small { font-size: 8.8pt; color: var(--soft); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">ABCPROOF · motizukipdf · special broadcast</div>
+  <h1><span class="ff">funfun</span> IUT</h1>
+  <p class="sub">An otaku field guide to inter-universal Teichmüller theory
+    <span class="jp jpttl">（宇宙際タイヒミューラー理論）</span>: its characteristics, some honest observations,
+    and far too many Japanese pop culture jokes</p>
+  <div class="byline">Running example: the abc triple \(({{a}},{{b}},{{c}})\) with \(l = {{l}}\) · all numbers from the toolkit in <code>src/</code> · November 2026</div>
+</div>
+
+<div class="abstract"><b>Abstract</b> &nbsp;
+Inter-universal Teichmüller theory (IUT) is Shinichi Mochizuki's {{nprocs}}-process, four-paper,
+646-page machine for bounding the height of an elliptic curve by its conductor, which is to say for
+proving the abc conjecture. We describe what kind of theory it is, using the papers in <code>pdf/</code>
+and the data-type toolkit in this repository, and we follow one small example through it. Along the way
+we compare its objects to things from anime, manga, games and Japanese daily life, because a theory
+with “theaters”, “pilots”, “alien copies” and “Hodge theaters in different universes” is already halfway
+to being a light novel. No mathematical claim below rests on a joke, and no joke rests on a mathematical claim.
+</div>
+
+<div class="box warn"><span class="tag">Content notice</span>
+All references are text only: no character art, logos or screenshots were harmed, or used, in the making of
+this article. Where we describe what the theory <em>claims</em>, we cite the papers. Where we describe the
+debate about whether the claim is <em>right</em>, we report both sides and adjudicate nothing. We are a
+toolkit, not a referee. 審判ではありません。
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">0</span>Previously on IUT<span class="jp">前回までのあらすじ</span></h2>
+
+<p>In August 2012 four preprints appeared on a RIMS (Kyoto University) web page with no press release:
+<em>Inter-universal Teichmüller Theory I–IV</em> [IUTchI–IV], 186 + 174 + 199 + 87 pages. They were accepted
+by the journal PRIMS on February 5, 2020, announced at a Kyoto University press conference on April 3,
+2020, and published in special volumes of PRIMS in 2021 [EssLgc, §1.1]. In March 2018, Peter Scholze and
+Jakob Stix spent a week at RIMS discussing the theory with Mochizuki and came away convinced that the
+key inequality, [IUTchIII] Corollary 3.12, does not follow; Mochizuki came away convinced that their
+objection rests on a misreading he calls the identification of “redundant copies” [EssLgc, §1].
+Since then there have been surveys [Alien], a logic-focused exposition [EssLgc], effective versions
+[ExpEst], and in April 2026 a progress report on formalizing the theory in Lean [Form26].</p>
+
+<p>If this sounds like a long-running shōnen series, it is. The first arc aired in 2012, the tournament
+arc started in 2018, a movie adaptation (the published version) came out in 2021, and the fandom is
+still arguing about whether the finale was earned. Unlike most long-running series, the main character
+has not yet had a power-up beach episode, although [Alien] comes close: it explains the whole theory
+through the Gaussian integral \(\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}\).</p>
+
+<!-- ============================================================ -->
+<h2><span class="no">1</span>The plot in one page<span class="jp">あらすじ</span></h2>
+
+<p>The abc conjecture is about coprime positive integers with \(a + b = c\). Write
+\(\operatorname{rad}(abc)\) for the product of the distinct primes dividing \(abc\), and define the
+<em>quality</em> of the triple as</p>
+\[ q(a,b,c) \;=\; \frac{\log c}{\log \operatorname{rad}(abc)}. \]
+<p>The conjecture says that for every \(\varepsilon &gt; 0\) only finitely many triples have
+\(q &gt; 1 + \varepsilon\). Our running example is</p>
+\[ 1 + 2400 = 2401, \qquad 2400 = 2^5\cdot 3\cdot 5^2,\quad 2401 = 7^4, \qquad
+   \operatorname{rad}(abc) = 2\cdot 3\cdot 5\cdot 7 = {{rad}}, \]
+<p>so \(q = {{logc}} / {{lograd}} = {{quality}}\). That is a respectable triple. (The current champion,
+\(2 + 3^{10}\cdot 109 = 23^5\), has quality about 1.6299.) Its \(c\) is also what you get if you collect all seven
+dragon balls four times over: \(7 \cdot 7 \cdot 7 \cdot 7\). We wished for a small radical and got one.</p>
+
+<p>IUT does not attack the integers directly. It turns the triple into the Frey curve
+\(E : y^2 = x(x-1)(x+{{b}})\) and proves a Szpiro / Vojta type inequality for elliptic curves over
+number fields: in the form of [IUTchIV] Corollary 2.3, for a hyperbolic curve \(U_X = X\setminus D\),</p>
+\[ \operatorname{ht}_{\omega_X(D)} \;\lesssim\; (1+\varepsilon)\,\bigl(\text{log-diff}_X + \text{log-cond}_D\bigr), \]
+<p>where \(\lesssim\) means “up to a function bounded below by a constant”, i.e. an inequality of
+<em>bounded discrepancy classes</em>. Taking \(X = \mathbb{P}^1\) and \(D = \{0, 1, \infty\}\) gives abc. In
+the toolkit's normalization, the example has</p>
+\[ \log(\underline{q}) = {{logq}},\qquad |\log(\underline{q})| = \tfrac{\log(\underline{q})}{2l} = {{abslogq}},\qquad
+   \operatorname{ht}_E = \tfrac16\log(\underline{q}) = {{htE}},\qquad \log(\mathfrak{f}) = {{logf}}. \]
+<p>Here \(\log(\underline{q})\) is the arithmetic degree of the \(q\)-parameters at the bad places
+\(v_2, v_3, v_5, v_7\), where \(\operatorname{ord}(q) = 2, 2, 4, 8\), and \(\log(\mathfrak f) = \log {{rad}}\) is the
+conductor. The prime \(l = {{l}}\) is the auxiliary prime of the initial Θ-data [IUTchI, Def 3.1]; it
+sets the size of everything that follows.</p>
+
+<div class="box otaku"><span class="tag">Otaku note: the protagonist's stats</span>
+Every isekai protagonist checks their status window on arrival. Ours reads: <b>Class</b> Frey curve.
+<b>Level</b> \(l = {{l}}\). <b>Labels</b> \(\mathbb{F}_l = \{-6,\dots,6\}\), with \(l^* = (l-1)/2 = {{lstar}}\)
+and \(l^{\pm} = (l+1)/2 = {{lpm}}\). <b>Party</b> {{nval}} valuations \(v_2, v_3, v_5, v_7, v_{13}, v_\infty\).
+<b>Equipment</b> a field \(F\) with \([F:\mathbb{Q}] \le {{degF}}\) and \(K = F(E[l])\) with
+\([K:\mathbb{Q}] \le {{degK}}\). <b>Special skill</b> none yet; it has to be built, one Hodge theater at a time.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">2</span>Characteristic one: it is an isekai<span class="jp">異世界もの</span></h2>
+
+<p>The word “inter-universal” is literal. Each of the main objects, a <em>Θ<sup>±ell</sup>NF-Hodge theater</em>,
+is built inside its own Grothendieck universe, and the central construction, the <em>Θ-link</em>, connects
+Hodge theaters that live in <em>different</em> universes. The Θ-link is not a ring homomorphism. It does not
+even pretend to be one: it identifies only certain multiplicative monoids and the realified global
+Frobenioids attached to them, sending the theta values on one side to the \(q\)-parameter on the other,</p>
+\[ {}^{\dagger}\mathcal{F}^{\Vdash\blacktriangleright\times\mu}_{\mathrm{LGP}} \;\xrightarrow{\ \sim\ }\;
+   {}^{\ddagger}\mathcal{F}^{\Vdash\blacktriangleright\times\mu}_{\triangle},
+   \qquad \underline{\underline{\Theta}}_v^{\,j^2}\ \longmapsto\ \underline{\underline{q}}_v
+   \quad (1 \le j \le l^*) \]
+<p>[IUTchIII, Def 3.8; IUTchII, Cor 4.10]. The additive structure does not cross. In other words,
+when you are hit by Truck-kun and reincarnated on the other side of a Θ-link, you keep your multiplicative
+monoid, your units modulo torsion and your Frobenioid-theoretic degree, and you lose the ability to add.
+This is the “Reincarnated as a Monoid” route, and it is the whole point: \(\underline{\underline{q}}_v^{\,j^2}\) and
+\(\underline{\underline{q}}_v\) can be identified across universes precisely because nobody on either side insists
+that they are the same <em>ring</em> element.</p>
+
+<p>Because the two sides are not related by any ring isomorphism, the objects on one side are, from
+the point of view of the other, <em>alien copies</em> [Alien, §1.3, §2.10]. The theory then has to answer the question
+every isekai story eventually asks: what can the new world know about the old one? Its answer is
+“only what can be reconstructed from data that both worlds share”. The shared data are called
+<em>coric</em>, and they are the subject of §5.</p>
+
+<div class="box otaku"><span class="tag">Otaku note: the guild registration</span>
+In a fantasy guild you register your stats, not your soul. A Θ-link is the same: the guild clerk on the
+\(\ddagger\) side writes down “multiplicative monoid, units mod torsion, degree” and stamps the form.
+Your additive structure is not on the form. Please do not argue with the clerk about it. Many have tried.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">3</span>Characteristic two: it takes rings apart<span class="jp">分解と合体</span></h2>
+
+<p>A ring has two operations, and in a number field they are tangled together so tightly that you cannot
+change one without the other. Mochizuki describes a ring as having <em>two underlying combinatorial
+dimensions</em>, roughly its additive and multiplicative structures, and calls the tangle the
+<em>arithmetic holomorphic structure</em> [Alien, §2.7, §2.11]. The strategy of IUT is to <em>dismantle</em>
+this intertwining [Alien, §2.7, §2.10], move the pieces around separately, and then measure how much was lost.</p>
+
+<p>Two moves do the moving. The Θ-link (horizontal) keeps only multiplicative data, as above. The
+<em>log-link</em> (vertical) applies the \(p\)-adic logarithm at each place \(v\),
+\[ \log_v : \mathcal{O}^{\times}_{\overline{K}_v} \longrightarrow \overline{K}_v, \qquad
+   \mathcal{I}_v = (p_v^*)^{-1}\cdot \log_v\bigl(\mathcal{O}^{\times}_{K_v}\bigr), \]
+turning multiplication into addition. The image \(\mathcal{I}_v\) is the <em>log-shell</em>, where
+\(p_v^* = p_v\) for odd \(p_v\) and \(p_v^* = 4\) for \(p_v = 2\) (the toolkit prints \(p^* = 4, 3, 5, 7, 13\) for the
+example). [Alien] describes the log-link as an “arithmetic rotation, or juggling” of the two dimensions,
+and [EssLgc] says the log-link is “a device for constructing additive log-shells”.</p>
+
+<p>This is, unmistakably, a combining-robot show. In episode one the giant robot separates into a jet,
+a tank and a submarine; each is useful on its own but none can win the fight; the climax is the
+transformation sequence where they recombine. IUT separates the ring into its additive part (the jet,
+fast and flexible, lives in log-shells) and its multiplicative part (the tank, heavy, crosses Θ-links),
+and then spends [IUTchIII] working out how to recombine them in a universe where the original robot
+was never built. The difference from the anime is that the recombination is only <em>up to
+indeterminacy</em>, which is like the robot coming back with its arms a little bit fuzzy.</p>
+
+<!-- ============================================================ -->
+<h2><span class="no">4</span>Characteristic three: the board is a lattice<span class="jp">すごろく盤</span></h2>
+
+<p>Iterating both moves gives the <em>log-theta-lattice</em> [IUTchIII, Def 1.4, 3.8]: a Hodge theater
+\({}^{n,m}\mathcal{HT}\) at every point \((n,m) \in \mathbb{Z}^2\), with a Θ-link
+\((n,m) \to (n+1,m)\) and a log-link \((n,m) \to (n,m+1)\). The toolkit draws {{latV}} vertices and {{latE}} links for
+two columns and five rows:</p>
+
+<figure>
+<svg width="500" height="170" viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker>
+    <marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e85d8a"/></marker>
+  </defs>
+  <g font-size="10" fill="#6b6178">
+    <text x="20" y="152">m = −2</text><text x="20" y="122">m = −1</text><text x="20" y="92">m = 0</text>
+    <text x="20" y="62">m = +1</text><text x="20" y="32">m = +2</text>
+    <text x="128" y="166">n = 0</text><text x="268" y="166">n = 1</text>
+  </g>
+  <g stroke="#6b6178" stroke-width="1.3" marker-end="url(#ah)">
+    <line x1="140" y1="142" x2="140" y2="124"/><line x1="140" y1="112" x2="140" y2="94"/>
+    <line x1="140" y1="82" x2="140" y2="64"/><line x1="140" y1="52" x2="140" y2="34"/>
+    <line x1="280" y1="142" x2="280" y2="124"/><line x1="280" y1="112" x2="280" y2="94"/>
+    <line x1="280" y1="82" x2="280" y2="64"/><line x1="280" y1="52" x2="280" y2="34"/>
+  </g>
+  <line x1="150" y1="88" x2="268" y2="88" stroke="#e85d8a" stroke-width="2" marker-end="url(#ahp)"/>
+  <text x="209" y="80" font-size="10.5" fill="#e85d8a" text-anchor="middle">Θ×μ LGP-link</text>
+  <g fill="#fff" stroke="#2a2433" stroke-width="1.3">
+    <circle cx="140" cy="148" r="5"/><circle cx="140" cy="118" r="5"/><circle cx="140" cy="58" r="5"/><circle cx="140" cy="28" r="5"/>
+    <circle cx="280" cy="148" r="5"/><circle cx="280" cy="118" r="5"/><circle cx="280" cy="88" r="5"/><circle cx="280" cy="58" r="5"/><circle cx="280" cy="28" r="5"/>
+  </g>
+  <circle cx="140" cy="88" r="6" fill="#e85d8a"/>
+  <text x="122" y="92" font-size="11" fill="#2a2433" text-anchor="end">†</text>
+  <text x="296" y="92" font-size="11" fill="#2a2433">‡</text>
+  <g font-size="9.5" fill="#6b6178">
+    <text x="320" y="56">↑ log-link: vertically coric,</text>
+    <text x="320" y="69">   D-prime-strips are shared</text>
+    <text x="320" y="96">→ Θ-link: horizontally coric,</text>
+    <text x="320" y="109">   F⊢×μ-prime-strips are shared</text>
+  </g>
+</svg>
+<figcaption><b>Figure 1.</b> Part of the log-theta-lattice as the toolkit builds it (<code>iut walk --rows 2</code>). Each dot is a
+Θ<sup>±ell</sup>NF-Hodge theater in its own universe. The diagram does <em>not</em> commute [IUTchIII, Rem 1.4.1].</figcaption>
+</figure>
+
+<p>The single most important fact about this picture is that it does not commute. Going up then right
+is not the same as going right then up, because the log-link mixes the additive and multiplicative
+structures and the Θ-link only respects the multiplicative one. The Konami code does not work here:
+you may press ↑ as often as you like, but ↑→ and →↑ load different save files, and there is no ↓ at all
+(the log-link is not invertible). The toolkit's TUI lets you press <code>l</code> and <code>t</code> to make
+these moves and watch the universe counter climb, which is the closest thing we have to a sugoroku board for
+this theory.</p>
+
+<div class="box otaku"><span class="tag">Otaku note: time loops</span>
+Time-loop anime teach that you can repeat the same week as often as you like, as long as you carry
+something across each reset. In the log-theta-lattice, every vertical step is a reset of the ring
+structure, and what you carry across is the étale-like data, the D-prime-strips. The protagonist does
+not remember the additive structure, but the fundamental group remembers for them. That is what
+“vertically coric” means.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">5</span>Characteristic four: the theaters combine<span class="jp">合体！</span></h2>
+
+<p>Each dot in Figure 1 is assembled from two halves glued together [IUTchI, Def 6.13 (iii)]:</p>
+\[ \mathcal{HT}^{\Theta^{\pm\mathrm{ell}}\mathrm{NF}} \;=\; \mathcal{HT}^{\Theta^{\pm\mathrm{ell}}}
+   \;\bigsqcup_{\,0,\ \boxplus\ \mapsto\ >\,}\; \mathcal{HT}^{\Theta\mathrm{NF}}. \]
+<p>The left half, the Θ<sup>±ell</sup>-Hodge theater, is <em>additive</em>: it carries a capsule of
+\(l = {{l}}\) prime-strips labelled by \(t \in \mathbb{F}_l = \{-6,\dots,6\}\), acted on by
+\(\mathbb{F}_l^{\rtimes\pm}\), and two bridges, the Θ<sup>±</sup>-bridge to \(\mathcal F_\boxplus\) and the
+Θ<sup>ell</sup>-bridge to \(\mathcal D^{\circledcirc\pm}\). The right half, the ΘNF-Hodge theater, is
+<em>multiplicative</em>: a capsule of \(l^* = {{lstar}}\) prime-strips labelled by \(j \in \mathbb{F}_l^* = \{1,\dots,6\}\),
+acted on by \(\mathbb{F}_l^{*}\), with the Θ-bridge to \(\mathcal F_>\) and the NF-bridge to \(\mathcal F_\circledast\).
+The gluing sends \(\pm t \mapsto |t|\) and identifies the zero label and \(\boxplus\) with \(>\). The toolkit checks
+all four bridges and the gluing for the example and prints ✓ for each.</p>
+
+<p>This is a sentai team-up episode. Thirteen rangers on the additive team, six on the multiplicative
+team, and a combination sequence in which every pair of mirror-image rangers \(t\) and \(-t\) fuses into one
+ranger \(|t|\), while ranger zero becomes the cockpit. The resulting mecha is unique: the gluing has no
+non-trivial automorphisms compatible with the structure [IUTchI, Rem 6.12.2], so there is exactly one
+way to say the transformation phrase. Mochizuki's term for the additive symmetry,
+<em>conjugate synchronization</em>, is also a perfectly good name for a dance routine.</p>
+
+<h3>The two pilots</h3>
+<p>Every Hodge theater carries two “pilot objects” [IUTchIII, Def 3.8]. The <em>q-pilot</em> is the
+collection \(\{\underline{\underline{q}}_v\}\); the <em>Θ-pilot</em> is the collection of theta values
+\(\{\underline{\underline{q}}_v^{\,j^2}\}_{1\le j\le l^*}\), that is
+\(\underline{\underline{q}}^{1}, \underline{\underline{q}}^{4}, \underline{\underline{q}}^{9}, \underline{\underline{q}}^{16},
+\underline{\underline{q}}^{25}, \underline{\underline{q}}^{36}\) for \(l = {{l}}\). Their log-volumes in the example are</p>
+\[ \text{q-pilot: } -|\log(\underline{q})| = -{{abslogq}}, \qquad
+   \text{Θ-pilot (naive): } \tfrac{l(l+1)}{12}\cdot\bigl(-|\log(\underline{q})|\bigr) = {{thetapilot}}, \]
+<p>where the factor \(l(l+1)/12 = {{ratio}}\) is the average of \(j^2\) over \(j = 1,\dots,l^*\).
+Getting into the robot is not optional in this genre, and the Θ-link is exactly the moment when the
+Θ-pilot on one side is told that it is now the q-pilot on the other. If the two log-volumes really
+had to agree, we would get \(-15.17\,|\log q| = -|\log q|\), which is false, and that tension, made
+precise, is the inequality.</p>
+
+<div class="box toolkit"><span class="tag">The toolkit says</span>
+<pre>Θ-Hodge theater: Θ̲_v evaluated at j ∈ F_l^*:  q̲^1, q̲^4, q̲^9, q̲^16, q̲^25, q̲^36
+q-pilot  {q̲_v}            log-vol −|log(q)| = -{{abslogq}}    (in F⊩_Δ)
+Θ-pilot  {q̲_v^{j²}}_{j≤l*} naive log-vol  = {{thetapilot}}    (in F⊩_gau / F⊩_LGP)</pre>
+It is a little like a monster-collecting game's evolution chart, where \(\underline{\underline q}\) evolves into
+\(\underline{\underline q}^{4}\), then \(\underline{\underline q}^{9}\), and so on up to \(\underline{\underline q}^{36}\), except that
+each evolution makes the monster <em>smaller</em>, because \(|q_v| &lt; 1\).
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">6</span>Characteristic five: one truth, from the fundamental group<span class="jp">真実はいつもひとつ</span></h2>
+
+<p>IUT is built on <em>anabelian geometry</em> (遠アーベル幾何), Grothendieck's idea that certain
+“hyperbolic” varieties are determined by their étale fundamental groups. Mochizuki proved a
+\(p\)-adic version of Grothendieck's conjecture for hyperbolic curves in the 1990s, and IUT relies on a
+stronger, <em>mono-anabelian</em> form: an explicit algorithm that rebuilds the field and the curve
+from the group alone. Every prime-strip in the theory comes in two flavours [IUTchI, Def 4.1, 5.2]:</p>
+<ul>
+<li><b>étale-like</b> data, the <em>D-prime-strips</em>, which remember only the groups
+\(\Pi_v\) (and \(G_v\)); these are what the log-link cannot change, so they are shared vertically;</li>
+<li><b>Frobenius-like</b> data, the <em>F-prime-strips</em>, which also carry monoids such as
+\(\mathcal{O}^{\times}\) and \(\mathcal{O}^{\triangleright}\) that the log-link rearranges.</li>
+</ul>
+<p>The two are connected by <em>Kummer theory</em>: a Frobenius-like monoid element is sent to its Kummer
+class in the cohomology of the étale-like group, which is how the theory reads Frobenius-like data from
+inside the étale-like world.</p>
+
+<p>The genre here is the detective show. A famous boy detective reconstructs the culprit from a cufflink;
+the mono-anabelian algorithm reconstructs the number field from \(\Pi_v\). Both insist there is only
+one truth. The Kummer map is the transformation belt from a long-running tokusatsu series: put the
+Frobenius-like monoid in, press the button, and a cohomology class comes out. Henshin! The D-prime-strip
+is what is left when you take every monoid away. In one of our earlier infographics, a bathhouse witch took
+the monoids and told the F-prime-strip that from now on its name was D; we stand by that joke.</p>
+
+<div class="box paper"><span class="tag">From the papers: coricity</span>
+The D-prime-strips are <em>vertically coric</em>, invariant under the log-links, and the
+\(\mathcal F^{\vdash\times\mu}\)-prime-strips (units modulo torsion, with only mono-analytic structure) are
+<em>horizontally coric</em>, shared by the two sides of a Θ-link [IUTchIII, Thm 1.5, Def 3.8]. The
+whole of [IUTchIII] can be read as an effort to describe the Θ-pilot using only coric data, so that the
+description makes sense on both sides of the Θ-link at once. That description is the <em>multiradial
+representation</em> of Theorem 3.11.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">7</span>Characteristic six: the price is indeterminacy<span class="jp">戦闘力測定</span></h2>
+
+<p>Describing the Θ-pilot with coric data is possible, but not for free. [IUTchIII] Theorem 3.11 gives
+the multiradial representation up to three <em>indeterminacies</em>:</p>
+<ul>
+<li><b>(Ind1)</b> automorphisms of the étale-like data, coming from the fact that only the groups, not
+a choice of basepoint, are shared;</li>
+<li><b>(Ind2)</b> automorphisms of the units modulo torsion \(\mathcal O^{\times\mu}\), which the Θ-link
+cannot see;</li>
+<li><b>(Ind3)</b> the <em>upper semi-compatibility</em> of the log-Kummer correspondence: going up and
+down the log-links only lets you say that one region contains another, not that they are equal.</li>
+</ul>
+<p>Taking the union of all possible outcomes (the “holomorphic hull”) and comparing log-volumes gives
+[IUTchIII] Corollary 3.12, the inequality \(-|\log(\underline{\underline\Theta})| \ge -|\log(\underline{\underline q})|\), and
+[IUTchIV] turns it into the height bound of §1. The toolkit follows [EssLgc, §3.10], which breaks the
+argument into eight steps (Stp1)–(Stp8). For the example, the log-volume of the region being tracked is
+{{stp1}} through the indeterminacy steps, {{stp4}} after taking the hull, and the final comparison happens at
+\(-|\log q| = {{stp8}}\).</p>
+
+<p>Ind3 is the scouter in a famous martial-arts anime. It does not tell you a power level, it tells you a
+power level <em>is at least</em> something, and then it explodes. For our example, the toolkit's version of
+[IUTchIV] Theorem 1.10 produces the constant</p>
+\[ C_\Theta \approx {{ctheta_m}}\times 10^{ {{ctheta_e}} }, \]
+<p>so the inequality holds with a very large amount of room. We have checked, and this number is over
+9000. That is not evidence for or against anything: for \(l = {{l}}\) and a single triple the bound is
+trivially satisfied, because the theory is asymptotic. It speaks about bounded discrepancy classes, i.e.
+about infinitely many points at once, and the auxiliary prime \(l\) is meant to grow with the height.
+One triple is a demo, not a test, the same way one episode is not a season.</p>
+
+<!-- ============================================================ -->
+<h2><span class="no">8</span>Observations<span class="jp">感想戦</span></h2>
+
+<h3>8.1 The author says the logic is simple</h3>
+<p>[EssLgc] (2023) summarizes the logical structure of IUT with Boolean operators. The Θ-link
+corresponds to logical AND \(\wedge\); the indeterminacies coming from the log-Kummer correspondence
+correspond to exclusive OR \(\dot\vee\):</p>
+\[ A \wedge B \;=\; A \wedge (B_1 \,\dot\vee\, B_2 \,\dot\vee\, \cdots) \;\Longrightarrow\; \cdots \]
+<p>and the paper compares the pattern to carry-addition in the Witt ring \(\mathbb{Z}/4\mathbb{Z}\) written
+with Boolean \(\wedge\) and \(\dot\vee\) over \(\mathbb{F}_2\). The April 2026 progress report on formalization
+[Form26] goes further and says that the logical structure “is rather simple”, so that the value of a Lean
+formalization is mainly as a communication tool, “a precise record of the logical structure of IUT that is
+immune to false misinterpretations”. The toolkit's numerical model of [EssLgc, Ex 2.4.5] reproduces the
+point in miniature: the AND version concludes “{{andverdict}}”, while the OR, XOR and redundant-copies
+versions conclude “{{orverdict}}”.</p>
+
+<p>We would describe this as a visual novel with one true ending. Choose \(\wedge\) at every branch and you
+reach the inequality. Choose \(\vee\), or identify two copies that the story wanted kept apart, and you
+get the bad ending where nothing follows. The disagreement of 2018 is, in this language, a disagreement
+about which route the original script is on.</p>
+
+<h3>8.2 The disagreement is about one corollary</h3>
+<p>It is worth being precise. Scholze and Stix did not claim that the papers are full of errors; they argued
+that one may identify the copies of the real numbers (and of the other objects) on the two sides of the
+Θ-link, since they are isomorphic, and that once one does so the argument for Corollary 3.12 only goes
+through after inserting scaling factors that make the resulting inequality useless [SS18]. Mochizuki's reply, worked out at length in [EssLgc, §3], is that such an identification
+is exactly what the theory forbids: the copies are “RCS-redundant” only in a reading that collapses the
+\(\wedge\) of the Θ-link into a \(\vee\). Outside RIMS and its collaborators the proof is not, as of this
+writing, generally accepted, and the formalization effort [Form26] is in part an attempt to settle the
+question in a form neither side can misread. We note this as a characteristic of IUT, not a verdict on it.</p>
+
+<h3>8.3 The notation is a light novel title</h3>
+<p>To give every object a name in plain ASCII, the toolkit needs {{nids}} identifiers
+(<code>docs/IDENTIFIERS.md</code>). Some are short. Others, such as \(\mathcal F^{\Vdash\blacktriangleright\times\mu}\)-prime-strip
+→ <code>FMonoGlobValUnitsModTorsPrimeStrip</code> or Θ<sup>×μ</sup><sub>LGP</sub>-link →
+<code>ThetaUnitsModTorsLGPTorsorLink</code>, are as long as the title of a light novel, and say about as much
+about the plot. A fair English rendering of the latter would be “That Time I Got Linked Across Universes
+and Only My Units Modulo Torsion Made It”. We believe this would sell.</p>
+
+<h3>8.4 There are effective versions, with very large constants</h3>
+<p>[ExpEst] (Mochizuki, Fesenko, Hoshi, Minamide, Porowski) makes the inequalities numerically effective
+by reworking the étale theta function so that it behaves at places above 2. One of its consequences
+(Theorem B) is an explicit Szpiro inequality
+\(|abc| \le 2^4 \cdot \max\{\exp(1.7\cdot 10^{30}\cdot \varepsilon^{-166/81}),\ \operatorname{rad}(abc)^{3(1+\varepsilon)}\}\),
+and another (Corollary C) is the claim that Fermat's equation has no solutions for prime exponents
+\(p &gt; 1.615\cdot 10^{14}\), which, combined with results of Vandiver, Coppersmith and Mihăilescu–Rassias, the
+authors present as an alternative proof of Fermat's Last Theorem. The constant
+\(\exp(1.7\cdot10^{30})\) deserves its own isekai: it is the size of a world, not of a number.</p>
+
+<h3>8.5 What this repository can and cannot do</h3>
+<p>The toolkit in <code>src/</code> (C, with a TUI) and <code>htdocs/</code> (the same engine in WebAssembly)
+turns the objects of [IUTchI–IV] into data types, with generators, validators and {{nprocs}} named processes, and
+<code>lean/</code> proves that the constructed objects satisfy the validators. It lets you build the example,
+walk the lattice, and watch the pilots and indeterminacies move. It does <em>not</em> verify Corollary 3.12:
+the anabelian reconstructions are modelled by labelled placeholders, not computed, and the log-volumes are
+the numbers the papers predict, evaluated on the example. It is a tour of the set, not the film.</p>
+
+<!-- ============================================================ -->
+<h2><span class="no">9</span>Character profiles<span class="jp">キャラクター紹介</span></h2>
+
+<table>
+<tr><th>Object</th><th>What it is</th><th>Its energy</th></tr>
+<tr><td>Initial Θ-data</td><td>\((\overline F/F, X_F, l, \underline C_K, \underline{\mathbb V}, \mathbb V^{\mathrm{bad}}_{\mathrm{mod}}, \underline\epsilon)\), the starting data [IUTchI, Def 3.1]</td><td>Character creation screen</td></tr>
+<tr><td>Prime-strip</td><td>One local object for each place \(v\), bundled together [IUTchI, Def 4.1, 5.2]</td><td>A bento: one compartment per prime</td></tr>
+<tr><td>D-prime-strip</td><td>Étale-like: only the groups \(\Pi_v\)</td><td>The ghost without the shell</td></tr>
+<tr><td>F-prime-strip</td><td>Frobenius-like: groups plus monoids</td><td>The ghost with the shell, for now</td></tr>
+<tr><td>Hodge theater</td><td>Θ<sup>±ell</sup>-HT ⊔ ΘNF-HT, one per universe [IUTchI, Def 6.13]</td><td>Sentai combination, 13 + 6 rangers</td></tr>
+<tr><td>Θ-link</td><td>Identifies Θ-pilot with q-pilot, multiplicatively only [IUTchIII, Def 3.8]</td><td>Truck-kun</td></tr>
+<tr><td>log-link</td><td>\(p\)-adic logarithm to a log-shell [IUTchIII, Def 1.1]</td><td>A time-loop reset</td></tr>
+<tr><td>Log-shell \(\mathcal I_v\)</td><td>\((p_v^*)^{-1}\log_v(\mathcal O^\times_{K_v})\), the common container</td><td>The save file everyone can read</td></tr>
+<tr><td>Kummer map</td><td>Frobenius-like monoid \(\to\) étale-like cohomology</td><td>Transformation belt</td></tr>
+<tr><td>Multiradial rep.</td><td>The Θ-pilot described by coric data [IUTchIII, Thm 3.11]</td><td>The recap episode everyone can follow</td></tr>
+<tr><td>Ind1, Ind2, Ind3</td><td>The three indeterminacies of Thm 3.11</td><td>A scouter that only says “at least”</td></tr>
+<tr><td>Cor 3.12</td><td>\(-|\log\underline{\underline\Theta}| \ge -|\log\underline{\underline q}|\)</td><td>The final boss, still contested</td></tr>
+</table>
+
+<div class="preview"><span class="tag">次回予告 · Next episode</span>
+<p>The log-link climbs again! The Θ-pilot crosses into a new universe with nothing but its monoid and its
+degree. Can the multiradial representation describe it from the other side? Will Ind3 let it keep more
+than an upper bound? And will anyone, in any universe, finally formalize Corollary 3.12 in Lean?
+Next time on funfun IUT: “Upper Semi-Compatibility Is Not Equality”. Don't miss it!</p>
+</div>
+
+<h3>おまけ · Omake</h3>
+<p>Why did the Θ<sup>±ell</sup>-Hodge theater refuse to go to the karaoke box? Because every song it chose
+had a mirror-image duet partner, and only \(|t|\) was allowed on stage. Why is the log-theta-lattice a bad
+place to buy a train pass? Because every line goes up and to the right, and the transfers do not commute.
+Why does the Frey curve for \(1 + 2400 = 2401\) never lose at mahjong? It only ever needs four sevens.</p>
+
+<h2><span class="no">★</span>References<span class="jp">参考文献</span></h2>
+<ul class="refs">
+<li>[IUTchI–IV] S. Mochizuki, <em>Inter-universal Teichmüller Theory I: Construction of Hodge Theaters; II:
+Hodge–Arakelov-theoretic Evaluation; III: Canonical Splittings of the Log-theta-lattice; IV: Log-volume
+Computations and Set-theoretic Foundations</em>, Publ. RIMS 57 (2021). In this repository as
+<code>pdf/Inter-universal Teichmuller Theory I–IV.pdf</code>.</li>
+<li>[Alien] S. Mochizuki, <em>The Mathematics of Mutually Alien Copies: from Gaussian Integrals to
+Inter-universal Teichmüller Theory</em>. <code>pdf/Alien Copies, Gaussians, and Inter-universal Teichmuller Theory.pdf</code>.</li>
+<li>[EssLgc] S. Mochizuki, <em>On the Essential Logical Structure of Inter-universal Teichmüller Theory in Terms
+of Logical AND “∧” / Logical OR “∨” Relations</em> (September 2023).
+<code>pdf/Essential Logical Structure of Inter-universal Teichmuller Theory.pdf</code>.</li>
+<li>[ExpEst] S. Mochizuki, I. Fesenko, Y. Hoshi, A. Minamide, W. Porowski, <em>Explicit Estimates in
+Inter-universal Teichmüller Theory</em>. <code>pdf/Explicit estimates in IUTeich.pdf</code>.</li>
+<li>[Form26] S. Mochizuki, <em>On the Formalization of IUT: a Preliminary Progress Report</em> (joint work in progress
+with Y. Hoshi, G. Yamashita, Y. Yang, …), April 2026. <code>pdf/Formalization of IUT (2026-04).pdf</code>.</li>
+<li>[SS18] P. Scholze, J. Stix, <em>Why abc is still a conjecture</em>, manuscript (2018), discussed in [EssLgc, §1].</li>
+<li>[Toolkit] This repository: <code>src/</code>, <code>htdocs/</code>, <code>lean/</code>, <code>docs/DATA_MODEL.md</code>,
+<code>docs/PROCESSES.md</code>. Every number above was produced by <code>node scripts/funfun/build.js</code> from
+<code>src/iut</code> on \(({{a}},{{b}},{{c}})\), \(l = {{l}}\).</li>
+</ul>
+
+<p class="small center">Every show, game and character referred to above belongs to its creators and is mentioned only
+by description, with affection. ありがとうございました！</p>
+
+</body>
+</html>
