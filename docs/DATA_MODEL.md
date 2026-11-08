@@ -135,6 +135,14 @@ threads ±t ↦ |t|), the isomorphism torsors of [IUTchI] Prop 4.8 and 6.6, and 
 card per type (Θ-, ΘNF-, Θ±ell-, Θ±ell NF-, D-, †/‡- and {n,m}-Hodge theaters, and
 the étale picture), each with a Japanese pop-culture joke
 (`node scripts/infographic/hodgetheaters.js`).
+Its kawaii companion
+[hodgetheaters-kawaii-infographic.png](hodgetheaters-kawaii-infographic.png)
+(SVG master [hodgetheaters-kawaii-infographic.svg](hodgetheaters-kawaii-infographic.svg))
+follows the construction instead: a sugoroku board of the fourteen processes from
+`GenerateInitialData` to `DrawEtalePicture`, each run and required to print `=> ok`,
+and a card per type with its recipe, one key fact and three jokes
+(`node scripts/infographic/hodgetheaters-kawaii.js`; the rounded type is M PLUS
+Rounded 1c under the SIL OFL, vendored in `scripts/infographic/fonts/`).
 
 From these the program builds the ⊩-strips of [IUTchII] Cor 4.10 / [IUTchIII]
 Def 3.8: F⊩_Δ (`FMonoGlobTriangle`, labels 0 and F_l^* identified, home of the
