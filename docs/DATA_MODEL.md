@@ -127,6 +127,23 @@ prints it (`node scripts/infographic/primestrips.js`).
   Θ̲_v with Θ̲_v(j) = q̲_v^{j²});
 * the **gluing 0, ⊞ ↦ >** (`GluingZeroBoxPlusToGt`) along F_l ⊇ F_l^× ↠ F_l^*.
 
+The Hodge theaters are drawn on one page in
+[hodgetheaters-infographic.png](hodgetheaters-infographic.png) (3840 × 2160; SVG
+master [hodgetheaters-infographic.svg](hodgetheaters-infographic.svg)): the
+anatomy of one Θ±ell NF-Hodge theater (bridges, capsules F_T and F_J, the gluing
+threads ±t ↦ |t|), the isomorphism torsors of [IUTchI] Prop 4.8 and 6.6, and one
+card per type (Θ-, ΘNF-, Θ±ell-, Θ±ell NF-, D-, †/‡- and {n,m}-Hodge theaters, and
+the étale picture), each with a Japanese pop-culture joke
+(`node scripts/infographic/hodgetheaters.js`).
+Its kawaii companion
+[hodgetheaters-kawaii-infographic.png](hodgetheaters-kawaii-infographic.png)
+(SVG master [hodgetheaters-kawaii-infographic.svg](hodgetheaters-kawaii-infographic.svg))
+follows the construction instead: a sugoroku board of the fourteen processes from
+`GenerateInitialData` to `DrawEtalePicture`, each run and required to print `=> ok`,
+and a card per type with its recipe, one key fact and three jokes
+(`node scripts/infographic/hodgetheaters-kawaii.js`; the rounded type is M PLUS
+Rounded 1c under the SIL OFL, vendored in `scripts/infographic/fonts/`).
+
 From these the program builds the ⊩-strips of [IUTchII] Cor 4.10 / [IUTchIII]
 Def 3.8: F⊩_Δ (`FMonoGlobTriangle`, labels 0 and F_l^* identified, home of the
 **q-pilot** {q̲_v}), F⊩_env, F⊩_gau, F⊩_LGP (`FMonoGlobLGPTorsor`, home of the
