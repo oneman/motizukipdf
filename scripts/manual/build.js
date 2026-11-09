@@ -500,7 +500,7 @@ ${IDS.slice().sort((a, b) => a.id.toLowerCase().localeCompare(b.id.toLowerCase()
 
 // ---- CSS
 const CSS = `
-@page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+@page { size: letter; margin: 18mm 16mm 20mm 16mm; }
 :root { --text:#1c2130; --dim:#5d6578; --line:#dde2ee; --soft:#eef1f8; --accent:#2f6fde; --theta:#e4572e; --log:#1f9d55; --hull:#7b4fd1; --alien:#d7263d; --frob:#f29e1f; }
 html { font-size: 10.2pt; }
 body { font-family: Inter, "DejaVu Sans", "Segoe UI", Helvetica, Arial, sans-serif; color: var(--text); line-height: 1.38; margin: 0; }
@@ -613,7 +613,7 @@ if (HTML_ONLY) process.exit(0);
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const footer = `<div style="font-family: Inter, 'DejaVu Sans', sans-serif; font-size: 7.5pt; color: #5d6578; width: 100%; padding: 0 16mm; display: flex; justify-content: space-between;"><span>IUT data types and processes · motizukipdf</span><span class="pageNumber"></span></div>`;
-  const pdfOpts = { format: 'A4', printBackground: true, displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: footer, margin: { top: '18mm', bottom: '20mm', left: '16mm', right: '16mm' }, preferCSSPageSize: true };
+  const pdfOpts = { format: 'Letter', printBackground: true, displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: footer, margin: { top: '18mm', bottom: '20mm', left: '16mm', right: '16mm' }, preferCSSPageSize: true };
   async function render(html, out) {
     await page.setContent(html, { waitUntil: 'load' });
     await page.emulateMedia({ media: 'print' });

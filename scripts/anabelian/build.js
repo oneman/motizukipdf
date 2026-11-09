@@ -212,7 +212,7 @@ if (HTML_ONLY) process.exit(0);
     <span>Anabelian reconstruction algorithms · a field guide for IUT travellers</span>
     <span>— <span class="pageNumber"></span> / <span class="totalPages"></span> —</span></div>`;
   await page.pdf({
-    path: OUT_PDF, format: 'A4', printBackground: true, preferCSSPageSize: true,
+    path: OUT_PDF, format: 'Letter', printBackground: true, preferCSSPageSize: true,
     displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: footer,
     margin: { top: '16mm', bottom: '18mm', left: '17mm', right: '17mm' },
   });
