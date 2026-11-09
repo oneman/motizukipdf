@@ -1,0 +1,15 @@
+{
+  "name": "anabelian-guide-build",
+  "private": true,
+  "description": "Builds anabelian_guide.pdf from docs/anabelian/anabelian_guide.html (KaTeX for the math, inline SVG figures, Chromium via Playwright for the PDF)",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.1.0",
+    "@fontsource/m-plus-rounded-1c": "5.1.0",
+    "@fontsource/noto-serif-jp": "5.2.5",
+    "@fontsource/source-serif-4": "5.3.1",
+    "katex": "0.16.11"
+  }
+}
