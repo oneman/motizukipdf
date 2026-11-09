@@ -7,6 +7,9 @@
 #include <string.h>
 #include "iut_ops.h"
 
+/* the first v ∈ V^bad (= V ×_{V_mod} V^bad_mod): a place over 2 of multiplicative reduction is not one */
+static unsigned first_vbad(const iut_initial_theta_data *d) { for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].in_Vbad_mod) return i; return 0; }
+
 static int fails;
 #define CHECK(cond, ...) do { if (cond) { fprintf(out, "  ok   " __VA_ARGS__); fputc('\n', out); } else { fails++; fprintf(out, "  FAIL " __VA_ARGS__); fputc('\n', out); } } while (0)
 
@@ -66,7 +69,7 @@ int iut_selftest_ops(FILE *out)
       iut_cusps_section_one c; iut_cusps_section_one_get(&d, &c); CHECK(c.two_epsilon == 2 && c.two_epsilon_ok && c.delta_E_mod_l_order == 169 && c.epsilon_prime == -c.epsilon_dprime, "[IUTchI] §1: cusps ε′ = −ε″, 2ε ≢ ±ε, |Δ_E ⊗ Z/l| = l²");
       iut_cor_one_two r; iut_cor_one_two_run(&d, &r); CHECK(r.l_squared == 169 && r.idx_C_XArrow == 338 && r.gal_XArrow_over_CUnder == 26 && r.gal_XArrow_over_CArrow == 2 && r.nsteps == 8, "[IUTchI] Cor 1.2: l² = [Δ_X : Δ_X→] = [Δ_C : Δ_X→]/2, Gal(X→/C̲) ≅ Z/2l ⊇ Gal(X→/C→) ≅ Z/2"); }
     { iut_tempered_fact t[8]; unsigned n = iut_tempered_facts(t, 8); int bad = 0; for (unsigned i = 0; i < n; ++i) if (!iut_ident_find(t[i].id)) bad++; CHECK(n == 7 && !bad, "[IUTchI] §2: 7 tempered/profinite facts, all with identifiers");
-      iut_tempered_at_v a, g; iut_tempered_at_v_get(&d, 0, &a); iut_tempered_at_v_get(&d, d.nV - 1, &g); CHECK(a.tempered_available && a.decomposition_groups_synchronized && !g.tempered_available, "[IUTchI] Def 3.1 (c), Cor 2.5: Π_v tempered exactly at v ∈ V^bad, decomposition groups synchronized there"); }
+      iut_tempered_at_v a, g; iut_tempered_at_v_get(&d, first_vbad(&d), &a); iut_tempered_at_v_get(&d, d.nV - 1, &g); CHECK(a.tempered_available && a.decomposition_groups_synchronized && !g.tempered_available, "[IUTchI] Def 3.1 (c), Cor 2.5: Π_v tempered exactly at v ∈ V^bad, decomposition groups synchronized there"); }
     { iut_def_three_one_item it[6]; iut_report r = {0}; unsigned n = iut_def_three_one_check(&d, it, 6, &r); CHECK(n == 6 && r.errors == 0 && it[2].machine_checked && !it[0].machine_checked, "[IUTchI] Def 3.1 (a)-(f) on example 2: all hold; (c) machine-checked, (a) asserted");
       iut_initial_theta_data bad = d; { unsigned vb = 0; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].in_Vbad_mod) { vb = i; break; } bad.V[vb].ordq = 13; } r.n = r.errors = 0; iut_def_three_one_check(&bad, it, 6, &r); CHECK(r.errors >= 1 && !it[2].ok, "[IUTchI] Def 3.1 (c): l | ord_v(q_v) is detected");
       iut_theta_approach ta; iut_theta_approach_get(&d, &ta); CHECK(ta.cyclotome_index == 13, "[IUTchI] Rem 3.1.2: M_X ≅ l·Δ_Θ (index l)");
@@ -74,7 +77,7 @@ int iut_selftest_ops(FILE *out)
     { iut_kappa_function f = { 1, 2, 1, 1, 1, 1, 1 }; iut_kappa_verdict v; iut_kappa_coric_check(&f, &v); CHECK(v.kappa_coric && v.inf_kappa_units_coric && v.ncritical == 4, "[IUTchI] Rem 3.1.7: κ-coric conditions; 4 strictly critical points");
       f.nzeros = 1; iut_kappa_coric_check(&f, &v); CHECK(!v.kappa_coric && v.failed, "[IUTchI] Rem 3.1.7: a single zero is rejected");
       iut_kappa_sol ks; iut_kappa_sol_get(&d, &ks); CHECK(ks.sl2_order == 13 * 168, "[IUTchI] Rem 3.1.7 (iii): |SL_2(F_13)| = l(l²−1)"); }
-    { iut_local_frobenioid lf; iut_local_frobenioid_build(&d, 0, &lf); CHECK(lf.kind == IUT_LF_BAD && lf.is_tempered && lf.splitting_indeterminacy == 26 && lf.theta_root_indeterminacy == 26 && lf.theta_translation_indeterminacy && !iut_q_cmp(lf.generator_value, iut_q_make(1, 1)), "[IUTchI] Ex 3.2: tempered F̲_v, q̲_v up to μ_2l, Θ̲_v up to μ_2l and l·Z, splittings a μ_2l-orbit");
+    { iut_local_frobenioid lf; iut_local_frobenioid_build(&d, first_vbad(&d), &lf); CHECK(lf.kind == IUT_LF_BAD && lf.is_tempered && lf.splitting_indeterminacy == 26 && lf.theta_root_indeterminacy == 26 && lf.theta_translation_indeterminacy && !iut_q_cmp(lf.generator_value, iut_q_make(1, 1)), "[IUTchI] Ex 3.2: tempered F̲_v, q̲_v up to μ_2l, Θ̲_v up to μ_2l and l·Z, splittings a μ_2l-orbit");
       iut_local_frobenioid lg; iut_local_frobenioid_build(&d, d.nV - 2, &lg); CHECK(lg.kind == IUT_LF_GOOD_NONARCH && lg.splitting_indeterminacy == 1 && !lg.is_tempered, "[IUTchI] Ex 3.3: good v: Φ_{C⊢v} = N·log(p_v), canonical splitting");
       iut_local_frobenioid la; iut_local_frobenioid_build(&d, d.nV - 1, &la); CHECK(la.kind == IUT_LF_ARCH && la.has_kummer_structure && strstr(la.D_mono_v, "TM"), "[IUTchI] Ex 3.4: archimedean (C_v, D_v, κ_v), D⊢_v ∈ TM");
       const char *rec[6]; CHECK(iut_local_frobenioid_reconstructions(&lf, rec, 6) == 6 && iut_local_frobenioid_split_iso(&lf, 0, &lf, 1), "[IUTchI] Ex 3.2 (v)-(vi): six reconstructions, F⊢_v ≅ F^Θ_v"); }
@@ -89,7 +92,7 @@ int iut_selftest_ops(FILE *out)
       iut_global_base a, b; iut_global_base_get(&d, IUT_GB_CIRCAST, &a); iut_global_base_get(&d, IUT_GB_CIRCDOTPM, &b); CHECK(a.aut_image_order == 936 && a.aut_eps_image_order == 156 && a.quotient_order == 6 && b.quotient_order == 26 && b.double_cover, "[IUTchI] Ex 4.3, Def 6.1 (v): |Borel/±1| = l(l−1)²/2, |semi-unipotent/±1| = l(l−1), quotients F_l^*, F_l^{⋊±}");
       iut_valuation_orbit o[4]; CHECK(iut_valuation_orbits(&d, o, 4) == 4 && o[1].upper_bound <= o[2].upper_bound && !strcmp(o[1].id, "VPmUn"), "[IUTchI] Ex 4.3 (i), Rem 6.1.1: V ⊆ V^±un = V^± ⊆ V^Bor ⊆ V(K)"); }
     { iut_eval_points e; iut_eval_points_make(&d, 0, &e); CHECK(e.n == 7 && iut_q_todouble(e.theta_value[6]) == 36 && e.K_v_rational && e.sections_group_theoretic, "[IUTchI] Ex 4.4: l± evaluation points, Θ̲_v ↦ q̲_v^{j²}, K_v-rational, sections group-theoretic");
-      iut_theta_bridge_piece p0, pg; iut_theta_bridge_piece_get(&d, 0, -2, &p0); iut_theta_bridge_piece_get(&d, d.nV - 1, -2, &pg); CHECK(p0.via_evaluation_section && p0.label_used == 2 && pg.full_poly_iso, "[IUTchI] Ex 4.4 (iii): φ^Θ_{v_j} via evaluation section |j| at bad v, full poly-iso at good v");
+      iut_theta_bridge_piece p0, pg; iut_theta_bridge_piece_get(&d, first_vbad(&d), -2, &p0); iut_theta_bridge_piece_get(&d, d.nV - 1, -2, &pg); CHECK(p0.via_evaluation_section && p0.label_used == 2 && pg.full_poly_iso, "[IUTchI] Ex 4.4 (iii): φ^Θ_{v_j} via evaluation section |j| at bad v, full poly-iso at good v");
       iut_label_transport nf, pm; iut_label_transport_make(&d, 0, &nf); iut_label_transport_make(&d, 1, &pm); CHECK(iut_label_transport_check(&nf, &d) && iut_label_transport_check(&pm, &d) && nf.n == 6 && pm.n == 13, "[IUTchI] Prop 4.7, Prop 6.5: †χ, †ζ, †ζ_± are bijections, synchronized");
       iut_iso_torsor t[12]; unsigned n = iut_iso_torsors(&d, t, 12); CHECK(n == 11 && t[0].order == 6 && t[1].order == 1 && t[4].order == (2UL << d.nV) && t[5].order == 26 && t[6].order == 2 && t[7].order == 26 * (1UL << d.nV), "[IUTchI] Prop 4.8, Prop 6.6: torsor orders l*, 1, 1, l*; 2·2^|V|, 2l, 2, 2l·2^|V|");
       iut_forgetful_counts fc; iut_forgetful_counts_get(&d, 1, &fc); CHECK(fc.n == 7 && fc.symmetric_group_order == 5040 && fabs(fc.label_assignments - 823543) < 1e-6, "[IUTchI] Prop 6.8, Prop 6.9: (l±)^{l±} = 7^7 label assignments cut down to l±! = 5040"); }

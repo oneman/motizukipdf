@@ -12,7 +12,7 @@ SYSROOT="${WASI_SYSROOT:-/usr}"
 OUT="../htdocs/engine"
 TMP="${TMPDIR:-/tmp}/iut-wasm.$$"
 mkdir -p "$OUT"
-SRCS="iut_ids.c iut_core.c iut_lattice.c iut_json.c iut_view.c iut_main.c iut_tui.c iut_i.c \
+SRCS="iut_ids.c iut_core.c iut_lattice.c iut_json.c iut_view.c iut_main.c iut_tui.c iut_input.c iut_pipeline.c iut_i.c \
       iut_ops_i.c iut_ops_ii.c iut_ops_iii.c iut_ops_iv.c iut_ops_logic.c iut_proc.c iut_test_ops.c"
 # 16 MB stack: the runners keep Hodge theaters and lattices on the stack.
 "$CC" --target=wasm32-wasi --sysroot="$SYSROOT" -std=c11 -O2 -DIUT_NO_CURSES \

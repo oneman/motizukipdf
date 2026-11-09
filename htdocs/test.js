@@ -53,6 +53,20 @@ function ok(cond, msg) { checks++; if (cond) console.log('  ok   ' + msg); else 
   const w = IUT.json(['walk', '--json', '--rows', '2', '--horizontal', 'LGP', '--example', '2']);
   ok(w.HodgeTheaters.length === 10 && w.links.length === 9, 'walk --rows 2: 10 Hodge theaters, 9 links');
   ok(w.links.filter(l => l.species !== 'LogLink').length === 1, 'exactly one horizontal link in the H');
+  /* the exact worked examples of initial Θ-data, passed as --theta-json <text> (the wasm engine has no files) */
+  require(path.join(__dirname, 'data', 'initial-theta-data.js'));
+  const TJ = globalThis.IUT_THETA_DATA || [];
+  ok(TJ.length === 4, 'data/initial-theta-data.js: 4 worked examples (' + TJ.map(t => t.id).join(', ') + ')');
+  for (const t of TJ) {
+    const pj = IUT.exec(['pipeline', '--json', '--theta-json', t.text]);
+    const P = pj.code === 0 ? JSON.parse(pj.out) : null;
+    ok(P && P.problems === 0 && P.data.l === t.l && P.data.EpsilonUnder === 1 && P.crossCheck.length === 4 && P.crossCheck.every(x => x.ok),
+       'pipeline --theta-json ' + t.id + ': 0 problems, l = ' + t.l + ', ε̲ = ±1, cross-check with the file ok (' + pj.ms.toFixed(1) + ' ms)');
+    const r = IUT.exec(['run', '--all', '--theta-json', t.text]);
+    ok(r.code === 0 && /73 process\(es\) run, 0 failure/.test(r.out), 'run --all --theta-json ' + t.id + ': 73 processes, 0 failures');
+  }
+  const nofile = IUT.exec(['gen', '--theta-json', 'docs/initial-theta-data/frey-1-8-9.json']);
+  ok(nofile.code !== 0 && /could not read/.test(nofile.err), 'a path for --theta-json fails cleanly in wasm (no file system)');
   const bad = IUT.exec(['run', 'NoSuchProcess', '--example', '0']);
   ok(bad.code !== 0, 'unknown process exits non-zero');
 
@@ -68,12 +82,14 @@ function ok(cond, msg) { checks++; if (cond) console.log('  ok   ' + msg); else 
   if (fs.existsSync(native)) {
     const cmds = [['ids', '--json'], ['procs', '--json'], ['species'], ['gen', '--example', '2'], ['gen', '--json', '--random', '7'],
       ['validate', '--example', '5'], ['walk', '--rows', '3', '--horizontal', 'gau', '--example', '1'], ['walk', '--json', '--example', '3'],
-      ['run', '--all', '--example', '4'], ['run', '--all', '--random', '11'], ['run', 'ComputeThmOneTen', '--abc', '3', '125', '128', '--l', '11']];
+      ['run', '--all', '--example', '4'], ['run', '--all', '--random', '11'], ['run', 'ComputeThmOneTen', '--abc', '3', '125', '128', '--l', '11'],
+      ['pipeline', '--example', '2'], ['pipeline', '--json', '--rows', '3', '--random', '5']];
+    for (const t of (globalThis.IUT_THETA_DATA || [])) cmds.push(['pipeline', '--theta-json', t.text], ['walk', '--json', '--theta-json', t.text]);
     for (const c of cmds) {
       let nat;
       try { nat = execFileSync(native, c, { encoding: 'utf8', maxBuffer: 1 << 26 }); } catch (e) { nat = e.stdout; }
       const web = IUT.exec(c).out;
-      ok(nat === web, 'native == wasm: iut ' + c.join(' '));
+      ok(nat === web, 'native == wasm: iut ' + c.map(a => a.length > 60 ? '<' + a.length + ' bytes of JSON>' : a).join(' '));
     }
   } else console.log('  (no src/iut built: skipping the native comparison)');
 

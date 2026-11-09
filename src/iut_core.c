@@ -86,15 +86,28 @@ int iut_sym_FlStar_act(const iut_initial_theta_data *d, int u, int j)
 static const double IUT_ETA_PRM = 5e20;                 /* [ExpEst] §1: η_prm = 5·10^20 */
 static double estar_mod(unsigned e_mod) { return 4096.0 * 27.0 * 5.0 * (double)(e_mod ? e_mod : 1); }
 
-double iut_log_q(const iut_initial_theta_data *d)
+static double log_q_over(const iut_initial_theta_data *d, int only_Vbad_mod)
 {
-    /* log(q) = deg(q-divisor)/[Fmod:Q] = Σ_v ord_v(q_v) f_v log(p_v) / d_mod, over V^bad (odd) ∪ {2 if bad} */
     double s = 0;
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
         if (v->kind != IUT_V_NONARCH || v->red != IUT_RED_BAD_MULT) continue;
+        if (only_Vbad_mod && !v->in_Vbad_mod) continue;
         s += (double)v->ordq * (double)(v->f_mod ? v->f_mod : 1) * log((double)v->p);
     }
+    return s / (double)(d->dmod ? d->dmod : 1);
+}
+/* log(q) = deg(q-divisor)/[Fmod:Q] = Σ_{v ∈ V^bad_mod} ord_v(q_v) f_v log(p_v) / d_mod.
+ * The q-divisor of [IUTchIV] Thm 1.10 is supported on V(F)^bad = V^bad_mod ×_{V_mod} V(F), which
+ * has odd residue characteristic ([IUTchI] Def 3.1 (b); [IUTchIV] Rem 1.10.6 (i)): a place over 2 of
+ * bad multiplicative reduction is NOT counted here.  log(q∀) of [IUTchIV] Cor 2.2 counts it.        */
+double iut_log_q(const iut_initial_theta_data *d)     { return log_q_over(d, 1); }
+double iut_log_q_all(const iut_initial_theta_data *d) { return log_q_over(d, 0); }
+double iut_log_cond_bad(const iut_initial_theta_data *d)
+{
+    double s = 0;
+    for (unsigned i = 0; i < d->nV; ++i)
+        if (d->V[i].in_Vbad_mod) s += (double)(d->V[i].f_mod ? d->V[i].f_mod : 1) * log((double)d->V[i].p);
     return s / (double)(d->dmod ? d->dmod : 1);
 }
 double iut_log_cond(const iut_initial_theta_data *d)
@@ -189,7 +202,7 @@ int iut_gen_from_abc(iut_initial_theta_data *d, long long a, long long b, long l
     /* Frey curve has full rational 2-torsion, so F_tpd = Q.  F ⊇ Q(√-1, E[2·3·5]). */
     d->dF = 2 * 6 * 48 * 480;    /* upper bound: 2·|GL2(F2)|·|GL2(F3)|·|GL2(F5)|, [IUTchIV] (E3)-(E5) */
     d->dK = d->dF * (unsigned long long)l * (l + 1) * (l - 1) * (l - 1); /* × |GL2(F_l)|, [IUTchIV] (E3) */
-    d->epsilon = 0;
+    d->epsilon = 1;              /* [IUTchI] Def 3.1 (f): the cusp ±1 (nonzero; canonical generator at V^bad) */
     /* bad primes: p | abc.  Δ = 16 (abc)²; for odd p, ord_p(j) = −2 ord_p(abc). */
     long long n = a * b * c;
     unsigned p = 2;
@@ -279,7 +292,7 @@ int iut_gen_random(iut_initial_theta_data *d, unsigned seed)
     d->dF = (unsigned long long)d->dmod * 2 * 6 * 48; d->dK = d->dF * (unsigned long long)d->l * (d->l + 1) * (d->l - 1) * (d->l - 1);
     d->logdF = 0.5 + 0.1 * rnd(40);
     d->logdK = d->logdF + iut_log_cond(d) + 2.0 * log((double)d->l);
-    d->epsilon = rnd(2);
+    d->epsilon = 1;              /* [IUTchI] Def 3.1 (f): the cusp ±1 */
     d->h_F_galois_over_Fmod = d->h_F_contains_six_torsion = d->h_image_contains_SL2 = d->h_stable_reduction = d->h_CK_is_K_core = 1;
     iut_data_finish(d);
     return 0;
@@ -364,9 +377,14 @@ int iut_validate_data(const iut_initial_theta_data *d, iut_report *r)
     };
     for (size_t i = 0; i < sizeof hs / sizeof hs[0]; ++i)
         iut_report_add(r, hs[i].ok ? IUT_SEV_INFO : IUT_SEV_ERROR, hs[i].cond, hs[i].ref, "%s: %s", hs[i].ok ? "asserted (not machine-checkable here)" : "NOT asserted", hs[i].msg);
-    /* ε */
-    if (d->epsilon != 0 && d->epsilon != 1)
-        iut_report_add(r, IUT_SEV_ERROR, "EpsilonUnder", "[IUTchI] Def 3.1 (f)", "ε̲ must be one of the two admissible shifts (0/1)");
+    /* ε̲: a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ, i.e. a label in F_l^* = {1..l*};
+     * at v ∈ V^bad it must be the cusp of the canonical generator ±1, so the label is 1.      */
+    if (!iut_label_in_FlStar(d, d->epsilon))
+        iut_report_add(r, IUT_SEV_ERROR, "EpsilonUnder", "[IUTchI] Def 3.1 (f)", "ε̲ = %d is not a cusp label in F_l^* = {1..%u}: ε̲ must come from a NONZERO element of Q ≅ Z/lZ", d->epsilon, d->lstar);
+    else if (nbad_odd && d->epsilon != 1)
+        iut_report_add(r, IUT_SEV_ERROR, "EpsilonUnder", "[IUTchI] Def 3.1 (f)", "ε̲ = ±%d: at v ∈ V^bad ε̲_v must be the cusp of the canonical generator ±1 of Z", d->epsilon);
+    else
+        iut_report_add(r, IUT_SEV_OK, "EpsilonUnder", "[IUTchI] Def 3.1 (f)", "ε̲ = the cusp ±%d of C̲_K (nonzero; the canonical generator at every v ∈ V^bad)", d->epsilon);
     return (int)(r->errors - before);
 }
 
@@ -501,7 +519,7 @@ void iut_prime_strip_build(iut_prime_strip *ps, iut_ps_kind kind, const char *la
             L->has_valgroup = (kind != IUT_PS_FMonoUnits && kind != IUT_PS_FMonoUnitsModTors);
             L->has_splitting = (kind == IUT_PS_FMono || kind == IUT_PS_FMonoGlob || kind == IUT_PS_FMonoValUnitsModTors || kind == IUT_PS_FMonoGlobValUnitsModTors);
             L->kummer_kind = L->units_mod_tors ? 2 : (kind == IUT_PS_F || kind == IUT_PS_FMonoUnits ? 1 : 0);
-            if (L->has_valgroup && v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT) {
+            if (L->has_valgroup && v->in_Vbad_mod) {   /* q̲_v, Θ̲_v live at v ∈ V^bad only ([IUTchI] Ex 3.2) */
                 if (theta_exps && ntheta) {
                     L->nval = ntheta > IUT_MAX_LSTAR + 1 ? IUT_MAX_LSTAR + 1 : ntheta;
                     for (unsigned k = 0; k < L->nval; ++k) { L->val[k] = iut_q_make((long)theta_exps[k], 1); deg -= (double)theta_exps[k]; }

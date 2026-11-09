@@ -13,9 +13,9 @@
   var ETA_PRM = 5e20;                                   // η_prm of [IUTchIV] Prop 1.6 / [ExpEst]
   function abs(t) { return t < 0 ? -t : t; }
   function fmt(x, k) { return (typeof x === 'number' && isFinite(x)) ? x.toFixed(k === undefined ? 4 : k) : String(x); }
-  function badIndex(d) { for (var i = 0; i < d.VSet.length; i++) if (d.VSet[i].kind === 'VNon' && d.VSet[i].reduction === 'badMultiplicative') return i; return 0; }
+  function badIndex(d) { for (var i = 0; i < d.VSet.length; i++) if (d.VSet[i].inVBadMod) return i; return 0; }
   function vbadIndex(d) { for (var i = 0; i < d.VSet.length; i++) if (d.VSet[i].inVBadMod) return i; return badIndex(d); }
-  function isBad(v) { return v.kind === 'VNon' && v.reduction === 'badMultiplicative'; }
+  function isBad(v) { return !!v.inVBadMod; }   // v ∈ V^bad = V ×_{V_mod} V^bad_mod
   function newLat(d, h) { var lat = new IUT.Lattice(d, h || 'ThetaUnitsModTorsLGPTorsorLink'); lat.buildH(0, 0, 1); return lat; }
   function sq(d) { var s = []; for (var j = 1; j <= d.LStar; j++) s.push(j * j); return s; }
 
@@ -78,7 +78,7 @@
 
   /* ---------------- IUTchI read from the paper: mirror of src/iut_i.h / src/iut_i.c ---------------- */
   function yn(b) { return b ? 'yes' : 'no'; }
-  function isBadV(v) { return v.kind === 'VNon' && v.reduction === 'badMultiplicative'; }
+  function isBadV(v) { return !!v.inVBadMod; }
   // §0 pseudo-monoids  [IUTchI] Ex 5.1 (i), Def 5.2 (v)-(vi), Rem 5.1.3
   I.PSEUDO_MONOIDS = [
     { id: 'MCircAst', notation: 'M^⊛(†D^⊛)', divisible: true, cyclotomic: true, isGroup: true, kummerReady: true, ref: '[IUTchI] Ex 5.1 (i); Rem 5.1.3' },
@@ -152,7 +152,7 @@
       { item: '(c)', condition: 'l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)', ok: cOk && d.l % 2 === 1 && d.l % 3 !== 0, machineChecked: true },
       { item: '(d)', condition: 'V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)', ok: d.VSet.length > 0, machineChecked: true },
       { item: '(e)', condition: 'V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction', ok: eOk && oddOk && !!h.StableReduction, machineChecked: true },
-      { item: '(f)', condition: 'ε̲ a cusp of C̲_K, hence ε̲_v ∈ LabCusp(D_v) for every v', ok: IUT.inFl(d, d.EpsilonUnder || 0), machineChecked: true }
+      { item: '(f)', condition: 'ε̲ a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1', ok: d.EpsilonUnder === 1, machineChecked: true }
     ];
     items.forEach(function (it) { r.add(it.ok ? 'ok' : 'error', 'DefThreeOne', '[IUTchI] Def 3.1 ' + it.item, it.condition); });
     return { items: items, report: r };
@@ -401,7 +401,7 @@
   III.upperSemiCompatibility = function (d, vIndex) {   // Prop 3.5 (ii) (a)(b)(c)
     var v = d.VSet[vIndex];
     if (v.kind === 'VArc') return { kase: 'arch', relation: '↠ (surjection onto the closed disc)', logVolumeDelta: 0, ref: '[IUTchIII] Prop 3.5 (ii)(b)' };
-    if (v.reduction === 'badMultiplicative') return { kase: 'bad', relation: '= up to roots of unity (log(ζ) = 0)', logVolumeDelta: 0, ref: '[IUTchIII] Prop 3.5 (ii)(c)' };
+    if (v.inVBadMod) return { kase: 'bad', relation: '= up to roots of unity (log(ζ) = 0)', logVolumeDelta: 0, ref: '[IUTchIII] Prop 3.5 (ii)(c)' };
     var sh = III.logShellMake(d, vIndex, true, false); return { kase: 'nonarch', relation: '⊆ (log(O×) ⊆ I, inclusion)', logVolumeDelta: sh.logVolume > 0 ? sh.logVolume : 0, ref: '[IUTchIII] Prop 3.5 (ii)(a)' };
   };
   III.GLOBAL_VARIANTS = { MODTorsor: { objects: 'F_MOD: F_mod^×-torsors of rational functions (arithmetic line bundles as global objects)', thetaLinkCompatible: true, logVolumeCompatible: false, ref: '[IUTchIII] Ex 3.6 (i), Rem 3.6.2 (i)' }, ModIdeal: { objects: 'F_mod: collections of local fractional ideals {J_v}_v (local integral structures)', thetaLinkCompatible: false, logVolumeCompatible: true, ref: '[IUTchIII] Ex 3.6 (ii), Rem 3.6.2 (ii)' } };

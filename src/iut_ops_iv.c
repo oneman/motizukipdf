@@ -105,8 +105,9 @@ int iut_iv_torsion_facts(const iut_initial_theta_data *d, iut_report *r)
 
 /* --------------------------------------------------------------- Def 1.9 */
 void iut_arith_divisor_zero(const iut_initial_theta_data *d, iut_arith_divisor *out) { memset(out, 0, sizeof *out); out->nV = d->nV; }
+/* the q-divisor of [IUTchIV] Thm 1.10 is supported on V(F)^bad, i.e. over V^bad_mod (odd residue characteristic) */
 void iut_arith_divisor_q(const iut_initial_theta_data *d, iut_arith_divisor *out)
-{ iut_arith_divisor_zero(d, out); for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].kind == IUT_V_NONARCH && d->V[i].red == IUT_RED_BAD_MULT) out->coeff[i] = (double)d->V[i].ordq; }
+{ iut_arith_divisor_zero(d, out); for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].in_Vbad_mod) out->coeff[i] = (double)d->V[i].ordq; }
 void iut_arith_divisor_add(const iut_arith_divisor *a, const iut_arith_divisor *b, iut_arith_divisor *out)
 { *out = *a; for (unsigned i = 0; i < a->nV && i < b->nV; ++i) out->coeff[i] += b->coeff[i]; }
 double iut_arith_divisor_deg(const iut_initial_theta_data *d, const iut_arith_divisor *D)
@@ -160,7 +161,7 @@ void iut_cor22_compute(const iut_initial_theta_data *d, iut_cor22 *out)
      *  log-diff = log d^Ftpd, log f^Ftpd ≤ log-cond ≤ log f^Ftpd + log(2l);  (1/6) log q ≈ ht_∞ ≈ ht_ω(D). */
     memset(out, 0, sizeof *out);
     out->d = d->dmod; out->delta = 4096.0 * 27.0 * 5.0 * out->d;
-    out->logq_all = iut_log_q(d);
+    out->logq_all = iut_log_q_all(d);   /* q∀: every bad multiplicative v, 2 included */
     double lq = out->logq_all > 1 ? out->logq_all : 1.0;
     out->l_min = sqrt(lq);
     out->l_max = 10.0 * out->delta * sqrt(lq) * log(2.0 * out->delta * lq);

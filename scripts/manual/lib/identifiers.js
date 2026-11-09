@@ -46,7 +46,7 @@
   {"id": "VGoodMod", "notation": "V^good_mod", "kind": "set", "ref": "[IUTchI] Def 3.1", "desc": "complement V_mod \\ V^bad_mod"},
   {"id": "VBad", "notation": "V^bad", "kind": "set", "ref": "[IUTchI] Def 3.1", "desc": "elements of V over V^bad_mod"},
   {"id": "VGood", "notation": "V^good", "kind": "set", "ref": "[IUTchI] Def 3.1", "desc": "elements of V over V^good_mod"},
-  {"id": "EpsilonUnder", "notation": "ε̲", "kind": "datum", "ref": "[IUTchI] Def 3.1 (vi)", "desc": "the 2-torsion-point / cusp label used to shift the evaluation points"},
+  {"id": "EpsilonUnder", "notation": "ε̲", "kind": "datum", "ref": "[IUTchI] Def 3.1 (f)", "desc": "a cusp of C̲_K from a nonzero element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1 (label 1)"},
   {"id": "QUnderV", "notation": "q̲_v", "kind": "datum", "ref": "[IUTchI] Ex 3.2", "desc": "the 2l-th root of the q-parameter q_v at v ∈ V^bad: q̲_v = q_v^{1/2l}"},
   {"id": "ThetaUnderV", "notation": "Θ̲_v", "kind": "datum", "ref": "[IUTchI] Ex 3.2; [EtTh]", "desc": "the (reciprocal of the l-th root of the) theta function at v ∈ V^bad"},
   {"id": "LPrime", "notation": "l", "kind": "constant", "ref": "[IUTchI] Def 3.1", "desc": "the prime l ≥ 5 (stays a letter, listed for completeness)"},

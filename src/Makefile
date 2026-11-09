@@ -32,7 +32,7 @@ ifeq ($(strip $(CURSES_LIBS)),)
   $(info ncurses not found: building text-only `iut` (TUI falls back to `iut walk`))
 endif
 
-SRC = iut_ids.c iut_core.c iut_lattice.c iut_json.c iut_view.c iut_main.c iut_tui.c \
+SRC = iut_ids.c iut_core.c iut_lattice.c iut_json.c iut_view.c iut_main.c iut_tui.c iut_input.c iut_pipeline.c \
       iut_i.c iut_ops_i.c iut_ops_ii.c iut_ops_iii.c iut_ops_iv.c iut_ops_logic.c iut_proc.c iut_test_ops.c
 OBJ = $(SRC:.c=.o)
 

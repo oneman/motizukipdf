@@ -71,7 +71,7 @@ ROW("VBadMod",   "V^bad_mod","set",   "[IUTchI] Def 3.1",        "nonempty set o
 ROW("VGoodMod",  "V^good_mod","set",  "[IUTchI] Def 3.1",        "complement V_mod \\ V^bad_mod"),
 ROW("VBad",      "V^bad",    "set",   "[IUTchI] Def 3.1",        "elements of V over V^bad_mod"),
 ROW("VGood",     "V^good",   "set",   "[IUTchI] Def 3.1",        "elements of V over V^good_mod"),
-ROW("EpsilonUnder","ε̲",     "datum", "[IUTchI] Def 3.1 (vi)",   "the 2-torsion-point / cusp label used to shift the evaluation points"),
+ROW("EpsilonUnder","ε̲",     "datum", "[IUTchI] Def 3.1 (f)",    "a cusp of C̲_K from a nonzero element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1 (label 1)"),
 ROW("QUnderV",   "q̲_v",     "datum", "[IUTchI] Ex 3.2",         "the 2l-th root of the q-parameter q_v at v ∈ V^bad: q̲_v = q_v^{1/2l}"),
 ROW("ThetaUnderV","Θ̲_v",    "datum", "[IUTchI] Ex 3.2; [EtTh]", "the (reciprocal of the l-th root of the) theta function at v ∈ V^bad"),
 ROW("LPrime",    "l",        "constant","[IUTchI] Def 3.1",      "the prime l ≥ 5 (stays a letter, listed for completeness)"),

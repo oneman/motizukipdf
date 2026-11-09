@@ -9,10 +9,15 @@
  *   iut ids       [--js|--md|--json] [filter]    identifier table (letters-only ids)
  *   iut procs     [--md|--js|--json] [filter]    registry of processes (the ops layer, src/iut_ops_*.c)
  *   iut run       <id> [data options]            run one process on the data;  iut run --all [filter]
+ *   iut pipeline  [data options] [--rows R] [--horizontal …] [--json]
+ *                                                 the whole run: Def 3.1 → Hodge theaters → Gaussian monoids →
+ *                                                 log-theta-lattice → Cor 3.12 → Thm 1.10, state after every stage
  *   iut selftest                                 run the built-in tests (data model + ops layer)
  *   iut tui       [data options]                 ncurses interface
  *
- * data options:  --abc A B C   --l L   --example K   --random SEED
+ * data options:  --abc A B C   --l L   --example K   --random SEED   --theta-json FILE
+ *                (FILE: initial Θ-data of the schema iut-initial-theta-data/1, e.g.
+ *                 docs/initial-theta-data/frey-1-8-9.json; JSON text starting with '{' also works)
  */
 #include <math.h>
 #include <stdlib.h>
@@ -31,9 +36,12 @@ static void usage(FILE *f)
         "  species    species / mutation tables           selftest   built-in tests\n"
         "  procs      registry of processes (ops layer): --md | --js | --json | [filter]\n"
         "  run        run a process: run <id> [data options]   or   run --all [filter] [data options]\n"
+        "  pipeline   the whole pipeline on the data: Def 3.1 → Hodge theaters → Gaussian monoids →\n"
+        "             log-theta-lattice → multiradial rep., Cor 3.12 → Thm 1.10 (exit = #problems)\n"
         "  tui        interactive ncurses interface\n"
         "data options: --abc A B C   --l L   --example K (0..5)   --random SEED\n"
-        "walk options: --rows R (default 3)  --horizontal lgp|LGP|gau|xmu|theta  --json\n");
+        "              --theta-json FILE   initial Θ-data from a JSON file (docs/initial-theta-data/*.json)\n"
+        "walk options: --rows R (default 3)  --horizontal lgp|LGP|gau|xmu|theta  --json   (pipeline: same, default rows 2)\n");
 }
 
 void iut_options_default(iut_options *o)
@@ -51,6 +59,7 @@ int iut_options_parse(iut_options *o, int argc, char **argv, FILE *err)
         else if (!strcmp(a, "--l") && i + 1 < argc) { o->l = (unsigned)atoi(argv[++i]); }
         else if (!strcmp(a, "--example") && i + 1 < argc) { o->example = atoi(argv[++i]); o->have_example = 1; }
         else if (!strcmp(a, "--random") && i + 1 < argc) { o->seed = (unsigned)atoi(argv[++i]); o->have_seed = 1; }
+        else if (!strcmp(a, "--theta-json") && i + 1 < argc) { o->theta_json = argv[++i]; o->have_theta_json = 1; }
         else if (!strcmp(a, "--rows") && i + 1 < argc) { o->rows = atoi(argv[++i]); if (o->rows < 1) o->rows = 1; if (o->rows > IUT_LAT_MOFF) o->rows = IUT_LAT_MOFF; }
         else if (!strcmp(a, "--json")) o->json = 1;
         else if (!strcmp(a, "--horizontal") && i + 1 < argc) {
@@ -70,6 +79,13 @@ int iut_options_parse(iut_options *o, int argc, char **argv, FILE *err)
 int iut_options_make_data(const iut_options *o, iut_initial_theta_data *d, FILE *err)
 {
     int rc;
+    if (o->have_theta_json) {
+        char msg[256] = "";
+        const char *s = o->theta_json; while (*s == ' ' || *s == '\n' || *s == '\t' || *s == '\r') ++s;
+        rc = (*s == '{') ? iut_data_from_json_text(d, s, msg, sizeof msg) : iut_data_from_json_file(d, o->theta_json, msg, sizeof msg);
+        if (rc) fprintf(err, "could not read initial Θ-data: %s\n", msg);
+        return rc;
+    }
     if (o->have_abc) rc = iut_gen_from_abc(d, o->a, o->b, o->c, o->l);
     else if (o->have_seed) rc = iut_gen_random(d, o->seed);
     else rc = iut_gen_example(d, o->example);
@@ -122,6 +138,14 @@ static int cmd_walk(const iut_options *o)
     int errs = (int)r.errors;
     iut_lattice_free(lat); free(lat);
     return errs ? 1 : 0;
+}
+
+static int cmd_pipeline(const iut_options *o, int rows_given)
+{
+    iut_initial_theta_data d;
+    if (iut_options_make_data(o, &d, stderr)) return 2;
+    int problems = iut_pipeline_run(stdout, &d, rows_given ? o->rows : 2, o->horizontal, o->json);
+    return problems > 125 ? 125 : problems;
 }
 
 static int cmd_ids(int argc, char **argv)
@@ -262,6 +286,60 @@ int iut_selftest(FILE *out)
       iut_lattice_init(lat, &d, IUT_LINK_THETA_UNITSMODTORS_LGPIDEAL); iut_lattice_build_H(lat, 0, 0, 1);
       memset(&r, 0, sizeof r); CHECK(iut_validate_lattice(lat, &r) == 0, "lgp-Gaussian lattice validates");
       iut_lattice_free(lat); free(lat); }
+    /* ε̲ ([IUTchI] Def 3.1 (f)): a cusp from a NONZERO element of Q, ±1 at V^bad */
+    { iut_initial_theta_data d; iut_report r;
+      for (int k = 0; k <= 5; ++k) { iut_gen_example(&d, k); CHECK(d.epsilon == 1, "example %d: ε̲ = the cusp ±1", k); }
+      for (unsigned s = 1; s <= 4; ++s) { iut_gen_random(&d, s); CHECK(d.epsilon == 1, "random #%u: ε̲ = the cusp ±1", s); }
+      iut_gen_example(&d, 0); d.epsilon = 0; memset(&r, 0, sizeof r);
+      CHECK(iut_validate_data(&d, &r) > 0, "validator rejects ε̲ = 0 (the zero cusp does not come from a nonzero element of Q)");
+      d.epsilon = 2; memset(&r, 0, sizeof r);
+      CHECK(iut_validate_data(&d, &r) > 0, "validator rejects ε̲ = ±2 when V^bad ≠ ∅ (must be the canonical generator ±1)");
+      iut_def_three_one_item it[8]; d.epsilon = 0; iut_def_three_one_check(&d, it, 8, NULL);
+      CHECK(!it[5].ok, "Def 3.1 (f) check fails for ε̲ = 0"); }
+    /* log(q) is supported on V^bad_mod: 2 is never counted ([IUTchIV] Thm 1.10, Rem 1.10.6 (i)) */
+    { iut_initial_theta_data d; iut_gen_from_abc(&d, 1, 2400, 2401, 13);
+      double want = 2 * log(3.0) + 4 * log(5.0) + 8 * log(7.0);
+      CHECK(fabs(iut_log_q(&d) - want) < 1e-9, "Frey(1,2400,2401): log q = 2 log 3 + 4 log 5 + 8 log 7 = %.6f (v2 excluded)", iut_log_q(&d));
+      CHECK(fabs(iut_log_q_all(&d) - want - 2 * log(2.0)) < 1e-9, "Frey(1,2400,2401): log q∀ = log q + 2 log 2 = %.6f", iut_log_q_all(&d));
+      int v2 = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == 2) v2 = (int)i;
+      unsigned ctr = 0; iut_hodge_theater *ht = iut_hodge_theater_new(&d, 0, 0, &ctr);
+      CHECK(v2 >= 0 && d.V[v2].red == IUT_RED_BAD_MULT && ht && ht->FMonoGlobLGP.loc[v2].nval == 0, "v2 multiplicative but ∉ V^bad_mod: no q̲-generator in the prime-strips");
+      iut_hodge_theater_free(ht); }
+    /* initial Θ-data from JSON (schema iut-initial-theta-data/1) */
+    { static const char *js =
+        "{\"schema\": \"iut-initial-theta-data/1\", \"id\": \"test\", \"title\": \"1 + 8 = 9\","
+        " \"curve\": {\"equation\": \"y\\u00b2 = x\u00b3 + 7x\u00b2 \u2212 8x\", \"j\": {\"weilHeight\": 14.257673}},"
+        " \"Fmod\": {\"degree\": 1}, \"F\": {\"degreeDivides\": 46080, \"galoisOverFmod\": true, \"degreePrimeToL\": true,"
+        " \"containsSqrtMinus1\": true, \"sixTorsionRational\": true, \"stableReduction\": \"Raynaud\"},"
+        " \"K\": {\"degreeOverQAtMost\": \"92897280\"}, \"l\": {\"value\": 7, \"SL2\": {\"proved\": true}},"
+        " \"C_K\": {\"kCore\": \"C_F\"}, \"epsilon\": {\"label\": 1},"
+        " \"V\": {\"places\": [{\"name\": \"v2\", \"kind\": \"VNon\", \"p\": 2, \"reductionOverQ\": \"additive\", \"reductionOverF\": \"good\", \"ordQ\": 0},"
+        "   {\"name\": \"v3\", \"kind\": \"VNon\", \"p\": 3, \"reductionOverQ\": \"multiplicative\", \"reductionOverF\": \"multiplicative\", \"ordQ\": 4,"
+        "    \"tateParameter\": {\"ord\": 4, \"unitModPD\": \"5110\", \"precision\": 8}},"
+        "   {\"name\": \"vinf\", \"kind\": \"VArc\", \"p\": 0}]},"
+        " \"VbadMod\": [{\"p\": 3}], \"derived\": {\"logQ\": 4.394449, \"absLogQ\": 0.313889, \"logCond\": 1.098612, \"htFromQ\": 0.732408}}";
+      iut_initial_theta_data d; char err[256] = ""; iut_report r; memset(&r, 0, sizeof r);
+      int rc = iut_data_from_json_text(&d, js, err, sizeof err);
+      CHECK(rc == 0, "JSON initial Θ-data parses (%s)", rc ? err : d.name);
+      CHECK(rc == 0 && d.l == 7 && d.nV == 3 && d.epsilon == 1 && d.dF == 46080 && d.dK == 92897280ULL, "JSON: l = 7, |V| = 3, ε̲ = 1, [F:Q] | 46080, [K:Q] ≤ 92897280");
+      CHECK(rc == 0 && d.V[1].in_Vbad_mod && d.V[1].ordq == 4 && d.V[1].q_unit == 5110 && d.V[1].q_prec == 8 && d.V[0].red == IUT_RED_GOOD, "JSON: v3 ∈ V^bad_mod with q_3 = 3^4·u, u ≡ 5110 mod 3^8; v2 good over F");
+      CHECK(rc == 0 && !strncmp(d.curve, "y\xc2\xb2 = x\xc2\xb3", 7), "JSON: \\u escapes decode to UTF-8 (%s)", d.curve);
+      CHECK(rc == 0 && iut_validate_data(&d, &r) == 0 && r.warnings == 0, "JSON data validates: %u errors, %u warnings", r.errors, r.warnings);
+      CHECK(rc == 0 && fabs(iut_log_q(&d) - d.expected_logq) < 5e-6 && fabs(iut_log_cond_bad(&d) - d.expected_logcond) < 5e-6, "JSON: toolkit log q, log f agree with the file's derived numbers");
+      CHECK(iut_tate_unit_pow(&d.V[1], 1) == 5110 && iut_tate_unit_pow(&d.V[1], 4) == (unsigned long long)(((5110ULL * 5110 % 6561) * 5110 % 6561) * 5110 % 6561), "Tate unit powers u^{j²} mod 3^8");
+      char *buf = NULL; size_t n = 0; FILE *m = open_memstream(&buf, &n);
+      int prob = iut_pipeline_run(m, &d, 2, IUT_LINK_THETA_UNITSMODTORS_LGP, 0); fclose(m);
+      CHECK(prob == 0 && buf && strstr(buf, "pipeline complete") && strstr(buf, "stage 7"), "pipeline runs through on the JSON data (%d problems)", prob);
+      free(buf); buf = NULL; n = 0; m = open_memstream(&buf, &n);
+      iut_pipeline_run(m, &d, 1, IUT_LINK_THETA_UNITSMODTORS_LGP, 1); fclose(m);
+      CHECK(buf && buf[0] == '{' && strstr(buf, "\"schema\": \"iut-pipeline/1\"") && strstr(buf, "\"unitPow\""), "pipeline --json output (%zu bytes)", n);
+      free(buf);
+      CHECK(iut_data_from_json_text(&d, "{\"schema\": \"other\"}", err, sizeof err) != 0, "JSON: wrong schema is rejected (%s)", err);
+      CHECK(iut_data_from_json_text(&d, "{\"schema\": ", err, sizeof err) != 0, "JSON: truncated input is rejected (%s)", err);
+      iut_gen_example(&d, 2); buf = NULL; n = 0; m = open_memstream(&buf, &n);
+      prob = iut_pipeline_run(m, &d, 2, IUT_LINK_THETA_UNITSMODTORS_LGP, 0); fclose(m);
+      CHECK(prob == 0 && buf && !strstr(buf, "stage 7"), "pipeline also runs on generated data (no cross-check stage)");
+      free(buf); }
     /* JSON smoke test */
     { iut_initial_theta_data d; iut_gen_example(&d, 0);
       char *buf = NULL; size_t n = 0; FILE *m = open_memstream(&buf, &n);
@@ -305,6 +383,7 @@ int main(int argc, char **argv)
     if (!strcmp(cmd, "gen")) return cmd_gen(&o);
     if (!strcmp(cmd, "validate")) return cmd_validate(&o);
     if (!strcmp(cmd, "walk")) return cmd_walk(&o);
+    if (!strcmp(cmd, "pipeline")) { int rows_given = 0; for (int i = 2; i < argc; ++i) if (!strcmp(argv[i], "--rows")) rows_given = 1; return cmd_pipeline(&o, rows_given); }
     if (!strcmp(cmd, "tui")) return iut_tui_main(&o);
     fprintf(stderr, "unknown command '%s'\n", cmd); usage(stderr);
     return 2;

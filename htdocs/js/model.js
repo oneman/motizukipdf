@@ -1,6 +1,6 @@
 /*
- * model.js — the page's state: which initial Θ-data is selected (an example, an abc triple + l, or a
- * random seed), which horizontal link flavour and how many lattice rows; plus memoised calls into the
+ * model.js — the page's state: which initial Θ-data is selected (an example, an abc triple + l, a
+ * random seed, or one of the exact worked examples of docs/initial-theta-data/ passed as --theta-json), which horizontal link flavour and how many lattice rows; plus memoised calls into the
  * C engine (engine.js) and a few parsers for its output.  Views subscribe to MODEL.on('change', …).
  */
 (function (root) {
@@ -23,7 +23,11 @@
     { key: 'theta', id: 'ThetaLink', label: 'Θ-link' }
   ];
 
-  var state = { mode: 'example', example: 2, abc: [1, 2400, 2401], l: 13, seed: 2, horizontal: 'LGP', rows: 2 };
+  /* the exact worked examples of initial Θ-data (docs/initial-theta-data/*.json, via data/initial-theta-data.js) */
+  var THETA_JSON = root.IUT_THETA_DATA || [];
+  function thetaJson(id) { return THETA_JSON.filter(function (t) { return t.id === id; })[0] || THETA_JSON[0] || null; }
+
+  var state = { mode: 'example', example: 2, abc: [1, 2400, 2401], l: 13, seed: 2, json: THETA_JSON.length ? THETA_JSON[0].id : null, horizontal: 'LGP', rows: 2 };
   var cache = {}, listeners = {}, statics = {};
 
   function on(ev, fn) { (listeners[ev] = listeners[ev] || []).push(fn); }
@@ -32,11 +36,13 @@
   function dataArgs() {
     if (state.mode === 'abc') return ['--abc', String(state.abc[0]), String(state.abc[1]), String(state.abc[2]), '--l', String(state.l)];
     if (state.mode === 'random') return ['--random', String(state.seed)];
+    if (state.mode === 'json' && thetaJson(state.json)) return ['--theta-json', thetaJson(state.json).text];
     return ['--example', String(state.example)];
   }
   function dataLabel() {
     if (state.mode === 'abc') return 'abc(' + state.abc.join(',') + ') l=' + state.l;
     if (state.mode === 'random') return 'random #' + state.seed;
+    if (state.mode === 'json' && thetaJson(state.json)) return thetaJson(state.json).title + ', l = ' + thetaJson(state.json).l + ' (exact JSON)';
     return EXAMPLES[state.example].label;
   }
   function set(patch) {
@@ -75,6 +81,15 @@
     rows = rows || state.rows; horizontal = horizontal || state.horizontal;
     return memo('walktext:' + rows + ':' + horizontal, function () { return IUT.exec(['walk', '--rows', String(rows), '--horizontal', horizontal].concat(dataArgs())).out; });
   }
+  /* `iut pipeline --json`: the state after every stage, initial Θ-data → Thm 1.10 */
+  function pipeline(rows, horizontal) {
+    rows = rows || state.rows; horizontal = horizontal || state.horizontal;
+    return memo('pipeline:' + rows + ':' + horizontal, function () { return JSON.parse(IUT.exec(['pipeline', '--json', '--rows', String(rows), '--horizontal', horizontal].concat(dataArgs())).out); });
+  }
+  function pipelineText(rows, horizontal) {
+    rows = rows || state.rows; horizontal = horizontal || state.horizontal;
+    return memo('pipelinetext:' + rows + ':' + horizontal, function () { return IUT.exec(['pipeline', '--rows', String(rows), '--horizontal', horizontal].concat(dataArgs())).out; });
+  }
   function run(id) { return memo('run:' + id, function () { return IUT.exec(['run', id].concat(dataArgs())); }); }
   function runAll() { return memo('runall', function () { return IUT.exec(['run', '--all'].concat(dataArgs())); }); }
 
@@ -108,7 +123,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   root.MODEL = {
-    EXAMPLES: EXAMPLES, HORIZONTAL: HORIZONTAL, on: on, set: set, get: get, dataArgs: dataArgs, dataLabel: dataLabel,
+    EXAMPLES: EXAMPLES, THETA_JSON: THETA_JSON, thetaJson: thetaJson, HORIZONTAL: HORIZONTAL, pipeline: pipeline, pipelineText: pipelineText, on: on, set: set, get: get, dataArgs: dataArgs, dataLabel: dataLabel,
     ids: ids, ident: ident, procs: procs, proc: proc, speciesText: speciesText, types: types, structsFor: structsFor,
     gen: gen, genText: genText, validate: validate, validateText: validateText, walk: walk, walkText: walkText, walkSections: walkSections,
     run: run, runAll: runAll, runAllSplit: runAllSplit, hodgeTheaterAt: hodgeTheaterAt, linksOf: linksOf, horizontalInfo: horizontalInfo, esc: esc
