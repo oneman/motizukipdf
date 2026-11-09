@@ -1,0 +1,95 @@
+<h2 class="chapter"><span class="no">7</span>The three blurs: (Ind1), (Ind2), (Ind3)<span class="jp">三つのぼかし</span></h2>
+
+<p>An indeterminacy is the price of a descent: whenever the algorithm replaces a rich object by a poorer
+one that travels better, it must accept every way the poorer object could have come from a rich one. The
+proof of Corollary 3.12 (Step (x)) explains where each of the three comes from in a single sentence each,
+and [Alien] §3.7 (i) gives a more concrete description. Side by side:</p>
+
+<table class="wide">
+<tr><th></th><th>(Ind1)</th><th>(Ind2)</th><th>(Ind3)</th></tr>
+<tr><td>acts on</td><td>labels and Galois groups</td><td>units of each tensor factor</td><td>local units along the column</td></tr>
+<tr><td>comes from</td><td>compatibility with the permutation symmetries of the étale-picture</td><td>compatibility with \(\mathrm{Aut}(\mathcal{F}^{\times\mu})\), i.e. with the <b>horizontal</b> arrows</td><td>compatibility with the log-Kummer correspondence, i.e. with the <b>vertical</b> arrows</td></tr>
+<tr><td>[Alien] name</td><td>étale-transport indeterminacy</td><td>Kummer-detachment indeterminacy (Ism)</td><td>Kummer-detachment indeterminacy (upper semi-commutativity)</td></tr>
+<tr><td>group / shape</td><td>\(\prod_j \mathfrak{S}_{j+1}\) and \(\mathrm{Aut}(G_v)\); {{ind1}} label permutations here</td><td>\(\mathrm{Ism}\): a compact group of isometries of \(\mathcal{O}^{\times\mu}\)</td><td>not a group: inclusions \(\subseteq\) (nonarch.), surjections \(\twoheadrightarrow\) (arch.)</td></tr>
+<tr><td>effect on log-volume</td><td>none (invariant)</td><td>none (invariant)</td><td>turns equality into an <b>upper bound</b></td></tr>
+<tr><td>enters at</td><td>(Stp2)</td><td>(Stp3)</td><td>(Stp1)</td></tr>
+</table>
+
+<h3><span class="no">7.1</span>(Ind1): shuffled seats</h3>
+<p>Once the data are rebuilt from abstract Galois groups, nothing distinguishes one ordering of the capsule
+from another, and nothing pins down an isomorphism of \(G_v\) with the Galois group of a specific field. An
+automorphism of \(G_v\) need not come from a field automorphism (the absolute Galois group of a \(p\)-adic
+field does not determine the field; see <em>anabelian_guide.pdf</em>), so (Ind1) includes moves that scramble
+the ring structure. The log-volume does not see them: a procession-normalized log-volume is an average over
+labels and a sum over places, and both are symmetric.</p>
+
+<h3><span class="no">7.2</span>(Ind2): turning the dial</h3>
+<p>\(\mathrm{Ism}\) is the group of \(G_v\)-equivariant automorphisms of \(\mathcal{O}^{\times\mu}_{\overline{k}}\) that
+preserve the lattices \(\mathcal{O}^{\times\mu}_{k_H}\) for every open \(H \subseteq G_v\) [IUTchII, Ex. 1.8 (iv)].
+It is compact, so it moves points around while preserving volumes, the way rotating a dial preserves the
+area of the dial. Its existence is a genuine loss: the units on the two sides of the Θ-link are identified only
+up to such a twist, and in particular one cannot tell which unit is 1 + p and which is its image under some
+isometry. Each tensor factor gets its own independent copy, so the twist cannot even be synchronized across
+labels.</p>
+
+<h3><span class="no">7.3</span>(Ind3): only “fits inside”</h3>
+<p>Along the 0-column the Kummer isomorphisms at different heights \(m\) are compatible with the log-links only
+in the sense that the log-shell at one level <em>contains</em> the image of the units from the next. Mochizuki
+calls this <b>upper semi-compatibility</b> (Theorem 3.11 (ii), Prop. 3.5 (ii)). It is the price of the
+“vertical shift” that the argument needs: the units must be taken one level below the value groups they
+measure, and vertically coric containers are the only way to accommodate that [IUTchIII, proof of Cor. 3.12,
+Step (iv)]. In terms of log-volume, an inclusion can only make things bigger, so (Ind3) converts the would-be
+equality into an inequality from above. The log-volumes themselves are compatible with the log-links on the
+nose (Prop. 3.9 (iv)).</p>
+
+<div class="box key"><span class="tag">Why the blurs are harmless for log-volumes · [IUTchIII] proof of Cor 3.12, Step (x)</span>
+<p>The three indeterminacies describe “some sort of ‘formal quotient’, like the ‘fine moduli spaces’ that
+appear in algebraic geometry. […] [T]he procession-normalized mono-analytic log-volumes […] furnish a means of
+constructing a sort of associated ‘coarse space’ […] in the sense that […] the resulting log-volumes ∈ ℝ are
+invariant with respect to the indeterminacies (Ind1), (Ind2), and have the effect of converting the
+indeterminacy (Ind3) into an inequality [from above].”</p>
+</div>
+
+<h3><span class="no">7.4</span>The invisible indeterminacies</h3>
+<p>Two more blurs exist but can be ignored “essentially as a formal consequence of the way in which the various
+objects that appear are defined” [Alien, §3.7 (i); IUTchIII, Rem. 3.11.4]: multiplication by roots of unity
+(the only overlap between theta values and local units, by non-interference, and the theta values are
+stable under it), and the sign \(\pm1\) in the cyclotomic rigidity for κ-coric functions (the global
+Frobenioids only use all of \(F_{\mathrm{mod}}^\times\), which is stable under inversion).</p>
+
+<h3><span class="no">7.5</span>Watching the blur on real numbers</h3>
+
+<p>The toolkit's <code>Fuzzify</code> process implements the “engulfing” picture of [EssLgc] §3.10: start from
+the Θ-pilot's naive log-volume and widen it by everything the three indeterminacies and the hull allow,
+then ask whether the q-pilot is inside.</p>
+
+<figure>{{svg:fuzz}}
+<figcaption><b>Figure 7.1.</b> For each worked example: the Θ-pilot's naive log-volume (pink dot), the range
+of log-volumes the blurred and hulled representation allows (pink capsule, up to its upper end), and the
+q-pilot (blue triangle). In every case the q-pilot is engulfed, as Corollary 3.12 predicts. Each row has its
+own scale.</figcaption>
+</figure>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run Fuzzify</span>
+<pre>{{run:Fuzzify}}</pre>
+<p class="small">“(ExtInd1/2)” illustrate the two ways [EssLgc] says possibilities may be added (unions of sets
+of possibilities, and passing to coarser classes); “(logORInd)” and “(ΘORInd)” are its point that an “OR”
+across a log-link is harmless because log-volumes are log-link invariant, while an “OR” across the Θ-link
+would say nothing at all (§10).</p>
+</div>
+
+<div class="box analogy"><span class="tag">Analogy · Shinkansen reserved seating</span>
+<p>Think of the procession as a Shinkansen car with reserved seats. (Ind1): the conductor reshuffles who sits
+in which seat. (Ind2): every passenger rotates in their seat (they can, the seats swivel). (Ind3): the
+luggage rack is “at least as big as” the luggage, not exactly as big. Ask how much the car weighs: the first
+two do not change the answer, and the third means the scale can only say “at most this much”. The train
+still leaves on time, to the second.</p>
+</div>
+
+<div class="box otaku"><span class="tag">Otaku corner · 三人組</span>
+<p>Every long-running comedy has a trio of troublemakers who undo the protagonist's careful plans. IUT's trio
+are (Ind1), (Ind2) and (Ind3). Mochizuki insists they are “relatively mild”; readers have long asked whether one
+of them is quietly carrying the plot. [EssLgc] §3.11 even ranks them, “(Ind3 &gt; 1 + 2)”: once the output is
+stable under (Ind3), stability under the other two comes almost for free. The equivalent in a shōnen
+manga is the reveal that the quiet one was the strongest all along.</p>
+</div>

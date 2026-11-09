@@ -1,0 +1,70 @@
+<h2 class="chapter"><span class="no">10</span>Logic: why “AND” and not “OR”<span class="jp">論理：「かつ」と「または」</span></h2>
+
+<p>[EssLgc] is Mochizuki's 2022 paper on the logical structure of the theory. Its central claim is that the
+whole argument is a chain of logical AND relations (∧), and that reading any link of the chain as an OR (∨)
+makes the theory look either trivial or wrong. Example 2.4.5 gives a model with real numbers
+\(A, B &gt; 0\) and \(0 \le \varepsilon \le 1\) that mirrors the three acts of §1.3:</p>
+
+<table class="wide">
+<tr><th>act</th><th>AND version (IUT)</th><th>OR version</th></tr>
+<tr><td>Θ-link</td><td>\(N \overset{\text{def}}{=} -2B \;\wedge\; N \overset{\text{def}}{=} -A\)</td><td>\(N = -2B \;\vee\; N = -A\)</td></tr>
+<tr><td>multiradial representation</td><td>\(N = -2A + \varepsilon \;\wedge\; N = -A\)</td><td>\(N = -2A + \varepsilon \;\vee\; N = -A\)</td></tr>
+<tr><td>final estimate</td><td>\(-2A + \varepsilon = -A\), so \(A = \varepsilon \le 1\)</td><td>nothing follows</td></tr>
+</table>
+
+<p>Read the dictionary: \(N\) is the glued object, \(-A\) the q-pilot's log-volume, \(-2B\) the Θ-pilot's in its
+own universe (a dilation by 2 standing in for \(j^2\)), and \(-2A + \varepsilon\) the multiradial representation of
+the Θ-pilot, computed in the q-pilot's universe up to a small error \(\varepsilon\). In the AND reading the Θ-link
+is consistent precisely because \(A\) and \(B\) are allowed to be different numbers (two universes). The
+multiradial representation then re-expresses \(-2B\) in terms of \(A\), and both equations hold at once, which
+forces \(A \le 1\): a bound on the height.</p>
+
+<p>In the OR reading the distinct \(A, B\) look superfluous, one is tempted to set \(A = B\) “for the sake of
+simplicity”, at which point the AND version of the Θ-link becomes self-contradictory (\(-2A = -A\)) and the passage
+to the final estimate “looks as if one erroneously replaced the ‘∨’ […] by an ‘∧’ without any mathematical
+justification whatsoever.” Mochizuki attributes the 2018 objection (§12) to this chain, which he calls the
+“redundant copies school” (RCS).</p>
+
+<figure>
+<svg width="640" height="150" viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <rect x="20" y="16" width="290" height="120" rx="10" fill="#eff8f1" stroke="#3f8f5a" stroke-width="1.4"/>
+  <text x="165" y="36" font-size="11" text-anchor="middle" font-weight="700" fill="#3f8f5a">AND-IUT: two universes, A ≠ B allowed</text>
+  <circle cx="90" cy="86" r="30" fill="#fff2f6" stroke="#e85d8a"/><text x="90" y="83" font-size="10" text-anchor="middle" fill="#e85d8a" font-weight="600">−2B</text><text x="90" y="97" font-size="8" text-anchor="middle" fill="#6b6178">Θ-pilot</text>
+  <circle cx="240" cy="86" r="30" fill="#eef4fc" stroke="#3a74c4"/><text x="240" y="83" font-size="10" text-anchor="middle" fill="#3a74c4" font-weight="600">−A</text><text x="240" y="97" font-size="8" text-anchor="middle" fill="#6b6178">q-pilot</text>
+  <text x="165" y="80" font-size="16" text-anchor="middle" fill="#2a2433">∧</text><text x="165" y="100" font-size="8.5" text-anchor="middle" fill="#6b6178">N is both</text>
+  <text x="165" y="126" font-size="9" text-anchor="middle" fill="#2a2433">mult. rep.: −2A + ε ∧ −A  ⇒  A = ε ≤ 1</text>
+  <rect x="330" y="16" width="290" height="120" rx="10" fill="#fff8e6" stroke="#c98a10" stroke-width="1.4"/>
+  <text x="475" y="36" font-size="11" text-anchor="middle" font-weight="700" fill="#c98a10">OR-IUT / RCS: identify A = B</text>
+  <circle cx="400" cy="86" r="30" fill="#fff2f6" stroke="#e85d8a"/><text x="400" y="83" font-size="10" text-anchor="middle" fill="#e85d8a" font-weight="600">−2A</text>
+  <circle cx="550" cy="86" r="30" fill="#eef4fc" stroke="#3a74c4"/><text x="550" y="83" font-size="10" text-anchor="middle" fill="#3a74c4" font-weight="600">−A</text>
+  <text x="475" y="80" font-size="16" text-anchor="middle" fill="#2a2433">∨</text><text x="475" y="100" font-size="8.5" text-anchor="middle" fill="#6b6178">N is one of them</text>
+  <text x="475" y="126" font-size="9" text-anchor="middle" fill="#2a2433">∧ would say −2A = −A: contradiction;  ∨ says nothing</text>
+</svg>
+<figcaption><b>Figure 10.1.</b> [EssLgc] Example 2.4.5 as a picture. The AND reading needs two universes; the OR
+reading collapses them and loses the content.</figcaption>
+</figure>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run EvaluateLogicModel</span>
+<pre>{{run:EvaluateLogicModel}}</pre>
+<p class="small">The toolkit plugs in sample values and evaluates five readings that [EssLgc] §2.4 discusses: only the
+AND reading reaches a conclusion.</p>
+</div>
+
+<h3><span class="no">10.1</span>How the AND survives the algorithm</h3>
+
+<p>[EssLgc] §3.6–§3.10 then tracks the ∧ through every step of Figure 6.1. Each step either keeps it (the descents
+(Stp2), (Stp3) replace data by equivalent algorithms on weaker data; (Stp5), (Stp6) do not change the possible
+value-group portions), or enlarges a set of possibilities, which only adds ∨'s <em>inside</em> one side and never
+across the Θ-link (\(\dot\vee\), “(ExtInd1)”). The closed loop of (Stp7) brings both sides into one copy of
+\(\mathbb{R}\), where the ∧ becomes an inclusion of a number in a half-line. The danger [EssLgc] warns about most
+is (AOC3): wanting a proof that “taking log-volumes of pilot objects in the domain and codomain of the Θ-link yields
+the same real number”. In the AND reading there is no such statement to prove; the two log-volumes live in
+different universes until the very last step.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 二股</span>
+<p>In a harem romcom the protagonist is with heroine A <em>or</em> heroine B, and the whole season is about which.
+IUT is the rare series in which the protagonist is, for structural reasons, with A <em>and</em> B at once, because
+they live in different universes and never meet. Fans who insist “it has to be one of them” (the RCS reading)
+conclude the plot makes no sense. Fans who accept the AND find the ending forced: the only consistent epilogue is
+the one where the protagonist's height is bounded. Opinions on whether this ending was earned are in §12.</p>
+</div>

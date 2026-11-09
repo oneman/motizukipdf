@@ -1,0 +1,42 @@
+<h2 class="chapter"><span class="no">13</span>Run it yourself<span class="jp">自分で動かす</span></h2>
+
+<p>Every toolkit box in this guide is live output, regenerated when the PDF is built. To reproduce it:</p>
+
+<div class="box toolkit"><span class="tag">Commands</span>
+<pre>make -C src                                           # build the C library, CLI and TUI
+D=docs/initial-theta-data/frey-1-8-9.json             # or frey-1-2400-2401, frey-2-6436341-6436343, curve-11a1
+
+src/iut pipeline --theta-json $D                      # stages 0–7; stage 5 is this guide
+src/iut run RepresentMultiradially --theta-json $D    # Thm 3.11: (a)(b)(c), Ind1–Ind3
+src/iut run EstimateLogVolume      --theta-json $D    # Cor 3.12 as numbered steps
+src/iut run ChainAndSteps          --theta-json $D    # [EssLgc] §3.10 (Stp1)–(Stp8)
+src/iut run StepEstimate           --theta-json $D    # [Alien] §3.7 (1est)–(12est)
+src/iut run Fuzzify                --theta-json $D    # engulfing, (ExtInd1/2)
+src/iut run ClassifyRadial                            # radial environments
+src/iut tui --theta-json $D                           # the ncurses TUI: walk the lattice
+
+(cd scripts/multiradial &amp;&amp; npm ci) &amp;&amp; node scripts/multiradial/build.js   # rebuild this PDF</pre>
+</div>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run StepEstimate</span>
+<pre>{{run:StepEstimate}}</pre>
+</div>
+
+<p>The web app (<code>scripts/serve.sh</code>, then open <code>htdocs/</code>) has a <b>Pipeline</b> view that runs the
+same C code compiled to WebAssembly and draws each stage, with an “exact Θ-data (JSON)” option that loads the four
+examples. The Lean port (<code>cd lean &amp;&amp; lake build</code>) proves, among other things, that (Ind1) on packet
+\(j\) has order \((j+1)!\) (<code>card_Ind1</code>), the closed form of the procession-normalized upper end used in
+§9.2 (<code>thetaUpperBound_eq</code>), and that \(C_\Theta \ge -1\) is equivalent to the bracket of Theorem 1.10 being
+non-negative (<code>CTheta_ge_neg_one_iff</code>).</p>
+
+<table class="wide">
+<tr><th>to explore</th><th>where</th></tr>
+<tr><td>the four examples, every stage</td><td><code>docs/PIPELINE.md</code>, <code>docs/initial-theta-data/pipeline/*.txt</code></td></tr>
+<tr><td>all {{nprocs}} processes</td><td><code>src/iut procs</code>, <code>docs/PROCESSES.md</code></td></tr>
+<tr><td>all {{nids}} identifiers</td><td><code>docs/IDENTIFIERS.md</code></td></tr>
+<tr><td>the data model</td><td><code>docs/DATA_MODEL.md</code></td></tr>
+<tr><td>4K infographics</td><td><code>docs/*-infographic.png</code> (identifiers, mutations, prime-strips, Hodge theaters, initial Θ-data)</td></tr>
+<tr><td>the light-hearted overview</td><td><code>funfun_iut.pdf</code></td></tr>
+<tr><td>anabelian reconstruction, Kummer theory, cyclotomic rigidity</td><td><code>anabelian_guide.pdf</code> (companion guide)</td></tr>
+<tr><td>the papers</td><td><code>pdf/</code>: [IUTchIII] pp. 153–186 for Theorem 3.11 and Corollary 3.12</td></tr>
+</table>

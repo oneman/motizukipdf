@@ -1,0 +1,35 @@
+<h2 class="chapter"><span class="no">5</span>The cast: every object the algorithm touches<span class="jp">登場人物紹介</span></h2>
+
+<p>A long-running series needs a character sheet. Here is everyone who appears in Theorem 3.11 and
+Corollary 3.12, in order of appearance, with where they are defined, what they do, and what they would be
+if IUT were an anime. The toolkit names (from <code>docs/IDENTIFIERS.md</code>, {{nids}} identifiers in all)
+are given so you can find each one in <code>src/</code>, the web app and <code>lean/</code>.</p>
+
+<table class="wide cast"><colgroup><col style="width:19%"><col style="width:11%"><col style="width:48%"><col style="width:22%"></colgroup>
+<tr><th>character</th><th>defined in</th><th>role in the algorithm</th><th>if this were an anime</th></tr>
+<tr><td>initial Θ-data</td><td>[IUTchI] Def 3.1</td><td>\((\overline{F}/F, X_F, l, \underline{C}_K, \underline{\mathbb{V}}, \mathbb{V}^{\mathrm{bad}}_{\mathrm{mod}}, \underline{\epsilon})\): the elliptic curve, the prime \(l\), the places. Everything is built from it.
+  <code>InitialThetaData</code></td><td>the save file</td></tr>
+<tr><td>Θ±ell NF-Hodge theater</td><td>[IUTchI] Def 6.13</td><td>one complete copy of arithmetic with labels \(j \in \mathbb{F}_l\); one per lattice node. <code>ThetaPmEllNFHodgeTheater</code></td><td>a parallel world</td></tr>
+<tr><td>D-prime-strip, D⊢-prime-strip</td><td>[IUTchI] Def 4.1</td><td>the Galois groups \(\{\Pi_v\}\) or \(\{G_v\}\) alone, one per place: étale-like, coric. <code>DPrimeStrip</code>, <code>DMonoPrimeStrip</code></td><td>the skeleton crew who appear in every world</td></tr>
+<tr><td>F×μ-prime-strip</td><td>[IUTchII] Def 4.9</td><td>\(\{G_v \curvearrowright \mathcal{O}^{\times\mu}_v\}\) plus realified global degrees: the gluing data of the Θ-link and the <em>input</em> of the algorithm. Called the BPS (“basic prime-strip”) in [Form26]. <code>FMonoGlobValUnitsModTorsPrimeStrip</code></td><td>the network cable between two computers [IUTchIII, Rem. 3.11.1 (iv)]</td></tr>
+<tr><td>q-pilot, Θ-pilot</td><td>[IUTchIII] Def 3.8 (i)</td><td>\(\underline{q}\) and \(\{\underline{q}^{j^2}\}_j\) as objects of a global realified Frobenioid; the two things whose sizes are compared. <code>QPilot</code>, <code>ThetaPilot</code></td><td>the two rival pilots in the final race</td></tr>
+<tr><td>Θ×μ_LGP-link</td><td>[IUTchIII] Def 3.8 (ii)</td><td>full poly-isomorphism of F×μ-prime-strips from \((n,m)\) to \((n+1,m)\), Θ-pilot \(\mapsto\) q-pilot. <code>ThetaUnitsModTorsLGPTorsorLink</code></td><td>the body swap</td></tr>
+<tr><td>log-link</td><td>[IUTchIII] Def 1.1</td><td>the \(p\)-adic logarithm on units, from \((n,m)\) to \((n,m+1)\). <code>LogLink</code></td><td>the time leap within one world line</td></tr>
+<tr><td>log-shell \(\mathcal{I}_v\)</td><td>[IUTchIII] Def 1.1</td><td>\(\tfrac{1}{2p}\log(\mathcal{O}^\times_{K_v})\): the bi-coric additive container. <code>LogShell</code></td><td>the stage on which everything is performed</td></tr>
+<tr><td>procession \(\mathrm{Prc}(\mathcal{D}_T)\)</td><td>[IUTchI] Prop 6.9</td><td>\(\{\mathcal{D}_0\} \to \{\mathcal{D}_0,\mathcal{D}_1\} \to \dots \to \{\mathcal{D}_0,\dots,\mathcal{D}_{l^*}\}\): labels added one at a time. <code>Procession</code></td><td>a matsuri parade in which each float adds one more passenger</td></tr>
+<tr><td>tensor packet \(\mathcal{I}(\mathbb{S}^\pm_{j+1})\)</td><td>[IUTchIII] Prop 3.2</td><td>tensor product of \(j+1\) log-shells, one per label \(0..j\). <code>TensorPacket</code></td><td>a bento box with \(j+1\) compartments</td></tr>
+<tr><td>splitting / LGP-monoid \(\Psi^\perp_{\mathrm{LGP}}\)</td><td>[IUTchIII] Prop 3.4, 3.5</td><td>the theta values \(\underline{q}^{j^2}\), acting multiplicatively on packet \(j\). <code>PsiLGP</code></td><td>the seasoning: one per box</td></tr>
+<tr><td>copies of \(F_{\mathrm{mod}}\)</td><td>[IUTchIII] Prop 3.7, 3.10</td><td>\(M_{\mathrm{mod}}(\dots)_j\), one number field per label, from κ-coric functions; the global part. <code>FmodUnits</code></td><td>the rice: the same in every box</td></tr>
+<tr><td>étale theta function, mono-theta environment</td><td>[EtTh]; [IUTchII] §1–§2</td><td>its Kummer theory has a <em>rigid</em> cyclotome, so the theta values are insulated from (Ind1), (Ind2). <code>PsiTheta</code></td><td>the one character whose sync ratio never drops</td></tr>
+<tr><td>(Ind1), (Ind2), (Ind3)</td><td>[IUTchIII] Thm 3.11 (i), (ii)</td><td>the three blurs. <code>IndOne</code>, <code>IndTwo</code>, <code>IndThree</code></td><td>the three-member comic relief</td></tr>
+<tr><td>holomorphic hull</td><td>[IUTchIII] Rem 3.9.5</td><td>the smallest \(\mathcal{O}\)-module (arithmetic vector bundle) containing a region. <code>HolomorphicHull</code></td><td>the furoshiki wrapping cloth</td></tr>
+<tr><td>log-volume \(\mu^{\log}\)</td><td>[IUTchIII] Prop 3.9</td><td>the procession-normalized volume of a region: the scale both sides trust. <code>LogVolume</code></td><td>the referee</td></tr>
+</table>
+
+<div class="box otaku"><span class="tag">Otaku corner · OP credits</span>
+<p>The opening credits of IUT would run: <em>Original work</em> Shinichi Mochizuki. <em>Series composition</em>
+[IUTchI–IV]. <em>Character design</em> Grothendieck (posthumously). <em>Mechanical design</em> the étale
+theta function. <em>Background art</em> \(p\)-adic Hodge theory. <em>Music</em> the Gaussian integral.
+<em>Special thanks</em> Belyi, Faltings, Uchida, Tamagawa. Episode count: 646 pages, and the second cour is
+still being argued about on forums (§12).</p>
+</div>

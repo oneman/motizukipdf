@@ -10,3 +10,4 @@ lean/.lake/
 
 # funfun_iut.pdf build dependencies (npm install in scripts/funfun)
 scripts/funfun/node_modules/
+scripts/multiradial/node_modules/
