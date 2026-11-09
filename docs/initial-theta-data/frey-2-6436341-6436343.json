@@ -1,0 +1,395 @@
+{
+  "schema": "iut-initial-theta-data/1",
+  "id": "frey-2-6436341-6436343",
+  "title": "2 + 3¹⁰·109 = 23⁵",
+  "blurb": "Reyssat's triple, the highest known abc quality 1.6299",
+  "reference": "[IUTchI] Def 3.1 (a)–(f); F chosen as in [IUTchIV] Thm 1.10",
+  "tuple": "(F̄/F, X_F, l, C̲_K, V, V^bad_mod, ε̲)",
+  "input": {
+    "kind": "abc triple → Frey curve",
+    "a": "2",
+    "b": "6436341",
+    "c": "6436343",
+    "rad": "15042",
+    "quality": 1.6299,
+    "factored": { "a": "2", "b": "3¹⁰·109", "c": "23⁵" }
+  },
+  "curve": {
+    "equation": "y² = x³ + 6436339x² − 12872682x",
+    "model": ["0", "6436339", "0", "-12872682", "0"],
+    "b2": "25745356",
+    "b4": "-25745364",
+    "b6": "0",
+    "b8": "-165705941873124",
+    "c4": "662823973455472",
+    "c6": "-17064647115828415143040",
+    "discriminant": "109833904946803852249841111616",
+    "discriminantFactored": "2⁶·3²⁰·23¹⁰·109²",
+    "j": {
+      "num": "4550034081061575630856781958829776704708032",
+      "den": "1716154764793810191403767369",
+      "factored": "2⁶·41426498340967³ / 3²⁰·23¹⁰·109²",
+      "value": 2651295893822400,
+      "weilHeight": 98.223709
+    },
+    "check": "1728·Δ = c4³ − c6²"
+  },
+  "Fmod": { "field": "Q", "degree": 1, "why": "F_mod is the field of moduli Q(j) of X_F, and j ∈ Q" },
+  "Ftpd": {
+    "field": "Q(E[2])",
+    "degree": 1,
+    "why": "the Frey curve has all three 2-torsion points (0,0), (a,0), (−b,0) rational"
+  },
+  "F": {
+    "field": "F = Q(√−1, E[2·3·5]) = F_tpd(√−1, E[3·5])",
+    "FBar": "an algebraic closure Q̄ of Q (hence of F)",
+    "degreeDivides": 46080,
+    "degreeDividesFactored": "2¹⁰·3²·5",
+    "why": "Gal(F/F_tpd) embeds in {±1} × GL2(F_3) × GL2(F_5), of order 2·48·480 = 46080; [F_tpd:Q] = 1",
+    "galoisOverFmod": true,
+    "degreePrimeToL": true,
+    "containsSqrtMinus1": true,
+    "sixTorsionRational": true,
+    "stableReduction": "Raynaud: E[3] ⊆ E(F) ⇒ semistable at every v ∤ 3, E[5] ⊆ E(F) ⇒ semistable at every v ∤ 5"
+  },
+  "X_F": {
+    "definition": "X_F = E_F ∖ {origin}",
+    "type": "(1,1)",
+    "C_F": "C_F = X_F / ⟨−1⟩, type (1,1)±",
+    "E_F": "y² = x³ + 6436339x² − 12872682x, base-changed to F"
+  },
+  "l": {
+    "value": 7,
+    "lStar": 3,
+    "lPm": 4,
+    "sieve": [
+      {
+        "l": 5,
+        "ok": false,
+        "reasons": [
+          "F ⊇ Q(E[5]) acts trivially on E[5], so the image cannot contain SL2(F_5)",
+          "l divides ord(q_3) = 20",
+          "l divides ord(q_23) = 10"
+        ],
+        "short": ["E[5] ⊆ E(F)", "5 | ord q_3 = 20", "5 | ord q_23 = 10"]
+      },
+      { "l": 7, "ok": true, "reasons": [], "short": [] },
+      { "l": 11, "ok": true, "reasons": [], "short": [] },
+      { "l": 13, "ok": true, "reasons": [], "short": [] },
+      { "l": 17, "ok": true, "reasons": [], "short": [] },
+      { "l": 19, "ok": true, "reasons": [], "short": [] },
+      {
+        "l": 23,
+        "ok": false,
+        "reasons": ["l = 23 is a residue characteristic of V^bad_mod"],
+        "short": ["23 ∈ V^bad_mod"]
+      }
+    ],
+    "SL2": {
+      "criterion": "Serre 1972 §2.8 Prop 19: elements s, s′, s″ in the image force it to contain SL2(F_l)",
+      "s": { "p": 31, "ap": 4, "trace": 4, "det": 3, "disc": 4, "u": 3 },
+      "sPrime": { "p": 5, "ap": 2, "trace": 2, "det": 5, "disc": 5, "u": 5 },
+      "sDouble": { "p": 5, "ap": 2, "trace": 2, "det": 5, "disc": 5, "u": 5 },
+      "proved": true,
+      "overF": "[F:Q] | 46080 is prime to l, so Im(G_F) is normal of index prime to l in Im(G_Q) ⊇ SL2(F_l), hence also ⊇ SL2(F_l)"
+    }
+  },
+  "K": {
+    "field": "K = F(E[7])",
+    "galoisOverF": true,
+    "degreeOverF": "2016",
+    "degreeOverFFactored": "7·6²·8 = |GL2(F_7)|",
+    "why": "F is unramified at 7 (ramified only over 2, 3, 5 and the primes of Δ), so F ∩ Q(μ_7) = Q and det = cyclotomic character is onto F_7^×",
+    "degreeOverQAtMost": "92897280"
+  },
+  "C_K": {
+    "type": "(1, l-tors)±",
+    "XUnderK": "X̲_K of type (1, l-tors): the Z/7-cover of X_K cut out by a surjection E[7] ↠ Q ≅ Z/7Z",
+    "choices": 8,
+    "why": "the kernel of E[7] ↠ Q is one of the 8 lines of E[7] ≅ F_7²; all are K-rational because K = F(E[7])",
+    "cuspsXUnder": 7,
+    "cuspsCUnder": 4,
+    "cuspLabels": [0, 1, 2, 3],
+    "kCore": "C_F: j ∉ Z (some ord_p(j) < 0) while CM j-invariants are algebraic integers, so E has no CM and the K-core of C̲_K is C_F ([CanLift] Rem 2.1.1)"
+  },
+  "V": {
+    "rule": "one place v of K above each place of F_mod = Q (a section of V(K) ↠ V_mod); for v ∈ V^bad choose v so that the kernel of E[l] ↠ Q is the Tate subgroup μ_l (type (1, Z/lZ)±) — possible because Gal(K/F) ⊇ SL2(F_l) moves any line to any other",
+    "places": [
+      {
+        "name": "v2",
+        "kind": "VNon",
+        "p": 2,
+        "ordDelta": 6,
+        "ordJ": 6,
+        "reductionOverQ": "additive (potentially good)",
+        "reductionOverF": "good",
+        "ordQ": 0,
+        "inVbadMod": false
+      },
+      {
+        "name": "v3",
+        "kind": "VNon",
+        "p": 3,
+        "ordDelta": 20,
+        "ordJ": -20,
+        "reductionOverQ": "multiplicative",
+        "reductionOverF": "multiplicative",
+        "ordQ": 20,
+        "inVbadMod": true,
+        "tateParameter": { "ord": 20, "unitModPD": "364", "precision": 8, "digits": [1, 1, 1, 1, 1, 1, 0, 0] }
+      },
+      {
+        "name": "v5",
+        "kind": "VNon",
+        "p": 5,
+        "ordDelta": 0,
+        "ordJ": 0,
+        "reductionOverQ": "good",
+        "reductionOverF": "good",
+        "ordQ": 0,
+        "inVbadMod": false
+      },
+      {
+        "name": "v23",
+        "kind": "VNon",
+        "p": 23,
+        "ordDelta": 10,
+        "ordJ": -10,
+        "reductionOverQ": "multiplicative",
+        "reductionOverF": "multiplicative",
+        "ordQ": 10,
+        "inVbadMod": true,
+        "tateParameter": { "ord": 10, "unitModPD": "61448124894", "precision": 8, "digits": [2, 6, 10, 6, 1, 2, 1, 18] }
+      },
+      {
+        "name": "v109",
+        "kind": "VNon",
+        "p": 109,
+        "ordDelta": 2,
+        "ordJ": -2,
+        "reductionOverQ": "multiplicative",
+        "reductionOverF": "multiplicative",
+        "ordQ": 2,
+        "inVbadMod": true,
+        "tateParameter": { "ord": 2, "unitModPD": "12186328046825005", "precision": 8, "digits": [88, 62, 39, 20, 77, 33, 72, 66] }
+      },
+      { "name": "vinf", "kind": "VArc", "p": 0, "reductionOverF": "archimedean", "inVbadMod": false }
+    ],
+    "otherPrimes": "every other prime p: E has good reduction at p, v ∈ V^good (any v | p in K)"
+  },
+  "VbadMod": [
+    {
+      "p": 3,
+      "ordQ": 20,
+      "q": { "ord": 20, "unitModPD": "364", "precision": 8, "digits": [1, 1, 1, 1, 1, 1, 0, 0] }
+    },
+    {
+      "p": 23,
+      "ordQ": 10,
+      "q": { "ord": 10, "unitModPD": "61448124894", "precision": 8, "digits": [2, 6, 10, 6, 1, 2, 1, 18] }
+    },
+    {
+      "p": 109,
+      "ordQ": 2,
+      "q": { "ord": 2, "unitModPD": "12186328046825005", "precision": 8, "digits": [88, 62, 39, 20, 77, 33, 72, 66] }
+    }
+  ],
+  "VbadModExcluded": [],
+  "epsilon": {
+    "cusp": "the cusp of C̲_K labelled ±1 ∈ |F_l|",
+    "label": 1,
+    "why": "Def 3.1 (f): a cusp from a NON-zero element of Q ≅ Z/lZ; at v ∈ V^bad it must be the cusp of the canonical generator ±1 of Z (q^{1/l})"
+  },
+  "labels": {
+    "Fl": [-3, -2, -1, 0, 1, 2, 3],
+    "FlAbs": [0, 1, 2, 3],
+    "FlStar": [1, 2, 3],
+    "FlSemiPm": "F_7 ⋊ {±1}, order 14",
+    "FlStarGroup": "F_7^× / {±1}, order 3"
+  },
+  "derived": {
+    "logQ": 62.709884,
+    "logQFormula": "Σ_{v ∈ V^bad_mod} ord_v(q_v)·log p_v  (= deg of the q-divisor; [F_mod:Q] = 1)",
+    "absLogQ": 4.479277,
+    "absLogQFormula": "|log(q)| = log(q) / 2l  (one Θ-pilot step)",
+    "logCond": 8.925454,
+    "logCondFormula": "Σ_{v ∈ V^bad_mod} log p_v",
+    "htFromQ": 10.451647,
+    "weilHeightJ": 98.223709,
+    "thetaDilation": "j² for j ∈ F_7^* = {1, 4, 9}"
+  },
+  "conditions": [
+    {
+      "clause": "(a)",
+      "need": "F a number field with √−1 ∈ F; F̄ an algebraic closure",
+      "how": "F = Q(√−1, E[2·3·5]) contains √−1 by construction",
+      "status": "by construction"
+    },
+    {
+      "clause": "(b)",
+      "need": "X_F once-punctured elliptic curve with stable reduction at every finite v; F/F_mod Galois of degree prime to l; E[2·3] ⊆ E(F); V^bad_mod ≠ ∅, odd, multiplicative",
+      "how": "stable (Raynaud, E[15] ⊆ E(F)); [F:Q] | 46080; V^bad_mod ≠ ∅",
+      "status": "checked"
+    },
+    {
+      "clause": "(c)",
+      "need": "l ≥ 5 prime, Im(G_F → GL2(F_l)) ⊇ SL2(F_l), l prime to V^bad_mod and to every ord(q_v)",
+      "how": "l = 7: Serre witnesses p = 31, 5, 5; 7 ∤ 20, 7 ∤ 10, 7 ∤ 2",
+      "status": "proved"
+    },
+    {
+      "clause": "(d)",
+      "need": "C̲_K of type (1, l-tors)± with K-core C_F",
+      "how": "choose one of the 8 lines of E[7]; j ∉ Z so E has no CM",
+      "status": "by choice"
+    },
+    {
+      "clause": "(e)",
+      "need": "V ⊆ V(K) a section of V(K) ↠ V_mod; at v ∈ V^bad, C̲_v of type (1, Z/lZ)±",
+      "how": "one v | p per p; at V^bad the v of the Tate μ_l",
+      "status": "by choice"
+    },
+    {
+      "clause": "(f)",
+      "need": "ε̲ a cusp of C̲_K from a nonzero element of Q",
+      "how": "the cusp ±1",
+      "status": "by choice"
+    }
+  ],
+  "thm110Hypothesis": {
+    "statement": "E_F has good reduction at every v ∈ V(F)^good ∩ V(F)^non not dividing 2l ([IUTchIV] Thm 1.10)",
+    "holds": true,
+    "why": "V^bad_mod contains every odd prime where E_F is bad over F"
+  },
+  "toolkit": {
+    "commands": [
+      "iut gen --abc 2 6436341 6436343 --l 7 --json",
+      "iut validate --abc 2 6436341 6436343 --l 7",
+      "iut run CheckDefThreeOne --abc 2 6436341 6436343 --l 7"
+    ],
+    "errors": 0,
+    "warnings": 1,
+    "checks": 19,
+    "warningLines": [
+      "VBad: 1 place(s) of additive reduction: stable reduction only after a finite extension (F_tpd / Legendre form)"
+    ],
+    "def31": [
+      { "clause": "a", "ok": true, "how": "asserted flag" },
+      { "clause": "b", "ok": true, "how": "asserted flag" },
+      { "clause": "c", "ok": true, "how": "checked" },
+      { "clause": "d", "ok": true, "how": "checked" },
+      { "clause": "e", "ok": true, "how": "checked" },
+      { "clause": "f", "ok": true, "how": "checked" }
+    ],
+    "gen": {
+      "species": "InitialThetaData",
+      "name": "abc(2,6436341,6436343) l=7",
+      "curve": "Frey y^2=x(x-2)(x+6436341)",
+      "Fmod": { "id": "Fmod", "degree": 1 },
+      "F": { "id": "FBarOverF", "degreeBound": 276480, "logDifferentTpd": 0 },
+      "K": { "id": "KField", "degreeBound": 557383680, "logDifferentEstimate": 13.51042187 },
+      "l": 7,
+      "LStar": 3,
+      "LPm": 4,
+      "EpsilonUnder": 0,
+      "jLogHeight": 35.51382493,
+      "logQ": 62.7098837,
+      "AbsLogQ": 4.479277407,
+      "logF": 9.618601567,
+      "HtE": 10.45164728,
+      "hypotheses": {
+        "FGaloisOverFmod": true,
+        "FContainsSixTorsion": true,
+        "ImageContainsSLTwo": true,
+        "StableReduction": true,
+        "CKIsKCore": true
+      },
+      "VSet": [
+        {
+          "name": "v2",
+          "kind": "VNon",
+          "p": 2,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "badAdditive",
+          "ordQ": 0,
+          "inVBadMod": false
+        },
+        {
+          "name": "v3",
+          "kind": "VNon",
+          "p": 3,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "badMultiplicative",
+          "ordQ": 20,
+          "inVBadMod": true
+        },
+        {
+          "name": "v23",
+          "kind": "VNon",
+          "p": 23,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "badMultiplicative",
+          "ordQ": 10,
+          "inVBadMod": true
+        },
+        {
+          "name": "v109",
+          "kind": "VNon",
+          "p": 109,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "badMultiplicative",
+          "ordQ": 2,
+          "inVBadMod": true
+        },
+        {
+          "name": "v5",
+          "kind": "VNon",
+          "p": 5,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "good",
+          "ordQ": 0,
+          "inVBadMod": false
+        },
+        {
+          "name": "v7",
+          "kind": "VNon",
+          "p": 7,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "good",
+          "ordQ": 0,
+          "inVBadMod": false
+        },
+        {
+          "name": "vinf",
+          "kind": "VArc",
+          "p": 0,
+          "eMod": 1,
+          "fMod": 1,
+          "eK": 1,
+          "fK": 1,
+          "reduction": "good",
+          "ordQ": 0,
+          "inVBadMod": false
+        }
+      ]
+    }
+  }
+}
