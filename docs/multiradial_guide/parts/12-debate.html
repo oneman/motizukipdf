@@ -1,0 +1,70 @@
+<h2 class="chapter"><span class="no">12</span>Where the debate stands (November 2026)<span class="jp">論争の現在地</span></h2>
+
+<div class="box warn"><span class="tag">Neutral ground</span>
+<p>This section reports what the participants have written, in their own words where possible, and maps each
+position onto the steps of this guide. It takes no side. The toolkit in this repository implements the
+<em>statements</em> of the theory as data types and bookkeeping; it cannot settle whether Corollary 3.12 is proved.</p>
+</div>
+
+<p>Almost all of the disagreement about IUT is concentrated on exactly the material of this guide: the passage
+from Theorem 3.11 to Corollary 3.12. Nobody seriously disputes the earlier anabelian results the theory consumes
+(Mochizuki's own 2026 report says the material of “Stages 3–5” has “never been a source of confusion/debate”).
+The timeline:</p>
+
+<table class="wide">
+<tr><th>when</th><th>who</th><th>what</th><th>which step of this guide</th></tr>
+<tr><td>Aug 2012</td><td>S. Mochizuki</td><td>[IUTchI–IV] posted.</td><td>all</td></tr>
+<tr><td>Mar 2018</td><td>P. Scholze, J. Stix</td><td>After a week of discussions at RIMS, a report (“Why abc is still a conjecture”)
+arguing that the abstract copies in the theory can be identified with one another without loss, that the Θ-link
+then forces an identification incompatible with \(\underline{q} \mapsto \underline{q}^{j^2}\), and that the proof of
+Corollary 3.12 has a serious gap. Mochizuki published replies the same year.</td><td>§2.2, §8.2, §10</td></tr>
+<tr><td>2021</td><td>PRIMS</td><td>[IUTchI–IV] published in a special issue of <em>Publ. RIMS</em> 57.</td><td>—</td></tr>
+<tr><td>2022</td><td>S. Mochizuki</td><td>[EssLgc]: the AND/OR analysis of §10; the objection is attributed to a
+“redundant copies school” that identifies the two sides of the Θ-link.</td><td>§10</td></tr>
+<tr><td>Mar 2025</td><td>K. Joshi</td><td>“Final Report on the Mochizuki–Scholze–Stix Controversy” (arXiv 2505.10568):
+argues the Scholze–Stix argument is mistaken but also that “Mochizuki's proof is also incomplete”, since a key
+point is not clearly proved, “without clearly proving this, there is no way to provide a complete proof of
+[Theorem 3.11] (let alone […] Corollary 3.12)”; maintains that abc follows from Joshi's own arithmetic
+Teichmüller theory.</td><td>§6</td></tr>
+<tr><td>Apr 2026</td><td>S. Mochizuki et al.</td><td>[Form26]: progress report on a Lean formalization; Stage 1 is
+“[IUTchIII] Theorem 3.11 ⟹ Corollary 3.12”, reorganized as 3.11 ⟹ 3.11.5 ⟹ 3.12, with skeletal Lean code for the
+last arrow.</td><td>§8.4</td></tr>
+<tr><td>Jul 2026</td><td>Project LANA (J. Commelin, K. Kedlaya, Y. Hoshi, A. Topaz, F. Kato, leader)</td><td>Interim
+report on a Lean formalization (code released July 17, 2026). It gives no verdict, but says “At present, however,
+Project LANA has not yet reconstructed a proof of the required compatibility” and “there seems a point where a
+proof is not fully written”, describing a “wall” about whether a certain diagram commutes, or a certain
+isomorphism is the identity, once (Ind1)–(Ind3) are allowed.</td><td>§7, §8.2 (xi-b)–(xi-d)</td></tr>
+<tr><td>Jul 30, 2026</td><td>K. Joshi</td><td>“Comments on the LANA Project Report of Kato et al.”: critical of the
+report's methodology, arguing it rediscovers known problems, and again pointing to Joshi's own work.</td><td>—</td></tr>
+</table>
+
+<h3><span class="no">12.1</span>The disagreement, mapped onto the algorithm</h3>
+
+<p>Put in the vocabulary of this guide, the positions differ on one question: <b>at step (xi), are the two routes
+of Figure 8.1 really computing the same thing, in the same copy of \(\mathbb{R}\), with the blur on the
+correct side?</b></p>
+<ul>
+<li><b>Mochizuki's reading.</b> Yes, by construction: SHE and IPL say the output is expressible in column 1's ring
+structure and is linked to the fixed input; the closed loop of (Stp7) places both log-volumes in one container;
+everything else is an AND that was never broken. Asking for a separate proof that the two pilots' log-volumes
+agree is the error (AOC3).</li>
+<li><b>The Scholze–Stix reading.</b> If the copies can be identified (they argue nothing is lost by doing so), the
+argument reduces to a comparison in which the indeterminacies must absorb the factor \(j^2\), and then the
+inequality has no content. They locate the gap in the proof of Corollary 3.12.</li>
+<li><b>Joshi's reading.</b> The copies cannot be naively identified (agreeing with Mochizuki against Scholze–Stix),
+but a needed property of the construction is not proved in [IUTchIII], so Theorem 3.11 itself is incomplete.</li>
+<li><b>LANA's reading, as of July 2026.</b> No verdict; the formalization has reached a specific compatibility
+involving (Ind1)–(Ind3) that it has not yet been able to reconstruct from the papers.</li>
+</ul>
+
+<p>What all four have in common is that the argument has been narrowed to a small part of the theory, the part
+this guide covers, and that formalization is now the route by which it will be tested. The toolkit's Lean port in
+<code>lean/</code> formalizes the data model and the arithmetic of the procession (§9.2), not the theorem.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 考察班</span>
+<p>Every big series has a 考察班 (kōsatsu-han), the fan research squad that rewatches episodes frame by frame. IUT's
+squad is unusually distinguished, and for fourteen years it has been rewatching the same scene: the ten minutes
+between Theorem 3.11 and Corollary 3.12. The 2026 twist is that the squad now includes a proof assistant, which does
+not get tired, does not take sides, and does not accept “it is obvious from the definitions” as a frame. As of this
+writing, the season finale has been delayed.</p>
+</div>

@@ -1,0 +1,104 @@
+<h2 class="chapter"><span class="no">2</span>Why this is hard: the Θ-link breaks the ring<span class="jp">環が壊れる理由</span></h2>
+
+<p>A ring has two operations, \(+\) and \(\times\), welded together by the distributive law. [Alien] §2.11
+calls them the “two underlying combinatorial dimensions of a ring”, and the image to keep in mind is a
+sheet of paper: multiplication runs one way, addition the other, and the distributive law is what keeps
+the sheet from tearing. For a local field \(k\) the multiplicative direction itself splits again into
+a <em>unit</em> part \(\mathcal{O}_k^\times\) (things of size 1) and a <em>value group</em> part (the
+powers of a uniformizer, which carry the size).</p>
+
+<p>The map we want, \(\underline{q}^{\,j^2} \mapsto \underline{q}\), only makes sense on the value-group
+part. It is a perfectly good map of multiplicative monoids, but there is no ring homomorphism behind it:
+in characteristic zero \((a + b)^N \ne a^N + b^N\), so any map that dilates sizes by \(N\) tears the sheet.
+That is why the Θ-link cannot be a map of rings, of schemes, or of anything that remembers \(+\). It is
+a gluing of two separate copies of arithmetic along the part that has no \(+\) in it.</p>
+
+<div class="box analogy"><span class="tag">Analogy · characteristic \(p\) has it easy</span>
+<p>In characteristic \(p\) the map \(x \mapsto x^p\) <em>is</em> a ring homomorphism (Frobenius), because
+\((a+b)^p = a^p + b^p\) there. So over function fields the N-th power trick of §1.1 can be run inside one
+copy of arithmetic, and the geometric Szpiro inequality has proofs along exactly these lines (via
+Frobenius, or via the Kodaira–Spencer map) [Alien, §2.4–§2.9]. Number fields have no Frobenius. IUT's
+move is to build a substitute for Frobenius that is allowed to leave the universe: the Θ-link. Mochizuki's
+2026 report gives the simplest model: “when \(N = p\), working modulo \(p\) […] there is a common ring
+structure that is compatible with the \(p\)-th power map” [Form26, §3]. Over \(\mathbb{Z}\) there is no such
+common ring structure, so the theory has to manufacture a common <em>container</em> instead.</p>
+</div>
+
+<h3><span class="no">2.1</span>What goes through the Θ-link and what does not</h3>
+
+<figure>
+<svg width="640" height="262" viewBox="0 0 640 262" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <rect x="14" y="20" width="170" height="210" rx="14" fill="#fff2f6" stroke="#e85d8a" stroke-width="1.4"/>
+  <text x="99" y="42" font-size="11" text-anchor="middle" font-weight="700" fill="#e85d8a">Hodge theater at (0,0)</text>
+  <text x="99" y="58" font-size="9" text-anchor="middle" fill="#6b6178">domain of the Θ-link</text>
+  <g font-size="9.5" fill="#2a2433"><text x="28" y="84">ring K_v, scheme E</text><text x="28" y="102">Π_v (with geometry)</text><text x="28" y="120">G_v (Galois group)</text>
+  <text x="28" y="138">units O×_v</text><text x="28" y="156">Θ-pilot {q̲<tspan dy="-4" font-size="7">j²</tspan><tspan dy="4">}</tspan></text><text x="28" y="174">global degrees</text><text x="28" y="192">labels, symmetries</text></g>
+  <rect x="456" y="20" width="170" height="210" rx="14" fill="#eef4fc" stroke="#3a74c4" stroke-width="1.4"/>
+  <text x="541" y="42" font-size="11" text-anchor="middle" font-weight="700" fill="#3a74c4">Hodge theater at (1,0)</text>
+  <text x="541" y="58" font-size="9" text-anchor="middle" fill="#6b6178">codomain of the Θ-link</text>
+  <g font-size="9.5" fill="#2a2433"><text x="470" y="84">ring K_v, scheme E</text><text x="470" y="102">Π_v (with geometry)</text><text x="470" y="120">G_v (Galois group)</text>
+  <text x="470" y="138">units O×_v</text><text x="470" y="156">q-pilot q̲</text><text x="470" y="174">global degrees</text><text x="470" y="192">labels, symmetries</text></g>
+  <rect x="196" y="104" width="248" height="96" rx="10" fill="#fff" stroke="#2a2433" stroke-width="1.2"/>
+  <text x="320" y="98" font-size="10" text-anchor="middle" font-weight="700" fill="#2a2433">the shared F×μ-prime-strip (the “cable”)</text>
+  <g font-size="9.3"><text x="208" y="122" fill="#3f8f5a">✓ G_v as abstract topological groups</text>
+  <text x="208" y="139" fill="#3f8f5a">✓ units mod torsion O×μ_v (up to Ism)</text>
+  <text x="208" y="156" fill="#3f8f5a">✓ value monoid: Θ-pilot ↦ q-pilot</text>
+  <text x="208" y="173" fill="#3f8f5a">✓ realified global degrees</text>
+  <text x="208" y="190" fill="#c0392b">✗ addition, ✗ Π_v, ✗ the ring K_v</text></g>
+  <line x1="184" y1="152" x2="196" y2="152" stroke="#2a2433" stroke-width="1.2"/><line x1="444" y1="152" x2="456" y2="152" stroke="#2a2433" stroke-width="1.2"/>
+  <text x="320" y="254" font-size="9" text-anchor="middle" fill="#6b6178">toolkit, 1 + 8 = 9: sharesG = true, sharesUnits = true, sharesPi = false, keepsRing = false, dilation = {{dilation}}</text>
+  <text x="320" y="30" font-size="9.5" text-anchor="middle" fill="#6b6178">two mutually alien copies</text>
+  <text x="320" y="46" font-size="9.5" text-anchor="middle" fill="#6b6178">of conventional scheme theory</text>
+</svg>
+<figcaption><b>Figure 2.1.</b> The Θ×μ_LGP-link of [IUTchIII] Definition 3.8 (ii) as the toolkit's lattice
+records it. Only the F×μ-prime-strip passes from one side to the other, by a <em>full poly-isomorphism</em>
+(every isomorphism at once, no preferred one). What it carries: the Galois groups \(G_v\) as abstract
+groups, the units modulo torsion with their integral structures, and the value-group monoid, along which
+the Θ-pilot on the left is identified with the q-pilot on the right. What it does not carry: addition.</figcaption>
+</figure>
+
+<p>So after the Θ-link we have a strange situation. On the right there is an honest elliptic curve over an
+honest number field, with its q-pilot. On the left there is another honest elliptic curve over another
+honest number field, with its Θ-pilot. And there is a bridge between them that carries only abstract
+groups and multiplicative monoids. The question of Theorem 3.11 is:</p>
+
+<div class="box key"><span class="tag">The question Theorem 3.11 answers</span>
+<p>Can the person standing on the <b>right</b> describe the Θ-pilot of the <b>left</b> in their own ring
+theory, using only what came across the bridge? If so, how precisely?</p>
+</div>
+
+<p>Answer: yes, up to three explicit blurs, and the description is good enough to measure. The tools
+that make this possible are exactly the ones developed in the decade before IUT: <em>anabelian
+geometry</em> (rebuild a ring-like object from its Galois group alone), <em>Kummer theory</em> (relate
+an object to its portable photograph in Galois cohomology), the <em>étale theta function</em> (whose
+Kummer theory has an unusually rigid cyclotome), and the <em>\(p\)-adic logarithm</em> (which turns the
+multiplicative units into an additive module, and so manufactures a place where addition can live again).
+The companion guide <em>anabelian_guide.pdf</em> in this repository covers the first three in depth.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 異世界転生</span>
+<p>Every isekai protagonist faces the problem of Theorem 3.11. You are hit by a truck (Truck-kun, the
+genre's most prolific transport mechanism) and wake up in a world whose laws of nature differ from
+yours. All you carried across is what fits in your pockets: in IUT, an abstract group \(G_v\) and a
+bag of units. The ring structure, your house, the power grid, stayed behind. The plot of a hundred light
+novels is then: rebuild modern civilization from what you carried, in a way that also works in the new
+world. IUT's version is stricter than any light novel: what you rebuild must be described so that a
+native of <em>either</em> world would accept it, and you have to say exactly how wrong it might be.
+No cheat skill (チート能力) is granted, although the étale theta function comes close.</p>
+</div>
+
+<h3><span class="no">2.2</span>Why not just compare the two sides directly?</h3>
+
+<p>Because there is nothing to compare them in. To say “the Θ-pilot on the left has log-volume
+\({{thetapilot}}\) and the q-pilot on the right has log-volume \({{qpilot}}\)” one needs a common copy
+of the real numbers into which both log-volumes map, and a common ring structure in which both pilots are
+honest arithmetic line bundles. The Θ-link provides neither: it identifies the two pilots only as abstract
+objects of a monoid, up to isomorphism class. Any argument of the form “compute both sides and compare”
+silently assumes a common ring structure, which is precisely what the Θ-link destroyed.</p>
+
+<p>Mochizuki's 2026 report puts it as a diagram [Form26, §3]: for two ring structures \({}^\dagger R\)
+and \({}^\ddagger R\) glued along their multiplicative monoids, the multiradial representation is a
+common container</p>
+\[ {}^\dagger R \;\subseteq\; \bigl(\text{multiradial representation of the Θ-pilot}\bigr) \;\supseteq\; {}^\ddagger R, \]
+<p>built from “the multiplicative monoid and abstract group structures (but not the ring structures!)” that
+are “common (cf. ‘logical AND ∧!’) to †, ‡”. The rest of this guide is about how that container is built
+and what it costs.</p>

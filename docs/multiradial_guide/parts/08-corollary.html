@@ -1,0 +1,233 @@
+<h2 class="chapter"><span class="no">8</span>From picture to inequality (Corollary 3.12)<span class="jp">絵から不等式へ</span></h2>
+
+<div class="box key"><span class="tag">Corollary 3.12 · Log-volume estimates for Θ-pilot objects</span>
+<p>Let \(-|\log(\underline{\underline{\Theta}})| \in \mathbb{R}\cup\{+\infty\}\) be the procession-normalized
+mono-analytic log-volume of the <b>holomorphic hull</b> of the union of the possible images of a Θ-pilot
+object in the multiradial representation of Theorem 3.11, subject to (Ind1), (Ind2), (Ind3). Let
+\(-|\log(\underline{q})| \in \mathbb{R}\) be the procession-normalized log-volume of the image of a q-pilot
+object, <em>not</em> subject to the indeterminacies. Then \(-|\log(\underline{\underline{\Theta}})| \in \mathbb{R}\) and</p>
+\[ -|\log(\underline{\underline{\Theta}})| \;\ge\; -|\log(\underline{q})|, \]
+<p>i.e. \(C_\Theta \ge -1\) for any real \(C_\Theta\) with \(-|\log(\underline{\underline{\Theta}})| \le C_\Theta\cdot|\log(\underline{q})|\).</p>
+</div>
+
+<p>Two asymmetries in the statement are the whole point. The Θ-side is <em>blurred and hulled</em>; the q-side
+is <em>sharp</em>. And the inequality goes the “surprising” way: naively the Θ-pilot is the bigger object (its
+log-volume is more negative, \({{thetapilot}}\) against \({{qpilot}}\) for \(1+8=9\)), yet the corollary says
+the blurred Θ-pilot cannot be smaller than the q-pilot. The only way both can be true is if the blur is at least
+as big as the gap. That is the height bound in disguise (§9).</p>
+
+<h3><span class="no">8.1</span>The proof, in Mochizuki's twelve steps</h3>
+
+<p>The proof begins with a free move: since \(|\log\underline{q}| &gt; 0\), one may assume
+\(-|\log\Theta| &lt; 0\), because otherwise \(-|\log\Theta| \ge 0 &gt; -|\log\underline{q}|\) and there is nothing to
+prove. Then it reviews “precisely what is achieved” by the theory, in steps:</p>
+
+<table class="wide">
+<tr><th>step</th><th>content</th></tr>
+<tr><td>(i)</td><td>Concentrate on a <b>single</b> Θ×μ_LGP-link \((0,0)\to(1,0)\). It has a unit portion
+(\(\mathcal{F}^{\times\mu}\)) and a value-group portion (\(\mathcal{F}^{\Vdash}\)); the latter sends the
+Θ-pilot to the q-pilot.</td></tr>
+<tr><td>(ii)</td><td>Units suffer \(\mathrm{Aut}_{\mathcal{F}^{\times\mu}}\) (that is, (Ind1), (Ind2)); the cyclotomes behind
+the value-group portion (mono-theta environments, κ-coric functions) are <b>insulated</b> from them.</td></tr>
+<tr><td>(iii)</td><td>Units and value groups must be related through the <em>same</em> Θ-link, because the lattice
+does not commute.</td></tr>
+<tr><td>(iv)</td><td>But the units must sit one level below the value groups (“vertical shift”). Resolve the tension
+with vertically coric structures, at the cost of (Ind3).</td></tr>
+<tr><td>(v)–(ix)</td><td>Use bi-coric mono-analytic log-shells as containers; recall how the log-Kummer
+correspondences, conjugate synchronization by \(\mathbb{F}_l^{\rtimes\pm}\), the \(\mathbb{F}_l^{*}\)-symmetry and
+the copies of \(F_{\mathrm{mod}}\) make this work. Three approaches to cyclotomic rigidity, all compatible
+(Fig. 3.7 of [IUTchIII]).</td></tr>
+<tr><td>(x)</td><td>Summary: Kummer-detachment relates the Frobenius-like data at \((0,0)\) to the multiradial
+representation at the cost of (Ind1)–(Ind3); log-volumes are the “coarse space” that forgets them.</td></tr>
+<tr><td>(xi-a)–(xi-g)</td><td>The comparison itself: see §8.2.</td></tr>
+<tr><td>(xii)</td><td>Why <b>global</b> realified Frobenioids are needed: local Frobenioid objects have
+non-invertible endomorphisms, so locally one could not tell a region from its \(p^N\)-multiple.</td></tr>
+</table>
+
+<h3><span class="no">8.2</span>Substeps (xi-a)–(xi-g): two ways to compute one number</h3>
+
+<ol>
+<li><b>(xi-a)</b> Think of the q-pilot at \((1,0)\) in terms of the holomorphic log-shells there. The Θ-link is a
+gluing that makes the Θ-pilot at \((0,0)\) correspond to the q-pilot at \((1,0)\).</li>
+<li><b>(xi-b)</b> The multiradial algorithm produces a collection of possible output data in
+\({}^{0,\circ}\mathcal{U} \xrightarrow{\sim} {}^{1,\circ}\mathcal{U}\), the arrow coming from the étale-picture
+symmetry. For the rest of the argument, forget the theta functions (HIS) and keep only IPL and SHE.</li>
+<li><b>(xi-c)</b> So: the output possibilities are linked to the q-pilot's representation on
+\({}^{1,\circ}\mathcal{U}^{\mathbb{Q}}\) and can be expressed entirely in the ring structure of column 1.
+Pass to the <b>holomorphic hull</b>: the possibilities become localizations of arithmetic vector bundles over
+the rings \(\mathcal{O}_{K_v}\) labelled \((1,\circ)\).</li>
+<li><b>(xi-d)</b> Those bundles have rank \(&gt;1\) and the q-pilot is a line bundle, so take (a power of) the
+determinant and then the log-volume. Two comparable objects result:
+\(\mathbb{R}_{\le -|\log\Theta|}\) and \(-|\log\underline{q}| \in \mathbb{R}\). The log-Kummer correspondence in
+column 1 corrects the vertical shift between the units of \({}^{1,0}\mathcal{F}^{\times\mu}\) and the log-shells
+built from them.</li>
+<li><b>(xi-e)</b> Expressibility in column 1's ring structure means: valid even under the condition that the
+input prime-strip's pilot log-volume equals the fixed value \(-|\log\underline{q}|\).</li>
+<li><b>(xi-f)</b> Hence the construction of \(\mathbb{R}_{\le -|\log\Theta|}\) “constitutes, in particular, a
+construction […] of the pilot-object log-volume of the input data”, namely \(-|\log\underline{q}|\). So
+\(-|\log\underline{q}| \in \mathbb{R}_{\le-|\log\Theta|}\), and the inequality “follows formally”.</li>
+<li><b>(xi-g)</b> In summary: two tautologically equivalent ways to compute the log-volume of the q-pilot at
+\((1,0)\) (Figure 8.1).</li>
+</ol>
+
+<figure>
+<svg width="640" height="230" viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <defs><marker id="a81" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker></defs>
+  <rect x="20" y="20" width="190" height="56" rx="10" fill="#fff2f6" stroke="#e85d8a" stroke-width="1.4"/>
+  <text x="115" y="42" font-size="10.5" text-anchor="middle" font-weight="700" fill="#e85d8a">multiradial representation</text>
+  <text x="115" y="58" font-size="9.5" text-anchor="middle" fill="#2a2433">at the 0-column (0, ◦)</text>
+  <rect x="430" y="20" width="190" height="56" rx="10" fill="#eef4fc" stroke="#3a74c4" stroke-width="1.4"/>
+  <text x="525" y="42" font-size="10.5" text-anchor="middle" font-weight="700" fill="#3a74c4">multiradial representation</text>
+  <text x="525" y="58" font-size="9.5" text-anchor="middle" fill="#2a2433">at the 1-column (1, ◦)</text>
+  <line x1="214" y1="48" x2="426" y2="48" stroke="#6b6178" stroke-width="1.4" marker-end="url(#a81)" marker-start="url(#a81)"/>
+  <text x="320" y="40" font-size="9.5" text-anchor="middle" fill="#2a2433">≈  permutation symmetry</text>
+  <text x="320" y="62" font-size="9" text-anchor="middle" fill="#6b6178">of the étale-picture</text>
+  <rect x="20" y="152" width="190" height="56" rx="10" fill="#fff8e6" stroke="#c98a10" stroke-width="1.4"/>
+  <text x="115" y="174" font-size="10.5" text-anchor="middle" font-weight="700" fill="#2a2433">Θ-pilot object in the</text>
+  <text x="115" y="190" font-size="9.5" text-anchor="middle" fill="#2a2433">Hodge theater at (0,0)</text>
+  <rect x="430" y="152" width="190" height="56" rx="10" fill="#fff8e6" stroke="#c98a10" stroke-width="1.4"/>
+  <text x="525" y="174" font-size="10.5" text-anchor="middle" font-weight="700" fill="#2a2433">q-pilot object in the</text>
+  <text x="525" y="190" font-size="9.5" text-anchor="middle" fill="#2a2433">Hodge theater at (1,0)</text>
+  <line x1="214" y1="180" x2="426" y2="180" stroke="#e85d8a" stroke-width="2" marker-end="url(#a81)"/>
+  <text x="320" y="172" font-size="9.5" text-anchor="middle" fill="#e85d8a" font-weight="600">Θ×μ_LGP-link</text>
+  <text x="320" y="196" font-size="9" text-anchor="middle" fill="#6b6178">value part ⊩ and unit part ×μ</text>
+  <line x1="115" y1="148" x2="115" y2="80" stroke="#6b6178" stroke-width="1.4" marker-end="url(#a81)"/>
+  <text x="124" y="104" font-size="9" fill="#2a2433">⇑ Kummer-detachment</text>
+  <text x="124" y="117" font-size="9" fill="#6b6178">via log-Kummer,</text>
+  <text x="124" y="130" font-size="9" fill="#6b6178">compatible with the Θ-link</text>
+  <line x1="525" y1="80" x2="525" y2="148" stroke="#6b6178" stroke-width="1.4" marker-end="url(#a81)"/>
+  <text x="516" y="104" font-size="9" text-anchor="end" fill="#2a2433">⇓ comparison</text>
+  <text x="516" y="117" font-size="9" text-anchor="end" fill="#6b6178">via hull + log-volume</text>
+  <text x="516" y="130" font-size="9" text-anchor="end" fill="#6b6178">in column 1's ring structure</text>
+  <text x="320" y="124" font-size="10" text-anchor="middle" font-weight="700" fill="#3f8f5a">two ways around</text>
+  <text x="320" y="138" font-size="9" text-anchor="middle" fill="#3f8f5a">the same square</text>
+</svg>
+<figcaption><b>Figure 8.1.</b> After [IUTchIII] Fig. 3.8, “two tautologically equivalent ways to compute the
+log-volume of the q-pilot object at \((1,0)\)”. Bottom route: the Θ-link says the q-pilot <em>is</em> (the image
+of) the Θ-pilot. Top route: the Θ-pilot, detached into the multiradial representation, transported across by the
+étale-picture symmetry, hulled and measured in column 1. Both routes compute the same thing, so the measured
+value must be compatible with the q-pilot's own: that compatibility is the inequality.</figcaption>
+</figure>
+
+<div class="box key"><span class="tag">The punchline in one line</span>
+<p>The set of log-volumes the algorithm can output, \(\mathbb{R}_{\le -|\log\Theta|}\), was constructed by an
+algorithm that, run on the q-pilot's own input, is a way of computing the q-pilot's log-volume. So the q-pilot's
+log-volume is one of the outputs: \(-|\log\underline{q}| \le -|\log\Theta|\).</p>
+</div>
+
+<h3><span class="no">8.3</span>The hull, the determinant and the closed loop (Stp4–Stp8)</h3>
+
+<figure>
+<svg width="640" height="190" viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <defs><pattern id="g82" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18,0 L0,0 0,18" fill="none" stroke="#e4dcef" stroke-width=".8"/></pattern>
+  <marker id="a82" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker></defs>
+  <rect x="20" y="20" width="250" height="150" fill="url(#g82)" stroke="#e4dcef"/>
+  <path d="M70,110 C 60,70 100,50 120,70 C 140,40 180,60 170,90 C 200,100 180,140 150,130 C 120,150 80,140 70,110 z" fill="#e85d8a" opacity=".22" stroke="#e85d8a"/>
+  <path d="M90,100 C 95,75 130,62 150,80 C 175,82 172,120 140,118 C 120,130 92,122 90,100 z" fill="#7a5cc2" opacity=".2" stroke="#7a5cc2" stroke-dasharray="3 2"/>
+  <path d="M100,95 C 110,60 160,70 160,95 C 165,125 115,135 100,95 z" fill="#3a74c4" opacity=".18" stroke="#3a74c4" stroke-dasharray="2 2"/>
+  <text x="145" y="186" font-size="9.5" text-anchor="middle" fill="#6b6178">possible images of the Θ-pilot (Ind1–3)</text>
+  <line x1="282" y1="95" x2="352" y2="95" stroke="#6b6178" stroke-width="1.4" marker-end="url(#a82)"/>
+  <text x="317" y="86" font-size="9" text-anchor="middle" fill="#2a2433">hull (Stp4)</text>
+  <rect x="364" y="20" width="250" height="150" fill="url(#g82)" stroke="#e4dcef"/>
+  <path d="M414,110 C 404,70 444,50 464,70 C 484,40 524,60 514,90 C 544,100 524,140 494,130 C 464,150 424,140 414,110 z" fill="#e85d8a" opacity=".18" stroke="#e85d8a"/>
+  <rect x="400" y="38" width="144" height="108" fill="none" stroke="#3f8f5a" stroke-width="2.2"/>
+  <text x="472" y="32" font-size="9" text-anchor="middle" fill="#3f8f5a" font-weight="600">smallest O-module containing the union</text>
+  <text x="489" y="186" font-size="9.5" text-anchor="middle" fill="#6b6178">then det (Stp6) and log-volume (Stp8): one real number</text>
+</svg>
+<figcaption><b>Figure 8.2.</b> The holomorphic hull. The possible images of the Θ-pilot are arbitrary regions in the
+tensor packets (left); the q-pilot is an arithmetic line bundle, so the two cannot be compared until the regions
+are wrapped in the smallest module over the ring of integers that contains them all (right). Wrapping only
+enlarges, which is another reason the result is an upper bound.</figcaption>
+</figure>
+
+<p>In [EssLgc] §3.10 the same substeps appear as five moves, each of which “does not affect the logical
+‘∧/∨’ structure” or only adds possibilities:</p>
+<ul>
+<li><b>(Stp4) Hull.</b> Pass from the possible regions to the holomorphic hull in column 1: a “simple,
+straightforward” enlargement of the set of possibilities.</li>
+<li><b>(Stp5) Hull-approximants.</b> Replace each region by one with the same global log-volume that
+corresponds to an arithmetic vector bundle.</li>
+<li><b>(Stp6) Determinant.</b> Pass to a suitable rational tensor power of the determinant line bundle.</li>
+<li><b>(Stp7) Log-shift adjustment.</b> The line bundles of (Stp6) live in the ring structure at \((1,1)\), one
+step above the Θ-link's codomain. Running (Stp1)–(Stp6) at every \((1,m)\) gives arrows from \((1,m)\) to
+\((1,m+1)\): “a sort of endomorphism of the 1-column”, a <b>closed loop</b>. Because log-volumes are compatible
+with log-links, the shift costs nothing.</li>
+<li><b>(Stp8) Log-volumes.</b> The closed loop means the logical AND relation kept through (Stp1)–(Stp7)
+becomes an AND relation between the q-pilot's log-volume and the set of possible output log-volumes
+“within the same container, i.e., some copy of the real numbers”. The inequality follows formally.</li>
+</ul>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run ChainAndSteps</span>
+<pre>{{run:ChainAndSteps}}</pre>
+<p class="small">The last column is the log-volume after each step for \(1+8=9\). (Stp1)–(Stp3) carry the
+procession-normalized value {{ub}}; the hull (Stp4) raises it to {{hull}} before the theta shift is subtracted;
+(Stp8) lands at the q-pilot's \({{qpilot}}\) with the “monodromy” of the closed loop.</p>
+</div>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run EstimateLogVolume</span>
+<pre>{{run:EstimateLogVolume}}</pre>
+</div>
+
+<h3><span class="no">8.4</span>The 2026 reorganization: 3.11 ⇒ 3.11.5 ⇒ 3.12</h3>
+
+<p>For the Lean formalization Mochizuki regroups the argument [Form26, §4]. A diagram of <em>species</em>
+(types of objects) and <em>mutations</em> (functorial algorithms) has four commuting triangles. The first two
+express the multiradial algorithm, with input a BPS (basic prime-strip, i.e. F×μ-prime-strip), as a
+<b>descent</b> (dsc): it only needs a BPS glued to the vertically coric étale Hodge theater (etHT). The third
+composes it with “hull+det” to get (HDD). The fourth restricts (HDD) along the SHE arrow to the case where
+the input is the q-pilot. The never-stated “Theorem 3.11.5 (= 3.11 + Rmk. 3.9.5)” is the statement after the
+third triangle, and “3.11.5 ⇒ 3.12” is the simultaneous comparison of Θ-pilot and q-pilot in one ring
+structure. Skeletal Lean code exists for this last step; work on the second and third triangles (the APT
+property) is under way at RIMS.</p>
+
+<figure>
+<svg width="640" height="150" viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <defs><marker id="a84" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker></defs>
+  <g font-size="9.5" text-anchor="middle">
+  <rect x="10" y="20" width="90" height="34" rx="6" fill="#eef4fc" stroke="#3a74c4"/><text x="55" y="41" fill="#2a2433" font-weight="600">BPS</text>
+  <rect x="190" y="20" width="110" height="34" rx="6" fill="#fff2f6" stroke="#e85d8a"/><text x="245" y="35" fill="#2a2433" font-weight="600">mult. rep.</text><text x="245" y="48" fill="#6b6178" font-size="8.5">(Thm 3.11)</text>
+  <rect x="400" y="20" width="130" height="34" rx="6" fill="#fff2f6" stroke="#e85d8a" stroke-width="1.6"/><text x="465" y="35" fill="#2a2433" font-weight="600">mult. rep. + hull + det</text><text x="465" y="48" fill="#6b6178" font-size="8.5">(“Thm 3.11.5”)</text>
+  <rect x="100" y="100" width="110" height="34" rx="6" fill="#fff8e6" stroke="#c98a10"/><text x="155" y="115" fill="#2a2433" font-weight="600">BPS + 0-column</text><text x="155" y="128" fill="#6b6178" font-size="8.5">(Θ-pilot side)</text>
+  <rect x="290" y="100" width="110" height="34" rx="6" fill="#f4f0fc" stroke="#7a5cc2"/><text x="345" y="121" fill="#2a2433" font-weight="600">BPS + etHT</text>
+  <rect x="500" y="100" width="120" height="34" rx="6" fill="#eef4fc" stroke="#3a74c4"/><text x="560" y="115" fill="#2a2433" font-weight="600">q-pilot + etHT</text><text x="560" y="128" fill="#6b6178" font-size="8.5">(input side)</text>
+  </g>
+  <g stroke="#6b6178" stroke-width="1.3">
+  <line x1="100" y1="37" x2="186" y2="37" marker-end="url(#a84)"/><line x1="300" y1="37" x2="396" y2="37" marker-end="url(#a84)"/>
+  <line x1="70" y1="54" x2="120" y2="96" marker-end="url(#a84)"/><line x1="185" y1="96" x2="225" y2="58" marker-end="url(#a84)"/>
+  <line x1="210" y1="117" x2="286" y2="117" marker-end="url(#a84)"/><line x1="320" y1="96" x2="270" y2="58" marker-end="url(#a84)" stroke="#7a5cc2"/>
+  <line x1="380" y1="96" x2="440" y2="58" marker-end="url(#a84)" stroke="#e85d8a"/><line x1="496" y1="117" x2="404" y2="117" marker-end="url(#a84)" stroke="#3a74c4"/>
+  <line x1="545" y1="96" x2="490" y2="58" marker-end="url(#a84)" stroke="#3a74c4" stroke-dasharray="4 3"/>
+  </g>
+  <g font-size="8.5" fill="#6b6178"><text x="143" y="31" text-anchor="middle">mlt. algo.</text><text x="348" y="31" text-anchor="middle">hull+det</text>
+  <text x="248" y="112" text-anchor="middle">forget</text><text x="290" y="78" fill="#7a5cc2">(dsc)</text><text x="420" y="78" fill="#e85d8a">(HDD)</text>
+  <text x="450" y="112" text-anchor="middle" fill="#3a74c4">(SHE)</text><text x="566" y="78" fill="#3a74c4">Cor 3.12</text></g>
+</svg>
+<figcaption><b>Figure 8.3.</b> A simplified redrawing of the species/mutation diagram of [Form26] §4. (dsc)
+is the descent arrow; (HDD) := (hull+det) ∘ (dsc); restricting (HDD) along (SHE) to the q-pilot input and
+comparing with the q-pilot itself is “3.11.5 ⇒ 3.12”. The toolkit's Lean port has a toy version in
+<code>lean/IUT/LeanForm.lean</code>.</figcaption>
+</figure>
+
+<h3><span class="no">8.5</span>Three “why” questions the proof answers</h3>
+
+<p><b>Why only one Θ-link?</b> Because the lattice does not commute. Relating units through one Θ-link and
+value groups through another would need a commuting square (Step (iii)).</p>
+
+<p><b>Why global Frobenioids?</b> The Θ-link only preserves isomorphism classes of objects. Locally, a region
+and its \(p^N\)-multiple are related by endomorphisms that are not automorphisms, so a purely local argument
+could not even tell them apart. Global realified Frobenioids have no such endomorphisms (Step (xii)).</p>
+
+<p><b>Why not use \(\Theta^N\) and get a sharper bound?</b> Because the argument rests on the first power of the
+étale theta function: its mono-theta cyclotomic rigidity has no evident analogue for \(N\)-th tensor powers,
+whose log-volume “must always be computed as the result of multiplying the log-volume of the original Θ-pilot
+object by \(N\)”. Mochizuki adds that the sharper inequalities this would give “are known to be false” (Step (xi-h),
+[IUTchIV] Rem. 2.3.2 (ii)). On the other hand, replacing the q-pilot by \(\underline{q}^\lambda\) on the codomain
+side is harmless and gives \(C_\Theta \ge -\lambda\) (Rem. 3.12.1 (ii)).</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 風呂敷</span>
+<p>The holomorphic hull is a furoshiki. You have a pile of oddly shaped objects (the possible regions); to
+carry them on the train you wrap them in one square cloth, tied at the corners. The cloth is bigger than the
+objects and its size is easy to state (“a 70 cm furoshiki”), which is the point. Corollary 3.12 is the
+statement that the q-pilot fits in the cloth. A sceptic might ask whether the cloth is so big that anything
+would fit; §9 shows how big it is for real curves, and §12 is where people argue about it.</p>
+</div>

@@ -1,0 +1,122 @@
+<h2 class="chapter"><span class="no">4</span>The stage: the log-theta-lattice<span class="jp">舞台装置</span></h2>
+
+<p>The algorithm runs on a two-dimensional grid of complete copies of arithmetic, the
+<b>log-theta-lattice</b> [IUTchIII, Def. 1.4, Def. 3.8 (iii)]. Each node \((n, m)\) is a
+Θ±ell NF-Hodge theater: one whole copy of “conventional scheme theory” around the elliptic curve, with its
+number fields, local fields, Galois groups, Frobenioids, and the label symmetries
+\(\mathbb{F}_l^{\rtimes\pm}\) and \(\mathbb{F}_l^{*}\) (see the Hodge theaters infographic in <code>docs/</code>).
+Different nodes live in different universes, so nothing in one node is literally an element of another.</p>
+
+<figure>{{svg:lattice}}
+<figcaption><b>Figure 4.1.</b> The part of the LGP-Gaussian log-theta-lattice the algorithm uses: two columns of
+vertical log-links and one horizontal Θ×μ_LGP-link from \((0,0)\) to \((1,0)\). Mochizuki calls this
+shape the “infinite H” [EssLgc, §3.3 (InfH)]. A dashed capsule \((n,\circ)\) stands for what all the
+Hodge theaters of column \(n\) have in common: the vertically coric data.</figcaption>
+</figure>
+
+<h3><span class="no">4.1</span>Two kinds of arrows</h3>
+
+<table class="wide">
+<tr><th>arrow</th><th>what it does</th><th>what it shares (coric)</th><th>what it scrambles</th></tr>
+<tr><td>log-link ↑</td><td>At each place \(v\), the \(p\)-adic (or complex) logarithm sends the units of
+the node below to an additive module that becomes the multiplicative world of the node above.</td>
+<td>the arithmetic fundamental groups \(\Pi_v\) and \(G_v\) (vertical coricity, [IUTchIII] Thm 1.5 (i))</td>
+<td>which elements are units and which are values: it “juggles” \(\boxplus\) and \(\boxtimes\)</td></tr>
+<tr><td>Θ-link →</td><td>Glues the Θ-pilot of \((n,m)\) to the q-pilot of \((n+1,m)\) as abstract monoids.</td>
+<td>\(G_v\) and the units modulo torsion \(\mathcal{O}^{\times\mu}\) (horizontal coricity, Thm 1.5 (ii))</td>
+<td>the ring structure and \(\Pi_v\): the two sides are alien</td></tr>
+</table>
+
+<p>Two facts about the arrows drive the whole algorithm.</p>
+
+<p><b>The lattice does not commute.</b> Going up a log-link and then across a Θ-link is not the same as going
+across and then up. The Lean port in <code>lean/IUT/Link.lean</code> proves this for the toolkit's data model
+as the theorem <code>square_not_commutative</code>. Consequence: one must use a <em>single</em> Θ-link and do
+everything else vertically. Using the unit part of one Θ-link and the value part of another would require a
+commuting square that does not exist [IUTchIII, proof of Cor. 3.12, Step (iii)].</p>
+
+<p><b>Some data survive both kinds of arrow.</b> The Galois groups \(G_v\), and the units modulo torsion
+\(\mathcal{O}^{\times\mu}\) rebuilt from them, are shared vertically <em>and</em> horizontally: they are
+<b>bi-coric</b> [IUTchIII, Thm 1.5 (iii)]. So are the <b>log-shells</b> built from them (Thm 1.5 (iv)).
+These are the only objects that can serve as a common container for both columns, and Theorem 3.11 uses
+them exactly that way.</p>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run CheckBicoric</span>
+<pre>{{run:CheckBicoric}}</pre>
+</div>
+
+<h3><span class="no">4.2</span>Log-shells: the container that holds the log of everything</h3>
+
+<p>For a nonarchimedean place \(v\) over an odd prime \(p\), the log-shell is</p>
+\[ \mathcal{I}_v \;=\; \tfrac{1}{2p}\,\log_p\!\bigl(\mathcal{O}_{K_v}^{\times}\bigr) \;\subseteq\; K_v, \]
+<p>a compact additive lattice that contains the logarithms of all units, with a little room to spare
+([IUTchIII] Def. 1.1, Prop. 1.2). Its purpose is to be an <em>upper bound</em> that is stable under the
+log-link: whatever level of the column you are on, the logarithm of the units at the next level lands
+inside the log-shell at this one. That stability is what makes log-shells “mono-analytic containers”
+[IUTchIII, Rem. 1.5.2], and it is also the reason one of the three blurs, (Ind3), is only an inclusion
+“\(\subseteq\)” rather than an equality (§7.3). At archimedean places the log-shell is a closed disc and the
+inclusion becomes a surjection “\(\twoheadrightarrow\)”.</p>
+
+<div class="box warn"><span class="tag">Toolkit caveat</span>
+<p>The initial Θ-data JSON files carry no ramification data for the field \(K\), so the toolkit takes
+\(e = 1\) everywhere and every log-shell is \(p^0\cdot\mathcal{O}\) with log-volume 0. The shape of the
+algorithm is unaffected; the sizes of the containers come in only through the estimate of
+\(\log d^K\) (§9.4).</p>
+</div>
+
+<div class="box otaku"><span class="tag">Otaku corner · 大道芸</span>
+<p>Mochizuki's word for what the log-link does to addition and multiplication is <em>juggling</em>
+[IUTchIII, Rem. 1.2.2 (vi)]. Picture a daidōgei street performer in Asakusa: two clubs, \(\boxplus\) and
+\(\boxtimes\), constantly swapping hands. Each throw (log-link) turns the multiplicative club into the
+additive one. The audience (the coric data) only ever sees the performer's hands, which do not change; the
+clubs are never in the same hand twice. The log-shell is the performer's reach: whatever is in the air, it
+is within that circle. The non-commutativity of the lattice is the fact that you cannot juggle and take a
+bow at the same time.</p>
+</div>
+
+<h3><span class="no">4.3</span>Frobenius-like and étale-like</h3>
+
+<p>Every object in IUT comes in two flavours [IUTchIII, Rem. 1.5.4; Alien, §2.7]:</p>
+<ul>
+<li><b>Frobenius-like</b> objects are monoids and Frobenioids that live inside one specific Hodge theater:
+the actual units, the actual theta values, the actual number field. They are rigid and precise, and they do
+<em>not</em> travel: they belong to one node of the lattice.</li>
+<li><b>Étale-like</b> objects are rebuilt from Galois groups by anabelian algorithms. Because the Galois
+groups are coric, étale-like objects travel freely along any arrow that shares them. The price is that
+they are only defined up to the automorphisms of the Galois group.</li>
+</ul>
+<p>The bridge between the two is <b>Kummer theory</b>: a Kummer isomorphism identifies a Frobenius-like monoid
+with its étale-like copy inside Galois cohomology. Mochizuki calls the act of crossing this bridge
+<b>Kummer-detachment</b> [Alien, §2.7 (vi)]. Crossing it costs an indeterminacy, and that cost is the subject
+of §7.</p>
+
+<figure>
+<svg width="640" height="140" viewBox="0 0 640 140" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <defs><marker id="a43" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker></defs>
+  <rect x="20" y="20" width="200" height="96" rx="10" fill="#fff8e6" stroke="#c98a10" stroke-width="1.4"/>
+  <text x="120" y="42" font-size="11" text-anchor="middle" font-weight="700" fill="#c98a10">Frobenius-like</text>
+  <text x="120" y="62" font-size="9.5" text-anchor="middle" fill="#2a2433">O▷_{F̄_v} ⊇ O×, q̲^{j²}, F_mod^×</text>
+  <text x="120" y="80" font-size="9" text-anchor="middle" fill="#6b6178">lives in ONE Hodge theater (n, m)</text>
+  <text x="120" y="96" font-size="9" text-anchor="middle" fill="#6b6178">precise, does not travel</text>
+  <rect x="420" y="20" width="200" height="96" rx="10" fill="#eef4fc" stroke="#3a74c4" stroke-width="1.4" stroke-dasharray="5 3"/>
+  <text x="520" y="42" font-size="11" text-anchor="middle" font-weight="700" fill="#3a74c4">étale-like</text>
+  <text x="520" y="62" font-size="9.5" text-anchor="middle" fill="#2a2433">rebuilt from G_v, Π_v by algorithms</text>
+  <text x="520" y="80" font-size="9" text-anchor="middle" fill="#6b6178">lives over the coric data (n, ◦)</text>
+  <text x="520" y="96" font-size="9" text-anchor="middle" fill="#6b6178">travels, but only up to Aut(G_v)</text>
+  <line x1="226" y1="58" x2="414" y2="58" stroke="#6b6178" stroke-width="1.4" marker-end="url(#a43)" marker-start="url(#a43)"/>
+  <text x="320" y="50" font-size="10" text-anchor="middle" fill="#2a2433" font-weight="600">Kummer isomorphism</text>
+  <text x="320" y="76" font-size="9" text-anchor="middle" fill="#6b6178">“Kummer-detachment”: the object and its</text>
+  <text x="320" y="88" font-size="9" text-anchor="middle" fill="#6b6178">portable photograph in Galois cohomology</text>
+</svg>
+<figcaption><b>Figure 4.2.</b> The two flavours of every object. The multiradial algorithm is a long
+sequence of crossings between them: detach the Θ-pilot from its Hodge theater into étale-like form, carry it
+along coric data, and land it in a container on the other side.</figcaption>
+</figure>
+
+<div class="box analogy"><span class="tag">Analogy · the cake and the photo of the cake</span>
+<p>A Frobenius-like object is a cake in your kitchen. An étale-like object is a photo of the cake, which you
+can send anywhere. The Kummer isomorphism says “this photo is of that cake”. A photo can be received in
+another universe, but the receiver can rotate it, crop it, or print it at a different size; they cannot
+eat it. The multiradial algorithm is the art of sending enough photos, from enough angles, that the receiver
+can say how much cake there was, in their own units, to within a stated error.</p>
+</div>

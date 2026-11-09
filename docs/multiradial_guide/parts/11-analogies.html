@@ -1,0 +1,84 @@
+<h2 class="chapter"><span class="no">11</span>Analogy gallery<span class="jp">たとえ話ギャラリー</span></h2>
+
+<p>Mochizuki explains the multiradial algorithm through at least six analogies of his own. None of them is a proof
+and each captures a different facet. Here they are side by side, followed by our less dignified additions.</p>
+
+<h3><span class="no">11.1</span>The Gaussian integral [Alien §1, §3.8]</h3>
+
+<p>The classical computation of \(I = \int_{-\infty}^{\infty} e^{-x^2}dx\) has no elementary antiderivative to work
+with. The trick is to take <em>two identical but mutually alien copies</em> of the integral, one in \(x\) and one in
+\(y\), multiply them, and pass to polar coordinates, where the radial and angular parts decouple:</p>
+\[ I^2 = \iint_{\mathbb{R}^2} e^{-(x^2+y^2)}\,dx\,dy = \int_0^{2\pi}\!\!\int_0^\infty e^{-r^2}\,r\,dr\,d\theta
+   = \pi, \qquad I = \sqrt{\pi}. \]
+
+<figure>
+<svg width="640" height="190" viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <defs><marker id="a111" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker>
+  <radialGradient id="gg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e85d8a" stop-opacity=".55"/><stop offset="1" stop-color="#e85d8a" stop-opacity="0"/></radialGradient></defs>
+  <rect x="40" y="20" width="150" height="150" fill="url(#gg)" stroke="#e4dcef"/>
+  <g stroke="#e4dcef" stroke-width=".8"><line x1="40" y1="45" x2="190" y2="45"/><line x1="40" y1="70" x2="190" y2="70"/><line x1="40" y1="95" x2="190" y2="95"/><line x1="40" y1="120" x2="190" y2="120"/><line x1="40" y1="145" x2="190" y2="145"/>
+  <line x1="65" y1="20" x2="65" y2="170"/><line x1="90" y1="20" x2="90" y2="170"/><line x1="115" y1="20" x2="115" y2="170"/><line x1="140" y1="20" x2="140" y2="170"/><line x1="165" y1="20" x2="165" y2="170"/></g>
+  <text x="115" y="186" font-size="9.5" text-anchor="middle" fill="#6b6178">cartesian: x-copy ⊗ y-copy</text>
+  <line x1="205" y1="95" x2="265" y2="95" stroke="#6b6178" stroke-width="1.4" marker-end="url(#a111)"/>
+  <text x="235" y="86" font-size="9" text-anchor="middle" fill="#2a2433">rotate</text>
+  <rect x="280" y="20" width="150" height="150" fill="url(#gg)" stroke="#e4dcef"/>
+  <g fill="none" stroke="#3a74c4" stroke-width=".9"><circle cx="355" cy="95" r="18"/><circle cx="355" cy="95" r="36"/><circle cx="355" cy="95" r="54"/><circle cx="355" cy="95" r="72"/></g>
+  <g stroke="#7a5cc2" stroke-width=".8"><line x1="355" y1="95" x2="427" y2="95"/><line x1="355" y1="95" x2="406" y2="44"/><line x1="355" y1="95" x2="355" y2="23"/><line x1="355" y1="95" x2="304" y2="44"/><line x1="355" y1="95" x2="283" y2="95"/><line x1="355" y1="95" x2="304" y2="146"/><line x1="355" y1="95" x2="355" y2="167"/><line x1="355" y1="95" x2="406" y2="146"/></g>
+  <text x="355" y="186" font-size="9.5" text-anchor="middle" fill="#6b6178">polar: radial ⊥ angular</text>
+  <g font-size="9.3" fill="#2a2433"><text x="450" y="40">two alien copies x, y</text><text x="450" y="54" fill="#6b6178">↔ the two sides of the Θ-link</text>
+  <text x="450" y="78">rotation to polar coords</text><text x="450" y="92" fill="#6b6178">↔ multiradiality, étale-picture</text>
+  <text x="450" y="116">radial ⊥ angular</text><text x="450" y="130" fill="#6b6178">↔ value group ⊥ units (Kummer)</text>
+  <text x="450" y="154">quadratic exponent −r²</text><text x="450" y="168" fill="#6b6178">↔ quadratic theta commutators</text></g>
+</svg>
+<figcaption><b>Figure 11.1.</b> The Gaussian integral as a model of the multiradial algorithm ([Alien] Fig. 3.20.1). The
+cartesian grid is one copy of arithmetic per axis; the rotation that mixes them is only possible because the two
+copies are kept distinct (“alien”) until then.</figcaption>
+</figure>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run ComputeGaussian</span>
+<pre>{{run:ComputeGaussian}}</pre>
+</div>
+
+<h3><span class="no">11.2</span>Mochizuki's other analogies, in one table</h3>
+
+<table class="wide">
+<tr><th>analogy</th><th>what corresponds to what</th><th>source</th></tr>
+<tr><td>Parallel transport / connections</td><td>coric data = base, radial data = fibres, multiradiality = a transport isomorphism lifting any path; (Ind1)–(Ind3) = monodromy; SHE = “parallel transport mechanism for the Θ-pilot”.</td><td>[IUTchII] Rem 1.7.1; [IUTchIII] Rem 3.11.1 (iv)</td></tr>
+<tr><td>Crystals</td><td>abstract F×μ-prime-strip vs its realizations in Hodge theaters ↔ a reduced char-\(p\) scheme vs its thickenings over \(\mathbb{Z}_p\); working up to indeterminacies ↔ working modulo \(p\).</td><td>[IUTchIII] Rem 3.11.1 (iii); [EssLgc] §3.10</td></tr>
+<tr><td>Kodaira–Spencer map</td><td>rank-two bundle \(\mathcal{E}\) as container for \(\omega_E\); transport across \(S\times S\); the discrepancy bounds \(\deg\omega_E\).</td><td>[Alien] §3.1 (v)</td></tr>
+<tr><td>Faltings' isogeny invariance</td><td>the unusual case where a “global multiplicative subspace” exists and the comparison is exact: \(\varepsilon = 0\).</td><td>[Alien] §2.3; [EssLgc] Ex 3.2.1; [Form26] §3</td></tr>
+<tr><td>Frobenius mod \(p\)</td><td>a common ring structure compatible with the \(p\)-th power map: the thing IUT has to fake for \(N = j^2\) over \(\mathbb{Q}\).</td><td>[Form26] §3; [Alien] §2.4–§2.6</td></tr>
+<tr><td>Fine vs coarse moduli</td><td>(Ind1)–(Ind3) describe a “formal quotient”; log-volumes are its “coarse space”, invariant under (Ind1), (Ind2).</td><td>[IUTchIII] Cor 3.12 proof, Step (x)</td></tr>
+<tr><td>CPU and network cable</td><td>theta functions are hidden internal structures of the algorithm; the F×μ-prime-strip is the simple cable that connects two complicated computers.</td><td>[IUTchIII] Rem 3.11.1 (iv)</td></tr>
+<tr><td>Analytic continuation</td><td>the multiradial representation is “analytic continuation” along the infinite H; the Θ-link gap is “miraculously rotated” onto the harmless log-link gap.</td><td>[Form26] §3; [EssLgc] §3.11</td></tr>
+<tr><td>Upper half-plane</td><td>GL₂(ℝ)-orbits of complex structures ↔ multiradial environments; classical Teichmüller dilation ↔ the Θ-link's dilation.</td><td>[Alien] Ex 3.2.1 (iii); [BogIUT]</td></tr>
+</table>
+
+<h3><span class="no">11.3</span>Our additions: the multiradial algorithm as Japanese pop culture</h3>
+
+<table class="wide">
+<tr><th>IUT</th><th>pop culture</th><th>why it fits</th></tr>
+<tr><td>Θ-link</td><td><em>Your Name</em> body swap</td><td>shared body, unshared world; communication only by notes valid on both sides (§1)</td></tr>
+<tr><td>Hodge theater</td><td>a parallel world line</td><td>a complete world, alien to the others; no direct contact</td></tr>
+<tr><td>log-link</td><td>a daidōgei juggler</td><td>\(\boxplus\) and \(\boxtimes\) swap hands with every throw (§4)</td></tr>
+<tr><td>Kummer theory</td><td>the cake and its photo</td><td>the photo travels, the cake does not (§4.3)</td></tr>
+<tr><td>F×μ-prime-strip</td><td>an isekai protagonist's pockets</td><td>everything else stayed behind (§2)</td></tr>
+<tr><td>mono-theta rigidity</td><td>a sync ratio that never drops</td><td>its cyclotome cannot be rescaled from outside (§6)</td></tr>
+<tr><td>procession</td><td>a matsuri parade</td><td>each float adds one more label; reorderings are limited</td></tr>
+<tr><td>(Ind1)</td><td>a gacha banner</td><td>{{ind1}} outcomes for \(l = 7\), same log-volume every pull</td></tr>
+<tr><td>(Ind2)</td><td>swivelling Shinkansen seats</td><td>everyone rotates, nobody's weight changes (§7)</td></tr>
+<tr><td>(Ind3)</td><td>the luggage rack</td><td>at least as big as the luggage, so the scale says “at most”</td></tr>
+<tr><td>holomorphic hull</td><td>a furoshiki</td><td>one square cloth around odd shapes; its size is easy to state (§8)</td></tr>
+<tr><td>log-volume</td><td>the sumo weigh-in</td><td>a public number everyone trusts (§9)</td></tr>
+<tr><td>multiradial vs uniradial</td><td>karaoke in any key</td><td>the loudness survives every key change (§3)</td></tr>
+<tr><td>AND vs OR</td><td>the two-heroine romcom</td><td>with both at once, in different universes (§10)</td></tr>
+<tr><td>the 2018–2026 debate</td><td>a long-running series' finale discourse</td><td>everyone agrees on the episodes, not on whether the ending was earned (§12)</td></tr>
+</table>
+
+<div class="box otaku"><span class="tag">Otaku corner · ネタバレ注意</span>
+<p>Spoiler warning for anyone reading [IUTchIII] for the first time: the theta function, the hero of 180 pages,
+is deliberately forgotten in the last three (“hidden internal structures”). This is the IUT equivalent of a
+protagonist who saves the world and is then written out of the final episode so the side characters can sign the
+peace treaty. Mochizuki's justification is the same one a scriptwriter would give: the treaty only needs to know
+what was saved, not who saved it.</p>
+</div>

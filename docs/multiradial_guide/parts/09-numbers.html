@@ -1,0 +1,90 @@
+<h2 class="chapter newpage"><span class="no">9</span>The numbers: four worked examples<span class="jp">実際の数値</span></h2>
+
+<p>The toolkit's <code>iut pipeline</code> runs the whole theory on exact initial Θ-data for four elliptic curves
+(three Frey curves of abc triples and the curve 11a1; see <code>docs/PIPELINE.md</code>). Stage 5 of the
+pipeline is the multiradial representation and Corollary 3.12. Here is what it produces.</p>
+
+{{table:summary}}
+
+<p class="small">Columns: the bad places of \(F_{\mathrm{mod}}\) used for \(\log q\) (odd primes only, [IUTchI] Def 3.1);
+the q-pilot \(-|\log q| = -\log q/2l\); the Θ-pilot \(-\frac{l(l+1)}{12}|\log q|\); the size of (Ind1);
+the hull term \(\frac{1}{l^*}\sum_{j=1}^{l^*}(j+1)\log d^K\); the upper end of the blurred Θ-pilot after the theta
+shift; whether \(-|\log q| \le\) that upper end.</p>
+
+<h3><span class="no">9.1</span>Row by row, for \(1 + 8 = 9\)</h3>
+
+<p>The algorithm's output, measured, is a sum over the procession. Packet \(j\) contributes the hull of
+\(j+1\) log-shells, which costs \((j+1)\log d^K\) (the different of \(K\) measures how big a log-shell is),
+and the theta value \(\underline{q}^{\,j^2}\) acting on it, which contributes \(-\frac{j^2}{2l}\log q\)
+[Alien, §3.7 (iv); IUTchIV, Thm 1.10, Step (v)].</p>
+
+{{table:procession}}
+
+<p>Averaging the rows \(j = 1,\dots,l^*\) gives the upper end \({{ub}}\): that is the hull term \({{hull}}\) plus
+the Θ-pilot's naive log-volume \({{thetapilot}}\). The q-pilot sits at \({{qpilot}}\), far below, so the inequality
+holds by a wide margin.</p>
+
+<figure>{{svg:bars}}
+<figcaption><b>Figure 9.1.</b> Per-label contributions for all four examples, on a common scale: the hull cost
+\((j+1)\log d^K\) (pink, up), the theta shift \(-\frac{j^2}{2l}\log q\) (blue, down), and their sum (black). The
+hull grows linearly in \(j\), the theta shift quadratically. For \(2 + 3^{10}\cdot109 = 23^5\), whose \(\log q\) is
+large relative to \(\log d^K\), the parabola already turns over at \(j = 3\).</figcaption>
+</figure>
+
+<h3><span class="no">9.2</span>From the corollary to a height bound</h3>
+
+<p>Write the measured upper end in closed form. With \(\sum_{j=1}^{l^*}(j+1) = \frac{l^*(l^*+3)}{2}\) and
+\(\sum_{j=1}^{l^*} j^2 = \frac{l^*\,l\,(l+1)}{12}\) (both proved in <code>lean/IUT/Multiradial.lean</code>),</p>
+\[ -|\log\Theta| \;\lesssim\; \frac{1}{l^*}\sum_{j=1}^{l^*}\Bigl[(j+1)\log d^K - \frac{j^2}{2l}\log q\Bigr]
+   \;=\; \frac{l+5}{4}\,\log d^K \;-\; \frac{l+1}{24}\,\log q . \]
+<p>Corollary 3.12 says this is at least \(-|\log q| = -\frac{\log q}{2l}\). Rearranging,</p>
+\[ \log q\,\Bigl(\frac{l+1}{24} - \frac{1}{2l}\Bigr) \;\le\; \frac{l+5}{4}\,\log d^K
+   \qquad\Longleftrightarrow\qquad
+   \log q \;\le\; \frac{6\,l\,(l+5)}{l^2+l-12}\;\log d^K . \]
+<p>For large \(l\) the factor tends to 6, so the inequality reads \(\tfrac{1}{6}\log q \lesssim (1 + O(1/l))\log d^K\).
+The left side is the height of the curve (the toolkit's \(\mathrm{ht}_E = \tfrac16\log q\)); the right side is
+controlled by the conductor and the different. That is a Szpiro-type inequality, and through it abc. Before
+normalizing by \(l^*\), the same computation is Mochizuki's “leading term”
+\(\frac{l^2}{48}\bigl(6\log d^K - \log q\bigr)\) [Alien, §3.7 (iv)]: “a ‘large positive constant’ \(\frac{l^2}{48}\)
+times precisely the quantity […] that one wishes to bound from below”. He notes that this computation “was in
+fact known to the author around the year 2000”, and that a primary motivation for IUT was “establishing a
+suitable framework, or geometry, in which this computation could be performed.”</p>
+
+{{table:szpiro}}
+
+<figure>{{svg:cliff}}
+<figcaption><b>Figure 9.2.</b> How close each example comes to the edge \(\log q = 6\log d^K\), where the leading
+term of the multiradial representation changes sign. The record abc triple \(2 + 3^{10}\cdot109 = 23^5\) gets
+furthest, as it should: a high-quality abc triple is exactly a curve with large \(\log q\) for its conductor.</figcaption>
+</figure>
+
+<h3><span class="no">9.3</span>The constant \(C_\Theta\) and Theorem 1.10</h3>
+
+<p>[IUTchIV] Theorem 1.10 replaces the leading-term heuristic by a fully explicit estimate, including the
+archimedean places, the places above 2, and all the error terms, and expresses the result as an upper bound
+\(C_\Theta\) with \(-|\log\Theta| \le C_\Theta\,|\log q|\). The toolkit evaluates it: for \(1 + 8 = 9\) it gets
+\(C_\Theta = {{ctheta}}\), comfortably \(\ge -1\), and Theorem 1.10's height inequality reads
+\(\tfrac16\log q = {{thmlhs}} \le {{thmrhs}}\).</p>
+
+<div class="box warn"><span class="tag">How to read these numbers</span>
+<ul>
+<li><b>The constants dominate.</b> Theorem 1.10's right-hand side contains \(\eta_{\mathrm{prm}} = 5\cdot10^{20}\)
+([ExpEst] §1). For curves this small it swamps everything, so the bound holds trivially and says nothing sharp.
+The theory is about curves of enormous height, where \(l\) is chosen near \(\sqrt{\text{height}}\) [IUTchIV, Cor. 2.2].</li>
+<li><b>\(\log d^K\) is an estimate.</b> The initial Θ-data files record no ramification data for
+\(K = F(E[l])\), so the toolkit estimates the different and takes \(e = 1\) in the log-shells.</li>
+<li><b>Only \(\log q\) is exact.</b> It is computed from the Tate parameters at the odd bad places and
+cross-checked against an independent computation (stage 7 of the pipeline).</li>
+<li><b>The toolkit does not prove anything.</b> It implements the data types and the bookkeeping of the
+statements. Whether the statements are proved is the subject of §12.</li>
+</ul>
+</div>
+
+<div class="box otaku"><span class="tag">Otaku corner · 体重測定</span>
+<p>Sumo wrestlers are weighed before each tournament, and the number is public. Corollary 3.12 is a weigh-in where
+one wrestler (the Θ-pilot) steps on the scale wearing a heavy keshō-mawashi (the hull) and the other (the q-pilot)
+in a plain mawashi. The rule says the dressed-up wrestler must weigh at least as much as the plain one. For our
+four small examples the keshō-mawashi weighs several times more than either wrestler, which is why the rule is
+satisfied easily. In the big tournaments, curves with height in the millions, the apron is relatively light
+and the rule starts to bite.</p>
+</div>

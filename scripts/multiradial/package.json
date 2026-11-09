@@ -1,0 +1,13 @@
+{
+  "name": "multiradial-guide-build",
+  "private": true,
+  "description": "Builds multiradial_guide.pdf from docs/multiradial_guide/parts/*.html (KaTeX for the math, Chromium via Playwright for the PDF)",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@fontsource/noto-serif-jp": "5.2.5",
+    "@fontsource/source-serif-4": "5.3.1",
+    "katex": "0.16.11"
+  }
+}

@@ -1,0 +1,113 @@
+<h2 class="chapter"><span class="no">3</span>Multiradiality: the one definition you need<span class="jp">多輻性とは</span></h2>
+
+<p>The word “multiradial” comes from a picture of a wheel. The hub is something shared (the <em>coric</em>
+data, from “core”), and the spokes are the different richer structures that sit over it (the
+<em>radial</em> data). The question is whether the hub can be turned without breaking the spokes.</p>
+
+<div class="box key"><span class="tag">Definition · [IUTchII] Example 1.7; [Alien] §3.1 (ii)–(iii)</span>
+<p>A <b>radial environment</b> is a triple: a type of <b>radial data</b> \(\mathcal{R}\), a type of
+<b>coric data</b> \(\mathcal{C}\), and a functorial <b>radial algorithm</b> \(\mathcal{R} \to \mathcal{C}\) that
+forgets the finer structure. It is <b>multiradial</b> if the resulting functor is <em>full</em>: every
+isomorphism between the coric data underlying two radial data lifts to an isomorphism of the radial data.
+It is <b>uniradial</b> otherwise.</p>
+</div>
+
+<p>Fullness has a vivid consequence, the <b>switching property</b> [Alien, §3.1 (iii)]: take two radial data
+\(R_1, R_2\) together with an isomorphism \(\alpha\) between their coric data. Swapping the roles of
+\(R_1\) and \(R_2\) (and replacing \(\alpha\) by \(\alpha^{-1}\)) gives an isomorphic configuration.
+Multiradiality is equivalent to every such pair being isomorphic to a “diagonal” pair \((R, R, \mathrm{id})\).
+In words: <em>once you only look through the hub, you cannot tell which spoke is which.</em></p>
+
+<h3><span class="no">3.1</span>The prototype: complex structures on a real plane</h3>
+
+<figure>
+<svg width="640" height="200" viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'DejaVu Sans', sans-serif">
+  <defs><marker id="a31" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b6178"/></marker></defs>
+  <text x="160" y="16" font-size="11" font-weight="700" text-anchor="middle" fill="#2a2433">uniradial</text>
+  <text x="480" y="16" font-size="11" font-weight="700" text-anchor="middle" fill="#2a2433">multiradial (tautologically)</text>
+  <line x1="320" y1="8" x2="320" y2="192" stroke="#e4dcef" stroke-width="1.5"/>
+  <g>
+    <circle cx="70" cy="62" r="30" fill="#fff2f6" stroke="#e85d8a"/><text x="70" y="59" font-size="10" text-anchor="middle" fill="#e85d8a" font-weight="600">C ≅ R²</text><text x="70" y="72" font-size="8" text-anchor="middle" fill="#6b6178">one complex str.</text>
+    <circle cx="250" cy="62" r="30" fill="#fff2f6" stroke="#e85d8a"/><text x="250" y="59" font-size="10" text-anchor="middle" fill="#e85d8a" font-weight="600">C ≅ R²</text><text x="250" y="72" font-size="8" text-anchor="middle" fill="#6b6178">one complex str.</text>
+    <line x1="88" y1="88" x2="146" y2="138" stroke="#6b6178" marker-end="url(#a31)"/><line x1="232" y1="88" x2="174" y2="138" stroke="#6b6178" marker-end="url(#a31)"/>
+    <rect x="128" y="142" width="64" height="32" rx="6" fill="#eef4fc" stroke="#3a74c4"/><text x="160" y="162" font-size="10.5" text-anchor="middle" fill="#3a74c4" font-weight="600">R²</text>
+    <text x="160" y="190" font-size="8.5" text-anchor="middle" fill="#6b6178">GL₂(R) acts on R² but does not lift: most of it is not C-linear</text>
+    <text x="160" y="110" font-size="8.5" text-anchor="middle" fill="#6b6178">forget</text>
+  </g>
+  <g>
+    <circle cx="390" cy="62" r="30" fill="#fff2f6" stroke="#e85d8a" stroke-dasharray="3 2"/><circle cx="390" cy="62" r="22" fill="none" stroke="#e85d8a" stroke-dasharray="2 2"/><text x="390" y="59" font-size="9" text-anchor="middle" fill="#e85d8a" font-weight="600">GL₂(R)-orbit</text><text x="390" y="71" font-size="8" text-anchor="middle" fill="#6b6178">of complex strs.</text>
+    <circle cx="570" cy="62" r="30" fill="#fff2f6" stroke="#e85d8a" stroke-dasharray="3 2"/><circle cx="570" cy="62" r="22" fill="none" stroke="#e85d8a" stroke-dasharray="2 2"/><text x="570" y="59" font-size="9" text-anchor="middle" fill="#e85d8a" font-weight="600">GL₂(R)-orbit</text><text x="570" y="71" font-size="8" text-anchor="middle" fill="#6b6178">of complex strs.</text>
+    <line x1="408" y1="88" x2="466" y2="138" stroke="#6b6178" marker-end="url(#a31)"/><line x1="552" y1="88" x2="494" y2="138" stroke="#6b6178" marker-end="url(#a31)"/>
+    <rect x="448" y="142" width="64" height="32" rx="6" fill="#eef4fc" stroke="#3a74c4"/><text x="480" y="162" font-size="10.5" text-anchor="middle" fill="#3a74c4" font-weight="600">R²</text>
+    <path d="M425,46 C 460,26 500,26 535,46" fill="none" stroke="#3f8f5a" stroke-width="1.4" marker-end="url(#a31)" marker-start="url(#a31)"/>
+    <text x="480" y="24" font-size="8.5" text-anchor="middle" fill="#3f8f5a">every g ∈ GL₂(R) lifts: switchable</text>
+    <text x="480" y="190" font-size="8.5" text-anchor="middle" fill="#6b6178">the orbit is H⁺ ⊔ H⁻: the space of moduli of complex structures</text>
+  </g>
+</svg>
+<figcaption><b>Figure 3.1.</b> [Alien] Example 3.2.1, after its Figures 3.2 and 3.3. A complex line, viewed as a
+real plane, is uniradial: a random real-linear automorphism of the plane does not respect multiplication
+by \(i\). If instead the radial data is the plane together with the whole \(GL_2(\mathbb{R})\)-orbit of
+complex structures, every automorphism lifts. The price is that you no longer know <em>which</em> complex
+structure you have; the space of possibilities is the upper and lower half-planes, i.e. classical
+Teichmüller space. This is where the “Teichmüller” in IUT comes from.</figcaption>
+</figure>
+
+<p>Note what just happened. Making something multiradial is <em>easy</em> if you are willing to throw
+information away: replace your structure by the set of all structures it could be. The tautological
+recipe even has a name, <b>multiradialization</b> [IUTchII, Ex. 1.7 (ii)]. The art of Theorem 3.11 is to
+throw away exactly enough. The blurred description must still determine the one number we care about,
+the log-volume, up to an error we can bound. Everything in §6 and §7 is about that balance.</p>
+
+<div class="box key"><span class="tag">The whole game in one sentence</span>
+<p>Find a description of the Θ-pilot that is (1) <b>multiradial</b>, so that the person on the other side of
+the Θ-link can read it, and (2) still <b>informative about log-volumes</b>, so that reading it tells them
+something. Either one alone is trivial. Both together is Theorem 3.11.</p>
+</div>
+
+<h3><span class="no">3.2</span>Multiradiality as parallel transport</h3>
+
+<p>Mochizuki's favourite way to think about multiradiality is through connections [IUTchII, Rem. 1.7.1;
+Alien, §3.1 (iv)]. Grothendieck's definition of a connection on a bundle \(E\) over \(X/S\) is an
+isomorphism between the fibres of \(E\) at two infinitesimally close points of \(X\) lying over the same
+point of \(S\). Read this as: two “radial” fibres over the same “coric” base point, and a rule for
+transporting one to the other. Fullness of the radial functor says such transports exist along every path
+in the coric data; the leftover choice in the lift is a kind of <b>monodromy</b>. In IUT, that monodromy
+is precisely the indeterminacies (Ind1), (Ind2), (Ind3).</p>
+
+<p>The analogy goes further. [Alien] §3.1 (v) rewrites the classical proof of the geometric Szpiro
+inequality via the Kodaira–Spencer map in these terms: a rank-two bundle \(\mathcal{E}\) with a
+logarithmic connection serves as a <em>container</em> for the line bundle \(\omega_E \subseteq \mathcal{E}\).
+Transport \(\omega_E\) from one factor of \(S\times S\) to the other through the container and measure how far
+it moves; the discrepancy <em>is</em> the Kodaira–Spencer map, and its non-vanishing bounds
+\(\deg \omega_E\). The multiradial representation is the arithmetic version: tensor packets of
+log-shells are the container, the Θ-pilot is the line bundle, and the blur is the discrepancy.</p>
+
+<div class="box analogy"><span class="tag">Analogy · karaoke key change</span>
+<p>The backing track is coric: everyone in the karaoke box hears the same one. The singer's voice is
+radial. A song is “uniradial” if it only works in the original key. It is “multiradial” if every
+transposition of the backing track (the machine's ♯/♭ buttons, which act on the coric data) can be matched by
+the singer. The tautological way to be multiradial is to hum tunelessly, which matches every key and says
+nothing. The Theorem 3.11 way is to sing so that the <em>loudness</em> of the performance (the log-volume)
+is the same in every key, even if you cannot say which key you are in.</p>
+</div>
+
+<h3><span class="no">3.3</span>A catalogue of radial environments in IUT</h3>
+
+<p>The toolkit's <code>ClassifyRadial</code> process lists the radial environments that appear in the papers,
+with a verdict for each. Read it top to bottom as the story of the theory: the ring is uniradial, the
+Galois groups are tautologically multiradial, the units modulo torsion become multiradial if you accept
+(Ind2), the full Kummer structure on the units is uniradial (it needs a cyclotome), the mono-theta
+environment is multiradial (its cyclotome is rigid), and the full multiradial representation of
+Theorem 3.11 is multiradial up to (Ind1)–(Ind3).</p>
+
+<div class="box toolkit"><span class="tag">Toolkit · iut run ClassifyRadial</span>
+<pre>{{run:ClassifyRadial}}</pre>
+</div>
+
+<div class="box otaku"><span class="tag">Otaku corner · 推し</span>
+<p>Fandom has its own radial environment. The coric data is the anime as broadcast; the radial data is each
+fan's interpretation. An interpretation is “multiradial” if it survives every re-edit of the broadcast:
+director's cut, Blu-ray fixes to the animation, the movie recap. Most fan theories are uniradial and die
+with the Blu-ray release. The rare multiradial ones are vague enough to survive and specific enough to
+predict the box-office numbers. Theorem 3.11 is the fan theory that predicts the box office.</p>
+</div>

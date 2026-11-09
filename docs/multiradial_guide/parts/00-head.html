@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Multiradial Algorithm</title>
+<!--
+  Source of multiradial_guide.pdf, in parts that scripts/multiradial/build.js concatenates in
+  file-name order. Math goes between \( … \) and \[ … \] (KaTeX). Placeholders: {{key}} for a
+  number of the running example, {{svg:name}} / {{table:name}} for figures and tables drawn from
+  the pipeline JSON of the four worked examples, {{run:Proc}} for live toolkit output.
+  All jokes are text only: no character art, logos or screenshots from any show or game.
+-->
+<style>
+  @page { size: A4; }
+  :root {
+    --ink: #2a2433; --soft: #6b6178; --rule: #e4dcef;
+    --sakura: #e85d8a; --sakura-bg: #fff2f6;
+    --matcha: #3f8f5a; --matcha-bg: #eff8f1;
+    --sora: #3a74c4; --sora-bg: #eef4fc;
+    --yuzu: #c98a10; --yuzu-bg: #fff8e6;
+    --fuji: #7a5cc2; --fuji-bg: #f4f0fc;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0; color: var(--ink); background: #fff;
+    font: 10.2pt/1.5 'Source Serif 4', 'Noto Serif JP', 'DejaVu Serif', serif;
+    hyphens: auto; text-align: justify;
+  }
+  .jp { font-family: 'Noto Serif JP', serif; }
+  h1, h2, h3 { font-family: Inter, 'DejaVu Sans', 'Noto Serif JP', sans-serif; text-align: left; hyphens: none; }
+  h2 {
+    font-size: 14.5pt; margin: 0 0 7pt; padding-bottom: 3pt;
+    border-bottom: 1.5pt solid var(--rule); break-after: avoid;
+  }
+  h2.chapter { margin-top: 20pt; }
+  h2.chapter.newpage { break-before: page; margin-top: 0; }
+  h2 .no { color: var(--sakura); margin-right: 7pt; }
+  h2 .jp { font-size: 10pt; color: var(--soft); font-weight: 400; margin-left: 7pt; }
+  h3 { font-size: 11pt; margin: 13pt 0 3pt; break-after: avoid; }
+  h3 .no { color: var(--sora); margin-right: 5pt; }
+  p { margin: 0 0 6.5pt; }
+  code, .mono { font-family: 'DejaVu Sans Mono', monospace; font-size: 8.2pt; }
+  a { color: var(--sora); text-decoration: none; }
+  b.k { font-family: Inter, 'DejaVu Sans', sans-serif; font-size: 8.8pt; letter-spacing: .03em; }
+
+  .masthead {
+    background: linear-gradient(125deg, #fff0f5 0%, #f1edff 50%, #eaf6ff 100%);
+    border-radius: 10pt; padding: 20pt 22pt 16pt; margin-bottom: 12pt; border: 1pt solid var(--rule);
+  }
+  .kicker { font: 600 8.5pt Inter, 'DejaVu Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--sakura); }
+  .masthead h1 { font-size: 30pt; line-height: 1.04; margin: 5pt 0 5pt; letter-spacing: -.01em; }
+  .masthead h1 .ff { color: var(--sakura); }
+  .masthead .sub { font-size: 12pt; color: var(--soft); margin: 0 0 9pt; text-align: left; }
+  .masthead .byline { font: 8.6pt Inter, 'DejaVu Sans', sans-serif; color: var(--soft); }
+  .masthead .jpttl { font-size: 10.5pt; color: var(--soft); }
+
+  .abstract { border-left: 3pt solid var(--sakura); padding: 2pt 0 2pt 10pt; margin: 0 0 10pt; font-size: 9.8pt; color: #3d3546; }
+  .abstract b { font-family: Inter, 'DejaVu Sans', sans-serif; font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--sakura); }
+
+  .box { border-radius: 7pt; padding: 7pt 10pt 4pt; margin: 8pt 0 10pt; break-inside: avoid; font-size: 9.5pt; }
+  .box .tag { font: 700 7.6pt Inter, 'DejaVu Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 2pt; }
+  .otaku { background: var(--sakura-bg); border: 1pt solid #f6c3d4; }
+  .otaku .tag { color: var(--sakura); }
+  .toolkit { background: var(--sora-bg); border: 1pt solid #c6d9f3; }
+  .toolkit .tag { color: var(--sora); }
+  .toolkit pre, pre.run { margin: 2pt 0 5pt; white-space: pre-wrap; font: 6.7pt/1.38 'DejaVu Sans Mono', monospace; color: #213a5e; text-align: left; }
+  .paper { background: var(--matcha-bg); border: 1pt solid #c3e3cc; }
+  .paper .tag { color: var(--matcha); }
+  .warn { background: var(--yuzu-bg); border: 1pt solid #f0d79b; }
+  .warn .tag { color: var(--yuzu); }
+  .analogy { background: var(--fuji-bg); border: 1pt solid #d9cdf3; }
+  .analogy .tag { color: var(--fuji); }
+  .key { background: #fff; border: 1.4pt solid var(--ink); }
+  .key .tag { color: var(--ink); }
+
+  .two { display: flex; gap: 12pt; break-inside: avoid; }
+  .two > * { flex: 1; }
+
+  figure { margin: 10pt 0 12pt; break-inside: avoid; text-align: center; }
+  figure svg { max-width: 100%; height: auto; }
+  figcaption { font-size: 8.7pt; color: var(--soft); margin-top: 4pt; text-align: left; }
+  figcaption b { color: var(--ink); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 8.7pt; margin: 6pt 0 10pt; break-inside: avoid; }
+  th { font: 600 7.8pt Inter, 'DejaVu Sans', sans-serif; text-align: left; color: var(--soft); border-bottom: 1.2pt solid var(--rule); padding: 3pt 5pt; vertical-align: bottom; }
+  td { border-bottom: .6pt solid var(--rule); padding: 3.2pt 5pt; vertical-align: top; text-align: left; hyphens: none; }
+  tr:nth-child(even) td { background: #fbf9fd; }
+  table.wide td:first-child { white-space: nowrap; font-weight: 600; }
+  table.wide { break-inside: auto; }
+  table.wide tr { break-inside: avoid; }
+  table.cast { table-layout: fixed; }
+  table.cast td:first-child { white-space: normal; }
+  table.num td { font-variant-numeric: tabular-nums; }
+
+  .katex { font-size: 1.04em; }
+  .katex-display { margin: 6pt 0 8pt; }
+  ul, ol { margin: 0 0 7pt; padding-left: 16pt; }
+  li { margin-bottom: 2.5pt; }
+  .refs { font-size: 8.7pt; }
+  .refs li { margin-bottom: 3pt; text-align: left; }
+  .toc { columns: 2; column-gap: 18pt; font-size: 9.6pt; margin: 4pt 0 10pt; }
+  .toc div { break-inside: avoid; margin-bottom: 2.5pt; }
+  .toc .n { color: var(--sakura); font-weight: 700; display: inline-block; width: 18pt; font-family: Inter, 'DejaVu Sans', sans-serif; }
+  .step {
+    border: 1pt solid var(--rule); border-left: 4pt solid var(--sakura); border-radius: 6pt;
+    padding: 6pt 10pt 3pt; margin: 9pt 0; break-inside: avoid; background: #fffdfe;
+  }
+  .step .hd { font: 700 9.5pt Inter, 'DejaVu Sans', sans-serif; color: var(--ink); margin-bottom: 3pt; }
+  .step .hd .badge { font-size: 7.4pt; padding: 1pt 5pt; border-radius: 6pt; margin-left: 6pt; color: #fff; vertical-align: 1pt; }
+  .b1 { background: var(--fuji); } .b2 { background: var(--sora); } .b3 { background: var(--sakura); } .b0 { background: var(--matcha); }
+  .step .io { font-size: 8.8pt; color: var(--soft); margin-bottom: 3pt; }
+  .page-break { break-before: page; }
+  .center { text-align: center; }
+  .small { font-size: 8.7pt; color: var(--soft); }
+  .big-quote { font-size: 11.5pt; text-align: center; margin: 10pt 18pt; color: var(--ink); font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">ABCPROOF · motizukipdf · field guide no. 2</div>
+  <h1>The <span class="ff">Multiradial</span> Algorithm</h1>
+  <p class="sub">A field guide to [IUTchIII] Theorem 3.11 and Corollary 3.12: what goes in, what comes out,
+    what gets blurred on the way, and why the blur turns into an inequality. With analogies, figures,
+    real numbers, and an irresponsible amount of anime.
+    <span class="jp jpttl">（多輻的アルゴリズム完全攻略ガイド）</span></p>
+  <div class="byline">Running example: initial Θ-data for \(1 + 8 = 9\) with \(l = {{l}}\) · three more worked examples ·
+    every number comes from the toolkit in <code>src/</code> · November 2026</div>
+</div>
+
+<div class="abstract"><b>Abstract</b> &nbsp;
+The multiradial algorithm is the engine of inter-universal Teichmüller theory. It takes a small piece of
+data that two incompatible “universes” of ring theory share, and from it rebuilds, in the language of
+<em>one</em> universe, the theta values that were built in the <em>other</em>, up to three controlled
+blurs called (Ind1), (Ind2) and (Ind3). Corollary 3.12 then measures the blurred picture with a ruler
+both universes agree on, the log-volume, and reads off an inequality. This guide walks through the
+algorithm step by step, in Mochizuki's own order (Theorem 3.11, the proof of Corollary 3.12, the steps
+(Stp1)–(Stp8) of [EssLgc] §3.10), and runs every step on four sets of initial Θ-data that the toolkit
+in this repository builds exactly. It collects the analogies Mochizuki himself uses (parallel transport,
+crystals, the Gaussian integral, a CPU and a network cable) and adds a few of our own, most of them
+from Japanese pop culture. It ends with an honest account of where the debate about Corollary 3.12
+stands in November 2026, including the July 2026 interim report of the LANA formalization project.
+</div>
+
+<div class="box warn"><span class="tag">Content notice</span>
+Jokes are text only: no character art, logos or screenshots. Where we say what the theory <em>claims</em>,
+we cite the papers in <code>pdf/</code>. Where people disagree about whether the claim is <em>proved</em>,
+we report each side in its own words and adjudicate nothing (§12). Numbers marked “toolkit” are produced
+by the C library in <code>src/</code> when this PDF is built; for curves this small they illustrate the
+shape of the computation, not a sharp bound (§9.4). 審判ではありません。
+</div>
+
+<h3 style="margin-top:6pt">Contents</h3>
+<div class="toc">
+  <div><span class="n">1</span>The plot in one breath</div>
+  <div><span class="n">2</span>Why this is hard: the Θ-link breaks the ring</div>
+  <div><span class="n">3</span>Multiradiality: the one definition you need</div>
+  <div><span class="n">4</span>The stage: the log-theta-lattice</div>
+  <div><span class="n">5</span>The cast: every object the algorithm touches</div>
+  <div><span class="n">6</span>The algorithm, step by step (Theorem 3.11)</div>
+  <div><span class="n">7</span>The three blurs: (Ind1), (Ind2), (Ind3)</div>
+  <div><span class="n">8</span>From picture to inequality (Corollary 3.12)</div>
+  <div><span class="n">9</span>The numbers: four worked examples</div>
+  <div><span class="n">10</span>Logic: why “AND” and not “OR”</div>
+  <div><span class="n">11</span>Analogy gallery</div>
+  <div><span class="n">12</span>Where the debate stands (November 2026)</div>
+  <div><span class="n">13</span>Run it yourself</div>
+  <div><span class="n">14</span>Glossary and references</div>
+</div>
+
+<div class="box analogy"><span class="tag">How to read this guide</span>
+<p>Three speeds. <b>Express</b> (ten minutes): read §1, look at Figure 6.1 and Figure 8.1, read the boxed
+“key” statements. <b>Local</b> (an evening): read §1–§9 in order and skip the green paper boxes.
+<b>Kakueki-teisha 各駅停車</b> (stops at every station): read everything and keep [IUTchIII] open at
+pages 153–186. Boxes are colour-coded: <span style="color:var(--sakura)">pink</span> for jokes,
+<span style="color:var(--fuji)">purple</span> for analogies, <span style="color:var(--matcha)">green</span>
+for what the papers say, <span style="color:var(--sora)">blue</span> for toolkit output and
+<span style="color:var(--yuzu)">yellow</span> for caveats. Nothing mathematical rests on a joke, and no
+joke rests on anything mathematical.</p>
+</div>
