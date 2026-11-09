@@ -6,6 +6,8 @@
 #                   and htdocs/data/types.js (the struct forms, from the headers)
 #   make engine     recompile src/ to WebAssembly → htdocs/engine/iut.wasm.js (needs clang + wasi-libc, see scripts/web/build-engine.sh)
 #   make check      verify that the generated files are in sync with the C sources
+#   make gui        build ./iut-gui, the graphical pipeline program (GTK 3 + Cairo, needs libgtk-3-dev / gtk+3)
+#   make gui-check  build it and run `iut-gui --check` (headless: every example through every stage, compared with `iut pipeline`)
 #   make clean
 
 CC      ?= cc
@@ -56,12 +58,32 @@ gen: iut
 engine:
 	../scripts/web/build-engine.sh
 
+# ---- iut-gui (src/gui/): links the same library objects as iut, without the CLI's main and the TUI
+GUI_SRC  = gui/gui_main.c gui/gui_model.c gui/gui_draw.c gui/gui_tree.c
+GUI_OBJ  = $(GUI_SRC:.c=.o)
+LIB_OBJ  = $(filter-out iut_main.o iut_tui.o,$(OBJ))
+GTK_CFLAGS = $(shell pkg-config --cflags gtk+-3.0 2>/dev/null)
+GTK_LIBS   = $(shell pkg-config --libs gtk+-3.0 2>/dev/null)
+
+gui: iut-gui
+
+iut-gui: $(GUI_OBJ) $(LIB_OBJ)
+	@if [ -z "$(GTK_LIBS)" ]; then echo "iut-gui needs GTK 3 (Debian/Ubuntu: apt install libgtk-3-dev; macOS: brew install gtk+3)"; exit 1; fi
+	$(CC) $(CFLAGS) -o $@ $(GUI_OBJ) $(LIB_OBJ) $(GTK_LIBS) $(LDLIBS)
+
+gui/%.o: gui/%.c gui/gui.h gui/gui_draw.h gui/gui_tree.h iut.h iut_ops.h iut_i.h
+	@if [ -z "$(GTK_CFLAGS)" ]; then echo "iut-gui needs GTK 3 (Debian/Ubuntu: apt install libgtk-3-dev; macOS: brew install gtk+3)"; exit 1; fi
+	$(CC) $(CFLAGS) -Wno-deprecated-declarations $(CPPFLAGS) $(GTK_CFLAGS) -c -o $@ $<
+
+gui-check: iut-gui
+	./iut-gui --check
+
 check: iut
 	@./iut ids --md | diff -q - ../docs/IDENTIFIERS.md && echo "docs/IDENTIFIERS.md in sync"
 	@./iut procs --md | diff -q - ../docs/PROCESSES.md && echo "docs/PROCESSES.md in sync"
 	@node ../scripts/web/gen-types.js --check && echo "htdocs/data/types.js in sync"
 
 clean:
-	rm -f $(OBJ) iut
+	rm -f $(OBJ) iut $(GUI_OBJ) iut-gui
 
-.PHONY: all test gen engine check clean
+.PHONY: all test gen engine check clean gui gui-check

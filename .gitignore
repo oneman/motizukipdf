@@ -3,6 +3,8 @@
 /src/*.o
 /src/iut
 /src/iut-nocurses
+/src/iut-gui
+/src/gui/*.o
 *.dSYM/
 
 # Lean / Lake build artifacts
