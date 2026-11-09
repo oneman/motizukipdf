@@ -1,0 +1,148 @@
+$ iut pipeline --theta-json docs/initial-theta-data/frey-2-6436341-6436343.json
+
+IUT pipeline   2 + 3¹⁰·109 = 23⁵ (frey-2-6436341-6436343)
+  source: frey-2-6436341-6436343   curve: y² = x³ + 6436339x² − 12872682x   l = 7   rows ±2   horizontal: Θ×μ_LGP-link
+
+── stage 0 ── initial Θ-data ─────────────────────────────────────────── [IUTchI] Def 3.1
+Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
+  name      : 2 + 3¹⁰·109 = 23⁵ (frey-2-6436341-6436343)
+  curve     : y² = x³ + 6436339x² − 12872682x
+  source    : JSON file, schema iut-initial-theta-data/1, id frey-2-6436341-6436343
+  fields    : F_mod ⊆ F ⊆ K = F(E[l]) ⊆ F̄     [F_mod:Q]=1  [F:Q]≤46080  [K:Q]≤92897280
+  l         : 7   (l* = 3, l± = 4)   ε̲ = the cusp ±1
+  log(q)    : 62.7099   |log(q)| = log(q)/2l = 4.4793   ht_E = log(q)/6 = 10.4516
+  log(f)    : 8.9255   log(d^Ftpd) = 0.0000   log(d^K) ≈ 13.5104   h(j) ≈ 98.224
+  V ≅ V_mod : 6 valuations
+    name   kind  p    e/f_m e/f_K reduction  ord(q)  V^bad_mod
+    v2     non   2    1/1   1/1   good       0       -
+    v3     non   3    1/1   1/1   bad mult.  20      yes
+    v5     non   5    1/1   1/1   good       0       -
+    v23    non   23   1/1   1/1   bad mult.  10      yes
+    v109   non   109  1/1   1/1   bad mult.  2       yes
+    vinf   arc   -    -     -     -          -       -
+  asserted  : F/F_mod Galois ✓ | E[6] ⊆ F ✓ | SL2 ⊆ image ✓ | stable red. ✓ | C_K K-core ✓
+  labels    : F_l = {-3..3}  |F_l| = {0..3}  F_l^* = {1..3}
+  symmetries: F_l^{⋊±} (additive, Θ±ell-HT)  acts on F_l;  F_l^* (multiplicative, ΘNF-HT) acts on F_l^*
+  Tate param: q_v3 = 3^20 · u,   u ≡ 364 mod 3^8   (base-3 digits 1,1,1,1,1,1,0,0)
+  Tate param: q_v23 = 23^10 · u,   u ≡ 61448124894 mod 23^8   (base-23 digits 2,6,10,6,1,2,1,18)
+  Tate param: q_v109 = 109^2 · u,   u ≡ 12186328046825005 mod 109^8   (base-109 digits 88,62,39,20,77,33,72,66)
+  ε̲         : the cusp ±1 of C̲_K   ([IUTchI] Def 3.1 (f): from a nonzero element of Q ≅ Z/7Z)
+
+── stage 1 ── conditions (a)–(f) ─────────────────────────────────────── [IUTchI] Def 3.1
+  ✓ (a)  F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F
+      asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion
+  ✓ (b)  X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)
+      asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked
+  ✓ (c)  l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)
+      checked against every v ∈ V^bad_mod
+  ✓ (d)  V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)
+      |V| = |V_mod| by construction of the data
+  ✓ (e)  V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction
+      checked: at least one odd v of bad multiplicative reduction
+  ✓ (f)  ε̲ a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1
+      ε̲ = the cusp ±1 (label 1 ∈ F_l^*)
+  validation: 0 error(s), 0 warning(s), 9 checks
+
+── stage 2 ── Hodge theaters ───────────────────────────────── [IUTchI] §3–§6, Def 6.13
+  Θ±ell-Hodge theater   capsule F_T of 7 F-prime-strips, t ∈ F_7, symmetry F_l^{⋊±} of order 14 (orbit of t=0: 7)
+    t:              -3    -2    -1     0     1     2     3
+    basepoint:     201   202   203   204   205   206   207
+    Θ±-bridge F_T → F_⊞ ✓   Θell-bridge D_T → D_⊚± ✓
+  ΘNF-Hodge theater     capsule F_J of 3 F-prime-strips, j ∈ F_l^*, symmetry F_l^* of order 3 (orbit of j=1: 3)
+    j:               1     2     3
+    Θ-bridge F_J → F_> ✓   NF-bridge F_J → F_⊛ ✓
+  gluing 0,⊞ ↦ >        ✓   F_l^× ↠ F_l^*:  ±1 ↦ 1  ±2 ↦ 2  ±3 ↦ 3   (0 ↦ >)
+  Θ-Hodge theater at V^bad: q̲_v = q_v^{1/2l}, Θ̲_v evaluated at j ∈ F_l^* is q̲_v^{j²}
+    v3     ord(q_v) = 20   ord(q̲_v) = 20/14 = 10/7
+    v23    ord(q_v) = 10   ord(q̲_v) = 10/14 = 5/7
+    v109   ord(q_v) = 2   ord(q̲_v) = 2/14 = 1/7
+  prime-strips at (0,0): F_⊞, D_⊚±, F_>, F_⊛, F⊩_mod, F⊩_tht, F⊩_Δ, F⊩_env, F⊩_gau, F⊩_LGP, F⊩_lgp  (each indexed by the 6 places of V)
+  validation of the Θ±ell NF-Hodge theater: 0 error(s) in 10 checks
+
+── stage 3 ── Gaussian monoids (theta values) ─────────── [IUTchII] Cor 2.5, 3.5, 4.10
+  θ evaluated at the l = 7 evaluation points t ∈ F_l gives q̲_v^{t²} up to μ_14; it depends on |t| only.
+  Ψ_gau at v ∈ V^bad = O× · (q̲_v^{j²})_{j=1..3}.  ord_v(q̲_v^{j²}) = j²·ord(q_v)/14.
+  v = v3 (p = 3, ord q_v = 20)
+      j   j² ord(q̲^{j²}) ord(q^{j²})   unit of q_v^{j²} mod 3^8 (base-3 digits)
+      1     1           10/7           20   364  (1,1,1,1,1,1,0,0)
+      2     4           40/7           80   1048  (1,1,2,2,0,1,1,0)
+      3     9           90/7          180   1243  (1,0,0,1,0,2,1,0)
+  v = v23 (p = 23, ord q_v = 10)
+      j   j² ord(q̲^{j²}) ord(q^{j²})   unit of q_v^{j²} mod 23^8 (base-23 digits)
+      1     1            5/7           10   61448124894  (2,6,10,6,1,2,1,18)
+      2     4           20/7           40   2471821470  (16,8,19,21,0,16,16,0)
+      3     9           45/7           90   36924100554  (6,0,10,16,18,9,19,10)
+  v = v109 (p = 109, ord q_v = 2)
+      j   j² ord(q̲^{j²}) ord(q^{j²})   unit of q_v^{j²} mod 109^8 (base-109 digits)
+      1     1            1/7            2   12186328046825005  (88,62,39,20,77,33,72,66)
+      2     4            4/7            8   12446356904801070  (25,67,90,18,87,38,9,68)
+      3     9            9/7           18   8479073565393668  (64,78,45,87,65,86,41,46)
+  log-volumes (normalized, [IUTchIII] Prop 3.9):  −(j²/2l)·log q for j = 1..3: -4.4793 -17.9171 -40.3135
+  q-pilot {q̲_v}: −|log q| = -4.479277      Θ-pilot {q̲_v^{j²}}: −avg(j²)·|log q| = −(l(l+1)/12)·|log q| = -20.903295
+
+── stage 4 ── log-theta-lattice ────────────────────────── [IUTchIII] Def 1.1, 1.4, 3.8
+log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchIII] Def 1.4, 3.8 (iii)
+   m\n    +0        +1     
+   +2   •       •      
+           ↑         ↑      
+   +1   •       •      
+           ↑         ↑      
+   +0  [†•]─Θ→ ‡•    
+           ↑         ↑      
+   -1   •       •      
+           ↑         ↑      
+   -2   •       •      
+
+  • = Θ±ell NF-Hodge theater (its own universe / label)   † = (0,0)   ‡ = (1,0)   [ ] = focus
+  ↑ = log-link (vertically coric: D-prime-strips shared)   ─Θ→ = Θ×μ_LGP-link (horizontally coric: F⊢×μ shared)
+  10 vertices, 9 links. The diagram does NOT commute ([IUTchIII] Rem 1.4.1).
+
+  Θ×μ_LGP-link (0,0) → (1,0): glues F⊩▶×μ-prime-strips, full poly-isomorphism ✓
+    shares G_v ✓, O×μ ✓; Π_v NOT shared (mutually alien), ring structure NOT kept; value-group dilation l(l+1)/12 = 4.6667
+    v3     left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183013 = #183013 ✓;  Π_v #270012 vs #670012
+    v23    left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183033 = #183033 ✓;  Π_v #270032 vs #670032
+    v109   left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183043 = #183043 ✓;  Π_v #270042 vs #670042
+  log-links: 8 (columns n = 0, 1; rows -2..2). Each one identifies Π_v (vertical coricity) and builds the log-shells of its codomain:
+    v        p*        I_v    μ_log(I_v)   Π_v at (0,0) = at (0,1)?
+    v2        4   p^{0}·O      +0.000000   ✓
+    v3        3   p^{0}·O      +0.000000   ✓
+    v5        5   p^{0}·O      +0.000000   ✓
+    v23      23   p^{0}·O      +0.000000   ✓
+    v109    109   p^{0}·O      +0.000000   ✓
+    vinf      -    π-disc              0   ✓
+  validation of the lattice: 0 error(s) in 3 checks
+    [info] 10 Hodge theaters, 8 log-links, 1 Θ-links (Θ×μ_LGP-link); only the row m=0 carries a Θ-link: this is the 'infinite H' used in the proof of Cor 3.12
+    [info] the diagram is highly non-commutative: no square of links is required to commute
+
+── stage 5 ── multiradial representation, Cor 3.12 ───────── [IUTchIII] Thm 3.11, Cor 3.12
+  procession S^±_{j+1} = {0..j} of tensor packets of log-shells, j = 0..l* = 3:
+      j   |S|     (j+1)!   (j+1)·log d^K −(j²/2l)·log q              sum
+      0     1          1        13.510422        -0.000000        13.510422
+      1     2          2        27.020844        -4.479277        22.541566
+      2     3          6        40.531266       -17.917110        22.614156
+      3     4         24        54.041687       -40.313497        13.728191
+  indeterminacies: (Ind1) |Aut(Prc)| = Π_j (j+1)! = 288, (Ind2) Ism on 4 direct summands, (Ind3) upper semi-compatibility ✓
+  (a) 4 tensor packets, (b) 9 splitting monoids, (c) 3 copies of F_mod^×;  log-Kummer non-interference ✓;  compatible with the Θ×μ_LGP-link ✓
+  (0) |log q| = log q / 2l: log-volume of the q-pilot at (1,0), i.e. −|log q|                                    -4.47928   [IUTchIII] Cor 3.12; Def 3.8 (i)
+  (1) the Θ-pilot at (0,0): naive log-volume −avg(j²)·|log q|                                                 -20.9033   [IUTchIII] Def 3.8 (i)
+  (2) the Θ×μ_LGP-link (0,0)→(1,0) identifies the Θ-pilot with the q-pilot (value groups), units up to Ism         -4.47928   [IUTchIII] Def 3.8 (ii), Thm 3.11 (iii)
+  (3) multiradial representation of the Θ-pilot in terms of the mono-analytic data of (1,0): Ind1 count                 24   [IUTchIII] Thm 3.11 (i)
+  (4) holomorphic hull of the region: Σ_j (j+1) log d^K (procession-normalized)                                    40.5313   [IUTchIII] Cor 3.12 proof; [Alien] §3.7 (iv)
+  (5) −|log Θ| upper bound (hull + theta shift, procession-normalized)                                            19.628   [IUTchIII] Cor 3.12
+  (6) inequality −|log Θ| ≥ −|log q| ⇔ C_Θ ≥ −1: C_Θ                                              2.2325e+21   [IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10
+  Cor 3.12: −|log Θ| ≥ −|log q| ✓
+
+── stage 6 ── the height bound ───────────────────────────── [IUTchIV] Thm 1.10, Cor 2.2
+  log q = 62.709884   |log q| = 4.479277   log d^Ftpd = 0.000000   log f^Ftpd = 8.925454   e*_mod = 552960   η_prm = 5e+20
+  C_Θ = 2.2325e+21 (≥ −1 ✓)
+  Thm 1.10:  (1/6)·log q = 10.451647  ≤  (1 + 20·d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod·l + η_prm) = 1e+22   ✓
+  Cor 2.2:   log q∀ = 62.709884 (2 included); (C1) wants 7.919 ≤ l ≤ 7.906e+08: l = 7 out of range;  ε_E = 2.51e+15;  (C2) 10.451647 ≤ 1e+22 ✓
+  The constants (η_prm = 5·10^20) dominate for curves this small: the bound holds, and says nothing sharper than that.
+
+── stage 7 ── cross-check with frey-2-6436341-6436343.json ─────────────────────────────
+  ✓ log(q)  = Σ_{V^bad_mod} ord(q_v) log p_v  toolkit 62.709884   file 62.709884
+  ✓ |log(q)| = log(q)/2l                       toolkit 4.479277   file 4.479277
+  ✓ log(f) over V^bad_mod                      toolkit 8.925454   file 8.925454
+  ✓ ht = log(q)/6                              toolkit 10.451647   file 10.451647
+
+pipeline complete: 0 problem(s)  (Def 3.1: 0, Hodge theater: 0, lattice: 0, Cor 3.12: holds, cross-check: 0)

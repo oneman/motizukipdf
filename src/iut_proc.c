@@ -23,7 +23,7 @@ static iut_log_theta_lattice *new_lat(const iut_initial_theta_data *d, iut_link_
 }
 static void free_lat(iut_log_theta_lattice *lat) { iut_lattice_free(lat); free(lat); }
 static int print_report(FILE *f, iut_report *r) { for (unsigned i = 0; i < r->n; ++i) fprintf(f, "    [%s] %-28s %s   %s\n", r->issue[i].sev == IUT_SEV_ERROR ? "ERR " : r->issue[i].sev == IUT_SEV_WARN ? "warn" : r->issue[i].sev == IUT_SEV_INFO ? "info" : " ok ", r->issue[i].condition, r->issue[i].msg, r->issue[i].ref); return r->errors ? 1 : 0; }
-static unsigned first_bad(const iut_initial_theta_data *d) { for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].kind == IUT_V_NONARCH && d->V[i].red == IUT_RED_BAD_MULT) return i; return 0; }
+static unsigned first_bad(const iut_initial_theta_data *d) { for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].in_Vbad_mod) return i; return 0; }
 
 /* ================================================================ IUTchI */
 static int p_label_maps(const iut_initial_theta_data *d, FILE *f)
@@ -235,7 +235,7 @@ static int p_evaluation(const iut_initial_theta_data *d, FILE *f)
 {
     unsigned b = first_bad(d); iut_eval_points e; iut_eval_points_make(d, b, &e); int bad = 0;
     fprintf(f, "    at %s: %u evaluation points labelled |F_l| = {", d->V[b].name, e.n); for (unsigned j = 0; j < e.n; ++j) fprintf(f, "%s%d", j ? "," : "", e.label[j]); fprintf(f, "}; Θ̲_v values (in units of ord q̲_v, up to μ_2l):"); for (unsigned j = 0; j < e.n; ++j) { char q[16]; iut_q_fmt(e.theta_value[j], q, sizeof q); fprintf(f, " %s", q); } fprintf(f, "\n    μ_− of order %u; K_v-rational: %s; sections G_v → Π_v group-theoretic: %s   [IUTchI] Ex 4.4 (i)–(ii)\n", e.mu_minus_order, yesno(e.K_v_rational), yesno(e.sections_group_theoretic));
-    for (unsigned v = 0; v < d->nV && v < 4; ++v) { iut_theta_bridge_piece p; iut_theta_bridge_piece_get(d, v, -3, &p); fprintf(f, "    φ^Θ_{v_j} at %s, j = −3: %s (label %d)   [IUTchI] Ex 4.4 (iii)\n", d->V[v].name, p.via_evaluation_section ? "evaluation section" : "full poly-isomorphism", p.label_used); if (p.via_evaluation_section != (d->V[v].kind == IUT_V_NONARCH && d->V[v].red == IUT_RED_BAD_MULT)) bad++; }
+    for (unsigned v = 0; v < d->nV && v < 4; ++v) { iut_theta_bridge_piece p; iut_theta_bridge_piece_get(d, v, -3, &p); fprintf(f, "    φ^Θ_{v_j} at %s, j = −3: %s (label %d)   [IUTchI] Ex 4.4 (iii)\n", d->V[v].name, p.via_evaluation_section ? "evaluation section" : "full poly-isomorphism", p.label_used); if (p.via_evaluation_section != d->V[v].in_Vbad_mod) bad++; }
     return bad + !(e.n == d->lpm && iut_q_todouble(e.theta_value[3]) == 9);
 }
 static int p_label_transport(const iut_initial_theta_data *d, FILE *f)

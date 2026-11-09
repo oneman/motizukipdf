@@ -10,7 +10,8 @@
  *   IUT.json(args)              → parsed JSON of stdout (throws on failure)
  *
  * The WASI shim below implements only what a command-line C program with stdio needs:
- * args_sizes_get / args_get, fd_write (stdout, stderr), fd_close, fd_fdstat_get, fd_seek, proc_exit.
+ * args_sizes_get / args_get, fd_write (stdout, stderr), fd_close, fd_fdstat_get, fd_seek, proc_exit;
+ * fd_prestat_get reports no preopened directories and any other import answers ENOSYS (no files).
  * Works in browsers and in node (htdocs/test.js).
  */
 (function (root) {
@@ -84,8 +85,14 @@
         return 0;
       },
       fd_seek: function () { return 29; /* ESPIPE */ },
+      fd_prestat_get: function () { return 8; /* EBADF: no preopened directories, so there is no file system */ },
       proc_exit: function (code) { throw new Exit(code); }
     };
+    /* every other WASI call the C library links (path_open, fd_read, … for fopen) fails with ENOSYS:
+     * the page passes data as arguments (e.g. --theta-json '{…}'), never as files */
+    if (wasmModule) WebAssembly.Module.imports(wasmModule).forEach(function (imp) {
+      if (imp.module === 'wasi_snapshot_preview1' && imp.kind === 'function' && !wasi[imp.name]) wasi[imp.name] = function () { return 52; /* ENOSYS */ };
+    });
     return { wasi_snapshot_preview1: wasi, setMemory: function (m) { mem = m; } };
   }
 

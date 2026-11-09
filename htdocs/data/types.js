@@ -108,6 +108,16 @@
      "type": "int",
      "name": "in_Vbad_mod",
      "comment": "v ∈ Vbad_mod (odd p, bad multiplic.)"
+    },
+    {
+     "type": "unsigned long long",
+     "name": "q_unit",
+     "comment": "q_v = p^ordq · u with u ≡ q_unit mod p^q_prec (q_prec = 0: unknown)"
+    },
+    {
+     "type": "unsigned",
+     "name": "q_prec",
+     "comment": ""
     }
    ],
    "comment": "",
@@ -125,7 +135,7 @@
   {
    "name": "iut_initial_theta_data",
    "file": "iut.h",
-   "line": 86,
+   "line": 90,
    "fields": [
     {
      "type": "char",
@@ -198,7 +208,7 @@
     {
      "type": "int",
      "name": "epsilon",
-     "comment": "to shift evaluation points, cf. [IUTchII] Intro (\"shifted by a 2-torsion point\")"
+     "comment": "generator ±1 of Z, so with V^bad ≠ ∅ the label is 1 (the cusp ±1)."
     },
     {
      "type": "int",
@@ -225,6 +235,41 @@
      "type": "int",
      "name": "h_CK_is_K_core",
      "comment": "C_K is a K-core"
+    },
+    {
+     "type": "int",
+     "name": "from_json",
+     "comment": "schema iut-initial-theta-data/1 (docs/initial-theta-data/)"
+    },
+    {
+     "type": "char",
+     "name": "source_id[48]",
+     "comment": "e.g. \"frey-1-8-9\""
+    },
+    {
+     "type": "int",
+     "name": "have_expected",
+     "comment": "the JSON's own \"derived\" numbers"
+    },
+    {
+     "type": "double",
+     "name": "expected_logq",
+     "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "expected_abslogq",
+     "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "expected_logcond",
+     "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "expected_ht",
+     "comment": ""
     }
    ],
    "comment": "initial Θ-data (species) (F̄/F, X_F, l, C_K, V, Vbad_mod, ε) [IUTchI] Def. 3.1; [Alien] §3.3 (i).",
@@ -245,7 +290,7 @@
   {
    "name": "iut_local_datum",
    "file": "iut.h",
-   "line": 148,
+   "line": 160,
    "fields": [
     {
      "type": "unsigned",
@@ -312,7 +357,7 @@
   {
    "name": "iut_prime_strip",
    "file": "iut.h",
-   "line": 163,
+   "line": 175,
    "fields": [
     {
      "type": "iut_ps_kind",
@@ -371,7 +416,7 @@
   {
    "name": "iut_pilot",
    "file": "iut.h",
-   "line": 177,
+   "line": 189,
    "fields": [
     {
      "type": "iut_pilot_kind",
@@ -403,7 +448,7 @@
   {
    "name": "iut_log_shell",
    "file": "iut.h",
-   "line": 187,
+   "line": 199,
    "fields": [
     {
      "type": "unsigned",
@@ -460,7 +505,7 @@
   {
    "name": "iut_capsule_member",
    "file": "iut.h",
-   "line": 202,
+   "line": 214,
    "fields": [
     {
      "type": "int",
@@ -485,7 +530,7 @@
   {
    "name": "iut_theta_hodge_theater",
    "file": "iut.h",
-   "line": 207,
+   "line": 219,
    "fields": [
     {
      "type": "iut_prime_strip",
@@ -514,7 +559,7 @@
   {
    "name": "iut_theta_pm_ell_hodge_theater",
    "file": "iut.h",
-   "line": 213,
+   "line": 225,
    "fields": [
     {
      "type": "unsigned",
@@ -561,7 +606,7 @@
   {
    "name": "iut_theta_nf_hodge_theater",
    "file": "iut.h",
-   "line": 221,
+   "line": 233,
    "fields": [
     {
      "type": "unsigned",
@@ -613,7 +658,7 @@
   {
    "name": "iut_hodge_theater",
    "file": "iut.h",
-   "line": 230,
+   "line": 242,
    "fields": [
     {
      "type": "int",
@@ -732,7 +777,7 @@
   {
    "name": "iut_link",
    "file": "iut.h",
-   "line": 269,
+   "line": 281,
    "fields": [
     {
      "type": "iut_link_kind",
@@ -811,7 +856,7 @@
   {
    "name": "iut_indeterminacies",
    "file": "iut.h",
-   "line": 284,
+   "line": 296,
    "fields": [
     {
      "type": "int",
@@ -839,7 +884,7 @@
   {
    "name": "iut_procession_step",
    "file": "iut.h",
-   "line": 292,
+   "line": 304,
    "fields": [
     {
      "type": "unsigned",
@@ -877,7 +922,7 @@
   {
    "name": "iut_multiradial_rep",
    "file": "iut.h",
-   "line": 303,
+   "line": 315,
    "fields": [
     {
      "type": "int",
@@ -949,7 +994,7 @@
   {
    "name": "iut_log_theta_lattice",
    "file": "iut.h",
-   "line": 320,
+   "line": 332,
    "fields": [
     {
      "type": "iut_initial_theta_data",
@@ -1004,7 +1049,7 @@
   {
    "name": "iut_species",
    "file": "iut.h",
-   "line": 332,
+   "line": 344,
    "fields": [
     {
      "type": "const char",
@@ -1038,7 +1083,7 @@
   {
    "name": "iut_mutation",
    "file": "iut.h",
-   "line": 338,
+   "line": 350,
    "fields": [
     {
      "type": "const char",
@@ -1082,7 +1127,7 @@
   {
    "name": "iut_issue",
    "file": "iut.h",
-   "line": 352,
+   "line": 364,
    "fields": [
     {
      "type": "iut_severity",
@@ -1111,7 +1156,7 @@
   {
    "name": "iut_report",
    "file": "iut.h",
-   "line": 358,
+   "line": 370,
    "fields": [
     {
      "type": "unsigned",
@@ -1140,7 +1185,7 @@
   {
    "name": "iut_options",
    "file": "iut.h",
-   "line": 446,
+   "line": 476,
    "fields": [
     {
      "type": "long long",
@@ -1171,6 +1216,11 @@
      "type": "iut_link_kind",
      "name": "horizontalintrowsintjson",
      "comment": ""
+    },
+    {
+     "type": "const char",
+     "name": "*theta_jsoninthave_theta_json",
+     "comment": "--theta-json FILE (or inline JSON text starting with '{')"
     }
    ],
    "comment": "option parsing shared by CLI and TUI",
@@ -4783,7 +4833,7 @@
   {
    "name": "iut_ps_kind",
    "file": "iut.h",
-   "line": 127,
+   "line": 139,
    "items": [
     {
      "name": "IUT_PS_D",
@@ -4870,7 +4920,7 @@
   {
    "name": "iut_pilot_kind",
    "file": "iut.h",
-   "line": 176,
+   "line": 188,
    "items": [
     {
      "name": "IUT_PILOT_Q",
@@ -4892,7 +4942,7 @@
   {
    "name": "iut_link_kind",
    "file": "iut.h",
-   "line": 256,
+   "line": 268,
    "items": [
     {
      "name": "IUT_LINK_THETA",
@@ -4956,7 +5006,7 @@
   {
    "name": "iut_severity",
    "file": "iut.h",
-   "line": 351,
+   "line": 363,
    "items": [
     {
      "name": "IUT_SEV_OK",

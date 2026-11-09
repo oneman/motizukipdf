@@ -30,6 +30,7 @@ static void jnum(FILE *f, double x)
 void iut_json_data(FILE *f, const iut_initial_theta_data *d)
 {
     fprintf(f, "{\n  \"species\": \"InitialThetaData\",\n  \"name\": "); jstr(f, d->name);
+    if (d->from_json) { fprintf(f, ",\n  \"source\": "); jstr(f, d->source_id); }
     fprintf(f, ",\n  \"curve\": "); jstr(f, d->curve);
     fprintf(f, ",\n  \"Fmod\": {\"id\": \"Fmod\", \"degree\": %u},\n  \"F\": {\"id\": \"FBarOverF\", \"degreeBound\": %llu, \"logDifferentTpd\": ", d->dmod, d->dF); jnum(f, d->logdF);
     fprintf(f, "},\n  \"K\": {\"id\": \"KField\", \"degreeBound\": %llu, \"logDifferentEstimate\": ", d->dK); jnum(f, d->logdK);
@@ -44,10 +45,12 @@ void iut_json_data(FILE *f, const iut_initial_theta_data *d)
     fprintf(f, "  \"VSet\": [\n");
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
-        fprintf(f, "    {\"name\": \"%s\", \"kind\": \"%s\", \"p\": %u, \"eMod\": %u, \"fMod\": %u, \"eK\": %u, \"fK\": %u, \"reduction\": \"%s\", \"ordQ\": %u, \"inVBadMod\": %s}%s\n",
+        fprintf(f, "    {\"name\": \"%s\", \"kind\": \"%s\", \"p\": %u, \"eMod\": %u, \"fMod\": %u, \"eK\": %u, \"fK\": %u, \"reduction\": \"%s\", \"ordQ\": %u, \"inVBadMod\": %s",
                 v->name, v->kind == IUT_V_ARCH ? "VArc" : "VNon", v->p, v->e_mod, v->f_mod, v->e_K, v->f_K,
                 v->red == IUT_RED_GOOD ? "good" : v->red == IUT_RED_BAD_MULT ? "badMultiplicative" : "badAdditive",
-                v->ordq, v->in_Vbad_mod ? "true" : "false", i + 1 < d->nV ? "," : "");
+                v->ordq, v->in_Vbad_mod ? "true" : "false");
+        if (v->q_prec) fprintf(f, ", \"qUnit\": \"%llu\", \"qPrecision\": %u", v->q_unit, v->q_prec);   /* q_v = p^ordQ·u, u ≡ qUnit mod p^qPrecision */
+        fprintf(f, "}%s\n", i + 1 < d->nV ? "," : "");
     }
     fprintf(f, "  ]\n}\n");
 }

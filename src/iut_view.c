@@ -12,8 +12,9 @@ void iut_view_data(FILE *f, const iut_initial_theta_data *d)
 {
     fprintf(f, "Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1\n");
     fprintf(f, "  name      : %s\n  curve     : %s\n", d->name, d->curve);
+    if (d->from_json) fprintf(f, "  source    : JSON file, schema iut-initial-theta-data/1, id %s\n", d->source_id);
     fprintf(f, "  fields    : F_mod ⊆ F ⊆ K = F(E[l]) ⊆ F̄     [F_mod:Q]=%u  [F:Q]≤%llu  [K:Q]≤%llu\n", d->dmod, d->dF, d->dK);
-    fprintf(f, "  l         : %u   (l* = %u, l± = %u)   ε̲ = %d\n", d->l, d->lstar, d->lpm, d->epsilon);
+    fprintf(f, "  l         : %u   (l* = %u, l± = %u)   ε̲ = the cusp ±%d\n", d->l, d->lstar, d->lpm, d->epsilon);
     fprintf(f, "  log(q)    : %.4f   |log(q)| = log(q)/2l = %.4f   ht_E = log(q)/6 = %.4f\n", iut_log_q(d), d->l ? iut_log_q(d) / (2.0 * d->l) : 0, iut_height_from_q(d));
     fprintf(f, "  log(f)    : %.4f   log(d^Ftpd) = %.4f   log(d^K) ≈ %.4f   h(j) ≈ %.3f\n", iut_log_cond(d), d->logdF, d->logdK, d->j_log_height);
     fprintf(f, "  V ≅ V_mod : %u valuations\n", d->nV);

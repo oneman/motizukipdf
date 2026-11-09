@@ -159,7 +159,7 @@ void iut_tempered_at_v_get(const iut_initial_theta_data *d, unsigned v, iut_temp
     memset(out, 0, sizeof *out);
     out->v_index = v;
     const iut_valuation *V = &d->V[v];
-    out->tempered_available = (V->kind == IUT_V_NONARCH && V->red == IUT_RED_BAD_MULT);   /* Def 3.1 (c): Π_v = Π^tp_{X̲̲_v} at bad v */
+    out->tempered_available = V->in_Vbad_mod;   /* Def 3.1 (c): Π_v = Π^tp_{X̲̲_v} at bad v */
     out->profinite_conjugates_stay_tempered = out->tempered_available;
     out->commensurably_terminal = out->tempered_available;
     out->decomposition_groups_synchronized = out->tempered_available;
@@ -182,7 +182,7 @@ unsigned iut_def_three_one_check(const iut_initial_theta_data *d, iut_def_three_
     ITEM("(c)", "l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)", c_ok && d->l % 2 && d->l % 3, 1, "checked against every v ∈ V^bad_mod");
     ITEM("(d)", "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)", d->nV > 0 && d->nV <= IUT_MAX_V, 1, "|V| = |V_mod| by construction of the data");
     ITEM("(e)", "V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction", e_ok && odd_ok && d->h_stable_reduction, 1, "checked: at least one odd v of bad multiplicative reduction");
-    ITEM("(f)", "ε̲ a cusp of C̲_K, hence ε̲_v ∈ LabCusp(D_v) for every v", iut_label_in_Fl(d, d->epsilon), 1, "ε̲ recorded as a label of F_l");
+    ITEM("(f)", "ε̲ a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1", iut_label_in_FlStar(d, d->epsilon) && (!e_ok || d->epsilon == 1), 1, d->epsilon == 1 ? "ε̲ = the cusp ±1 (label 1 ∈ F_l^*)" : "ε̲ must be a label in F_l^*, equal to ±1 when V^bad ≠ ∅");
 #undef ITEM
     return n;
 }
@@ -247,7 +247,7 @@ void iut_local_frobenioid_build(const iut_initial_theta_data *d, unsigned v, iut
         out->is_split = 1; out->has_kummer_structure = 1; out->formal_symbol = "log(p_v)·log(Θ)";
         return;
     }
-    if (V->red == IUT_RED_BAD_MULT) {
+    if (V->in_Vbad_mod) {   /* v ∈ V^bad = V ×_{V_mod} V^bad_mod */
         out->kind = IUT_LF_BAD; out->ref = "[IUTchI] Ex 3.2";
         out->D_v = "D_v = B^temp(X̲̲_v)^0"; out->D_mono_v = "D⊢_v = B(K_v)^0 ⊆ D_v"; out->D_theta_v = "D^Θ_v";
         out->F_v = "F̲_v: the tempered Frobenioid over D_v"; out->F_birat_v = "F÷_v: birationalization"; out->C_v = "C_v: base-field-theoretic hull";
@@ -427,7 +427,7 @@ void iut_theta_bridge_piece_get(const iut_initial_theta_data *d, unsigned v, int
     const iut_valuation *V = &d->V[v];
     memset(out, 0, sizeof *out);
     out->v_index = v; out->j = j; out->label_used = iut_label_abs(j);
-    int bad = V->kind == IUT_V_NONARCH && V->red == IUT_RED_BAD_MULT;
+    int bad = V->in_Vbad_mod;
     out->via_evaluation_section = bad; out->full_poly_iso = !bad;
 }
 void iut_label_transport_make(const iut_initial_theta_data *d, int signed_labels, iut_label_transport *out)

@@ -291,7 +291,7 @@ void iut_lgp_monoid_build(const iut_initial_theta_data *d, unsigned j, unsigned 
      * q̲^{j²} alone ("⊥" = the value-group portion, cf. [IUTchII] Cor 3.6).                       */
     iut_monoid_build(d, IUT_MON_LGP, v_index, copy_base, 0, out);
     const iut_valuation *v = &d->V[out->v_index];
-    int bad = (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT);
+    int bad = v->in_Vbad_mod;
     out->ngen = 1; out->gen[0] = iut_q_make(bad ? (long)j * j : 0, 1); out->gen_label[0] = (int)j; out->split = 1;
 }
 void iut_upper_semi_compatibility(const iut_initial_theta_data *d, unsigned v_index, iut_upper_semi_compat *out)
@@ -305,7 +305,7 @@ void iut_upper_semi_compatibility(const iut_initial_theta_data *d, unsigned v_in
     const iut_valuation *v = &d->V[v_index];
     memset(out, 0, sizeof *out);
     if (v->kind == IUT_V_ARCH) { out->kase = IUT_USC_ARCH; out->relation = "↠ (surjection onto the closed disc)"; out->log_volume_delta = 0; out->ref = "[IUTchIII] Prop 3.5 (ii)(b)"; return; }
-    if (v->red == IUT_RED_BAD_MULT) { out->kase = IUT_USC_BAD; out->relation = "= up to roots of unity (log(ζ) = 0)"; out->log_volume_delta = 0; out->ref = "[IUTchIII] Prop 3.5 (ii)(c)"; return; }
+    if (v->in_Vbad_mod) { out->kase = IUT_USC_BAD; out->relation = "= up to roots of unity (log(ζ) = 0)"; out->log_volume_delta = 0; out->ref = "[IUTchIII] Prop 3.5 (ii)(c)"; return; }
     iut_log_shell sh; iut_log_shell_make(d, v_index, 1, 0, 0, 0, &sh);
     out->kase = IUT_USC_NONARCH; out->relation = "⊆ (log(O×) ⊆ I, inclusion)"; out->log_volume_delta = sh.log_volume > 0 ? sh.log_volume : 0; out->ref = "[IUTchIII] Prop 3.5 (ii)(a)";
 }
@@ -389,7 +389,7 @@ void iut_multiradial_full_build(const iut_log_theta_lattice *lat, int n, iut_mul
     memset(out, 0, sizeof *out);
     iut_multiradial_build(lat, n, &out->rep);
     /* (a) the tensor packets I(S±_{j+1}; n,◦D⊢_vQ) — one procession per vQ; we record the packets at the first bad prime */
-    unsigned p = 0; for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].kind == IUT_V_NONARCH && d->V[i].red == IUT_RED_BAD_MULT) { p = d->V[i].p; break; }
+    unsigned p = 0; for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].in_Vbad_mod) { p = d->V[i].p; break; }
     out->npackets = iut_tensor_packet_procession(d, p, 0, out->packet);
     /* (b) splitting monoids Ψ⊥_LGP: one per j ∈ F_l^* and per v ∈ Vbad */
     unsigned nbad = 0; for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].kind == IUT_V_NONARCH && d->V[i].red == IUT_RED_BAD_MULT && d->V[i].in_Vbad_mod) nbad++;

@@ -7,6 +7,7 @@
  *   #lattice                  the log-theta-lattice explorer                      views/lattice.js
  *   #examples/<key>/<step>    worked examples, step by step                       views/examples.js
  *   #identifiers/<id>         the 448 identifiers                                 views/ids.js
+ *   #pipeline                 the whole pipeline on one set of Θ-data, stage by stage views/pipeline.js
  */
 (function (root) {
   'use strict';
@@ -17,6 +18,7 @@
     { key: 'types', label: 'Data types', view: function () { return root.VIEW_TYPES; } },
     { key: 'processes', label: 'Processes', view: function () { return root.VIEW_PROCS; } },
     { key: 'lattice', label: 'Lattice', view: function () { return root.VIEW_LATTICE; } },
+    { key: 'pipeline', label: 'Pipeline', view: function () { return root.VIEW_PIPELINE; } },
     { key: 'examples', label: 'Worked examples', view: function () { return root.VIEW_EXAMPLES; } },
     { key: 'identifiers', label: 'Identifiers', view: function () { return root.VIEW_IDS; } }
   ];
@@ -31,7 +33,8 @@
     var mode = el('select', {}, [
       el('option', { value: 'example', text: 'built-in example' }),
       el('option', { value: 'abc', text: 'abc triple' }),
-      el('option', { value: 'random', text: 'random seed' })
+      el('option', { value: 'random', text: 'random seed' }),
+      M.THETA_JSON.length ? el('option', { value: 'json', text: 'exact Θ-data (JSON)' }) : null
     ]);
     mode.value = s.mode;
     var exSel = el('select', {}, M.EXAMPLES.map(function (e) { return el('option', { value: e.k, text: e.label }); }));
@@ -44,6 +47,9 @@
     var rows = el('select', {}, [1, 2, 3, 4, 5, 6].map(function (r) { return el('option', { value: r, text: r + ' row' + (r > 1 ? 's' : '') }); }));
     rows.value = String(s.rows);
 
+    var jsSel = el('select', {}, M.THETA_JSON.map(function (t) { return el('option', { value: t.id, text: t.title + ', l = ' + t.l }); }));
+    if (s.json) jsSel.value = s.json;
+    var jsLab = el('label', { title: 'docs/initial-theta-data/<id>.json: initial Θ-data computed exactly (Tate parameters, proved SL2 condition), passed to the engine as --theta-json' }, ['curve ', jsSel]);
     var exLab = el('label', {}, ['example ', exSel]);
     var abcLab = el('label', {}, ['a + b = c ', a, ' + ', b, ' = ', c, '  l ', l, el('button', { class: 'primary', text: 'generate', onclick: applyAbc })]);
     var rndLab = el('label', {}, ['seed ', seed, el('button', { class: 'primary', text: 'generate', onclick: function () { M.set({ mode: 'random', seed: Math.max(0, +seed.value | 0) }); } })]);
@@ -51,6 +57,7 @@
       exLab.style.display = mode.value === 'example' ? '' : 'none';
       abcLab.style.display = mode.value === 'abc' ? '' : 'none';
       rndLab.style.display = mode.value === 'random' ? '' : 'none';
+      jsLab.style.display = mode.value === 'json' ? '' : 'none';
     }
     function applyAbc() {
       var A = +a.value, B = +b.value, C = +c.value, L = +l.value;
@@ -62,23 +69,25 @@
       showMode();
       if (mode.value === 'example') M.set({ mode: 'example', example: +exSel.value });
       else if (mode.value === 'random') M.set({ mode: 'random', seed: +seed.value });
+      else if (mode.value === 'json') M.set({ mode: 'json', json: jsSel.value });
       else if (+a.value + +b.value === +c.value) applyAbc();
     });
     exSel.addEventListener('change', function () { M.set({ mode: 'example', example: +exSel.value }); });
+    jsSel.addEventListener('change', function () { M.set({ mode: 'json', json: jsSel.value }); });
     [a, b, c, l].forEach(function (inp) { inp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') applyAbc(); }); });
     seed.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') M.set({ mode: 'random', seed: +seed.value }); });
     hor.addEventListener('change', function () { M.set({ horizontal: hor.value }); });
     rows.addEventListener('change', function () { M.set({ rows: +rows.value }); });
 
     bench.appendChild(el('label', { class: 'strong' }, ['Θ-data ', mode]));
-    bench.appendChild(exLab); bench.appendChild(abcLab); bench.appendChild(rndLab);
+    bench.appendChild(exLab); bench.appendChild(abcLab); bench.appendChild(rndLab); bench.appendChild(jsLab);
     bench.appendChild(el('span', { class: 'sep' }));
     bench.appendChild(el('label', {}, ['horizontal link ', hor]));
     bench.appendChild(el('label', {}, ['lattice ', rows]));
     var summary = el('div', { class: 'summary', id: 'summary' });
     bench.appendChild(summary);
     showMode();
-    els.bench = { mode: mode, exSel: exSel, a: a, b: b, c: c, l: l, seed: seed, hor: hor, rows: rows, summary: summary };
+    els.bench = { showMode: showMode, mode: mode, exSel: exSel, jsSel: jsSel, a: a, b: b, c: c, l: l, seed: seed, hor: hor, rows: rows, summary: summary };
     renderSummary();
   }
   function isPrime(n) { if (n < 2) return false; for (var i = 2; i * i <= n; i++) if (n % i === 0) return false; return true; }
@@ -138,6 +147,9 @@
     }
   }
   function onChange() {
+    var st = M.get();   /* a view may change the selection (the pipeline's example buttons): keep the bench in step */
+    if (els.bench && els.bench.mode.value !== st.mode) { els.bench.mode.value = st.mode; els.bench.showMode(); }
+    if (els.bench && st.mode === 'json' && st.json) els.bench.jsSel.value = st.json;
     renderSummary();
     rendered.home = false;
     VIEWS.forEach(function (v) {
@@ -169,6 +181,7 @@
         el('a', { href: '#types', text: 'Data types →' }),
         el('a', { href: '#processes', text: 'Processes →' }),
         el('a', { href: '#lattice', text: 'Lattice explorer →' }),
+        el('a', { href: '#pipeline', text: 'Pipeline →' }),
         el('a', { href: '#examples', text: 'Worked examples →' }),
         el('a', { href: '#identifiers', text: 'Identifiers →' })
       ])

@@ -269,7 +269,7 @@
     ],
     "errors": 0,
     "warnings": 1,
-    "checks": 19,
+    "checks": 20,
     "warningLines": [
       "VBad: 1 place(s) of additive reduction: stable reduction only after a finite extension (F_tpd / Legendre form)"
     ],
@@ -291,7 +291,7 @@
       "l": 7,
       "LStar": 3,
       "LPm": 4,
-      "EpsilonUnder": 0,
+      "EpsilonUnder": 1,
       "jLogHeight": 35.51382493,
       "logQ": 62.7098837,
       "AbsLogQ": 4.479277407,

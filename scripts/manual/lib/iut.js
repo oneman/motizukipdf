@@ -60,7 +60,7 @@
     });
     return d;
   }
-  function logQ(d) { var s = 0; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && v.reduction === 'badMultiplicative') s += v.ordQ * v.fMod * Math.log(v.p); }); return s / (d.Fmod.degree || 1); }
+  function logQ(d) { var s = 0; d.VSet.forEach(function (v) { if (v.inVBadMod) s += v.ordQ * v.fMod * Math.log(v.p); }); return s / (d.Fmod.degree || 1); }   // over V^bad_mod only ([IUTchIV] Thm 1.10, Rem 1.10.6 (i))
   function logF(d) { var s = 0; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && v.reduction !== 'good') s += v.fMod * Math.log(v.p); }); return s / (d.Fmod.degree || 1); }
 
   /* Frey curve y² = x(x−a)(x+b) of an abc triple; F_mod = Q, F_tpd = Q (full rational 2-torsion). */
@@ -85,7 +85,7 @@
       species: 'InitialThetaData', name: 'abc(' + a + ',' + b + ',' + c + ') l=' + l, curve: 'Frey y^2=x(x-' + a + ')(x+' + b + ')',
       Fmod: { id: 'Fmod', degree: 1 }, F: { id: 'FBarOverF', degreeBound: dF, logDifferentTpd: 0 },
       K: { id: 'KField', degreeBound: dF * gl2, logDifferentEstimate: logf + 2 * Math.log(l) },
-      l: l, EpsilonUnder: 0, jLogHeight: Math.abs(3 * Math.log(a * a + a * b + b * b) + 8 * Math.log(2) - 2 * Math.log(n)),
+      l: l, EpsilonUnder: 1, jLogHeight: Math.abs(3 * Math.log(a * a + a * b + b * b) + 8 * Math.log(2) - 2 * Math.log(n)),
       hypotheses: { FGaloisOverFmod: true, FContainsSixTorsion: true, ImageContainsSLTwo: true, StableReduction: true, CKIsKCore: true },
       VSet: V, abc: [a, b, c]
     };
@@ -112,7 +112,7 @@
     var dF = dmod * 2 * 6 * 48;
     var dd = { species: 'InitialThetaData', name: 'random#' + seed + ' synthetic dmod=' + dmod + ' l=' + l, curve: 'E over F_mod of degree ' + dmod,
       Fmod: { id: 'Fmod', degree: dmod }, F: { id: 'FBarOverF', degreeBound: dF, logDifferentTpd: 0.5 + 0.1 * r(40) },
-      K: { id: 'KField', degreeBound: dF * l * (l + 1) * (l - 1) * (l - 1), logDifferentEstimate: 0 }, l: l, EpsilonUnder: r(2), jLogHeight: 0,
+      K: { id: 'KField', degreeBound: dF * l * (l + 1) * (l - 1) * (l - 1), logDifferentEstimate: 0 }, l: l, EpsilonUnder: 1, jLogHeight: 0,
       hypotheses: { FGaloisOverFmod: true, FContainsSixTorsion: true, ImageContainsSLTwo: true, StableReduction: true, CKIsKCore: true }, VSet: V };
     finish(dd); dd.K.logDifferentEstimate = dd.F.logDifferentTpd + logF(dd) + 2 * Math.log(l);
     return dd;
@@ -160,7 +160,8 @@
     [['FGaloisOverFmod', 'FBarOverF', '[IUTchI] Def 3.1 (a)', 'F Galois over F_mod of degree prime to l'], ['FContainsSixTorsion', 'FBarOverF', '[IUTchI] Def 3.1 (a)', 'F contains the fields of definition of E[2·3]'],
      ['ImageContainsSLTwo', 'KField', '[IUTchI] Def 3.1 (c)', 'Im(Gal(K/F) → GL2(F_l)) ⊇ SL2(F_l)'], ['StableReduction', 'XF', '[IUTchI] Def 3.1 (b)', 'E_F has stable reduction everywhere'], ['CKIsKCore', 'CK', '[IUTchI] Def 3.1 (d)', 'C_K is a K-core']]
       .forEach(function (h) { r.add(H[h[0]] ? 'info' : 'error', h[1], h[2], (H[h[0]] ? 'asserted (not machine-checkable): ' : 'NOT asserted: ') + h[3]); });
-    if (d.EpsilonUnder !== 0 && d.EpsilonUnder !== 1) r.add('error', 'EpsilonUnder', '[IUTchI] Def 3.1 (f)', 'ε̲ must be 0 or 1');
+    if (!(d.EpsilonUnder >= 1 && d.EpsilonUnder <= d.LStar)) r.add('error', 'EpsilonUnder', '[IUTchI] Def 3.1 (f)', 'ε̲ must be a cusp label in F_l^* (from a nonzero element of Q)');
+    else if (d.EpsilonUnder !== 1) r.add('error', 'EpsilonUnder', '[IUTchI] Def 3.1 (f)', 'at v ∈ V^bad, ε̲_v must be the cusp of the canonical generator ±1');
     return r;
   }
 
@@ -175,7 +176,7 @@
         L.valGroup = !(kind === 'FMonoUnitsPrimeStrip' || kind === 'FMonoUnitsModTorsPrimeStrip');
         L.split = /^FMono(Glob)?PrimeStrip$|ValUnitsModTors/.test(kind);
         L.kummer = L.unitsModTors ? 'UnitsModTorsKummer' : (kind === 'FPrimeStrip' || kind === 'FMonoUnitsPrimeStrip' ? 'UnitsKummer' : 'none');
-        if (L.valGroup && v.kind === 'VNon' && v.reduction === 'badMultiplicative') L.vals = (exps && exps.length) ? exps.slice() : [1];
+        if (L.valGroup && v.inVBadMod) L.vals = (exps && exps.length) ? exps.slice() : [1];
       }
       ps.local.push(L);
     });

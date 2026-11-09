@@ -53,11 +53,14 @@ make test       # C self-tests (model + operations layer) + node tests of the we
 ./iut procs IUTchIII                         # the registry of processes (operations on the data types), filtered
 ./iut run ComputeThmOneTen --abc 1 2400 2401 --l 13   # run one process on the given Θ-data
 ./iut run --all --example 2                  # run all 73 processes (exit code = number of failures)
+./iut pipeline --theta-json ../docs/initial-theta-data/frey-1-8-9.json   # the whole theory on exact Θ-data,
+                                             # stage by stage (docs/PIPELINE.md); add --json for JSON
 ./iut tui      --example 3                   # interactive ncurses UI
 ```
 
 Data options accepted by `gen`, `validate`, `walk`, `run`, `tui`: `--abc A B C`, `--l L`,
-`--example K` (0–5), `--random SEED`; `walk` also takes `--rows R`,
+`--example K` (0–5), `--random SEED`, `--theta-json FILE` (exact initial Θ-data in the
+schema `iut-initial-theta-data/1`, see [docs/PIPELINE.md](docs/PIPELINE.md)); `walk` also takes `--rows R`,
 `--horizontal theta|xmu|gau|LGP|lgp` and `--json`; `procs` takes `--md`, `--js`,
 `--json` and an optional filter; `run` takes a process id or `--all [filter]`.
 
@@ -114,6 +117,12 @@ it and every view recomputes.
   the C program applies them. Tabs show the alien copies across the Θ-link, the
   multiradial representation and the log-volume numbers, the étale-picture and
   the validation report.
+* **Pipeline** — `iut pipeline` run in the page: the selected Θ-data carried
+  through every stage, from Def 3.1 and its conditions through the Hodge
+  theaters, the Gaussian monoids, the log-theta-lattice and the multiradial
+  representation to Thm 1.10, one card per stage. The bench's *exact Θ-data
+  (JSON)* option loads the four exact worked examples of
+  `docs/initial-theta-data/` (see [docs/PIPELINE.md](docs/PIPELINE.md)).
 * **Worked examples** — nine walks through the theory, step by step (54 steps):
   from an abc triple to initial Θ-data; labels, symmetries and cusps;
   prime-strips and the forgetful ladder; assembling a Θ±ell NF-Hodge theater;

@@ -1,0 +1,779 @@
+{
+ "schema": "iut-pipeline/1",
+ "source": "frey-1-2400-2401",
+ "name": "1 + 2400 = 2401 (frey-1-2400-2401)",
+ "rows": 2,
+ "horizontal": "ThetaUnitsModTorsLGPTorsorLink",
+ "problems": 0,
+ "data": {
+  "species": "InitialThetaData",
+  "name": "1 + 2400 = 2401 (frey-1-2400-2401)",
+  "source": "frey-1-2400-2401",
+  "curve": "y² = x³ + 2399x² − 2400x",
+  "Fmod": {
+   "id": "Fmod",
+   "degree": 1
+  },
+  "F": {
+   "id": "FBarOverF",
+   "degreeBound": 46080,
+   "logDifferentTpd": 0
+  },
+  "K": {
+   "id": "KField",
+   "degreeBound": 608256000,
+   "logDifferentEstimate": 10.14289808
+  },
+  "l": 11,
+  "LStar": 5,
+  "LPm": 6,
+  "EpsilonUnder": 1,
+  "jLogHeight": 46.700594,
+  "logQ": 24.20225742,
+  "AbsLogQ": 1.10010261,
+  "logF": 5.347107531,
+  "HtE": 4.03370957,
+  "hypotheses": {
+   "FGaloisOverFmod": true,
+   "FContainsSixTorsion": true,
+   "ImageContainsSLTwo": true,
+   "StableReduction": true,
+   "CKIsKCore": true
+  },
+  "VSet": [
+   {
+    "name": "v2",
+    "kind": "VNon",
+    "p": 2,
+    "eMod": 1,
+    "fMod": 1,
+    "eK": 1,
+    "fK": 1,
+    "reduction": "badMultiplicative",
+    "ordQ": 2,
+    "inVBadMod": false,
+    "qUnit": "121",
+    "qPrecision": 8
+   },
+   {
+    "name": "v3",
+    "kind": "VNon",
+    "p": 3,
+    "eMod": 1,
+    "fMod": 1,
+    "eK": 1,
+    "fK": 1,
+    "reduction": "badMultiplicative",
+    "ordQ": 2,
+    "inVBadMod": true,
+    "qUnit": "1315",
+    "qPrecision": 8
+   },
+   {
+    "name": "v5",
+    "kind": "VNon",
+    "p": 5,
+    "eMod": 1,
+    "fMod": 1,
+    "eK": 1,
+    "fK": 1,
+    "reduction": "badMultiplicative",
+    "ordQ": 4,
+    "inVBadMod": true,
+    "qUnit": "286761",
+    "qPrecision": 8
+   },
+   {
+    "name": "v7",
+    "kind": "VNon",
+    "p": 7,
+    "eMod": 1,
+    "fMod": 1,
+    "eK": 1,
+    "fK": 1,
+    "reduction": "badMultiplicative",
+    "ordQ": 8,
+    "inVBadMod": true,
+    "qUnit": "675572",
+    "qPrecision": 8
+   },
+   {
+    "name": "vinf",
+    "kind": "VArc",
+    "p": 0,
+    "eMod": 1,
+    "fMod": 1,
+    "eK": 1,
+    "fK": 1,
+    "reduction": "good",
+    "ordQ": 0,
+    "inVBadMod": false
+   }
+  ]
+ },
+ "defThreeOne": {
+  "items": [
+   {
+    "item": "(a)",
+    "ok": true,
+    "condition": "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F",
+    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion"
+   },
+   {
+    "item": "(b)",
+    "ok": true,
+    "condition": "X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)",
+    "detail": "asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked"
+   },
+   {
+    "item": "(c)",
+    "ok": true,
+    "condition": "l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)",
+    "detail": "checked against every v ∈ V^bad_mod"
+   },
+   {
+    "item": "(d)",
+    "ok": true,
+    "condition": "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)",
+    "detail": "|V| = |V_mod| by construction of the data"
+   },
+   {
+    "item": "(e)",
+    "ok": true,
+    "condition": "V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction",
+    "detail": "checked: at least one odd v of bad multiplicative reduction"
+   },
+   {
+    "item": "(f)",
+    "ok": true,
+    "condition": "ε̲ a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1",
+    "detail": "ε̲ = the cusp ±1 (label 1 ∈ F_l^*)"
+   }
+  ],
+  "errors": 0,
+  "warnings": 0,
+  "checks": 9,
+  "issues": []
+ },
+ "hodgeTheater": {
+  "T": [
+   {
+    "t": -5,
+    "basepoint": 201
+   },
+   {
+    "t": -4,
+    "basepoint": 202
+   },
+   {
+    "t": -3,
+    "basepoint": 203
+   },
+   {
+    "t": -2,
+    "basepoint": 204
+   },
+   {
+    "t": -1,
+    "basepoint": 205
+   },
+   {
+    "t": 0,
+    "basepoint": 206
+   },
+   {
+    "t": 1,
+    "basepoint": 207
+   },
+   {
+    "t": 2,
+    "basepoint": 208
+   },
+   {
+    "t": 3,
+    "basepoint": 209
+   },
+   {
+    "t": 4,
+    "basepoint": 210
+   },
+   {
+    "t": 5,
+    "basepoint": 211
+   }
+  ],
+  "J": [
+   {
+    "j": 1,
+    "basepoint": 207
+   },
+   {
+    "j": 2,
+    "basepoint": 208
+   },
+   {
+    "j": 3,
+    "basepoint": 209
+   },
+   {
+    "j": 4,
+    "basepoint": 210
+   },
+   {
+    "j": 5,
+    "basepoint": 211
+   }
+  ],
+  "symmetryPmOrder": 22,
+  "symmetryStarOrder": 5,
+  "bridges": {
+   "ThetaPm": true,
+   "ThetaEll": true,
+   "Theta": true,
+   "NF": true
+  },
+  "glued": true,
+  "gluing": [
+   [
+    -5,
+    5
+   ],
+   [
+    -4,
+    4
+   ],
+   [
+    -3,
+    3
+   ],
+   [
+    -2,
+    2
+   ],
+   [
+    -1,
+    1
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    3
+   ],
+   [
+    4,
+    4
+   ],
+   [
+    5,
+    5
+   ]
+  ],
+  "thetaHT": [
+   {
+    "v": "v3",
+    "p": 3,
+    "ordQ": 2,
+    "ordQUnder": [
+     2,
+     22
+    ]
+   },
+   {
+    "v": "v5",
+    "p": 5,
+    "ordQ": 4,
+    "ordQUnder": [
+     4,
+     22
+    ]
+   },
+   {
+    "v": "v7",
+    "p": 7,
+    "ordQ": 8,
+    "ordQUnder": [
+     8,
+     22
+    ]
+   }
+  ],
+  "errors": 0,
+  "checks": 10
+ },
+ "gaussian": {
+  "evaluationPoints": 11,
+  "muOrder": 22,
+  "places": [
+   {
+    "v": "v3",
+    "p": 3,
+    "ordQ": 2,
+    "precision": 8,
+    "qUnit": "1315",
+    "rows": [
+     {
+      "j": 1,
+      "jSq": 1,
+      "ordQUnderPow": [
+       1,
+       11
+      ],
+      "ordQPow": 2,
+      "unitPow": "1315"
+     },
+     {
+      "j": 2,
+      "jSq": 4,
+      "ordQUnderPow": [
+       4,
+       11
+      ],
+      "ordQPow": 8,
+      "unitPow": "2098"
+     },
+     {
+      "j": 3,
+      "jSq": 9,
+      "ordQUnderPow": [
+       9,
+       11
+      ],
+      "ordQPow": 18,
+      "unitPow": "1621"
+     },
+     {
+      "j": 4,
+      "jSq": 16,
+      "ordQUnderPow": [
+       16,
+       11
+      ],
+      "ordQPow": 32,
+      "unitPow": "1585"
+     },
+     {
+      "j": 5,
+      "jSq": 25,
+      "ordQUnderPow": [
+       25,
+       11
+      ],
+      "ordQPow": 50,
+      "unitPow": "3934"
+     }
+    ]
+   },
+   {
+    "v": "v5",
+    "p": 5,
+    "ordQ": 4,
+    "precision": 8,
+    "qUnit": "286761",
+    "rows": [
+     {
+      "j": 1,
+      "jSq": 1,
+      "ordQUnderPow": [
+       2,
+       11
+      ],
+      "ordQPow": 4,
+      "unitPow": "286761"
+     },
+     {
+      "j": 2,
+      "jSq": 4,
+      "ordQUnderPow": [
+       8,
+       11
+      ],
+      "ordQPow": 16,
+      "unitPow": "281016"
+     },
+     {
+      "j": 3,
+      "jSq": 9,
+      "ordQUnderPow": [
+       18,
+       11
+      ],
+      "ordQPow": 36,
+      "unitPow": "104066"
+     },
+     {
+      "j": 4,
+      "jSq": 16,
+      "ordQUnderPow": [
+       32,
+       11
+      ],
+      "ordQPow": 64,
+      "unitPow": "360161"
+     },
+     {
+      "j": 5,
+      "jSq": 25,
+      "ordQUnderPow": [
+       50,
+       11
+      ],
+      "ordQPow": 100,
+      "unitPow": "45876"
+     }
+    ]
+   },
+   {
+    "v": "v7",
+    "p": 7,
+    "ordQ": 8,
+    "precision": 8,
+    "qUnit": "675572",
+    "rows": [
+     {
+      "j": 1,
+      "jSq": 1,
+      "ordQUnderPow": [
+       4,
+       11
+      ],
+      "ordQPow": 8,
+      "unitPow": "675572"
+     },
+     {
+      "j": 2,
+      "jSq": 4,
+      "ordQUnderPow": [
+       16,
+       11
+      ],
+      "ordQPow": 32,
+      "unitPow": "1392379"
+     },
+     {
+      "j": 3,
+      "jSq": 9,
+      "ordQUnderPow": [
+       36,
+       11
+      ],
+      "ordQPow": 72,
+      "unitPow": "5533403"
+     },
+     {
+      "j": 4,
+      "jSq": 16,
+      "ordQUnderPow": [
+       64,
+       11
+      ],
+      "ordQPow": 128,
+      "unitPow": "1582443"
+     },
+     {
+      "j": 5,
+      "jSq": 25,
+      "ordQUnderPow": [
+       100,
+       11
+      ],
+      "ordQPow": 200,
+      "unitPow": "249405"
+     }
+    ]
+   }
+  ],
+  "logVolumes": [
+   -1.10010261,
+   -4.40041044,
+   -9.90092349,
+   -17.60164176,
+   -27.50256525
+  ],
+  "qPilot": -1.10010261,
+  "thetaPilot": -12.10112871
+ },
+ "lattice": {
+  "vertices": 10,
+  "logLinks": 8,
+  "errors": 0,
+  "checks": 3,
+  "thetaLink": {
+   "kind": "ThetaUnitsModTorsLGPTorsorLink",
+   "notation": "Θ×μ_LGP-link",
+   "dom": [
+    0,
+    0
+   ],
+   "cod": [
+    1,
+    0
+   ],
+   "glued": "FMonoGlobValUnitsModTorsPrimeStrip",
+   "sharesG": true,
+   "sharesUnits": true,
+   "sharesPi": false,
+   "keepsRing": false,
+   "dilation": 11,
+   "places": [
+    {
+     "v": "v3",
+     "left": [
+      1,
+      4,
+      9,
+      16,
+      25
+     ],
+     "right": [
+      1
+     ],
+     "unitsShared": true,
+     "piLeft": 270012,
+     "piRight": 670012
+    },
+    {
+     "v": "v5",
+     "left": [
+      1,
+      4,
+      9,
+      16,
+      25
+     ],
+     "right": [
+      1
+     ],
+     "unitsShared": true,
+     "piLeft": 270022,
+     "piRight": 670022
+    },
+    {
+     "v": "v7",
+     "left": [
+      1,
+      4,
+      9,
+      16,
+      25
+     ],
+     "right": [
+      1
+     ],
+     "unitsShared": true,
+     "piLeft": 270032,
+     "piRight": 670032
+    }
+   ]
+  },
+  "logShells": [
+   {
+    "v": "v2",
+    "p": 2,
+    "pstar": 4,
+    "radius": [
+     0,
+     1
+    ],
+    "logVolume": 0,
+    "piShared": true
+   },
+   {
+    "v": "v3",
+    "p": 3,
+    "pstar": 3,
+    "radius": [
+     0,
+     1
+    ],
+    "logVolume": 0,
+    "piShared": true
+   },
+   {
+    "v": "v5",
+    "p": 5,
+    "pstar": 5,
+    "radius": [
+     0,
+     1
+    ],
+    "logVolume": 0,
+    "piShared": true
+   },
+   {
+    "v": "v7",
+    "p": 7,
+    "pstar": 7,
+    "radius": [
+     0,
+     1
+    ],
+    "logVolume": 0,
+    "piShared": true
+   },
+   {
+    "v": "vinf",
+    "p": 0,
+    "pstar": 0,
+    "radius": [
+     0,
+     1
+    ],
+    "logVolume": 0,
+    "piShared": true
+   }
+  ]
+ },
+ "multiradial": {
+  "procession": [
+   {
+    "j": 0,
+    "size": 1,
+    "perms": 1,
+    "leading": 10.14289808,
+    "thetaShift": 0
+   },
+   {
+    "j": 1,
+    "size": 2,
+    "perms": 2,
+    "leading": 20.28579615,
+    "thetaShift": -1.10010261
+   },
+   {
+    "j": 2,
+    "size": 3,
+    "perms": 6,
+    "leading": 30.42869423,
+    "thetaShift": -4.40041044
+   },
+   {
+    "j": 3,
+    "size": 4,
+    "perms": 24,
+    "leading": 40.57159231,
+    "thetaShift": -9.90092349
+   },
+   {
+    "j": 4,
+    "size": 5,
+    "perms": 120,
+    "leading": 50.71449038,
+    "thetaShift": -17.60164176
+   },
+   {
+    "j": 5,
+    "size": 6,
+    "perms": 720,
+    "leading": 60.85738846,
+    "thetaShift": -27.50256525
+   }
+  ],
+  "ind1": 24883200,
+  "ind2Summands": 6,
+  "ind3": true,
+  "packets": 6,
+  "splittingMonoids": 15,
+  "numberFieldCopies": 5,
+  "logKummer": true,
+  "leadingTerm": 142.352318,
+  "thetaUpperBound": 28.4704636,
+  "absLogQ": 1.10010261,
+  "corThreeTwelve": {
+   "holds": true,
+   "steps": [
+    {
+     "label": "(0) |log q| = log q / 2l: log-volume of the q-pilot at (1,0), i.e. −|log q|",
+     "value": -1.10010261,
+     "ref": "[IUTchIII] Cor 3.12; Def 3.8 (i)"
+    },
+    {
+     "label": "(1) the Θ-pilot at (0,0): naive log-volume −avg(j²)·|log q|",
+     "value": -12.10112871,
+     "ref": "[IUTchIII] Def 3.8 (i)"
+    },
+    {
+     "label": "(2) the Θ×μ_LGP-link (0,0)→(1,0) identifies the Θ-pilot with the q-pilot (value groups), units up to Ism",
+     "value": -1.10010261,
+     "ref": "[IUTchIII] Def 3.8 (ii), Thm 3.11 (iii)"
+    },
+    {
+     "label": "(3) multiradial representation of the Θ-pilot in terms of the mono-analytic data of (1,0): Ind1 count",
+     "value": 720,
+     "ref": "[IUTchIII] Thm 3.11 (i)"
+    },
+    {
+     "label": "(4) holomorphic hull of the region: Σ_j (j+1) log d^K (procession-normalized)",
+     "value": 40.57159231,
+     "ref": "[IUTchIII] Cor 3.12 proof; [Alien] §3.7 (iv)"
+    },
+    {
+     "label": "(5) −|log Θ| upper bound (hull + theta shift, procession-normalized)",
+     "value": 28.4704636,
+     "ref": "[IUTchIII] Cor 3.12"
+    },
+    {
+     "label": "(6) inequality −|log Θ| ≥ −|log q| ⇔ C_Θ ≥ −1: C_Θ",
+     "value": 1.363509173e+22,
+     "ref": "[IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10"
+    }
+   ]
+  }
+ },
+ "heightBound": {
+  "logQ": 24.20225742,
+  "absLogQ": 1.10010261,
+  "logDTpd": 0,
+  "logFTpd": 5.347107531,
+  "CTheta": 1.363509173e+22,
+  "lhs": 4.03370957,
+  "rhs": 1e+22,
+  "holds": true,
+  "corTwoTwo": {
+   "logQAll": 25.58855178,
+   "lMin": 5.058512803,
+   "lMax": 479945215.6,
+   "lInRange": true,
+   "epsE": 3733723703000000,
+   "lhs": 4.26475863,
+   "rhs": 1.000001996e+22,
+   "holds": true
+  }
+ },
+ "crossCheck": [
+  {
+   "what": "log(q)  = Σ_{V^bad_mod} ord(q_v) log p_v",
+   "toolkit": 24.20225742,
+   "file": 24.202257,
+   "ok": true
+  },
+  {
+   "what": "|log(q)| = log(q)/2l",
+   "toolkit": 1.10010261,
+   "file": 1.100103,
+   "ok": true
+  },
+  {
+   "what": "log(f) over V^bad_mod",
+   "toolkit": 4.65396035,
+   "file": 4.65396,
+   "ok": true
+  },
+  {
+   "what": "ht = log(q)/6",
+   "toolkit": 4.03370957,
+   "file": 4.03371,
+   "ok": true
+  }
+ ]
+}
