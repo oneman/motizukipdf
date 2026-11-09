@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Anabelian Reconstruction Algorithms</title>
+<!--
+  Source of anabelian_guide.pdf. Build with: node scripts/anabelian/build.js
+  Math goes between \( … \) and \[ … \] (KaTeX). {{key}} placeholders are numbers computed in
+  build.js or read from src/iut; {{fig:name}} placeholders are SVG figures from figures.js.
+  Pop-culture jokes are text only. The mascot Musubi is an original drawing.
+-->
+<style>
+  @page { size: A4; }
+  :root {
+    --ink: #2a2433; --soft: #6b6178; --rule: #e4dcef;
+    --sakura: #e85d8a; --sakura-bg: #fff2f6;
+    --matcha: #3f8f5a; --matcha-bg: #eff8f1;
+    --sora: #3a74c4; --sora-bg: #eef4fc;
+    --yuzu: #c98a10; --yuzu-bg: #fff8e6;
+    --fuji: #7a5cc4; --fuji-bg: #f3effc;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0; color: var(--ink); background: #fff;
+    font: 10.1pt/1.5 'Source Serif 4', 'Noto Serif JP', 'DejaVu Serif', serif;
+    hyphens: auto; text-align: justify;
+  }
+  .jp { font-family: 'Noto Serif JP', serif; }
+  h1, h2, h3 { font-family: Inter, 'Noto Serif JP', sans-serif; text-align: left; hyphens: none; }
+  h2 {
+    font-size: 14pt; margin: 18pt 0 6pt; padding-bottom: 3pt;
+    border-bottom: 1.5pt solid var(--rule); break-after: avoid;
+  }
+  h2 .no { color: var(--fuji); margin-right: 6pt; }
+  h2 .jp { font-size: 10pt; color: var(--soft); font-weight: 400; margin-left: 6pt; }
+  h3 { font-size: 11pt; margin: 11pt 0 3pt; break-after: avoid; }
+  p { margin: 0 0 6.5pt; }
+  code, .mono { font-family: 'JetBrains Mono', 'DejaVu Sans Mono', monospace; font-size: 8.3pt; }
+  a { color: var(--sora); text-decoration: none; }
+  b.k { color: var(--fuji); }
+
+  .masthead {
+    background: linear-gradient(120deg, #f3effc 0%, #fff2f6 50%, #eef4fc 100%);
+    border-radius: 10pt; padding: 16pt 18pt 10pt; margin-bottom: 12pt;
+    border: 1pt solid var(--rule); display: flex; gap: 10pt; align-items: center;
+  }
+  .masthead .l { flex: 1.25; }
+  .masthead .r { flex: 1; }
+  .kicker { font: 600 8.5pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--fuji); }
+  .masthead h1 { font-size: 25pt; line-height: 1.05; margin: 4pt 0 4pt; letter-spacing: -.01em; }
+  .masthead h1 .ff { color: var(--fuji); }
+  .masthead .sub { font-size: 11pt; color: var(--soft); margin: 0 0 7pt; text-align: left; }
+  .masthead .byline { font: 8.4pt Inter, sans-serif; color: var(--soft); text-align: left; }
+
+  .abstract {
+    border-left: 3pt solid var(--fuji); padding: 2pt 0 2pt 10pt; margin: 0 0 10pt;
+    font-size: 9.8pt; color: #3d3546;
+  }
+  .abstract b { font-family: Inter, sans-serif; font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--fuji); }
+
+  .box { border-radius: 7pt; padding: 7pt 10pt 4pt; margin: 8pt 0 10pt; break-inside: avoid; font-size: 9.5pt; }
+  .box .tag { font: 700 7.6pt Inter, sans-serif; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 2pt; }
+  .otaku { background: var(--sakura-bg); border: 1pt solid #f6c3d4; }
+  .otaku .tag { color: var(--sakura); }
+  .toolkit { background: var(--sora-bg); border: 1pt solid #c6d9f3; }
+  .toolkit .tag { color: var(--sora); }
+  .toolkit pre { margin: 2pt 0 5pt; white-space: pre-wrap; font: 7.8pt/1.35 'JetBrains Mono', monospace; color: #213a5e; }
+  .paper { background: var(--matcha-bg); border: 1pt solid #c3e3cc; }
+  .paper .tag { color: var(--matcha); }
+  .warn { background: var(--yuzu-bg); border: 1pt solid #f0d79b; }
+  .warn .tag { color: var(--yuzu); }
+  .algo { background: var(--fuji-bg); border: 1pt solid #d6caf2; }
+  .algo .tag { color: var(--fuji); }
+  .algo ol { margin: 2pt 0 5pt; }
+
+  .float-r { float: right; width: 46%; margin: 2pt 0 8pt 12pt; }
+  .clear { clear: both; }
+
+  figure { margin: 8pt 0 12pt; break-inside: avoid; text-align: center; }
+  figure svg.fig { width: 100%; height: auto; display: block; }
+  figcaption { font-size: 8.7pt; color: var(--soft); margin-top: 4pt; text-align: left; }
+  figcaption b { color: var(--ink); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 8.8pt; margin: 6pt 0 10pt; break-inside: avoid; }
+  th { font: 600 7.9pt Inter, sans-serif; text-align: left; color: var(--soft); border-bottom: 1.2pt solid var(--rule); padding: 3pt 5pt; }
+  td { border-bottom: .6pt solid var(--rule); padding: 3pt 5pt; vertical-align: top; text-align: left; hyphens: none; }
+  tr:nth-child(even) td { background: #fbf9fd; }
+  table.num td, table.num th { text-align: center; }
+  table.num td:last-child, table.num th:last-child { text-align: left; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 5pt 12pt; font: 8.4pt Inter, sans-serif; margin: 2pt 0 9pt; }
+  .chip { display: inline-block; width: 9pt; height: 9pt; border-radius: 2.5pt; vertical-align: -1pt; margin-right: 4pt; }
+
+  .toc { columns: 2; column-gap: 18pt; font-size: 9pt; margin: 0 0 8pt; padding-left: 14pt; }
+  .toc li { margin-bottom: 1.5pt; break-inside: avoid; }
+
+  .katex { font-size: 1.03em; }
+  .katex-display { margin: 6pt 0 8pt; }
+  ul, ol { margin: 0 0 7pt; padding-left: 16pt; }
+  li { margin-bottom: 2.5pt; }
+  .refs { font-size: 8.6pt; }
+  .refs li { margin-bottom: 3pt; text-align: left; }
+  .preview {
+    background: linear-gradient(120deg, #2b2340, #3b2d5c); color: #f3eefc; border-radius: 9pt;
+    padding: 10pt 14pt 6pt; margin: 12pt 0; break-inside: avoid;
+  }
+  .preview .tag { color: #c9b8ff; font: 700 8pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+  .preview p { color: #f3eefc; }
+  .page-break { break-before: page; }
+  .center { text-align: center; }
+  .small { font-size: 8.4pt; color: var(--soft); }
+  .slogan { font: 600 10.5pt Inter, sans-serif; color: var(--fuji); text-align: center; margin: 8pt 0 10pt; }
+  .cheat td:first-child { font-weight: 600; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="l">
+    <div class="kicker">ABCPROOF · motizukipdf · field guide no. 2</div>
+    <h1>Anabelian <span class="ff">Reconstruction</span> Algorithms</h1>
+    <p class="sub">How inter-universal Teichmüller theory rebuilds fields, curves and functions from nothing but
+      a group <span class="jp">（遠アーベル幾何の復元アルゴリズム入門）</span></p>
+    <div class="byline">Sources: the papers in <code>pdf/</code> · numbers from <code>src/iut</code> and from the worked
+      examples in <code>scripts/anabelian/build.js</code> · November 2026</div>
+  </div>
+  <div class="r">{{fig:mast}}</div>
+</div>
+
+<div class="abstract"><b>Abstract</b> &nbsp;
+Anabelian geometry asks how much of a variety you can recover from its étale fundamental group alone.
+Mochizuki's <em>mono-anabelian</em> version asks for more than a yes: it asks for an <em>algorithm</em> whose
+only input is one abstract profinite group, and whose output is the field, the curve and its functions,
+with addition and multiplication. Inter-universal Teichmüller theory (IUT) needs these algorithms because
+its Θ-link glues two universes along groups and monoids but never along rings, so the only way to talk
+about the ring on the far side is to rebuild it from the shared group. This guide walks through the
+algorithms one at a time: the local invariants of a Galois group, Uchida's addition-from-multiplication
+lemma, cyclotomes and Kummer theory, Belyi and elliptic cuspidalization, the full reconstruction theorem
+[AbsTopIII, Thm 1.9], the archimedean version, the étale-like / Frobenius-like dichotomy and mono-anabelian
+transport, the three kinds of cyclotomic rigidity, and log-shells. Each one comes with a picture, a worked
+example whose numbers are computed by the build script, an analogy, and at least one joke. No mathematical
+claim rests on a joke.
+</div>
+
+<div class="legend">
+  <span><span class="chip" style="background:var(--sora)"></span>étale-like: groups and containers (“zero mass”)</span>
+  <span><span class="chip" style="background:var(--yuzu)"></span>Frobenius-like: monoids, Frobenioids (“positive mass”)</span>
+  <span><span class="chip" style="background:var(--matcha)"></span>reconstructed rings and fields</span>
+  <span><span class="chip" style="background:var(--fuji)"></span>the algorithm</span>
+  <span><span class="chip" style="background:var(--sakura)"></span>links and indeterminacies</span>
+</div>
+
+<ol class="toc" start="0">
+  <li>Why IUT needs reconstruction algorithms</li>
+  <li>What anabelian geometry is</li>
+  <li>Mono-anabelian versus bi-anabelian</li>
+  <li>Algorithm A: what \(G_k\) knows about a \(p\)-adic field</li>
+  <li>Algorithm B: Uchida's addition from multiplication</li>
+  <li>Algorithm C: cyclotomes and Kummer classes</li>
+  <li>Algorithm D: Belyi cuspidalization</li>
+  <li>Algorithm E: elliptic cuspidalization</li>
+  <li>The full algorithm: [AbsTopIII] Theorem 1.9</li>
+  <li>The archimedean side: Aut-holomorphic spaces</li>
+  <li>Étale-like, Frobenius-like, and mono-anabelian transport</li>
+  <li>Cyclotomic rigidity, three ways</li>
+  <li>The log-link and log-shells</li>
+  <li>Where IUT calls each algorithm</li>
+  <li>Cheat sheet, honest notes, references</li>
+</ol>
+
+<div class="box warn"><span class="tag">Content notice</span>
+All pop-culture references are text only: no character art, logos or screenshots. Musubi, the onigiri
+detective in the figures, is an original drawing. Where we say what a theorem states, we cite the paper and
+the numbered result. The 2018 disagreement about IUT is about [IUTchIII] Corollary 3.12, which comes after
+everything in this guide; we report it in §14 and adjudicate nothing. 審判ではありません。
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">0</span>Why IUT needs reconstruction algorithms<span class="jp">なぜ復元が必要か</span></h2>
+
+<p>Here is the problem in its smallest form, taken from Mochizuki's 2023 Oberwolfach report [Gateway, §2].
+Let \(R\) be an integral domain, say \(\mathbb{Z}\), acted on by a group \(G\), and let \(N\ge 2\). The \(N\)-th
+power map \(x\mapsto x^N\) is an isomorphism of multiplicative monoids from \(R^{\rhd}=R\setminus\{0\}\) onto
+its image, and it respects the \(G\)-action, but it is not a ring map, because \((x+y)^N\neq x^N+y^N\).
+Now take two labelled copies \({}^\dagger R\) and \({}^\ddagger R\) and glue them along it:</p>
+\[ {}^\dagger G \curvearrowright {}^\dagger R \;\supseteq\; ({}^\dagger R^{\rhd})^N \;\xleftarrow{\;\sim\;}\; {}^\ddagger R^{\rhd} \;\subseteq\; {}^\ddagger R \curvearrowleft {}^\ddagger G. \]
+<p>The groups \({}^\dagger G\) and \({}^\ddagger G\) can be identified, and so can the monoids, but the rings
+cannot. That is the shape of IUT's <b>Θ-link</b>: it identifies the Θ-pilot \(\{q_v^{j^2}\}\) on one side with
+the \(q\)-pilot \(\{q_v\}\) on the other, multiplicatively, and the only things it lets through are abstract
+groups (the Galois groups \(G_v\)) and abstract monoids. If you want to say anything about the ring structure
+of \({}^\dagger R\) in terms of \({}^\ddagger R\), you need a procedure that starts from the shared group and
+rebuilds as much ring structure as possible on both sides <em>by the same recipe</em>. A procedure whose input
+is a bare group and whose output is a field is exactly what anabelian geometry, in its algorithmic form,
+provides.</p>
+
+<p>Mochizuki puts the connection to abc in one sentence [Gateway, §4; Alien, §3.11 (iii)]: anabelian geometry
+is about reconstructing <em>addition</em> from <em>multiplication</em> (plus topology), and the abc inequality
+bounds the additive size of a number (its height) by its multiplicative size (its conductor). Both say that
+addition is dominated by multiplication. The rest of this guide is about how the reconstruction is actually
+done.</p>
+
+<div class="box otaku"><span class="tag">Otaku note: the premise of the series</span>
+Two worlds, one shared object that passes between them, and the rule that you may not bring anything else
+across. It is the setup of every isekai and of every “switched bodies” film: in one famous one, the two leads
+cannot even keep each other's names, only the notes they leave. IUT's notes are Galois groups. And since the
+Japanese word <span class="jp">結び</span> (<i>musubi</i>) means both “rice ball” and “a knot that ties two
+things together”, our mascot is an onigiri.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">1</span>What anabelian geometry is<span class="jp">遠アーベル幾何とは</span></h2>
+
+<p>Every connected scheme \(X\) has an étale fundamental group \(\pi_1(X)\), a profinite group that
+classifies its finite étale covers the way the topological fundamental group classifies covering spaces.
+For a geometrically connected variety over a field \(k\) there is a fundamental exact sequence</p>
+\[ 1 \longrightarrow \Delta_X \longrightarrow \Pi_X \longrightarrow G_k \longrightarrow 1,
+\qquad \Pi_X=\pi_1(X),\;\; \Delta_X=\pi_1(X_{\overline k}),\;\; G_k=\mathrm{Gal}(\overline k/k). \]
+<p>\(\Delta_X\) is the <em>geometric</em> part (for a curve of genus \(g\) with \(r\) punctures it is the
+profinite completion of the topological fundamental group of a surface) and \(G_k\) is the <em>arithmetic</em>
+part. In his 1983 letter to Faltings, Grothendieck proposed that for “anabelian” varieties, whose fundamental
+groups are very far from abelian, the group \(\Pi_X\) together with its map to \(G_k\) should determine
+\(X\). The prototypes are:</p>
+<ul>
+  <li><b>Number fields</b> (Neukirch, Uchida, 1969–1976): an isomorphism \(G_F\cong G_{F'}\) of absolute Galois
+    groups of number fields comes from a unique isomorphism \(F'\cong F\).</li>
+  <li><b>Hyperbolic curves</b> (Tamagawa 1997 for affine curves; Mochizuki 1996 and 1999 for all hyperbolic
+    curves over sub-\(p\)-adic fields, i.e. subfields of finitely generated extensions of \(\mathbb{Q}_p\)):
+    isomorphisms of \(\Pi_X\) over \(G_k\) come from isomorphisms of curves [pGC, LocAn].</li>
+  <li><b>Absolute</b> results, where \(G_k\) is not given in advance and must itself be found inside \(\Pi_X\):
+    [AbsAnab], [AbsTopI–III]. These are the ones IUT uses.</li>
+</ul>
+<p>A curve is <em>hyperbolic</em> when \(2g-2+r>0\). That condition is what makes \(\Delta_X\) nonabelian and
+“rigid”: \(\mathbb{P}^1\) minus three points (a <em>tripod</em>) and an elliptic curve minus its origin are the two
+smallest examples, and both are the stars of this guide.</p>
+
+<table>
+<tr><th>object</th><th>what it is</th><th>toolkit identifier</th><th>analogy</th></tr>
+<tr><td>\(\Pi_X\)</td><td>arithmetic fundamental group of \(X\); in IUT \(\Pi_v\), tempered at bad \(v\)</td><td><code>PiV</code>, <code>PiTpG</code></td><td>the whole shadow</td></tr>
+<tr><td>\(\Delta_X\)</td><td>geometric fundamental group, kernel of \(\Pi_X\twoheadrightarrow G_k\)</td><td><code>DeltaV</code></td><td>the shape of the shadow</td></tr>
+<tr><td>\(G_k\)</td><td>absolute Galois group of the base field</td><td><code>GV</code></td><td>the light source</td></tr>
+<tr><td>\(I_x\subseteq D_x\)</td><td>inertia and decomposition groups of a point or cusp \(x\)</td><td><code>InertiaEpsilonPrime</code></td><td>the footprint at \(x\)</td></tr>
+<tr><td>\(\widehat{\mathbb{Z}}(1)\), \(M_X\)</td><td>a cyclotome: a copy of \(\varprojlim\mu_N\); \(M_X=\mathrm{Hom}(H^2(\Delta_X,\widehat{\mathbb{Z}}),\widehat{\mathbb{Z}})\)</td><td><code>MXCyclotome</code></td><td>the tuning fork</td></tr>
+<tr><td>Kummer map \(\kappa\)</td><td>\(f\mapsto\) the class in \(H^1(\Pi,\widehat{\mathbb{Z}}(1))\) of the torsor of roots of \(f\)</td><td><code>KummerReady</code></td><td>a transformation belt</td></tr>
+<tr><td>\(\mathcal{B}(\Pi)\)</td><td>the anabelioid of finite \(\Pi\)-sets: “a space that is only its covers”</td><td><code>BPi</code>, <code>Temperoid</code></td><td>the Galois category</td></tr>
+</table>
+<p class="small">The toolkit's catalogue (<code>iut ids</code>) has {{nids}} identifiers, {{ngroups}} of kind
+<i>group</i> and {{nanab}} of kind <i>anabelioid</i>, and {{nprocs}} processes. None of them computes with
+profinite groups; they model the data and its bookkeeping (§14).</p>
+
+<div class="box otaku"><span class="tag">Otaku note: who's that curve?</span>
+Every Saturday morning a children's show from the late 1990s shows a black silhouette and asks you to name
+the creature. Anabelian geometry is that segment for algebraic geometry: the fundamental group is the
+silhouette, and the theorem says that for hyperbolic curves the silhouette is never ambiguous. The abelian
+case is the reason for the name: an elliptic curve's silhouette is just \(\widehat{\mathbb{Z}}^2\), which every
+elliptic curve has, so the game is no fun. Ana-bel-ian = <i>not</i> that.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">2</span>Mono-anabelian versus bi-anabelian<span class="jp">単遠アーベル と 双遠アーベル</span></h2>
+
+<p>There are two ways to say “the group determines the curve”. The classical way, which Mochizuki calls
+<b>bi-anabelian</b>, compares two objects: given \(X_1\), \(X_2\) and an isomorphism
+\(\Pi_{X_1}\cong\Pi_{X_2}\), it says the isomorphism comes from geometry. The <b>mono-anabelian</b> way is
+software: an algorithm that takes as input <em>one</em> abstract profinite group \(\Pi\), which “just happens” to be
+isomorphic to some \(\Pi_X\), and outputs field-like and scheme-like structures, functorially in \(\Pi\)
+[AbsTopIII, §I2, Rem 1.9.8]. The algorithm must be written “in language that only depends on the topological
+group structure”: no peeking at how \(\Pi\) was built.</p>
+
+<figure>{{fig:monobi}}
+<figcaption><b>Figure 1.</b> Bi-anabelian results compare two groups; mono-anabelian results are algorithms on
+one. A functorial algorithm gives a comparison theorem for free, so mono \(\Rightarrow\) bi. The converse is not
+known: an “algorithm” allowed to compare with a fixed reference model is really a bi-anabelian result in
+disguise [AbsTopIII, Rem 1.9.8].</figcaption></figure>
+
+<p>Why IUT insists on mono: on the far side of a Θ-link (or a log-link) there is no reference model. The only
+thing you are handed is the group \(G_v\) or \(\Pi_v\) “as an abstract topological group”, and anything you
+build from it must be built the same way in both universes. [AbsTopIII, §3] makes this precise: the
+mono-anabelian algorithms are compatible with the log-Frobenius operation (Cor 3.6), and the bi-anabelian
+approach is not (Cor 3.7 and the remarks after it). Mochizuki also remarks that the Neukirch–Uchida theorem
+was historically proved bi-anabelianly, and that [AbsTopIII, Thm 1.9] gave the first independent proof with an
+explicit construction of the number field [AbsTopIII, Rem 1.9.5]. Hoshi later gave a mono-anabelian
+reconstruction of a number field from its absolute Galois group alone [Hoshi19], and wrote the standard
+introduction to the subject [Hoshi21].</p>
+
+<div class="box otaku"><span class="tag">Otaku note: spot the difference vs. the vending machine</span>
+Bi-anabelian geometry is the “find the 7 differences” page of a weekend newspaper: two pictures side by side,
+and the theorem says there are zero differences. Mono-anabelian geometry is a Japanese vending machine: you
+put in one coin (a profinite group), press one button (the algorithm), and a hot can of corn soup (a field with
+\(+\) and \(\times\)) drops out. The machine has never seen your coin before and does not ask where you got it.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">3</span>Algorithm A: what \(G_k\) knows about a \(p\)-adic field<span class="jp">局所体のガロア群</span></h2>
+
+<p>Start with the smallest input: \(G_k=\mathrm{Gal}(\overline k/k)\) for a finite extension \(k\) of
+\(\mathbb{Q}_p\) (an <b>MLF</b>, mixed-characteristic local field). Local class field theory says
+\(G_k^{\mathrm{ab}}\cong(k^\times)^\wedge\cong\widehat{\mathbb{Z}}\times\mu_{q-1}\times\mu_{p^\infty}(k)\times\mathbb{Z}_p^{\,d}\),
+where \(q=p^f\) is the size of the residue field and \(d=[k:\mathbb{Q}_p]=ef\). That is the key to the following
+algorithm, which is [AbsAnab, Prop 1.2.1] read as software.</p>
+
+<div class="box algo"><span class="tag">Algorithm A · input: an abstract profinite group \(G\cong G_k\)</span>
+<ol>
+  <li>Compute \(G^{\mathrm{ab}}\) and its rank over \(\mathbb{Z}_l\) for each prime \(l\). It is \(1\) for \(l\neq p\)
+    and \(d+1\ge 2\) for \(l=p\). So <b>\(p\)</b> is the unique prime with rank at least \(2\), and
+    <b>\(d=[k:\mathbb{Q}_p]\)</b> is that rank minus one.</li>
+  <li>The prime-to-\(p\) torsion of \(G^{\mathrm{ab}}\) has order \(q-1\). So <b>\(q\)</b>, <b>\(f=\log_p q\)</b> and
+    <b>\(e=d/f\)</b> are determined.</li>
+  <li>An open subgroup \(H\) corresponds to an unramified extension exactly when \(e\) does not grow; the
+    intersection of those is the <b>inertia subgroup</b> \(I_k\).</li>
+  <li>The <b>Frobenius element</b> of \(G/I_k\cong\widehat{\mathbb{Z}}\) is the one that acts on the prime-to-\(p\)
+    roots of unity of unramified \(H\) as \(x\mapsto x^{q}\).</li>
+  <li>The images of \(\mathcal{O}_k^\times\), \(k^\times\) in \(G^{\mathrm{ab}}\) follow, and taking the torsion of the
+    abelianizations of all open \(H\), glued by the transfer (Verlagerung), gives a copy
+    \(\mu_{\mathbb{Q}/\mathbb{Z}}(G)\) of the roots of unity with its \(G\)-action: the <b>cyclotomic character</b>.</li>
+  <li>Finally the Brauer-group residue map <b>\(H^2(G,\mu_{\mathbb{Q}/\mathbb{Z}}(G))\cong\mathbb{Q}/\mathbb{Z}\)</b> of local
+    class field theory is group-theoretic too [AbsAnab, Prop 1.2.1 (vii); AbsTopIII, Cor 1.10 (i)].</li>
+</ol>
+</div>
+
+<figure>{{fig:localboard}}
+<figcaption><b>Figure 2.</b> Algorithm A as a sugoroku board. Every square is something an arbitrary
+automorphism of \(G_k\) must preserve [AbsAnab, Prop 1.2.1]. The last square is the catch.</figcaption></figure>
+
+<p>Here is what the algorithm reads off for six fields. The ranks are listed for \(l=2,3,5,7,11,13\), with the
+rank at \(p\) in bold; the build script recomputes \(p,d,q,f,e\) from those numbers and stops if any comes out
+wrong. The last column is the order of the \(p\)-power roots of unity in \(k\).</p>
+
+<table class="num">
+<tr><th>\(k\)</th><th>\(\mathrm{rk}_{\mathbb{Z}_l}G_k^{\mathrm{ab}}\), \(l=2,\dots,13\)</th><th>\(p\)</th><th>\(d\)</th><th>\(q-1\)</th><th>\(q\)</th><th>\(f\)</th><th>\(e\)</th><th>\(|\mu_{p^\infty}|\)</th><th>note</th></tr>
+{{localTable}}
+</table>
+
+<p>Look at the rows for \(\mathbb{Q}_3(\zeta_3)\) and \(\mathbb{Q}_3(\sqrt3)\) have the same
+\(p,d,q,f,e\), and Algorithm A only tells them apart through the \(p\)-power torsion. In general it cannot do
+more. There exist non-isomorphic \(p\)-adic fields with isomorphic absolute Galois groups (Yamagata,
+Jarden–Ritter; see [NSW], the closing remark before Thm 12.2.7), and Mochizuki's 1997 paper records that he set
+out to prove the naive Grothendieck conjecture for \(p\)-adic fields and found it to be false [GCpLF, §0]. What
+<em>is</em> true is that \(G_k\) together with its higher ramification filtration determines \(k\) [GCpLF, Thm
+4.2], a result proved with \(p\)-adic Hodge theory.</p>
+
+<figure>{{fig:twodim}}
+<figcaption><b>Figure 3.</b> The two “combinatorial dimensions” of a local field [AbsTopIII, §I3, Rem 1.9.4].
+\(G_k\) has cohomological dimension 2: the unramified direction is rigid (Frobenius is preserved by every
+automorphism), and the inertia direction is not. The complex numbers have the same split: units \(S^1\) are rigid,
+the value group \(\mathbb{R}_{&gt;0}\) can be stretched. IUT's Θ-link will deliberately allow the stretch; that is the
+sense in which it is a “Teichmüller deformation”.</figcaption></figure>
+
+<p>So \(G_k\) alone is <b>mono-analytic</b>: it sees the multiplicative monoid and its two dimensions, but not how
+addition ties them together. IUT calls the ring structure the <b>arithmetic holomorphic structure</b>, by analogy
+with a complex structure on a real surface [Alien, §2.7 (vii)]. To get it back you must couple \(G_k\) to
+geometry, which is the job of \(\Delta_X\). Remark 1.9.4 of [AbsTopIII] says this exactly: being “coupled with
+\(\Delta_X\)” via \(\Pi_X\) rigidifies both dimensions of \(G_k\).</p>
+
+<p>There is one more useful version of the input. If you know not just \(G_k\) but the pair
+\(G_k\curvearrowright\mathcal{O}^{\rhd}_{\overline k}\) (a group acting on an abstract monoid, called an
+MLF-Galois pair), then the Brauer-group argument above recovers the identification of the monoid's roots of
+unity with \(\mu(G_k)\), and so \(\mathrm{Aut}(G_k\curvearrowright\mathcal{O}^{\rhd})\cong\mathrm{Aut}(G_k)\). With only the units,
+\(\mathrm{Aut}(G_k\curvearrowright\mathcal{O}^{\times})\cong\widehat{\mathbb{Z}}^\times\times\mathrm{Aut}(G_k)\): a whole \(\widehat{\mathbb{Z}}^\times\) of
+ambiguity appears [Alien, Ex 2.12.1–2.12.2]. Remember this \(\widehat{\mathbb{Z}}^\times\); it returns in §11.</p>
+
+<div class="box otaku"><span class="tag">Otaku note: identical twins</span>
+\(G_k\) is the classic manga twin problem. The twins have the same height, the same birthday, the same
+grades (\(p\), \(d\), \(q\), \(f\), \(e\)) and only a beauty mark tells them apart (the \(p\)-power roots of unity), and
+sometimes not even that. The detective's solution is always the same: look at how each twin interacts with the
+rest of the world. For a \(p\)-adic field, “the rest of the world” is a hyperbolic curve over it.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">4</span>Algorithm B: Uchida's addition from multiplication<span class="jp">内田の補題</span></h2>
+
+<p>Suppose you have somehow recovered the <em>multiplicative</em> group \(K_X^\times\) of the function field of a
+proper curve \(X\) over an algebraically closed field \(k\), together with, for each point \(x\), the valuation
+\(\mathrm{ord}_x\colon K_X^\times\to\mathbb{Z}\) and the subgroup \(U_x\) of functions with value \(1\) at \(x\). Then
+addition comes for free. This is “Uchida's lemma”, implicit in Uchida's 1977 work on function fields and stated
+as an algorithm in [AbsTopIII, Prop 1.3].</p>
+
+<div class="box algo"><span class="tag">Algorithm B · input: \(\big(K_X^\times,\ \{\mathrm{ord}_x\},\ \{U_x\}\big)\)</span>
+<ol>
+  <li>Constants: \(k^\times=\bigcap_x\ker(\mathrm{ord}_x)\). Evaluation: \(\ker(\mathrm{ord}_x)=U_x\times k^\times\), so the
+    projection to \(k^\times\) is “the value at \(x\)”.</li>
+  <li>The valuations let you talk about divisors, and so about
+    \(\Gamma^\times(D)=\{f:\mathrm{Div}(f)+D\ge0\}\) and its dimension count \(l(D)\), all multiplicatively
+    [Prop 1.1].</li>
+  <li>Pick \(D\) with \(l(D)=2\) and three points \(x,y_1,y_2\) as in [Prop 1.2]. For \(\lambda\in k^\times\) let
+    \(f_{\lambda,1}\) be the element of \(\Gamma^\times(D)\) with value \(\lambda\) at \(x\) and a zero at \(y_1\); define
+    \(f_{\mu,2}\) likewise with a zero at \(y_2\).</li>
+  <li>If \(\lambda\neq-\mu\), the sum \(f_{\lambda,1}+f_{\mu,2}\) is the <em>unique</em> \(g\in\Gamma^\times(D)\) with
+    \(g(y_1)=f_{\mu,2}(y_1)\) and \(g(y_2)=f_{\lambda,1}(y_2)\). Then <b>\(\lambda+\mu=g(x)\)</b>.</li>
+  <li>Evaluating at all points gives addition on all of \(K_X^\times\cup\{0\}\).</li>
+</ol>
+</div>
+
+<figure>{{fig:uchida}}
+<figcaption><b>Figure 4.</b> Algorithm B on the simplest possible stage, \(\mathbb{P}^1\) with \(D=\infty\) (so
+\(\Gamma(D)=\{a+bt\}\)), \(x=0\), \(y_1=1\), \(y_2=-1\), computing \(\lambda+\mu\) for \(\lambda={{lam}}\), \(\mu={{mu}}\).
+The script finds \(g={{ga}}+{{gb}}t\) from the two values \(g(1)={{gy1}}\), \(g(-1)={{gy2}}\) and reads off
+\(g(0)={{ga}}\). (Prop 1.2 is stated for curves of any genus; \(\mathbb{P}^1\) is just the easiest place to draw it.)</figcaption></figure>
+
+<p>Two lines on a graph do not look like deep mathematics, but notice what was <em>not</em> used: we never added
+two functions. We only used which functions vanish where, their values, and multiplication by constants. That is
+the whole philosophy of the subject in one picture. Mochizuki's summary of his reconstruction theorem is
+literally a sum of two terms [IUTchI, §I4]:</p>
+<p class="slogan">[AbsTopIII] §1 = Uchida's lemma + Belyi cuspidalization</p>
+<p>and over finite fields the analogous slogan is “Uchida's lemma + the Lefschetz trace formula for Frobenius”
+[IUTchI, §I4]. The next three sections supply the inputs to Uchida's lemma from \(\Pi_X\) alone: the cyclotome
+(§5), the Kummer classes (§5) and the points (§6–7).</p>
+
+<div class="box otaku"><span class="tag">Otaku note: a sudoku that outputs arithmetic</span>
+The puzzle magazine that gave sudoku its name has a rule that every grid must have a unique solution. Uchida's
+lemma is that rule applied to a linear system: two given values pin down one function, and its third value is the
+answer. You can do \(3+5\) this way, and the build script does. It is the least efficient calculator in Japan,
+which is a competitive category.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">5</span>Algorithm C: cyclotomes and Kummer classes<span class="jp">円分物とクンマー類</span></h2>
+
+<h3>Synchronizing cyclotomes</h3>
+<p>Algorithm B needs functions, and to get functions out of a group you need Kummer theory, and Kummer theory
+needs coefficients: a copy of \(\widehat{\mathbb{Z}}(1)=\varprojlim\mu_N\). A group gives you several candidates, called
+<b>cyclotomes</b>, and the first job is to identify them with each other canonically. For a proper curve \(X\) with
+a point \(x\) removed, [AbsTopIII, Prop 1.4] gives a group-theoretic isomorphism between</p>
+<ul>
+  <li>the inertia group \(I_x\cong\widehat{\mathbb{Z}}(1)\) of the puncture (the loop around the hole), and</li>
+  <li>\(M_X=\mathrm{Hom}(H^2(\Delta_X,\widehat{\mathbb{Z}}),\widehat{\mathbb{Z}})\), the dual of the “fundamental class” of the closed
+    surface,</li>
+</ul>
+<p>using the maximal cuspidally central extension \(1\to I_x\to\Delta^{\text{c-cn}}_{X\setminus x}\to\Delta_X\to 1\):
+its extension class is an element of \(\mathrm{Hom}(M_X,I_x)\), and it is the isomorphism. Topologically: a small loop
+around the puncture is homologous to the boundary of the whole surface, so the “local” and “global” orientation
+are the same thing.</p>
+
+<h3>Kummer classes</h3>
+<p>Given a cyclotome, every invertible function \(f\) on an open \(U\subseteq X\) has a Kummer class
+\(\kappa_U(f)\in H^1(\Pi_U,M_X)\): the class of the torsor of all \(N\)-th roots of \(f\), for all \(N\). The base
+field must be <b>Kummer-faithful</b> (no nonzero element of any semi-abelian variety is infinitely divisible
+[AbsTopIII, Def 1.5]); every sub-\(p\)-adic field is [Rem 1.5.4]. Then [Prop 1.6] says:</p>
+<ol>
+  <li>\(\kappa_U\) is injective, so functions are faithfully recorded as cohomology classes;</li>
+  <li>restricting to the inertia groups \(I_x\) of the punctures gives an exact sequence
+    \(1\to(k^\times)^\wedge\to H^1(\Pi_U,M_X)\to\bigoplus_{x\in S}\widehat{\mathbb{Z}}\), where the map to the sum reads off the
+    order of zero or pole at each puncture;</li>
+  <li>the image of the functions is cut out by the condition that this divisor be principal, and principality is
+    tested group-theoretically with the sections \(G_k\to\Pi_{J}\) of the Jacobian.</li>
+</ol>
+<p>Then [Prop 1.8] separates nonconstant functions from constants: a class is a nonconstant number-field function
+when some multiple of it vanishes at one point and not at another (values are computed by restricting to the
+decomposition group of the point, \(\eta|_x=s_x^*(\eta)\in H^1(G_{k_x},M_X)\)), and a constant is a value of such a
+function at a point.</p>
+
+<figure>{{fig:kummer}}
+<figcaption><b>Figure 5.</b> Kummer theory moves Frobenius-like data (functions, as elements of a monoid) into an
+étale-like container built from the group alone. The pink dial is the <b>cyclotomic rigidity</b> question: the
+torsion of the monoid and the cyclotome of the group are both copies of \(\widehat{\mathbb{Z}}(1)\), but which isomorphism
+between them is the right one? An error by \(\lambda\in\widehat{\mathbb{Z}}^\times\) would send \(f\) to “\(f^\lambda\)”.</figcaption></figure>
+
+<div class="box otaku"><span class="tag">Otaku note: the tuning fork and the transformation belt</span>
+Before a school brass band plays, everyone tunes to one note. The cyclotome is that note: the inertia loop, the
+fundamental class of the surface and the roots of unity in the field all have to agree on pitch before anything
+else can be played. The Kummer map is the transformation belt of a long-running masked-rider franchise: insert a
+function, and it comes out as a cohomology class with the same personality and a much better costume. Cyclotomic
+rigidity is reading the belt's instructions so that you do not transform into \(f^{-1}\) by mistake.
+</div>
+
+<!-- ============================================================ -->
+<h2 class="page-break"><span class="no">6</span>Algorithm D: Belyi cuspidalization<span class="jp">ベールイ・カスプ化</span></h2>
+
+<p>Uchida's lemma needs <em>points</em>: the valuations \(\mathrm{ord}_x\) and the evaluations at \(x\). In the group
+world a point \(x\) shows up as its decomposition group \(D_x\subseteq\Pi_X\), but nothing in the group structure of
+\(\Pi_X\) singles that subgroup out (it is the image of a section of \(\Pi_X\twoheadrightarrow G_k\), and there are many
+sections). The trick is to turn
+points into <b>cusps</b>, because cusps <em>are</em> visible: their inertia groups can be found group-theoretically
+[AbsTopI, Lemma 4.5; IUTchI, Rem 1.2.2]. “Cuspidalization” means constructing \(\Pi_{X\setminus S}\twoheadrightarrow\Pi_X\)
+from \(\Pi_X\) alone. The tool is Belyi's theorem (1979): a curve over \(\mathbb{C}\) is defined over a number field
+exactly when it admits a map to \(\mathbb{P}^1\) branched over at most three points.</p>
+
+<p>The idea [AbsTopII, Ex 3.6, Cor 3.7]: take the point \(x\) you want and a Belyi map \(\beta\colon W\to P\),
+where \(P=\mathbb{P}^1\setminus\{0,1,\infty\}\), \(W\subseteq U\subseteq V\) are open, and \(x\) is one of the points
+\(\beta\) sends to \(\{0,1,\infty\}\). Over \(P\) the map is finite étale, so \(\Pi_W\) is an <em>open subgroup</em> of
+\(\Pi_P\), which you can find by group theory. Then \(W\subseteq U\setminus\{x\}\) is an open immersion, so
+\(\Pi_W\twoheadrightarrow\Pi_{U\setminus\{x\}}\) is a quotient by inertia groups of cusps, which you can also find. A
+chain of “cover, then fill in cusps” operations takes you from \(\Pi_P\) to \(\Pi_{U\setminus\{x\}}\).</p>
+
+<div class="box algo"><span class="tag">Algorithm D · [AbsTopII] Cor 3.7 · input: \(1\to\Delta\to\Pi\to G\to1\), \(X\) of strictly Belyi type</span>
+<ol>
+  <li>(a) Find a normal open \(\Pi_V\subseteq\Pi\) and a chain of type \(\subset,\subset,\bullet,\dots,\bullet,\subset,\bullet,\dots,\bullet,\supset\)
+    (covers \(\subset\), de-cuspidalizations \(\bullet\)) ending in a terminal isomorphism with the trivial chain. It
+    yields \(\Pi_U\twoheadrightarrow\Pi_V\) for \(U=V\times_X U_X\).</li>
+  <li>(b) Descend to \(\Pi_{U_X}\twoheadrightarrow\Pi\) using the unique lift of the outer action of \(\Pi/\Pi_V\).</li>
+  <li>(c) The decomposition groups of the points of \(X\setminus U_X\) are the images of the cuspidal decomposition
+    groups of \(\Pi_{U_X}\).</li>
+</ol>
+<p class="small">“Strictly Belyi type” means defined over a number field and isogenous to a hyperbolic curve of
+genus 0 [AbsTopII, Def 3.5]; every finite étale cover of a once-punctured elliptic curve over a number field
+qualifies [Alien, Ex 2.12.3 (i)]. The method reaches points defined over number fields; over a \(p\)-adic field
+all closed points follow by \(p\)-adic approximation [AbsTopII, Rem 3.7.2].</p>
+</div>
+
+<figure>{{fig:belyi}}
+<figcaption><b>Figure 6.</b> Left: \(\beta(t)=4t(1-t)\) sends \(0,1\mapsto0\), \(\tfrac12\mapsto1\) and
+\(\infty\mapsto\infty\), and its only critical points are \(\tfrac12\) and \(\infty\). So
+\(\mathbb{P}^1\setminus\{0,\tfrac12,1,\infty\}\to\mathbb{P}^1\setminus\{0,1,\infty\}\) is finite étale of degree 2,
+and \(\pi_1\) of the tripod minus \(\tfrac12\) is an index-2 subgroup of \(\pi_1\) of the tripod. (By Schreier's
+formula an index-\(d\) subgroup of a free group of rank \(r\) is free of rank \(d(r-1)+1\); here \(2\cdot1+1=3\),
+matching four punctures.) Right: the point \(\tfrac25\) needs Belyi's polynomial
+\(\beta={{belyiC}}\cdot t^2(1-t)^3\) of degree {{belyiDeg}}, which also sends three other points to \(1\); they are
+filled back in by de-cuspidalization.</figcaption></figure>
+
+<p>Belyi's own algorithm makes every algebraic point reachable: first push the point to a rational one by
+repeatedly composing with minimal polynomials, then use the map \(t\mapsto\frac{(m+n)^{m+n}}{m^m n^n}t^m(1-t)^n\),
+which is ramified only over \(0,1,\infty\) and sends \(\frac{m}{m+n}\mapsto1\). For \(\frac25\) the script checks
+that \(\beta(\frac25)=1\), that \(\frac25\) is a double root of \(\beta=1\), that the other three roots are
+\({{belyiR0}}\) and \({{belyiRe}}\pm{{belyiIm}}\,i\), and that Schreier's formula gives \({{belyiDeg}}\cdot1+1={{belyiPunct}}-1\),
+as it must for \({{belyiPunct}}\) punctures. Another example: \(4(t-1)/t^2\) does the same job for the point \(2\).</p>
+
+<div class="box otaku"><span class="tag">Otaku note: origami and the rolling ball</span>
+A Belyi map is origami for Riemann surfaces: you fold the whole sphere onto itself until the point you care
+about lands on one of three corners, and the creases (the branch points) all sit on the corners too. There is also
+a well-loved PlayStation game in which a tiny prince rolls a sticky ball over everything until the whole
+world is stuck to it. Belyi's algorithm is that ball: point after point gets rolled into \(\{0,1,\infty\}\), and
+none of them ever falls off. The King of All Cosmos would approve of the degree.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">7</span>Algorithm E: elliptic cuspidalization<span class="jp">楕円カスプ化</span></h2>
+
+<p>For a once-punctured elliptic curve \(X=E\setminus\{O\}\) there is a second, more elementary way to turn points
+into cusps, which works for torsion points and also in pro-\(\Sigma\) settings where Belyi maps are unavailable
+[AbsTopII, Ex 3.2, Cor 3.3]. Multiplication by \(N\) on \(E\) restricts to a finite étale map</p>
+\[ [N]\colon\; U=E\setminus E[N]\;\longrightarrow\; E\setminus\{O\}=X \qquad\text{of degree }N^2. \]
+<p>So \(\Pi_U\) is an open subgroup of \(\Pi_X\) of index \(N^2\), visible to group theory. But \(U\) is also an open
+subscheme of \(X\), so \(\Pi_U\twoheadrightarrow\Pi_X\) by filling in the \(N^2-1\) nonzero torsion points. The same group
+plays both roles; following the chain “cover by \([N]\), then de-cuspidalize \(N^2-1\) times” recovers the
+cuspidalization \(\Pi_U\twoheadrightarrow\Pi_X\) and with it the decomposition groups of the \(N\)-torsion points.
+The general statement handles any “elliptically admissible” orbicurve: one whose \(k\)-core is semi-elliptic, i.e.
+a quotient of a once-punctured elliptic curve by \(\pm1\) [AbsTopII, Def 3.1].</p>
+
+<figure>{{fig:elliptic}}
+<figcaption><b>Figure 7.</b> Elliptic cuspidalization for \(N=3\). Schreier's formula checks the ranks: an
+index-\(N^2\) subgroup of a free group of rank 2 has rank \(N^2+1\), which is {{ellRank2}} for \(N=2\) and
+{{ellRank3}} for \(N=3\), the rank of \(\pi_1\) of a torus with \(N^2\) punctures. The 2-torsion of 11a1
+(\(y^2+y=x^3-x^2-10x-20\)) is computed by the build script from \(4x^3-4x^2-40x-79=0\).</figcaption></figure>
+
+<p>In IUT this is how the <b>evaluation points</b> are reached: the theta function is evaluated at
+\(\mu_-\)-translates of cusps, which are torsion points, and their decomposition groups are reconstructed by
+elliptic cuspidalization [Alien, §3.4 (iii)]. It is also behind [IUTchI, Cor 1.2], which reconstructs
+\(\Pi_{\underline X}\), \(\Pi_{\vec C}\), \(\Pi_{\underline C}\) and the cusps \(0,\epsilon',\epsilon''\) from \(\Pi_{\vec X}\), and recovers
+the prime \(l\) itself from an index count.</p>
+
+<div class="box toolkit"><span class="tag">The toolkit says · iut run ReconstructCoverings --abc 1 2400 2401 --l 13</span>
+<pre>step 2: reconstruct Π_C ⊇ Π_X→ and Δ_X ⊆ Δ_C ⊆ Π_C ([AbsTopII] Cor 3.3 (i),(ii))
+step 3: recover l from l² = [Δ_X : Δ_X̲]·[Δ_X̲ : Δ_X→] = [Δ_X : Δ_X→] = [Δ_C : Δ_X→]/2
+        l² = {{cov_l2}} = 13·13 = {{cov_dc}}/2</pre>
+The process walks the eight steps of the proof of [IUTchI] Cor 1.2 on the example \(1+2400=2401\), \(l=13\), and
+checks the index identity. It records the steps; it does not manipulate profinite groups.
+</div>
+
+<div class="box otaku"><span class="tag">Otaku note: shadow clones</span>
+\([N]^{-1}(O)=E[N]\): one origin becomes \(N^2\) of them, every one an exact copy. Any ninja anime fan knows the
+technique. The point of the jutsu here is the opposite of the usual one: instead of confusing the enemy, it lets
+the group theorist find every clone, because each clone is a hole you can put your finger through.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">8</span>The full algorithm: [AbsTopIII] Theorem 1.9<span class="jp">復元定理</span></h2>
+
+<p>Now everything plugs together. Let \(X\) be a hyperbolic orbicurve of strictly Belyi type over a sub-\(p\)-adic
+field \(k\) (a number field or a \(p\)-adic field, say). [AbsTopIII, Thm 1.9] gives a functorial group-theoretic
+algorithm that reconstructs, from the extension \(1\to\Delta_X\to\Pi_X\to G_k\to1\) alone, the “NF-portion of the
+function field”: the field \(\overline k_{\mathrm{NF}}\) of algebraic numbers in \(\overline k\) and the function
+fields of the covers of \(X\) over it, <em>with their field structures</em>. When \(k\) is a number field or an MLF
+the extension can be replaced by the single group \(\Pi_X\) [Rem 1.9.2; AbsTopI, Thm 2.6 (v), (vi)].</p>
+
+<figure>{{fig:pipeline}}
+<figcaption><b>Figure 8.</b> The steps (a)–(e) of [AbsTopIII, Thm 1.9]. Steps (a)–(d) make the inputs of Uchida's
+lemma out of the group; step (e) is Uchida's lemma. The output is functorial with respect to open injections of
+groups and to change of base field, including from a number field to its completion; that last property is what
+lets IUT apply the same algorithm prime by prime [Rem 1.9.5 (ii)].</figcaption></figure>
+
+<p>Three remarks from the paper are worth keeping in your pocket.</p>
+<ul>
+  <li><b>Combinatorialization</b> [Rem 1.9.7]: the algorithm is “a complete combinatorialization, independent of
+    the base field, of the orbicurve”, in the same spirit as replacing a scheme's covers by an abstract Galois
+    category, or a log-regular scheme's local rings by monoids.</li>
+  <li><b>An elementary version</b> [Thm 1.11]: if you drop Belyi cuspidalization and only want the function
+    field, there is a much simpler algorithm valid over any Kummer-faithful field. Mochizuki hopes it can be
+    taught to advanced undergraduates.</li>
+  <li><b>MLF bonus</b> [Cor 1.10]: over a \(p\)-adic field, \(\Pi_X\) also gives back \(\overline k\), \(k\) and the ring
+    structure of \(\overline k\), not only its algebraic-number part. This is the local result IUT uses at each prime.</li>
+</ul>
+
+<div class="box otaku"><span class="tag">Otaku note: the culinary battle</span>
+In a famous cooking show the chairman unveils a single ingredient and the chefs must build a whole menu from it
+in an hour. Theorem 1.9 is that show with \(\Pi_X\) under the cloche. Course one, the Galois group (Algorithm A);
+course two, a cyclotome reduction (§5); the main course, Belyi-folded points with a Kummer glaze (§6); dessert,
+Uchida's addition. The judges taste it in another universe and it is the same dish. Allez cuisine!
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">9</span>The archimedean side: Aut-holomorphic spaces<span class="jp">アルキメデス的側面</span></h2>
+
+<p>A number field also has complex places, and there is no profinite Galois group there. [AbsTopIII, §2] supplies
+the archimedean counterpart: an <b>Aut-holomorphic space</b> is a topological surface together with, for every
+connected open \(U\), the subgroup \(\mathrm{Aut}^{\mathrm{hol}}(U)\subseteq\mathrm{Homeo}(U)\) of holomorphic automorphisms
+[Def 2.1]. The key fact is that the holomorphic-or-antiholomorphic automorphisms of the unit disc form a
+commensurably terminal subgroup of its homeomorphisms [Prop 2.2], so this weak-looking data pins down the
+complex structure up to complex conjugation. A refinement of the earlier “parallelograms, rectangles, squares”
+method then recovers the local linear holomorphic structure [Prop 2.5, 2.6], and elliptic cuspidalization on the
+Riemann surface ties it to the Galois-theoretic theory of §1 [Cor 2.7–2.9].</p>
+
+<figure>{{fig:aut}}
+<figcaption><b>Figure 9.</b> The archimedean dictionary. The unit circle \(S^1=\mathcal{O}^\times_{\mathbb{C}}\) plays the
+part of the rigid Frobenius direction and \(\mathbb{R}_{&gt;0}\) the floppy inertia direction (Figure 3).</figcaption></figure>
+
+<div class="box otaku"><span class="tag">Otaku note: the ghost and the shell</span>
+In a famous cyberpunk manga, a cyborg's “ghost” can move between bodies, and the question is what survives the
+move. Here the shell is the topological surface, which anyone can copy, and the ghost is the holomorphic structure.
+The Aut-holomorphic structure is a way of carrying the ghost in a form that the shell can hold: not the complex
+coordinate itself, but the list of motions that respect it.
+</div>
+
+<!-- ============================================================ -->
+<h2 class="page-break"><span class="no">10</span>Étale-like, Frobenius-like, and mono-anabelian transport<span class="jp">エタール的とフロベニウス的</span></h2>
+
+<h3>The prototype in positive characteristic</h3>
+<p>Mochizuki calls the following example “the fundamental model, or prototype, for a quite substantial portion
+of inter-universal Teichmüller theory” [Alien, Ex 2.6.1]. Let \(K\) be the function field of a curve over a finite
+field of characteristic \(p\). The Frobenius \(\Phi\colon f\mapsto f^p\) has degree \(p\), so it is far from an
+isomorphism, yet it induces an <em>isomorphism</em> \(\Psi\colon G_K\xrightarrow{\sim}G_K\) of Galois groups, because it is
+purely inseparable. There are two ways to rebuild \(K\) from \(G_K\): by class field theory (which uses the ring
+structure heavily) and by Kummer theory (which uses only the multiplicative monoid and one cyclotomic rigidity
+isomorphism \(\lambda\)). Either way, the square below cannot commute.</p>
+
+<figure>{{fig:frobproto}}
+<figcaption><b>Figure 10.</b> [Alien, Ex 2.6.1]. The vertical maps and the top map are isomorphisms; the bottom map
+multiplies degrees by \(p\). Reading (b) is IUT's strategy in miniature: admit just enough indeterminacy to make
+the diagram commute, then show the indeterminacy is small, and conclude \(N\cdot h\le h+C\), so
+\(h\le C/(N-1)\).</figcaption></figure>
+
+<h3>The vocabulary</h3>
+<p>From this example IUT takes its terms [Alien, §2.7]. A <b>link</b> is a wall between two “mutually alien”
+copies of scheme theory (the Θ-link and the log-link). <b>Frobenius-like</b> objects are the ones used to set up
+the link; they live on one side only, carry “positive mass” (degrees, heights) and are changed by the link, like
+\(K\) under \(\Phi\). <b>Étale-like</b> objects are groups such as \(G_K\), \(\Pi_X\), and everything built from them
+by an algorithm; they are “zero mass” <em>containers</em>, mapped isomorphically across the link, though only by an
+unknown isomorphism. An object that maps isomorphically across a link is <b>coric</b>.</p>
+
+<p><b>Mono-anabelian transport</b> computes what the link does to positive-mass data in three moves: (1) Kummer
+theory passes from Frobenius-like to étale-like objects (<em>Kummer-detachment</em>); (2) the anabelian algorithm,
+being the same on both sides, carries the étale-like objects across (<em>étale-transport</em>); (3) inverse Kummer
+theory re-attaches Frobenius-like objects on the far side. Each move has its own indeterminacy: Kummer-detachment
+indeterminacies (mostly about cyclotomic rigidity) and étale-transport indeterminacies (the étale-like objects are
+only known up to isomorphism) [IUTchIII, Rem 1.5.4].</p>
+
+<figure>{{fig:transport}}
+<figcaption><b>Figure 11.</b> [Alien, Fig 2.1] with the toolkit's run on \(1+2400=2401\), \(l=13\): the Θ-pilot
+log-volume {{tr_in}} goes to mass 0 when detached, travels as étale-like data, and the codomain is re-attached with
+the \(q\)-pilot log-volume {{tr_out}}.</figcaption></figure>
+
+<div class="box toolkit"><span class="tag">The toolkit says · iut run TransportMonoAnabelian --abc 1 2400 2401 --l 13</span>
+<pre>run: Frobenius-like input at (0,0): Θ-pilot log-volume                {{tr_in}}
+run: Kummer-detach at (0,0): pass to étale-like (0,◦) data (mass 0)    {{tr_det}}
+run: étale-transport across the Θ-link via D⊢ (Ind1 permutations)      {{tr_ind1}}
+run: re-attach at (1,0): q-pilot log-volume (the mass of the codomain) {{tr_out}}</pre>
+The third number is a count (the size of the label-permutation indeterminacy the toolkit tracks), not a
+log-volume.
+</div>
+
+<p>The same example also explains the two words <b>arithmetic holomorphic</b> and <b>mono-analytic</b> [Alien, §2.7
+(vii)]. The class-field-theory reconstruction depends on the whole ring; the Kummer reconstruction depends only on
+the multiplicative monoid plus \(\lambda\). Kummer theory “isolates the dependence on the ring structure in the compact
+form of the cyclotomic rigidity isomorphism”. That is why the next section is entirely about \(\lambda\).</p>
+
+<div class="box otaku"><span class="tag">Otaku note: ekiben on the bullet train</span>
+A station bento (<i>ekiben</i>) is a box designed to survive a high-speed journey. The box is étale-like: rigid,
+standard, the same in Tokyo and in Hakata, weighing nothing that matters. The food is Frobenius-like: it is what
+you actually care about, and it is different in every region. Mono-anabelian transport ships the boxes and
+re-fills them on arrival, and the indeterminacies are the passengers' complaints that the karaage moved around in
+transit. They are allowed to complain only up to a bounded amount.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">11</span>Cyclotomic rigidity, three ways<span class="jp">円分剛性の三つの方法</span></h2>
+
+<p>Everything Frobenius-like gets into the étale-like world through Kummer theory, and Kummer theory is only as good
+as its cyclotomic rigidity isomorphism: the identification of the roots of unity of the monoid with the cyclotome
+of the group. IUT needs this identification to be <b>multiradial</b>: it must survive arbitrary automorphisms of
+the coric data on the other side of the Θ-link. That data contains \(G_v\curvearrowright\mathcal{O}^{\times\mu}\), and
+\(\widehat{\mathbb{Z}}^\times\) acts on it (raise units to the power \(\lambda\)); this action moves the roots of unity of the monoid
+but not the cyclotome of the group. So any rigidity that depends on the unit group is ruined by the Θ-link, and
+IUT must <em>decouple</em> the value-group data from the units [Alien, §3.4 (i)]. It uses three methods, summarized
+in [Alien, Fig 3.10]:</p>
+
+<table>
+<tr><th>method</th><th>applied to</th><th>how it fixes \(\lambda\)</th><th>radiality</th><th>profinite topology</th></tr>
+<tr><td>Brauer groups / local class field theory for \(G_k\curvearrowright\mathcal{O}^{\rhd}_{\overline k}\)</td><td>local units (a<sub>Θ</sub>)</td>
+  <td>\(\mathbb{Q}/\mathbb{Z}\cong H^2(G_k,\mu)\) built from the monoid and from the group must agree [Alien, Ex 2.12.1 (ii)]</td><td>uniradial</td><td>compatible</td></tr>
+<tr><td>mono-theta environments</td><td>local value groups at bad \(v\) (b<sub>Θ</sub>)</td>
+  <td>commutators in the theta group of the line bundle on the Tate curve; zeros of order exactly 1 [EtTh, Cor 2.19]</td><td>multiradial</td><td>compatible</td></tr>
+<tr><td>\(\kappa\)-coric rational functions</td><td>global \(F_{\mathrm{mod}}\) (c<sub>Θ</sub>)</td>
+  <td>\(\mathbb{Q}_{&gt;0}\cap\widehat{\mathbb{Z}}^\times=\{1\}\): only \(\pm\lambda\) keeps Kummer classes of functions inside the reconstructed function field [IUTchI, Ex 5.1 (v)]</td><td>multiradial</td><td>incompatible</td></tr>
+</table>
+
+<h3>The global method: \(\kappa\)-coric functions</h3>
+<p>The global realified Frobenioids that cross the Θ-link are, in essence, arithmetic line bundles on copies of the
+number field \(F_{\mathrm{mod}}\). Elements of \(F_{\mathrm{mod}}\) are produced as <em>values of functions at special
+points</em>, exactly as in [AbsTopIII, §1] [Alien, §3.4 (ii)]. The functions used are the <b>\(\kappa\)-coric rational
+functions</b> on the coarse curve \(|C_{F_{\mathrm{mod}}}|\cong\mathbb{A}^1\): those that take root-of-unity values at
+the “strictly critical” points (the nonzero 2-torsion points) [IUTchI, Rem 3.1.7]. That condition can be checked on
+the étale-like side by restricting Kummer classes to decomposition groups, and it is what decouples them from the
+local units. Their rigidity comes from the elementary fact \(\mathbb{Q}_{&gt;0}\cap\widehat{\mathbb{Z}}^\times=\{1\}\): if
+\(\lambda\in\widehat{\mathbb{Z}}^\times\) sends the Kummer class of every function to the class of a function, then looking at orders of
+zeros (positive integers) forces \(\lambda=\pm1\) [Alien, Ex 2.13.1 (ii)]. The leftover \(\pm1\) is harmless because
+\(F_{\mathrm{mod}}^\times\) is closed under inversion. The price is that the argument only works for the full profinite
+group, not for its finite quotients; that does not matter globally [Alien, §3.4 (v)].</p>
+
+<h3>The local method: mono-theta environments</h3>
+<p>At a bad prime \(v\), \(X_v\) is a once-punctured Tate curve and its tempered cover \(Y_v\) has special fibre an infinite
+chain of projective lines (Figure 12). The theta function \(\ddot\Theta_v\) has a simple zero at every cusp, which allows
+a “mod \(N\)” version of the \(\mathbb{Q}_{&gt;0}\cap\widehat{\mathbb{Z}}^\times\) argument with no \(\pm1\) and compatible with the topology. But its
+poles are not symmetric under the \(\mathbb{Z}\)-action, so the naive version fails <b>discrete rigidity</b>. The fix is to
+package the data as a triple (the \(\mathbb{G}_m\)-torsor of the line bundle, its automorphisms by symmetries and constants,
+the theta section): the <b>mono-theta environment</b> [EtTh, Def 2.13]. It is invariant under the
+\(l\cdot\mathbb{Z}\)-symmetries, and commutators of its automorphisms recover cyclotomic rigidity; all of this is “essentially a
+formal consequence of the quadratic structure of the commutators of the theta groups” [Alien, §3.4 (iv)]. Mono-theta
+environments have étale-like versions (from \(\Pi^{\mathrm{tp}}_v\)) and Frobenius-like versions (from a tempered Frobenioid),
+which is what lets the theta values travel by mono-anabelian transport [IUTchII, Prop 1.2, Cor 1.10–1.12].</p>
+
+<figure>{{fig:thetachain}}
+<figcaption><b>Figure 12.</b> After [Alien, Fig 3.9]. The cusps (orange) are symmetric; the pole orders \(j^2/2\)
+(pink) are a parabola, and a parabola is not translation invariant. The quadratic exponent is the same one that
+makes Gaussian integrals work, which is the theme of [Alien].</figcaption></figure>
+
+<div class="box otaku"><span class="tag">Otaku note: three keys to one door</span>
+A classic adventure series on a certain handheld always hides the last dungeon behind a door with three locks.
+The first key (class field theory) opens it, but it only works from inside the room, which is useless if you are
+in another universe. The second key (mono-theta) works from anywhere and fits the lock exactly, but only at the
+bad primes. The third key (\(\kappa\)-coric functions) works globally, but it only turns if you hold the entire
+profinite group at once, never a finite piece of it. IUT carries all three, and its inventory screen is Fig 3.10.
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="no">12</span>The log-link and log-shells<span class="jp">対数リンクと対数殻</span></h2>
+
+<p>The \(p\)-adic logarithm \(\log_k\colon\mathcal{O}_k^\times\to k\) is not a ring map (it turns \(\times\) into \(+\)), but it
+is \(G_k\)-equivariant. That makes it a link in the sense of §10, with \(\Pi_X\) coric [AbsTopIII, §I1; Alien, Ex
+2.12.3]: in the chain \(\cdots\xrightarrow{\log}\mathcal{O}_k\xrightarrow{\log}\mathcal{O}_k\xrightarrow{\log}\cdots\), each copy of
+\(\mathcal{O}_k\) belongs to a different universe, but the same \(\Pi_X\) sits over all of them, and Corollary 1.10 rebuilds the
+same field structure from each. The diagram of Kummer maps and logs does not commute as maps of elements, but it does
+commute “as regions”. Put</p>
+\[ \mathcal{I}=(2p)^{-1}\cdot\log_k(\mathcal{O}_k^\times)\subseteq k, \qquad \mathcal{O}_k\subseteq\mathcal{I}\supseteq\log_k(\mathcal{O}_k^\times). \]
+<p>Every composite of arrows, through any number of log-iterates, lands inside the étale-like log-shell
+\(\mathcal{I}(\Pi_X)\). This is <b>upper semi-commutativity</b>, and together with the fact that log-volumes are compatible
+with \(\log\) it is all IUT needs from the log-link [Alien, Ex 2.12.3 (iv); IUTchIII, Prop 1.2, Rem 1.2.2]. The
+log-shell comes in four flavours: holomorphic or mono-analytic, Frobenius-like or étale-like; the mono-analytic
+ones are built from \(\mathcal{O}^{\times\mu}\) alone, since \(\mathcal{O}^{\times\mu}\otimes\mathbb{Q}\cong\mathcal{I}\otimes\mathbb{Q}\).</p>
+
+<figure>{{fig:logshell}}
+<figcaption><b>Figure 13.</b> Log-shells. For \(k\) unramified over \(\mathbb{Q}_p\) with \(p\) odd, \(\log\) maps
+\(1+p\mathcal{O}_k\) isomorphically onto \(p\mathcal{O}_k\) and kills the roots of unity, so \(\mathcal{I}=(2p)^{-1}p\,\mathcal{O}_k=\mathcal{O}_k\):
+log-volume 0. Ramification makes the shell strictly bigger than \(\mathcal{O}_k\).</figcaption></figure>
+
+<div class="box otaku"><span class="tag">Otaku note: the futon and the time loop</span>
+The log-link is a time-loop anime: every episode the world resets, and the protagonist keeps only what fits in a
+small container. The log-shell is that container, and its whole job is to be big enough that nothing from any
+previous loop sticks out. For an unramified field and an odd prime it fits exactly, like a futon folded into its
+closet. Ramification is when the futon is a little too big and the closet door will not quite shut, which is what
+the \(\log(\mathfrak{d})\) terms in [IUTchIV] keep track of.
+</div>
+
+<!-- ============================================================ -->
+<h2 class="page-break"><span class="no">13</span>Where IUT calls each algorithm<span class="jp">IUTの中での呼び出し</span></h2>
+
+<p>Here is the call graph. Each Hodge theater carries arithmetically holomorphic data, and each reconstruction
+algorithm is applied to it <em>inside</em> that theater; the Θ-link lets only mono-analytic data through, so on the
+far side only algorithms that start from \(G_v\) (Algorithm A, mono-analytic log-shells) can be run on the shared
+data. The vertical log-links share the holomorphic \(\Pi_v\), so the full algorithms can be run along a whole column
+of the log-theta-lattice.</p>
+
+<figure>{{fig:iutmap}}
+<figcaption><b>Figure 14.</b> Where the algorithms are called. Left: inside the domain Hodge theater. Middle: what
+crosses the Θ-link. Right: what the codomain does with it, leading to the multiradial representation of [IUTchIII,
+Thm 3.11], which is the subject of the companion guide <code>multiradial_guide.pdf</code>.</figcaption></figure>
+
+<table>
+<tr><th>where</th><th>input group</th><th>algorithm</th><th>output used for</th></tr>
+<tr><td>[IUTchI] Cor 1.2</td><td>\(\Pi_{\vec X}\) at each \(v\)</td><td>elliptic cuspidalization [AbsTopII, Cor 3.3]</td><td>\(\Pi_{\underline X}\), \(\Pi_{\underline C}\), cusps \(0,\epsilon',\epsilon''\), the prime \(l\)</td></tr>
+<tr><td>[IUTchI] Rem 3.1.2</td><td>\(\Pi_{\underline X_K}\subseteq\Pi_{\underline C_K}\)</td><td>Thm 1.9 applied “via the Θ-approach”</td><td>the cyclotome \(M_X\cong l\cdot\Delta_\Theta\) of the punctured elliptic curve</td></tr>
+<tr><td>[IUTchI] Ex 5.1</td><td>\(\pi_1({}^\dagger\mathcal{D}^\circledast)\)</td><td>Thm 1.9, Belyi cuspidalization, \(\kappa\)-coric functions</td><td>\(\overline F\), \(F_{\mathrm{mod}}\), the global Frobenioids</td></tr>
+<tr><td>[IUTchI] Def 5.2 (v)–(vi)</td><td>\(\pi_1({}^\ddagger\mathcal{D}_v)\)</td><td>Cor 1.10 (local)</td><td>\(\mathcal{O}^{\rhd}_{\overline F_v}\), local \(\kappa\)-coric pseudo-monoids</td></tr>
+<tr><td>[IUTchII] §1</td><td>\(\Pi^{\mathrm{tp}}_v\), \(v\) bad</td><td>mono-theta environments [EtTh]</td><td>cyclotomic, discrete and constant multiple rigidity</td></tr>
+<tr><td>[IUTchII] §2–3</td><td>\(\Pi^{\mathrm{tp}}_v\)</td><td>elliptic cuspidalization at evaluation points</td><td>Galois evaluation of theta values \(q_v^{j^2}\)</td></tr>
+<tr><td>[IUTchIII] Prop 1.2, Thm 1.5</td><td>\(G_v\), \(\Pi_v\)</td><td>Algorithm A, Cor 1.10, \(\log\)</td><td>the four kinds of log-shells; bi-coric data</td></tr>
+<tr><td>[IUTchIII] Thm 3.11</td><td>all of the above</td><td>mono-anabelian transport along the log-theta-lattice</td><td>the multiradial representation of the Θ-pilot</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2><span class="no">14</span>Cheat sheet, honest notes, references<span class="jp">まとめ</span></h2>
+
+<table class="cheat">
+<tr><th>algorithm</th><th>input</th><th>output</th><th>key trick</th><th>analogy</th></tr>
+<tr><td>A · local invariants</td><td>\(G_k\)</td><td>\(p,d,q,f,e\), \(I_k\), Frobenius, cyclotome, \(H^2\cong\mathbb{Q}/\mathbb{Z}\)</td><td>local class field theory on \(G^{\mathrm{ab}}\)</td><td>the twins' report cards</td></tr>
+<tr><td>B · Uchida</td><td>\(K^\times\), valuations, evaluations</td><td>addition</td><td>a two-dimensional linear system</td><td>the sudoku calculator</td></tr>
+<tr><td>C · cyclotomes, Kummer</td><td>\(\Pi_U\), \(\Delta_X\)</td><td>\(I_x\cong M_X\); functions as classes</td><td>the cuspidally central extension; principal divisors via the Jacobian</td><td>tuning fork, transformation belt</td></tr>
+<tr><td>D · Belyi cusp.</td><td>\(\Pi_X\), strictly Belyi type</td><td>\(\Pi_{X\setminus S}\twoheadrightarrow\Pi_X\), points as decomposition groups</td><td>Belyi maps are étale over the tripod</td><td>origami; the sticky ball</td></tr>
+<tr><td>E · elliptic cusp.</td><td>\(\Pi_X\), elliptically admissible</td><td>the same, for torsion points</td><td>\([N]\) is étale off \(E[N]\)</td><td>shadow clones</td></tr>
+<tr><td>Thm 1.9 / Cor 1.10</td><td>\(\Pi_X\)</td><td>\(\overline k_{\mathrm{NF}}\) (resp. \(\overline k\)) and function fields as fields</td><td>A + C + D, then B</td><td>the culinary battle</td></tr>
+<tr><td>Aut-holomorphic</td><td>a surface and its local automorphism groups</td><td>the complex structure, up to conjugation</td><td>disc automorphisms are commensurably terminal</td><td>ghost and shell</td></tr>
+<tr><td>transport</td><td>Frobenius-like data on one side</td><td>its description on the other side, with indeterminacies</td><td>Kummer, anabelian rigidity, inverse Kummer</td><td>ekiben</td></tr>
+<tr><td>cyclotomic rigidity</td><td>monoid with group action</td><td>\(\mu(\text{monoid})\cong\mu(\text{group})\)</td><td>Brauer groups; theta commutators; \(\mathbb{Q}_{&gt;0}\cap\widehat{\mathbb{Z}}^\times=\{1\}\)</td><td>three keys</td></tr>
+<tr><td>log-shells</td><td>\(\mathcal{O}_k^\times\), \(\Pi_X\)</td><td>a compact container for all log-iterates</td><td>upper semi-commutativity</td><td>the futon</td></tr>
+</table>
+
+<div class="box paper"><span class="tag">Honest notes</span>
+<p><b>What the toolkit does.</b> The C toolkit and the web app model IUT's data types and processes and keep their
+bookkeeping (labels, indices, log-volumes, indeterminacy counts). They do not compute with profinite groups,
+and no finite program can run Theorem 1.9 on an actual \(\Pi_X\). The numbers in this guide come either from that
+bookkeeping or from the small worked examples in <code>build.js</code>, which are checked when the PDF is built.</p>
+<p><b>What is and is not contested.</b> The anabelian papers surveyed here ([AbsAnab], [AbsTopI–III], [EtTh])
+were published before and independently of IUT. The disagreement that followed the March 2018 discussions between
+Scholze, Stix and Mochizuki concerns the proof of [IUTchIII] Corollary 3.12, in particular how the identifications
+across the Θ-link may be made; Mochizuki's position is set out in [EssLgc]. This guide describes the
+reconstruction machinery that both sides of that discussion take as input, and adjudicates nothing.</p>
+<p><b>What we simplified.</b> We wrote “the” fundamental group where basepoints and outer isomorphisms matter; we
+ignored orbicurve technicalities, the tempered versions at bad primes [AbsTopIII, Rem 1.9.1], and the minor
+corrections to [AbsAnab, Lemma 1.3.9] and [AbsTopI, Lemma 4.5] recorded in [IUTchI, Rem 1.2.2].</p>
+</div>
+
+<div class="preview"><span class="tag">次回予告 · Next episode</span>
+<p>The groups have crossed the wall. The boxes are refilled. But the Θ-pilot is still on the wrong side, and
+the only thing everyone agrees on is a bento box! Can the log-Kummer correspondence, three indeterminacies
+and one very large log-shell describe it from over here? Next time, in the companion guide: “The Multiradial
+Algorithm”. Don't miss it!</p>
+</div>
+
+<h3>おまけ · Omake</h3>
+<p>Why did the profinite group refuse to go to the karaoke box? It only knew the songs up to isomorphism. Why
+does the tripod \(\mathbb{P}^1\setminus\{0,1,\infty\}\) always win at musical chairs? There are only three chairs, and
+Belyi showed everyone else is sitting on them anyway. What did the cyclotome say to the Kummer class? “Stay in
+tune, or you'll be \(f^{-1}\) by the bridge.” And why do anabelian geometers never get lost on the Yamanote line?
+Because a loop determines the city.</p>
+
+<h2><span class="no">★</span>References<span class="jp">参考文献</span></h2>
+<ul class="refs">
+<li>[AbsAnab] S. Mochizuki, <em>The Absolute Anabelian Geometry of Hyperbolic Curves</em>, in Galois Theory and Modular
+Forms, Kluwer (2004). <code>pdf/Absolute Anabelian Geometry.pdf</code>. Prop 1.2.1: invariants of \(G_k\).</li>
+<li>[AbsTopI–III] S. Mochizuki, <em>Topics in Absolute Anabelian Geometry I: Generalities; II: Decomposition Groups and
+Endomorphisms; III: Global Reconstruction Algorithms</em>, J. Math. Sci. Univ. Tokyo 19 (2012), 20 (2013), 22 (2015).
+<code>pdf/Topics in Absolute Anabelian Geometry I–III.pdf</code>. II §3: Belyi and elliptic cuspidalization; III §1:
+Thm 1.9, Cor 1.10, Thm 1.11; III §2: Aut-holomorphic spaces; III §3–5: log-Frobenius compatibility and log-shells.</li>
+<li>[Alien] S. Mochizuki, <em>The Mathematics of Mutually Alien Copies: from Gaussian Integrals to Inter-universal
+Teichmüller Theory</em>, RIMS Kôkyûroku Bessatsu B84 (2021). <code>pdf/Alien Copies, Gaussians, and Inter-universal
+Teichmuller Theory.pdf</code>. §2.6–2.13: transport; §3.4: cyclotomic rigidity, Fig 3.10.</li>
+<li>[EssLgc] S. Mochizuki, <em>On the Essential Logical Structure of Inter-universal Teichmüller Theory in Terms of Logical
+AND “∧”/Logical OR “∨” Relations</em>. <code>pdf/Essential Logical Structure of Inter-universal Teichmuller Theory.pdf</code>.</li>
+<li>[EtTh] S. Mochizuki, <em>The Étale Theta Function and its Frobenioid-theoretic Manifestations</em>, Publ. RIMS 45 (2009).
+<code>pdf/The Etale Theta Function and its Frobenioid-theoretic Manifestations.pdf</code>.</li>
+<li>[Gateway] S. Mochizuki, <em>Inter-universal Teichmüller Theory as an Anabelian Gateway to Diophantine Geometry and
+Analytic Number Theory</em>, Oberwolfach report (2023). <code>pdf/IUT as an Anabelian Gateway (MFO-RIMS23 Oberwolfach Report).pdf</code>.</li>
+<li>[GCpLF] S. Mochizuki, <em>A Version of the Grothendieck Conjecture for \(p\)-adic Local Fields</em>, Internat. J. Math. 8
+(1997). <code>pdf/A Version of the Grothendieck Conjecture for p-adic Local Fields.pdf</code>.</li>
+<li>[Hoshi19] Y. Hoshi, <em>Mono-anabelian Reconstruction of Number Fields</em>, RIMS Kôkyûroku Bessatsu B76 (2019).</li>
+<li>[Hoshi21] Y. Hoshi, <em>Introduction to Mono-anabelian Geometry</em>, Publ. Math. Besançon (2021), 5–44.</li>
+<li>[IUTchI–IV] S. Mochizuki, <em>Inter-universal Teichmüller Theory I–IV</em>, Publ. RIMS 57 (2021).
+<code>pdf/Inter-universal Teichmuller Theory I–IV.pdf</code>.</li>
+<li>[LocAn] S. Mochizuki, <em>The Local Pro-\(p\) Anabelian Geometry of Curves</em>, Invent. Math. 138 (1999).
+<code>pdf/The Local Pro-p Anabelian Geometry of Curves.pdf</code>.</li>
+<li>[pGC] S. Mochizuki, <em>The Profinite Grothendieck Conjecture for Closed Hyperbolic Curves over Number Fields</em>,
+J. Math. Sci. Univ. Tokyo 3 (1996). <code>pdf/The Profinite Grothendieck Conjecture for Closed Hyperbolic Curves over Number Fields.pdf</code>.</li>
+<li>[NSW] J. Neukirch, A. Schmidt, K. Wingberg, <em>Cohomology of Number Fields</em>, Springer.</li>
+<li>G. V. Belyi, <em>On Galois extensions of a maximal cyclotomic field</em>, Izv. Akad. Nauk SSSR 43 (1979);
+K. Uchida, <em>Isomorphisms of Galois groups of algebraic function fields</em>, Ann. of Math. 106 (1977);
+A. Tamagawa, <em>The Grothendieck conjecture for affine curves</em>, Compositio Math. 109 (1997).</li>
+<li>[Toolkit] This repository: <code>src/</code> (<code>iut run TransportMonoAnabelian</code>, <code>iut run ReconstructCoverings</code>,
+<code>iut ids</code>), and <code>scripts/anabelian/build.js</code>, which computes the worked examples and builds this PDF.</li>
+</ul>
+
+<p class="small center">Every show, game and character referred to above belongs to its creators and is mentioned only
+by description, with affection. Musubi is original. ありがとうございました！</p>
+
+</body>
+</html>
