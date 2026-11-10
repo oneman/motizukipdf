@@ -294,7 +294,7 @@
     var maxAbs = Math.max(0.5, Math.max.apply(null, shells.map(function (s) { return Math.abs(s.logVolume); })));
     shells.forEach(function (s, i) {
       var y = 44 + i * 30, v = g.VSet[i] || {};
-      D.text(c, s.v === 'vinf' ? 'v = ∞' : s.v + ' (p=' + v.p + ', e=' + v.eK + ')', 20, y, { size: 11, align: 'left', serif: true });
+      D.text(c, s.v === 'vinf' ? 'v = ∞' : s.v + ' (p=' + v.p + ', e' + (v.eKIsLowerBound ? '≥' : '=') + v.eK + ')', 20, y, { size: 11, align: 'left', serif: true });
       D.text(c, 'p* = ' + (s.PStar || '—'), 150, y, { size: 10.5, align: 'left', mono: true, color: P.ink2 });
       D.text(c, 'radius ' + s.radius, 230, y, { size: 10.5, align: 'left', mono: true, color: P.ink2 });
       D.text(c, s.holomorphic ? 'holomorphic' : 'mono-analytic', 330, y, { size: 10, align: 'left', color: s.holomorphic ? P.violet : P.teal });

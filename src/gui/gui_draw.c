@@ -1003,7 +1003,7 @@ static double draw_hb(cairo_t *cr, double W, const gm_model *m)
         double gap = T->lhs > 0 ? log10(T->rhs / T->lhs) : 0;
         txf(cr, (xl + xr) / 2, ly + 26, 11, TX_CENTER | TX_ITALIC, INK2, "%.1f orders of magnitude of room", gap);
         y = ly + 52;
-        pill(cr, 20, y, T->inequality_holds, T->inequality_holds ? "Thm 1.10 holds for this curve" : "Thm 1.10 fails");
+        pill(cr, 20, y, T->inequality_holds, !T->inequality_holds ? "Thm 1.10 fails" : T->constant_dominates ? "Thm 1.10 holds, through its constant alone" : "Thm 1.10 holds for this curve");
         y += 40;
     }
     /* Cor 2.2 */
@@ -1026,7 +1026,8 @@ static double draw_hb(cairo_t *cr, double W, const gm_model *m)
         double x = 20;
         x += pill(cr, x, y, C->l_in_range, C->l_in_range ? "(C1) l in range" : "(C1) l out of range") + 10;
         snprintf(b, sizeof b, "(C2) %.6f ≤ %.6g", C->lhs, C->rhs);
-        pill(cr, x, y, C->holds, b);
+        x += pill(cr, x, y, C->holds, b) + 10;
+        if (C->in_exceptional_set) pill(cr, x, y, 0, "in the exceptional set: Cor 2.2 asserts nothing here");
         y += 40;
     }
     return y;

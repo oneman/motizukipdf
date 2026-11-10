@@ -76,6 +76,7 @@ typedef struct {
     unsigned      p;                  /* residue characteristic p_v (0 if arc) */
     unsigned      e_mod, f_mod;       /* ram. index / res. degree of Fmod_v/Qp */
     unsigned      e_K,   f_K;         /* same for K_v / Q_p  (v ∈ V ⊆ V(K))    */
+    int           e_K_lower;          /* e_K is only the lower bound forced by q_v^{1/2l} ∈ K_v (bad mult.) */
     iut_reduction red;                /* reduction type of E at v              */
     unsigned      ordq;               /* ord_v(q_v) = -ord_v(j_E)  (bad mult.) */
     int           in_Vbad_mod;        /* v ∈ Vbad_mod (odd p, bad multiplic.)  */
@@ -381,7 +382,8 @@ int  iut_gen_from_abc(iut_initial_theta_data *d, long long a, long long b, long 
 int  iut_gen_random(iut_initial_theta_data *d, unsigned seed);
 /* a tiny hand-made example with explicit valuations                          */
 int  iut_gen_example(iut_initial_theta_data *d, int which);
-void iut_data_finish(iut_initial_theta_data *d);  /* derive l*, l±, flags       */
+void iut_data_finish(iut_initial_theta_data *d);
+unsigned iut_eK_min(unsigned l, unsigned ordq);   /* 2l/gcd(2l, ord q_v): the least e(K_v/(F_mod)_v) with q_v^{1/2l} ∈ K_v */  /* derive l*, l±, flags       */
 
 /* ------------------------------------------------------------- validators  */
 int  iut_validate_data(const iut_initial_theta_data *d, iut_report *r);

@@ -47,7 +47,8 @@
     "p": 2,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 11,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 2,
@@ -61,7 +62,8 @@
     "p": 3,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 11,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 2,
@@ -75,7 +77,8 @@
     "p": 5,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 11,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 4,
@@ -89,7 +92,8 @@
     "p": 7,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 11,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 8,
@@ -104,6 +108,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -117,7 +122,7 @@
     "item": "(a)",
     "ok": true,
     "condition": "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F",
-    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion"
+    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l"
    },
    {
     "item": "(b)",
@@ -582,10 +587,10 @@
     "p": 2,
     "pstar": 4,
     "radius": [
-     0,
-     1
+     -10,
+     11
     ],
-    "logVolume": 0,
+    "logVolume": 1.260267601,
     "piShared": true
    },
    {
@@ -593,10 +598,10 @@
     "p": 3,
     "pstar": 3,
     "radius": [
-     0,
-     1
+     -5,
+     11
     ],
-    "logVolume": 0,
+    "logVolume": 0.9987384442,
     "piShared": true
    },
    {
@@ -604,10 +609,10 @@
     "p": 5,
     "pstar": 5,
     "radius": [
-     0,
-     1
+     -8,
+     11
     ],
-    "logVolume": 0,
+    "logVolume": 1.463125375,
     "piShared": true
    },
    {
@@ -615,10 +620,10 @@
     "p": 7,
     "pstar": 7,
     "radius": [
-     0,
-     1
+     -9,
+     11
     ],
-    "logVolume": 0,
+    "logVolume": 1.769009226,
     "piShared": true
    },
    {
@@ -738,7 +743,10 @@
   "CTheta": 1.363509173e+22,
   "lhs": 4.03370957,
   "rhs": 1e+22,
+  "mainTerm": 15.06912122,
+  "constTerm": 1e+22,
   "holds": true,
+  "constantDominates": true,
   "corTwoTwo": {
    "logQAll": 25.58855178,
    "lMin": 5.058512803,
@@ -747,7 +755,10 @@
    "epsE": 3733723703000000,
    "lhs": 4.26475863,
    "rhs": 1.000001996e+22,
-   "holds": true
+   "holds": true,
+   "epsSmall": false,
+   "sOneOk": false,
+   "inExceptionalSet": true
   }
  },
  "crossCheck": [

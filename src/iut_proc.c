@@ -491,13 +491,19 @@ static int p_thm110(const iut_initial_theta_data *d, FILE *f)
     iut_thm110 T; iut_thm110_compute(d, &T);
     fprintf(f, "    (E1) n=%u: %.1f (E2) %.3f (E3) |GL2(F_%u)| = %.0f (E5) %.0f\n", d->lstar, iut_iv_E1(d->lstar), iut_iv_E2(d->lstar), d->l, iut_iv_E3(d->l), iut_iv_E5());
     fprintf(f, "    log q = %.4f, |log q| = %.4f, log d^Ftpd = %.4f, log f^Ftpd = %.4f, log d^K ≤ %.4f, e_mod = %.0f, e*_mod = %.0f\n", T.logq, T.abs_logq, T.logd_tpd, T.logf_tpd, T.logdK_bound, T.e_mod, T.estar_mod);
-    fprintf(f, "    C_Θ = %.3f (Cor 3.12 ⇔ C_Θ ≥ −1: %s);  (1/6) log q = %.4f ≤ %.4e: %s\n", T.C_theta, T.cor312_holds ? "yes" : "no", T.lhs, T.rhs, T.inequality_holds ? "holds" : "FAILS"); return !T.inequality_holds;
+    fprintf(f, "    C_Θ = %.3f (Cor 3.12 ⇔ C_Θ ≥ −1: %s);  (1/6) log q = %.4f ≤ %.4f + %.4e: %s\n", T.C_theta, T.cor312_holds ? "yes" : "no", T.lhs, T.main_term, T.const_term,
+            !T.inequality_holds ? "FAILS" : T.constant_dominates ? "holds, but only as a comparison with the constant 20(e*_mod·l + η_prm)" : "holds");
+    return !T.inequality_holds;
 }
 static int p_cor22(const iut_initial_theta_data *d, FILE *f)
 {
     iut_cor22 C; iut_cor22_compute(d, &C);
     fprintf(f, "    d = %.0f, δ = %.0f, log q∀ = %.4f; (C1) %.2f ≤ l ≤ %.3e: l = %u %s; ε_E = %.4e\n", C.d, C.delta, C.logq_all, C.l_min, C.l_max, d->l, C.l_in_range ? "in range" : "OUT OF RANGE", C.eps_E);
-    fprintf(f, "    (C2) %.4f ≤ (1+ε_E)(%.4f + [%.4f, %.4f]) + %.3e: %s;  Cor 2.3 slack: %.3e\n", C.lhs, C.logdiff, C.logcond_lo, C.logcond_hi, C.C_K, C.holds ? "holds" : "FAILS", iut_cor23_bound(C.lhs, C.logdiff, C.logcond_lo, C.eps_E, C.C_K)); return !C.holds;
+    fprintf(f, "    (C2) %.4f ≤ (1+ε_E)(%.4f + [%.4f, %.4f]) + %.3e: %s;  Cor 2.3 slack: %.3e\n", C.lhs, C.logdiff, C.logcond_lo, C.logcond_hi, C.C_K, !C.holds ? "FAILS" : C.in_exceptional_set ? "holds trivially" : "holds", iut_cor23_bound(C.lhs, C.logdiff, C.logcond_lo, C.eps_E, C.C_K));
+    if (C.in_exceptional_set)
+        fprintf(f, "    this curve is in the exceptional set Exc of Cor 2.2 (%s%s%s), so the corollary asserts nothing about it\n",
+                C.eps_small ? "" : "ε_E > 1", C.eps_small || C.s1_ok ? "" : "; ", C.s1_ok ? "" : "(log q∀)^{1/2} < ξ_prm + η_prm");
+    return !C.holds;
 }
 static int p_species(const iut_initial_theta_data *d, FILE *f)
 {

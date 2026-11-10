@@ -172,12 +172,13 @@ unsigned iut_def_three_one_check(const iut_initial_theta_data *d, iut_def_three_
 {
     unsigned n = 0;
     int c_ok = 1, e_ok = 0, odd_ok = 1;
+    int deg_ok = !(d->l && (d->dF / (d->dmod ? d->dmod : 1)) % d->l == 0);   /* the same test as iut_validate */
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
         if (v->in_Vbad_mod) { e_ok = 1; if (v->p % 2 == 0) odd_ok = 0; if (v->p == d->l || (v->ordq && !coprime(d->l, v->ordq))) c_ok = 0; }
     }
 #define ITEM(it, cond, okv, mc, det) do { if (n < max) { out[n].item = it; out[n].condition = cond; out[n].ok = (okv); out[n].machine_checked = mc; out[n].detail = det; } n++; if (r) iut_report_add(r, (okv) ? IUT_SEV_OK : IUT_SEV_ERROR, "DefThreeOne", "[IUTchI] Def 3.1 " it, "%s: %s", cond, det); } while (0)
-    ITEM("(a)", "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F", d->h_F_galois_over_Fmod && d->h_F_contains_six_torsion, 0, "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion");
+    ITEM("(a)", "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F", d->h_F_galois_over_Fmod && d->h_F_contains_six_torsion && deg_ok, 0, deg_ok ? "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l" : "the bound on [F:F_mod] is divisible by l (F ⊇ Q(E[5]) forces l ≠ 5)");
     ITEM("(b)", "X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)", d->h_image_contains_SL2 && d->h_CK_is_K_core && d->l >= 5 && iut_is_prime(d->l), 0, "asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked");
     ITEM("(c)", "l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)", c_ok && d->l % 2 && d->l % 3, 1, "checked against every v ∈ V^bad_mod");
     ITEM("(d)", "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)", d->nV > 0 && d->nV <= IUT_MAX_V, 1, "|V| = |V_mod| by construction of the data");

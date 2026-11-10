@@ -95,6 +95,11 @@
      "comment": "same for K_v / Q_p (v ∈ V ⊆ V(K))"
     },
     {
+     "type": "int",
+     "name": "e_K_lower",
+     "comment": "e_K is only the lower bound forced by q_v^{1/2l} ∈ K_v (bad mult.)"
+    },
+    {
      "type": "iut_reduction",
      "name": "red",
      "comment": "reduction type of E at v"
@@ -135,7 +140,7 @@
   {
    "name": "iut_initial_theta_data",
    "file": "iut.h",
-   "line": 90,
+   "line": 91,
    "fields": [
     {
      "type": "char",
@@ -290,7 +295,7 @@
   {
    "name": "iut_local_datum",
    "file": "iut.h",
-   "line": 160,
+   "line": 161,
    "fields": [
     {
      "type": "unsigned",
@@ -357,7 +362,7 @@
   {
    "name": "iut_prime_strip",
    "file": "iut.h",
-   "line": 175,
+   "line": 176,
    "fields": [
     {
      "type": "iut_ps_kind",
@@ -416,7 +421,7 @@
   {
    "name": "iut_pilot",
    "file": "iut.h",
-   "line": 189,
+   "line": 190,
    "fields": [
     {
      "type": "iut_pilot_kind",
@@ -448,7 +453,7 @@
   {
    "name": "iut_log_shell",
    "file": "iut.h",
-   "line": 199,
+   "line": 200,
    "fields": [
     {
      "type": "unsigned",
@@ -505,7 +510,7 @@
   {
    "name": "iut_capsule_member",
    "file": "iut.h",
-   "line": 214,
+   "line": 215,
    "fields": [
     {
      "type": "int",
@@ -530,7 +535,7 @@
   {
    "name": "iut_theta_hodge_theater",
    "file": "iut.h",
-   "line": 219,
+   "line": 220,
    "fields": [
     {
      "type": "iut_prime_strip",
@@ -559,7 +564,7 @@
   {
    "name": "iut_theta_pm_ell_hodge_theater",
    "file": "iut.h",
-   "line": 225,
+   "line": 226,
    "fields": [
     {
      "type": "unsigned",
@@ -606,7 +611,7 @@
   {
    "name": "iut_theta_nf_hodge_theater",
    "file": "iut.h",
-   "line": 233,
+   "line": 234,
    "fields": [
     {
      "type": "unsigned",
@@ -658,7 +663,7 @@
   {
    "name": "iut_hodge_theater",
    "file": "iut.h",
-   "line": 242,
+   "line": 243,
    "fields": [
     {
      "type": "int",
@@ -777,7 +782,7 @@
   {
    "name": "iut_link",
    "file": "iut.h",
-   "line": 281,
+   "line": 282,
    "fields": [
     {
      "type": "iut_link_kind",
@@ -856,7 +861,7 @@
   {
    "name": "iut_indeterminacies",
    "file": "iut.h",
-   "line": 296,
+   "line": 297,
    "fields": [
     {
      "type": "int",
@@ -884,7 +889,7 @@
   {
    "name": "iut_procession_step",
    "file": "iut.h",
-   "line": 304,
+   "line": 305,
    "fields": [
     {
      "type": "unsigned",
@@ -922,7 +927,7 @@
   {
    "name": "iut_multiradial_rep",
    "file": "iut.h",
-   "line": 315,
+   "line": 316,
    "fields": [
     {
      "type": "int",
@@ -994,7 +999,7 @@
   {
    "name": "iut_log_theta_lattice",
    "file": "iut.h",
-   "line": 332,
+   "line": 333,
    "fields": [
     {
      "type": "iut_initial_theta_data",
@@ -1049,7 +1054,7 @@
   {
    "name": "iut_species",
    "file": "iut.h",
-   "line": 344,
+   "line": 345,
    "fields": [
     {
      "type": "const char",
@@ -1083,7 +1088,7 @@
   {
    "name": "iut_mutation",
    "file": "iut.h",
-   "line": 350,
+   "line": 351,
    "fields": [
     {
      "type": "const char",
@@ -1127,7 +1132,7 @@
   {
    "name": "iut_issue",
    "file": "iut.h",
-   "line": 364,
+   "line": 365,
    "fields": [
     {
      "type": "iut_severity",
@@ -1156,7 +1161,7 @@
   {
    "name": "iut_report",
    "file": "iut.h",
-   "line": 370,
+   "line": 371,
    "fields": [
     {
      "type": "unsigned",
@@ -1185,7 +1190,7 @@
   {
    "name": "iut_options",
    "file": "iut.h",
-   "line": 476,
+   "line": 478,
    "fields": [
     {
      "type": "long long",
@@ -4380,6 +4385,21 @@
      "type": "int",
      "name": "inequality_holds",
      "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "main_term",
+     "comment": "rhs = main_term + const_term; const_term = 20(e*_mod l + η_prm)"
+    },
+    {
+     "type": "double",
+     "name": "const_term",
+     "comment": "rhs = main_term + const_term; const_term = 20(e*_mod l + η_prm)"
+    },
+    {
+     "type": "int",
+     "name": "constant_dominates",
+     "comment": "const_term alone ≥ lhs: the inequality holds whatever the curve's conductor is"
     }
    ],
    "comment": "Thm 1.10 double iut_iv_E1(unsigned n); (1/n)Σ_{m=1}^n m = (n+1)/2 double iut_iv_E2(unsigned n); (1/n)Σ m² = (2n+1)(n+1)/6 double iut_iv_E3(unsigned p); |GL2(F_p)| = p(p+1)(p−1)² double iut_iv_E5(void); [F_mod(√−1):F_mod] ≤ 2",
@@ -4393,7 +4413,7 @@
   {
    "name": "iut_cor22",
    "file": "iut_ops.h",
-   "line": 455,
+   "line": 457,
    "fields": [
     {
      "type": "double",
@@ -4464,6 +4484,31 @@
      "type": "int",
      "name": "holds",
      "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "sqrt_h",
+     "comment": "(s1) of the proof: (log q∀)^{1/2} ≥ ξ_prm + η_prm, with ξ_prm ≥ 5"
+    },
+    {
+     "type": "double",
+     "name": "s1_threshold",
+     "comment": "(s1) of the proof: (log q∀)^{1/2} ≥ ξ_prm + η_prm, with ξ_prm ≥ 5"
+    },
+    {
+     "type": "int",
+     "name": "eps_small",
+     "comment": "ε_E ≤ 1; (s1)"
+    },
+    {
+     "type": "int",
+     "name": "s1_ok",
+     "comment": "ε_E ≤ 1; (s1)"
+    },
+    {
+     "type": "int",
+     "name": "in_exceptional_set",
+     "comment": "!eps_small || !s1_ok: the curve is in the finite set Exc that Cor 2.2 excludes"
     }
    ],
    "comment": "Prop 2.1, Cor 2.2, Cor 2.3 int iut_iv_log_le_x(double x); log x ≤ x double iut_iv_chebyshev_lo(double x); 2x/3 ≤ θ(x) double iut_iv_chebyshev_hi(double x); θ(x) ≤ 4x/3 (x ≥ ξ_prm) double iut_iv_prime_in_A_bound(double thetaA, double xi_prm); ∃ p ∈ A, p ≤ 2(θ_A + ξ_prm)",
@@ -4475,7 +4520,7 @@
   {
    "name": "iut_mutation_history",
    "file": "iut_ops.h",
-   "line": 473,
+   "line": 478,
    "fields": [
     {
      "type": "unsigned",
@@ -4506,7 +4551,7 @@
   {
    "name": "iut_esslgc_model",
    "file": "iut_ops.h",
-   "line": 481,
+   "line": 486,
    "fields": [
     {
      "type": "double",
@@ -4560,7 +4605,7 @@
   {
    "name": "iut_stp",
    "file": "iut_ops.h",
-   "line": 494,
+   "line": 499,
    "fields": [
     {
      "type": "const char",
@@ -4599,7 +4644,7 @@
   {
    "name": "iut_interval",
    "file": "iut_ops.h",
-   "line": 505,
+   "line": 510,
    "fields": [
     {
      "type": "double",
@@ -4618,7 +4663,7 @@
   {
    "name": "iut_gauss_step",
    "file": "iut_ops.h",
-   "line": 517,
+   "line": 522,
    "fields": [
     {
      "type": "unsigned",
@@ -4647,7 +4692,7 @@
   {
    "name": "iut_transport_stage",
    "file": "iut_ops.h",
-   "line": 522,
+   "line": 527,
    "fields": [
     {
      "type": "const char",
@@ -4683,7 +4728,7 @@
   {
    "name": "iut_formal_sum",
    "file": "iut_ops.h",
-   "line": 528,
+   "line": 533,
    "fields": [
     {
      "type": "unsigned",
@@ -4707,7 +4752,7 @@
   {
    "name": "iut_dictionary_entry",
    "file": "iut_ops.h",
-   "line": 546,
+   "line": 551,
    "fields": [
     {
      "type": "const char",
@@ -4726,7 +4771,7 @@
   {
    "name": "iut_process",
    "file": "iut_ops.h",
-   "line": 551,
+   "line": 556,
    "fields": [
     {
      "type": "const char",
@@ -4833,7 +4878,7 @@
   {
    "name": "iut_ps_kind",
    "file": "iut.h",
-   "line": 139,
+   "line": 140,
    "items": [
     {
      "name": "IUT_PS_D",
@@ -4920,7 +4965,7 @@
   {
    "name": "iut_pilot_kind",
    "file": "iut.h",
-   "line": 188,
+   "line": 189,
    "items": [
     {
      "name": "IUT_PILOT_Q",
@@ -4942,7 +4987,7 @@
   {
    "name": "iut_link_kind",
    "file": "iut.h",
-   "line": 268,
+   "line": 269,
    "items": [
     {
      "name": "IUT_LINK_THETA",
@@ -5006,7 +5051,7 @@
   {
    "name": "iut_severity",
    "file": "iut.h",
-   "line": 363,
+   "line": 364,
    "items": [
     {
      "name": "IUT_SEV_OK",
@@ -5530,7 +5575,7 @@
   {
    "name": "iut_logic_flavour",
    "file": "iut_ops.h",
-   "line": 480,
+   "line": 485,
    "items": [
     {
      "name": "IUT_LOGIC_AND",
@@ -5569,7 +5614,7 @@
   {
    "name": "iut_formal_sum_kind",
    "file": "iut_ops.h",
-   "line": 529,
+   "line": 534,
    "items": [
     {
      "name": "IUT_FS_ZERO",

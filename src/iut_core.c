@@ -154,6 +154,9 @@ double iut_leading_term(const iut_initial_theta_data *d)
 }
 
 /* ------------------------------------------------------------- finishing */
+unsigned iut_eK_min(unsigned l, unsigned ordq)
+{ unsigned a = 2 * l, b = ordq; while (b) { unsigned t = a % b; a = b; b = t; } return a ? 2 * l / a : 1; }
+
 void iut_data_finish(iut_initial_theta_data *d)
 {
     d->lstar = d->l ? (d->l - 1) / 2 : 0;
@@ -167,6 +170,14 @@ void iut_data_finish(iut_initial_theta_data *d)
         if (!v->f_mod) v->f_mod = 1;
         if (!v->e_K)   v->e_K = v->e_mod;
         if (!v->f_K)   v->f_K = v->f_mod;
+        /* K = F(E[l]) and E[2] ⊆ E(F) put q_v^{1/2l} in K_v at every place of bad multiplicative reduction
+         * ([IUTchIV] Prop 1.8 (vi); Yamashita, proof of Lemma 1.9 (1)): ord(q_v)/(2l) ∈ (1/e)Z for
+         * e = e(K_v/(F_mod)_v), so e is a multiple of 2l/gcd(2l, ord q_v).  That is all we know of e_K,
+         * so it is recorded as a lower bound. */
+        if (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->ordq && d->l) {
+            unsigned need = v->e_mod * iut_eK_min(d->l, v->ordq);
+            if (v->e_K % need) { unsigned a = v->e_K, b = need; while (b) { unsigned t = a % b; a = b; b = t; } v->e_K = v->e_K / a * need; v->e_K_lower = 1; }
+        }
         v->in_Vbad_mod = (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->p % 2 == 1);
         if (v->red != IUT_RED_BAD_MULT) v->ordq = 0;
     }
@@ -185,7 +196,7 @@ static void add_val(iut_initial_theta_data *d, unsigned p, iut_reduction red, un
     v->kind = IUT_V_NONARCH; v->p = p; v->red = red; v->ordq = ordq;
     v->e_mod = v->f_mod = 1;
     /* K = F(E[l]) with the local degrees we can honestly say little about: */
-    v->e_K = (red == IUT_RED_BAD_MULT) ? 1 : 1;
+    v->e_K = 1;                  /* raised at bad multiplicative places by iut_data_finish */
     v->f_K = 1;
 }
 
@@ -358,6 +369,8 @@ int iut_validate_data(const iut_initial_theta_data *d, iut_report *r)
         if (v->red == IUT_RED_BAD_ADD) nadd++;
         if (v->e_K < v->e_mod || v->f_K < v->f_mod)
             iut_report_add(r, IUT_SEV_ERROR, "KField", "[IUTchI] Def 3.1", "%s: e_K,f_K must dominate e_mod,f_mod", v->name);
+        if (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->ordq && d->l && v->e_mod && v->e_K % (v->e_mod * iut_eK_min(d->l, v->ordq)))
+            iut_report_add(r, IUT_SEV_ERROR, "KField", "[IUTchIV] Prop 1.8 (vi)", "%s: q_v^{1/2l} ∈ K_v needs e_K to be a multiple of %u (got %u)", v->name, v->e_mod * iut_eK_min(d->l, v->ordq), v->e_K);
     }
     if (nbad_odd == 0)
         iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (e)", "V^bad_mod must be nonempty: no odd prime of bad multiplicative reduction");

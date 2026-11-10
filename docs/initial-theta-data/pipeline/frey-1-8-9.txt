@@ -11,11 +11,11 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
   fields    : F_mod ⊆ F ⊆ K = F(E[l]) ⊆ F̄     [F_mod:Q]=1  [F:Q]≤46080  [K:Q]≤92897280
   l         : 7   (l* = 3, l± = 4)   ε̲ = the cusp ±1
   log(q)    : 4.3944   |log(q)| = log(q)/2l = 0.3139   ht_E = log(q)/6 = 0.7324
-  log(f)    : 1.0986   log(d^Ftpd) = 0.0000   log(d^K) ≈ 5.6836   h(j) ≈ 14.258
+  log(f)    : 1.0986   log(d^Ftpd) = 0.0000   log(d^K) ≈ 5.6836 (≤ 25.9904, Thm 1.10)   h(j) ≈ 14.258
   V ≅ V_mod : 4 valuations
     name   kind  p    e/f_m e/f_K reduction  ord(q)  V^bad_mod
     v2     non   2    1/1   1/1   good       0       -
-    v3     non   3    1/1   1/1   bad mult.  4       yes
+    v3     non   3    1/1   ≥7/1  bad mult.  4       yes
     v5     non   5    1/1   1/1   good       0       -
     vinf   arc   -    -     -     -          -       -
   asserted  : F/F_mod Galois ✓ | E[6] ⊆ F ✓ | SL2 ⊆ image ✓ | stable red. ✓ | C_K K-core ✓
@@ -26,7 +26,7 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
 
 ── stage 1 ── conditions (a)–(f) ─────────────────────────────────────── [IUTchI] Def 3.1
   ✓ (a)  F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F
-      asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion
+      asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l
   ✓ (b)  X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)
       asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked
   ✓ (c)  l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)
@@ -87,7 +87,7 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
   log-links: 8 (columns n = 0, 1; rows -2..2). Each one identifies Π_v (vertical coricity) and builds the log-shells of its codomain:
     v        p*        I_v    μ_log(I_v)   Π_v at (0,0) = at (0,1)?
     v2        4   p^{0}·O      +0.000000   ✓
-    v3        3   p^{0}·O      +0.000000   ✓
+    v3        3 p^{-3/7}·O      +0.941668   ✓
     v5        5   p^{0}·O      +0.000000   ✓
     vinf      -    π-disc              0   ✓
   validation of the lattice: 0 error(s) in 3 checks
@@ -117,7 +117,8 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
   C_Θ = 3.18584e+22 (≥ −1 ✓)
   Thm 1.10:  (1/6)·log q = 0.732408  ≤  (1 + 20·d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod·l + η_prm) = 1e+22   ✓
   Cor 2.2:   log q∀ = 4.394449 (2 included); (C1) wants 2.096 ≤ l ≤ 1.785e+08: l = 7 in range;  ε_E = 8.085e+15;  (C2) 0.732408 ≤ 1e+22 ✓
-  The constants (η_prm = 5·10^20) dominate for curves this small: the bound holds, and says nothing sharper than that.
+  Thm 1.10 holds here only as a comparison with its constant: main term 4.237505, constant 20(e*_mod·l + η_prm) = 1e+22.
+  Cor 2.2 asserts nothing about this curve: it is in the exceptional set Exc (ε_E > 1, (log q∀)^{1/2} < ξ_prm + η_prm; (log q∀)^{1/2} = 2.096, ξ_prm + η_prm ≥ 5e+20).
 
 ── stage 7 ── cross-check with frey-1-8-9.json ─────────────────────────────
   ✓ log(q)  = Σ_{V^bad_mod} ord(q_v) log p_v  toolkit 4.394449   file 4.394449

@@ -16,13 +16,14 @@ void iut_view_data(FILE *f, const iut_initial_theta_data *d)
     fprintf(f, "  fields    : F_mod ⊆ F ⊆ K = F(E[l]) ⊆ F̄     [F_mod:Q]=%u  [F:Q]≤%llu  [K:Q]≤%llu\n", d->dmod, d->dF, d->dK);
     fprintf(f, "  l         : %u   (l* = %u, l± = %u)   ε̲ = the cusp ±%d\n", d->l, d->lstar, d->lpm, d->epsilon);
     fprintf(f, "  log(q)    : %.4f   |log(q)| = log(q)/2l = %.4f   ht_E = log(q)/6 = %.4f\n", iut_log_q(d), d->l ? iut_log_q(d) / (2.0 * d->l) : 0, iut_height_from_q(d));
-    fprintf(f, "  log(f)    : %.4f   log(d^Ftpd) = %.4f   log(d^K) ≈ %.4f   h(j) ≈ %.3f\n", iut_log_cond(d), d->logdF, d->logdK, d->j_log_height);
+    fprintf(f, "  log(f)    : %.4f   log(d^Ftpd) = %.4f   log(d^K) ≈ %.4f (≤ %.4f, Thm 1.10)   h(j) ≈ %.3f\n", iut_log_cond(d), d->logdF, d->logdK, d->logdF + iut_log_cond(d) + 2.0 * log((double)(d->l ? d->l : 1)) + 21.0, d->j_log_height);
     fprintf(f, "  V ≅ V_mod : %u valuations\n", d->nV);
     fprintf(f, "    %-6s %-5s %-4s %-5s %-5s %-10s %-7s %s\n", "name", "kind", "p", "e/f_m", "e/f_K", "reduction", "ord(q)", "V^bad_mod");
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
         if (v->kind == IUT_V_ARCH) fprintf(f, "    %-6s arc   -    -     -     -          -       -\n", v->name);
-        else fprintf(f, "    %-6s non   %-4u %u/%-3u %u/%-3u %-10s %-7u %s\n", v->name, v->p, v->e_mod, v->f_mod, v->e_K, v->f_K, redname(v->red), v->ordq, v->in_Vbad_mod ? "yes" : "-");
+        else { char ek[24]; snprintf(ek, sizeof ek, "%s%u/%u", v->e_K_lower ? "≥" : "", v->e_K, v->f_K);
+               fprintf(f, "    %-6s non   %-4u %u/%-3u %-*s %-10s %-7u %s\n", v->name, v->p, v->e_mod, v->f_mod, v->e_K_lower ? 7 : 5, ek, redname(v->red), v->ordq, v->in_Vbad_mod ? "yes" : "-"); }
     }
     fprintf(f, "  asserted  : F/F_mod Galois %s | E[6] ⊆ F %s | SL2 ⊆ image %s | stable red. %s | C_K K-core %s\n",
             d->h_F_galois_over_Fmod ? "✓" : "✗", d->h_F_contains_six_torsion ? "✓" : "✗", d->h_image_contains_SL2 ? "✓" : "✗", d->h_stable_reduction ? "✓" : "✗", d->h_CK_is_K_core ? "✓" : "✗");

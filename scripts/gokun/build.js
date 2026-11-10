@@ -96,15 +96,15 @@ const V = {
 /* ------------------------------------------------------------------ tables */
 const T = {};
 T.level = `<table class="num"><tr><th>example</th><th>\\(l\\)</th><th>\\(h = \\log q^{\\forall}\\)</th><th>\\(\\sqrt h\\) (must be \\(&lt; l\\))</th>
-<th>\\(\\varepsilon_E\\) (must be \\(\\le \\min\\{1,\\varepsilon\\}\\))</th><th>toolkit says</th><th>status in Prop. 1.15</th></tr>` +
+<th>\\(\\varepsilon_E\\) (must be \\(\\le \\min\\{1,\\varepsilon\\}\\))</th><th>toolkit said</th><th>toolkit says now</th></tr>` +
   EX.map(e => { const c = e.heightBound.corTwoTwo; return `<tr><td>${esc(e.short)}</td><td>${e.data.l}</td><td>${fx(c.logQAll, 2)}</td><td>${fx(Math.sqrt(c.logQAll), 2)}</td>
-<td>${sci(c.epsE)}</td><td>“${c.holds ? 'holds' : 'fails'}”</td><td>in the exceptional set</td></tr>`; }).join('') + '</table>';
+<td>${sci(c.epsE)}</td><td>“${c.holds ? 'holds' : 'fails'}”</td><td>${c.inExceptionalSet ? 'in the exceptional set' : 'outside the exceptional set'}</td></tr>`; }).join('') + '</table>';
 
 T.ram = `<table class="num"><tr><th>example</th><th>place</th><th>\\(\\operatorname{ord}_v(q_v)\\)</th><th>\\(l\\)</th>
-<th>\\(\\operatorname{ord}(q_v^{1/2l})\\)</th><th>smallest possible \\(e(K_v/\\mathbb{Q}_p)\\)</th><th>toolkit's \\(e_K\\)</th></tr>` +
+<th>\\(\\operatorname{ord}(q_v^{1/2l})\\)</th><th>smallest possible \\(e(K_v/\\mathbb{Q}_p)\\)</th><th>toolkit's \\(e_K\\), before</th><th>now</th></tr>` +
   EX.flatMap(e => e.data.VSet.filter(v => v.inVBadMod).map(v => {
     const two = 2 * e.data.l, g = gcd(two, v.ordQ);
-    return `<tr><td>${esc(e.short)}</td><td>\\(v_{${v.p}}\\)</td><td>${v.ordQ}</td><td>${e.data.l}</td><td>${v.ordQ / g}/${two / g}</td><td>${two / g}</td><td>${v.eK}</td></tr>`;
+    return `<tr><td>${esc(e.short)}</td><td>\\(v_{${v.p}}\\)</td><td>${v.ordQ}</td><td>${e.data.l}</td><td>${v.ordQ / g}/${two / g}</td><td>${two / g}</td><td>1</td><td>${v.eKIsLowerBound ? '≥ ' : ''}${v.eK}</td></tr>`;
   })).join('') + '</table>';
 
 T.diff = `<table class="num"><tr><th>example</th><th>\\(l\\)</th><th>toolkit's estimate of \\(\\log \\mathfrak{d}^K\\)</th>
