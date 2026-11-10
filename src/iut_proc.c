@@ -165,7 +165,7 @@ static int p_tempered(const iut_initial_theta_data *d, FILE *f)
 static int p_def31(const iut_initial_theta_data *d, FILE *f)
 {
     iut_def_three_one_item it[6]; iut_report r = {0}; unsigned n = iut_def_three_one_check(d, it, 6, &r);
-    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %s %-4s %-16s %s\n", it[i].item, it[i].ok ? "ok" : "FAIL", it[i].machine_checked ? "(checked)" : "(asserted flag)", it[i].condition);
+    for (unsigned i = 0; i < n; ++i) fprintf(f, "    %s %-4s %-16s %s\n", it[i].item, it[i].ok ? "ok" : "FAIL", it[i].machine_checked == 2 ? "(partly checked)" : it[i].machine_checked ? "(checked)" : "(asserted flag)", it[i].condition);
     iut_theta_approach ta; iut_theta_approach_get(d, &ta); const char *det[5]; unsigned nd = iut_def_three_one_determining_data(det, 5); iut_s_mod sm; iut_s_mod_get(d, &sm);
     fprintf(f, "    Rem 3.1.2 Θ-approach: %s; %s ≅ %s with index %u\n    Rem 3.1.3: the data is determined by", ta.applied_to, ta.cyclotome, ta.theta_cyclotome, ta.cyclotome_index); for (unsigned i = 0; i < nd; ++i) fprintf(f, " %s", det[i]); fprintf(f, "\n    Rem 3.1.5: %s, [K:F_mod] ≤ %llu, %u points\n", sm.notation, sm.gal_order_bound, sm.npoints);
     return r.errors ? 1 : 0;

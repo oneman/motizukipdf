@@ -4,7 +4,7 @@
  */
 #include <math.h>
 #include <string.h>
-#include "iut.h"
+#include "iut_ops.h"
 
 static const char *redname(iut_reduction r) { return r == IUT_RED_GOOD ? "good" : r == IUT_RED_BAD_MULT ? "bad mult." : "bad add."; }
 
@@ -16,7 +16,8 @@ void iut_view_data(FILE *f, const iut_initial_theta_data *d)
     fprintf(f, "  fields    : F_mod ⊆ F ⊆ K = F(E[l]) ⊆ F̄     [F_mod:Q]=%u  [F:Q]≤%llu  [K:Q]≤%llu\n", d->dmod, d->dF, d->dK);
     fprintf(f, "  l         : %u   (l* = %u, l± = %u)   ε̲ = the cusp ±%d\n", d->l, d->lstar, d->lpm, d->epsilon);
     fprintf(f, "  log(q)    : %.4f   |log(q)| = log(q)/2l = %.4f   ht_E = log(q)/6 = %.4f\n", iut_log_q(d), d->l ? iut_log_q(d) / (2.0 * d->l) : 0, iut_height_from_q(d));
-    fprintf(f, "  log(f)    : %.4f   log(d^Ftpd) = %.4f   log(d^K) ≈ %.4f (≤ %.4f, Thm 1.10)   h(j) ≈ %.3f\n", iut_log_cond(d), d->logdF, d->logdK, d->logdF + iut_log_cond(d) + 2.0 * log((double)(d->l ? d->l : 1)) + 21.0, d->j_log_height);
+    fprintf(f, "  log(f)    : %.4f over V^bad_mod (the f of Thm 1.10); %.4f over every bad place   log(d^Ftpd) = %.4f   h(j) ≈ %.3f\n", iut_log_cond_bad(d), iut_log_cond(d), d->logdF, d->j_log_height);
+    fprintf(f, "  log(d^K)  : ≈ %.4f (an estimate; ≤ %.4f by Thm 1.10, Step (ii))\n", d->logdK, d->logdF + iut_log_cond_bad(d) + 2.0 * log((double)(d->l ? d->l : 1)) + 21.0);
     fprintf(f, "  V ≅ V_mod : %u valuations\n", d->nV);
     fprintf(f, "    %-6s %-5s %-4s %-5s %-5s %-10s %-7s %s\n", "name", "kind", "p", "e/f_m", "e/f_K", "reduction", "ord(q)", "V^bad_mod");
     for (unsigned i = 0; i < d->nV; ++i) {
@@ -25,8 +26,13 @@ void iut_view_data(FILE *f, const iut_initial_theta_data *d)
         else { char ek[24]; snprintf(ek, sizeof ek, "%s%u/%u", v->e_K_lower ? "≥" : "", v->e_K, v->f_K);
                fprintf(f, "    %-6s non   %-4u %u/%-3u %-*s %-10s %-7u %s\n", v->name, v->p, v->e_mod, v->f_mod, v->e_K_lower ? 7 : 5, ek, redname(v->red), v->ordq, v->in_Vbad_mod ? "yes" : "-"); }
     }
-    fprintf(f, "  asserted  : F/F_mod Galois %s | E[6] ⊆ F %s | SL2 ⊆ image %s | stable red. %s | C_K K-core %s\n",
-            d->h_F_galois_over_Fmod ? "✓" : "✗", d->h_F_contains_six_torsion ? "✓" : "✗", d->h_image_contains_SL2 ? "✓" : "✗", d->h_stable_reduction ? "✓" : "✗", d->h_CK_is_K_core ? "✓" : "✗");
+    for (unsigned i = 0; i < d->nV; ++i) {
+        const iut_valuation *v = &d->V[i];
+        if (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && !v->in_Vbad_mod)
+            fprintf(f, "    %s: bad multiplicative but over %s, so it stays in V^good (Def 3.1 (b), (c); Thm 1.10 allows bad reduction over 2l)\n", v->name, v->p == 2 ? "2" : "l");
+    }
+    fprintf(f, "  asserted  : F/F_mod Galois %s | √−1, E[6] ⊆ F %s | E[5] ⊆ F %s | SL2 ⊆ image %s | stable red. %s | C_K K-core %s\n",
+            d->h_F_galois_over_Fmod ? "✓" : "✗", d->h_F_contains_six_torsion ? "✓" : "✗", d->h_F_contains_five_torsion ? "✓" : "✗", d->h_image_contains_SL2 ? "✓" : "✗", d->h_stable_reduction ? "✓" : "✗", d->h_CK_is_K_core ? "✓" : "✗");
     fprintf(f, "  labels    : F_l = {%d..%d}  |F_l| = {0..%u}  F_l^* = {1..%u}\n", -(int)d->lstar, (int)d->lstar, d->lstar, d->lstar);
     fprintf(f, "  symmetries: F_l^{⋊±} (additive, Θ±ell-HT)  acts on F_l;  F_l^* (multiplicative, ΘNF-HT) acts on F_l^*\n");
 }
@@ -198,12 +204,13 @@ void iut_view_multiradial(FILE *f, const iut_multiradial_rep *rep, const iut_ini
     }
     fprintf(f, "\n  log(q) = %.4f   |log(q)| = log(q)/2l = %.4f   −|log(q)| = %.4f\n", rep->logq, rep->abs_log_q, -rep->abs_log_q);
     fprintf(f, "  Σ_{j=1}^{l*} [(j+1) log d^K − (j²/2l) log q] = %.4f   ≈ (l²/48)(6 log d^K − log q) = %.4f      [Alien] §3.7 (iv)\n", rep->leading_term, iut_leading_term(d));
-    fprintf(f, "  procession-normalized (÷ l*):  hull enlargement %.4f,  −|log(Θ)| (leading-term heuristic) = %.4f\n", rep->hull_enlargement, rep->theta_upper_bound);
-    fprintf(f, "  heuristic  −|log(Θ)| ≥ −|log(q)| :  %.4f ≥ %.4f  → %s\n", rep->theta_upper_bound, -rep->abs_log_q, rep->theta_upper_bound >= -rep->abs_log_q ? "holds" : "FAILS (Szpiro-violating data?)");
-    fprintf(f, "  C_Θ ([IUTchIV] Thm 1.10, with e*_mod = 2^12·3^3·5·e_mod, η_prm = 5·10^20 [ExpEst]) = %.6g  →  C_Θ ≥ −1 %s\n", rep->C_theta, rep->C_theta >= -1 ? "✓" : "✗");
-    fprintf(f, "  hence (1/6) log(q) ≤ (1 + 20 d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod·l + η_prm):  %.4f ≤ %.6g\n",
-            rep->logq / 6.0, (1 + 20.0 * d->dmod / d->l) * (d->logdF + iut_log_cond(d)) + 20.0 * (4096.0 * 27 * 5 * d->l + 5e20));
-    fprintf(f, "  overall: %s\n", rep->inequality_holds ? "inequality holds for this data" : "inequality FAILS for this data");
+    fprintf(f, "  procession-normalized (÷ l*), leading terms only:  hull %.4f,  with the theta shift %.4f   (an estimate, not a bound)\n", rep->hull_enlargement, rep->theta_upper_bound);
+    iut_thm110 T; iut_thm110_compute(d, &T);
+    fprintf(f, "  −|log(Θ)| ≤ B = %.4f: the bound of [IUTchIV] Thm 1.10, Steps (v)–(vii), with every term, summed over v_Q\n", rep->theta_hull_bound);
+    fprintf(f, "  Cor 3.12 (an input, not re-proved here) gives B ≥ −|log(q)|:  %.4f ≥ %.4f  → %s;   C_Θ = B/|log q| = %.6g\n", rep->theta_hull_bound, -rep->abs_log_q, rep->theta_hull_bound >= -rep->abs_log_q ? "consistent" : "NOT consistent with this data", rep->C_theta_local);
+    fprintf(f, "  C_Θ of the statement of Thm 1.10 (e*_mod = 2^12·3^3·5·e_mod, η_prm = 5·10^20 [ExpEst]) = %.6g  →  C_Θ ≥ −1 %s\n", rep->C_theta, rep->C_theta >= -1 ? "✓" : "✗");
+    fprintf(f, "  hence (1/6) log(q) ≤ (1 + 20 d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod·l + η_prm):  %.4f ≤ %.6g%s\n", T.lhs, T.rhs, T.hypotheses_ok ? "" : "   (the hypotheses of Thm 1.10 do not all hold for this data)");
+    fprintf(f, "  overall: %s\n", rep->inequality_holds ? "the consequences of Cor 3.12 are consistent with this data" : "a consequence of Cor 3.12 FAILS for this data");
 }
 
 void iut_view_etale_picture(FILE *f, const iut_log_theta_lattice *lat)

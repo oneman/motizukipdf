@@ -128,8 +128,9 @@ double iut_log_shell_volume(const iut_valuation *v, unsigned dK)
 {
     (void)dK;
     if (v->kind == IUT_V_ARCH) return 0.0;             /* I_v = closed disc of radius π: normalized 0 in our model */
+    IUT_GAP("LocalFieldsOfK");                          /* e, f, m are the values forced by the hypotheses, not those of the actual K_v */
     double p = (double)v->p, e = v->e_K ? v->e_K : 1, f = v->f_K ? v->f_K : 1;
-    double m = (v->p == 2) ? 1.0 : 0.0;                 /* ±1 ∈ μ_2 always; other p-torsion ignored */
+    double m = (double)v->m_K;                          /* μ_{p^m} ⊆ K_v: set by iut_data_finish (√−1, μ_3, μ_5, μ_l) */
     double kstar = (v->p == 2) ? 2.0 : 1.0;             /* p* = p^kstar */
     return -(1.0 / e + m / (e * f)) * log(p) + kstar * log(p);
 }
@@ -157,6 +158,13 @@ double iut_leading_term(const iut_initial_theta_data *d)
 unsigned iut_eK_min(unsigned l, unsigned ordq)
 { unsigned a = 2 * l, b = ordq; while (b) { unsigned t = a % b; a = b; b = t; } return a ? 2 * l / a : 1; }
 
+static void raise_eK(iut_valuation *v, unsigned need)
+{   /* e_K := lcm(e_K, need), recorded as a lower bound */
+    if (!need || v->e_K % need == 0) return;
+    unsigned a = v->e_K, b = need; while (b) { unsigned t = a % b; a = b; b = t; }
+    v->e_K = v->e_K / a * need; v->e_K_lower = 1;
+}
+
 void iut_data_finish(iut_initial_theta_data *d)
 {
     d->lstar = d->l ? (d->l - 1) / 2 : 0;
@@ -174,11 +182,22 @@ void iut_data_finish(iut_initial_theta_data *d)
          * ([IUTchIV] Prop 1.8 (vi); Yamashita, proof of Lemma 1.9 (1)): ord(q_v)/(2l) ∈ (1/e)Z for
          * e = e(K_v/(F_mod)_v), so e is a multiple of 2l/gcd(2l, ord q_v).  That is all we know of e_K,
          * so it is recorded as a lower bound. */
-        if (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->ordq && d->l) {
-            unsigned need = v->e_mod * iut_eK_min(d->l, v->ordq);
-            if (v->e_K % need) { unsigned a = v->e_K, b = need; while (b) { unsigned t = a % b; a = b; b = t; } v->e_K = v->e_K / a * need; v->e_K_lower = 1; }
+        if (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->ordq && d->l)
+            raise_eK(v, v->e_mod * iut_eK_min(d->l, v->ordq));
+        /* The determinant of the Galois representation on torsion points is the cyclotomic character, so
+         * K contains a primitive 4·3·l-th root of unity (and a 5th one when E[5] ⊆ E(F)): K is ramified
+         * over Q at every place dividing 2·3·(5·)l ([IUTchIV] Thm 1.10, proof, Step (iii)).  Q_p(μ_p) has
+         * e = p − 1 and Q_2(√−1) has e = 2: e_K is a multiple of that, and μ_{p^m} ⊆ K_v with m ≥ 1 (m ≥ 2
+         * at p = 2).  Again a lower bound: the wild part of K_v/Q_p is not known to the toolkit.          */
+        if (v->kind == IUT_V_NONARCH && d->l) {
+            unsigned p = v->p; v->m_K = 0;
+            if (p == 2)      { raise_eK(v, 2); v->m_K = 2; }
+            else if (p == 3 || p == d->l || (p == 5 && d->h_F_contains_five_torsion)) { raise_eK(v, p - 1); v->m_K = 1; }
         }
-        v->in_Vbad_mod = (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->p % 2 == 1);
+        /* V^bad_mod: bad multiplicative, odd, and prime to l ([IUTchI] Def 3.1 (b), (c)).  A bad place over l
+         * is left in V^good — Def 3.1 (b) allows bad reduction there, [IUTchIV] Thm 1.10 asks for good reduction
+         * only away from 2l, and (P3) in the proof of Cor 2.2 foresees l = p_v.                              */
+        v->in_Vbad_mod = (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->p % 2 == 1 && v->p != d->l);
         if (v->red != IUT_RED_BAD_MULT) v->ordq = 0;
     }
 }
@@ -202,6 +221,7 @@ static void add_val(iut_initial_theta_data *d, unsigned p, iut_reduction red, un
 
 int iut_gen_from_abc(iut_initial_theta_data *d, long long a, long long b, long long c, unsigned l)
 {
+    IUT_GAP("GeneratorsFreyOnly");
     memset(d, 0, sizeof *d);
     if (a <= 0 || b <= 0 || c <= 0 || a + b != c) return -1;
     if (gcdl(a, b) != 1 || gcdl(a, c) != 1) return -2;
@@ -252,6 +272,7 @@ int iut_gen_from_abc(iut_initial_theta_data *d, long long a, long long b, long l
     /* log(d^K) estimate: tame ramification at bad primes ≤ log p each, at l ≤ 2 log l  */
     d->logdK = logf + 2.0 * log((double)l);
     d->h_F_galois_over_Fmod = 1; d->h_F_contains_six_torsion = 1;
+    d->h_F_contains_five_torsion = 1;   /* F = Q(√−1, E[2·3·5]) as in [IUTchIV] Thm 1.10: this is where the factor 480 of dF comes from */
     d->h_image_contains_SL2 = 1; /* asserted: true for all but finitely many l by Serre, cannot be checked here */
     d->h_stable_reduction = 1;   /* true at odd primes for Frey curves; at 2 see IUT_RED_BAD_ADD */
     d->h_CK_is_K_core = 1;       /* asserted: fails only for CM / Shimura-type curves */
@@ -300,11 +321,12 @@ int iut_gen_random(iut_initial_theta_data *d, unsigned seed)
     { iut_reduction red2 = rnd(2) ? IUT_RED_GOOD : IUT_RED_BAD_MULT; unsigned oq2 = 2 + 2 * rnd(3);   /* sequenced: argument evaluation order is unspecified in C */
       add_val(d, 2, red2, oq2); }
     add_val(d, 0, IUT_RED_GOOD, 0);
-    d->dF = (unsigned long long)d->dmod * 2 * 6 * 48; d->dK = d->dF * (unsigned long long)d->l * (d->l + 1) * (d->l - 1) * (d->l - 1);
+    d->dF = (unsigned long long)d->dmod * 2 * 6 * 48 * 480; d->dK = d->dF * (unsigned long long)d->l * (d->l + 1) * (d->l - 1) * (d->l - 1);
     d->logdF = 0.5 + 0.1 * rnd(40);
     d->logdK = d->logdF + iut_log_cond(d) + 2.0 * log((double)d->l);
     d->epsilon = 1;              /* [IUTchI] Def 3.1 (f): the cusp ±1 */
     d->h_F_galois_over_Fmod = d->h_F_contains_six_torsion = d->h_image_contains_SL2 = d->h_stable_reduction = d->h_CK_is_K_core = 1;
+    d->h_F_contains_five_torsion = 1;   /* F = F_mod(√−1, E[2·3·5]), as [IUTchIV] Thm 1.10 asks */
     iut_data_finish(d);
     return 0;
 }
@@ -337,13 +359,15 @@ int iut_validate_data(const iut_initial_theta_data *d, iut_report *r)
         iut_report_add(r, IUT_SEV_ERROR, "LStar", "[IUTchI] §0", "l*, l± inconsistent with l");
     if (d->l == 5)
         iut_report_add(r, IUT_SEV_WARN, "LPrime", "[IUTchIV] Thm 1.10", "l = 5 is excluded in the explicit estimate of Thm 1.10 (F ⊇ Q(E[5]) ⇒ l ≠ 5)");
+    if (d->l == 5 && d->h_F_contains_five_torsion)
+        iut_report_add(r, IUT_SEV_ERROR, "KField", "[IUTchI] Def 3.1 (c)", "l = 5 with E[5] ⊆ E(F): the image of G_F in GL2(F_5) is trivial, so it cannot contain SL2(F_5)");
     /* fields */
     if (d->dmod == 0 || d->dF % d->dmod || d->dK % d->dF)
         iut_report_add(r, IUT_SEV_ERROR, "Fmod", "[IUTchI] Def 3.1", "degrees must satisfy dmod | dF | dK (got %u,%llu,%llu)", d->dmod, d->dF, d->dK);
     else
         iut_report_add(r, IUT_SEV_OK, "Fmod", "[IUTchI] Def 3.1", "F_mod ⊆ F ⊆ K with [F_mod:Q]=%u, [F:Q]≤%llu, [K:Q]≤%llu", d->dmod, d->dF, d->dK);
     if (d->l && (d->dF / (d->dmod ? d->dmod : 1)) % d->l == 0)
-        iut_report_add(r, IUT_SEV_ERROR, "FBarOverF", "[IUTchI] Def 3.1 (a)", "[F:F_mod] must be prime to l");
+        iut_report_add(r, IUT_SEV_ERROR, "FBarOverF", "[IUTchI] Def 3.1 (b)", "[F:F_mod] must be prime to l");
     /* V ≅ V_mod */
     unsigned narc = 0, nbad = 0, nbad_odd = 0, nbad_even = 0, nadd = 0;
     for (unsigned i = 0; i < d->nV; ++i) {
@@ -356,15 +380,19 @@ int iut_validate_data(const iut_initial_theta_data *d, iut_report *r)
             iut_report_add(r, IUT_SEV_ERROR, "VNon", "[IUTchI] Def 3.1", "%s: residue characteristic %u is not prime", v->name, v->p);
         if (v->red == IUT_RED_BAD_MULT) {
             nbad++;
-            if (v->p % 2) nbad_odd++; else nbad_even++;
+            if (v->in_Vbad_mod) nbad_odd++; else if (v->p == 2) nbad_even++;
             if (v->ordq == 0)
                 iut_report_add(r, IUT_SEV_ERROR, "QUnderV", "[IUTchI] Ex 3.2", "%s: bad multiplicative reduction needs ord(q_v) > 0", v->name);
             if (v->in_Vbad_mod && v->p % 2 == 0)
-                iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (e)", "%s: V^bad_mod consists of ODD residue characteristic", v->name);
+                iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (b)", "%s: V^bad_mod consists of ODD residue characteristic", v->name);
             if (v->in_Vbad_mod && v->p == d->l)
-                iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (c)", "%s: l must be prime to the residue characteristics of V^bad_mod", v->name);
-            if (d->l && v->ordq % d->l == 0)
-                iut_report_add(r, IUT_SEV_WARN, "QUnderV", "[IUTchI] Def 3.1; [IUTchIV] Prop 1.8 (vii)", "%s: l | ord(q_v) = %u (l-torsion then unramified at v; SL2 condition fragile)", v->name, v->ordq);
+                iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (c)", "%s: l must be prime to the residue characteristics of V^bad_mod", v->name);   /* cannot happen after iut_data_finish; guards hand-made data */
+            if (d->l && v->ordq % d->l == 0 && v->in_Vbad_mod)
+                iut_report_add(r, IUT_SEV_ERROR, "QUnderV", "[IUTchI] Def 3.1 (c)", "%s: l | ord(q_v) = %u, but l must be prime to the orders of the q-parameters on V^bad (choose another l)", v->name, v->ordq);
+            else if (d->l && v->ordq % d->l == 0)
+                iut_report_add(r, IUT_SEV_WARN, "QUnderV", "[IUTchIV] Cor 2.2, proof, (P2)", "%s: l | ord(q_v) = %u at a place outside V^bad_mod: Def 3.1 allows it, the choice of l in Cor 2.2 avoids it", v->name, v->ordq);
+            if (v->p % 2 == 1 && !v->in_Vbad_mod)
+                iut_report_add(r, IUT_SEV_INFO, "VBadMod", "[IUTchI] Def 3.1 (b), (c); [IUTchIV] Thm 1.10", "%s: bad multiplicative over l = %u, so it is left in V^good (l must be prime to V^bad_mod; Thm 1.10 allows bad reduction over 2l)", v->name, d->l);
         }
         if (v->red == IUT_RED_BAD_ADD) nadd++;
         if (v->e_K < v->e_mod || v->f_K < v->f_mod)
@@ -373,21 +401,22 @@ int iut_validate_data(const iut_initial_theta_data *d, iut_report *r)
             iut_report_add(r, IUT_SEV_ERROR, "KField", "[IUTchIV] Prop 1.8 (vi)", "%s: q_v^{1/2l} ∈ K_v needs e_K to be a multiple of %u (got %u)", v->name, v->e_mod * iut_eK_min(d->l, v->ordq), v->e_K);
     }
     if (nbad_odd == 0)
-        iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (e)", "V^bad_mod must be nonempty: no odd prime of bad multiplicative reduction");
+        iut_report_add(r, IUT_SEV_ERROR, "VBadMod", "[IUTchI] Def 3.1 (b)", "V^bad_mod must be nonempty: no odd prime ≠ l of bad multiplicative reduction");
     else
-        iut_report_add(r, IUT_SEV_OK, "VBadMod", "[IUTchI] Def 3.1 (e)", "|V^bad_mod| = %u odd primes of bad multiplicative reduction%s", nbad_odd, nbad_even ? " (2 is bad but excluded from V^bad_mod)" : "");
+        iut_report_add(r, IUT_SEV_OK, "VBadMod", "[IUTchI] Def 3.1 (b)", "|V^bad_mod| = %u odd primes of bad multiplicative reduction%s", nbad_odd, nbad_even ? " (2 is bad but excluded from V^bad_mod)" : "");
     if (narc == 0)
         iut_report_add(r, IUT_SEV_WARN, "VArc", "[IUTchI] Def 3.1", "no archimedean valuation listed in V");
     if (nadd)
         iut_report_add(r, IUT_SEV_WARN, "VBad", "[IUTchI] Def 3.1 (b); [IUTchIV] Cor 2.2", "%u place(s) of additive reduction: stable reduction only after a finite extension (F_tpd / Legendre form)", nadd);
     /* asserted hypotheses */
     struct { int ok; const char *cond, *ref, *msg; } hs[] = {
-        { d->h_F_galois_over_Fmod,     "FBarOverF", "[IUTchI] Def 3.1 (a)", "F Galois over F_mod of degree prime to l" },
-        { d->h_F_contains_six_torsion, "FBarOverF", "[IUTchI] Def 3.1 (a)", "F contains the fields of definition of E[2·3]" },
+        { d->h_F_galois_over_Fmod,     "FBarOverF", "[IUTchI] Def 3.1 (b)", "F Galois over F_mod of degree prime to l" },
+        { d->h_F_contains_six_torsion, "FBarOverF", "[IUTchI] Def 3.1 (a), (b)", "√−1 ∈ F, and the 2·3-torsion points of E_F are rational over F" },
         { d->h_image_contains_SL2,     "KField",    "[IUTchI] Def 3.1 (c)", "Im(Gal(K/F) → GL2(F_l)) ⊇ SL2(F_l)" },
         { d->h_stable_reduction,       "XF",        "[IUTchI] Def 3.1 (b)", "E_F has stable reduction at all nonarchimedean valuations of F" },
         { d->h_CK_is_K_core,           "CK",        "[IUTchI] Def 3.1 (d); [CanLift] Rem 2.1.1", "C_K is a K-core (no Shimura-curve coverings)" },
     };
+    IUT_GAP("AssertedHypotheses");
     for (size_t i = 0; i < sizeof hs / sizeof hs[0]; ++i)
         iut_report_add(r, hs[i].ok ? IUT_SEV_INFO : IUT_SEV_ERROR, hs[i].cond, hs[i].ref, "%s: %s", hs[i].ok ? "asserted (not machine-checkable here)" : "NOT asserted", hs[i].msg);
     /* ε̲: a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ, i.e. a label in F_l^* = {1..l*};
@@ -575,6 +604,7 @@ void iut_prime_strip_forget(iut_prime_strip *dst, const iut_prime_strip *src, iu
 /* ------------------------------------------------------------- Hodge theaters */
 iut_hodge_theater *iut_hodge_theater_new(const iut_initial_theta_data *d, int n, int m, unsigned *universe_ctr)
 {
+    IUT_GAP("HodgeTheatersAreBookkeeping");   /* labels and copy numbers, not categories */
     iut_hodge_theater *ht = calloc(1, sizeof *ht);
     if (!ht) return NULL;
     ht->n = n; ht->m = m; ht->data = d;

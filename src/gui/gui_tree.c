@@ -148,7 +148,7 @@ void gt_rebuild(GtkTreeStore *st, const gm_model *m)
         for (unsigned k = 0; k < m->nitems; ++k) {
             GtkTreeIter it = add(st, &C, NULL, "stage:1", m->items[k].item, "%s %s", yes(m->items[k].ok), m->items[k].condition);
             add(st, &it, NULL, "stage:1", "detail", "%s", m->items[k].detail);
-            add(st, &it, NULL, "stage:1", "checked by", "%s", m->items[k].machine_checked ? "the program" : "assertion (flag)");
+            add(st, &it, NULL, "stage:1", "checked by", "%s", m->items[k].machine_checked == 2 ? "the program, and assertions (flags)" : m->items[k].machine_checked ? "the program" : "assertion (flag)");
         }
         GtkTreeIter R = add(st, NULL, NULL, "stage:1", "validation report", "%u error(s), %u warning(s), %u checks", m->rdata.errors, m->rdata.warnings, m->rdata.n);
         for (unsigned k = 0; k < m->rdata.n; ++k) {

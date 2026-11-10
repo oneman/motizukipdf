@@ -7,6 +7,10 @@
  * Works in the browser (window.IUT) and in node (module.exports) so that the
  * model can be tested with `node scripts/manual/lib/test.js`.  Identifiers used as keys are
  * the English-letters-only identifiers of identifiers.js / docs/IDENTIFIERS.md.
+ *
+ * IUT_GAP("ManualUsesAJavaScriptPort"): this file and ops.js are a second implementation, used only to
+ * build docs/IUT_MANUAL.pdf.  The C sources are the reference; the fixes listed in
+ * docs/gaps/GAP_REPORT.md §5 have NOT been ported here yet (see `iut gaps ManualUses`).
  */
 (function (root) {
   'use strict';

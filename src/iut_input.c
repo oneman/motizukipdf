@@ -325,6 +325,9 @@ static int load(iut_initial_theta_data *d, const jval *root, char *err, size_t e
     d->h_image_contains_SL2     = jtruthy(jpath(root, "l.SL2.proved"));
     d->h_stable_reduction       = jtruthy(jpath(root, "F.stableReduction"));
     d->h_CK_is_K_core           = jtruthy(jpath(root, "C_K.kCore"));
+    /* E[5] ⊆ E(F), the extra hypothesis of [IUTchIV] Thm 1.10: an explicit flag, or F described as Q(√−1, E[2·3·5]) */
+    { const char *ff = jstr(jpath(root, "F.field"));
+      d->h_F_contains_five_torsion = jtruthy(jpath(root, "F.fiveTorsionRational")) || (ff && (strstr(ff, "3\xc2\xb7" "5") || strstr(ff, "E[30]") || strstr(ff, "E[15]"))); }
     /* the file's own derived numbers, for the cross-check in `iut pipeline` */
     double a, b, c, h;
     if (jnum(jpath(root, "derived.logQ"), &a) && jnum(jpath(root, "derived.absLogQ"), &b) &&
@@ -332,7 +335,7 @@ static int load(iut_initial_theta_data *d, const jval *root, char *err, size_t e
         d->have_expected = 1; d->expected_logq = a; d->expected_abslogq = b; d->expected_logcond = c; d->expected_ht = h;
     }
     iut_data_finish(d);
-    /* V^bad_mod as listed in the file must be exactly the odd places of bad multiplicative reduction */
+    /* V^bad_mod as listed in the file must be exactly the odd places, prime to l, of bad multiplicative reduction */
     const jval *vb = jget(root, "VbadMod");
     if (vb && vb->type == J_ARR) {
         unsigned listed = 0;
@@ -341,7 +344,7 @@ static int load(iut_initial_theta_data *d, const jval *root, char *err, size_t e
             listed++;
             int found = 0;
             for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].p == (unsigned)x && d->V[i].in_Vbad_mod) found = 1;
-            if (!found) return fail(err, errn, "VbadMod lists p = %u, but that place is not odd of bad multiplicative reduction over F", (unsigned)x);
+            if (!found) return fail(err, errn, "VbadMod lists p = %u, but that place is not an odd place, prime to l, of bad multiplicative reduction over F", (unsigned)x);
         }
         unsigned have = 0; for (unsigned i = 0; i < d->nV; ++i) have += (unsigned)d->V[i].in_Vbad_mod;
         if (have != listed) return fail(err, errn, "V.places has %u odd places of bad multiplicative reduction, VbadMod lists %u", have, listed);

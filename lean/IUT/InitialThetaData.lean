@@ -2,6 +2,9 @@ import IUT.Labels
 import Mathlib.Tactic.NormNum.Prime
 import Mathlib.Data.List.Nodup
 
+-- IUT_GAP("LeanNotInSync"): this file mirrors src/iut.h as it was before m_K, h_F_contains_five_torsion
+-- and the rule "a bad place over l stays in V^good" were added (see `iut gaps LeanNotInSync`).
+
 /-!
 # Initial Θ-data `(F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)` — [IUTchI] Def 3.1
 

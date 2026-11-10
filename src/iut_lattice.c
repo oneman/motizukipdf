@@ -101,6 +101,7 @@ const iut_link *iut_apply_log_link(iut_log_theta_lattice *lat, int n, int m)
     for (unsigned i = 0; i < dom->pmell.nT; ++i) cod->pmell.T[i].basepoint = dom->pmell.T[i].basepoint;
     for (unsigned i = 0; i < dom->nf.nJ; ++i)    cod->nf.J[i].basepoint = dom->nf.J[i].basepoint;
     /* log-shells in the codomain, one per v ∈ V */
+    IUT_GAP("LogLinkMovesNoElements"); IUT_GAP("LogShellFromBounds");
     const iut_initial_theta_data *d = dom->data;
     cod->nshell = d->nV;
     for (unsigned i = 0; i < d->nV; ++i) {
@@ -216,8 +217,14 @@ void iut_multiradial_build(const iut_log_theta_lattice *lat, int n, iut_multirad
     out->leading_term = sum;                                   /* exact finite sum of the leading terms */
     out->hull_enlargement = hull / (double)(d->lstar ? d->lstar : 1);
     out->theta_upper_bound = sum / (double)(d->lstar ? d->lstar : 1);  /* procession-normalized −|log(Θ)| (heuristic) */
-    out->C_theta = iut_C_theta(d, d->logdF, iut_log_cond(d));          /* [IUTchIV] Thm 1.10, F_tpd-data */
-    out->inequality_holds = (out->theta_upper_bound >= -out->abs_log_q) && (out->C_theta >= -1.0);
+    out->C_theta = iut_C_theta(d, d->logdF, iut_log_cond_bad(d));      /* [IUTchIV] Thm 1.10, F_tpd-data: f over V^bad_mod */
+    /* The verdict used to rest on the leading terms alone, which are not an upper bound.  It now rests on the
+     * bound of the proof of Thm 1.10 with every term (Steps (v)–(vii)).  Cor 3.12 itself is an INPUT here: the
+     * toolkit does not re-prove it, it checks that its consequence B ≥ −|log q| is consistent with the data. */
+    IUT_GAP("CorThreeTwelveIsAnInput");
+    iut_hull_bound hb; iut_hull_bound_compute(d, &hb);
+    out->theta_hull_bound = hb.total; out->C_theta_local = hb.C_theta_local;
+    out->inequality_holds = hb.consequence_holds && (out->C_theta >= -1.0);
 }
 
 /* ---------------------------------------------------------------- validators */

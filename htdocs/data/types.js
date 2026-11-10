@@ -96,8 +96,43 @@
     },
     {
      "type": "int",
-     "name": "e_K_lower",
-     "comment": "e_K is only the lower bound forced by q_v^{1/2l} ∈ K_v (bad mult.)"
+     "name": "e_K_lower/*e_Kisonlyalowerbound:forcedbyq_v^{1/2l}∈K_v(badmult.)andbythe",
+     "comment": ""
+    },
+    {
+     "type": "roots",
+     "name": "ofunity√−1",
+     "comment": ""
+    },
+    {
+     "type": "roots",
+     "name": "μ_3",
+     "comment": ""
+    },
+    {
+     "type": "roots",
+     "name": "(μ_5",
+     "comment": ""
+    },
+    {
+     "type": "roots",
+     "name": ")μ_l∈K(p|2·3·5·l)seegapLocalFieldsOfK*/",
+     "comment": ""
+    },
+    {
+     "type": "unsigned",
+     "name": "m_K/*μ_{p^m}⊆K_vform=m_K",
+     "comment": ""
+    },
+    {
+     "type": "unsigned",
+     "name": "asforcedbyDef3.1:√−1∈F(p=2:m≥2)",
+     "comment": ""
+    },
+    {
+     "type": "A",
+     "name": "lowerboundentersμ_log(I_v)by[IUTchIV]Prop1.4(ii)*/",
+     "comment": ""
     },
     {
      "type": "iut_reduction",
@@ -111,8 +146,18 @@
     },
     {
      "type": "int",
-     "name": "in_Vbad_mod",
-     "comment": "v ∈ Vbad_mod (odd p, bad multiplic.)"
+     "name": "in_Vbad_mod/*v∈Vbad_mod:badmultiplicative",
+     "comment": ""
+    },
+    {
+     "type": "int",
+     "name": "poddandp≠l([IUTchI]Def3.1(b)",
+     "comment": ""
+    },
+    {
+     "type": "int",
+     "name": "(c)).",
+     "comment": ""
     },
     {
      "type": "unsigned long long",
@@ -140,7 +185,7 @@
   {
    "name": "iut_initial_theta_data",
    "file": "iut.h",
-   "line": 91,
+   "line": 97,
    "fields": [
     {
      "type": "char",
@@ -243,6 +288,26 @@
     },
     {
      "type": "int",
+     "name": "h_F_contains_five_torsion/*F⊇fieldofdefinitionofE[5]:F=F_mod(√−1",
+     "comment": ""
+    },
+    {
+     "type": "int",
+     "name": "E[2·3·5])",
+     "comment": ""
+    },
+    {
+     "type": "int",
+     "name": "theextra",
+     "comment": ""
+    },
+    {
+     "type": "hypothesis",
+     "name": "of[IUTchIV]Thm1.10(notofDef3.1)itforcesl≠5*/",
+     "comment": ""
+    },
+    {
+     "type": "int",
      "name": "from_json",
      "comment": "schema iut-initial-theta-data/1 (docs/initial-theta-data/)"
     },
@@ -295,7 +360,7 @@
   {
    "name": "iut_local_datum",
    "file": "iut.h",
-   "line": 161,
+   "line": 169,
    "fields": [
     {
      "type": "unsigned",
@@ -362,7 +427,7 @@
   {
    "name": "iut_prime_strip",
    "file": "iut.h",
-   "line": 176,
+   "line": 184,
    "fields": [
     {
      "type": "iut_ps_kind",
@@ -421,7 +486,7 @@
   {
    "name": "iut_pilot",
    "file": "iut.h",
-   "line": 190,
+   "line": 198,
    "fields": [
     {
      "type": "iut_pilot_kind",
@@ -453,7 +518,7 @@
   {
    "name": "iut_log_shell",
    "file": "iut.h",
-   "line": 200,
+   "line": 208,
    "fields": [
     {
      "type": "unsigned",
@@ -510,7 +575,7 @@
   {
    "name": "iut_capsule_member",
    "file": "iut.h",
-   "line": 215,
+   "line": 223,
    "fields": [
     {
      "type": "int",
@@ -535,7 +600,7 @@
   {
    "name": "iut_theta_hodge_theater",
    "file": "iut.h",
-   "line": 220,
+   "line": 228,
    "fields": [
     {
      "type": "iut_prime_strip",
@@ -564,7 +629,7 @@
   {
    "name": "iut_theta_pm_ell_hodge_theater",
    "file": "iut.h",
-   "line": 226,
+   "line": 234,
    "fields": [
     {
      "type": "unsigned",
@@ -611,7 +676,7 @@
   {
    "name": "iut_theta_nf_hodge_theater",
    "file": "iut.h",
-   "line": 234,
+   "line": 242,
    "fields": [
     {
      "type": "unsigned",
@@ -663,7 +728,7 @@
   {
    "name": "iut_hodge_theater",
    "file": "iut.h",
-   "line": 243,
+   "line": 251,
    "fields": [
     {
      "type": "int",
@@ -782,7 +847,7 @@
   {
    "name": "iut_link",
    "file": "iut.h",
-   "line": 282,
+   "line": 290,
    "fields": [
     {
      "type": "iut_link_kind",
@@ -861,7 +926,7 @@
   {
    "name": "iut_indeterminacies",
    "file": "iut.h",
-   "line": 297,
+   "line": 305,
    "fields": [
     {
      "type": "int",
@@ -889,7 +954,7 @@
   {
    "name": "iut_procession_step",
    "file": "iut.h",
-   "line": 305,
+   "line": 313,
    "fields": [
     {
      "type": "unsigned",
@@ -927,7 +992,7 @@
   {
    "name": "iut_multiradial_rep",
    "file": "iut.h",
-   "line": 316,
+   "line": 324,
    "fields": [
     {
      "type": "int",
@@ -983,6 +1048,17 @@
      "type": "double",
      "name": "hull_enlargement",
      "comment": "log-volume added by the holomorphic hull"
+    },
+    {
+     "type": "double",
+     "name": "theta_hull_bound",
+     "comment": "B with −|log(Θ)| ≤ B: every term of the proof, not only the leading ones",
+     "group": "the upper bound of [IUTchIV] Thm 1.10, proof Steps (v)–(vii), summed over v_Q (iut_hull_bound_compute)"
+    },
+    {
+     "type": "double",
+     "name": "C_theta_local",
+     "comment": "B/|log q|: an admissible C_Θ computed from the places of this curve"
     }
    ],
    "comment": "multiradial representation R^LGP_{n,◦} = (a) tensor packets of log-shells, (b) splitting monoids of LGP-monoids, (c) copies (F_mod^×)_j — up to (Ind1),(Ind2),(Ind3).",
@@ -999,7 +1075,7 @@
   {
    "name": "iut_log_theta_lattice",
    "file": "iut.h",
-   "line": 333,
+   "line": 344,
    "fields": [
     {
      "type": "iut_initial_theta_data",
@@ -1054,7 +1130,7 @@
   {
    "name": "iut_species",
    "file": "iut.h",
-   "line": 345,
+   "line": 356,
    "fields": [
     {
      "type": "const char",
@@ -1088,7 +1164,7 @@
   {
    "name": "iut_mutation",
    "file": "iut.h",
-   "line": 351,
+   "line": 362,
    "fields": [
     {
      "type": "const char",
@@ -1132,7 +1208,7 @@
   {
    "name": "iut_issue",
    "file": "iut.h",
-   "line": 365,
+   "line": 376,
    "fields": [
     {
      "type": "iut_severity",
@@ -1161,7 +1237,7 @@
   {
    "name": "iut_report",
    "file": "iut.h",
-   "line": 371,
+   "line": 382,
    "fields": [
     {
      "type": "unsigned",
@@ -1188,9 +1264,186 @@
    "idents": []
   },
   {
+   "name": "iut_gap",
+   "file": "iut.h",
+   "line": 499,
+   "fields": [
+    {
+     "type": "const char",
+     "name": "*id",
+     "comment": "letters only, unique"
+    },
+    {
+     "type": "int",
+     "name": "stage",
+     "comment": "pipeline stage 0–7, or −1 for the toolkit as a whole"
+    },
+    {
+     "type": "iut_gap_status",
+     "name": "status",
+     "comment": ""
+    },
+    {
+     "type": "const char",
+     "name": "*ref",
+     "comment": "where the papers specify the thing"
+    },
+    {
+     "type": "const char",
+     "name": "*title",
+     "comment": ""
+    },
+    {
+     "type": "const char",
+     "name": "*paper",
+     "comment": "what the papers specify"
+    },
+    {
+     "type": "const char",
+     "name": "*code",
+     "comment": "what the toolkit does instead"
+    },
+    {
+     "type": "const char",
+     "name": "*where",
+     "comment": "file: function(s)"
+    },
+    {
+     "type": "const char",
+     "name": "*plan",
+     "comment": "the fix: done, or prepared"
+    }
+   ],
+   "comment": "",
+   "idents": []
+  },
+  {
+   "name": "iut_hull_row",
+   "file": "iut.h",
+   "line": 531,
+   "fields": [
+    {
+     "type": "unsigned",
+     "name": "p",
+     "comment": "the prime under v_Q (0: archimedean)"
+    },
+    {
+     "type": "int",
+     "name": "kind",
+     "comment": "0 distinguished, 1 nonarchimedean not distinguished, 2 archimedean"
+    },
+    {
+     "type": "const char",
+     "name": "*why",
+     "comment": "why it is distinguished"
+    },
+    {
+     "type": "double",
+     "name": "logdK",
+     "comment": "the upper bound used for log(d^K_vQ)"
+    },
+    {
+     "type": "const char",
+     "name": "*logdK_src",
+     "comment": "where that bound comes from (Step (ii), Prop 1.3)"
+    },
+    {
+     "type": "double",
+     "name": "logq",
+     "comment": "log(q_vQ)"
+    },
+    {
+     "type": "double",
+     "name": "logs",
+     "comment": "log(s^Q_vQ) = log p"
+    },
+    {
+     "type": "int",
+     "name": "iota",
+     "comment": "ι_vQ"
+    },
+    {
+     "type": "double",
+     "name": "bound",
+     "comment": "the procession-normalized upper bound at v_Q"
+    }
+   ],
+   "comment": "the hull bound of [IUTchIV] Thm 1.10, Steps (iv)–(viii) An upper bound B for −|log(Θ)|, the procession-normalized mono-analytic log-volume of the holomorphic hull of the union of possible images of a Θ-pilot, computed place by place exactly as in the proof: v_Q ∈ V^dst_Q (p | 2·3·5·l, or in the support of q or of the different): ((l+5)/4)·log(d^K_vQ) − ((l+1)/24)·log(q_vQ) + log(s^Q_vQ) + (l+5)·l*_mod·log(s^≤_vQ) (Step (v)) v_Q nonarchimedean, not distinguished: 0 (Step (vi)) v_Q archimedean: ((l+5)/4)·log π (Step (vii)) with l*_mod = log(e*_mod·l), log(s^Q_vQ) = log p, log(s^≤_vQ) = 1 if p ≤ e*_mod·l, else 0.",
+   "idents": []
+  },
+  {
+   "name": "iut_hull_bound",
+   "file": "iut.h",
+   "line": 542,
+   "fields": [
+    {
+     "type": "unsigned",
+     "name": "nrows",
+     "comment": ""
+    },
+    {
+     "type": "iut_hull_row",
+     "name": "row[IUT_MAX_V+6]",
+     "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "lstar_mod",
+     "comment": "l*_mod = log(e*_mod·l)"
+    },
+    {
+     "type": "double",
+     "name": "per_j[IUT_MAX_LPM]",
+     "comment": "the bound before averaging, for j = 1..l* (index j)"
+    },
+    {
+     "type": "double",
+     "name": "unlocalized_logd",
+     "comment": "((l+5)/4)·log(d^Ftpd) when its support is unknown"
+    },
+    {
+     "type": "double",
+     "name": "total",
+     "comment": "B"
+    },
+    {
+     "type": "double",
+     "name": "abs_logq",
+     "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "C_theta_local",
+     "comment": "B/|log q|"
+    },
+    {
+     "type": "double",
+     "name": "C_theta_formula",
+     "comment": "the C_Θ of the statement of Thm 1.10"
+    },
+    {
+     "type": "int",
+     "name": "below_formula",
+     "comment": "C_theta_local ≤ C_theta_formula, as the proof says"
+    },
+    {
+     "type": "int",
+     "name": "consequence_holds",
+     "comment": "B ≥ −|log q|, the consequence of Cor 3.12"
+    },
+    {
+     "type": "int",
+     "name": "complete",
+     "comment": "0: the support of d^Ftpd is not in the data model (gap DifferentSupport)"
+    }
+   ],
+   "comment": "",
+   "idents": []
+  },
+  {
    "name": "iut_options",
    "file": "iut.h",
-   "line": 478,
+   "line": 569,
    "fields": [
     {
      "type": "long long",
@@ -1226,6 +1479,11 @@
      "type": "const char",
      "name": "*theta_jsoninthave_theta_json",
      "comment": "--theta-json FILE (or inline JSON text starting with '{')"
+    },
+    {
+     "type": "int",
+     "name": "auto_l",
+     "comment": "--l auto: choose l as in the proof of [IUTchIV] Cor 2.2 (iut_choose_l)"
     }
    ],
    "comment": "option parsing shared by CLI and TUI",
@@ -1740,12 +1998,12 @@
     {
      "type": "int",
      "name": "ok",
-     "comment": ""
+     "comment": "1 computed, 0 asserted, 2 partly computed and partly asserted"
     },
     {
      "type": "int",
      "name": "machine_checked",
-     "comment": ""
+     "comment": "1 computed, 0 asserted, 2 partly computed and partly asserted"
     },
     {
      "type": "const char",
@@ -4400,6 +4658,27 @@
      "type": "int",
      "name": "constant_dominates",
      "comment": "const_term alone ≥ lhs: the inequality holds whatever the curve's conductor is"
+    },
+    {
+     "type": "int",
+     "name": "hyp_l_not_five",
+     "comment": "E[5] ⊆ E(F) forces l ≠ 5; the last step of the proof uses l ≥ 7",
+     "group": "the hypotheses of the statement beyond Def 3.1"
+    },
+    {
+     "type": "int",
+     "name": "hyp_good_away_from_2l",
+     "comment": "E_F has good reduction at every v ∈ V(F)^good ∩ V(F)^non not dividing 2l"
+    },
+    {
+     "type": "int",
+     "name": "hyp_F_is_tripod_extension",
+     "comment": "F = F_mod(√−1, E[2·3·5]) — an asserted flag"
+    },
+    {
+     "type": "int",
+     "name": "hypotheses_ok",
+     "comment": "all three: only then does the theorem say anything about this curve"
     }
    ],
    "comment": "Thm 1.10 double iut_iv_E1(unsigned n); (1/n)Σ_{m=1}^n m = (n+1)/2 double iut_iv_E2(unsigned n); (1/n)Σ m² = (2n+1)(n+1)/6 double iut_iv_E3(unsigned p); |GL2(F_p)| = p(p+1)(p−1)² double iut_iv_E5(void); [F_mod(√−1):F_mod] ≤ 2",
@@ -4413,7 +4692,7 @@
   {
    "name": "iut_cor22",
    "file": "iut_ops.h",
-   "line": 457,
+   "line": 470,
    "fields": [
     {
      "type": "double",
@@ -4511,7 +4790,7 @@
      "comment": "!eps_small || !s1_ok: the curve is in the finite set Exc that Cor 2.2 excludes"
     }
    ],
-   "comment": "Prop 2.1, Cor 2.2, Cor 2.3 int iut_iv_log_le_x(double x); log x ≤ x double iut_iv_chebyshev_lo(double x); 2x/3 ≤ θ(x) double iut_iv_chebyshev_hi(double x); θ(x) ≤ 4x/3 (x ≥ ξ_prm) double iut_iv_prime_in_A_bound(double thetaA, double xi_prm); ∃ p ∈ A, p ≤ 2(θ_A + ξ_prm)",
+   "comment": "placeholders (iut_gaps.c): the signature the real computation will have; each returns IUT_NOT_IMPLEMENTED int iut_gap_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out); gap LocalFieldsOfK: (p, e, f, d, m) of K_v int iut_gap_serre_SL2(const iut_initial_theta_data *d, unsigned witness_primes[3]); gap AssertedHypotheses: Serre's criterion for SL_2(F_l) ⊆ image int iut_gap_theta_value(const iut_initial_theta_data *d, unsigned v_index, unsigned j, unsigned long long *unit_mod_p_prec); gap ThetaValuesOrdersOnly: the unit of q̲_v^{j²} ∈ K_v int iut_gap_hull_exact(const iut_initial_theta_data *d, unsigned p, unsigned j, double *log_volume); gap IndeterminaciesAreCounted: the hull's log-volume itself, not a bound int iut_gap_explicit_abc(long long a, long long b, long long c, double epsilon, double *bound); gap ExplicitEstimatesNotImplemented: [ExpEst] Thm A/B int iut_gap_reconstruct(const char *algorithm, const void *group, void *out); gap PrerequisitePapers: a mono-anabelian reconstruction run on a group Prop 2.1, Cor 2.2, Cor 2.3 int iut_iv_log_le_x(double x); log x ≤ x double iut_iv_chebyshev_lo(double x); 2x/3 ≤ θ(x) double iut_iv_chebyshev_hi(double x); θ(x) ≤ 4x/3 (x ≥ ξ_prm) double iut_iv_prime_in_A_bound(double thetaA, double xi_prm); ∃ p ∈ A, p ≤ 2(θ_A + ξ_prm)",
    "idents": [
     "ThmA",
     "ThmB"
@@ -4520,7 +4799,7 @@
   {
    "name": "iut_mutation_history",
    "file": "iut_ops.h",
-   "line": 478,
+   "line": 491,
    "fields": [
     {
      "type": "unsigned",
@@ -4551,7 +4830,7 @@
   {
    "name": "iut_esslgc_model",
    "file": "iut_ops.h",
-   "line": 486,
+   "line": 499,
    "fields": [
     {
      "type": "double",
@@ -4605,7 +4884,7 @@
   {
    "name": "iut_stp",
    "file": "iut_ops.h",
-   "line": 499,
+   "line": 512,
    "fields": [
     {
      "type": "const char",
@@ -4644,7 +4923,7 @@
   {
    "name": "iut_interval",
    "file": "iut_ops.h",
-   "line": 510,
+   "line": 523,
    "fields": [
     {
      "type": "double",
@@ -4663,7 +4942,7 @@
   {
    "name": "iut_gauss_step",
    "file": "iut_ops.h",
-   "line": 522,
+   "line": 535,
    "fields": [
     {
      "type": "unsigned",
@@ -4692,7 +4971,7 @@
   {
    "name": "iut_transport_stage",
    "file": "iut_ops.h",
-   "line": 527,
+   "line": 540,
    "fields": [
     {
      "type": "const char",
@@ -4728,7 +5007,7 @@
   {
    "name": "iut_formal_sum",
    "file": "iut_ops.h",
-   "line": 533,
+   "line": 546,
    "fields": [
     {
      "type": "unsigned",
@@ -4752,7 +5031,7 @@
   {
    "name": "iut_dictionary_entry",
    "file": "iut_ops.h",
-   "line": 551,
+   "line": 564,
    "fields": [
     {
      "type": "const char",
@@ -4771,7 +5050,7 @@
   {
    "name": "iut_process",
    "file": "iut_ops.h",
-   "line": 556,
+   "line": 569,
    "fields": [
     {
      "type": "const char",
@@ -4878,7 +5157,7 @@
   {
    "name": "iut_ps_kind",
    "file": "iut.h",
-   "line": 140,
+   "line": 148,
    "items": [
     {
      "name": "IUT_PS_D",
@@ -4965,7 +5244,7 @@
   {
    "name": "iut_pilot_kind",
    "file": "iut.h",
-   "line": 189,
+   "line": 197,
    "items": [
     {
      "name": "IUT_PILOT_Q",
@@ -4987,7 +5266,7 @@
   {
    "name": "iut_link_kind",
    "file": "iut.h",
-   "line": 269,
+   "line": 277,
    "items": [
     {
      "name": "IUT_LINK_THETA",
@@ -5051,7 +5330,7 @@
   {
    "name": "iut_severity",
    "file": "iut.h",
-   "line": 364,
+   "line": 375,
    "items": [
     {
      "name": "IUT_SEV_OK",
@@ -5075,6 +5354,35 @@
     }
    ],
    "comment": "validation",
+   "idents": []
+  },
+  {
+   "name": "iut_gap_status",
+   "file": "iut.h",
+   "line": 493,
+   "items": [
+    {
+     "name": "IUT_GAP_OPEN",
+     "value": "0",
+     "comment": "not computed at all: a placeholder stands in"
+    },
+    {
+     "name": "IUT_GAP_APPROX",
+     "value": null,
+     "comment": "computed from bounds / estimates, labelled as such"
+    },
+    {
+     "name": "IUT_GAP_ASSERTED",
+     "value": null,
+     "comment": "taken as an input (flag, constant or theorem), not checked"
+    },
+    {
+     "name": "IUT_GAP_FIXED",
+     "value": null,
+     "comment": "was a gap or a mistake; closed, kept for the record"
+    }
+   ],
+   "comment": "",
    "idents": []
   },
   {
@@ -5575,7 +5883,7 @@
   {
    "name": "iut_logic_flavour",
    "file": "iut_ops.h",
-   "line": 485,
+   "line": 498,
    "items": [
     {
      "name": "IUT_LOGIC_AND",
@@ -5614,7 +5922,7 @@
   {
    "name": "iut_formal_sum_kind",
    "file": "iut_ops.h",
-   "line": 534,
+   "line": 547,
    "items": [
     {
      "name": "IUT_FS_ZERO",

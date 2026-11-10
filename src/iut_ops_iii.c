@@ -29,6 +29,7 @@ void iut_log_shell_make(const iut_initial_theta_data *d, unsigned v_index, int h
      * the closed disc of radius π.  The p-adic valuation of a generator is recorded as a
      * rational, the log-volume by [IUTchIV] Prop 1.4 (ii) with the p* normalization.     */
     const iut_valuation *v = &d->V[v_index];
+    IUT_GAP("LogShellFromBounds");
     memset(out, 0, sizeof *out);
     out->v_index = v_index; out->holomorphic = holomorphic; out->etale_like = etale_like; out->lattice_n = n; out->lattice_m = m;
     if (v->kind == IUT_V_ARCH) { out->pstar = 0; out->radius = iut_q_make(0, 1); out->log_volume = 0; return; }
@@ -403,6 +404,7 @@ void iut_multiradial_full_build(const iut_log_theta_lattice *lat, int n, iut_mul
     unsigned long long s = 0; for (unsigned k = 0; k < out->npackets; ++k) s += out->packet[k].nsummands;
     out->ind2_summands = s;
     out->ind3 = 1;
+    IUT_GAP("IndeterminaciesAreCounted");   /* (Ind1)–(Ind3) are counted and named; their action on regions is not enumerated */
     iut_non_interference ni; iut_kummer_non_interference(d, &ni);
     out->log_kummer_ok = ni.non_interference;
     /* (iii) compatibility with the Θ×μ_LGP-link: (a) F⊢×μ units, (b) value groups/pilots, (c) D⊢ core, (d) global realified Frobenioids */
@@ -421,9 +423,10 @@ unsigned iut_cor312_steps(const iut_log_theta_lattice *lat, iut_named_value *out
         { "(1) the Θ-pilot at (0,0): naive log-volume −avg(j²)·|log q|", th.log_volume, "[IUTchIII] Def 3.8 (i)" },
         { "(2) the Θ×μ_LGP-link (0,0)→(1,0) identifies the Θ-pilot with the q-pilot (value groups), units up to Ism", q.log_volume, "[IUTchIII] Def 3.8 (ii), Thm 3.11 (iii)" },
         { "(3) multiradial representation of the Θ-pilot in terms of the mono-analytic data of (1,0): Ind1 count", (double)iut_factorial(d->lpm), "[IUTchIII] Thm 3.11 (i)" },
-        { "(4) holomorphic hull of the region: Σ_j (j+1) log d^K (procession-normalized)", rep.hull_enlargement, "[IUTchIII] Cor 3.12 proof; [Alien] §3.7 (iv)" },
-        { "(5) −|log Θ| upper bound (hull + theta shift, procession-normalized)", rep.theta_upper_bound, "[IUTchIII] Cor 3.12" },
-        { "(6) inequality −|log Θ| ≥ −|log q| ⇔ C_Θ ≥ −1: C_Θ", rep.C_theta, "[IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10" },
+        { "(4) holomorphic hull, leading terms only: ((l+5)/4)·log d^K (an estimate, not a bound)", rep.hull_enlargement, "[Alien] §3.7 (iv)" },
+        { "(5) leading terms with the theta shift: ((l+5)/4)·log d^K − ((l+1)/24)·log q (not a bound)", rep.theta_upper_bound, "[Alien] §3.7 (iv); [IUTchIV] Rem 1.10.1" },
+        { "(6) −|log Θ| ≤ B: the bound of the proof of Thm 1.10 with every term, summed over v_Q", rep.theta_hull_bound, "[IUTchIV] Thm 1.10, Steps (v)–(vii)" },
+        { "(7) Cor 3.12 (an input, not re-proved here) gives B ≥ −|log q|, i.e. C_Θ ≥ −1 for C_Θ = B/|log q|", rep.C_theta_local, "[IUTchIII] Cor 3.12" },
     };
     unsigned n = sizeof steps / sizeof steps[0]; if (n > max) n = max;
     for (unsigned i = 0; i < n; ++i) out[i] = steps[i];

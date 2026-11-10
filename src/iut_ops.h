@@ -446,8 +446,21 @@ typedef struct {
     int    cor312_holds, inequality_holds;
     double main_term, const_term;            /* rhs = main_term + const_term; const_term = 20(e*_mod l + η_prm) */
     int    constant_dominates;               /* const_term alone ≥ lhs: the inequality holds whatever the curve's conductor is */
+    /* the hypotheses of the statement beyond Def 3.1 */
+    int    hyp_l_not_five;                   /* E[5] ⊆ E(F) forces l ≠ 5; the last step of the proof uses l ≥ 7            */
+    int    hyp_good_away_from_2l;            /* E_F has good reduction at every v ∈ V(F)^good ∩ V(F)^non not dividing 2l   */
+    int    hyp_F_is_tripod_extension;        /* F = F_mod(√−1, E[2·3·5]) — an asserted flag                              */
+    int    hypotheses_ok;                    /* all three: only then does the theorem say anything about this curve        */
 } iut_thm110;
 void iut_thm110_compute(const iut_initial_theta_data *d, iut_thm110 *out);
+
+/* ---- placeholders (iut_gaps.c): the signature the real computation will have; each returns IUT_NOT_IMPLEMENTED ---- */
+int iut_gap_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out);            /* gap LocalFieldsOfK: (p, e, f, d, m) of K_v */
+int iut_gap_serre_SL2(const iut_initial_theta_data *d, unsigned witness_primes[3]);                             /* gap AssertedHypotheses: Serre's criterion for SL_2(F_l) ⊆ image */
+int iut_gap_theta_value(const iut_initial_theta_data *d, unsigned v_index, unsigned j, unsigned long long *unit_mod_p_prec); /* gap ThetaValuesOrdersOnly: the unit of q̲_v^{j²} ∈ K_v */
+int iut_gap_hull_exact(const iut_initial_theta_data *d, unsigned p, unsigned j, double *log_volume);            /* gap IndeterminaciesAreCounted: the hull's log-volume itself, not a bound */
+int iut_gap_explicit_abc(long long a, long long b, long long c, double epsilon, double *bound);                 /* gap ExplicitEstimatesNotImplemented: [ExpEst] Thm A/B */
+int iut_gap_reconstruct(const char *algorithm, const void *group, void *out);                                   /* gap PrerequisitePapers: a mono-anabelian reconstruction run on a group */
 
 /* ---- Prop 2.1, Cor 2.2, Cor 2.3 ------------------------------------------ */
 int    iut_iv_log_le_x(double x);                       /* log x ≤ x                              */
