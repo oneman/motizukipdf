@@ -53,6 +53,13 @@
     "eKIsLowerBound": true,
     "fK": 1,
     "mK": 2,
+    "dK": 0,
+    "KExact": {
+     "e": false,
+     "f": false,
+     "m": false,
+     "d": false
+    },
     "reduction": "good",
     "ordQ": 0,
     "inVBadMod": false
@@ -67,6 +74,13 @@
     "eKIsLowerBound": true,
     "fK": 1,
     "mK": 1,
+    "dK": 0,
+    "KExact": {
+     "e": false,
+     "f": false,
+     "m": false,
+     "d": false
+    },
     "reduction": "badMultiplicative",
     "ordQ": 4,
     "inVBadMod": true,
@@ -83,6 +97,13 @@
     "eKIsLowerBound": true,
     "fK": 1,
     "mK": 1,
+    "dK": 0,
+    "KExact": {
+     "e": false,
+     "f": false,
+     "m": false,
+     "d": false
+    },
     "reduction": "good",
     "ordQ": 0,
     "inVBadMod": false
@@ -97,6 +118,13 @@
     "eKIsLowerBound": false,
     "fK": 1,
     "mK": 0,
+    "dK": 0,
+    "KExact": {
+     "e": false,
+     "f": false,
+     "m": false,
+     "d": false
+    },
     "reduction": "good",
     "ordQ": 0,
     "inVBadMod": false
@@ -346,6 +374,10 @@
      2
     ],
     "logVolume": 0.3465735903,
+    "exact": false,
+    "eK": 2,
+    "fK": 1,
+    "mK": 2,
     "piShared": true
    },
    {
@@ -357,6 +389,10 @@
      7
     ],
     "logVolume": 0.941667676,
+    "exact": false,
+    "eK": 14,
+    "fK": 1,
+    "mK": 1,
     "piShared": true
    },
    {
@@ -368,6 +404,10 @@
      2
     ],
     "logVolume": 0.8047189562,
+    "exact": false,
+    "eK": 4,
+    "fK": 1,
+    "mK": 1,
     "piShared": true
    },
    {
@@ -379,6 +419,10 @@
      1
     ],
     "logVolume": 0,
+    "exact": false,
+    "eK": 1,
+    "fK": 1,
+    "mK": 0,
     "piShared": true
    }
   ]
@@ -610,9 +654,9 @@
    "title": "The local fields K_v are known only through bounds",
    "ref": "[IUTchI] Def 3.1 (c), (e); [IUTchIV] Prop 1.2–1.4, Thm 1.10 Step (iii)",
    "paper": "K = F(E[l]) and, for each v ∈ V, the local field K_v with its ramification index e_v, residue degree f_v, different exponent d_v and p-power roots of unity μ_{p^m}; they enter log(O×_{K_v}), the log-shell I_v and every log-volume.",
-   "code": "[F:Q] and [K:Q] are upper bounds; e_K is the lower bound forced by q_v^{1/2l} ∈ K_v and by √−1, μ_3, μ_5, μ_l ⊆ K; f_K = 1; m_K is the lower bound forced by the same roots of unity; log d^K is an estimate.",
-   "where": "iut_core.c: iut_data_finish, iut_log_shell_volume; iut_ops_iv.c: iut_gap_local_field_K",
-   "plan": "Prepared: iut_gap_local_field_K is the placeholder with the final signature. At v ∈ V^bad, K_v = F_v(ζ_l, q_v^{1/l}) (Tate curve) is computable from the Tate parameter already in the JSON files; at good v, f_v is the order of Frobenius on E[l] (needs a_p, already computed in scripts/infographic/initialtheta-data.js); F_v needs E[2·3·5]."
+   "code": "At a place with p ∤ 30l (F_mod = Q, F = F_mod(√−1, E[2·3·5])) iut_local_field_K writes K_v down: at a Tate-curve place K_v = Q_p(ζ_60l, q_v^{1/30l}) up to an unramified quadratic twist, so e = 30l/gcd(30l, ord q_v), d = 1 − 1/e, m = 0 unless (p − 1) | e, and f from the order of the unit of q_v (JSON data); at a good place e = 1. At p | 30l, where K_v is wildly ramified, and for any other F, e_K and m_K are still the lower bounds forced by q_v^{1/2l} ∈ K_v and by √−1, μ_3, μ_5, μ_l ⊆ K, and f_K = 1. [F:Q] and [K:Q] are upper bounds.",
+   "where": "iut_core.c: iut_local_field_K, iut_data_finish, iut_log_shell_volume",
+   "plan": "Partly done: the tame places are exact (each printed value says = or ≥). Left: the wild places p | 30l, which need the Néron model at p (ordinary or supersingular reduction, and for p = l the image of inertia in GL_2(F_l)); the residue degree at good places, which needs the order of Frobenius on E[60l]; and whether the reduction at a Tate-curve place is split, which decides a factor 2 in f when f is odd."
   },
   {
    "id": "GeneratorsFreyOnly",
@@ -720,9 +764,9 @@
    "title": "The log-shell I_v is given by an inner radius and a model log-volume",
    "ref": "[IUTchIII] Def 1.1, Prop 1.2; [AbsTopIII] Def 5.4 (iii); [IUTchIV] Prop 1.2, 1.4 (ii)",
    "paper": "I_v = (p*_v)^{−1}·log(O×_{K_v}) ⊆ K_v, a specific compact Z_p-module, with μ_log(I_v) = log p* − (1/e + m/(ef)) log p; at an archimedean v, the closed disc of radius π.",
-   "code": "The radius printed is that of the largest p^λ·O_v the series argument puts inside I_v; μ_log uses the lower bounds for e and m. The archimedean log-volume is set to 0.",
+   "code": "The radius printed is that of the largest p^λ·O_v the series argument puts inside I_v. Where K_v is written down (p ∤ 30l, see LocalFieldsOfK) μ_log(I_v) = (1 − 1/e)·log p is exact and marked so; at p | 30l it uses the lower bounds for e and m and is marked a model. The archimedean log-volume is set to 0.",
    "where": "iut_lattice.c: iut_apply_log_link; iut_ops_iii.c: iut_log_shell_make; iut_core.c: iut_log_shell_volume",
-   "plan": "Follows from LocalFieldsOfK: with the true (e, f, m) the formula is exact. The archimedean term log π per factor is carried in the hull bound (Step (vii)) and should be shown on the shell as well."
+   "plan": "The wild places follow LocalFieldsOfK. The archimedean term log π per factor is carried in the hull bound (Step (vii)) and should be shown on the shell as well."
   },
   {
    "id": "LogLinkMovesNoElements",
@@ -841,20 +885,20 @@
    "title": "The manual is built from a second implementation in JavaScript",
    "ref": "scripts/manual/lib/iut.js, ops.js",
    "paper": "—",
-   "code": "docs/IUT_MANUAL.pdf is produced by scripts/manual, which carries its own JavaScript copy of the data model and of the operations. The web app and the GUI run the C code; the manual does not, so a fix in C does not reach it.",
+   "code": "docs/IUT_MANUAL.pdf is produced by scripts/manual, which carries its own JavaScript copy of the data model and of the operations for its diagrams and progressions. The fixes of November 2026 (V^bad_mod, Def 3.1 lettering, e_K and m_K bounds, tame K_v, f^F over V^bad_mod, Thm 1.10 hypotheses, the hull bound, Cor 3.12 as an input) are ported and tested (scripts/manual/lib/test.js; the hull bound agrees with the C value), and the manual now prints `iut pipeline` and `iut gaps` from the C program. It is still a second implementation that the next C change will not reach.",
    "where": "scripts/manual/lib/iut.js, scripts/manual/lib/ops.js",
-   "plan": "Prepared: the fixes of this change are listed in docs/gaps/GAP_REPORT.md §5 for porting. Better: make the manual read `iut … --json` (as the guides and articles do) and delete the port."
+   "plan": "Open: make the diagrams read `iut … --json` (as the guides and articles do) and delete the port."
   },
   {
    "id": "ViewsDoNotShowGaps",
    "stage": -1,
-   "status": "open",
-   "title": "The GUI and the TUI do not show the gap list or the hull table",
+   "status": "fixed",
+   "title": "The GUI and the TUI did not show the gap list or the hull table",
    "ref": "—",
    "paper": "—",
-   "code": "`iut pipeline` (text and JSON) and the web app's Pipeline view show both. iut-gui draws stage 5 from the older fields and has no gap panel; the TUI has no screen for either.",
-   "where": "src/gui/gui_draw.c, src/iut_tui.c",
-   "plan": "Open. The data is in iut_hull_bound and iut_gaps[]; each needs one more page."
+   "code": "Was: only `iut pipeline` and the web app showed them. Now iut-gui has the hull table on the stage 5 page, the placeholders under every stage and in the object tree; the TUI has a gaps screen (key g) and lists the placeholders of stages 5 and 6 under the multiradial screen, which shows B but not the table prime by prime.",
+   "where": "src/gui/gui_draw.c: draw_mr, draw_gaps; src/gui/gui_tree.c; src/iut_tui.c",
+   "plan": "Done."
   },
   {
    "id": "LeanNotInSync",

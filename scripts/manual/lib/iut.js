@@ -9,8 +9,9 @@
  * the English-letters-only identifiers of identifiers.js / docs/IDENTIFIERS.md.
  *
  * IUT_GAP("ManualUsesAJavaScriptPort"): this file and ops.js are a second implementation, used only to
- * build docs/IUT_MANUAL.pdf.  The C sources are the reference; the fixes listed in
- * docs/gaps/GAP_REPORT.md §5 have NOT been ported here yet (see `iut gaps ManualUses`).
+ * build the diagrams of docs/IUT_MANUAL.pdf.  The C sources are the reference.  The fixes listed in
+ * docs/gaps/GAP_REPORT.md §5 were ported on 2026-11-10 (finish, logFBad, hullBound, validateData); a later
+ * change in C has to be repeated here by hand (see `iut gaps ManualUses`).
  */
 (function (root) {
   'use strict';
@@ -58,11 +59,54 @@
   }
   function finish(d) {
     d.LStar = (d.l - 1) / 2; d.LPm = (d.l + 1) / 2;
+    var five = !!(d.hypotheses && d.hypotheses.FContainsFiveTorsion);
+    function raise(v, need) { if (need && v.eK % need) { v.eK = v.eK / gcd(v.eK, need) * need; v.eKIsLowerBound = true; } }
     d.VSet.forEach(function (v) {
-      v.inVBadMod = v.kind === 'VNon' && v.reduction === 'badMultiplicative' && v.p % 2 === 1;
+      // as iut_data_finish in src/iut_core.c
+      if (v.kind === 'VNon') {
+        v.mK = 0; v.KExact = false; v.dK = 0;
+        if (v.reduction === 'badMultiplicative' && v.ordQ) raise(v, v.eMod * (2 * d.l / gcd(2 * d.l, v.ordQ)));   // q_v^{1/2l} ∈ K_v
+        if (v.p === 2) { raise(v, 2); v.mK = 2; }                                                              // √−1 ∈ F
+        else if (v.p === 3 || v.p === d.l || (v.p === 5 && five)) { raise(v, v.p - 1); v.mK = 1; }              // μ_3, μ_5, μ_l ⊆ K
+      }
+      v.inVBadMod = v.kind === 'VNon' && v.reduction === 'badMultiplicative' && v.p % 2 === 1 && v.p !== d.l;   // [IUTchI] Def 3.1 (b), (c)
       if (v.reduction !== 'badMultiplicative') v.ordQ = 0;
+      // iut_local_field_K: K_v written down at p ∤ 30l when F_mod = Q and F = F_mod(√−1, E[2·3·5])
+      if (v.kind === 'VNon' && five && d.Fmod.degree === 1 && v.eMod === 1 && v.fMod === 1 && [2, 3, 5, d.l].indexOf(v.p) < 0 && v.reduction !== 'badAdditive') {
+        var N = 30 * d.l, f0 = 1, y = v.p % (2 * N); while (y !== 1) { y = (y * (v.p % (2 * N))) % (2 * N); f0++; }
+        v.eK = 1; v.eKIsLowerBound = false; v.fK = f0; v.mK = 0; v.KExact = true; v.mKExact = true;
+        if (v.reduction === 'badMultiplicative' && v.ordQ) { v.eK = N / gcd(N, v.ordQ); v.dK = 1 - 1 / v.eK; v.mKExact = v.eK % (v.p - 1) !== 0; }
+      }
     });
     return d;
+  }
+  // log f over V^bad_mod: the conductor of [IUTchIV] Thm 1.10 and Cor 2.2 is supported on Supp(q)
+  function logFBad(d) { var s = 0; d.VSet.forEach(function (v) { if (v.inVBadMod) s += v.fMod * Math.log(v.p); }); return s / (d.Fmod.degree || 1); }
+  // The bound of the proof of [IUTchIV] Thm 1.10, Steps (v)–(vii), prime by prime: as iut_hull_bound_compute in src/iut_ops_iv.c
+  function hullBound(d) {
+    var l = d.l, lq = logQ(d), dm = d.Fmod.degree || 1, e = 1; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && v.eMod > e) e = v.eMod; });
+    var est = estarMod(e), lsm = Math.log(est * l), cD = (l + 5) / 4, cQ = (l + 1) / 24, cI = (l + 5) * lsm, rows = [], total = 0;
+    var ps = [2, 3, 5, l]; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && ps.indexOf(v.p) < 0) ps.push(v.p); }); ps.sort(function (a, b) { return a - b; });
+    ps.forEach(function (p) {
+      var lp = Math.log(p), small = p === 2 || p === 3 || p === 5, isl = p === l, inq = false, badmult = false, lqv = 0, lfv = 0, dex = null;
+      d.VSet.forEach(function (v) { if (v.kind !== 'VNon' || v.p !== p) return; if (v.reduction === 'badMultiplicative') badmult = true; if (v.KExact) dex = v.dK;
+        if (v.inVBadMod) { inq = true; lqv += v.ordQ * v.fMod * lp / dm; lfv += v.fMod * lp / dm; } });
+      if (!small && !isl && !inq) { rows.push({ p: p, kind: 'unramified', logDK: 0, logQ: 0, logS: 0, bound: 0, src: 'Prop 1.4 (iv)' }); return; }
+      var D = lfv, src;
+      if (p === 2) { D += 11 * lp; if (badmult) D += lp; src = 'Step (ii): 11 log 2'; }
+      else if (p === 3) { D += 3 * lp; src = 'Step (ii): 3 log 3' + (inq ? ' + log f' : ''); }
+      else if (p === 5) { D += 2 * lp; src = 'Step (ii): 2 log 5' + (inq ? ' + log f' : ''); }
+      else if (isl) { D += 2 * lp; if (badmult) D += lp; src = 'Step (ii): 2 log l'; }
+      else if (dex !== null) { D = dex * lp; src = 'exact: (1 − 1/e)·log p, K_v tame'; }
+      else src = 'Prop 1.3 (i): tame, ≤ log f';
+      if (isl && small) D += 2 * lp;
+      var iota = p <= est * l ? 1 : 0, b = cD * D - cQ * lqv + lp + cI * iota;
+      rows.push({ p: p, kind: 'distinguished', logDK: D, logQ: lqv, logS: lp, bound: b, src: src }); total += b;
+    });
+    var arch = cD * Math.log(Math.PI); rows.push({ p: 0, kind: 'archimedean', logDK: 0, logQ: 0, logS: 0, bound: arch, src: 'Step (vii)' }); total += arch;
+    var unloc = d.F.logDifferentTpd || 0; total += cD * unloc;
+    var abs = lq / (2 * l), cth = cTheta(d, d.F.logDifferentTpd, logFBad(d));
+    return { rows: rows, total: total, lStarMod: lsm, CThetaLocal: abs > 0 ? total / abs : Infinity, CThetaStatement: cth, belowStatement: abs > 0 && total / abs <= cth, consequenceHolds: total >= -abs, complete: !(unloc > 0) };
   }
   function logQ(d) { var s = 0; d.VSet.forEach(function (v) { if (v.inVBadMod) s += v.ordQ * v.fMod * Math.log(v.p); }); return s / (d.Fmod.degree || 1); }   // over V^bad_mod only ([IUTchIV] Thm 1.10, Rem 1.10.6 (i))
   function logF(d) { var s = 0; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && v.reduction !== 'good') s += v.fMod * Math.log(v.p); }); return s / (d.Fmod.degree || 1); }
@@ -90,7 +134,7 @@
       Fmod: { id: 'Fmod', degree: 1 }, F: { id: 'FBarOverF', degreeBound: dF, logDifferentTpd: 0 },
       K: { id: 'KField', degreeBound: dF * gl2, logDifferentEstimate: logf + 2 * Math.log(l) },
       l: l, EpsilonUnder: 1, jLogHeight: Math.abs(3 * Math.log(a * a + a * b + b * b) + 8 * Math.log(2) - 2 * Math.log(n)),
-      hypotheses: { FGaloisOverFmod: true, FContainsSixTorsion: true, ImageContainsSLTwo: true, StableReduction: true, CKIsKCore: true },
+      hypotheses: { FGaloisOverFmod: true, FContainsSixTorsion: true, FContainsFiveTorsion: true, ImageContainsSLTwo: true, StableReduction: true, CKIsKCore: true },
       VSet: V, abc: [a, b, c]
     };
     return finish(d);
@@ -137,10 +181,10 @@
   function validateData(d, r) {
     r = r || new Report(); var e0 = r.errors;
     if (!isPrime(d.l) || d.l < 5) r.add('error', 'LPrime', '[IUTchI] Def 3.1 (c)', 'l = ' + d.l + ' must be a prime ≥ 5'); else r.add('ok', 'LPrime', '[IUTchI] Def 3.1 (c)', 'l = ' + d.l + ' prime, l* = ' + d.LStar + ', l± = ' + d.LPm);
-    if (d.l === 5) r.add('warn', 'LPrime', '[IUTchIV] Thm 1.10', 'l = 5 is excluded in the explicit estimate (F ⊇ Q(E[5]))');
+    if (d.l === 5 && d.hypotheses && d.hypotheses.FContainsFiveTorsion) r.add('error', 'LPrime', '[IUTchI] Def 3.1 (b); [IUTchIV] Thm 1.10', 'l = 5 with E[5] ⊆ E(F): [F:F_mod] is not prime to l');
     var dmod = d.Fmod.degree, dF = d.F.degreeBound, dK = d.K.degreeBound;
     if (!dmod || dF % dmod || dK % dF) r.add('error', 'Fmod', '[IUTchI] Def 3.1', 'degrees must satisfy dmod | dF | dK'); else r.add('ok', 'Fmod', '[IUTchI] Def 3.1', 'F_mod ⊆ F ⊆ K with [F_mod:Q]=' + dmod + ', [F:Q]≤' + dF + ', [K:Q]≤' + dK);
-    if ((dF / dmod) % d.l === 0) r.add('error', 'FBarOverF', '[IUTchI] Def 3.1 (a)', '[F:F_mod] must be prime to l');
+    if ((dF / dmod) % d.l === 0) r.add('error', 'FBarOverF', '[IUTchI] Def 3.1 (b)', '[F:F_mod] must be prime to l');
     var narc = 0, nbadOdd = 0, nbadEven = 0, nadd = 0, seen = {};
     d.VSet.forEach(function (v) {
       var key = v.kind + ':' + v.p; if (seen[key]) r.add('error', 'VSet', '[IUTchI] Def 3.1 (e)', 'V → V_mod must be a bijection: ' + v.name + ' duplicated'); seen[key] = 1;
@@ -150,18 +194,19 @@
         if (v.p % 2) nbadOdd++; else nbadEven++;
         if (!(v.ordQ > 0)) r.add('error', 'QUnderV', '[IUTchI] Ex 3.2', v.name + ': bad multiplicative reduction needs ord(q_v) > 0');
         if (v.inVBadMod && v.p === d.l) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (c)', v.name + ': l must be prime to the residue characteristics of V^bad_mod');
-        if (v.inVBadMod && v.p % 2 === 0) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (e)', v.name + ': V^bad_mod has odd residue characteristic');
-        if (v.ordQ % d.l === 0) r.add('warn', 'QUnderV', '[IUTchI] Def 3.1; [IUTchIV] Prop 1.8 (vii)', v.name + ': l | ord(q_v) = ' + v.ordQ);
+        if (v.inVBadMod && v.p % 2 === 0) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (b)', v.name + ': V^bad_mod has odd residue characteristic');
+        if (v.ordQ % d.l === 0) r.add(v.inVBadMod ? 'error' : 'warn', 'QUnderV', '[IUTchI] Def 3.1 (c)', v.name + ': l | ord(q_v) = ' + v.ordQ);
+        if (!v.inVBadMod && v.p === d.l) r.add('info', 'VBadMod', '[IUTchI] Def 3.1 (b), (c)', v.name + ': bad reduction over l; the place stays in V^good');
       }
       if (v.reduction === 'badAdditive') nadd++;
       if (v.eK < v.eMod || v.fK < v.fMod) r.add('error', 'KField', '[IUTchI] Def 3.1', v.name + ': e_K,f_K must dominate e_mod,f_mod');
     });
-    if (!nbadOdd) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (e)', 'V^bad_mod must be nonempty: no odd prime of bad multiplicative reduction');
-    else r.add('ok', 'VBadMod', '[IUTchI] Def 3.1 (e)', '|V^bad_mod| = ' + nbadOdd + ' odd prime(s) of bad multiplicative reduction' + (nbadEven ? ' (2 is bad but excluded)' : ''));
+    if (!nbadOdd) r.add('error', 'VBadMod', '[IUTchI] Def 3.1 (b)', 'V^bad_mod must be nonempty: no odd prime of bad multiplicative reduction');
+    else r.add('ok', 'VBadMod', '[IUTchI] Def 3.1 (b)', '|V^bad_mod| = ' + nbadOdd + ' odd prime(s) of bad multiplicative reduction' + (nbadEven ? ' (2 is bad but excluded)' : ''));
     if (!narc) r.add('warn', 'VArc', '[IUTchI] Def 3.1', 'no archimedean valuation listed');
     if (nadd) r.add('warn', 'VBad', '[IUTchI] Def 3.1 (b); [IUTchIV] Cor 2.2', nadd + ' place(s) of additive reduction: stable reduction only after a finite extension');
     var H = d.hypotheses || {};
-    [['FGaloisOverFmod', 'FBarOverF', '[IUTchI] Def 3.1 (a)', 'F Galois over F_mod of degree prime to l'], ['FContainsSixTorsion', 'FBarOverF', '[IUTchI] Def 3.1 (a)', 'F contains the fields of definition of E[2·3]'],
+    [['FGaloisOverFmod', 'FBarOverF', '[IUTchI] Def 3.1 (b)', 'F Galois over F_mod of degree prime to l'], ['FContainsSixTorsion', 'FBarOverF', '[IUTchI] Def 3.1 (a), (b)', 'F contains the fields of definition of E[2·3]'],
      ['ImageContainsSLTwo', 'KField', '[IUTchI] Def 3.1 (c)', 'Im(Gal(K/F) → GL2(F_l)) ⊇ SL2(F_l)'], ['StableReduction', 'XF', '[IUTchI] Def 3.1 (b)', 'E_F has stable reduction everywhere'], ['CKIsKCore', 'CK', '[IUTchI] Def 3.1 (d)', 'C_K is a K-core']]
       .forEach(function (h) { r.add(H[h[0]] ? 'info' : 'error', h[1], h[2], (H[h[0]] ? 'asserted (not machine-checkable): ' : 'NOT asserted: ') + h[3]); });
     if (!(d.EpsilonUnder >= 1 && d.EpsilonUnder <= d.LStar)) r.add('error', 'EpsilonUnder', '[IUTchI] Def 3.1 (f)', 'ε̲ must be a cusp label in F_l^* (from a nonzero element of Q)');
@@ -309,7 +354,7 @@
     cod.LogShell = d.VSet.map(function (v) {
       if (v.kind === 'VArc') return { v: v.name, PStar: 0, radius: '0', logVolume: 0, holomorphic: true, etaleLike: false, from: [n, m] };
       var e = v.eK || 1, p = v.p, kstar = p === 2 ? 2 : 1, lam = Math.floor(e / (p - 1)) + 1, num = lam - kstar * e;
-      var mu = -(1 / e + (p === 2 ? 1 : 0) / (e * (v.fK || 1))) * Math.log(p) + kstar * Math.log(p);
+      var mu = -(1 / e + (v.mK || 0) / (e * (v.fK || 1))) * Math.log(p) + kstar * Math.log(p);   // [IUTchIV] Prop 1.4 (ii); exact where v.KExact && v.mKExact
       return { v: v.name, PStar: p === 2 ? 4 : p, radius: e === 1 ? String(num) : num + '/' + e, logVolume: mu, holomorphic: true, etaleLike: false, from: [n, m] };
     });
     cod.hasIncomingLog = true; cod.logIterate = dom.logIterate + 1;
@@ -350,10 +395,13 @@
       steps.push(s);
     }
     var rep = { species: 'MultiradialRepresentation', n: n, steps: steps, ind: { IndOne: true, IndTwo: true, IndThree: true }, logQ: lq, AbsLogQ: lq / (2 * d.l),
-      leadingTerm: sum, leadingTermAsymptotic: leadingTerm(d), hullEnlargement: hull / d.LStar, thetaUpperBound: sum / d.LStar, CTheta: cTheta(d, d.F.logDifferentTpd, logF(d)) };
+      leadingTerm: sum, leadingTermAsymptotic: leadingTerm(d), hullEnlargement: hull / d.LStar, thetaUpperBound: sum / d.LStar, CTheta: cTheta(d, d.F.logDifferentTpd, logFBad(d)) };
+    // thetaUpperBound is the leading-term estimate; the bound is hull.total (Thm 1.10, Steps (v)–(vii)).  Cor 3.12 is an input:
+    // inequalityHolds says the numbers are consistent with it, not that it was verified.
+    rep.hull = hullBound(d);
     rep.heuristicHolds = rep.thetaUpperBound >= -rep.AbsLogQ;
-    rep.inequalityHolds = rep.heuristicHolds && rep.CTheta >= -1;
-    rep.thmOneTenRHS = (1 + 20 * d.Fmod.degree / d.l) * (d.F.logDifferentTpd + logF(d)) + 20 * (estarMod(1) * d.l + ETA_PRM);
+    rep.inequalityHolds = rep.hull.consequenceHolds && rep.CTheta >= -1;
+    rep.thmOneTenRHS = (1 + 20 * d.Fmod.degree / d.l) * (d.F.logDifferentTpd + logFBad(d)) + 20 * (estarMod(1) * d.l + ETA_PRM);
     return rep;
   }
 
@@ -394,7 +442,7 @@
   var api = {
     LAT: LAT, PS: PS, LINKS: LINKS, CORIC: CORIC, EXAMPLES: EXAMPLES,
     isPrime: isPrime, gcd: gcd, ordp: ordp, factorial: factorial, factor: factor,
-    genFromAbc: genFromAbc, genRandom: genRandom, genExample: genExample, finish: finish, logQ: logQ, logF: logF,
+    genFromAbc: genFromAbc, genRandom: genRandom, genExample: genExample, finish: finish, logQ: logQ, logF: logF, logFBad: logFBad, hullBound: hullBound,
     inFl: inFl, inFlStar: inFlStar, symFlSemiPm: symFlSemiPm, symFlStar: symFlStar,
     Report: Report, validateData: validateData, validatePrimeStrip: validatePrimeStrip, validateHodgeTheater: validateHodgeTheater, validateLattice: validateLattice,
     buildPrimeStrip: buildPrimeStrip, forgetPrimeStrip: forgetPrimeStrip, newHodgeTheater: newHodgeTheater, Lattice: Lattice,

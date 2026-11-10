@@ -3,7 +3,7 @@
  *
  *  Screens (number keys):
  *    1 Θ-data   2 validate   3 lattice   4 Hodge theater (focus)   5 alien copies
- *    6 multiradial / log-volume   7 étale-picture   8 species   9 identifiers
+ *    6 multiradial / log-volume   7 étale-picture   8 species   9 identifiers   g gaps and placeholders
  *  Lattice actions:
  *    arrows  move focus      l  log-link from focus (n,m)→(n,m+1)
  *    t       Θ-link from focus (n,m)→(n+1,m)        H  build the infinite H
@@ -66,15 +66,17 @@ static void render(tui *T)
     case 3: iut_view_lattice(m, lat); fprintf(m, "\nfocus (%d,%d): %s   keys: arrows move · l log-link · t Θ-link · H infinite H · L link kind\n", lat->focus_n, lat->focus_m, focus ? focus->copy_label : "(empty: press l/t from a neighbour)"); break;
     case 4: if (focus) iut_view_hodge_theater(m, focus); else fprintf(m, "no Hodge theater at (%d,%d) yet — move the focus or apply a link\n", lat->focus_n, lat->focus_m); break;
     case 5: iut_view_alien(m, lat, lat->focus_n, lat->focus_m); break;
-    case 6: { iut_multiradial_rep rep; iut_multiradial_build(lat, lat->focus_n, &rep); iut_view_multiradial(m, &rep, &lat->data); } break;
+    case 6: { iut_multiradial_rep rep; iut_multiradial_build(lat, lat->focus_n, &rep); iut_view_multiradial(m, &rep, &lat->data); fputc('\n', m); iut_view_gaps_stage(m, 5); iut_view_gaps_stage(m, 6); } break;
     case 7: iut_view_etale_picture(m, lat); break;
+    case 10: iut_view_gaps(m, NULL); break;                 /* key g: the gap registry, as `iut gaps` */
     case 8: iut_view_species(m); break;
     case 9: fprintf(m, "filter: '%s'  (type letters to filter, Backspace to erase)\n\n", T->filter); iut_view_idents(m, T->filter); break;
     default:
         fprintf(m, "iut — inter-universal Teichmüller theory data types\n\n"
                    "  1 Θ-data        2 validate        3 log-theta-lattice   4 Hodge theater (focus)\n"
                    "  5 alien copies  6 multiradial     7 étale-picture       8 species / mutations\n"
-                   "  9 identifiers (letters-only)\n\n"
+                   "  9 identifiers (letters-only)\n"
+                   "  g gaps and placeholders (what is not computed; `iut gaps`)\n\n"
                    "  lattice: arrows move the focus; l = log-link (n,m)→(n,m+1); t = Θ-link (n,m)→(n+1,m);\n"
                    "           H = build the infinite H; L = cycle Θ / Θ×μ / Θ×μ_gau / Θ×μ_LGP / Θ×μ_lgp\n"
                    "  data:    e = next example; r = random; a = type an abc triple and l\n"
@@ -164,6 +166,7 @@ int iut_tui_main(const iut_options *o)
         if (ch == 'q' || ch == 'Q') break;
         if (ch >= '0' && ch <= '9') { T.screen = ch - '0'; T.scroll = 0; render(&T); continue; }
         if (ch == '?') { T.screen = 0; T.scroll = 0; render(&T); continue; }
+        if (ch == 'g' && T.screen != 9) { T.screen = 10; T.scroll = 0; render(&T); continue; }
         switch (ch) {
         case KEY_NPAGE: T.scroll += page; break;
         case KEY_PPAGE: T.scroll -= page; break;

@@ -278,6 +278,19 @@ int iut_selftest(FILE *out)
       CHECK(v2 >= 0 && d.V[v2].m_K == 2 && d.V[v2].e_K % 2 == 0 && fabs(b->shell[v2].log_volume - (2.0 - 3.0 / d.V[v2].e_K) * log(2.0)) < 1e-9, "log-shell at p=2: p* = 4, √−1 ∈ F gives m = 2 and e even; μ_log(I_2) = (2 − 1/e − 2/(e f)) log 2");
       int vl = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == d.l) vl = (int)i;
       CHECK(vl >= 0 && d.V[vl].e_K % (d.l - 1) == 0 && d.V[vl].m_K == 1 && d.V[vl].e_K_lower, "at p = l: μ_l ⊆ K forces (l − 1) | e_K and m = 1 ([IUTchIV] Thm 1.10, Step (iii))");
+      { /* K_v written down at a tame Tate-curve place: p = 11, l = 7, ord(q) = 5, u ≡ 3 mod 11.
+           N = 30l = 210: e = 210/gcd(210, 5) = 42, d = 41/42, 10 ∤ 42 so m = 0; f0 = ord(11 mod 420) = 6. */
+        iut_initial_theta_data t; memset(&t, 0, sizeof t); t.l = 7; t.dmod = 1; t.h_F_contains_five_torsion = 1; t.nV = 2;
+        t.V[0].kind = IUT_V_NONARCH; t.V[0].p = 11; t.V[0].red = IUT_RED_BAD_MULT; t.V[0].ordq = 5; t.V[0].q_unit = 3; t.V[0].q_prec = 1;
+        t.V[1].kind = IUT_V_NONARCH; t.V[1].p = 5;  t.V[1].red = IUT_RED_GOOD;
+        iut_data_finish(&t);
+        CHECK(t.V[0].e_K == 42 && !t.V[0].e_K_lower && (t.V[0].K_exact & IUT_KX_E) && (t.V[0].K_exact & IUT_KX_M) && t.V[0].m_K == 0
+              && fabs(t.V[0].d_K - 41.0 / 42.0) < 1e-12 && t.V[0].f_K % 6 == 0,
+              "K_v at a tame Tate place (p = 11, l = 7, ord q = 5): e = 30l/gcd(30l, ord q) = 42, d = 41/42, m = 0, 6 | f");
+        CHECK(fabs(iut_log_shell_volume(&t.V[0], 1) - (1.0 - 1.0 / 42.0) * log(11.0)) < 1e-12, "its log-shell: μ_log(I_v) = (1 − 1/e)·log p exactly ([IUTchIV] Prop 1.4 (ii), m = 0)");
+        CHECK(t.V[1].K_exact == 0 && t.V[1].e_K_lower, "at p | 30l the field K_v is wild: bounds only, K_exact = 0");
+        t.dmod = 2; iut_data_finish(&t);
+        CHECK(t.V[0].K_exact == 0, "F_mod ≠ Q: K_v is not written down"); }
       iut_multiradial_rep rep; iut_multiradial_build(lat, 0, &rep);
       CHECK(rep.nsteps == d.lstar + 1 && rep.step[3].perms == 24 && rep.step[3].size == 4, "processions S^±_{j+1}: |S^±_4| = 4, 4! = 24 (Ind1)");
       CHECK(rep.leading_term > 0.5 * iut_leading_term(&d) && rep.leading_term < 2.0 * iut_leading_term(&d), "leading term sum %.3f ≈ (l²/48)(6 log d^K − log q) = %.3f (asymptotic in l)", rep.leading_term, iut_leading_term(&d));

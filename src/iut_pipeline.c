@@ -194,13 +194,18 @@ int iut_pipeline_run(FILE *f, const iut_initial_theta_data *din, int rows, iut_l
             }
         }
         fprintf(f, "  log-links: %u (columns n = 0, 1; rows %d..%d). Each one identifies Π_v (vertical coricity) and builds the log-shells of its codomain:\n", nlog, -rows, rows);
-        fprintf(f, "    (I_v ⊇ the module shown; e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v, so μ_log is a model value)\n");
-        fprintf(f, "    %-6s %4s %10s %14s   %s\n", "v", "p*", "I_v ⊇", "μ_log(I_v)", "Π_v at (0,0) = at (0,1)?");
+        fprintf(f, "    (I_v ⊇ the module shown.  \"exact\": K_v is written down (p ∤ 30l, iut_local_field_K) and μ_log(I_v) is its true value;\n     \"model\": e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v)\n");
+        fprintf(f, "    %-6s %4s %10s %14s  %-6s %-22s %s\n", "v", "p*", "I_v ⊇", "μ_log(I_v)", "", "K_v/Q_p: e, f, m, d", "Π_v at (0,0) = at (0,1)?");
         for (unsigned i = 0; i < htup->nshell; ++i) {
             const iut_log_shell *S = &htup->shell[i]; const iut_valuation *v = &d->V[S->v_index];
-            if (v->kind == IUT_V_ARCH) { fprintf(f, "    %-6s %4s %10s %14s   %s\n", v->name, "-", "π-disc", "0", ck(ht->nf.FGt.loc[i].Pi_copy == htup->nf.FGt.loc[i].Pi_copy)); continue; }
+            if (v->kind == IUT_V_ARCH) { fprintf(f, "    %-6s %4s %10s %14s  %-6s %-22s %s\n", v->name, "-", "π-disc", "0", "", "-", ck(ht->nf.FGt.loc[i].Pi_copy == htup->nf.FGt.loc[i].Pi_copy)); continue; }
             qfmt(S->radius, b1, sizeof b1); snprintf(b2, sizeof b2, "p^{%s}·O", b1);
-            fprintf(f, "    %-6s %4u %10s %+14.6f   %s\n", v->name, S->pstar, b2, S->log_volume, ck(ht->nf.FGt.loc[i].Pi_copy == htup->nf.FGt.loc[i].Pi_copy));
+            { int x = v->K_exact, ex = (x & IUT_KX_E) && (x & IUT_KX_M); char kv[64]; int w;
+              if (x & IUT_KX_D) w = snprintf(kv, sizeof kv, "%u, %s%u, %s%u, %.4f", v->e_K, (x & IUT_KX_F) ? "" : "≥", v->f_K, (x & IUT_KX_M) ? "" : "≥", v->m_K, v->d_K);
+              else              w = snprintf(kv, sizeof kv, "≥%u, ≥%u, ≥%u, ?", v->e_K, v->f_K, v->m_K);
+              int nb = 0; for (int q = 0; q < w; ++q) if (((unsigned char)kv[q] & 0xC0) == 0x80) ++nb;   /* pad by display width */
+              fprintf(f, "    %-6s %4u %10s %+14.6f  %-6s %-*s ", v->name, S->pstar, b2, S->log_volume, ex ? "exact" : "model", 22 + nb, kv); }
+            fprintf(f, "%s\n", ck(ht->nf.FGt.loc[i].Pi_copy == htup->nf.FGt.loc[i].Pi_copy));
         }
         fprintf(f, "  validation of the lattice: %u error(s) in %u checks\n", rlat.errors, rlat.n);
         for (unsigned k = 0; k < rlat.n; ++k) if (rlat.issue[k].sev == IUT_SEV_ERROR || rlat.issue[k].sev == IUT_SEV_INFO) fprintf(f, "    [%s] %s\n", rlat.issue[k].sev == IUT_SEV_ERROR ? "ERROR" : "info", rlat.issue[k].msg);
@@ -325,7 +330,10 @@ int iut_pipeline_run(FILE *f, const iut_initial_theta_data *din, int rows, iut_l
         for (unsigned i = 0; i < htup->nshell; ++i) {
             const iut_log_shell *S = &htup->shell[i]; const iut_valuation *v = &d->V[S->v_index];
             fprintf(f, "%s{\"v\": \"%s\", \"p\": %u, \"pstar\": %u, \"radius\": [%ld, %ld], \"logVolume\": ", i ? ", " : "", v->name, v->p, S->pstar, S->radius.num, S->radius.den);
-            jnum(f, S->log_volume); fprintf(f, ", \"piShared\": %s}", tf(ht->nf.FGt.loc[i].Pi_copy == htup->nf.FGt.loc[i].Pi_copy));
+            jnum(f, S->log_volume);
+            fprintf(f, ", \"exact\": %s, \"eK\": %u, \"fK\": %u, \"mK\": %u", tf((v->K_exact & IUT_KX_E) && (v->K_exact & IUT_KX_M)), v->e_K, v->f_K, v->m_K);
+            if (v->K_exact & IUT_KX_D) { fprintf(f, ", \"dK\": "); jnum(f, v->d_K); }
+            fprintf(f, ", \"piShared\": %s}", tf(ht->nf.FGt.loc[i].Pi_copy == htup->nf.FGt.loc[i].Pi_copy));
         }
         fprintf(f, "]},\n");
         /* stage 5 */

@@ -4,9 +4,6 @@
  * holds the very structs the C library built; nothing here computes mathematics of its own beyond
  * scaling bars.
  *
- * IUT_GAP("ViewsDoNotShowGaps"): stage 5 is drawn from the leading-term fields; the hull table
- * (iut_hull_bound) and the list of placeholders (iut_gaps[]) have no page here yet.
- *
  * Colours follow the web app (htdocs/js/draw.js): blue = étale-like, orange = Frobenius-like / bad places,
  * violet = holomorphic / archimedean, teal = mono-analytic, green = went through, red = failed.
  */
@@ -197,7 +194,8 @@ static const char *STAGE_TEXT[GS_COUNT] = {
     "of Π_v it holds: each column takes one colour as its log-links are applied, and the two columns stay different.",
     "Thm 3.11 describes the Θ-pilot of column 0 using only what the Θ-link shares, up to three indeterminacies: tensor "
     "packets of log-shells over the processions S±_{j+1}, the splitting monoids of the LGP-monoids, and copies of F_mod^×. "
-    "Cor 3.12 compares the procession-normalized log-volumes: −|log Θ| ≥ −|log q|.",
+    "Cor 3.12 compares the procession-normalized log-volumes: −|log Θ| ≥ −|log q|. It is an input of this program: "
+    "what is computed is the upper bound B of the proof of Thm 1.10, and whether B is consistent with the corollary.",
     "Thm 1.10 turns Cor 3.12 into a bound on the height of the curve: (1/6)·log q is at most (1 + 20·d_mod/l) times the "
     "log-different plus the log-conductor, plus constants. For curves this small the constant η_prm = 5·10²⁰ dominates, "
     "so the bound holds and says nothing sharper than that. The scales below are logarithmic.",
@@ -228,6 +226,27 @@ static double not_yet(cairo_t *cr, double W, double y, int s)
 }
 
 /* ============================================================ stage 0 */
+/* the placeholders of the gap registry (iut_gaps.c) that belong to one stage, as `iut pipeline` prints them */
+static double draw_gaps(cairo_t *cr, double W, double y, int stage)
+{
+    unsigned n = 0;
+    for (size_t i = 0; i < iut_gaps_count; ++i) if (iut_gaps[i].stage == stage && iut_gaps[i].status != IUT_GAP_FIXED) ++n;
+    if (!n) return y;
+    y += 6; line(cr, 20, y, W - 20, y, INK3, 0.6); y += 10;
+    txf(cr, 20, y, 11.5, TX_BOLD, INK2, "%u placeholder%s in this stage (`iut gaps` has the detail)", n, n > 1 ? "s" : "");
+    y += 20;
+    for (size_t i = 0; i < iut_gaps_count; ++i) {
+        const iut_gap *g = &iut_gaps[i];
+        if (g->stage != stage || g->status == IUT_GAP_FIXED) continue;
+        col c = g->status == IUT_GAP_OPEN ? RED : g->status == IUT_GAP_APPROX ? ORANGE : BLUE;
+        tx(cr, 28, y, 10.5, TX_BOLD | TX_MONO, c, iut_gap_status_name(g->status));
+        tx(cr, 120, y, 11, TX_BOLD, INK, g->id);
+        double h = txw(cr, 360, y, 11, 0, INK2, W - 380, g->title);
+        y += (h > 15 ? h : 15) + 5;
+    }
+    return y + 8;
+}
+
 static col place_col(const iut_valuation *v, col *bg)
 {
     if (v->kind == IUT_V_ARCH) { *bg = VIOLETBG; return VIOLET; }
@@ -942,6 +961,28 @@ static double draw_mr(cairo_t *cr, double W, const gm_model *m)
     y += 8;
     /* the inequality on a number line */
     {
+        /* the bound of [IUTchIV] Thm 1.10, Steps (v)–(vii), prime by prime (iut_hull_bound_compute) */
+        iut_hull_bound hb; iut_hull_bound_compute(&m->data, &hb);
+        y += heading(cr, 20, y, W - 40, "The hull bound, prime by prime", "[IUTchIV] Thm 1.10, Steps (v)–(vii)");
+        { static const char *H[] = { "v_Q", "class", "log d^K ≤", "log q", "log s", "bound", "source of the log d^K bound" };
+          double X[] = { 28, 80, 300, 390, 470, 560, 600 };
+          for (int k = 0; k < 7; ++k) tx(cr, X[k], y, 10.5, TX_BOLD | ((k >= 2 && k <= 5) ? TX_RIGHT : 0), INK3, H[k]);
+          y += 18;
+          for (unsigned k = 0; k < hb.nrows; ++k) {
+              const iut_hull_row *R = &hb.row[k];
+              if (R->p) txf(cr, X[0], y, 11.5, TX_MONO, INK, "%u", R->p); else tx(cr, X[0], y, 11.5, TX_MONO, INK, "∞");
+              tx(cr, X[1], y, 11, 0, INK2, R->kind == 2 ? "archimedean" : R->why ? R->why : "");
+              if (R->kind != 2) { txf(cr, X[2], y, 11.5, TX_RIGHT | TX_MONO, INK, "%.4f", R->logdK); txf(cr, X[3], y, 11.5, TX_RIGHT | TX_MONO, INK, "%.4f", R->logq); txf(cr, X[4], y, 11.5, TX_RIGHT | TX_MONO, INK, "%.4f", R->logs); }
+              txf(cr, X[5], y, 11.5, TX_RIGHT | TX_MONO | TX_BOLD, INK, "%.4f", R->bound);
+              tx(cr, X[6], y, 10.5, 0, INK3, R->logdK_src ? R->logdK_src : "");
+              y += 19;
+          }
+          y += 6;
+          txf(cr, 28, y, 12, TX_BOLD, INK, "−|log Θ| ≤ B = %.6f      C_Θ := B/|log q| = %.6g      C_Θ of the statement = %.6g", hb.total, hb.C_theta_local, hb.C_theta_formula);
+          y += 24;
+          pill(cr, 20, y, hb.below_formula, hb.below_formula ? "the place-by-place bound lies below the closed formula of Thm 1.10" : "the place-by-place bound EXCEEDS the closed formula of Thm 1.10");
+          y += 40; }
+        y += heading(cr, 20, y, W - 40, "Leading terms against the q-pilot", "[Alien] §3.7 (iv)");
         double a = -mr->rep.abs_log_q, t = mr->rep.theta_upper_bound;
         double lo = a < t ? a : t, hi = a > t ? a : t;
         if (hi < 0) hi = 0;
@@ -951,13 +992,13 @@ static double draw_mr(cairo_t *cr, double W, const gm_model *m)
         double xa = lx + lw * (a - lo) / (hi - lo), xt = lx + lw * (t - lo) / (hi - lo), x0 = lx + lw * (0 - lo) / (hi - lo);
         line(cr, x0, ly - 6, x0, ly + 6, INK3, 1); tx(cr, x0, ly + 8, 10, TX_CENTER | TX_MONO, INK3, "0");
         disc(cr, xa, ly, 7, BLUE, NULL, 0); txf(cr, xa, ly - 26, 11, TX_CENTER | TX_BOLD, BLUE, "−|log q| = %.4f", a);
-        disc(cr, xt, ly, 7, ORANGE, NULL, 0); txf(cr, xt, ly + 12, 11, TX_CENTER | TX_BOLD, ORANGE, "−|log Θ| ≤ %.4f", t);
+        disc(cr, xt, ly, 7, ORANGE, NULL, 0); txf(cr, xt, ly + 12, 11, TX_CENTER | TX_BOLD, ORANGE, "leading terms of −|log Θ|: %.4f", t);
         y = ly + 40;
-        snprintf(b, sizeof b, "Cor 3.12: −|log Θ| ≥ −|log q|   (C_Θ = %.6g ≥ −1)", mr->rep.C_theta);
+        snprintf(b, sizeof b, "Cor 3.12 is an input, not verified here; its consequence B ≥ −|log q| is %s  (%.4f ≥ %.4f)", m->c312ok ? "consistent" : "NOT consistent", hb.total, a);
         pill(cr, 20, y, m->c312ok, b);
         y += 36;
     }
-    return y;
+    return draw_gaps(cr, W, y, 5);
 }
 
 /* ============================================================ stage 6 */
@@ -1065,10 +1106,13 @@ static double draw_xc(cairo_t *cr, double W, const gm_model *m)
     y += 10;
     int p = gm_problems(m);
     char b[200];
-    snprintf(b, sizeof b, "pipeline %s: %d problem(s)  (Def 3.1: %u, Hodge theater: %u, lattice: %u, Cor 3.12: %s, cross-check: %u)",
-             p ? "FAILED" : "complete", p, m->rdata.errors, m->rht.errors, m->rlat.errors, m->c312ok ? "holds" : "fails", m->xbad);
+    snprintf(b, sizeof b, "pipeline %s: %d problem(s)  (Def 3.1: %u, Hodge theater: %u, lattice: %u, consequence of Cor 3.12: %s, cross-check: %u)",
+             p ? "FAILED" : "complete", p, m->rdata.errors, m->rht.errors, m->rlat.errors, m->c312ok ? "consistent" : "not consistent", m->xbad);
     pill(cr, 20, y, p == 0, b);
     y += 34;
+    { unsigned n = 0; for (size_t i = 0; i < iut_gaps_count; ++i) if (iut_gaps[i].status != IUT_GAP_FIXED) ++n;
+      txf(cr, 20, y, 11.5, TX_BOLD, ORANGE, "%u placeholders stand in for parts of the theory that are not computed: \"complete\" means every stage ran, not that the theory was verified.", n);
+      y += 24; }
     snprintf(b, sizeof b, "`iut pipeline` on the same data reports %d problem(s): %s", m->pipeline_problems, m->pipeline_problems == p ? "the two agree" : "THEY DISAGREE");
     tx(cr, 20, y, 11.5, TX_ITALIC, m->pipeline_problems == p ? INK2 : RED, b);
     return y + 40;
@@ -1081,14 +1125,14 @@ double gd_stage(cairo_t *cr, double W, const gm_model *m, int stage, gd_hits *hi
     if (hits) hits->nv = 0;
     if (!m->loaded) { tx(cr, W / 2, 80, 15, TX_CENTER, INK2, "Load some initial Θ-data with the bench above."); return 200; }
     switch (stage) {
-    case GS_DATA: return draw_data(cr, W, m);
-    case GS_DEF:  return draw_def(cr, W, m);
-    case GS_HT:   return draw_ht(cr, W, m);
-    case GS_GAU:  return draw_gau(cr, W, m);
-    case GS_LAT:  return draw_lat(cr, W, m, hits);
+    case GS_DATA: return draw_gaps(cr, W, draw_data(cr, W, m), 0);
+    case GS_DEF:  return draw_gaps(cr, W, draw_def(cr, W, m), 1);
+    case GS_HT:   return draw_gaps(cr, W, draw_ht(cr, W, m), 2);
+    case GS_GAU:  return draw_gaps(cr, W, draw_gau(cr, W, m), 3);
+    case GS_LAT:  return draw_gaps(cr, W, draw_lat(cr, W, m, hits), 4);
     case GS_MR:   return draw_mr(cr, W, m);
-    case GS_HB:   return draw_hb(cr, W, m);
-    default:      return draw_xc(cr, W, m);
+    case GS_HB:   return draw_gaps(cr, W, draw_hb(cr, W, m), 6);
+    default:      return draw_gaps(cr, W, draw_xc(cr, W, m), 7);
     }
 }
 

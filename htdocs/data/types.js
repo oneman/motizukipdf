@@ -57,7 +57,7 @@
   {
    "name": "iut_valuation",
    "file": "iut.h",
-   "line": 73,
+   "line": 74,
    "fields": [
     {
      "type": "char",
@@ -135,6 +135,21 @@
      "comment": ""
     },
     {
+     "type": "int",
+     "name": "K_exact/*whichinvariantsofK_v/Q_pareexactvaluesandnotbounds:amaskof",
+     "comment": ""
+    },
+    {
+     "type": "good",
+     "name": "places)0elsewhere*/",
+     "comment": ""
+    },
+    {
+     "type": "double",
+     "name": "d_K",
+     "comment": "exponent of the different of K_v/Q_p in units of ord(p) = 1; valid with IUT_KX_D"
+    },
+    {
      "type": "iut_reduction",
      "name": "red",
      "comment": "reduction type of E at v"
@@ -185,7 +200,7 @@
   {
    "name": "iut_initial_theta_data",
    "file": "iut.h",
-   "line": 97,
+   "line": 103,
    "fields": [
     {
      "type": "char",
@@ -360,7 +375,7 @@
   {
    "name": "iut_local_datum",
    "file": "iut.h",
-   "line": 169,
+   "line": 175,
    "fields": [
     {
      "type": "unsigned",
@@ -427,7 +442,7 @@
   {
    "name": "iut_prime_strip",
    "file": "iut.h",
-   "line": 184,
+   "line": 190,
    "fields": [
     {
      "type": "iut_ps_kind",
@@ -486,7 +501,7 @@
   {
    "name": "iut_pilot",
    "file": "iut.h",
-   "line": 198,
+   "line": 204,
    "fields": [
     {
      "type": "iut_pilot_kind",
@@ -518,7 +533,7 @@
   {
    "name": "iut_log_shell",
    "file": "iut.h",
-   "line": 208,
+   "line": 214,
    "fields": [
     {
      "type": "unsigned",
@@ -575,7 +590,7 @@
   {
    "name": "iut_capsule_member",
    "file": "iut.h",
-   "line": 223,
+   "line": 229,
    "fields": [
     {
      "type": "int",
@@ -600,7 +615,7 @@
   {
    "name": "iut_theta_hodge_theater",
    "file": "iut.h",
-   "line": 228,
+   "line": 234,
    "fields": [
     {
      "type": "iut_prime_strip",
@@ -629,7 +644,7 @@
   {
    "name": "iut_theta_pm_ell_hodge_theater",
    "file": "iut.h",
-   "line": 234,
+   "line": 240,
    "fields": [
     {
      "type": "unsigned",
@@ -676,7 +691,7 @@
   {
    "name": "iut_theta_nf_hodge_theater",
    "file": "iut.h",
-   "line": 242,
+   "line": 248,
    "fields": [
     {
      "type": "unsigned",
@@ -728,7 +743,7 @@
   {
    "name": "iut_hodge_theater",
    "file": "iut.h",
-   "line": 251,
+   "line": 257,
    "fields": [
     {
      "type": "int",
@@ -847,7 +862,7 @@
   {
    "name": "iut_link",
    "file": "iut.h",
-   "line": 290,
+   "line": 296,
    "fields": [
     {
      "type": "iut_link_kind",
@@ -926,7 +941,7 @@
   {
    "name": "iut_indeterminacies",
    "file": "iut.h",
-   "line": 305,
+   "line": 311,
    "fields": [
     {
      "type": "int",
@@ -954,7 +969,7 @@
   {
    "name": "iut_procession_step",
    "file": "iut.h",
-   "line": 313,
+   "line": 319,
    "fields": [
     {
      "type": "unsigned",
@@ -992,7 +1007,7 @@
   {
    "name": "iut_multiradial_rep",
    "file": "iut.h",
-   "line": 324,
+   "line": 330,
    "fields": [
     {
      "type": "int",
@@ -1075,7 +1090,7 @@
   {
    "name": "iut_log_theta_lattice",
    "file": "iut.h",
-   "line": 344,
+   "line": 350,
    "fields": [
     {
      "type": "iut_initial_theta_data",
@@ -1130,7 +1145,7 @@
   {
    "name": "iut_species",
    "file": "iut.h",
-   "line": 356,
+   "line": 362,
    "fields": [
     {
      "type": "const char",
@@ -1164,7 +1179,7 @@
   {
    "name": "iut_mutation",
    "file": "iut.h",
-   "line": 362,
+   "line": 368,
    "fields": [
     {
      "type": "const char",
@@ -1208,7 +1223,7 @@
   {
    "name": "iut_issue",
    "file": "iut.h",
-   "line": 376,
+   "line": 382,
    "fields": [
     {
      "type": "iut_severity",
@@ -1237,7 +1252,7 @@
   {
    "name": "iut_report",
    "file": "iut.h",
-   "line": 382,
+   "line": 388,
    "fields": [
     {
      "type": "unsigned",
@@ -1266,7 +1281,7 @@
   {
    "name": "iut_gap",
    "file": "iut.h",
-   "line": 499,
+   "line": 505,
    "fields": [
     {
      "type": "const char",
@@ -1320,7 +1335,7 @@
   {
    "name": "iut_hull_row",
    "file": "iut.h",
-   "line": 531,
+   "line": 537,
    "fields": [
     {
      "type": "unsigned",
@@ -1374,7 +1389,7 @@
   {
    "name": "iut_hull_bound",
    "file": "iut.h",
-   "line": 542,
+   "line": 548,
    "fields": [
     {
      "type": "unsigned",
@@ -1443,7 +1458,7 @@
   {
    "name": "iut_options",
    "file": "iut.h",
-   "line": 569,
+   "line": 575,
    "fields": [
     {
      "type": "long long",
@@ -4548,7 +4563,7 @@
   {
    "name": "iut_arith_divisor",
    "file": "iut_ops.h",
-   "line": 428,
+   "line": 431,
    "fields": [
     {
      "type": "unsigned",
@@ -4567,7 +4582,7 @@
   {
    "name": "iut_thm110",
    "file": "iut_ops.h",
-   "line": 441,
+   "line": 444,
    "fields": [
     {
      "type": "double",
@@ -4692,7 +4707,7 @@
   {
    "name": "iut_cor22",
    "file": "iut_ops.h",
-   "line": 470,
+   "line": 472,
    "fields": [
     {
      "type": "double",
@@ -4790,7 +4805,7 @@
      "comment": "!eps_small || !s1_ok: the curve is in the finite set Exc that Cor 2.2 excludes"
     }
    ],
-   "comment": "placeholders (iut_gaps.c): the signature the real computation will have; each returns IUT_NOT_IMPLEMENTED int iut_gap_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out); gap LocalFieldsOfK: (p, e, f, d, m) of K_v int iut_gap_serre_SL2(const iut_initial_theta_data *d, unsigned witness_primes[3]); gap AssertedHypotheses: Serre's criterion for SL_2(F_l) ⊆ image int iut_gap_theta_value(const iut_initial_theta_data *d, unsigned v_index, unsigned j, unsigned long long *unit_mod_p_prec); gap ThetaValuesOrdersOnly: the unit of q̲_v^{j²} ∈ K_v int iut_gap_hull_exact(const iut_initial_theta_data *d, unsigned p, unsigned j, double *log_volume); gap IndeterminaciesAreCounted: the hull's log-volume itself, not a bound int iut_gap_explicit_abc(long long a, long long b, long long c, double epsilon, double *bound); gap ExplicitEstimatesNotImplemented: [ExpEst] Thm A/B int iut_gap_reconstruct(const char *algorithm, const void *group, void *out); gap PrerequisitePapers: a mono-anabelian reconstruction run on a group Prop 2.1, Cor 2.2, Cor 2.3 int iut_iv_log_le_x(double x); log x ≤ x double iut_iv_chebyshev_lo(double x); 2x/3 ≤ θ(x) double iut_iv_chebyshev_hi(double x); θ(x) ≤ 4x/3 (x ≥ ξ_prm) double iut_iv_prime_in_A_bound(double thetaA, double xi_prm); ∃ p ∈ A, p ≤ 2(θ_A + ξ_prm)",
+   "comment": "placeholders (iut_gaps.c): the signature the real computation will have; each returns IUT_NOT_IMPLEMENTED int iut_gap_serre_SL2(const iut_initial_theta_data *d, unsigned witness_primes[3]); gap AssertedHypotheses: Serre's criterion for SL_2(F_l) ⊆ image int iut_gap_theta_value(const iut_initial_theta_data *d, unsigned v_index, unsigned j, unsigned long long *unit_mod_p_prec); gap ThetaValuesOrdersOnly: the unit of q̲_v^{j²} ∈ K_v int iut_gap_hull_exact(const iut_initial_theta_data *d, unsigned p, unsigned j, double *log_volume); gap IndeterminaciesAreCounted: the hull's log-volume itself, not a bound int iut_gap_explicit_abc(long long a, long long b, long long c, double epsilon, double *bound); gap ExplicitEstimatesNotImplemented: [ExpEst] Thm A/B int iut_gap_reconstruct(const char *algorithm, const void *group, void *out); gap PrerequisitePapers: a mono-anabelian reconstruction run on a group Prop 2.1, Cor 2.2, Cor 2.3 int iut_iv_log_le_x(double x); log x ≤ x double iut_iv_chebyshev_lo(double x); 2x/3 ≤ θ(x) double iut_iv_chebyshev_hi(double x); θ(x) ≤ 4x/3 (x ≥ ξ_prm) double iut_iv_prime_in_A_bound(double thetaA, double xi_prm); ∃ p ∈ A, p ≤ 2(θ_A + ξ_prm)",
    "idents": [
     "ThmA",
     "ThmB"
@@ -4799,7 +4814,7 @@
   {
    "name": "iut_mutation_history",
    "file": "iut_ops.h",
-   "line": 491,
+   "line": 493,
    "fields": [
     {
      "type": "unsigned",
@@ -4830,7 +4845,7 @@
   {
    "name": "iut_esslgc_model",
    "file": "iut_ops.h",
-   "line": 499,
+   "line": 501,
    "fields": [
     {
      "type": "double",
@@ -4884,7 +4899,7 @@
   {
    "name": "iut_stp",
    "file": "iut_ops.h",
-   "line": 512,
+   "line": 514,
    "fields": [
     {
      "type": "const char",
@@ -4923,7 +4938,7 @@
   {
    "name": "iut_interval",
    "file": "iut_ops.h",
-   "line": 523,
+   "line": 525,
    "fields": [
     {
      "type": "double",
@@ -4942,7 +4957,7 @@
   {
    "name": "iut_gauss_step",
    "file": "iut_ops.h",
-   "line": 535,
+   "line": 537,
    "fields": [
     {
      "type": "unsigned",
@@ -4971,7 +4986,7 @@
   {
    "name": "iut_transport_stage",
    "file": "iut_ops.h",
-   "line": 540,
+   "line": 542,
    "fields": [
     {
      "type": "const char",
@@ -5007,7 +5022,7 @@
   {
    "name": "iut_formal_sum",
    "file": "iut_ops.h",
-   "line": 546,
+   "line": 548,
    "fields": [
     {
      "type": "unsigned",
@@ -5031,7 +5046,7 @@
   {
    "name": "iut_dictionary_entry",
    "file": "iut_ops.h",
-   "line": 564,
+   "line": 566,
    "fields": [
     {
      "type": "const char",
@@ -5050,7 +5065,7 @@
   {
    "name": "iut_process",
    "file": "iut_ops.h",
-   "line": 569,
+   "line": 571,
    "fields": [
     {
      "type": "const char",
@@ -5157,7 +5172,7 @@
   {
    "name": "iut_ps_kind",
    "file": "iut.h",
-   "line": 148,
+   "line": 154,
    "items": [
     {
      "name": "IUT_PS_D",
@@ -5244,7 +5259,7 @@
   {
    "name": "iut_pilot_kind",
    "file": "iut.h",
-   "line": 197,
+   "line": 203,
    "items": [
     {
      "name": "IUT_PILOT_Q",
@@ -5266,7 +5281,7 @@
   {
    "name": "iut_link_kind",
    "file": "iut.h",
-   "line": 277,
+   "line": 283,
    "items": [
     {
      "name": "IUT_LINK_THETA",
@@ -5330,7 +5345,7 @@
   {
    "name": "iut_severity",
    "file": "iut.h",
-   "line": 375,
+   "line": 381,
    "items": [
     {
      "name": "IUT_SEV_OK",
@@ -5359,7 +5374,7 @@
   {
    "name": "iut_gap_status",
    "file": "iut.h",
-   "line": 493,
+   "line": 499,
    "items": [
     {
      "name": "IUT_GAP_OPEN",
@@ -5883,7 +5898,7 @@
   {
    "name": "iut_logic_flavour",
    "file": "iut_ops.h",
-   "line": 498,
+   "line": 500,
    "items": [
     {
      "name": "IUT_LOGIC_AND",
@@ -5922,7 +5937,7 @@
   {
    "name": "iut_formal_sum_kind",
    "file": "iut_ops.h",
-   "line": 547,
+   "line": 549,
    "items": [
     {
      "name": "IUT_FS_ZERO",

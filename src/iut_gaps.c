@@ -28,9 +28,9 @@ const iut_gap iut_gaps[] = {
 G("LocalFieldsOfK", 0, APPROX, "[IUTchI] Def 3.1 (c), (e); [IUTchIV] Prop 1.2–1.4, Thm 1.10 Step (iii)",
   "The local fields K_v are known only through bounds",
   "K = F(E[l]) and, for each v ∈ V, the local field K_v with its ramification index e_v, residue degree f_v, different exponent d_v and p-power roots of unity μ_{p^m}; they enter log(O×_{K_v}), the log-shell I_v and every log-volume.",
-  "[F:Q] and [K:Q] are upper bounds; e_K is the lower bound forced by q_v^{1/2l} ∈ K_v and by √−1, μ_3, μ_5, μ_l ⊆ K; f_K = 1; m_K is the lower bound forced by the same roots of unity; log d^K is an estimate.",
-  "iut_core.c: iut_data_finish, iut_log_shell_volume; iut_ops_iv.c: iut_gap_local_field_K",
-  "Prepared: iut_gap_local_field_K is the placeholder with the final signature. At v ∈ V^bad, K_v = F_v(ζ_l, q_v^{1/l}) (Tate curve) is computable from the Tate parameter already in the JSON files; at good v, f_v is the order of Frobenius on E[l] (needs a_p, already computed in scripts/infographic/initialtheta-data.js); F_v needs E[2·3·5]."),
+  "At a place with p ∤ 30l (F_mod = Q, F = F_mod(√−1, E[2·3·5])) iut_local_field_K writes K_v down: at a Tate-curve place K_v = Q_p(ζ_60l, q_v^{1/30l}) up to an unramified quadratic twist, so e = 30l/gcd(30l, ord q_v), d = 1 − 1/e, m = 0 unless (p − 1) | e, and f from the order of the unit of q_v (JSON data); at a good place e = 1. At p | 30l, where K_v is wildly ramified, and for any other F, e_K and m_K are still the lower bounds forced by q_v^{1/2l} ∈ K_v and by √−1, μ_3, μ_5, μ_l ⊆ K, and f_K = 1. [F:Q] and [K:Q] are upper bounds.",
+  "iut_core.c: iut_local_field_K, iut_data_finish, iut_log_shell_volume",
+  "Partly done: the tame places are exact (each printed value says = or ≥). Left: the wild places p | 30l, which need the Néron model at p (ordinary or supersingular reduction, and for p = l the image of inertia in GL_2(F_l)); the residue degree at good places, which needs the order of Frobenius on E[60l]; and whether the reduction at a Tate-curve place is split, which decides a factor 2 in f when f is odd."),
 G("GeneratorsFreyOnly", 0, OPEN, "[IUTchI] Def 3.1; [IUTchIV] Cor 2.2",
   "Initial Θ-data is generated only for Frey curves over Q",
   "Initial Θ-data for any elliptic curve over a number field F with F_mod = Q(j_E), in particular the points of the λ-line of degree ≤ d of Cor 2.2.",
@@ -92,9 +92,9 @@ G("ThetaValuesOrdersOnly", 3, APPROX, "[IUTchII] Cor 2.5, 2.6, 3.5; [EtTh] Prop 
 G("LogShellFromBounds", 4, APPROX, "[IUTchIII] Def 1.1, Prop 1.2; [AbsTopIII] Def 5.4 (iii); [IUTchIV] Prop 1.2, 1.4 (ii)",
   "The log-shell I_v is given by an inner radius and a model log-volume",
   "I_v = (p*_v)^{−1}·log(O×_{K_v}) ⊆ K_v, a specific compact Z_p-module, with μ_log(I_v) = log p* − (1/e + m/(ef)) log p; at an archimedean v, the closed disc of radius π.",
-  "The radius printed is that of the largest p^λ·O_v the series argument puts inside I_v; μ_log uses the lower bounds for e and m. The archimedean log-volume is set to 0.",
+  "The radius printed is that of the largest p^λ·O_v the series argument puts inside I_v. Where K_v is written down (p ∤ 30l, see LocalFieldsOfK) μ_log(I_v) = (1 − 1/e)·log p is exact and marked so; at p | 30l it uses the lower bounds for e and m and is marked a model. The archimedean log-volume is set to 0.",
   "iut_lattice.c: iut_apply_log_link; iut_ops_iii.c: iut_log_shell_make; iut_core.c: iut_log_shell_volume",
-  "Follows from LocalFieldsOfK: with the true (e, f, m) the formula is exact. The archimedean term log π per factor is carried in the hull bound (Step (vii)) and should be shown on the shell as well."),
+  "The wild places follow LocalFieldsOfK. The archimedean term log π per factor is carried in the hull bound (Step (vii)) and should be shown on the shell as well."),
 G("LogLinkMovesNoElements", 4, OPEN, "[IUTchIII] Def 1.1 (iii), Prop 1.2 (iii), (iv), Prop 3.5",
   "The log-link relabels copies; no element goes through a logarithm",
   "log_v: O×_{†v} → †K_v, whose image becomes the additive module of the next copy ‡; the log-Kummer correspondence follows elements up the column and is only upper semi-compatible.",
@@ -162,15 +162,15 @@ G("CrossCheckIsShallow", 7, OPEN, "—",
 G("ManualUsesAJavaScriptPort", -1, OPEN, "scripts/manual/lib/iut.js, ops.js",
   "The manual is built from a second implementation in JavaScript",
   "—",
-  "docs/IUT_MANUAL.pdf is produced by scripts/manual, which carries its own JavaScript copy of the data model and of the operations. The web app and the GUI run the C code; the manual does not, so a fix in C does not reach it.",
+  "docs/IUT_MANUAL.pdf is produced by scripts/manual, which carries its own JavaScript copy of the data model and of the operations for its diagrams and progressions. The fixes of November 2026 (V^bad_mod, Def 3.1 lettering, e_K and m_K bounds, tame K_v, f^F over V^bad_mod, Thm 1.10 hypotheses, the hull bound, Cor 3.12 as an input) are ported and tested (scripts/manual/lib/test.js; the hull bound agrees with the C value), and the manual now prints `iut pipeline` and `iut gaps` from the C program. It is still a second implementation that the next C change will not reach.",
   "scripts/manual/lib/iut.js, scripts/manual/lib/ops.js",
-  "Prepared: the fixes of this change are listed in docs/gaps/GAP_REPORT.md §5 for porting. Better: make the manual read `iut … --json` (as the guides and articles do) and delete the port."),
-G("ViewsDoNotShowGaps", -1, OPEN, "—",
-  "The GUI and the TUI do not show the gap list or the hull table",
+  "Open: make the diagrams read `iut … --json` (as the guides and articles do) and delete the port."),
+G("ViewsDoNotShowGaps", -1, FIXED, "—",
+  "The GUI and the TUI did not show the gap list or the hull table",
   "—",
-  "`iut pipeline` (text and JSON) and the web app's Pipeline view show both. iut-gui draws stage 5 from the older fields and has no gap panel; the TUI has no screen for either.",
-  "src/gui/gui_draw.c, src/iut_tui.c",
-  "Open. The data is in iut_hull_bound and iut_gaps[]; each needs one more page."),
+  "Was: only `iut pipeline` and the web app showed them. Now iut-gui has the hull table on the stage 5 page, the placeholders under every stage and in the object tree; the TUI has a gaps screen (key g) and lists the placeholders of stages 5 and 6 under the multiradial screen, which shows B but not the table prime by prime.",
+  "src/gui/gui_draw.c: draw_mr, draw_gaps; src/gui/gui_tree.c; src/iut_tui.c",
+  "Done."),
 G("LeanNotInSync", -1, OPEN, "lean/",
   "The Lean mirror of the data types does not have the new fields",
   "—",
@@ -296,8 +296,6 @@ void iut_json_gaps(FILE *f, int stage)
  * IUT_NOT_IMPLEMENTED and leaves its output zeroed, so a caller can tell a
  * placeholder from a result.  The entry of the same name in iut_gaps[] says
  * what is missing and how it is to be filled.                                */
-int iut_gap_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out)
-{ IUT_GAP("LocalFieldsOfK"); (void)d; (void)v_index; if (out) memset(out, 0, sizeof *out); return IUT_NOT_IMPLEMENTED; }
 int iut_gap_serre_SL2(const iut_initial_theta_data *d, unsigned witness_primes[3])
 { IUT_GAP("AssertedHypotheses"); (void)d; if (witness_primes) witness_primes[0] = witness_primes[1] = witness_primes[2] = 0; return IUT_NOT_IMPLEMENTED; }
 int iut_gap_theta_value(const iut_initial_theta_data *d, unsigned v_index, unsigned j, unsigned long long *unit_mod_p_prec)

@@ -23,8 +23,8 @@ void iut_view_data(FILE *f, const iut_initial_theta_data *d)
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
         if (v->kind == IUT_V_ARCH) fprintf(f, "    %-6s arc   -    -     -     -          -       -\n", v->name);
-        else { char ek[24]; snprintf(ek, sizeof ek, "%s%u/%u", v->e_K_lower ? "≥" : "", v->e_K, v->f_K);
-               fprintf(f, "    %-6s non   %-4u %u/%-3u %-*s %-10s %-7u %s\n", v->name, v->p, v->e_mod, v->f_mod, v->e_K_lower ? 7 : 5, ek, redname(v->red), v->ordq, v->in_Vbad_mod ? "yes" : "-"); }
+        else { char ek[24]; snprintf(ek, sizeof ek, "%s%u/%s%u", v->e_K_lower ? "≥" : "", v->e_K, (v->K_exact & IUT_KX_F) ? "" : "≥", v->f_K);
+               fprintf(f, "    %-6s non   %-4u %u/%-3u %-*s %-10s %-7u %s\n", v->name, v->p, v->e_mod, v->f_mod, 5 + (v->e_K_lower ? 2 : 0) + ((v->K_exact & IUT_KX_F) ? 0 : 2), ek, redname(v->red), v->ordq, v->in_Vbad_mod ? "yes" : "-"); }
     }
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];

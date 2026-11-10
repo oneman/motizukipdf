@@ -69,8 +69,9 @@ check(A.FMonoGlobLGPTorsor.local[0].units === C.FMonoGlobTriangle.local[0].units
 check(A.ThetaNFHodgeTheater.FGt.local[0].PiV !== C.ThetaNFHodgeTheater.FGt.local[0].PiV, 'Θ-link does not share Π_v (alien copies)');
 check(B.hasIncomingLog && B.LogShell.length === d1.VSet.length && !lat.get(0, -2).hasIncomingLog, 'log-shells only in log-link codomains');
 var s3 = B.LogShell.filter(function (s) { return s.v === 'v3'; })[0], s2 = B.LogShell.filter(function (s) { return s.v === 'v2'; })[0];
-check(s3.radius === '0' && Math.abs(s3.logVolume) < 1e-9, 'log-shell at unramified odd p: I_v = O_v, μ_log = 0');
-check(s2.PStar === 4 && Math.abs(s2.logVolume) < 1e-9, 'log-shell at p = 2: p* = 4, μ_log = 0');
+var w3 = d1.VSet.filter(function (v) { return v.p === 3; })[0], w2 = d1.VSet.filter(function (v) { return v.p === 2; })[0];
+check(w3.mK === 1 && w3.eK % 2 === 0 && Math.abs(s3.logVolume - (1 - 2 / w3.eK) * Math.log(3)) < 1e-9, 'log-shell at p = 3: μ_3 ⊆ K gives 2 | e, m = 1, μ_log = (1 − 2/e)·log 3');
+check(s2.PStar === 4 && w2.mK === 2 && w2.eK % 2 === 0 && Math.abs(s2.logVolume - (2 - 3 / w2.eK) * Math.log(2)) < 1e-9, 'log-shell at p = 2: p* = 4, √−1 ∈ F gives m = 2, μ_log = (2 − 3/e)·log 2');
 var rep = IUT.multiradial(lat, 0);
 check(rep.steps.length === d1.LStar + 1 && rep.steps[3].perms === 24, 'processions S^±_{j+1}, 4! = 24');
 check(rep.leadingTerm > 0.5 * rep.leadingTermAsymptotic && rep.leadingTerm < 2 * rep.leadingTermAsymptotic, 'leading term ≈ (l²/48)(6 log d^K − log q)');
@@ -185,7 +186,8 @@ check(ni.nonInterference && ni.torsionOrder === 2 && ni.MODCompatibleWithLGPLink
 var nbad = d.VSet.filter(function (v) { return v.inVBadMod; }).length, MF = OPS.iii.multiradialFullBuild(latO, 0);
 check(MF.npackets === d.LStar + 1 && MF.nnumberfields === d.LStar && MF.nsplitting === d.LStar * nbad && MF.ind1Count === prc.automorphisms && MF.ind2Summands >= MF.npackets && MF.ind3 && MF.logKummerOk, '[IUTchIII] Thm 3.11: multiradial representation (Ind1, Ind2, Ind3)');
 var cs = OPS.iii.cor312Steps(latO);
-check(cs.length === 7 && Math.abs(cs[0].value + IUT.logQ(d) / 26) < 1e-9 && OPS.iii.cor312Holds(latO), '[IUTchIII] Cor 3.12: steps listed, −|log q| = −log q / 2l, inequality holds');
+var hb = IUT.hullBound(d);
+check(cs.length === 8 && Math.abs(cs[0].value + IUT.logQ(d) / 26) < 1e-9 && OPS.iii.cor312Holds(latO) && hb.belowStatement && Math.abs(cs[6].value - hb.total) < 1e-9 && hb.rows.filter(function (r) { return r.kind === 'distinguished'; }).map(function (r) { return r.p; }).join() === '2,3,5,7,13', '[IUTchIII] Cor 3.12 as an input: 8 steps, −|log q| = −log q / 2l, hull bound of [IUTchIV] Thm 1.10 Steps (v)–(vii) over V^dst_Q = {2,3,5,7,13}, below the C_Θ of the statement');
 var latL = new IUT.Lattice(IUT.genExample(2)); latL.buildH(0, 0, 1); latL.applyLogLink(0, -1);
 check(OPS.iii.LGPLinkRequiresLog(latL, 0, 0) && !OPS.iii.LGPLinkRequiresLog(latL, 1, 0), '[IUTchIII] Def 3.8 (ii): the Θ×μ_LGP-link needs an incoming log-link');
 var MH = OPS.iv.mutationHistoryFromLattice(latL);
@@ -257,7 +259,7 @@ check(OPS.alien.dictionary().length === 11, '[Alien] §3.8: dictionary (1gau)-(1
   var lf = I.localFrobenioidBuild(d2, VB2), lg = I.localFrobenioidBuild(d2, 4), la = I.localFrobenioidBuild(d2, 5);
   check(lf.kind === 'Bad' && lf.isTempered && lf.splittingIndeterminacy === 26 && lf.thetaRootIndeterminacy === 26 && lf.thetaTranslationIndeterminacy && lg.kind === 'GoodNonarch' && lg.splittingIndeterminacy === 1 && la.kind === 'Arch' && la.hasKummerStructure && I.localFrobenioidReconstructions(lf).length === 6 && I.localFrobenioidSplitIso(lf, lf), '[IUTchI] Ex 3.2-3.4: tempered / good / archimedean local Frobenioids, μ_2l indeterminacies, six reconstructions, F⊢_v ≅ F^Θ_v');
   var g = I.globalRealifiedBuild(d2, 'MOD'), gm = I.fMonoGlobBuild(d2, false), gt = I.fMonoGlobBuild(d2, true), h = I.thetaHodgeTheaterDef(d2);
-  check(g.nprimes === 6 && g.rho[0] === 1 && Math.abs(I.globalRealifiedBuild(d2, 'D').frobeniusElement[5] - 1 / (2 * Math.PI)) < 1e-12 && Math.abs(I.rhoThetaV(d2, 0, 3) - 9 * Math.log(2)) < 1e-9 && I.fMonoGlobIso(gm, gt) && gt.id === 'FMonoGlobTht' && h.condA && h.condB && h.condC, '[IUTchI] Ex 3.5, Def 3.6: Prime(C⊩_mod) ≅ V_mod, ρ_v, ρ^Θ_v = j²·log p_v/[K_v:(F_mod)_v], F⊩_tht ≅ F⊩_mod, Θ-HT conditions');
+  check(g.nprimes === 6 && g.rho[0] === 1 / (d2.VSet[0].eK * d2.VSet[0].fK) && Math.abs(I.globalRealifiedBuild(d2, 'D').frobeniusElement[5] - 1 / (2 * Math.PI)) < 1e-12 && Math.abs(I.rhoThetaV(d2, 0, 3) - 9 * Math.log(2) * g.rho[0]) < 1e-9 && I.fMonoGlobIso(gm, gt) && gt.id === 'FMonoGlobTht' && h.condA && h.condB && h.condC, '[IUTchI] Ex 3.5, Def 3.6: Prime(C⊩_mod) ≅ V_mod, ρ_v, ρ^Θ_v = j²·log p_v/[K_v:(F_mod)_v], F⊩_tht ≅ F⊩_mod, Θ-HT conditions');
   var lat = new IUT.Lattice(d2, 'ThetaLink'); lat.buildH(0, 0, 0); r = new IUT.Report();
   check(I.thetaLinkCorThreeSeven(lat.applyThetaLink(0, 0), r) === 0 && r.errors === 0 && I.thetaLinkCorThreeSeven(lat.applyLogLink(0, 0), new IUT.Report()) > 0, '[IUTchI] Cor 3.7: the Θ-link passes (full poly-iso, D⊢ preserved, no ring); a log-link does not');
   var t = I.labcuspTorsorMake(d2), pm = I.labcuspPmTorsorMake(d2), a = I.globalBaseGet(d2, 'CircAst'), b = I.globalBaseGet(d2, 'CircDotPm'), o = I.valuationOrbits(d2);

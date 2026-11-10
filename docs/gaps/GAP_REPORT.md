@@ -24,13 +24,14 @@ do (section 3). The mistakes are fixed. The stand-ins are now placeholders: name
 a registry, marked in the source, printed under the stage they belong to, and counted in the
 last line of every run.
 
-| | count |
-|---|---|
-| mistakes found and fixed | 8 (6 registry entries marked *fixed*, 2 folded into *approximate* entries) |
-| placeholders: not computed at all (*open*) | 13 |
-| placeholders: computed from bounds (*approximate*) | 3 |
-| placeholders: inputs that are not checked (*asserted*) | 3 |
-| placeholder functions with their final signature, returning `IUT_NOT_IMPLEMENTED` | 6 |
+| | first pass (PR #30) | now, after the second pass (section 8) |
+|---|---|---|
+| mistakes found and fixed | 8 | 8 |
+| registry entries marked *fixed* | 6 | 7 |
+| placeholders: not computed at all (*open*) | 13 | 12 |
+| placeholders: computed from bounds (*approximate*) | 3 | 3, one of them now exact at the tame places |
+| placeholders: inputs that are not checked (*asserted*) | 3 | 3 |
+| placeholder functions returning `IUT_NOT_IMPLEMENTED` | 6 | 5 (`iut_local_field_K` is real) |
 
 ## 2. Mistakes that were fixed
 
@@ -81,13 +82,13 @@ Status words: *open* = not computed; *approximate* = computed from bounds and la
 
 | stage | id | status | what stands in | prepared next step |
 |---|---|---|---|---|
-| 0 data | `LocalFieldsOfK` | approximate | e, f, m, d of K_v are bounds, not values | stub `iut_gap_local_field_K`; K_v = F_v(ζ_l, q_v^{1/l}) at V^bad from the Tate parameter already in the JSON |
+| 0 data | `LocalFieldsOfK` | approximate | exact at p ∤ 30l (`iut_local_field_K`); at p \| 30l e, f, m, d of K_v are bounds | the wild places: Néron model at p, image of inertia at p = l |
 | 0 data | `GeneratorsFreyOnly` | open | only Frey curves over Q and four worked files | number-field layer in the JSON reader |
 | 1 Def 3.1 | `AssertedHypotheses` | asserted | √−1 ∈ F, Galois, E[6], stable reduction, SL_2, K-core, E[5] are flags | stub `iut_gap_serre_SL2`; port Serre's criterion from `scripts/infographic/initialtheta-data.js` |
 | 2 Hodge theaters | `HodgeTheatersAreBookkeeping` | open | prime-strips are tuples of copy numbers, bridges are flags | represent Π_v at V^bad by generators |
 | 2 Hodge theaters | `GlobalNumberFieldElements` | open | no element of F_mod^×, no κ-coric function | rational functions with exact coefficients for F_mod = Q |
 | 3 Gaussian monoids | `ThetaValuesOrdersOnly` | approximate | orders exact, units mod p^8; q̲_v and the theta series are not evaluated | stub `iut_gap_theta_value` |
-| 4 lattice | `LogShellFromBounds` | approximate | I_v from lower bounds for e and m; archimedean volume 0 | exact once `LocalFieldsOfK` closes |
+| 4 lattice | `LogShellFromBounds` | approximate | exact at p ∤ 30l; a model from lower bounds for e and m at p \| 30l; archimedean volume 0 | the wild places, with `LocalFieldsOfK` |
 | 4 lattice | `LogLinkMovesNoElements` | open | the log-link renumbers copies | p-adic log of the Tate unit to precision p^8 |
 | 5 multiradial | `CorThreeTwelveIsAnInput` | asserted | the inequality is used, not tested | none: no computation here can decide it |
 | 5 multiradial | `IndeterminaciesAreCounted` | open | (Ind1)–(Ind3) are numbers and a flag; the hull is the container of Prop 1.2/1.4 | stub `iut_gap_hull_exact` |
@@ -96,15 +97,16 @@ Status words: *open* = not computed; *approximate* = computed from bounds and la
 | 6 height bound | `ExplicitEstimatesNotImplemented` | open | nothing of [ExpEst] beyond η_prm | stub `iut_gap_explicit_abc` |
 | 6 height bound | `ReductionToGeneralPosition` | open | no compactly bounded subsets ([GenEll]) | not needed for a single run |
 | 7 cross-check | `CrossCheckIsShallow` | open | four numbers, JSON data only | recompute ord_v(q_v) from j in C |
-| outside | `ManualUsesAJavaScriptPort` | open | the manual runs a JavaScript copy of the model | section 5 below |
-| outside | `ViewsDoNotShowGaps` | open | `iut-gui` and the TUI have no gap list or hull table | one page each |
+| outside | `ManualUsesAJavaScriptPort` | open | the manual's diagrams run a JavaScript copy of the model (fixes ported, section 5) | read `iut … --json` and delete the copy |
 | outside | `LeanNotInSync` | open | `lean/` mirrors older structs | add m_K, the E[5] flag, the V^bad_mod rule |
 | outside | `PrerequisitePapers` | open | anabelian and étale-theta results are named facts | stub `iut_gap_reconstruct`; the two guides are the spec |
 
 The single dependency that unlocks most of the rest is `LocalFieldsOfK`. With the true
 (e, f, m, d) of K_v, the log-shells become exact, q̲_v can be extracted, the p-adic logarithm
 has something to act on, and the tensor packets become actual Z_p-lattices whose hull can be
-measured. That is the recommended next piece of work.
+measured. The second pass did the tame half of it (section 8). The wild half, the places over
+2, 3, 5 and l, is the recommended next piece of work, followed by `LogLinkMovesNoElements`
+(a p-adic logarithm of the Tate unit, which now has a field to live in at the tame places).
 
 ## 4. How the gaps are kept from getting lost
 
@@ -116,7 +118,7 @@ measured. That is the recommended next piece of work.
 * `iut pipeline` prints the entries of each stage under that stage and ends with
   "N placeholder(s) stand in for parts of the theory that are not computed". The JSON has
   them under `gaps`. The web Pipeline view shows them in a fold-out per stage.
-* The six stubs (`iut_gap_local_field_K`, `iut_gap_serre_SL2`, `iut_gap_theta_value`,
+* The five stubs (`iut_gap_serre_SL2`, `iut_gap_theta_value`,
   `iut_gap_hull_exact`, `iut_gap_explicit_abc`, `iut_gap_reconstruct`) have the signatures
   the real functions should have and return `IUT_NOT_IMPLEMENTED` (−77), so code written
   against them compiles today and a caller cannot mistake the stub for a result.
@@ -125,8 +127,11 @@ measured. That is the recommended next piece of work.
 ## 5. Fixes to port to the JavaScript copy used by the manual
 
 `docs/IUT_MANUAL.pdf` is built by `scripts/manual` from `scripts/manual/lib/iut.js` and
-`ops.js`, a second implementation. None of the fixes above reach it. Until the manual reads
-`iut … --json` instead, these need the same change there:
+`ops.js`, a second implementation used for the diagrams and progressions. The list below was
+ported in the second pass (section 8) and is covered by `scripts/manual/lib/test.js`, 169
+checks; the ported hull bound agrees with the C value to the last printed digit. The copy
+still exists, so the next change in C has to be repeated there until the manual reads
+`iut … --json` instead:
 
 1. V^bad_mod = bad multiplicative, odd, and p ≠ l.
 2. l | ord_v(q_v) at V^bad_mod is an error.
@@ -143,14 +148,13 @@ Regenerated here: `docs/GAPS.md`, `docs/IDENTIFIERS.md`, `docs/PROCESSES.md`,
 `docs/PIPELINE.md` (table), `docs/initial-theta-data/pipeline/*`, `htdocs/data/*`,
 `htdocs/engine/iut.wasm.js`.
 
-Not regenerated, and now behind the code:
+After the first pass the manual, the three article and guide PDFs and the GUI screenshots
+were behind the code. The second pass rebuilt all of them (section 8). Still behind:
 
-* `docs/IUT_MANUAL.pdf` (section 5).
-* `funfun_iut.pdf`, `multiradial_guide.pdf`, `gokun_abc.pdf`: they quote
-  `docs/initial-theta-data/pipeline/*.json`. The fields they read are still there, but
-  "Σ leading terms" and the Cor 3.12 wording in them predate the hull bound.
-* `docs/gui/*.png`: the stage 1 tree and the stage 5 and 6 panels changed text.
-* `lean/`: see `LeanNotInSync`.
+* `lean/`: see `LeanNotInSync`. Lean is not installed in the build container, and changing
+  the structures without compiling the proofs that use them would be a guess.
+* The six infographic PNGs and the six hatched plates were not touched: they show the data
+  types and the shape of the theory, not numbers from the pipeline.
 
 ## 7. Tests
 
@@ -160,3 +164,50 @@ files and gap marks in sync) and `make gui-check` (every example through every s
 GUI model agreeing with `iut pipeline`). New self-tests cover the Thm 1.10 hypotheses, the
 hull bound (distinguished primes {2, 3, 5, 7, 13} for example 2, and the average over j
 equal to B), the bad place over l, the l | ord q error, and `iut_choose_l`.
+
+## 8. Second pass (2026-11-10, after PR #30)
+
+Ryan's instruction after the first pass was to carry on and update the software and the PDFs.
+
+**Software**
+
+* **K_v is written down where that is possible** (`iut_local_field_K`, `src/iut_core.c`).
+  Hypotheses: F_mod = Q, F = F_mod(√−1, E[2·3·5]), K = F(E[l]), and p ∤ 30l. At a place of bad
+  multiplicative reduction the curve is a Tate curve up to an unramified quadratic twist, so
+  K_v = Q_p(ζ_60l, q_v^{1/30l})·(twist). With N = 30l, q_v = p^a·u and f0 the order of p
+  mod 60l, Kummer theory over Q_p(ζ_60l) gives
+  e = N/gcd(N, a) exactly, different exponent d = 1 − 1/e (tame), m = 0 unless (p − 1) | e,
+  and f = f0·lcm(e, o)/e where o is the order of the residue of u modulo N-th powers.
+  f is marked exact only when it is even, because the twist is not recorded and can double
+  an odd f. At a good place with p ∤ 30l, e = 1 and d = 0. Each value is printed with "=" or
+  "≥" accordingly.
+  Effect on the four worked examples: v_7 of 1 + 2400 = 2401 (l = 11), v_23 and v_109 of
+  2 + 3^10·109 = 23^5, and v_11 of 11a1 are exact; the log-shell there is the true
+  (1 − 1/e)·log p, and the hull bound uses the exact different (for 11a1, B goes from 978.607
+  to 978.436). The places over 2, 3, 5 and l stay bounds: K_v is wildly ramified there.
+* **GUI**: the stage 5 page has the hull table prime by prime and says Cor 3.12 is an input;
+  every stage page lists its placeholders; the object tree has a "placeholders" branch.
+* **TUI**: key `g` opens the gap registry; the multiradial screen lists the placeholders of
+  stages 5 and 6.
+* **Web**: the stage 4 table marks each log-shell "exact" or "model" and shows e, f, m, d.
+* Registry: `ViewsDoNotShowGaps` is fixed; 18 placeholders remain (12 open, 3 approximate,
+  3 asserted).
+
+**Documents**
+
+* `docs/IUT_MANUAL.pdf` (140 pages): the JavaScript copy has the fixes of section 5; two new
+  chapters print `iut pipeline` and `iut gaps` from the C program.
+* `multiradial_guide.pdf` (36 pages): §9 distinguishes the leading terms from the bound, has
+  the hull table for 1 + 8 = 9 and the constant B/|log q| = 2525.78 beside the 3.19·10^22 of
+  the statement; the summary table says "consistent with Cor 3.12", not "Cor 3.12 ✓"; the
+  caveats on log-shells are rewritten.
+* `gokun_abc.pdf` (13 pages): §10 marks item 5 done and adds items 7 and 8.
+* `funfun_iut.pdf` rebuilt from the current numbers; its text needed no change.
+* `anabelian_guide.pdf` does not depend on anything that changed and was left as it is.
+* `docs/gui/*.png` retaken.
+
+**Not done**
+
+* The wild places of `LocalFieldsOfK`, and the eleven other open entries.
+* `lean/` (see section 6).
+* `--l auto` in the GUI bench.

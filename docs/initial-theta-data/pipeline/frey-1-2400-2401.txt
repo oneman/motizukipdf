@@ -15,10 +15,10 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
   log(d^K)  : ≈ 10.1429 (an estimate; ≤ 30.4498 by Thm 1.10, Step (ii))
   V ≅ V_mod : 5 valuations
     name   kind  p    e/f_m e/f_K reduction  ord(q)  V^bad_mod
-    v2     non   2    1/1   ≥22/1 bad mult.  2       -
-    v3     non   3    1/1   ≥22/1 bad mult.  2       yes
-    v5     non   5    1/1   ≥44/1 bad mult.  4       yes
-    v7     non   7    1/1   ≥11/1 bad mult.  8       yes
+    v2     non   2    1/1   ≥22/≥1 bad mult.  2       -
+    v3     non   3    1/1   ≥22/≥1 bad mult.  2       yes
+    v5     non   5    1/1   ≥44/≥1 bad mult.  4       yes
+    v7     non   7    1/1   165/20 bad mult.  8       yes
     vinf   arc   -    -     -     -          -       -
     v2: bad multiplicative but over 2, so it stays in V^good (Def 3.1 (b), (c); Thm 1.10 allows bad reduction over 2l)
   asserted  : F/F_mod Galois ✓ | √−1, E[6] ⊆ F ✓ | E[5] ⊆ F ✓ | SL2 ⊆ image ✓ | stable red. ✓ | C_K K-core ✓
@@ -120,13 +120,14 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
     v5     left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9,q̲^16,q̲^25} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183023 = #183023 ✓;  Π_v #270022 vs #670022
     v7     left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9,q̲^16,q̲^25} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183033 = #183033 ✓;  Π_v #270032 vs #670032
   log-links: 8 (columns n = 0, 1; rows -2..2). Each one identifies Π_v (vertical coricity) and builds the log-shells of its codomain:
-    (I_v ⊇ the module shown; e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v, so μ_log is a model value)
-    v        p*    I_v ⊇    μ_log(I_v)   Π_v at (0,0) = at (0,1)?
-    v2        4 p^{-21/22}·O      +1.291774   ✓
-    v3        3 p^{-5/11}·O      +0.998738   ✓
-    v5        5 p^{-8/11}·O      +1.536282   ✓
-    v7        7 p^{-9/11}·O      +1.769009   ✓
-    vinf      -    π-disc              0   ✓
+    (I_v ⊇ the module shown.  "exact": K_v is written down (p ∤ 30l, iut_local_field_K) and μ_log(I_v) is its true value;
+     "model": e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v)
+    v        p*    I_v ⊇    μ_log(I_v)         K_v/Q_p: e, f, m, d    Π_v at (0,0) = at (0,1)?
+    v2        4 p^{-21/22}·O      +1.291774  model  ≥22, ≥1, ≥2, ?         ✓
+    v3        3 p^{-5/11}·O      +0.998738  model  ≥22, ≥1, ≥1, ?         ✓
+    v5        5 p^{-8/11}·O      +1.536282  model  ≥44, ≥1, ≥1, ?         ✓
+    v7        7 p^{-137/165}·O      +1.934117  exact  165, 20, 0, 0.9939     ✓
+    vinf      -    π-disc              0         -                      ✓
   validation of the lattice: 0 error(s) in 3 checks
     [info] 10 Hodge theaters, 8 log-links, 1 Θ-links (Θ×μ_LGP-link); only the row m=0 carries a Θ-link: this is the 'infinite H' used in the proof of Cor 3.12
     [info] the diagram is highly non-commutative: no square of links is required to commute
@@ -139,11 +140,11 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
     (leading terms use the estimate log d^K ≈ 10.1429; the last column is the bound of Thm 1.10, Step (v)–(vii), before the average over j)
       j   |S|     (j+1)!   (j+1)·log d^K −(j²/2l)·log q      leading sum    full bound at j
       0     1          1        10.142898        -0.000000        10.142898 (j = 0: not averaged)
-      1     2          2        20.285796        -1.100103        19.185694         682.336268
-      2     3          6        30.428694        -4.400410        26.028284        1016.881644
-      3     4         24        40.571592        -9.900923        30.670669        1349.226815
-      4     5        120        50.714490       -17.601642        33.112849        1679.371781
-      5     6        720        60.857388       -27.502565        33.354823        2007.316542
+      1     2          2        20.285796        -1.100103        19.185694         682.312681
+      2     3          6        30.428694        -4.400410        26.028284        1016.846264
+      3     4         24        40.571592        -9.900923        30.670669        1349.179642
+      4     5        120        50.714490       -17.601642        33.112849        1679.312814
+      5     6        720        60.857388       -27.502565        33.354823        2007.245781
   indeterminacies: (Ind1) |Aut(Prc)| = Π_j (j+1)! = 24883200, (Ind2) Ism on 6 direct summands, (Ind3) upper semi-compatibility ✓
   (a) 6 tensor packets, (b) 15 splitting monoids, (c) 5 copies of F_mod^×;  log-Kummer non-interference ✓;  compatible with the Θ×μ_LGP-link ✓
   (0) |log q| = log q / 2l: log-volume of the q-pilot at (1,0), i.e. −|log q|                                     -1.1001   [IUTchIII] Cor 3.12; Def 3.8 (i)
@@ -152,19 +153,19 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
   (3) multiradial representation of the Θ-pilot in terms of the mono-analytic data of (1,0): Ind1 count                720   [IUTchIII] Thm 3.11 (i)
   (4) holomorphic hull, leading terms only: ((l+5)/4)·log d^K (an estimate, not a bound)                           40.5716   [Alien] §3.7 (iv)
   (5) leading terms with the theta shift: ((l+5)/4)·log d^K − ((l+1)/24)·log q (not a bound)                    28.4705   [Alien] §3.7 (iv); [IUTchIV] Rem 1.10.1
-  (6) −|log Θ| ≤ B: the bound of the proof of Thm 1.10 with every term, summed over v_Q                        1347.03   [IUTchIV] Thm 1.10, Steps (v)–(vii)
-  (7) Cor 3.12 (an input, not re-proved here) gives B ≥ −|log q|, i.e. C_Θ ≥ −1 for C_Θ = B/|log q|          1224.46   [IUTchIII] Cor 3.12
+  (6) −|log Θ| ≤ B: the bound of the proof of Thm 1.10 with every term, summed over v_Q                        1346.98   [IUTchIV] Thm 1.10, Steps (v)–(vii)
+  (7) Cor 3.12 (an input, not re-proved here) gives B ≥ −|log q|, i.e. C_Θ ≥ −1 for C_Θ = B/|log q|          1224.41   [IUTchIII] Cor 3.12
   the hull bound, place by place ([IUTchIV] Thm 1.10, proof): l*_mod = log(e*_mod·l) = 15.6209
     v_Q    class                  log d^K_vQ ≤   log q_vQ   log s^Q ι          bound   source of the log d^K bound
     2      p | 2·3·5                    8.3178     0.0000    0.6931  1       283.8992   Step (ii): 11 log 2, + log 2 (tame, bad over 2)
     3      p | 2·3·5, Supp(q)           4.3944     2.1972    1.0986  1       267.5128   Step (ii): 3 log 3 + log f
     5      p | 2·3·5, Supp(q)           4.8283     6.4378    1.6094  1       267.6388   Step (ii): 2 log 5 + log f
-    7      Supp(q)                      1.9459    15.5673    1.9459  1       251.8809   Prop 1.3 (i): tame, ≤ log f
+    7      Supp(q)                      1.9341    15.5673    1.9459  1       251.8337   exact: (1 − 1/e)·log p, K_v tame
     11     p = l                        4.7958     0.0000    2.3979  1       271.5160   Step (ii): 2 log l
     ∞      archimedean                       -          -         -  -         4.5789   Step (vii): ((l+5)/4)·log π
     distinguished v_Q: ((l+5)/4)·log d^K_vQ − ((l+1)/24)·log q_vQ + log s^Q_vQ + (l+5)·l*_mod·ι     (Step (v))
-  −|log Θ| ≤ B = 1347.026610;   C_Θ := B/|log q| = 1224.46, against the C_Θ of the statement of Thm 1.10 = 1.36351e+22  ✓
-  Cor 3.12 is an input here, not something this program verifies.  Its consequence B ≥ −|log q|: 1347.026610 ≥ -1.100103  consistent ✓
+  −|log Θ| ≤ B = 1346.979437;   C_Θ := B/|log q| = 1224.41, against the C_Θ of the statement of Thm 1.10 = 1.36351e+22  ✓
+  Cor 3.12 is an input here, not something this program verifies.  Its consequence B ≥ −|log q|: 1346.979437 ≥ -1.100103  consistent ✓
   placeholders in this stage (3; `iut gaps` has the detail):
     ░ asserted    CorThreeTwelveIsAnInput: Cor 3.12 is used, not verified
     ░ open        IndeterminaciesAreCounted: (Ind1)–(Ind3) are counted and named, their effect on a region is not computed
@@ -193,4 +194,4 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
     ░ open        CrossCheckIsShallow: The cross-check compares four numbers, for JSON data only
 
 pipeline complete: 0 problem(s)  (Def 3.1: 0, Hodge theater: 0, lattice: 0, consequence of Cor 3.12: consistent, hull bound vs Thm 1.10: below, cross-check: 0)
-19 placeholder(s) stand in for parts of the theory that are not computed (`iut gaps`): "complete" means every stage ran, not that the theory was verified.
+18 placeholder(s) stand in for parts of the theory that are not computed (`iut gaps`): "complete" means every stage ran, not that the theory was verified.

@@ -356,7 +356,7 @@
     if (v.kind === 'VArc') return s;
     var e = v.eK || 1, p = v.p, kstar = p === 2 ? 2 : 1, lam = Math.floor(e / (p - 1)) + 1, num = lam - kstar * e;
     s.PStar = p === 2 ? 4 : p; s.radiusNum = num; s.radiusDen = e; s.radius = e === 1 ? String(num) : num + '/' + e;
-    s.logVolume = -(1 / e + (p === 2 ? 1 : 0) / (e * (v.fK || 1))) * Math.log(p) + kstar * Math.log(p);
+    s.logVolume = -(1 / e + (v.mK || 0) / (e * (v.fK || 1))) * Math.log(p) + kstar * Math.log(p);
     return s;
   };
   III.logLinkStrip = function (d, src, tautological) {   // [IUTchIII] Def 1.1 (iii), Prop 1.2 (i)-(v)
@@ -430,9 +430,10 @@
       { label: '(1) the Θ-pilot at (0,0): naive log-volume −avg(j²)·|log q|', value: th.logVolume, ref: '[IUTchIII] Def 3.8 (i)' },
       { label: '(2) the Θ×μ_LGP-link (0,0)→(1,0) identifies the Θ-pilot with the q-pilot (value groups), units up to Ism', value: q.logVolume, ref: '[IUTchIII] Def 3.8 (ii), Thm 3.11 (iii)' },
       { label: '(3) multiradial representation of the Θ-pilot in terms of the mono-analytic data of (1,0): Ind1 count', value: IUT.factorial(d.LPm), ref: '[IUTchIII] Thm 3.11 (i)' },
-      { label: '(4) holomorphic hull of the region: Σ_j (j+1) log d^K (procession-normalized)', value: rep.hullEnlargement, ref: '[IUTchIII] Cor 3.12 proof; [Alien] §3.7 (iv)' },
-      { label: '(5) −|log Θ| upper bound (hull + theta shift, procession-normalized)', value: rep.thetaUpperBound, ref: '[IUTchIII] Cor 3.12' },
-      { label: '(6) inequality −|log Θ| ≥ −|log q| ⇔ C_Θ ≥ −1: C_Θ', value: rep.CTheta, ref: '[IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10' }
+      { label: '(4) holomorphic hull, leading terms only: ((l+5)/4)·log d^K (an estimate, not a bound)', value: rep.hullEnlargement, ref: '[Alien] §3.7 (iv)' },
+      { label: '(5) leading terms with the theta shift: ((l+5)/4)·log d^K − ((l+1)/24)·log q (not a bound)', value: rep.thetaUpperBound, ref: '[Alien] §3.7 (iv); [IUTchIV] Rem 1.10.1' },
+      { label: '(6) −|log Θ| ≤ B: the bound of the proof of Thm 1.10 with every term, summed over v_Q', value: rep.hull.total, ref: '[IUTchIV] Thm 1.10, Steps (v)–(vii)' },
+      { label: '(7) Cor 3.12 (an input, not re-proved here) gives B ≥ −|log q|, i.e. C_Θ ≥ −1 for C_Θ = B/|log q|', value: rep.hull.CThetaLocal, ref: '[IUTchIII] Cor 3.12' }
     ];
   };
   III.cor312Holds = function (lat) { return IUT.multiradial(lat, 0).inequalityHolds; };
@@ -478,14 +479,17 @@
   IV.arithDivisorDegE = function (d, D, p) { return D.coeff.reduce(function (s, c, i) { var v = d.VSet[i]; return v.kind === 'VNon' && v.p === p ? s + c * (v.fMod || 1) * Math.log(p) : s; }, 0) / (d.Fmod.degree || 1); };
   IV.E1 = function (n) { return (n + 1) / 2; }; IV.E2 = function (n) { return (2 * n + 1) * (n + 1) / 6; }; IV.E3 = function (p) { return p * (p + 1) * (p - 1) * (p - 1); }; IV.E5 = function () { return 2; };   // Thm 1.10
   IV.thm110Compute = function (d) {
-    var lq = IUT.logQ(d), logd = d.F.logDifferentTpd, logf = IUT.logF(d), e = 1; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && v.eMod > e) e = v.eMod; });
+    var lq = IUT.logQ(d), logd = d.F.logDifferentTpd, logf = IUT.logFBad(d), e = 1; d.VSet.forEach(function (v) { if (v.kind === 'VNon' && v.eMod > e) e = v.eMod; });
     var T = { logq: lq, absLogq: lq / (2 * d.l), logdTpd: logd, logfTpd: logf, logdFPlusLogfFBound: logd + logf + 21, logdKBound: logd + logf + 2 * Math.log(d.l) + 21, logfKBound: logf, eMod: e, estarMod: 4096 * 27 * 5 * e, etaPrm: ETA_PRM, CTheta: IUT.cTheta(d, logd, logf) };
-    T.cor312Holds = T.CTheta >= -1; T.lhs = lq / 6; T.rhs = (1 + 20 * d.Fmod.degree / d.l) * (logd + logf) + 20 * (T.estarMod * d.l + ETA_PRM); T.inequalityHolds = T.lhs <= T.rhs; return T;
+    T.cor312Holds = T.CTheta >= -1; T.lhs = lq / 6; T.rhs = (1 + 20 * d.Fmod.degree / d.l) * (logd + logf) + 20 * (T.estarMod * d.l + ETA_PRM); T.inequalityHolds = T.lhs <= T.rhs;
+    // the hypotheses of the statement beyond Def 3.1 (as iut_thm110_compute)
+    T.hypLNotFive = d.l >= 7; T.hypGoodAwayFromTwoL = d.VSet.every(function (v) { return v.kind !== 'VNon' || v.reduction === 'good' || v.inVBadMod || v.p === 2 || v.p === d.l; });
+    T.hypFIsTripodExtension = !!(d.hypotheses && d.hypotheses.FContainsFiveTorsion); T.hypothesesOk = T.hypLNotFive && T.hypGoodAwayFromTwoL && T.hypFIsTripodExtension; return T;
   };
   IV.logLeX = function (x) { return x > 0 && Math.log(x) <= x; }; IV.chebyshevLo = function (x) { return 2 * x / 3; }; IV.chebyshevHi = function (x) { return 4 * x / 3; }; IV.primeInABound = function (thetaA, xi) { return 2 * (thetaA + xi); };   // Prop 2.1
   IV.cor22Compute = function (d) {   // Cor 2.2
     var lqa = IUT.logQ(d), lq = lqa > 1 ? lqa : 1, delta = 4096 * 27 * 5 * d.Fmod.degree;
-    var C = { d: d.Fmod.degree, delta: delta, logqAll: lqa, lMin: Math.sqrt(lq), lMax: 10 * delta * Math.sqrt(lq) * Math.log(2 * delta * lq), epsE: Math.pow(60 * delta, 2) * Math.log(2 * delta * lq) / Math.sqrt(lq), logdiff: d.F.logDifferentTpd, logcondLo: IUT.logF(d), CK: 20 * (4096 * 27 * 5 * d.l + ETA_PRM) };
+    var C = { d: d.Fmod.degree, delta: delta, logqAll: lqa, lMin: Math.sqrt(lq), lMax: 10 * delta * Math.sqrt(lq) * Math.log(2 * delta * lq), epsE: Math.pow(60 * delta, 2) * Math.log(2 * delta * lq) / Math.sqrt(lq), logdiff: d.F.logDifferentTpd, logcondLo: IUT.logFBad(d), CK: 20 * (4096 * 27 * 5 * d.l + ETA_PRM) };
     C.logcondHi = C.logcondLo + Math.log(2 * d.l); C.lInRange = d.l >= C.lMin && d.l <= C.lMax; C.lhs = lqa / 6; C.rhs = (1 + C.epsE) * (C.logdiff + C.logcondLo) + C.CK; C.holds = C.lhs <= C.rhs; return C;
   };
   IV.cor23Bound = function (ht, logdiff, logcond, eps, C) { return (1 + eps) * (logdiff + logcond) + C - ht; };
@@ -624,7 +628,7 @@
     MakePilots: function (d) { var q = III.pilotMake(d, 'QPilot'), t = III.pilotMake(d, 'ThetaPilot'), lat = newLat(d), r = new IUT.Report(); lat.applyLogLink(0, -1); III.LGPLinkRequiresLog(lat, 0, 0, r); III.LGPLinkRequiresLog(lat, 1, 0, r); return { ok: true, lines: ['q-pilot {q̲}: log-volume ' + fmt(q.logVolume) + ';  Θ-pilot {q̲^{j²}} (' + t.exponents.length + ' exps, last ' + t.exponents[t.exponents.length - 1] + '): log-volume ' + fmt(t.logVolume) + ';  arithmetic degree of q̲: ' + fmt(III.arithDegree(d, [1])), 'lattice for Θ×μ_LGP: ' + III.latticeKindForLink('ThetaUnitsModTorsLGPTorsorLink')].concat(rep2lines(r)) }; },
     NormalizeLogVolumes: function (d) { var p = d.VSet[badIndex(d)].p, vols = []; for (var j = 0; j <= d.LStar; j++) vols.push(j + 1); var ni = III.kummerNonInterference(d); return { ok: ni.nonInterference, lines: ['packet-normalization: vol(p·M) = vol(M) − log p: 0 ↦ ' + fmt(III.logVolumeScaleByP(0, p)) + ' (p=' + p + '); arch: e·M ↦ ' + III.logVolumeScaleByE(0), 'procession-normalization: average of ' + vols.length + ' capsule volumes = ' + fmt(III.logVolumeProcessionNormalize(vols)) + '; log-link compatibility: ' + (III.logVolumeLogLinkCompatible(1.5, 1.5) ? 'preserved' : 'BROKEN'), 'non-interference: F_mod^× ∩ ΠO×_v = μ (order ' + ni.torsionOrder + '), MOD/LGP-link ' + ni.MODCompatibleWithLGPLink + ', mod/log-volume ' + ni.modCompatibleWithLogVolume] }; },
     RepresentMultiradially: function (d) { var M = III.multiradialFullBuild(newLat(d), 0); return { ok: true, lines: ['R^LGP_{0,◦}: (a) ' + M.npackets + ' packets, (b) ' + M.nsplitting + ' splitting monoids, (c) ' + M.nnumberfields + ' copies of F_mod^×; Ind1 ' + M.ind1Count + ', Ind2 on ' + M.ind2Summands + ' summands, Ind3 ' + M.ind3 + '; log-Kummer ' + M.logKummerOk, '−|log q| = ' + fmt(-M.rep.AbsLogQ) + ', −|log Θ| ≤ ' + fmt(M.rep.thetaUpperBound) + ', C_Θ = ' + fmt(M.rep.CTheta, 3) + ', inequality: ' + (M.rep.inequalityHolds ? 'holds' : 'FAILS')] }; },
-    EstimateLogVolume: function (d) { var lat = newLat(d); return { ok: true, lines: III.cor312Steps(lat).map(function (s) { return s.label + '  ' + fmt(s.value) + '   ' + s.ref; }).concat(['Cor 3.12 holds: ' + III.cor312Holds(lat)]) }; },
+    EstimateLogVolume: function (d) { var lat = newLat(d); return { ok: true, lines: III.cor312Steps(lat).map(function (s) { return s.label + '  ' + fmt(s.value) + '   ' + s.ref; }).concat(['consistent with Cor 3.12 (an input): ' + III.cor312Holds(lat)]) }; },
     BoundDifferents: function (d) { var k = [{ p: 7, e: 1, f: 1, m: 0, d: 0 }, { p: 7, e: 2, f: 1, m: 0, d: 0.5 }, { p: 7, e: 6, f: 1, m: 0, d: 1 }], b = IV.prop13Bounds(k[0], k[2], 1); return { ok: b.lo <= k[2].d + 1e-9, lines: k.map(function (x, i) { var r = IV.prop12i(x); return 'k_' + i + ' (p=' + x.p + ',e=' + x.e + '): a=' + fmt(IV.a(x), 3) + ' b=' + fmt(IV.b(x), 3) + '  p^a R ⊆ log(R×) ⊆ p^{-b} R' + (r.equalities ? ' (equalities)' : ''); }).concat(['d_I = ' + fmt(IV.dI(k), 3) + ', d_{I*} (∗=0) = ' + fmt(IV.dIstar(k, 0), 3) + '; φ(p^λ (R_I)~) ⊆ p^{' + IV.prop12iiExpLog(k, 0) + '} log(R_I×) ⊆ p^{' + IV.prop12iiExpTilde(k, 0) + '} (R_I)~ (λ=0); (iii) exponent ' + IV.prop12iiiExp(k, 0) + '; unramified: ' + IV.prop12ivUnramified([k[0]]), 'Prop 1.3: ' + fmt(b.lo, 3) + ' ≤ d_2 ≤ ' + fmt(b.hi, 3) + ' (actual ' + k[2].d + ')']) }; },
     EstimateNonarchVolume: function (d) { var v = d.VSet[badIndex(d)], k = [{ p: v.p, e: v.eK || 1, f: v.fK || 1, m: v.p === 2 ? 1 : 0, d: 0 }, { p: v.p, e: 1, f: 1, m: 0, d: 0 }], star = [k[0].e > k[0].p - 2 ? 1 : 0, 0]; return { ok: true, lines: ['μ_log(log_p(R×)) at ' + v.name + ' = ' + fmt(IV.mulogLogUnits(k[0])) + '; Prop 1.4 (iii) bounds for λ=0: log part ≤ ' + fmt(IV.prop14iiiBoundLog(k, star[0], 0)) + ', tilde part ≤ ' + fmt(IV.prop14iiiBoundTilde(k, star, 0)) + '; d_I + a_I ≥ ' + IV.prop14iiiDIPlusAILower(k) + '; (iv) unramified odd ⇒ μ_log = 0: ' + IV.prop14iv([k[1]])] }; },
     EstimateArchMetric: function (d) { var narc = d.VSet.filter(function (v) { return v.kind === 'VArc'; }).length, L = []; for (var n = 1; n <= 3; n++) L.push('|I|=' + n + ': ' + IV.archSummands(n, narc) + ' summands, metric factor ' + IV.archMetricFactor(n) + ', ⊗m ∈ λ^{|I|}B with λ=2: ' + IV.archTensorBound(n, 2)); return { ok: true, lines: L }; },

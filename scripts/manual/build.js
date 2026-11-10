@@ -484,6 +484,19 @@ body += `<section class="chapter">${H(2, `${chapNo} · Species and mutations`, '
 <p class="intro"><code>iut species</code> — the species table (which struct implements which species) and the mutation table (which function implements which mutation, and whether it is a core), with the mutation-history of the infinite H.</p>
 <pre class="transcript">${esc(SPECIES_TXT.trim())}</pre>
 </section>`;
+chapNo++;
+{
+  const runAny = (args) => { try { return run(IUT_BIN, args); } catch (e) { return (e.stdout || '') + (e.stderr || ''); } };
+  body += `<section class="chapter">${H(2, `${chapNo} · The whole pipeline`, 'demo-pipeline')}
+<p class="intro"><code>iut pipeline ${esc(DATA_ARGS.join(' '))}</code> — the same Θ-data carried through every stage, from Def 3.1 to the height bound of [IUTchIV] Thm 1.10. Stage 5 has the bound of the proof of Thm 1.10 prime by prime; Cor 3.12 is an input, and the run reports whether the numbers are consistent with it. Under each stage are the placeholders that stand in for parts of the theory the program does not compute.</p>
+<pre class="transcript">${esc(runAny(['pipeline', ...DATA_ARGS]).trim())}</pre>
+</section>`;
+  chapNo++;
+  body += `<section class="chapter">${H(2, `${chapNo} · Gaps and placeholders`, 'demo-gaps')}
+<p class="intro"><code>iut gaps</code> — the registry of everything the papers specify and the program does not do the way the papers do it (<code>src/iut_gaps.c</code>, <code>docs/GAPS.md</code>): <b>open</b> is not computed, <b>approximate</b> is computed from bounds, <b>asserted</b> is an input that is not checked, <b>fixed</b> was a gap and is closed.</p>
+<pre class="transcript">${esc(runAny(['gaps']).trim())}</pre>
+</section>`;
+}
 
 // ---- appendix: struct map + index
 body += `<section class="part"><h1 class="part-title">${mark('h:appendix')}Appendix</h1></section>`;
