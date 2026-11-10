@@ -144,7 +144,10 @@ void iut_thm110_compute(const iut_initial_theta_data *d, iut_thm110 *out)
     out->C_theta = iut_C_theta(d, out->logd_tpd, out->logf_tpd);
     out->cor312_holds = out->C_theta >= -1.0;
     out->lhs = out->logq / 6.0;
-    out->rhs = (1.0 + 20.0 * d->dmod / d->l) * (out->logd_tpd + out->logf_tpd) + 20.0 * (out->estar_mod * d->l + out->eta_prm);
+    out->main_term = (1.0 + 20.0 * d->dmod / d->l) * (out->logd_tpd + out->logf_tpd);
+    out->const_term = 20.0 * (out->estar_mod * d->l + out->eta_prm);
+    out->rhs = out->main_term + out->const_term;
+    out->constant_dominates = out->const_term >= out->lhs;
     out->inequality_holds = out->lhs <= out->rhs;
 }
 
@@ -173,6 +176,13 @@ void iut_cor22_compute(const iut_initial_theta_data *d, iut_cor22 *out)
     out->lhs = out->logq_all / 6.0;
     out->rhs = (1.0 + out->eps_E) * (out->logdiff + out->logcond_lo) + out->C_K;
     out->holds = out->lhs <= out->rhs;
+    /* Cor 2.2 is a statement about the points outside a finite exceptional set Exc.  Two of the conditions that
+     * put a point INTO Exc are explicit in the proof (Step (i)–(ii); Yamashita Prop 1.15, (s1) and the last
+     * enlargement): (log q∀)^{1/2} < ξ_prm + η_prm, and ε_E > min{1, ε}.  A curve failing either is in Exc for
+     * every ε, and (C2) then holds only through the constant C_K. */
+    out->sqrt_h = sqrt(lq); out->s1_threshold = 5.0 + IUT_ETA_PRM_VALUE;
+    out->eps_small = out->eps_E <= 1.0; out->s1_ok = out->sqrt_h >= out->s1_threshold;
+    out->in_exceptional_set = !(out->eps_small && out->s1_ok);
 }
 double iut_cor23_bound(double ht, double logdiff, double logcond, double eps, double C) { return (1.0 + eps) * (logdiff + logcond) + C - ht; }
 

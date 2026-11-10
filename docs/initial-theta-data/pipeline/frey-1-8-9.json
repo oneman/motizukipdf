@@ -48,6 +48,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -59,7 +60,8 @@
     "p": 3,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 7,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 4,
@@ -74,6 +76,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -86,6 +89,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -99,7 +103,7 @@
     "item": "(a)",
     "ok": true,
     "condition": "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F",
-    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion"
+    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l"
    },
    {
     "item": "(b)",
@@ -343,10 +347,10 @@
     "p": 3,
     "pstar": 3,
     "radius": [
-     0,
-     1
+     -3,
+     7
     ],
-    "logVolume": 0,
+    "logVolume": 0.941667676,
     "piShared": true
    },
    {
@@ -463,7 +467,10 @@
   "CTheta": 3.185837293e+22,
   "lhs": 0.7324081924,
   "rhs": 1e+22,
+  "mainTerm": 4.237504542,
+  "constTerm": 1e+22,
   "holds": true,
+  "constantDominates": true,
   "corTwoTwo": {
    "logQAll": 4.394449155,
    "lMin": 2.096294148,
@@ -472,7 +479,10 @@
    "epsE": 8084637899000000,
    "lhs": 0.7324081924,
    "rhs": 1.000000888e+22,
-   "holds": true
+   "holds": true,
+   "epsSmall": false,
+   "sOneOk": false,
+   "inExceptionalSet": true
   }
  },
  "crossCheck": [

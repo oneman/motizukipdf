@@ -264,9 +264,12 @@ int iut_selftest(FILE *out)
       CHECK(a->nf.FGt.loc[0].Pi_copy != c->nf.FGt.loc[0].Pi_copy, "Θ-link: Π_v NOT shared (mutually alien copies)");
       CHECK(b->has_incoming_log && b->nshell == d.nV && !iut_lattice_get(lat, 0, -2)->has_incoming_log, "log-shells appear exactly in log-link codomains");
       int v3 = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == 3) v3 = i;
-      CHECK(v3 >= 0 && b->shell[v3].radius.num == 0 && fabs(b->shell[v3].log_volume - 0.0) < 1e-9, "log-shell at unramified odd p: I_v = O_v, μ_log = 0");
+      int vg = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].kind == IUT_V_NONARCH && d.V[i].red == IUT_RED_GOOD && d.V[i].p > 2) vg = i;
+      CHECK(vg >= 0 && d.V[vg].e_K == 1 && b->shell[vg].radius.num == 0 && fabs(b->shell[vg].log_volume - 0.0) < 1e-9, "log-shell at unramified odd p: I_v = O_v, μ_log = 0");
+      CHECK(v3 >= 0 && d.V[v3].e_K_lower && d.V[v3].e_K == iut_eK_min(d.l, d.V[v3].ordq) && d.V[v3].e_K % d.l == 0
+            && fabs(b->shell[v3].log_volume - (1.0 - 1.0 / d.V[v3].e_K) * log(3.0)) < 1e-9, "bad multiplicative v: q_v^{1/2l} ∈ K_v forces e_K ≥ 2l/gcd(2l, ord q_v); μ_log(I_v) = (1 − 1/e) log p");
       int v2 = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == 2) v2 = i;
-      CHECK(v2 >= 0 && fabs(b->shell[v2].log_volume - (2.0 - 2.0) * log(2.0)) < 1e-9, "log-shell at p=2: p* = 4, μ_log(I_2) = (2 − 1 − 1) log 2 = 0");
+      CHECK(v2 >= 0 && fabs(b->shell[v2].log_volume - (2.0 - 2.0 / d.V[v2].e_K) * log(2.0)) < 1e-9, "log-shell at p=2: p* = 4, μ_log(I_2) = (2 − 1/e − 1/(e f)) log 2");
       iut_multiradial_rep rep; iut_multiradial_build(lat, 0, &rep);
       CHECK(rep.nsteps == d.lstar + 1 && rep.step[3].perms == 24 && rep.step[3].size == 4, "processions S^±_{j+1}: |S^±_4| = 4, 4! = 24 (Ind1)");
       CHECK(rep.leading_term > 0.5 * iut_leading_term(&d) && rep.leading_term < 2.0 * iut_leading_term(&d), "leading term sum %.3f ≈ (l²/48)(6 log d^K − log q) = %.3f (asymptotic in l)", rep.leading_term, iut_leading_term(&d));

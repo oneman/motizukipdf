@@ -142,8 +142,7 @@ notation and with the elementary computations written out in full. Reading it pr
 empty (§2). <b>Confirmations:</b> eight conventions we had chosen that match (§2). <b>New material:</b>
 seven ideas that none of our earlier write-ups contain, including the “miracle identity”, the reason the
 log-theta-lattice needs infinite columns, and a short proof that the obvious cheat code \(\Theta^N\) cannot work (§3–§9).
-Nothing in the repository other than this article and the paper itself was changed; §10 lists the fixes we
-suggest.</div>
+The four corrections have since been made in the toolkit and in <code>funfun_iut.pdf</code>; §10 says what changed.</div>
 
 <div class="box warn"><span class="tag">Content notice · ご注意</span>
 <p>All pop-culture references are text only: no character art, logos or screenshots. The stamps and diagrams
@@ -220,22 +219,23 @@ row cites where in [Y] to look.</p>
 
 <table class="wide report">
 <thead><tr><th></th><th>what we had</th><th>what [Y] says</th><th>where</th></tr></thead>
-<tr><td>{{stamp:fix}}</td><td><code>funfun_iut.pdf</code> §1: \(\log q\) is “the arithmetic degree of the
+<tr><td>{{stamp:fix}}</td><td><code>funfun_iut.pdf</code> §1 said: \(\log q\) is “the arithmetic degree of the
 \(q\)-parameters at the bad places \(v_2, v_3, v_5, v_7\)”.</td>
 <td>\(\mathbb{V}^{\mathrm{bad}}_{\mathrm{mod}}\) never contains a place over 2. For \(1+2400=2401\) the number we printed,
 \({{ex_logq}} = {{ex_sum}}\), is right and uses only \(v_{3}, v_5, v_7\); the sentence is wrong. The place 2
 counts only in \(\log q^{\forall} = {{ex_logqall}}\).</td><td>Def. 10.1 (3); §1.3 (3); proof of Prop. 1.15</td></tr>
-<tr><td>{{stamp:fix}}</td><td>The toolkit prints ramification index \(e_K = 1\) at every place, including the bad
-ones, and builds log-shells as \(p^0\cdot\mathcal{O}\).</td>
+<tr><td>{{stamp:fix}}</td><td>The toolkit printed ramification index \(e_K = 1\) at every place, including the bad
+ones, and built log-shells as \(p^0\cdot\mathcal{O}\).</td>
 <td>Impossible at a bad place: \(q_v^{1/2l} \in K_v\), because \(K = F(E[l])\) and \(E[2]\) is rational. So
 \(e(K_v/\mathbb{Q}_p)\) is a multiple of \(2l/\gcd(2l, \operatorname{ord} q_v)\). See §2.1.</td>
 <td>Lemma 1.8; proof of Lemma 1.9 (1)</td></tr>
-<tr><td>{{stamp:fix}}</td><td><code>ComputeThmOneTen</code> and <code>ComputeCorTwoTwo</code> end with
-“holds” for every example.</td>
-<td>The inequality is proved only <em>outside a finite exceptional set</em>, and all our examples are inside it.
-“Holds” here means \(4 \le 10^{22}\). See §4.</td><td>Prop. 1.15, steps (s1) and the last enlargement of Exc</td></tr>
-<tr><td>{{stamp:fix}}</td><td><code>iut pipeline</code> stage 1 prints ✓ for item (a), “\(F/F_{\mathrm{mod}}\) Galois
-of degree prime to \(l\)”, even for \(l = 5\), while <code>iut validate</code> on the same data reports the error.</td>
+<tr><td>{{stamp:fix}}</td><td><code>ComputeThmOneTen</code> and <code>ComputeCorTwoTwo</code> ended with
+a bare “holds” for every example.</td>
+<td>Prop. 1.15 (Cor. 2.2) is proved only <em>outside a finite exceptional set</em>, and all our examples are
+inside it. Prop. 1.12 (Thm. 1.10) has no exceptional set, but for these curves it holds through its constant
+alone: “holds” meant \(4 \le 10^{22}\). See §4.</td><td>Prop. 1.12; Prop. 1.15, step (s1) and the last enlargement of Exc</td></tr>
+<tr><td>{{stamp:fix}}</td><td><code>iut pipeline</code> stage 1 printed ✓ for item (a), “\(F/F_{\mathrm{mod}}\) Galois
+of degree prime to \(l\)”, even for \(l = 5\), while <code>iut validate</code> on the same data reported the error.</td>
 <td>The condition is part of the definition, and in the proof \(l = 5\) never occurs: \(5 \le \sqrt h &lt; l\).
 Found while checking this against the code; stage 1 reads only the asserted flag.</td><td>Def. 10.1 (2); Prop. 1.15 (P1)</td></tr>
 <tr><td>{{stamp:note}}</td><td><code>funfun_iut.pdf</code>: IUT “turns the triple into the Frey curve and
@@ -269,11 +269,12 @@ so that the two sides of the miracle identity balance. See §5.</td><td>Prop. 1.
 
 <p>In the proof of Lemma 1.9, Yamashita needs \(\lambda = \frac{j^2}{2l}\operatorname{ord}(q_{v_j})\) to lie in
 \(\frac{1}{e_{v_j}}\mathbb{Z}\), and notes in passing why it does: \(q_{v}^{1/2l} \in K_{v}\). Read backwards,
-that is a lower bound on the ramification of \(K\) at each bad place, and our data violate it everywhere:</p>
+that is a lower bound on the ramification of \(K\) at each bad place, and our data violated it everywhere
+(the last column is what the toolkit prints now):</p>
 
 {{table:ram}}
 
-<p>The pipeline prints \(\operatorname{ord}(\underline{q}_v) = 2/7\) and \(e_K = 1\) on adjacent lines of the same
+<p>The pipeline used to print \(\operatorname{ord}(\underline{q}_v) = 2/7\) and \(e_K = 1\) on adjacent lines of the same
 run, which is the mathematical equivalent of a character whose age is listed as 17 and whose backstory takes
 30 years. The log-volume totals survive, because they are normalised by degree, but two downstream objects do
 not: the log-shell at a ramified place is not \(\mathcal{O}\) (Lemma 1.6 gives the true size, with the term
@@ -348,11 +349,14 @@ value and \(d = 1\):</p>
 
 {{table:level}}
 
-<p>So the toolkit's “holds” is true and says nothing: the right-hand side it compares against contains
+<p>So the toolkit's old “holds” was true and said nothing: the right-hand side it compares against contains
 \(20(e^*_{\mathrm{mod}}l + \eta_{\mathrm{prm}}) \approx 10^{22}\), and the “\(\epsilon\)” in \((1+\epsilon)\) is
 at best {{eps_min}}. This is correction three. It is not a defect of the theory, which only ever promised a
-statement about all but finitely many curves; it is a defect of our printout, which presents a comparison
-with a twenty-two-digit constant as a result.</p>
+statement about all but finitely many curves; it was a defect of our printout, which presented a comparison
+with a twenty-two-digit constant as a result. One precision, which the first version of this article blurred:
+the exceptional set belongs to Prop. 1.15 (Cor. 2.2). Prop. 1.12 (Thm. 1.10) is stated for every initial Θ-data,
+and for our curves it is true for the dull reason that its constant term alone exceeds the left side. The
+toolkit now says both things in so many words.</p>
 
 <div class="box otaku"><span class="tag">Otaku corner · レベル上げ</span>
 <p>Every JRPG has the door in the first village that says “you are not yet strong enough”. Our four examples
@@ -558,17 +562,17 @@ referee. <span class="jp">審判ではありません。</span></p>
 
 <h2 class="chapter"><span class="no">10</span>Suggested fixes, and a phrasebook<span class="jp">直すところ・単語帳</span></h2>
 
-<p>Nothing below has been done. Each is small, and whether to do them is the owner's call.</p>
+<p>Items 1 to 4 were done on November 10, 2026, after this article first appeared; 5 and 6 are still open.</p>
 <table class="wide">
 <tr><th>#</th><th>fix</th><th>where</th></tr>
-<tr><td>1</td><td>Reword the sentence in <code>funfun_iut.pdf</code> §1 to “at the bad places \(v_3, v_5, v_7\) of
+<tr><td>1 ✓</td><td>Reword the sentence in <code>funfun_iut.pdf</code> §1 to “at the bad places \(v_3, v_5, v_7\) of
 \(\mathbb{V}^{\mathrm{bad}}_{\mathrm{mod}}\)”, and mention \(v_2\) only with \(\log q^{\forall}\).</td><td><code>docs/funfun_iut/funfun_iut.html</code></td></tr>
-<tr><td>2</td><td>Carry a ramification index at bad places of at least \(2l/\gcd(2l,\operatorname{ord} q_v)\), or
+<tr><td>2 ✓</td><td>Carry a ramification index at bad places of at least \(2l/\gcd(2l,\operatorname{ord} q_v)\), or
 print \(e_K\) as “≥” instead of “1”; replace the \(\log\mathfrak{d}^K\) estimate by, or print it beside, the
 Lemma 1.11 (1) bound.</td><td><code>scripts/infographic/initialtheta-data.js</code>, <code>src/iut_core.c</code></td></tr>
-<tr><td>3</td><td>Change the verdict line of <code>ComputeThmOneTen</code> / <code>ComputeCorTwoTwo</code> from “holds” to
+<tr><td>3 ✓</td><td>Change the verdict line of <code>ComputeThmOneTen</code> / <code>ComputeCorTwoTwo</code> from “holds” to
 something like “holds trivially; this curve is in the exceptional set (\(\epsilon_E &gt; 1\))”.</td><td><code>src/iut_ops_iv.c</code></td></tr>
-<tr><td>4</td><td>Make pipeline stage 1 item (a) use the same degree check as the validator.</td><td><code>src/iut_i.c</code></td></tr>
+<tr><td>4 ✓</td><td>Make pipeline stage 1 item (a) use the same degree check as the validator.</td><td><code>src/iut_i.c</code></td></tr>
 <tr><td>5</td><td>Add an “auto l (proof window)” choice next to “auto l”: the smallest admissible prime above
 \(\sqrt{\log q^{\forall}}\).</td><td><code>src/gui/</code>, generator</td></tr>
 <tr><td>6</td><td>Cite [Y] in the manual and both guides; its numbering is far easier to point at than step

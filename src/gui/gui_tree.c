@@ -133,7 +133,7 @@ void gt_rebuild(GtkTreeStore *st, const gm_model *m)
             if (v->kind != IUT_V_ARCH) {
                 add(st, &p, NULL, NULL, "p_v", "%u", v->p);
                 add(st, &p, NULL, NULL, "e/f of (F_mod)_v / Q_p", "%u/%u", v->e_mod, v->f_mod);
-                add(st, &p, NULL, NULL, "e/f of K_v / Q_p", "%u/%u", v->e_K, v->f_K);
+                add(st, &p, NULL, NULL, "e/f of K_v / Q_p", "%s%u/%u", v->e_K_lower ? "≥" : "", v->e_K, v->f_K);
                 add(st, &p, NULL, NULL, "reduction", "%s", red);
                 add(st, &p, NULL, NULL, "ord_v(q_v)", "%u", v->ordq);
                 add(st, &p, NULL, NULL, "in V^bad_mod", "%s", yes(v->in_Vbad_mod));
@@ -236,7 +236,7 @@ void gt_rebuild(GtkTreeStore *st, const gm_model *m)
         add(st, &t, NULL, "stage:6", "C_Θ", "%.6g", T->C_theta);
         add(st, &t, NULL, "stage:6", "left side (1/6) log q", "%.6f", T->lhs);
         add(st, &t, NULL, "stage:6", "right side", "%.6g", T->rhs);
-        GtkTreeIter c = add(st, NULL, NULL, "stage:6", "Cor 2.2", "(C1) %s, (C2) %s", C->l_in_range ? "l in range" : "l out of range", yes(C->holds));
+        GtkTreeIter c = add(st, NULL, NULL, "stage:6", "Cor 2.2", "(C1) %s, (C2) %s%s", C->l_in_range ? "l in range" : "l out of range", yes(C->holds), C->in_exceptional_set ? " (curve in the exceptional set)" : "");
         add(st, &c, NULL, "stage:6", "log q∀", "%.6f", C->logq_all);
         add(st, &c, NULL, "stage:6", "δ = 2¹²·3³·5·d", "%.6g", C->delta);
         add(st, &c, NULL, "stage:6", "(C1) l range", "[%.4f, %.6g], l = %u", C->l_min, C->l_max, d->l);

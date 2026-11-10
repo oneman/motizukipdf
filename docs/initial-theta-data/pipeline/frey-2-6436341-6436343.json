@@ -48,6 +48,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -59,7 +60,8 @@
     "p": 3,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 7,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 20,
@@ -74,6 +76,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -85,7 +88,8 @@
     "p": 23,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 7,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 10,
@@ -99,7 +103,8 @@
     "p": 109,
     "eMod": 1,
     "fMod": 1,
-    "eK": 1,
+    "eK": 7,
+    "eKIsLowerBound": true,
     "fK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 2,
@@ -114,6 +119,7 @@
     "eMod": 1,
     "fMod": 1,
     "eK": 1,
+    "eKIsLowerBound": false,
     "fK": 1,
     "reduction": "good",
     "ordQ": 0,
@@ -127,7 +133,7 @@
     "item": "(a)",
     "ok": true,
     "condition": "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F",
-    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion"
+    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l"
    },
    {
     "item": "(b)",
@@ -495,10 +501,10 @@
     "p": 3,
     "pstar": 3,
     "radius": [
-     0,
-     1
+     -3,
+     7
     ],
-    "logVolume": 0,
+    "logVolume": 0.941667676,
     "piShared": true
    },
    {
@@ -517,10 +523,10 @@
     "p": 23,
     "pstar": 23,
     "radius": [
-     0,
-     1
+     -6,
+     7
     ],
-    "logVolume": 0,
+    "logVolume": 2.687566471,
     "piShared": true
    },
    {
@@ -528,10 +534,10 @@
     "p": 109,
     "pstar": 109,
     "radius": [
-     0,
-     1
+     -6,
+     7
     ],
-    "logVolume": 0,
+    "logVolume": 4.021155328,
     "piShared": true
    },
    {
@@ -637,7 +643,10 @@
   "CTheta": 2.232502944e+21,
   "lhs": 10.45164728,
   "rhs": 1e+22,
+  "mainTerm": 34.42675263,
+  "constTerm": 1e+22,
   "holds": true,
+  "constantDominates": true,
   "corTwoTwo": {
    "logQAll": 62.7098837,
    "lMin": 7.918957235,
@@ -646,7 +655,10 @@
    "epsE": 2509645535000000,
    "lhs": 10.45164728,
    "rhs": 1.00000224e+22,
-   "holds": true
+   "holds": true,
+   "epsSmall": false,
+   "sOneOk": false,
+   "inExceptionalSet": true
   }
  },
  "crossCheck": [

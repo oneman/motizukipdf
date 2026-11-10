@@ -444,6 +444,8 @@ typedef struct {
     double C_theta;                          /* the constant of Thm 1.10               */
     double lhs, rhs;                         /* (1/6) log q  ≤  (1 + 20 d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod l + η_prm) */
     int    cor312_holds, inequality_holds;
+    double main_term, const_term;            /* rhs = main_term + const_term; const_term = 20(e*_mod l + η_prm) */
+    int    constant_dominates;               /* const_term alone ≥ lhs: the inequality holds whatever the curve's conductor is */
 } iut_thm110;
 void iut_thm110_compute(const iut_initial_theta_data *d, iut_thm110 *out);
 
@@ -460,6 +462,9 @@ typedef struct {
     double logdiff, logcond_lo, logcond_hi; /* log-diff = log d^Ftpd; log f^Ftpd ≤ log-cond ≤ log f^Ftpd + log(2l) */
     double C_K, lhs, rhs;                   /* (C2): (1/6) log q ≤ (1+ε_E)(log-diff + log-cond) + C_K */
     int    l_in_range, holds;
+    double sqrt_h, s1_threshold;            /* (s1) of the proof: (log q∀)^{1/2} ≥ ξ_prm + η_prm, with ξ_prm ≥ 5 */
+    int    eps_small, s1_ok;                /* ε_E ≤ 1;  (s1) */
+    int    in_exceptional_set;              /* !eps_small || !s1_ok: the curve is in the finite set Exc that Cor 2.2 excludes */
 } iut_cor22;
 void iut_cor22_compute(const iut_initial_theta_data *d, iut_cor22 *out);
 double iut_cor23_bound(double ht, double logdiff, double logcond, double eps, double C); /* ht ≤ (1+ε)(log-diff+log-cond)+C: returns slack */

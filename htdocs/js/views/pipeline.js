@@ -156,7 +156,7 @@
         ['Thm 1.10', '(1/6)·log q = ' + fmt(B.lhs, 6) + '  ≤  ' + Number(B.rhs).toExponential(4) + (B.holds ? '  ✓' : '  ✗')],
         ['Cor 2.2', 'log q∀ = ' + fmt(C2.logQAll, 6) + ';  (C1) ' + fmt(C2.lMin, 3) + ' ≤ l ≤ ' + Number(C2.lMax).toExponential(3) + ': l = ' + d.l + (C2.lInRange ? ' in range' : ' out of range') + ';  (C2) ' + (C2.holds ? 'holds' : 'fails')]
       ]),
-      el('p', { class: 'small muted', text: 'For curves this small the constants (η_prm = 5·10^20) dominate the right-hand side: the inequality holds and says nothing sharper.' })
+      el('p', { class: 'small muted', text: (B.constantDominates ? 'Thm 1.10 holds here only as a comparison with its constant 20(e*_mod·l + η_prm) = ' + Number(B.constTerm).toExponential(2) + ' (main term ' + fmt(B.mainTerm, 4) + '). ' : '') + (B.corTwoTwo && B.corTwoTwo.inExceptionalSet ? 'Cor 2.2 asserts nothing about this curve: it is in the exceptional set (' + (B.corTwoTwo.epsSmall ? '' : 'ε_E > 1') + (B.corTwoTwo.epsSmall || B.corTwoTwo.sOneOk ? '' : '; ') + (B.corTwoTwo.sOneOk ? '' : '(log q∀)^½ < ξ_prm + η_prm') + ').' : '') })
     ]));
     /* 7 */
     if (P0.crossCheck.length) c.appendChild(section('xc', [

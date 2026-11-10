@@ -219,7 +219,12 @@ int iut_pipeline_run(FILE *f, const iut_initial_theta_data *din, int rows, iut_l
         fprintf(f, "  Thm 1.10:  (1/6)·log q = %.6f  ≤  (1 + 20·d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod·l + η_prm) = %.6g   %s\n", T.lhs, T.rhs, ck(T.inequality_holds));
         fprintf(f, "  Cor 2.2:   log q∀ = %.6f (2 included); (C1) wants %.3f ≤ l ≤ %.4g: l = %u %s;  ε_E = %.4g;  (C2) %.6f ≤ %.6g %s\n",
                 C.logq_all, C.l_min, C.l_max, d->l, C.l_in_range ? "in range" : "out of range", C.eps_E, C.lhs, C.rhs, ck(C.holds));
-        fprintf(f, "  The constants (η_prm = 5·10^20) dominate for curves this small: the bound holds, and says nothing sharper than that.\n\n");
+        if (T.constant_dominates)
+            fprintf(f, "  Thm 1.10 holds here only as a comparison with its constant: main term %.6f, constant 20(e*_mod·l + η_prm) = %.6g.\n", T.main_term, T.const_term);
+        if (C.in_exceptional_set)
+            fprintf(f, "  Cor 2.2 asserts nothing about this curve: it is in the exceptional set Exc (%s%s%s; (log q∀)^{1/2} = %.3f, ξ_prm + η_prm ≥ %.3g).\n",
+                    C.eps_small ? "" : "ε_E > 1", C.eps_small || C.s1_ok ? "" : ", ", C.s1_ok ? "" : "(log q∀)^{1/2} < ξ_prm + η_prm", C.sqrt_h, C.s1_threshold);
+        fputc('\n', f);
 
         if (nxc) {
             fprintf(f, "── stage 7 ── cross-check with %s.json ─────────────────────────────\n", d->source_id);
@@ -311,10 +316,11 @@ int iut_pipeline_run(FILE *f, const iut_initial_theta_data *din, int rows, iut_l
         fprintf(f, "  \"heightBound\": {\"logQ\": "); jnum(f, T.logq); fprintf(f, ", \"absLogQ\": "); jnum(f, T.abs_logq);
         fprintf(f, ", \"logDTpd\": "); jnum(f, T.logd_tpd); fprintf(f, ", \"logFTpd\": "); jnum(f, T.logf_tpd);
         fprintf(f, ", \"CTheta\": "); jnum(f, T.C_theta); fprintf(f, ", \"lhs\": "); jnum(f, T.lhs); fprintf(f, ", \"rhs\": "); jnum(f, T.rhs);
-        fprintf(f, ", \"holds\": %s,\n    \"corTwoTwo\": {\"logQAll\": ", tf(T.inequality_holds)); jnum(f, C.logq_all);
+        fprintf(f, ", \"mainTerm\": "); jnum(f, T.main_term); fprintf(f, ", \"constTerm\": "); jnum(f, T.const_term);
+        fprintf(f, ", \"holds\": %s, \"constantDominates\": %s,\n    \"corTwoTwo\": {\"logQAll\": ", tf(T.inequality_holds), tf(T.constant_dominates)); jnum(f, C.logq_all);
         fprintf(f, ", \"lMin\": "); jnum(f, C.l_min); fprintf(f, ", \"lMax\": "); jnum(f, C.l_max);
         fprintf(f, ", \"lInRange\": %s, \"epsE\": ", tf(C.l_in_range)); jnum(f, C.eps_E);
-        fprintf(f, ", \"lhs\": "); jnum(f, C.lhs); fprintf(f, ", \"rhs\": "); jnum(f, C.rhs); fprintf(f, ", \"holds\": %s}},\n", tf(C.holds));
+        fprintf(f, ", \"lhs\": "); jnum(f, C.lhs); fprintf(f, ", \"rhs\": "); jnum(f, C.rhs); fprintf(f, ", \"holds\": %s, \"epsSmall\": %s, \"sOneOk\": %s, \"inExceptionalSet\": %s}},\n", tf(C.holds), tf(C.eps_small), tf(C.s1_ok), tf(C.in_exceptional_set));
         /* stage 7 */
         fprintf(f, "  \"crossCheck\": [");
         for (unsigned k = 0; k < nxc; ++k) { fprintf(f, "%s{\"what\": ", k ? ", " : ""); jstr(f, xc[k].what); fprintf(f, ", \"toolkit\": "); jnum(f, xc[k].toolkit); fprintf(f, ", \"file\": "); jnum(f, xc[k].file); fprintf(f, ", \"ok\": %s}", tf(xc[k].ok)); }
