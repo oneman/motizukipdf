@@ -34,6 +34,11 @@ validators, a terminal UI and a web app:
   and some observations about it, told with Japanese pop culture jokes and the running
   example abc(1, 2400, 2401) with l = 13; its source is `docs/funfun_iut/funfun_iut.html`
   and every number in it is read from `src/iut` (`node scripts/funfun/build.js`).
+* `gokun_abc.pdf` — an illustrated review of Go Yamashita's survey *A proof of the abc
+  conjecture after Mochizuki* (2024-06-25 version, in `pdf/`): what it teaches beyond the
+  earlier write-ups, which toolkit conventions it confirms, and which statements of ours it
+  corrects; its source is `docs/gokun_abc/gokun_abc.html` and the example numbers come from
+  `docs/initial-theta-data/pipeline/*.json` (`node scripts/gokun/build.js`).
 
 Everything is grounded in the papers in this repository: each struct, check and
 view carries a citation such as `[IUTchIII] Def 1.1` or `[Alien] §3.7 (iv)`.
