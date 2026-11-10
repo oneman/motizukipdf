@@ -56,6 +56,7 @@ make test       # C self-tests (model + operations layer) + node tests of the we
 ./iut pipeline --theta-json ../docs/initial-theta-data/frey-1-8-9.json   # the whole theory on exact Θ-data,
                                              # stage by stage (docs/PIPELINE.md); add --json for JSON
 ./iut tui      --example 3                   # interactive ncurses UI
+make gui && ./iut-gui                        # the graphical pipeline program (GTK 3), see below
 ```
 
 Data options accepted by `gen`, `validate`, `walk`, `run`, `tui`: `--abc A B C`, `--l L`,
@@ -152,6 +153,30 @@ libclang-rt-18-dev-wasm32`), then `make engine` in `src/` (or
 `CC=clang-18 scripts/web/build-engine.sh`). `node htdocs/test.js` checks that
 the wasm build and the native build give byte-identical output.
 
+## The GUI (`iut-gui`)
+
+`src/gui/` is a native desktop program (GTK 3 + Cairo) that runs the pipeline of `iut pipeline` **one
+step at a time** on the same C library and draws the state after every step: enter an abc triple (or
+pick a built-in example, random data or one of the exact JSON examples), then Step, Run all or Play
+through stages 0–7. Stage 4 builds the infinite H **one link at a time**, and the vertices are coloured
+by their copy of Π_v, so you can watch each column become one copy under the log-links while the two
+columns stay mutually alien across the Θ-link. Once the pipeline is complete, the Lattice tab lets you
+apply further log-links and Θ-links by hand. The object inspector lists every object built so far
+(Hodge theaters, capsules, prime-strips field by field, links, log-shells, the multiradial
+representation, Thm 1.10) with the notation and reference of its identifier.
+
+```sh
+cd src
+make gui                       # needs GTK 3: apt install libgtk-3-dev  /  brew install gtk+3
+./iut-gui                      # starts on 1 + 2400 = 2401, l = 13
+./iut-gui --theta-json ../docs/initial-theta-data/frey-2-6436341-6436343.json
+make gui-check                 # headless: every example through every stage; the GUI must agree with `iut pipeline`
+```
+
+See [docs/GUI.md](docs/GUI.md) for the tour, the keys and the screenshot options.
+
+![iut-gui building the log-theta-lattice](docs/gui/window-lattice.png)
+
 ## The manual (PDF)
 
 `docs/IUT_MANUAL.pdf` is a generated manual / demo of the toolkit: **every data
@@ -201,10 +226,12 @@ src/        iut.h (types) · iut_ids.c (identifiers, species, mutations) · iut_
             multiradial) · iut_json.c (exports) · iut_view.c (text views) · iut_tui.c · iut_main.c · Makefile ·
             iut_i.h + iut_i.c (the data types of [IUTchI] §0–§6) ·
             iut_ops.h + iut_ops_i.c / _ii.c / _iii.c / _iv.c / _logic.c (operations layer) · iut_proc.c (process
-            registry) · iut_test_ops.c
+            registry) · iut_test_ops.c ·
+            gui/ (iut-gui: gui_model.c the step-by-step pipeline, gui_draw.c the stage pictures, gui_tree.c the
+            object inspector, gui_main.c the window; `make gui`)
 htdocs/     index.html · css/app.css · engine/iut.wasm.js (generated) · data/types.js (generated) · js/ (engine, model,
             draw, diagrams, ui, app) · js/views/ (types, procs, lattice, examples, ids) · test.js
-docs/       IDENTIFIERS.md, PROCESSES.md (generated) · DATA_MODEL.md
+docs/       IDENTIFIERS.md, PROCESSES.md (generated) · DATA_MODEL.md · GUI.md + gui/ (screenshots)
 lean/       lakefile.toml · IUT.lean · IUT/ (Identifiers, Labels, InitialThetaData, PrimeStrip, HodgeTheater,
             Link, LogThetaLattice, Multiradial, Species, Construction, Processes, LeanForm, StageTwo, StageThree, StageFour, StageFive) — Lean 4 / Mathlib port with proofs
 scripts/    serve.sh (static server for htdocs) · test.sh (build + all tests + sync check) · web/ (build-engine.sh,
