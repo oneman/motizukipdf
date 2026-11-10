@@ -58,10 +58,12 @@ inside the log-shell at this one. That stability is what makes log-shells “mon
 inclusion becomes a surjection “\(\twoheadrightarrow\)”.</p>
 
 <div class="box warn"><span class="tag">Toolkit caveat</span>
-<p>The initial Θ-data JSON files carry no ramification data for the field \(K\), so the toolkit takes
-\(e = 1\) everywhere and every log-shell is \(p^0\cdot\mathcal{O}\) with log-volume 0. The shape of the
-algorithm is unaffected; the sizes of the containers come in only through the estimate of
-\(\log d^K\) (§9.4).</p>
+<p>The initial Θ-data JSON files carry no ramification data for the field \(K\). Where \(K_v\) can be written
+down the toolkit does so: at a Tate-curve place with \(p \nmid 30l\) it is
+\(\mathbb{Q}_p(\zeta_{60l}, q_v^{1/30l})\) up to an unramified twist, so \(e = 30l/\gcd(30l, \operatorname{ord} q_v)\)
+and the log-shell has its true log-volume \((1 - 1/e)\log p\). At the places over \(2, 3, 5, l\), where \(K_v\) is wildly
+ramified, it uses the lower bounds for \(e\) forced by the roots of unity in \(K\), and labels the log-shell a model.
+The shape of the algorithm is unaffected; the sizes of the containers come in through \(\log d^K\) (§9.3).</p>
 </div>
 
 <div class="box otaku"><span class="tag">Otaku corner · 大道芸</span>

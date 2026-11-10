@@ -8,8 +8,10 @@ pipeline is the multiradial representation and Corollary 3.12. Here is what it p
 
 <p class="small">Columns: the bad places of \(F_{\mathrm{mod}}\) used for \(\log q\) (odd primes only, [IUTchI] Def 3.1);
 the q-pilot \(-|\log q| = -\log q/2l\); the Θ-pilot \(-\frac{l(l+1)}{12}|\log q|\); the size of (Ind1);
-the hull term \(\frac{1}{l^*}\sum_{j=1}^{l^*}(j+1)\log d^K\); the upper end of the blurred Θ-pilot after the theta
-shift; whether \(-|\log q| \le\) that upper end.</p>
+the hull term \(\frac{1}{l^*}\sum_{j=1}^{l^*}(j+1)\log d^K\); the leading terms of the blurred Θ-pilot after the theta
+shift (an estimate); the full bound \(B\) of the proof of [IUTchIV] Thm 1.10 with every term (§9.3); whether the
+numbers are consistent with Corollary 3.12, \(-|\log q| \le B\). The corollary is an input of the toolkit, so the
+last column is a consistency check and not a verification.</p>
 
 <h3><span class="no">9.1</span>Row by row, for \(1 + 8 = 9\)</h3>
 
@@ -20,9 +22,10 @@ and the theta value \(\underline{q}^{\,j^2}\) acting on it, which contributes \(
 
 {{table:procession}}
 
-<p>Averaging the rows \(j = 1,\dots,l^*\) gives the upper end \({{ub}}\): that is the hull term \({{hull}}\) plus
-the Θ-pilot's naive log-volume \({{thetapilot}}\). The q-pilot sits at \({{qpilot}}\), far below, so the inequality
-holds by a wide margin.</p>
+<p>Averaging the rows \(j = 1,\dots,l^*\) gives the leading terms \({{ub}}\): that is the hull term \({{hull}}\) plus
+the Θ-pilot's naive log-volume \({{thetapilot}}\). These two terms are what carries the idea, but they are not yet a
+bound: the proof adds a term for the size of each residue field and one for the ramification, and with those the
+upper end is \(B = {{hullB}}\) (§9.3). The q-pilot sits at \({{qpilot}}\), far below either number.</p>
 
 <figure>{{svg:bars}}
 <figcaption><b>Figure 9.1.</b> Per-label contributions for all four examples, on a common scale: the hull cost
@@ -33,7 +36,7 @@ large relative to \(\log d^K\), the parabola already turns over at \(j = 3\).</f
 
 <h3><span class="no">9.2</span>From the corollary to a height bound</h3>
 
-<p>Write the measured upper end in closed form. With \(\sum_{j=1}^{l^*}(j+1) = \frac{l^*(l^*+3)}{2}\) and
+<p>Write the leading terms in closed form. With \(\sum_{j=1}^{l^*}(j+1) = \frac{l^*(l^*+3)}{2}\) and
 \(\sum_{j=1}^{l^*} j^2 = \frac{l^*\,l\,(l+1)}{12}\) (both proved in <code>lean/IUT/Multiradial.lean</code>),</p>
 \[ -|\log\Theta| \;\lesssim\; \frac{1}{l^*}\sum_{j=1}^{l^*}\Bigl[(j+1)\log d^K - \frac{j^2}{2l}\log q\Bigr]
    \;=\; \frac{l+5}{4}\,\log d^K \;-\; \frac{l+1}{24}\,\log q . \]
@@ -66,17 +69,34 @@ archimedean places, the places above 2, and all the error terms, and expresses t
 \(C_\Theta = {{ctheta}}\), comfortably \(\ge -1\), and Theorem 1.10's height inequality reads
 \(\tfrac16\log q = {{thmlhs}} \le {{thmrhs}}\).</p>
 
+<p>The proof of Theorem 1.10 (Steps (v)–(vii)) reaches \(C_\Theta\) one rational prime at a time, and since
+November 2026 the toolkit follows it (<code>iut_hull_bound_compute</code>). A prime is <em>distinguished</em> if it
+divides \(2\cdot3\cdot5\cdot l\) or lies under a place where \(K\) ramifies or \(q\) is not a unit; such a prime
+contributes \(\frac{l+5}{4}\log d^K_{v_\mathbb{Q}} - \frac{l+1}{24}\log q_{v_\mathbb{Q}} + \log s_{v_\mathbb{Q}}
++ (l+5)\,l^*_{\mathrm{mod}}\), every other prime contributes 0, and the archimedean prime \(\frac{l+5}{4}\log\pi\).
+Here \(\log d^K_{v_\mathbb{Q}}\) is the bound of Step (ii) and \(l^*_{\mathrm{mod}} = \log(e^*_{\mathrm{mod}}\,l) =
+{{lstarmod}}\). For \(1 + 8 = 9\):</p>
+
+{{table:hull}}
+
+<p>The total is \(B = {{hullB}}\), so the constant this run actually needs is \(B/|\log q| = {{cthetalocal}}\), far
+below the closed formula \({{ctheta}}\) of the statement, which is built to work for every curve at once. Almost all
+of \(B\) is the term \((l+5)\,l^*_{\mathrm{mod}}\), paid once per distinguished prime: it is the price of not knowing
+the ramification of \(K\) exactly.</p>
+
 <div class="box warn"><span class="tag">How to read these numbers</span>
 <ul>
 <li><b>The constants dominate.</b> Theorem 1.10's right-hand side contains \(\eta_{\mathrm{prm}} = 5\cdot10^{20}\)
 ([ExpEst] §1). For curves this small it swamps everything, so the bound holds trivially and says nothing sharp.
 The theory is about curves of enormous height, where \(l\) is chosen near \(\sqrt{\text{height}}\) [IUTchIV, Cor. 2.2].</li>
-<li><b>\(\log d^K\) is an estimate.</b> The initial Θ-data files record no ramification data for
-\(K = F(E[l])\), so the toolkit estimates the different and takes \(e = 1\) in the log-shells.</li>
+<li><b>The local fields \(K_v\) are known only through bounds.</b> The initial Θ-data files record no ramification
+data for \(K = F(E[l])\). The table above uses the upper bounds of Step (ii) for the different, and the log-shells
+use the lower bounds for \(e\) forced by \(\sqrt{-1}, \mu_3, \mu_5, \mu_l \subseteq K\) and \(q_v^{1/2l} \in K_v\).</li>
 <li><b>Only \(\log q\) is exact.</b> It is computed from the Tate parameters at the odd bad places and
 cross-checked against an independent computation (stage 7 of the pipeline).</li>
 <li><b>The toolkit does not prove anything.</b> It implements the data types and the bookkeeping of the
-statements. Whether the statements are proved is the subject of §12.</li>
+statements, and <code>iut gaps</code> lists every place where a formula stands in for a construction
+(<code>docs/GAPS.md</code>). Whether the statements are proved is the subject of §12.</li>
 </ul>
 </div>
 

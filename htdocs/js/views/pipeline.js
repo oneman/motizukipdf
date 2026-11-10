@@ -151,8 +151,11 @@
     c.appendChild(section('lat', [
       U.canvas(function (cv) { DG.lattice(cv, w, { focus: [0, 0], shells: true }); }),
       link && ht00 && ht10 ? U.canvas(function (cv) { DG.thetaLink(cv, ht00, ht10, link, g); }) : null,
-      U.table(['v', 'p*', 'log-shell I_v', 'μ_log(I_v)', 'Π_v kept by the log-link'], L.logShells.map(function (s) { return [s.v, s.pstar ? String(s.pstar) : '—', s.p ? 'p^{' + qf(s.radius) + '}·O_v' : 'π-disc', fmt(s.logVolume, 6), s.piShared ? '✓' : '✗']; })),
-      el('p', { class: 'small muted', text: L.vertices + ' Hodge theaters, ' + L.logLinks + ' log-links, ' + (L.thetaLink ? 1 : 0) + ' Θ-link; validator: ' + L.errors + ' error(s) in ' + L.checks + ' checks. I_v = (p*)⁻¹·log(O×) is computed from lower bounds for e(K_v/Q_p) and for the p-power roots of unity in K_v (√−1, μ_3, μ_5, μ_l and q_v^{1/2l} lie in K), so μ_log(I_v) is that of a model field, not of K_v itself.' })
+      U.table(['v', 'p*', 'log-shell I_v ⊇', 'μ_log(I_v)', '', 'K_v / Q_p: e, f, m, d', 'Π_v kept by the log-link'], L.logShells.map(function (s) {
+        var x = (d.VSet.filter(function (v) { return v.name === s.v; })[0] || {}).KExact || {};
+        var kv = !s.p ? '—' : s.dK !== undefined ? s.eK + ', ' + (x.f ? '' : '≥') + s.fK + ', ' + (x.m ? '' : '≥') + s.mK + ', ' + fmt(s.dK, 4) : '≥' + s.eK + ', ≥' + s.fK + ', ≥' + s.mK + ', ?';
+        return [s.v, s.pstar ? String(s.pstar) : '—', s.p ? 'p^{' + qf(s.radius) + '}·O_v' : 'π-disc', fmt(s.logVolume, 6), !s.p ? '' : s.exact ? '<span class="chip teal">exact</span>' : '<span class="chip orange">model</span>', kv, s.piShared ? '✓' : '✗']; })),
+      el('p', { class: 'small muted', text: L.vertices + ' Hodge theaters, ' + L.logLinks + ' log-links, ' + (L.thetaLink ? 1 : 0) + ' Θ-link; validator: ' + L.errors + ' error(s) in ' + L.checks + ' checks. I_v = (p*)⁻¹·log(O×). “exact”: p ∤ 30l, where K_v = Q_p(ζ_60l, q_v^{1/30l}) up to an unramified twist is written down and μ_log(I_v) is its true value. “model”: at p | 30l the field is wildly ramified and e, m are the lower bounds forced by √−1, μ_3, μ_5, μ_l ⊆ K and q_v^{1/2l} ∈ K_v.' })
     ]));
     /* 5 */
     var R = P0.multiradial;

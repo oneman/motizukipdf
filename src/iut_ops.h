@@ -389,6 +389,9 @@ int  iut_cor312_holds(const iut_log_theta_lattice *lat);
 
 /* ---- Props 1.1-1.4: differents, logarithms, p-adic log-volume --------------- */
 typedef struct { unsigned p, e, f, m; double d; } iut_local_field;  /* k_i: ram. index e, residue degree f, p-torsion exponent m, different exponent d */
+/* K_v/Q_p at v = V[v_index], where it can be written down (p ∤ 30l, F_mod = Q, F = F_mod(√−1, E[2·3·5])):
+ * returns 0 and sets *exact to the mask of IUT_KX_* that are values, not bounds; IUT_NOT_IMPLEMENTED elsewhere. */
+int iut_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out, int *exact);
 double iut_iv_a(const iut_local_field *k);                /* a_i = (1/e)⌈e/(p−2)⌉ (p>2), 2 (p=2)   Prop 1.2 */
 double iut_iv_b(const iut_local_field *k);                /* b_i = ⌊log(p e/(p−1))/log p⌋ − 1/e           */
 double iut_iv_dI(const iut_local_field *k, unsigned n);   /* d_I = Σ d_i                                     */
@@ -455,7 +458,6 @@ typedef struct {
 void iut_thm110_compute(const iut_initial_theta_data *d, iut_thm110 *out);
 
 /* ---- placeholders (iut_gaps.c): the signature the real computation will have; each returns IUT_NOT_IMPLEMENTED ---- */
-int iut_gap_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out);            /* gap LocalFieldsOfK: (p, e, f, d, m) of K_v */
 int iut_gap_serre_SL2(const iut_initial_theta_data *d, unsigned witness_primes[3]);                             /* gap AssertedHypotheses: Serre's criterion for SL_2(F_l) ⊆ image */
 int iut_gap_theta_value(const iut_initial_theta_data *d, unsigned v_index, unsigned j, unsigned long long *unit_mod_p_prec); /* gap ThetaValuesOrdersOnly: the unit of q̲_v^{j²} ∈ K_v */
 int iut_gap_hull_exact(const iut_initial_theta_data *d, unsigned p, unsigned j, double *log_volume);            /* gap IndeterminaciesAreCounted: the hull's log-volume itself, not a bound */

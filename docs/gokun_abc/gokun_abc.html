@@ -562,7 +562,9 @@ referee. <span class="jp">審判ではありません。</span></p>
 
 <h2 class="chapter"><span class="no">10</span>Suggested fixes, and a phrasebook<span class="jp">直すところ・単語帳</span></h2>
 
-<p>Items 1 to 4 were done on November 10, 2026, after this article first appeared; 5 and 6 are still open.</p>
+<p>Items 1 to 4 were done on November 10, 2026, after this article first appeared. Item 5 followed the same day
+on the command line, together with two things this list did not ask for (7 and 8). Item 6 is still open, and so is
+everything in <code>iut gaps</code>, the toolkit's own list of what it does not compute.</p>
 <table class="wide">
 <tr><th>#</th><th>fix</th><th>where</th></tr>
 <tr><td>1 ✓</td><td>Reword the sentence in <code>funfun_iut.pdf</code> §1 to “at the bad places \(v_3, v_5, v_7\) of
@@ -573,10 +575,18 @@ Lemma 1.11 (1) bound.</td><td><code>scripts/infographic/initialtheta-data.js</co
 <tr><td>3 ✓</td><td>Change the verdict line of <code>ComputeThmOneTen</code> / <code>ComputeCorTwoTwo</code> from “holds” to
 something like “holds trivially; this curve is in the exceptional set (\(\epsilon_E &gt; 1\))”.</td><td><code>src/iut_ops_iv.c</code></td></tr>
 <tr><td>4 ✓</td><td>Make pipeline stage 1 item (a) use the same degree check as the validator.</td><td><code>src/iut_i.c</code></td></tr>
-<tr><td>5</td><td>Add an “auto l (proof window)” choice next to “auto l”: the smallest admissible prime above
-\(\sqrt{\log q^{\forall}}\).</td><td><code>src/gui/</code>, generator</td></tr>
+<tr><td>5 ✓</td><td>Add an “auto l (proof window)” choice next to “auto l”: the smallest admissible prime above
+\(\sqrt{\log q^{\forall}}\). Done as <code>--l auto</code> (conditions (P1)–(P3) of the proof of [IUTchIV] Cor 2.2); the
+GUI does not offer it yet.</td><td><code>src/iut_ops_iv.c</code>: <code>iut_choose_l</code></td></tr>
 <tr><td>6</td><td>Cite [Y] in the manual and both guides; its numbering is far easier to point at than step
 (vii) of the proof of [IUTchIV] Theorem 1.10.</td><td>docs</td></tr>
+<tr><td>7 ✓</td><td>Compute the bound of [Y] Prop 1.12 (= [IUTchIV] Thm 1.10) the way its proof does, one rational prime
+at a time with every term, and stop printing Corollary 13.13 (= Cor 3.12) with a ✓: it is an input, and the toolkit can
+only say whether its numbers are consistent with it.</td><td><code>src/iut_ops_iv.c</code>: <code>iut_hull_bound_compute</code></td></tr>
+<tr><td>8 ✓</td><td>Write \(K_v\) down where that is possible. At a Tate-curve place with \(p \nmid 30l\),
+\(K_v = \mathbb{Q}_p(\zeta_{60l}, q_v^{1/30l})\) up to an unramified quadratic twist, so
+\(e = 30l/\gcd(30l, \operatorname{ord} q_v)\) exactly and the log-shell there is no longer a model. The wild places
+\(p \mid 30l\) still carry the “≥”.</td><td><code>src/iut_core.c</code>: <code>iut_local_field_K</code></td></tr>
 </table>
 
 <h3><span class="no">10.1</span>Phrasebook: Yamashita ↔ Mochizuki ↔ this repository</h3>

@@ -210,12 +210,13 @@ void iut_hull_bound_compute(const iut_initial_theta_data *d, iut_hull_bound *out
         iut_hull_row *R = &out->row[out->nrows++];
         unsigned p = ps[k]; double lp = log((double)p);
         R->p = p;
-        int small = (p == 2 || p == 3 || p == 5), isl = (p == d->l), inq = 0, badmult = 0;
+        int small = (p == 2 || p == 3 || p == 5), isl = (p == d->l), inq = 0, badmult = 0, dexact = 0; double dval = 0;
         double lqv = 0, lfv = 0;
         for (unsigned i = 0; i < d->nV; ++i) {
             const iut_valuation *v = &d->V[i];
             if (v->kind != IUT_V_NONARCH || v->p != p) continue;
             if (v->red == IUT_RED_BAD_MULT) badmult = 1;
+            if (v->K_exact & IUT_KX_D) { dexact = 1; dval = v->d_K; }
             if (v->in_Vbad_mod) { inq = 1; lqv += (double)v->ordq * (v->f_mod ? v->f_mod : 1) * lp / dm; lfv += (double)(v->f_mod ? v->f_mod : 1) * lp / dm; }
         }
         if (!small && !isl && !inq) { R->kind = 1; R->why = "unramified in K"; R->logdK_src = "Prop 1.4 (iv)"; continue; }   /* Step (vi): 0 */
@@ -226,6 +227,7 @@ void iut_hull_bound_compute(const iut_initial_theta_data *d, iut_hull_bound *out
         else if (p == 3) { D += 3.0 * lp; R->logdK_src = inq ? "Step (ii): 3 log 3 + log f" : "Step (ii): 3 log 3"; }
         else if (p == 5) { D += 2.0 * lp; R->logdK_src = inq ? "Step (ii): 2 log 5 + log f" : "Step (ii): 2 log 5"; }
         else if (isl)    { D += 2.0 * lp; if (badmult) D += lp; R->logdK_src = "Step (ii): 2 log l"; }
+        else if (dexact) { D = dval * lp; R->logdK_src = "exact: (1 − 1/e)·log p, K_v tame"; }   /* iut_local_field_K; ≤ log f, the bound of Prop 1.3 (i) */
         else             R->logdK_src = "Prop 1.3 (i): tame, ≤ log f";
         if (isl && small) D += 2.0 * lp;                  /* l = 5 (outside Thm 1.10): both contributions */
         R->why = small && inq ? "p | 2·3·5, Supp(q)" : small ? "p | 2·3·5" : isl ? "p = l" : "Supp(q)";

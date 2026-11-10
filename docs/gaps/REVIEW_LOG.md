@@ -106,3 +106,34 @@ and each run of the four worked examples was compared before and after.
   `lean/` were not updated (GAP_REPORT.md §5–§6).
 * The smaller η_prm suggested under `InexplicitConstants` was not applied; it needs its
   citation checked first.
+
+## Second pass, 2026-11-10
+
+Asked to carry on and update the software and the PDFs.
+
+13. **K_v at tame places.** Worked out which local fields can be written down from the data
+    that exists. For p ∤ 30l at a Tate-curve place: Q_p(E[N]) = Q_p(ζ_N, q^{1/N}) up to the
+    unramified quadratic twist, N = 30l, and √−1 adds ζ_4. Over L0 = Q_p(ζ_60l) the class of
+    q = p^a·u in L0^×/N ≅ Z/N × k^×/N has order lcm(e, o), e = N/gcd(N, a); the unramified
+    part has degree lcm(e, o)/e. Checked by hand on 11a1 (p = 11, l = 7, a = 5): e = 42,
+    f0 = ord(11 mod 420) = 6, 10 ∤ 42 so μ_11 ⊄ K_v. Self-test added. The stub
+    `iut_gap_local_field_K` is replaced by `iut_local_field_K`.
+14. **What that does not give.** μ_p ⊆ K_v when (p − 1) | e needs a computation in the residue
+    field that was not done: m is marked "≥" there. The split/non-split character is not in
+    the data: f is marked exact only when even. p | 30l is wild and untouched.
+15. **The manual's JavaScript copy** was further behind than the report said: it predated
+    PR #28 as well (e_K = 1 everywhere). Ported the list of GAP_REPORT §5, adjusted four of
+    its tests to the corrected behaviour, and compared `IUT.hullBound` with the C value for
+    1 + 2400 = 2401, l = 13: both 1530.5931.
+16. **multiradial_guide.pdf** called the leading-term value "the upper end" and showed
+    "Cor 3.12 ✓" in its summary table. Rewritten around the bound B; hull table added.
+17. **GUI** drew stage 5 with the pill "Cor 3.12: −|log Θ| ≥ −|log q|" from the leading
+    terms. Replaced by the hull table and the input/consistent wording; placeholders added.
+18. **Lean** left alone: no toolchain in the container to compile it.
+
+| check | result |
+|---|---|
+| `iut selftest` | pass, with 4 new checks for `iut_local_field_K` |
+| `node scripts/manual/lib/test.js` | 169 checks pass |
+| `node htdocs/test.js` | native = WebAssembly |
+| `make check`, `make gui-check` | in sync; 39 runs, 0 disagreements |

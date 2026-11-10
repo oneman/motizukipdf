@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "iut.h"
+#include "iut_ops.h"
 
 /* ------------------------------------------------------------- rationals */
 static long gcdl(long a, long b) { if (a < 0) a = -a; if (b < 0) b = -b; while (b) { long t = a % b; a = b; b = t; } return a ? a : 1; }
@@ -131,6 +132,7 @@ double iut_log_shell_volume(const iut_valuation *v, unsigned dK)
     IUT_GAP("LocalFieldsOfK");                          /* e, f, m are the values forced by the hypotheses, not those of the actual K_v */
     double p = (double)v->p, e = v->e_K ? v->e_K : 1, f = v->f_K ? v->f_K : 1;
     double m = (double)v->m_K;                          /* μ_{p^m} ⊆ K_v: set by iut_data_finish (√−1, μ_3, μ_5, μ_l) */
+    /* exact when v->K_exact has IUT_KX_E and IUT_KX_M (then m = 0 and f does not enter) */
     double kstar = (v->p == 2) ? 2.0 : 1.0;             /* p* = p^kstar */
     return -(1.0 / e + m / (e * f)) * log(p) + kstar * log(p);
 }
@@ -163,6 +165,62 @@ static void raise_eK(iut_valuation *v, unsigned need)
     if (!need || v->e_K % need == 0) return;
     unsigned a = v->e_K, b = need; while (b) { unsigned t = a % b; a = b; b = t; }
     v->e_K = v->e_K / a * need; v->e_K_lower = 1;
+}
+
+/* ---- the local field K_v where it can be written down -------------------------------------------------
+ * Hypotheses: F_mod = Q at v (e_mod = f_mod = 1, d_mod = 1), F = F_mod(√−1, E[2·3·5]) and K = F(E[l]), so
+ * K = Q(√−1, E[30l]), and p ∤ 30l.  Put N = 30l.
+ *
+ * (A) v of bad multiplicative reduction.  Over Q_p the curve is a Tate curve E_q twisted by an unramified
+ *     character χ of order ≤ 2, and Q_p(E[N]) = Q_p(ζ_N, q^{1/N})·Q_p^χ for N ≥ 3.  With L0 = Q_p(ζ_{60l}),
+ *     unramified of degree f0 = ord(p mod 60l), Kummer theory gives K_v = L0(q^{1/N})·Q_p^χ, where the class of
+ *     q = p^a·u in L0^×/N ≅ Z/N × k^×/N is (a, ū).  Hence
+ *        e = N / gcd(N, a)              (tame, so the different exponent is d = 1 − 1/e),
+ *        f = f0 · lcm(e, o)/e           with o the order of ū in k^×/(k^×)^N, k = F_{p^f0}, then lcm with 2 if χ ≠ 1,
+ *        m = 0 unless (p − 1) | e       (μ_p ⊆ K_v needs Q_p(ζ_p), totally ramified of degree p − 1).
+ *     o needs u mod p (known for JSON data); χ is not recorded, so f is exact only when it is even anyway.
+ * (B) v of good reduction: K_v/Q_p is unramified, e = 1, d = 0, m = 0, and f is a multiple of f0.
+ *
+ * Elsewhere (p | 30l, or F_mod ≠ Q, or F larger than the tripod extension) the wild part of K_v is not known
+ * and the bounds of iut_data_finish stand: gap LocalFieldsOfK.                                             */
+static unsigned long long mulmod_ull(unsigned long long a, unsigned long long b, unsigned long long m)   /* m < 2^63 */
+{ unsigned long long r = 0; a %= m; b %= m; while (b) { if (b & 1) { r += a; if (r >= m) r -= m; } a += a; if (a >= m) a -= m; b >>= 1; } return r; }
+static unsigned long long powmod_ull(unsigned long long b, unsigned long long e, unsigned long long m)
+{ unsigned long long r = 1 % m; b %= m; while (e) { if (e & 1) r = mulmod_ull(r, b, m); b = mulmod_ull(b, b, m); e >>= 1; } return r; }
+static unsigned long long gcd_ull(unsigned long long a, unsigned long long b) { while (b) { unsigned long long t = a % b; a = b; b = t; } return a; }
+static unsigned mult_order(unsigned long long x, unsigned long long m)   /* order of x in (Z/m)^×, 0 if not a unit */
+{ if (m <= 1) return 1; if (gcd_ull(x % m, m) != 1) return 0; unsigned k = 1; unsigned long long y = x % m; while (y != 1) { y = mulmod_ull(y, x % m, m); ++k; } return k; }
+
+int iut_local_field_K(const iut_initial_theta_data *d, unsigned v_index, iut_local_field *out, int *exact)
+{
+    if (out) memset(out, 0, sizeof *out);
+    if (exact) *exact = 0;
+    if (!d || v_index >= d->nV) return -1;
+    const iut_valuation *v = &d->V[v_index];
+    unsigned p = v->p, l = d->l;
+    if (v->kind != IUT_V_NONARCH || !l) return IUT_NOT_IMPLEMENTED;
+    if (d->dmod != 1 || v->e_mod != 1 || v->f_mod != 1 || !d->h_F_contains_five_torsion) return IUT_NOT_IMPLEMENTED;
+    if (p == 2 || p == 3 || p == 5 || p == l || v->red == IUT_RED_BAD_ADD) return IUT_NOT_IMPLEMENTED;
+    unsigned long long N = 30ULL * l;
+    unsigned f0 = mult_order(p, 2 * N);
+    iut_local_field k = { p, 1, f0, 0, 0.0 };
+    int x = IUT_KX_E | IUT_KX_D | IUT_KX_M;
+    if (v->red == IUT_RED_BAD_MULT && v->ordq) {
+        unsigned long long g = gcd_ull(N, v->ordq), e = N / g;
+        k.e = (unsigned)e; k.d = 1.0 - 1.0 / (double)e;
+        if (e % (p - 1) == 0) x &= ~IUT_KX_M;                       /* μ_p ⊆ K_v cannot be excluded by the degree alone */
+        if (v->q_prec) {
+            /* o = order of u^((p^f0 − 1)/N) in F_p^×: u lies in F_p, so the exponent is needed mod p − 1 only */
+            unsigned long long mod = N * (p - 1), r = (powmod_ull(p, f0, mod) + mod - 1) % mod;   /* (p^f0 − 1) mod N(p−1); N | p^f0 − 1 */
+            unsigned o = mult_order(powmod_ull(v->q_unit % p, r / N, p), p);
+            unsigned long long D = e / gcd_ull(e, o) * o;           /* lcm(e, o) */
+            k.f = (unsigned)(f0 * (D / e));
+            if (k.f % 2 == 0) x |= IUT_KX_F;                         /* the twist χ can only double an odd f */
+        }
+    }
+    if (out) *out = k;
+    if (exact) *exact = x;
+    return 0;
 }
 
 void iut_data_finish(iut_initial_theta_data *d)
@@ -199,6 +257,12 @@ void iut_data_finish(iut_initial_theta_data *d)
          * only away from 2l, and (P3) in the proof of Cor 2.2 foresees l = p_v.                              */
         v->in_Vbad_mod = (v->kind == IUT_V_NONARCH && v->red == IUT_RED_BAD_MULT && v->p % 2 == 1 && v->p != d->l);
         if (v->red != IUT_RED_BAD_MULT) v->ordq = 0;
+        /* where K_v can be written down, the exact invariants replace the bounds */
+        { iut_local_field k; int x = 0;
+          v->K_exact = 0; v->d_K = 0.0;
+          if (iut_local_field_K(d, i, &k, &x) == 0) {
+              v->e_K = k.e; v->e_K_lower = 0; v->f_K = k.f; v->m_K = k.m; v->d_K = k.d; v->K_exact = x;
+          } }
     }
 }
 

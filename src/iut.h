@@ -70,6 +70,7 @@ const iut_ident *iut_ident_by_notation(const char *notation);
 typedef enum { IUT_V_NONARCH = 0, IUT_V_ARCH = 1 } iut_vkind;
 typedef enum { IUT_RED_GOOD = 0, IUT_RED_BAD_MULT = 1, IUT_RED_BAD_ADD = 2 } iut_reduction;
 
+enum { IUT_KX_E = 1, IUT_KX_F = 2, IUT_KX_M = 4, IUT_KX_D = 8 };
 typedef struct {
     char          name[IUT_MAX_NAME]; /* e.g. "v7", "vinf"                   */
     iut_vkind     kind;               /* Vnon or Varc                          */
@@ -81,6 +82,11 @@ typedef struct {
     unsigned      m_K;                /* μ_{p^m} ⊆ K_v for m = m_K, as forced by Def 3.1: √−1 ∈ F (p = 2: m ≥ 2),
                                          E[3] ⊆ E(F) (p = 3: m ≥ 1), E[5] ⊆ E(F) (p = 5: m ≥ 1), E[l] ⊆ E(K) (p = l: m ≥ 1).
                                          A lower bound; enters μ_log(I_v) by [IUTchIV] Prop 1.4 (ii)                */
+    int           K_exact;            /* which invariants of K_v/Q_p are exact values and not bounds: a mask of
+                                         IUT_KX_E, IUT_KX_F, IUT_KX_M, IUT_KX_D, set by iut_local_field_K at the
+                                         places where K_v can be written down (tame Tate-curve places, unramified
+                                         good places); 0 elsewhere                                               */
+    double        d_K;                /* exponent of the different of K_v/Q_p in units of ord(p) = 1; valid with IUT_KX_D */
     iut_reduction red;                /* reduction type of E at v              */
     unsigned      ordq;               /* ord_v(q_v) = -ord_v(j_E)  (bad mult.) */
     int           in_Vbad_mod;        /* v ∈ Vbad_mod: bad multiplicative, p odd and p ≠ l ([IUTchI] Def 3.1 (b), (c)).

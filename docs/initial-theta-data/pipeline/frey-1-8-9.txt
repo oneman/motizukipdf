@@ -15,9 +15,9 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
   log(d^K)  : ≈ 5.6836 (an estimate; ≤ 25.9904 by Thm 1.10, Step (ii))
   V ≅ V_mod : 4 valuations
     name   kind  p    e/f_m e/f_K reduction  ord(q)  V^bad_mod
-    v2     non   2    1/1   ≥2/1  good       0       -
-    v3     non   3    1/1   ≥14/1 bad mult.  4       yes
-    v5     non   5    1/1   ≥4/1  good       0       -
+    v2     non   2    1/1   ≥2/≥1 good       0       -
+    v3     non   3    1/1   ≥14/≥1 bad mult.  4       yes
+    v5     non   5    1/1   ≥4/≥1 good       0       -
     vinf   arc   -    -     -     -          -       -
   asserted  : F/F_mod Galois ✓ | √−1, E[6] ⊆ F ✓ | E[5] ⊆ F ✓ | SL2 ⊆ image ✓ | stable red. ✓ | C_K K-core ✓
   labels    : F_l = {-3..3}  |F_l| = {0..3}  F_l^* = {1..3}
@@ -96,12 +96,13 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
     shares G_v ✓, O×μ ✓; Π_v NOT shared (mutually alien), ring structure NOT kept; value-group dilation l(l+1)/12 = 4.6667
     v3     left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183013 = #183013 ✓;  Π_v #270012 vs #670012
   log-links: 8 (columns n = 0, 1; rows -2..2). Each one identifies Π_v (vertical coricity) and builds the log-shells of its codomain:
-    (I_v ⊇ the module shown; e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v, so μ_log is a model value)
-    v        p*    I_v ⊇    μ_log(I_v)   Π_v at (0,0) = at (0,1)?
-    v2        4 p^{-1/2}·O      +0.346574   ✓
-    v3        3 p^{-3/7}·O      +0.941668   ✓
-    v5        5 p^{-1/2}·O      +0.804719   ✓
-    vinf      -    π-disc              0   ✓
+    (I_v ⊇ the module shown.  "exact": K_v is written down (p ∤ 30l, iut_local_field_K) and μ_log(I_v) is its true value;
+     "model": e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v)
+    v        p*    I_v ⊇    μ_log(I_v)         K_v/Q_p: e, f, m, d    Π_v at (0,0) = at (0,1)?
+    v2        4 p^{-1/2}·O      +0.346574  model  ≥2, ≥1, ≥2, ?          ✓
+    v3        3 p^{-3/7}·O      +0.941668  model  ≥14, ≥1, ≥1, ?         ✓
+    v5        5 p^{-1/2}·O      +0.804719  model  ≥4, ≥1, ≥1, ?          ✓
+    vinf      -    π-disc              0         -                      ✓
   validation of the lattice: 0 error(s) in 3 checks
     [info] 10 Hodge theaters, 8 log-links, 1 Θ-links (Θ×μ_LGP-link); only the row m=0 carries a Θ-link: this is the 'infinite H' used in the proof of Cor 3.12
     [info] the diagram is highly non-commutative: no square of links is required to commute
@@ -165,4 +166,4 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
     ░ open        CrossCheckIsShallow: The cross-check compares four numbers, for JSON data only
 
 pipeline complete: 0 problem(s)  (Def 3.1: 0, Hodge theater: 0, lattice: 0, consequence of Cor 3.12: consistent, hull bound vs Thm 1.10: below, cross-check: 0)
-19 placeholder(s) stand in for parts of the theory that are not computed (`iut gaps`): "complete" means every stage ran, not that the theory was verified.
+18 placeholder(s) stand in for parts of the theory that are not computed (`iut gaps`): "complete" means every stage ran, not that the theory was verified.

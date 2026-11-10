@@ -74,6 +74,7 @@ const V = {
   ind1: m.M.ind1, ind1big: P['frey-1-2400-2401'].M.ind1.toLocaleString('en-US'),
   hull: f(sum(m.M.procession.filter(p => p.j > 0).map(p => p.leading)) / m.D.LStar, 4),
   ub: f(m.M.thetaUpperBound, 4), leading: f(m.M.leadingTerm, 4),
+  hullB: f(m.M.hull.total, 3), cthetalocal: f(m.M.hull.CThetaLocal, 2), lstarmod: f(m.M.hull.lStarMod, 3),
   ctheta: fe(m.H.CTheta),
   leadformula: f((m.D.l ** 2 / 48) * (6 * m.D.K.logDifferentEstimate - m.D.logQ), 4),
   vertices: m.L.vertices, loglinks: m.L.logLinks,
@@ -244,14 +245,21 @@ const TABLE = {
       h += `<tr><td>${p.j}</td><td>${p.size}</td><td>${p.perms}</td><td>${f(p.leading, 4)}</td><td>${f(p.thetaShift, 4)}</td><td><b>${f(p.leading + p.thetaShift, 4)}</b></td></tr>`;
     return h + '</table>';
   },
+  // The hull bound of [IUTchIV] Thm 1.10, Steps (v)–(vii), prime by prime, for the running example.
+  hull() {
+    let h = '<table><tr><th>v<sub>Q</sub></th><th>why distinguished</th><th>log d<sup>K</sup> ≤</th><th>from</th><th>log q</th><th>log s</th><th>contribution</th></tr>';
+    for (const r of m.M.hull.rows)
+      h += `<tr><td>${r.p ? r.p : '∞'}</td><td>${r.why}</td><td>${r.p ? f(r.logDK, 4) : '—'}</td><td>${r.logDKSource}</td><td>${r.p ? f(r.logQ, 4) : '—'}</td><td>${r.p ? f(r.logS, 4) : '—'}</td><td>${f(r.bound, 4)}</td></tr>`;
+    return h + `<tr><td colspan="6"><b>B</b></td><td><b>${f(m.M.hull.total, 4)}</b></td></tr></table>`;
+  },
   // One line per example: the whole algorithm in numbers.
   summary() {
-    let h = '<table><tr><th>example</th><th>l</th><th>V<sup>bad</sup><sub>mod</sub></th><th>log q</th><th>−|log q| (q-pilot)</th><th>Θ-pilot</th><th>Ind1 = Π(j+1)!</th><th>hull</th><th>upper end for −|log Θ|</th><th>Cor 3.12</th></tr>';
+    let h = '<table><tr><th>example</th><th>l</th><th>V<sup>bad</sup><sub>mod</sub></th><th>log q</th><th>−|log q| (q-pilot)</th><th>Θ-pilot</th><th>Ind1 = Π(j+1)!</th><th>hull</th><th>leading terms</th><th>full bound B</th><th>consistent with Cor 3.12</th></tr>';
     for (const e of EXAMPLES) {
       const p = P[e.id], hull = sum(p.M.procession.filter(q => q.j > 0).map(q => q.leading)) / p.D.LStar;
       h += `<tr><td>${e.short}</td><td>${p.D.l}</td><td>{${p.G.places.map(q => q.p).join(', ')}}</td><td>${f(p.D.logQ, 3)}</td>` +
         `<td>${f(-p.D.AbsLogQ, 4)}</td><td>${f(p.G.thetaPilot, 4)}</td><td>${p.M.ind1.toLocaleString('en-US')}</td>` +
-        `<td>${f(hull, 3)}</td><td>${f(p.M.thetaUpperBound, 3)}</td><td>${p.M.corThreeTwelve.holds ? '✓' : '✗'}</td></tr>`;
+        `<td>${f(hull, 3)}</td><td>${f(p.M.thetaUpperBound, 3)}</td><td>${f(p.M.hull.total, 2)}</td><td>${p.M.hull.consequenceHolds ? '✓' : '✗'}</td></tr>`;
     }
     return h + '</table>';
   },

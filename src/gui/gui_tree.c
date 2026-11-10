@@ -133,7 +133,7 @@ void gt_rebuild(GtkTreeStore *st, const gm_model *m)
             if (v->kind != IUT_V_ARCH) {
                 add(st, &p, NULL, NULL, "p_v", "%u", v->p);
                 add(st, &p, NULL, NULL, "e/f of (F_mod)_v / Q_p", "%u/%u", v->e_mod, v->f_mod);
-                add(st, &p, NULL, NULL, "e/f of K_v / Q_p", "%s%u/%u", v->e_K_lower ? "≥" : "", v->e_K, v->f_K);
+                add(st, &p, NULL, NULL, "e/f of K_v / Q_p", "%s%u/%s%u%s", v->e_K_lower ? "≥" : "", v->e_K, (v->K_exact & IUT_KX_F) ? "" : "≥", v->f_K, (v->K_exact & IUT_KX_E) ? "  (K_v written down: tame)" : "");
                 add(st, &p, NULL, NULL, "reduction", "%s", red);
                 add(st, &p, NULL, NULL, "ord_v(q_v)", "%u", v->ordq);
                 add(st, &p, NULL, NULL, "in V^bad_mod", "%s", yes(v->in_Vbad_mod));
@@ -217,10 +217,12 @@ void gt_rebuild(GtkTreeStore *st, const gm_model *m)
         add(st, &R, "LogKummerCorrespondence", "stage:5", "log-Kummer non-interference", "%s", yes(mr->log_kummer_ok));
         add(st, &R, NULL, "stage:5", "compatible with the Θ×μ_LGP-link", "%s %s %s %s", yes(mr->link_compat[0]), yes(mr->link_compat[1]), yes(mr->link_compat[2]), yes(mr->link_compat[3]));
         add(st, &R, NULL, "stage:5", "leading term", "%.6f", mr->rep.leading_term);
-        add(st, &R, NULL, "stage:5", "−|log Θ| upper bound", "%.6f", mr->rep.theta_upper_bound);
+        add(st, &R, NULL, "stage:5", "leading terms of −|log Θ| (estimate)", "%.6f", mr->rep.theta_upper_bound);
+        add(st, &R, NULL, "stage:5", "−|log Θ| ≤ B (Thm 1.10, Steps (v)–(vii))", "%.6f", mr->rep.theta_hull_bound);
+        add(st, &R, NULL, "stage:5", "C_Θ = B/|log q|", "%.6g", mr->rep.C_theta_local);
         add(st, &R, NULL, "stage:5", "|log q|", "%.6f", mr->rep.abs_log_q);
-        add(st, &R, NULL, "stage:5", "C_Θ", "%.6g", mr->rep.C_theta);
-        GtkTreeIter C = add(st, NULL, "CorThreeTwelve", "stage:5", "Cor 3.12", "%s", m->c312ok ? "holds ✓" : "fails ✗");
+        add(st, &R, NULL, "stage:5", "C_Θ of the statement of Thm 1.10", "%.6g", mr->rep.C_theta);
+        GtkTreeIter C = add(st, NULL, "CorThreeTwelve", "stage:5", "Cor 3.12 (an input)", "%s", m->c312ok ? "numbers consistent ✓" : "numbers NOT consistent ✗");
         for (unsigned k = 0; k < m->nc312; ++k) add(st, &C, NULL, "stage:5", m->c312[k].label, "%.6g   %s", m->c312[k].value, m->c312[k].ref);
     }
     /* stage 6 */
@@ -247,6 +249,17 @@ void gt_rebuild(GtkTreeStore *st, const gm_model *m)
     if (m->reached > GS_XC) {
         GtkTreeIter x = add(st, NULL, NULL, "stage:7", "cross-check", m->nxc ? "%u of %u agree" : "none (generated data)", m->nxc - m->xbad, m->nxc);
         for (unsigned k = 0; k < m->nxc; ++k) add(st, &x, NULL, "stage:7", m->xc[k].what, "%s toolkit %.6f, file %.6f", yes(m->xc[k].ok), m->xc[k].toolkit, m->xc[k].file);
+    }
+    /* the gap registry: what stands in for the theory (iut_gaps.c) */
+    {
+        unsigned n = 0; for (size_t i = 0; i < iut_gaps_count; ++i) if (iut_gaps[i].status != IUT_GAP_FIXED) ++n;
+        GtkTreeIter G = add(st, NULL, NULL, NULL, "placeholders (iut gaps)", "%u not computed, approximate or asserted", n);
+        for (size_t i = 0; i < iut_gaps_count; ++i) {
+            const iut_gap *g = &iut_gaps[i]; char act[32]; const char *a = NULL;
+            if (g->status == IUT_GAP_FIXED) continue;
+            if (g->stage >= 0) { snprintf(act, sizeof act, "stage:%d", g->stage); a = act; }
+            add(st, &G, NULL, a, g->id, "[%s] %s", iut_gap_status_name(g->status), g->title);
+        }
     }
 }
 
