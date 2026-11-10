@@ -11,37 +11,43 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
   fields    : F_mod ⊆ F ⊆ K = F(E[l]) ⊆ F̄     [F_mod:Q]=1  [F:Q]≤46080  [K:Q]≤92897280
   l         : 7   (l* = 3, l± = 4)   ε̲ = the cusp ±1
   log(q)    : 62.7099   |log(q)| = log(q)/2l = 4.4793   ht_E = log(q)/6 = 10.4516
-  log(f)    : 8.9255   log(d^Ftpd) = 0.0000   log(d^K) ≈ 13.5104 (≤ 33.8173, Thm 1.10)   h(j) ≈ 98.224
+  log(f)    : 8.9255 over V^bad_mod (the f of Thm 1.10); 8.9255 over every bad place   log(d^Ftpd) = 0.0000   h(j) ≈ 98.224
+  log(d^K)  : ≈ 13.5104 (an estimate; ≤ 33.8173 by Thm 1.10, Step (ii))
   V ≅ V_mod : 6 valuations
     name   kind  p    e/f_m e/f_K reduction  ord(q)  V^bad_mod
-    v2     non   2    1/1   1/1   good       0       -
-    v3     non   3    1/1   ≥7/1  bad mult.  20      yes
-    v5     non   5    1/1   1/1   good       0       -
+    v2     non   2    1/1   ≥2/1  good       0       -
+    v3     non   3    1/1   ≥14/1 bad mult.  20      yes
+    v5     non   5    1/1   ≥4/1  good       0       -
     v23    non   23   1/1   ≥7/1  bad mult.  10      yes
     v109   non   109  1/1   ≥7/1  bad mult.  2       yes
     vinf   arc   -    -     -     -          -       -
-  asserted  : F/F_mod Galois ✓ | E[6] ⊆ F ✓ | SL2 ⊆ image ✓ | stable red. ✓ | C_K K-core ✓
+  asserted  : F/F_mod Galois ✓ | √−1, E[6] ⊆ F ✓ | E[5] ⊆ F ✓ | SL2 ⊆ image ✓ | stable red. ✓ | C_K K-core ✓
   labels    : F_l = {-3..3}  |F_l| = {0..3}  F_l^* = {1..3}
   symmetries: F_l^{⋊±} (additive, Θ±ell-HT)  acts on F_l;  F_l^* (multiplicative, ΘNF-HT) acts on F_l^*
   Tate param: q_v3 = 3^20 · u,   u ≡ 364 mod 3^8   (base-3 digits 1,1,1,1,1,1,0,0)
   Tate param: q_v23 = 23^10 · u,   u ≡ 61448124894 mod 23^8   (base-23 digits 2,6,10,6,1,2,1,18)
   Tate param: q_v109 = 109^2 · u,   u ≡ 12186328046825005 mod 109^8   (base-109 digits 88,62,39,20,77,33,72,66)
   ε̲         : the cusp ±1 of C̲_K   ([IUTchI] Def 3.1 (f): from a nonzero element of Q ≅ Z/7Z)
+  placeholders in this stage (2; `iut gaps` has the detail):
+    ░ approximate LocalFieldsOfK: The local fields K_v are known only through bounds
+    ░ open        GeneratorsFreyOnly: Initial Θ-data is generated only for Frey curves over Q
 
 ── stage 1 ── conditions (a)–(f) ─────────────────────────────────────── [IUTchI] Def 3.1
-  ✓ (a)  F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F
-      asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l
-  ✓ (b)  X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)
-      asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked
-  ✓ (c)  l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)
-      checked against every v ∈ V^bad_mod
-  ✓ (d)  V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)
-      |V| = |V_mod| by construction of the data
-  ✓ (e)  V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction
-      checked: at least one odd v of bad multiplicative reduction
+  ✓ (a)  F is a number field with √−1 ∈ F; F̄ an algebraic closure of F
+      asserted: F = F_mod(√−1, E[2·3·…]) contains √−1 by construction (flag h_F_contains_six_torsion)
+  ✓ (b)  X_F once-punctured E_F with stable reduction; V^bad_mod ≠ ∅, odd, bad multiplicative; F/F_mod Galois of degree prime to l; E[2·3] ⊆ E(F)
+      checked: V^bad_mod ≠ ∅, odd, multiplicative; the bound on [F:F_mod] is prime to l.  asserted: stable reduction, F/F_mod Galois, E[6] ⊆ E(F)
+  ✓ (c)  l ≥ 5 prime with Im(G_F → GL_2(F_l)) ⊇ SL_2(F_l); K = F(E[l]); l prime to the residue characteristics of V^bad_mod and to the orders ord_v(q_v) on V^bad
+      checked: l prime, l ∤ p_v and l ∤ ord_v(q_v) for every v ∈ V^bad_mod.  asserted: SL_2(F_l) ⊆ image (flag h_image_contains_SL2)
+  ✓ (d)  C̲_K a hyperbolic orbicurve of type (1, l-tors)± with K-core C_K = C_F ×_F K; it determines X̲_K of type (1, l-tors)
+      asserted: flag h_CK_is_K_core (fails only for the four exceptional j-invariants)
+  ✓ (e)  V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod); at v ∈ V^bad, C̲_v of type (1, Z/lZ)±
+      |V| = |V_mod| by construction of the data (one v per place listed)
   ✓ (f)  ε̲ a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1
       ε̲ = the cusp ±1 (label 1 ∈ F_l^*)
   validation: 0 error(s), 0 warning(s), 9 checks
+  placeholders in this stage (1; `iut gaps` has the detail):
+    ░ asserted    AssertedHypotheses: Five hypotheses of Def 3.1 and one of Thm 1.10 are flags
 
 ── stage 2 ── Hodge theaters ───────────────────────────────── [IUTchI] §3–§6, Def 6.13
   Θ±ell-Hodge theater   capsule F_T of 7 F-prime-strips, t ∈ F_7, symmetry F_l^{⋊±} of order 14 (orbit of t=0: 7)
@@ -58,6 +64,9 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
     v109   ord(q_v) = 2   ord(q̲_v) = 2/14 = 1/7
   prime-strips at (0,0): F_⊞, D_⊚±, F_>, F_⊛, F⊩_mod, F⊩_tht, F⊩_Δ, F⊩_env, F⊩_gau, F⊩_LGP, F⊩_lgp  (each indexed by the 6 places of V)
   validation of the Θ±ell NF-Hodge theater: 0 error(s) in 10 checks
+  placeholders in this stage (2; `iut gaps` has the detail):
+    ░ open        HodgeTheatersAreBookkeeping: Hodge theaters are records of labels and copy numbers
+    ░ open        GlobalNumberFieldElements: No element of F_mod^× or κ-coric function is ever written down
 
 ── stage 3 ── Gaussian monoids (theta values) ─────────── [IUTchII] Cor 2.5, 3.5, 4.10
   θ evaluated at the l = 7 evaluation points t ∈ F_l gives q̲_v^{t²} up to μ_14; it depends on |t| only.
@@ -79,6 +88,8 @@ Initial Θ-data  (F̄/F, X_F, l, C_K, V, V^bad_mod, ε̲)      [IUTchI] Def 3.1
       3     9            9/7           18   8479073565393668  (64,78,45,87,65,86,41,46)
   log-volumes (normalized, [IUTchIII] Prop 3.9):  −(j²/2l)·log q for j = 1..3: -4.4793 -17.9171 -40.3135
   q-pilot {q̲_v}: −|log q| = -4.479277      Θ-pilot {q̲_v^{j²}}: −avg(j²)·|log q| = −(l(l+1)/12)·|log q| = -20.903295
+  placeholders in this stage (1; `iut gaps` has the detail):
+    ░ approximate ThetaValuesOrdersOnly: Theta values are orders and units of q^{j²}, not values of the theta function
 
 ── stage 4 ── log-theta-lattice ────────────────────────── [IUTchIII] Def 1.1, 1.4, 3.8
 log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchIII] Def 1.4, 3.8 (iii)
@@ -103,47 +114,77 @@ log-theta-lattice (Θ×μ_LGP-link horizontal; vertical = log-links)     [IUTchI
     v23    left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183033 = #183033 ✓;  Π_v #270032 vs #670032
     v109   left (0,0) F⊩_LGP O▶{q̲^1,q̲^4,q̲^9} ↦ right (1,0) F⊩_Δ O▶{q̲^1};  O×μ #183043 = #183043 ✓;  Π_v #270042 vs #670042
   log-links: 8 (columns n = 0, 1; rows -2..2). Each one identifies Π_v (vertical coricity) and builds the log-shells of its codomain:
-    v        p*        I_v    μ_log(I_v)   Π_v at (0,0) = at (0,1)?
-    v2        4   p^{0}·O      +0.000000   ✓
+    (I_v ⊇ the module shown; e and m are the lower bounds forced by the roots of unity and by q̲_v ∈ K_v, so μ_log is a model value)
+    v        p*    I_v ⊇    μ_log(I_v)   Π_v at (0,0) = at (0,1)?
+    v2        4 p^{-1/2}·O      +0.346574   ✓
     v3        3 p^{-3/7}·O      +0.941668   ✓
-    v5        5   p^{0}·O      +0.000000   ✓
+    v5        5 p^{-1/2}·O      +0.804719   ✓
     v23      23 p^{-6/7}·O      +2.687566   ✓
     v109    109 p^{-6/7}·O      +4.021155   ✓
     vinf      -    π-disc              0   ✓
   validation of the lattice: 0 error(s) in 3 checks
     [info] 10 Hodge theaters, 8 log-links, 1 Θ-links (Θ×μ_LGP-link); only the row m=0 carries a Θ-link: this is the 'infinite H' used in the proof of Cor 3.12
     [info] the diagram is highly non-commutative: no square of links is required to commute
+  placeholders in this stage (2; `iut gaps` has the detail):
+    ░ approximate LogShellFromBounds: The log-shell I_v is given by an inner radius and a model log-volume
+    ░ open        LogLinkMovesNoElements: The log-link relabels copies; no element goes through a logarithm
 
 ── stage 5 ── multiradial representation, Cor 3.12 ───────── [IUTchIII] Thm 3.11, Cor 3.12
   procession S^±_{j+1} = {0..j} of tensor packets of log-shells, j = 0..l* = 3:
-      j   |S|     (j+1)!   (j+1)·log d^K −(j²/2l)·log q              sum
-      0     1          1        13.510422        -0.000000        13.510422
-      1     2          2        27.020844        -4.479277        22.541566
-      2     3          6        40.531266       -17.917110        22.614156
-      3     4         24        54.041687       -40.313497        13.728191
+    (leading terms use the estimate log d^K ≈ 13.5104; the last column is the bound of Thm 1.10, Step (v)–(vii), before the average over j)
+      j   |S|     (j+1)!   (j+1)·log d^K −(j²/2l)·log q      leading sum    full bound at j
+      0     1          1        13.510422        -0.000000        13.510422 (j = 0: not averaged)
+      1     2          2        27.020844        -4.479277        22.541566         793.006997
+      2     3          6        40.531266       -17.917110        22.614156        1171.725328
+      3     4         24        54.041687       -40.313497        13.728191        1541.485103
   indeterminacies: (Ind1) |Aut(Prc)| = Π_j (j+1)! = 288, (Ind2) Ism on 4 direct summands, (Ind3) upper semi-compatibility ✓
   (a) 4 tensor packets, (b) 9 splitting monoids, (c) 3 copies of F_mod^×;  log-Kummer non-interference ✓;  compatible with the Θ×μ_LGP-link ✓
   (0) |log q| = log q / 2l: log-volume of the q-pilot at (1,0), i.e. −|log q|                                    -4.47928   [IUTchIII] Cor 3.12; Def 3.8 (i)
   (1) the Θ-pilot at (0,0): naive log-volume −avg(j²)·|log q|                                                 -20.9033   [IUTchIII] Def 3.8 (i)
   (2) the Θ×μ_LGP-link (0,0)→(1,0) identifies the Θ-pilot with the q-pilot (value groups), units up to Ism         -4.47928   [IUTchIII] Def 3.8 (ii), Thm 3.11 (iii)
   (3) multiradial representation of the Θ-pilot in terms of the mono-analytic data of (1,0): Ind1 count                 24   [IUTchIII] Thm 3.11 (i)
-  (4) holomorphic hull of the region: Σ_j (j+1) log d^K (procession-normalized)                                    40.5313   [IUTchIII] Cor 3.12 proof; [Alien] §3.7 (iv)
-  (5) −|log Θ| upper bound (hull + theta shift, procession-normalized)                                            19.628   [IUTchIII] Cor 3.12
-  (6) inequality −|log Θ| ≥ −|log q| ⇔ C_Θ ≥ −1: C_Θ                                              2.2325e+21   [IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10
-  Cor 3.12: −|log Θ| ≥ −|log q| ✓
+  (4) holomorphic hull, leading terms only: ((l+5)/4)·log d^K (an estimate, not a bound)                           40.5313   [Alien] §3.7 (iv)
+  (5) leading terms with the theta shift: ((l+5)/4)·log d^K − ((l+1)/24)·log q (not a bound)                     19.628   [Alien] §3.7 (iv); [IUTchIV] Rem 1.10.1
+  (6) −|log Θ| ≤ B: the bound of the proof of Thm 1.10 with every term, summed over v_Q                        1168.74   [IUTchIV] Thm 1.10, Steps (v)–(vii)
+  (7) Cor 3.12 (an input, not re-proved here) gives B ≥ −|log q|, i.e. C_Θ ≥ −1 for C_Θ = B/|log q|          260.921   [IUTchIII] Cor 3.12
+  the hull bound, place by place ([IUTchIV] Thm 1.10, proof): l*_mod = log(e*_mod·l) = 15.1690
+    v_Q    class                  log d^K_vQ ≤   log q_vQ   log s^Q ι          bound   source of the log d^K bound
+    2      p | 2·3·5                    7.6246     0.0000    0.6931  1       205.5944   Step (ii): 11 log 2
+    3      p | 2·3·5, Supp(q)           4.3944    21.9722    1.0986  1       188.9853   Step (ii): 3 log 3 + log f
+    5      p | 2·3·5                    3.2189     0.0000    1.6094  1       193.2935   Step (ii): 2 log 5
+    7      p = l                        3.8918     0.0000    1.9459  1       195.6488   Step (ii): 2 log l
+    23     Supp(q)                      3.1355    31.3549    3.1355  1       184.1177   Prop 1.3 (i): tame, ≤ log f
+    109    Supp(q)                      4.6913     9.3827    4.6913  1       197.6652   Prop 1.3 (i): tame, ≤ log f
+    ∞      archimedean                       -          -         -  -         3.4342   Step (vii): ((l+5)/4)·log π
+    distinguished v_Q: ((l+5)/4)·log d^K_vQ − ((l+1)/24)·log q_vQ + log s^Q_vQ + (l+5)·l*_mod·ι     (Step (v))
+  −|log Θ| ≤ B = 1168.739143;   C_Θ := B/|log q| = 260.921, against the C_Θ of the statement of Thm 1.10 = 2.2325e+21  ✓
+  Cor 3.12 is an input here, not something this program verifies.  Its consequence B ≥ −|log q|: 1168.739143 ≥ -4.479277  consistent ✓
+  placeholders in this stage (3; `iut gaps` has the detail):
+    ░ asserted    CorThreeTwelveIsAnInput: Cor 3.12 is used, not verified
+    ░ open        IndeterminaciesAreCounted: (Ind1)–(Ind3) are counted and named, their effect on a region is not computed
+    ░ open        DifferentSupport: The support of the different of F_tpd is not in the data model
 
 ── stage 6 ── the height bound ───────────────────────────── [IUTchIV] Thm 1.10, Cor 2.2
   log q = 62.709884   |log q| = 4.479277   log d^Ftpd = 0.000000   log f^Ftpd = 8.925454   e*_mod = 552960   η_prm = 5e+20
+  hypotheses of Thm 1.10 beyond Def 3.1:  l ≥ 7 ✓   good reduction away from 2l outside V^bad ✓   F = F_mod(√−1, E[2·3·5]) ✓ (asserted)
   C_Θ = 2.2325e+21 (≥ −1 ✓)
   Thm 1.10:  (1/6)·log q = 10.451647  ≤  (1 + 20·d_mod/l)(log d^Ftpd + log f^Ftpd) + 20(e*_mod·l + η_prm) = 1e+22   ✓
   Cor 2.2:   log q∀ = 62.709884 (2 included); (C1) wants 7.919 ≤ l ≤ 7.906e+08: l = 7 out of range;  ε_E = 2.51e+15;  (C2) 10.451647 ≤ 1e+22 ✓
   Thm 1.10 holds here only as a comparison with its constant: main term 34.426753, constant 20(e*_mod·l + η_prm) = 1e+22.
   Cor 2.2 asserts nothing about this curve: it is in the exceptional set Exc (ε_E > 1, (log q∀)^{1/2} < ξ_prm + η_prm; (log q∀)^{1/2} = 7.919, ξ_prm + η_prm ≥ 5e+20).
+  the proof of Cor 2.2 would take a prime with (P1)–(P3); the smallest one ≥ 7 is l = 11.
+  placeholders in this stage (3; `iut gaps` has the detail):
+    ░ asserted    InexplicitConstants: η_prm, ξ_prm, H_unif, C_K, H_K are not given by the papers
+    ░ open        ExplicitEstimatesNotImplemented: The explicit abc inequality of [ExpEst] is not in the toolkit
+    ░ open        ReductionToGeneralPosition: From compactly bounded subsets to all curves: not modelled
 
 ── stage 7 ── cross-check with frey-2-6436341-6436343.json ─────────────────────────────
   ✓ log(q)  = Σ_{V^bad_mod} ord(q_v) log p_v  toolkit 62.709884   file 62.709884
   ✓ |log(q)| = log(q)/2l                       toolkit 4.479277   file 4.479277
   ✓ log(f) over V^bad_mod                      toolkit 8.925454   file 8.925454
   ✓ ht = log(q)/6                              toolkit 10.451647   file 10.451647
+  placeholders in this stage (1; `iut gaps` has the detail):
+    ░ open        CrossCheckIsShallow: The cross-check compares four numbers, for JSON data only
 
-pipeline complete: 0 problem(s)  (Def 3.1: 0, Hodge theater: 0, lattice: 0, Cor 3.12: holds, cross-check: 0)
+pipeline complete: 0 problem(s)  (Def 3.1: 0, Hodge theater: 0, lattice: 0, consequence of Cor 3.12: consistent, hull bound vs Thm 1.10: below, cross-check: 0)
+19 placeholder(s) stand in for parts of the theory that are not computed (`iut gaps`): "complete" means every stage ran, not that the theory was verified.

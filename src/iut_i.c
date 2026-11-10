@@ -170,19 +170,39 @@ void iut_tempered_at_v_get(const iut_initial_theta_data *d, unsigned v, iut_temp
 static int coprime(unsigned a, unsigned b) { while (b) { unsigned t = a % b; a = b; b = t; } return a == 1; }
 unsigned iut_def_three_one_check(const iut_initial_theta_data *d, iut_def_three_one_item *out, unsigned max, iut_report *r)
 {
+    /* The six clauses are lettered exactly as in [IUTchI] Def 3.1:
+     *   (a) F ∋ √−1                                   (b) X_F, stable reduction, V^bad_mod, F/F_mod, E[2·3]
+     *   (c) l, SL_2(F_l), K, l prime to V^bad_mod     (d) C̲_K of type (1, l-tors)± with K-core C_K
+     *   (e) V ⊆ V(K) a section of V(K) ↠ V_mod       (f) ε̲
+     * machine_checked: 1 = every part of the clause is computed from the numbers; 0 = an asserted flag;
+     * 2 = partly computed, partly asserted (the detail says which part is which).                          */
     unsigned n = 0;
-    int c_ok = 1, e_ok = 0, odd_ok = 1;
+    int c_ok = 1, e_ok = 0, odd_ok = 1, dup = 0;
     int deg_ok = !(d->l && (d->dF / (d->dmod ? d->dmod : 1)) % d->l == 0);   /* the same test as iut_validate */
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
-        if (v->in_Vbad_mod) { e_ok = 1; if (v->p % 2 == 0) odd_ok = 0; if (v->p == d->l || (v->ordq && !coprime(d->l, v->ordq))) c_ok = 0; }
+        if (v->in_Vbad_mod) { e_ok = 1; if (v->p % 2 == 0 || v->red != IUT_RED_BAD_MULT) odd_ok = 0; if (v->p == d->l || (v->ordq && !coprime(d->l, v->ordq))) c_ok = 0; }
+        for (unsigned k = 0; k < i; ++k) if (v->kind == d->V[k].kind && v->p == d->V[k].p) dup = 1;
     }
+    int l_ok = d->l >= 5 && iut_is_prime(d->l) && !(d->l == 5 && d->h_F_contains_five_torsion);
+    IUT_GAP("AssertedHypotheses");
 #define ITEM(it, cond, okv, mc, det) do { if (n < max) { out[n].item = it; out[n].condition = cond; out[n].ok = (okv); out[n].machine_checked = mc; out[n].detail = det; } n++; if (r) iut_report_add(r, (okv) ? IUT_SEV_OK : IUT_SEV_ERROR, "DefThreeOne", "[IUTchI] Def 3.1 " it, "%s: %s", cond, det); } while (0)
-    ITEM("(a)", "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F", d->h_F_galois_over_Fmod && d->h_F_contains_six_torsion && deg_ok, 0, deg_ok ? "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l" : "the bound on [F:F_mod] is divisible by l (F ⊇ Q(E[5]) forces l ≠ 5)");
-    ITEM("(b)", "X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)", d->h_image_contains_SL2 && d->h_CK_is_K_core && d->l >= 5 && iut_is_prime(d->l), 0, "asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked");
-    ITEM("(c)", "l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)", c_ok && d->l % 2 && d->l % 3, 1, "checked against every v ∈ V^bad_mod");
-    ITEM("(d)", "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)", d->nV > 0 && d->nV <= IUT_MAX_V, 1, "|V| = |V_mod| by construction of the data");
-    ITEM("(e)", "V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction", e_ok && odd_ok && d->h_stable_reduction, 1, "checked: at least one odd v of bad multiplicative reduction");
+    ITEM("(a)", "F is a number field with √−1 ∈ F; F̄ an algebraic closure of F", d->h_F_contains_six_torsion, 0,
+         "asserted: F = F_mod(√−1, E[2·3·…]) contains √−1 by construction (flag h_F_contains_six_torsion)");
+    ITEM("(b)", "X_F once-punctured E_F with stable reduction; V^bad_mod ≠ ∅, odd, bad multiplicative; F/F_mod Galois of degree prime to l; E[2·3] ⊆ E(F)",
+         d->h_stable_reduction && e_ok && odd_ok && d->h_F_galois_over_Fmod && deg_ok && d->h_F_contains_six_torsion, 2,
+         !deg_ok ? "the bound on [F:F_mod] is divisible by l (F ⊇ Q(E[5]) forces l ≠ 5)"
+         : !e_ok ? "V^bad_mod is empty: no odd place, prime to l, of bad multiplicative reduction"
+         : "checked: V^bad_mod ≠ ∅, odd, multiplicative; the bound on [F:F_mod] is prime to l.  asserted: stable reduction, F/F_mod Galois, E[6] ⊆ E(F)");
+    ITEM("(c)", "l ≥ 5 prime with Im(G_F → GL_2(F_l)) ⊇ SL_2(F_l); K = F(E[l]); l prime to the residue characteristics of V^bad_mod and to the orders ord_v(q_v) on V^bad",
+         l_ok && d->h_image_contains_SL2 && c_ok, 2,
+         !c_ok ? "l divides ord_v(q_v) (or equals p_v) at some v ∈ V^bad_mod"
+         : !l_ok ? "l must be a prime ≥ 5 (and ≠ 5 when E[5] ⊆ E(F))"
+         : "checked: l prime, l ∤ p_v and l ∤ ord_v(q_v) for every v ∈ V^bad_mod.  asserted: SL_2(F_l) ⊆ image (flag h_image_contains_SL2)");
+    ITEM("(d)", "C̲_K a hyperbolic orbicurve of type (1, l-tors)± with K-core C_K = C_F ×_F K; it determines X̲_K of type (1, l-tors)", d->h_CK_is_K_core, 0,
+         "asserted: flag h_CK_is_K_core (fails only for the four exceptional j-invariants)");
+    ITEM("(e)", "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod); at v ∈ V^bad, C̲_v of type (1, Z/lZ)±", d->nV > 0 && d->nV <= IUT_MAX_V && !dup, 1,
+         dup ? "two members of V lie over the same place of F_mod" : "|V| = |V_mod| by construction of the data (one v per place listed)");
     ITEM("(f)", "ε̲ a cusp of C̲_K from a NONZERO element of Q ≅ Z/lZ; at v ∈ V^bad the cusp of the canonical generator ±1", iut_label_in_FlStar(d, d->epsilon) && (!e_ok || d->epsilon == 1), 1, d->epsilon == 1 ? "ε̲ = the cusp ±1 (label 1 ∈ F_l^*)" : "ε̲ must be a label in F_l^*, equal to ±1 when V^bad ≠ ∅");
 #undef ITEM
     return n;
@@ -211,6 +231,7 @@ void iut_s_mod_get(const iut_initial_theta_data *d, iut_s_mod *out)
 void iut_kappa_coric_check(const iut_kappa_function *f, iut_kappa_verdict *out)
 {
     /* [IUTchI] Rem 3.1.7 (i),(ii) */
+    IUT_GAP("GlobalNumberFieldElements");   /* f is a description supplied by the caller, not a rational function */
     memset(out, 0, sizeof *out);
     out->ncritical = 4; out->nstrictly_critical = 4;
     if (f->npoles != 1) { out->failed = "exactly one pole required"; return; }

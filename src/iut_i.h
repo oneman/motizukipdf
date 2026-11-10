@@ -189,7 +189,7 @@ void iut_tempered_at_v_get(const iut_initial_theta_data *d, unsigned v, iut_temp
 /* =============================================================== §3 ======= */
 
 /* Def 3.1 (a)–(f): the conditions on initial Θ-data, each checked or asserted  */
-typedef struct { const char *item, *condition; int ok, machine_checked; const char *detail; } iut_def_three_one_item;
+typedef struct { const char *item, *condition; int ok, machine_checked /* 1 computed, 0 asserted, 2 partly computed and partly asserted */; const char *detail; } iut_def_three_one_item;
 unsigned iut_def_three_one_check(const iut_initial_theta_data *d, iut_def_three_one_item *out, unsigned max, iut_report *r);
 /* Rem 3.1.2: the Θ-approach — [AbsTopIII] Thm 1.9 applied to Π_{X̲_K} ⊆ Π_{C̲_K}; the
  * cyclotome M_X of the once-punctured curve is identified with l·Δ_Θ (index l). */

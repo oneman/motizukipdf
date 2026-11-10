@@ -55,15 +55,15 @@ for (const ex of index.examples) {
     `[${ex.title}](initial-theta-data/pipeline/${ex.id}.txt)`, ex.curve, String(P.data.l),
     '{' + G.places.map((v) => v.p).join(', ') + '}',
     f6(H.logQ), f6(H.absLogQ), f6(G.thetaPilot), `${L.vertices} / ${L.logLinks + (L.thetaLink ? 1 : 0)}`,
-    f6(R.leadingTerm), g4(H.CTheta), `${f6(H.lhs)} ≤ ${g4(H.rhs)}`,
-    P.crossCheck.every((c) => c.ok) ? '✓' : '✗', String(P.problems),
+    f6(R.hull.total), g4(R.hull.CThetaLocal), g4(H.CTheta), H.hypotheses.ok ? `${f6(H.lhs)} ≤ ${g4(H.rhs)}` : 'does not apply',
+    P.crossCheck.every((c) => c.ok) ? '✓' : '✗', String(P.problems), String(P.gaps.filter((g) => g.status !== 'fixed').length),
   ]);
   web.push({ id: ex.id, title: ex.title, curve: ex.curve, l: ex.l, VbadMod: ex.VbadMod, text: fs.readFileSync(file, 'utf8') });
   console.log(`${ex.id}: ${P.problems} problem(s); log q = ${f6(H.logQ)}, Θ-pilot ${f6(G.thetaPilot)}, C_Θ = ${g4(H.CTheta)}`);
 }
 
 /* docs/PIPELINE.md: replace the table between the markers */
-const head = ['example', 'curve', 'l', 'V^bad_mod', 'log q', '\\|log q\\|', 'Θ-pilot log-vol.', 'vertices / links', 'Σ leading terms', 'C_Θ', 'Thm 1.10: (1/6) log q ≤ …', 'matches JSON', 'problems'];
+const head = ['example', 'curve', 'l', 'V^bad_mod', 'log q', '\\|log q\\|', 'Θ-pilot log-vol.', 'vertices / links', 'hull bound B', 'B / \\|log q\\|', 'C_Θ of the statement', 'Thm 1.10: (1/6) log q ≤ …', 'matches JSON', 'problems', 'placeholders'];
 const table = ['| ' + head.join(' | ') + ' |', '|' + head.map(() => '---').join('|') + '|', ...rows.map((r) => '| ' + r.join(' | ') + ' |')].join('\n');
 const doc = fs.readFileSync(DOC, 'utf8');
 const re = /(<!-- summary:start[^>]*-->)[\s\S]*?(<!-- summary:end -->)/;

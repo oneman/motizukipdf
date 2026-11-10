@@ -32,13 +32,15 @@
   "logQ": 24.20225742,
   "AbsLogQ": 1.10010261,
   "logF": 5.347107531,
+  "logFBad": 4.65396035,
   "HtE": 4.03370957,
   "hypotheses": {
    "FGaloisOverFmod": true,
    "FContainsSixTorsion": true,
    "ImageContainsSLTwo": true,
    "StableReduction": true,
-   "CKIsKCore": true
+   "CKIsKCore": true,
+   "FContainsFiveTorsion": true
   },
   "VSet": [
    {
@@ -47,9 +49,10 @@
     "p": 2,
     "eMod": 1,
     "fMod": 1,
-    "eK": 11,
+    "eK": 22,
     "eKIsLowerBound": true,
     "fK": 1,
+    "mK": 2,
     "reduction": "badMultiplicative",
     "ordQ": 2,
     "inVBadMod": false,
@@ -62,9 +65,10 @@
     "p": 3,
     "eMod": 1,
     "fMod": 1,
-    "eK": 11,
+    "eK": 22,
     "eKIsLowerBound": true,
     "fK": 1,
+    "mK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 2,
     "inVBadMod": true,
@@ -77,9 +81,10 @@
     "p": 5,
     "eMod": 1,
     "fMod": 1,
-    "eK": 11,
+    "eK": 44,
     "eKIsLowerBound": true,
     "fK": 1,
+    "mK": 1,
     "reduction": "badMultiplicative",
     "ordQ": 4,
     "inVBadMod": true,
@@ -95,6 +100,7 @@
     "eK": 11,
     "eKIsLowerBound": true,
     "fK": 1,
+    "mK": 0,
     "reduction": "badMultiplicative",
     "ordQ": 8,
     "inVBadMod": true,
@@ -110,6 +116,7 @@
     "eK": 1,
     "eKIsLowerBound": false,
     "fK": 1,
+    "mK": 0,
     "reduction": "good",
     "ordQ": 0,
     "inVBadMod": false
@@ -121,32 +128,32 @@
    {
     "item": "(a)",
     "ok": true,
-    "condition": "F ∋ √−1; F/F_mod Galois of degree prime to l; the 2·3-torsion of E_F rational over F",
-    "detail": "asserted flags h_F_galois_over_Fmod, h_F_contains_six_torsion; the bound on [F:F_mod] is prime to l"
+    "condition": "F is a number field with √−1 ∈ F; F̄ an algebraic closure of F",
+    "detail": "asserted: F = F_mod(√−1, E[2·3·…]) contains √−1 by construction (flag h_F_contains_six_torsion)"
    },
    {
     "item": "(b)",
     "ok": true,
-    "condition": "X_F once-punctured E_F; C_K = X̲_K/±1 of type (1,l-tors)±, X̲_K of type (1,l-tors); K = F(E[l]) with image ⊇ SL_2(F_l)",
-    "detail": "asserted flags h_image_contains_SL2, h_CK_is_K_core; l ≥ 5 prime checked"
+    "condition": "X_F once-punctured E_F with stable reduction; V^bad_mod ≠ ∅, odd, bad multiplicative; F/F_mod Galois of degree prime to l; E[2·3] ⊆ E(F)",
+    "detail": "checked: V^bad_mod ≠ ∅, odd, multiplicative; the bound on [F:F_mod] is prime to l.  asserted: stable reduction, F/F_mod Galois, E[6] ⊆ E(F)"
    },
    {
     "item": "(c)",
     "ok": true,
-    "condition": "l prime to 2·3, to the residue characteristics of V^bad_mod and to the orders ord_v(q_v)",
-    "detail": "checked against every v ∈ V^bad_mod"
+    "condition": "l ≥ 5 prime with Im(G_F → GL_2(F_l)) ⊇ SL_2(F_l); K = F(E[l]); l prime to the residue characteristics of V^bad_mod and to the orders ord_v(q_v) on V^bad",
+    "detail": "checked: l prime, l ∤ p_v and l ∤ ord_v(q_v) for every v ∈ V^bad_mod.  asserted: SL_2(F_l) ⊆ image (flag h_image_contains_SL2)"
    },
    {
     "item": "(d)",
     "ok": true,
-    "condition": "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod)",
-    "detail": "|V| = |V_mod| by construction of the data"
+    "condition": "C̲_K a hyperbolic orbicurve of type (1, l-tors)± with K-core C_K = C_F ×_F K; it determines X̲_K of type (1, l-tors)",
+    "detail": "asserted: flag h_CK_is_K_core (fails only for the four exceptional j-invariants)"
    },
    {
     "item": "(e)",
     "ok": true,
-    "condition": "V^bad_mod ≠ ∅, odd residue characteristic, bad multiplicative reduction; E_F has stable reduction",
-    "detail": "checked: at least one odd v of bad multiplicative reduction"
+    "condition": "V ⊆ V(K) is a section of V(K) ↠ V_mod (one v above each v_mod); at v ∈ V^bad, C̲_v of type (1, Z/lZ)±",
+    "detail": "|V| = |V_mod| by construction of the data (one v per place listed)"
    },
    {
     "item": "(f)",
@@ -587,10 +594,10 @@
     "p": 2,
     "pstar": 4,
     "radius": [
-     -10,
-     11
+     -21,
+     22
     ],
-    "logVolume": 1.260267601,
+    "logVolume": 1.291774291,
     "piShared": true
    },
    {
@@ -612,7 +619,7 @@
      -8,
      11
     ],
-    "logVolume": 1.463125375,
+    "logVolume": 1.536281644,
     "piShared": true
    },
    {
@@ -694,8 +701,94 @@
   "leadingTerm": 142.352318,
   "thetaUpperBound": 28.4704636,
   "absLogQ": 1.10010261,
+  "hull": {
+   "lStarMod": 15.62093622,
+   "total": 1347.02661,
+   "CThetaLocal": 1224.455426,
+   "CThetaStatement": 1.363509173e+22,
+   "belowStatement": true,
+   "consequenceHolds": true,
+   "complete": true,
+   "unlocalizedLogD": 0,
+   "perJ": [
+    682.3362682,
+    1016.881644,
+    1349.226815,
+    1679.371781,
+    2007.316542
+   ],
+   "rows": [
+    {
+     "p": 2,
+     "kind": "distinguished",
+     "why": "p | 2·3·5",
+     "logDK": 8.317766167,
+     "logDKSource": "Step (ii): 11 log 2, + log 2 (tame, bad over 2)",
+     "logQ": 0,
+     "logS": 0.6931471806,
+     "iota": 1,
+     "bound": 283.8991913
+    },
+    {
+     "p": 3,
+     "kind": "distinguished",
+     "why": "p | 2·3·5, Supp(q)",
+     "logDK": 4.394449155,
+     "logDKSource": "Step (ii): 3 log 3 + log f",
+     "logQ": 2.197224577,
+     "logS": 1.098612289,
+     "iota": 1,
+     "bound": 267.5127761
+    },
+    {
+     "p": 5,
+     "kind": "distinguished",
+     "why": "p | 2·3·5, Supp(q)",
+     "logDK": 4.828313737,
+     "logDKSource": "Step (ii): 2 log 5 + log f",
+     "logQ": 6.43775165,
+     "logS": 1.609437912,
+     "iota": 1,
+     "bound": 267.6387965
+    },
+    {
+     "p": 7,
+     "kind": "distinguished",
+     "why": "Supp(q)",
+     "logDK": 1.945910149,
+     "logDKSource": "Prop 1.3 (i): tame, ≤ log f",
+     "logQ": 15.56728119,
+     "logS": 1.945910149,
+     "iota": 1,
+     "bound": 251.8808896
+    },
+    {
+     "p": 11,
+     "kind": "distinguished",
+     "why": "p = l",
+     "logDK": 4.795790546,
+     "logDKSource": "Step (ii): 2 log l",
+     "logQ": 0,
+     "logS": 2.397895273,
+     "iota": 1,
+     "bound": 271.5160369
+    },
+    {
+     "p": 0,
+     "kind": "archimedean",
+     "why": "archimedean",
+     "logDK": 0,
+     "logDKSource": "Prop 1.5 (iii), (iv)",
+     "logQ": 0,
+     "logS": 0,
+     "iota": 0,
+     "bound": 4.578919543
+    }
+   ]
+  },
   "corThreeTwelve": {
    "holds": true,
+   "isInput": true,
    "steps": [
     {
      "label": "(0) |log q| = log q / 2l: log-volume of the q-pilot at (1,0), i.e. −|log q|",
@@ -718,19 +811,24 @@
      "ref": "[IUTchIII] Thm 3.11 (i)"
     },
     {
-     "label": "(4) holomorphic hull of the region: Σ_j (j+1) log d^K (procession-normalized)",
+     "label": "(4) holomorphic hull, leading terms only: ((l+5)/4)·log d^K (an estimate, not a bound)",
      "value": 40.57159231,
-     "ref": "[IUTchIII] Cor 3.12 proof; [Alien] §3.7 (iv)"
+     "ref": "[Alien] §3.7 (iv)"
     },
     {
-     "label": "(5) −|log Θ| upper bound (hull + theta shift, procession-normalized)",
+     "label": "(5) leading terms with the theta shift: ((l+5)/4)·log d^K − ((l+1)/24)·log q (not a bound)",
      "value": 28.4704636,
-     "ref": "[IUTchIII] Cor 3.12"
+     "ref": "[Alien] §3.7 (iv); [IUTchIV] Rem 1.10.1"
     },
     {
-     "label": "(6) inequality −|log Θ| ≥ −|log q| ⇔ C_Θ ≥ −1: C_Θ",
-     "value": 1.363509173e+22,
-     "ref": "[IUTchIII] Cor 3.12; [IUTchIV] Thm 1.10"
+     "label": "(6) −|log Θ| ≤ B: the bound of the proof of Thm 1.10 with every term, summed over v_Q",
+     "value": 1347.02661,
+     "ref": "[IUTchIV] Thm 1.10, Steps (v)–(vii)"
+    },
+    {
+     "label": "(7) Cor 3.12 (an input, not re-proved here) gives B ≥ −|log q|, i.e. C_Θ ≥ −1 for C_Θ = B/|log q|",
+     "value": 1224.455426,
+     "ref": "[IUTchIII] Cor 3.12"
     }
    ]
   }
@@ -739,14 +837,21 @@
   "logQ": 24.20225742,
   "absLogQ": 1.10010261,
   "logDTpd": 0,
-  "logFTpd": 5.347107531,
+  "logFTpd": 4.65396035,
   "CTheta": 1.363509173e+22,
   "lhs": 4.03370957,
   "rhs": 1e+22,
-  "mainTerm": 15.06912122,
+  "mainTerm": 13.11570644,
   "constTerm": 1e+22,
   "holds": true,
   "constantDominates": true,
+  "hypotheses": {
+   "lAtLeastSeven": true,
+   "goodAwayFromTwoL": true,
+   "FIsTripodExtension": true,
+   "ok": true
+  },
+  "autoL": 11,
   "corTwoTwo": {
    "logQAll": 25.58855178,
    "lMin": 5.058512803,
@@ -754,7 +859,7 @@
    "lInRange": true,
    "epsE": 3733723703000000,
    "lhs": 4.26475863,
-   "rhs": 1.000001996e+22,
+   "rhs": 1.000001738e+22,
    "holds": true,
    "epsSmall": false,
    "sOneOk": false,
@@ -785,6 +890,283 @@
    "toolkit": 4.03370957,
    "file": 4.03371,
    "ok": true
+  }
+ ],
+ "gaps": [
+  {
+   "id": "LocalFieldsOfK",
+   "stage": 0,
+   "status": "approximate",
+   "title": "The local fields K_v are known only through bounds",
+   "ref": "[IUTchI] Def 3.1 (c), (e); [IUTchIV] Prop 1.2–1.4, Thm 1.10 Step (iii)",
+   "paper": "K = F(E[l]) and, for each v ∈ V, the local field K_v with its ramification index e_v, residue degree f_v, different exponent d_v and p-power roots of unity μ_{p^m}; they enter log(O×_{K_v}), the log-shell I_v and every log-volume.",
+   "code": "[F:Q] and [K:Q] are upper bounds; e_K is the lower bound forced by q_v^{1/2l} ∈ K_v and by √−1, μ_3, μ_5, μ_l ⊆ K; f_K = 1; m_K is the lower bound forced by the same roots of unity; log d^K is an estimate.",
+   "where": "iut_core.c: iut_data_finish, iut_log_shell_volume; iut_ops_iv.c: iut_gap_local_field_K",
+   "plan": "Prepared: iut_gap_local_field_K is the placeholder with the final signature. At v ∈ V^bad, K_v = F_v(ζ_l, q_v^{1/l}) (Tate curve) is computable from the Tate parameter already in the JSON files; at good v, f_v is the order of Frobenius on E[l] (needs a_p, already computed in scripts/infographic/initialtheta-data.js); F_v needs E[2·3·5]."
+  },
+  {
+   "id": "GeneratorsFreyOnly",
+   "stage": 0,
+   "status": "open",
+   "title": "Initial Θ-data is generated only for Frey curves over Q",
+   "ref": "[IUTchI] Def 3.1; [IUTchIV] Cor 2.2",
+   "paper": "Initial Θ-data for any elliptic curve over a number field F with F_mod = Q(j_E), in particular the points of the λ-line of degree ≤ d of Cor 2.2.",
+   "code": "`--abc` builds the Frey curve of an abc triple with F_mod = Q; `--theta-json` reads four worked files (also F_mod = Q); `--random` with an odd seed invents a number field by its degree only.",
+   "where": "iut_core.c: iut_gen_from_abc, iut_gen_random; iut_input.c",
+   "plan": "Open. Needs a number-field layer (minimal polynomial of j, places of F_mod with e, f). The JSON schema already has Fmod.degree and per-place data, so the reader is the place to extend."
+  },
+  {
+   "id": "ChoiceOfLFixed",
+   "stage": 0,
+   "status": "fixed",
+   "title": "l could not be chosen the way the proof chooses it",
+   "ref": "[IUTchIV] Cor 2.2, proof, (P1)–(P3)",
+   "paper": "A prime l with h^{1/2} ≤ l ≤ 10δ·h^{1/2}·log(2δh), dividing no local height ord_v(q_v), and with ord_v(q_v) < h^{1/2} if l = p_v.",
+   "code": "Was: l always given by hand. Now `--l auto` picks the smallest such prime ≥ 7 within IUT_MAX_L (iut_choose_l).",
+   "where": "iut_ops_iv.c: iut_choose_l; iut_main.c: iut_options_make_data",
+   "plan": "Done in this change."
+  },
+  {
+   "id": "BadPlaceOverL",
+   "stage": 0,
+   "status": "fixed",
+   "title": "A bad place over l was forced into V^bad_mod and the data rejected",
+   "ref": "[IUTchI] Def 3.1 (b), (c); [IUTchIV] Thm 1.10",
+   "paper": "V^bad_mod is a chosen nonempty set of odd bad places prime to l; E may be bad at places of V^good, and Thm 1.10 asks for good reduction only away from 2l.",
+   "code": "Was: every odd bad multiplicative place was put in V^bad_mod, so abc(1,2400,2401) with l = 7 failed with an error. Now a bad place over l stays in V^good with a note, and log q, the theta values and f^F leave it out.",
+   "where": "iut_core.c: iut_data_finish, iut_validate_data",
+   "plan": "Done in this change."
+  },
+  {
+   "id": "AssertedHypotheses",
+   "stage": 1,
+   "status": "asserted",
+   "title": "Five hypotheses of Def 3.1 and one of Thm 1.10 are flags",
+   "ref": "[IUTchI] Def 3.1 (a)–(d); [IUTchIV] Thm 1.10",
+   "paper": "√−1 ∈ F; F/F_mod Galois; E[2·3] ⊆ E(F); stable reduction; Im(G_F → GL_2(F_l)) ⊇ SL_2(F_l); C_K a K-core; and for Thm 1.10, F = F_mod(√−1, E[2·3·5]).",
+   "code": "Each is a boolean the generator sets to true, or the JSON file records with its proof. The C code does not check any of them.",
+   "where": "iut_core.c: iut_validate_data; iut_i.c: iut_def_three_one_check; iut_ops_iv.c: iut_thm110_compute, iut_gap_serre_SL2",
+   "plan": "Prepared: iut_gap_serre_SL2 is the placeholder for Serre's criterion (three Frobenius elements), which scripts/infographic/initialtheta-data.js already runs for the four examples; port it to C. K-core: test j ∉ {the four exceptional j-invariants} and no CM. Stable reduction: Raynaud's criterion from E[3], E[5] ⊆ E(F)."
+  },
+  {
+   "id": "DefThreeOneLettering",
+   "stage": 1,
+   "status": "fixed",
+   "title": "The clauses of Def 3.1 were lettered differently from the paper",
+   "ref": "[IUTchI] Def 3.1 (a)–(f)",
+   "paper": "(a) √−1 ∈ F; (b) X_F, stable reduction, V^bad_mod, F/F_mod, E[2·3]; (c) l, SL_2, K, l prime to V^bad_mod and ord q; (d) C̲_K, K-core; (e) V a section; (f) ε̲.",
+   "code": "Was: the checker put SL_2 and the K-core under (b), the section V under (d) and V^bad_mod under (e), and the validator cited (a) and (e) for conditions of (b). Now both follow the paper, and a clause that is part computed and part asserted says which part is which.",
+   "where": "iut_i.c: iut_def_three_one_check; iut_core.c: iut_validate_data",
+   "plan": "Done in this change."
+  },
+  {
+   "id": "DefThreeOneNotCounted",
+   "stage": 1,
+   "status": "fixed",
+   "title": "A failed clause (c) did not count as a problem",
+   "ref": "[IUTchI] Def 3.1 (c)",
+   "paper": "l is prime to the orders of the q-parameters at V^bad.",
+   "code": "Was: l | ord_v(q_v) was a warning in the validator, so `iut pipeline --abc 1 2187 2188 --l 7` printed ✗ at (c) and still ended with 0 problems. Now it is an error and the pipeline counts it.",
+   "where": "iut_core.c: iut_validate_data",
+   "plan": "Done in this change."
+  },
+  {
+   "id": "HodgeTheatersAreBookkeeping",
+   "stage": 2,
+   "status": "open",
+   "title": "Hodge theaters are records of labels and copy numbers",
+   "ref": "[IUTchI] §3–§6; [EtTh]; [FrdI], [FrdII]; [AbsTopIII]",
+   "paper": "Categories: tempered Frobenioids F̲_v, their base categories D_v = B^temp(Π_v)^0, global Frobenioids F^⊛_mod, poly-isomorphisms as sets of isomorphisms, bridges as poly-morphisms of capsules.",
+   "code": "A prime-strip is, per v, a tuple of copy numbers (Π_v, G_v, O×) and a list of valuations; a bridge is a flag; a poly-isomorphism is a flag `full_poly_isomorphism` and, in iut_i.c, a count.",
+   "where": "iut_core.c: iut_prime_strip_build, iut_hodge_theater_new; iut_i.c",
+   "plan": "Open, and by design of the data model (docs/DATA_MODEL.md §8). A first real step: represent Π_v at v ∈ V^bad by generators of the tempered fundamental group of the Tate curve and G_v by its (p, e, f) invariants, so that an isomorphism of prime-strips is an actual map."
+  },
+  {
+   "id": "GlobalNumberFieldElements",
+   "stage": 2,
+   "status": "open",
+   "title": "No element of F_mod^× or κ-coric function is ever written down",
+   "ref": "[IUTchI] Ex 5.1, Def 5.2; Rem 3.1.7",
+   "paper": "The monoid M^⊛_mod = F_mod^×, the κ-coric rational functions on C_K and their values at the strictly critical points, which give the NF-bridge its content.",
+   "code": "Pseudo-monoids are described by name and by Kummer-ready/Kummer-blind flags; the κ-coric check takes a caller-supplied description of a function.",
+   "where": "iut_i.c: iut_pseudo_monoid_get, iut_kappa_coric_check",
+   "plan": "Open. For F_mod = Q a rational-function type with exact coefficients would do; the global Kummer theory of Prop 3.10 then becomes a statement about real elements."
+  },
+  {
+   "id": "ThetaValuesOrdersOnly",
+   "stage": 3,
+   "status": "approximate",
+   "title": "Theta values are orders and units of q^{j²}, not values of the theta function",
+   "ref": "[IUTchII] Cor 2.5, 2.6, 3.5; [EtTh] Prop 1.4",
+   "paper": "The étale theta function Θ̲_v evaluated at the l-torsion points labelled j gives q̲_v^{j²} = (q_v^{1/2l})^{j²} up to μ_2l, an element of K_v.",
+   "code": "The order j²·ord(q_v)/2l is exact, and the unit of q_v^{j²} is computed mod p^8 from the Tate parameter. The 2l-th root q̲_v and the theta series itself are not computed.",
+   "where": "iut_pipeline.c: stage 3; iut_input.c: iut_tate_unit_pow; iut_ops_iv.c: iut_gap_theta_value",
+   "plan": "Prepared: iut_gap_theta_value is the placeholder. Extracting the 2l-th root needs K_v (gap LocalFieldsOfK); once K_v = F_v(ζ_l, q^{1/l}) is represented, q̲ is a uniformizer power times a unit by Hensel, and the series Σ (−1)^n q^{(n²+n)/2}(U^{2n+1}) can be summed to the same p-adic precision."
+  },
+  {
+   "id": "LogShellFromBounds",
+   "stage": 4,
+   "status": "approximate",
+   "title": "The log-shell I_v is given by an inner radius and a model log-volume",
+   "ref": "[IUTchIII] Def 1.1, Prop 1.2; [AbsTopIII] Def 5.4 (iii); [IUTchIV] Prop 1.2, 1.4 (ii)",
+   "paper": "I_v = (p*_v)^{−1}·log(O×_{K_v}) ⊆ K_v, a specific compact Z_p-module, with μ_log(I_v) = log p* − (1/e + m/(ef)) log p; at an archimedean v, the closed disc of radius π.",
+   "code": "The radius printed is that of the largest p^λ·O_v the series argument puts inside I_v; μ_log uses the lower bounds for e and m. The archimedean log-volume is set to 0.",
+   "where": "iut_lattice.c: iut_apply_log_link; iut_ops_iii.c: iut_log_shell_make; iut_core.c: iut_log_shell_volume",
+   "plan": "Follows from LocalFieldsOfK: with the true (e, f, m) the formula is exact. The archimedean term log π per factor is carried in the hull bound (Step (vii)) and should be shown on the shell as well."
+  },
+  {
+   "id": "LogLinkMovesNoElements",
+   "stage": 4,
+   "status": "open",
+   "title": "The log-link relabels copies; no element goes through a logarithm",
+   "ref": "[IUTchIII] Def 1.1 (iii), Prop 1.2 (iii), (iv), Prop 3.5",
+   "paper": "log_v: O×_{†v} → †K_v, whose image becomes the additive module of the next copy ‡; the log-Kummer correspondence follows elements up the column and is only upper semi-compatible.",
+   "code": "The link copies Π_v and G_v, gives the units a new copy number and attaches the log-shells. Upper semi-compatibility is a table of three cases.",
+   "where": "iut_lattice.c: iut_apply_log_link; iut_ops_iii.c: iut_log_link_strip, iut_upper_semi_compatibility",
+   "plan": "Open. With p-adic units to precision p^8 (already used for the Tate unit) the p-adic logarithm of a unit is a few lines; the first use would be to show log(q-unit) inside I_v at each v ∈ V^bad."
+  },
+  {
+   "id": "HullBoundWasLeadingTerm",
+   "stage": 5,
+   "status": "fixed",
+   "title": "The upper bound for −|log Θ| was the two leading terms only",
+   "ref": "[IUTchIV] Thm 1.10, proof, Steps (iv)–(viii)",
+   "paper": "For each v_Q the procession-normalized bound of Step (v) (distinguished), (vi) (unramified: 0) or (vii) (archimedean: ((l+5)/4) log π), summed over v_Q.",
+   "code": "Was: ((l+5)/4)·log d^K − ((l+1)/24)·log q with an estimated log d^K, called an upper bound and used for the verdict. Now iut_hull_bound_compute follows Steps (v)–(vii) place by place with every term, checks that the result is below the C_Θ of the statement, and the verdict rests on it.",
+   "where": "iut_ops_iv.c: iut_hull_bound_compute; iut_lattice.c: iut_multiradial_build",
+   "plan": "Done in this change. What remains is in the two entries below."
+  },
+  {
+   "id": "CorThreeTwelveIsAnInput",
+   "stage": 5,
+   "status": "asserted",
+   "title": "Cor 3.12 is used, not verified",
+   "ref": "[IUTchIII] Thm 3.11, Cor 3.12",
+   "paper": "−|log Θ| ≥ −|log q|: the hull of all possible images of the Θ-pilot, in the multiradial representation and subject to (Ind1)–(Ind3), contains a region of the log-volume of the q-pilot.",
+   "code": "The toolkit computes an upper bound B for −|log Θ| and reports whether the consequence B ≥ −|log q| is consistent with the data. It cannot test the inequality itself, and it used to print it with a ✓ as if it had.",
+   "where": "iut_lattice.c: iut_multiradial_build; iut_ops_iii.c: iut_cor312_steps; iut_pipeline.c: stage 5",
+   "plan": "The wording is fixed in this change. The statement itself is disputed in the literature (Scholze–Stix 2018; the 2026 Lean work), and no computation here bears on that."
+  },
+  {
+   "id": "IndeterminaciesAreCounted",
+   "stage": 5,
+   "status": "open",
+   "title": "(Ind1)–(Ind3) are counted and named, their effect on a region is not computed",
+   "ref": "[IUTchIII] Thm 3.11 (i), (ii); Prop 3.2, 3.5; [IUTchIV] Prop 1.2, 1.5",
+   "paper": "(Ind1) automorphisms of the procession of D⊢-prime-strips, (Ind2) Ism acting on each direct summand of each tensor packet, (Ind3) upper semi-compatibility; the hull is that of the union of the images under all of them.",
+   "code": "(Ind1) is the number Π(j+1)!, (Ind2) the number of direct summands, (Ind3) a flag. The union and its hull are replaced by the container of Prop 1.2 (ii) / 1.4 (iii) as in the proof.",
+   "where": "iut_ops_iii.c: iut_multiradial_full_build; iut_ops_iv.c: iut_hull_bound_compute, iut_gap_hull_exact",
+   "plan": "Prepared: iut_gap_hull_exact is the placeholder for the exact log-volume. It needs the tensor packets as actual Z_p-lattices; with LocalFieldsOfK closed, a packet at an unramified p is a free Z_p-module with an explicit basis and the action of Ism is a group of matrices."
+  },
+  {
+   "id": "DifferentSupport",
+   "stage": 5,
+   "status": "open",
+   "title": "The support of the different of F_tpd is not in the data model",
+   "ref": "[IUTchIV] Thm 1.10, proof, Step (iii), (D4)–(D7)",
+   "paper": "V^dst_Q contains every prime under Supp(d^{F_tpd}); each such prime contributes log p + (l+5)·l*_mod to the bound.",
+   "code": "Only the total log d^{F_tpd} is stored. When it is not 0 the hull bound adds ((l+5)/4)·log d^{F_tpd} without those per-prime terms and marks itself incomplete. For the Frey curves F_tpd = Q and nothing is missing.",
+   "where": "iut_ops_iv.c: iut_hull_bound_compute",
+   "plan": "Open; goes with GeneratorsFreyOnly: store the ramified primes of F_tpd with their exponents next to dmod."
+  },
+  {
+   "id": "ThmOneTenHypotheses",
+   "stage": 6,
+   "status": "fixed",
+   "title": "The hypotheses of Thm 1.10 were not looked at, and its f^F counted the wrong places",
+   "ref": "[IUTchIV] Thm 1.10",
+   "paper": "E has good reduction at every v ∈ V(F)^good not dividing 2l; F = F_mod(√−1, E[2·3·5]), hence l ≥ 7; f^F has the support of the q-divisor, V^bad_mod.",
+   "code": "Was: the inequality was evaluated for any data, and log f^{F_tpd} included a bad place over 2 (so `--abc 1 8 9` used log 6 where the theorem has log 3). Now the three hypotheses are reported, the verdict line says when the theorem does not apply, and f^F is summed over V^bad_mod.",
+   "where": "iut_ops_iv.c: iut_thm110_compute, iut_cor22_compute",
+   "plan": "Done in this change."
+  },
+  {
+   "id": "InexplicitConstants",
+   "stage": 6,
+   "status": "asserted",
+   "title": "η_prm, ξ_prm, H_unif, C_K, H_K are not given by the papers",
+   "ref": "[IUTchIV] Prop 1.6, Prop 2.1 (ii), Cor 2.2 (ii); [ExpEst] §1",
+   "paper": "[IUTchIV] only says that η_prm and ξ_prm ≥ 5 exist, and that H_unif, C_K, H_K exist for a compactly bounded subset; the exceptional set Exc_d is finite but not listed.",
+   "code": "η_prm = 5·10^20 is borrowed from [ExpEst] (where it serves a sharper form of the prime number theorem); ξ_prm is used only through ξ_prm ≥ 5; Exc is tested by the two conditions the proof makes explicit; C_K is the constant of Thm 1.10 with e_mod = 1.",
+   "where": "iut_ops.h: IUT_ETA_PRM_VALUE; iut_ops_iv.c: iut_cor22_compute",
+   "plan": "Open. For the 4/3 form of Prop 1.6 a far smaller η_prm is admissible (Rosser–Schoenfeld), which would shrink the constant of Thm 1.10 by many orders of magnitude; it needs a citation checked before it goes in."
+  },
+  {
+   "id": "ExplicitEstimatesNotImplemented",
+   "stage": 6,
+   "status": "open",
+   "title": "The explicit abc inequality of [ExpEst] is not in the toolkit",
+   "ref": "[ExpEst] Thm A, Thm B, Cor C",
+   "paper": "An explicit ε-version of abc and its consequences (e.g. the Fermat exponent bound), with the modified constants of [ExpEst] §1 and the case p = 2 handled by μ_6-initial Θ-data.",
+   "code": "Nothing beyond the constant η_prm. The pipeline ends at [IUTchIV] Thm 1.10 and the conditions of Cor 2.2.",
+   "where": "iut_ops_iv.c: iut_gap_explicit_abc",
+   "plan": "Prepared: iut_gap_explicit_abc is the placeholder. The estimates of [ExpEst] §5 are elementary once the hull bound exists per place, which it now does."
+  },
+  {
+   "id": "ReductionToGeneralPosition",
+   "stage": 6,
+   "status": "open",
+   "title": "From compactly bounded subsets to all curves: not modelled",
+   "ref": "[IUTchIV] Cor 2.2 (i), Cor 2.3; [GenEll] Thm 2.1",
+   "paper": "Cor 2.3 obtains Vojta/abc for all hyperbolic curves from Cor 2.2 through [GenEll] (Belyi maps, compactly bounded subsets, bounded discrepancy classes).",
+   "code": "iut_cor23_bound evaluates the slack of one inequality; there is no notion of a compactly bounded subset or of ≈.",
+   "where": "iut_ops_iv.c: iut_cor23_bound",
+   "plan": "Open. Not needed to run one curve through the theory; needed to state what the run proves."
+  },
+  {
+   "id": "CrossCheckIsShallow",
+   "stage": 7,
+   "status": "open",
+   "title": "The cross-check compares four numbers, for JSON data only",
+   "ref": "—",
+   "paper": "—",
+   "code": "log q, |log q|, log f and ht are compared with the values stored in the JSON file. Generated data has no independent check, and nothing else in the pipeline is recomputed a second way.",
+   "where": "iut_pipeline.c: stage 7",
+   "plan": "Prepared: the hull bound now gives a second check (C_Θ place by place must lie below the C_Θ of the statement), which the pipeline counts. Next: recompute ord_v(q_v) from the j-invariant in C for `--abc` data."
+  },
+  {
+   "id": "ManualUsesAJavaScriptPort",
+   "stage": -1,
+   "status": "open",
+   "title": "The manual is built from a second implementation in JavaScript",
+   "ref": "scripts/manual/lib/iut.js, ops.js",
+   "paper": "—",
+   "code": "docs/IUT_MANUAL.pdf is produced by scripts/manual, which carries its own JavaScript copy of the data model and of the operations. The web app and the GUI run the C code; the manual does not, so a fix in C does not reach it.",
+   "where": "scripts/manual/lib/iut.js, scripts/manual/lib/ops.js",
+   "plan": "Prepared: the fixes of this change are listed in docs/gaps/GAP_REPORT.md §5 for porting. Better: make the manual read `iut … --json` (as the guides and articles do) and delete the port."
+  },
+  {
+   "id": "ViewsDoNotShowGaps",
+   "stage": -1,
+   "status": "open",
+   "title": "The GUI and the TUI do not show the gap list or the hull table",
+   "ref": "—",
+   "paper": "—",
+   "code": "`iut pipeline` (text and JSON) and the web app's Pipeline view show both. iut-gui draws stage 5 from the older fields and has no gap panel; the TUI has no screen for either.",
+   "where": "src/gui/gui_draw.c, src/iut_tui.c",
+   "plan": "Open. The data is in iut_hull_bound and iut_gaps[]; each needs one more page."
+  },
+  {
+   "id": "LeanNotInSync",
+   "stage": -1,
+   "status": "open",
+   "title": "The Lean mirror of the data types does not have the new fields",
+   "ref": "lean/",
+   "paper": "—",
+   "code": "lean/ mirrors the structs of iut.h as of an earlier state: no m_K, no h_F_contains_five_torsion, the old rule for V^bad_mod.",
+   "where": "lean/",
+   "plan": "Open."
+  },
+  {
+   "id": "PrerequisitePapers",
+   "stage": -1,
+   "status": "open",
+   "title": "The prerequisite papers have no operations layer",
+   "ref": "pdf/: [EtTh], [AbsTopIII], [FrdI], [FrdII], [GenEll], [SemiAnbd], …",
+   "paper": "The étale theta function and its rigidities ([EtTh]), mono-anabelian reconstruction ([AbsTopIII]), Frobenioids ([FrdI], [FrdII]), general position ([GenEll]).",
+   "code": "Their results appear as named facts and flags (cyclotomic rigidity kinds, reconstruction steps of Cor 1.2, tempered facts); none of their constructions is run.",
+   "where": "iut_i.c, iut_ops_ii.c; iut_ops_iv.c: iut_gap_reconstruct",
+   "plan": "Prepared: iut_gap_reconstruct is the placeholder for a reconstruction algorithm run on a concrete profinite/tempered group. The two guides (anabelian_guide.pdf, multiradial_guide.pdf) describe the algorithms step by step and are the specification to code against."
   }
  ]
 }

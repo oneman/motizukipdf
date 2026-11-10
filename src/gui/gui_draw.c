@@ -4,6 +4,9 @@
  * holds the very structs the C library built; nothing here computes mathematics of its own beyond
  * scaling bars.
  *
+ * IUT_GAP("ViewsDoNotShowGaps"): stage 5 is drawn from the leading-term fields; the hull table
+ * (iut_hull_bound) and the list of placeholders (iut_gaps[]) have no page here yet.
+ *
  * Colours follow the web app (htdocs/js/draw.js): blue = étale-like, orange = Frobenius-like / bad places,
  * violet = holomorphic / archimedean, teal = mono-analytic, green = went through, red = failed.
  */
@@ -372,7 +375,7 @@ static double draw_def(cairo_t *cr, double W, const gm_model *m)
         tx(cr, x + 56, rowy + 8, 13, TX_BOLD, INK, it->item);
         txw(cr, x + 56, rowy + 8 + 18, 12.5, 0, INK, cw - 70, it->condition);
         txw(cr, x + 56, rowy + 8 + 18 + h1 + 6, 11.5, TX_ITALIC, INK2, cw - 70, it->detail);
-        tx(cr, x + cw - 12, rowy + 9, 10, TX_RIGHT | TX_BOLD, it->machine_checked ? BLUE : INK3, it->machine_checked ? "MACHINE-CHECKED" : "ASSERTED");
+        tx(cr, x + cw - 12, rowy + 9, 10, TX_RIGHT | TX_BOLD, it->machine_checked ? BLUE : INK3, it->machine_checked == 2 ? "PARTLY CHECKED" : it->machine_checked ? "MACHINE-CHECKED" : "ASSERTED");
     }
     y = rowy + rowh + 20;
     y += heading(cr, 20, y, W - 40, "validation of the initial Θ-data", "iut validate");

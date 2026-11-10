@@ -2,10 +2,10 @@
 #
 #   make            build ./iut (ncurses TUI if available, otherwise text-only)
 #   make test       run the self-tests and the web-engine tests (node, against the wasm build in htdocs/engine)
-#   make gen        regenerate docs/IDENTIFIERS.md (from src/iut_ids.c), docs/PROCESSES.md (from src/iut_proc.c)
+#   make gen        regenerate docs/IDENTIFIERS.md (from src/iut_ids.c), docs/PROCESSES.md (from src/iut_proc.c), docs/GAPS.md (from src/iut_gaps.c)
 #                   and htdocs/data/types.js (the struct forms, from the headers)
 #   make engine     recompile src/ to WebAssembly → htdocs/engine/iut.wasm.js (needs clang + wasi-libc, see scripts/web/build-engine.sh)
-#   make check      verify that the generated files are in sync with the C sources
+#   make check      verify that the generated files are in sync with the C sources, and that the IUT_GAP("Id") marks match src/iut_gaps.c
 #   make gui        build ./iut-gui, the graphical pipeline program (GTK 3 + Cairo, needs libgtk-3-dev / gtk+3)
 #   make gui-check  build it and run `iut-gui --check` (headless: every example through every stage, compared with `iut pipeline`)
 #   make clean
@@ -35,7 +35,7 @@ ifeq ($(strip $(CURSES_LIBS)),)
 endif
 
 SRC = iut_ids.c iut_core.c iut_lattice.c iut_json.c iut_view.c iut_main.c iut_tui.c iut_input.c iut_pipeline.c \
-      iut_i.c iut_ops_i.c iut_ops_ii.c iut_ops_iii.c iut_ops_iv.c iut_ops_logic.c iut_proc.c iut_test_ops.c
+      iut_i.c iut_ops_i.c iut_ops_ii.c iut_ops_iii.c iut_ops_iv.c iut_ops_logic.c iut_proc.c iut_test_ops.c iut_gaps.c
 OBJ = $(SRC:.c=.o)
 
 all: iut
@@ -53,6 +53,7 @@ test: iut
 gen: iut
 	./iut ids --md > ../docs/IDENTIFIERS.md
 	./iut procs --md > ../docs/PROCESSES.md
+	./iut gaps --md > ../docs/GAPS.md
 	node ../scripts/web/gen-types.js
 
 engine:
@@ -81,6 +82,8 @@ gui-check: iut-gui
 check: iut
 	@./iut ids --md | diff -q - ../docs/IDENTIFIERS.md && echo "docs/IDENTIFIERS.md in sync"
 	@./iut procs --md | diff -q - ../docs/PROCESSES.md && echo "docs/PROCESSES.md in sync"
+	@./iut gaps --md | diff -q - ../docs/GAPS.md && echo "docs/GAPS.md in sync"
+	@../scripts/check-gaps.sh
 	@node ../scripts/web/gen-types.js --check && echo "htdocs/data/types.js in sync"
 
 clean:

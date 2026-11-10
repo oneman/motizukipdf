@@ -38,15 +38,16 @@ void iut_json_data(FILE *f, const iut_initial_theta_data *d)
     fprintf(f, ",\n  \"logQ\": "); jnum(f, iut_log_q(d));
     fprintf(f, ", \"AbsLogQ\": "); jnum(f, d->l ? iut_log_q(d) / (2.0 * d->l) : 0);
     fprintf(f, ", \"logF\": "); jnum(f, iut_log_cond(d));
+    fprintf(f, ", \"logFBad\": "); jnum(f, iut_log_cond_bad(d));   /* the f of [IUTchIV] Thm 1.10: over V^bad_mod only */
     fprintf(f, ", \"HtE\": "); jnum(f, iut_height_from_q(d));
-    fprintf(f, ",\n  \"hypotheses\": {\"FGaloisOverFmod\": %s, \"FContainsSixTorsion\": %s, \"ImageContainsSLTwo\": %s, \"StableReduction\": %s, \"CKIsKCore\": %s},\n",
+    fprintf(f, ",\n  \"hypotheses\": {\"FGaloisOverFmod\": %s, \"FContainsSixTorsion\": %s, \"ImageContainsSLTwo\": %s, \"StableReduction\": %s, \"CKIsKCore\": %s, \"FContainsFiveTorsion\": %s},\n",
             d->h_F_galois_over_Fmod ? "true" : "false", d->h_F_contains_six_torsion ? "true" : "false", d->h_image_contains_SL2 ? "true" : "false",
-            d->h_stable_reduction ? "true" : "false", d->h_CK_is_K_core ? "true" : "false");
+            d->h_stable_reduction ? "true" : "false", d->h_CK_is_K_core ? "true" : "false", d->h_F_contains_five_torsion ? "true" : "false");
     fprintf(f, "  \"VSet\": [\n");
     for (unsigned i = 0; i < d->nV; ++i) {
         const iut_valuation *v = &d->V[i];
-        fprintf(f, "    {\"name\": \"%s\", \"kind\": \"%s\", \"p\": %u, \"eMod\": %u, \"fMod\": %u, \"eK\": %u, \"eKIsLowerBound\": %s, \"fK\": %u, \"reduction\": \"%s\", \"ordQ\": %u, \"inVBadMod\": %s",
-                v->name, v->kind == IUT_V_ARCH ? "VArc" : "VNon", v->p, v->e_mod, v->f_mod, v->e_K, v->e_K_lower ? "true" : "false", v->f_K,
+        fprintf(f, "    {\"name\": \"%s\", \"kind\": \"%s\", \"p\": %u, \"eMod\": %u, \"fMod\": %u, \"eK\": %u, \"eKIsLowerBound\": %s, \"fK\": %u, \"mK\": %u, \"reduction\": \"%s\", \"ordQ\": %u, \"inVBadMod\": %s",
+                v->name, v->kind == IUT_V_ARCH ? "VArc" : "VNon", v->p, v->e_mod, v->f_mod, v->e_K, v->e_K_lower ? "true" : "false", v->f_K, v->m_K,
                 v->red == IUT_RED_GOOD ? "good" : v->red == IUT_RED_BAD_MULT ? "badMultiplicative" : "badAdditive",
                 v->ordq, v->in_Vbad_mod ? "true" : "false");
         if (v->q_prec) fprintf(f, ", \"qUnit\": \"%llu\", \"qPrecision\": %u", v->q_unit, v->q_prec);   /* q_v = p^ordQ·u, u ≡ qUnit mod p^qPrecision */

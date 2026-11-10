@@ -135,7 +135,10 @@ void iut_thm110_compute(const iut_initial_theta_data *d, iut_thm110 *out)
      *   log d^F + log f^F ≤ log d^Ftpd + log f^Ftpd + 21;  log d^K ≤ log d^Ftpd + log f^Ftpd + 2 log l + 21. */
     memset(out, 0, sizeof *out);
     out->logq = iut_log_q(d); out->abs_logq = out->logq / (2.0 * d->l);
-    out->logd_tpd = d->logdF; out->logf_tpd = iut_log_cond(d);
+    /* f^{F}: "the effective arithmetic divisor whose support coincides with Supp(q^F_ADiv), but all of whose
+     * coefficients are equal to 1": summed over V^bad_mod only, like log q.  A bad place over 2 or over l is
+     * not in it (it used to be counted here through iut_log_cond).                                           */
+    out->logd_tpd = d->logdF; out->logf_tpd = iut_log_cond_bad(d);
     out->logdF_plus_logfF_bound = out->logd_tpd + out->logf_tpd + 21.0;
     out->logdK_bound = out->logd_tpd + out->logf_tpd + 2.0 * log((double)d->l) + 21.0;
     out->logfK_bound = out->logf_tpd;
@@ -149,6 +152,134 @@ void iut_thm110_compute(const iut_initial_theta_data *d, iut_thm110 *out)
     out->rhs = out->main_term + out->const_term;
     out->constant_dominates = out->const_term >= out->lhs;
     out->inequality_holds = out->lhs <= out->rhs;
+    /* hypotheses of the statement that Def 3.1 does not already contain */
+    out->hyp_l_not_five = d->l >= 7;
+    out->hyp_good_away_from_2l = 1;
+    for (unsigned i = 0; i < d->nV; ++i) {
+        const iut_valuation *v = &d->V[i];
+        if (v->kind != IUT_V_NONARCH || v->red == IUT_RED_GOOD || v->in_Vbad_mod) continue;
+        if (v->p != 2 && v->p != d->l) out->hyp_good_away_from_2l = 0;      /* bad, outside V^bad_mod, and not over 2l */
+    }
+    IUT_GAP("AssertedHypotheses");
+    out->hyp_F_is_tripod_extension = d->h_F_contains_six_torsion && d->h_F_contains_five_torsion;
+    out->hypotheses_ok = out->hyp_l_not_five && out->hyp_good_away_from_2l && out->hyp_F_is_tripod_extension;
+}
+
+/* ------------------------------------------ Thm 1.10, proof, Steps (iv)–(viii) */
+void iut_hull_bound_compute(const iut_initial_theta_data *d, iut_hull_bound *out)
+{
+    /* The proof of [IUTchIV] Thm 1.10 bounds −|log(Θ)| one v_Q ∈ V_Q at a time and then sums:
+     *
+     *  Step (v), v_Q ∈ V^dst_Q.  With I = S^±_{j+1}, λ = ord(q̲^{j²}) at V^bad and 0 elsewhere, Prop 1.4 (iii)
+     *   gives the container p^{λ−d_I−a_I−b_I}·(R_I)~ of log-volume ≤ (−λ + d_I + 1) log p + Σ_{I*}(3 + log e_i);
+     *   by (R4), e_i > p − 2 forces p ≤ e*_mod·l and log e_i ≤ −3 + 4 l*_mod.  Weighted average over the
+     *   collections {v_i} (Prop 1.7), then the average over j = 1..l* ((E1), (E2)):
+     *        ((l*+3)/2)·log(d^K_vQ) − ((2l*+1)(l*+1)/12l)·log(q_vQ) + log(s^Q_vQ) + 2(l*+3)·l*_mod·log(s^≤_vQ)
+     *      = ((l+5)/4)·log(d^K_vQ) − ((l+1)/24)·log(q_vQ) + log(s^Q_vQ) + (l+5)·l*_mod·log(s^≤_vQ).
+     *  Step (vi), v_Q nonarchimedean and not distinguished: Prop 1.4 (iv), the container is (R_I)~: 0.
+     *  Step (vii), v_Q archimedean: Prop 1.5, the container is π^{j+1}·B_I: (j+1) log π, average ((l+5)/4) log π.
+     *
+     * V^dst_Q = the primes that ramify in K = those dividing 2·3·5·l or under Supp(q + d)  ((D4)–(D7)).
+     * log(s^Q_vQ) = log p (e = 1 over Q); log(s^≤_vQ) = ι_vQ = 1 iff p ≤ e*_mod·l.
+     *
+     * log(d^K_vQ) is not known exactly (gap LocalFieldsOfK); the proof's own bounds are used, place by place
+     * (Step (ii); Prop 1.3 (i), (ii)):
+     *    p ∤ 2·3·5·l, p ∈ Supp(q):  K/F_tpd tame            log d^K_vQ ≤ log d^Ftpd_vQ + log f^Ftpd_vQ
+     *    p | 2·3·5:  Gal(F/F_tpd) ↪ GL2(F_3)×GL2(F_5)×Z/2   … + n_p·log p,  (n_2, n_3, n_5) = (11, 3, 2)
+     *    p = l:      Gal(K/F) ↪ GL2(F_l)                    … + 2·log l
+     * (2^11·3^3·5^2 is the "21" and 2 log l the "2·log(l)" of the statement's log d^K bound.)               */
+    memset(out, 0, sizeof *out);
+    double l = d->l, lq = iut_log_q(d), dm = d->dmod ? d->dmod : 1;
+    unsigned e_mod = 1; for (unsigned i = 0; i < d->nV; ++i) if (d->V[i].kind == IUT_V_NONARCH && d->V[i].e_mod > e_mod) e_mod = d->V[i].e_mod;
+    double estar_l = 4096.0 * 27.0 * 5.0 * e_mod * l;
+    out->lstar_mod = log(estar_l);
+    out->abs_logq = lq / (2.0 * l);
+    double cD = (l + 5.0) / 4.0, cQ = (l + 1.0) / 24.0, cI = (l + 5.0) * out->lstar_mod;
+    /* the primes to list: 2, 3, 5, l, then every nonarchimedean member of V */
+    unsigned ps[IUT_MAX_V + 6], np = 0;
+    unsigned fixed[] = { 2, 3, 5, d->l };
+    for (unsigned k = 0; k < 4; ++k) { int seen = 0; for (unsigned q = 0; q < np; ++q) if (ps[q] == fixed[k]) seen = 1; if (!seen && fixed[k]) ps[np++] = fixed[k]; }
+    for (unsigned i = 0; i < d->nV; ++i) {
+        if (d->V[i].kind != IUT_V_NONARCH) continue;
+        int seen = 0; for (unsigned q = 0; q < np; ++q) if (ps[q] == d->V[i].p) seen = 1;
+        if (!seen && np < IUT_MAX_V + 4) ps[np++] = d->V[i].p;
+    }
+    for (unsigned a = 0; a + 1 < np; ++a) for (unsigned b = a + 1; b < np; ++b) if (ps[b] < ps[a]) { unsigned t = ps[a]; ps[a] = ps[b]; ps[b] = t; }
+    double sumD = 0, sumS = 0, sumI = 0;
+    for (unsigned k = 0; k < np; ++k) {
+        iut_hull_row *R = &out->row[out->nrows++];
+        unsigned p = ps[k]; double lp = log((double)p);
+        R->p = p;
+        int small = (p == 2 || p == 3 || p == 5), isl = (p == d->l), inq = 0, badmult = 0;
+        double lqv = 0, lfv = 0;
+        for (unsigned i = 0; i < d->nV; ++i) {
+            const iut_valuation *v = &d->V[i];
+            if (v->kind != IUT_V_NONARCH || v->p != p) continue;
+            if (v->red == IUT_RED_BAD_MULT) badmult = 1;
+            if (v->in_Vbad_mod) { inq = 1; lqv += (double)v->ordq * (v->f_mod ? v->f_mod : 1) * lp / dm; lfv += (double)(v->f_mod ? v->f_mod : 1) * lp / dm; }
+        }
+        if (!small && !isl && !inq) { R->kind = 1; R->why = "unramified in K"; R->logdK_src = "Prop 1.4 (iv)"; continue; }   /* Step (vi): 0 */
+        R->kind = 0; R->logq = lqv; R->logs = lp;
+        R->iota = (double)p <= estar_l;
+        double D = lfv;                                   /* tame part at Supp(q): ≤ log f^Ftpd_vQ */
+        if (p == 2)      { D += 11.0 * lp; if (badmult) D += lp; R->logdK_src = badmult ? "Step (ii): 11 log 2, + log 2 (tame, bad over 2)" : "Step (ii): 11 log 2"; }
+        else if (p == 3) { D += 3.0 * lp; R->logdK_src = inq ? "Step (ii): 3 log 3 + log f" : "Step (ii): 3 log 3"; }
+        else if (p == 5) { D += 2.0 * lp; R->logdK_src = inq ? "Step (ii): 2 log 5 + log f" : "Step (ii): 2 log 5"; }
+        else if (isl)    { D += 2.0 * lp; if (badmult) D += lp; R->logdK_src = "Step (ii): 2 log l"; }
+        else             R->logdK_src = "Prop 1.3 (i): tame, ≤ log f";
+        if (isl && small) D += 2.0 * lp;                  /* l = 5 (outside Thm 1.10): both contributions */
+        R->why = small && inq ? "p | 2·3·5, Supp(q)" : small ? "p | 2·3·5" : isl ? "p = l" : "Supp(q)";
+        R->logdK = D;
+        R->bound = cD * D - cQ * lqv + lp + cI * R->iota;
+        sumD += D; sumS += lp; sumI += R->iota;
+    }
+    /* the archimedean prime */
+    { iut_hull_row *R = &out->row[out->nrows++]; R->p = 0; R->kind = 2; R->why = "archimedean"; R->logdK_src = "Prop 1.5 (iii), (iv)"; R->bound = cD * log(M_PI); }
+    /* the different of F_tpd: only its total log(d^Ftpd) is in the data model, not its support */
+    IUT_GAP("DifferentSupport");
+    out->unlocalized_logd = cD * d->logdF;
+    out->complete = !(d->logdF > 0);
+    double B = out->unlocalized_logd;
+    for (unsigned k = 0; k < out->nrows; ++k) B += out->row[k].bound;
+    out->total = B;
+    /* the same bound before the average over j: Σ_vQ [(j+1) D − (j²/2l) log q_vQ + log s^Q + 4(j+1) l*_mod ι] + (j+1) log π */
+    double avg = 0;
+    for (unsigned j = 1; j <= d->lstar && j < IUT_MAX_LPM; ++j) {
+        out->per_j[j] = (j + 1.0) * (sumD + d->logdF) - ((double)j * j / (2.0 * l)) * lq + sumS + 4.0 * (j + 1.0) * out->lstar_mod * sumI + (j + 1.0) * log(M_PI);
+        avg += out->per_j[j];
+    }
+    (void)avg;   /* avg / l* = B: asserted in the self-test, (E1) and (E2) */
+    out->C_theta_local = out->abs_logq > 0 ? B / out->abs_logq : INFINITY;
+    out->C_theta_formula = iut_C_theta(d, d->logdF, iut_log_cond_bad(d));
+    out->below_formula = out->C_theta_local <= out->C_theta_formula;
+    out->consequence_holds = B >= -out->abs_logq;
+}
+
+/* ----------------------------------------------- Cor 2.2, proof: the choice of l */
+unsigned iut_choose_l(const iut_initial_theta_data *d, int *in_window)
+{
+    /* [IUTchIV] Cor 2.2, proof: with h = log(q∀) and δ = 2^12·3^3·5·d, there is a prime l with
+     *   (P1) h^{1/2} ≤ l ≤ 10δ·h^{1/2}·log(2δh),  (P2) l divides no nonzero local height h_v = ord_v(q_v),
+     *   (P3) if l = p_v for a bad v, then h_v < h^{1/2}.
+     * Thm 1.10 adds l ≥ 7 (E[5] ⊆ E(F)).  The toolkit also needs l ≤ IUT_MAX_L, and a V^bad_mod that stays
+     * nonempty once the places over l are taken out.  The smallest such prime is returned (0: none in reach). */
+    double h = iut_log_q_all(d), delta = 4096.0 * 27.0 * 5.0 * (d->dmod ? d->dmod : 1);
+    if (h < 1) h = 1;
+    double lo = sqrt(h), hi = 10.0 * delta * sqrt(h) * log(2.0 * delta * h);
+    if (in_window) *in_window = 0;
+    for (unsigned l = 7; l <= IUT_MAX_L; ++l) {
+        if (!iut_is_prime(l) || (double)l < lo || (double)l > hi) continue;
+        int ok = 1, nbad = 0;
+        for (unsigned i = 0; i < d->nV; ++i) {
+            const iut_valuation *v = &d->V[i];
+            if (v->kind != IUT_V_NONARCH || v->red != IUT_RED_BAD_MULT) continue;
+            if (v->ordq && v->ordq % l == 0) ok = 0;                                 /* (P2) */
+            if (v->p == l && !((double)v->ordq < lo)) ok = 0;                        /* (P3) */
+            if (v->p % 2 == 1 && v->p != l) nbad++;
+        }
+        if (ok && nbad) { if (in_window) *in_window = 1; return l; }
+    }
+    return 0;
 }
 
 /* ------------------------------------------------- Prop 2.1, Cor 2.2, Cor 2.3 */
@@ -162,6 +293,7 @@ void iut_cor22_compute(const iut_initial_theta_data *d, iut_cor22 *out)
      *  δ = 2^12·3^3·5·d;  (C1) there is a prime l with (log q∀)^{1/2} ≤ l ≤ 10δ(log q∀)^{1/2} log(2δ log q∀);
      *  (C2) (1/6) log q ≤ (1+ε_E)(log-diff + log-cond) + C_K, ε_E = (60δ)² log(2δ log q∀)/(log q∀)^{1/2};
      *  log-diff = log d^Ftpd, log f^Ftpd ≤ log-cond ≤ log f^Ftpd + log(2l);  (1/6) log q ≈ ht_∞ ≈ ht_ω(D). */
+    IUT_GAP("InexplicitConstants");   /* η_prm, ξ_prm, C_K, Exc: see the entry */
     memset(out, 0, sizeof *out);
     out->d = d->dmod; out->delta = 4096.0 * 27.0 * 5.0 * out->d;
     out->logq_all = iut_log_q_all(d);   /* q∀: every bad multiplicative v, 2 included */
@@ -171,7 +303,7 @@ void iut_cor22_compute(const iut_initial_theta_data *d, iut_cor22 *out)
     out->l_in_range = d->l >= out->l_min && d->l <= out->l_max;
     out->eps_E = (60.0 * out->delta) * (60.0 * out->delta) * log(2.0 * out->delta * lq) / sqrt(lq);
     out->logdiff = d->logdF;
-    out->logcond_lo = iut_log_cond(d); out->logcond_hi = out->logcond_lo + log(2.0 * d->l);
+    out->logcond_lo = iut_log_cond_bad(d); out->logcond_hi = out->logcond_lo + log(2.0 * d->l);   /* log f^Ftpd ≤ log-cond ≤ log f^Ftpd + log(2l) */
     out->C_K = 20.0 * (4096.0 * 27.0 * 5.0 * d->l + IUT_ETA_PRM_VALUE);   /* the constant swallowed into C_K: 20(e*_mod l + η_prm) with e_mod = 1 */
     out->lhs = out->logq_all / 6.0;
     out->rhs = (1.0 + out->eps_E) * (out->logdiff + out->logcond_lo) + out->C_K;
@@ -184,7 +316,7 @@ void iut_cor22_compute(const iut_initial_theta_data *d, iut_cor22 *out)
     out->eps_small = out->eps_E <= 1.0; out->s1_ok = out->sqrt_h >= out->s1_threshold;
     out->in_exceptional_set = !(out->eps_small && out->s1_ok);
 }
-double iut_cor23_bound(double ht, double logdiff, double logcond, double eps, double C) { return (1.0 + eps) * (logdiff + logcond) + C - ht; }
+double iut_cor23_bound(double ht, double logdiff, double logcond, double eps, double C) { IUT_GAP("ReductionToGeneralPosition"); return (1.0 + eps) * (logdiff + logcond) + C - ht; }
 
 /* ------------------------------------------------------------------ §3 */
 int iut_species_find(const char *id) { for (size_t i = 0; i < iut_species_count; ++i) if (!strcmp(iut_species_table[i].id, id)) return (int)i; return -1; }

@@ -60,6 +60,8 @@ make test       # C self-tests (model + operations layer) + node tests of the we
 ./iut run --all --example 2                  # run all 73 processes (exit code = number of failures)
 ./iut pipeline --theta-json ../docs/initial-theta-data/frey-1-8-9.json   # the whole theory on exact Θ-data,
                                              # stage by stage (docs/PIPELINE.md); add --json for JSON
+./iut gaps                                   # the gap registry: what is a placeholder, per stage
+                                             # (docs/GAPS.md, docs/gaps/GAP_REPORT.md); --md, --json, or an id
 ./iut tui      --example 3                   # interactive ncurses UI
 make gui && ./iut-gui                        # the graphical pipeline program (GTK 3), see below
 ```

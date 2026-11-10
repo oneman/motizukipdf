@@ -42,7 +42,8 @@
       D.text(c, s.ref, x + (w - 8) / 2, 53, { size: 8, color: P.ink3, maxWidth: w - 18 });
       if (i < n - 1) D.text(c, '→', x + w - 5, 35, { size: 12, color: P.ink3 });
     });
-    D.text(c, P0.problems ? P0.problems + ' problem(s)' : 'the pipeline went through: 0 problems', W / 2, H - 6, { size: 10.5, color: P0.problems ? P.red : P.green });
+    var np = (P0.gaps || []).filter(function (x) { return x.status !== 'fixed'; }).length;
+    D.text(c, P0.problems ? P0.problems + ' problem(s)' : 'every check that is implemented passed: 0 problems' + (np ? '; ' + np + ' placeholders stand in for parts of the theory' : ''), W / 2, H - 6, { size: 10.5, color: P0.problems ? P.red : P.green });
   }
 
   /* Gaussian monoid at one v: bars of ord(q̲_v^{j²}) = j²·ord(q_v)/2l */
@@ -73,11 +74,24 @@
     });
   }
 
+  /* the placeholders of the gap registry (src/iut_gaps.c) that belong to one stage; stage −1 = outside the stages */
+  var GAPCLS = { open: 'red', approximate: 'orange', asserted: 'violet', fixed: 'teal' };
+  function gapList(P0, n) {
+    var gs = (P0.gaps || []).filter(function (x) { return x.stage === n && x.status !== 'fixed'; });
+    if (!gs.length) return null;
+    var box = el('details', { class: 'gaps', style: 'margin-top:10px' }, [el('summary', { class: 'small', html: '<b>' + gs.length + ' placeholder' + (gs.length > 1 ? 's' : '') + '</b> in this stage: ' + gs.map(function (x) { return '<span class="chip ' + (GAPCLS[x.status] || '') + '">' + esc(x.status) + '</span> ' + esc(x.id); }).join(' &nbsp; ') })]);
+    box.appendChild(U.table(['gap', 'the papers', 'the toolkit', 'next step'], gs.map(function (x) {
+      return ['<b>' + esc(x.id) + '</b><br><span class="small muted">' + esc(x.title) + '<br>' + esc(x.ref) + '</span>', esc(x.paper), esc(x.code) + '<br><span class="small muted">' + esc(x.where) + '</span>', esc(x.plan)];
+    })));
+    return box;
+  }
+
   function section(stage, body) {
     var s = STAGES.filter(function (x) { return x.k === stage; })[0];
     var card = el('div', { class: 'card', id: 'pipeline-' + stage, style: 'margin-top:16px' });
     card.appendChild(el('h3', {}, [el('span', { text: 'stage ' + s.n + ' — ' + s.t }), el('span', { class: 'ref', text: s.ref })]));
     body.forEach(function (b) { if (b) card.appendChild(b); });
+    if (section.P0) { var gl = gapList(section.P0, Number(s.n)); if (gl) card.appendChild(gl); }
     return card;
   }
 
@@ -97,6 +111,7 @@
     }
     var P0;
     try { P0 = M.pipeline(); } catch (e) { c.appendChild(el('div', { class: 'callout', html: '<b>the pipeline did not run:</b> ' + esc(e.message) })); return; }
+    section.P0 = P0;
     var d = P0.data, w = M.walk(), ht00 = M.hodgeTheaterAt(w, 0, 0), ht10 = M.hodgeTheaterAt(w, 1, 0), g = M.gen();
     var link = w.links.filter(function (l) { return l.species !== 'LogLink'; })[0];
     var ok = { data: true, def: P0.defThreeOne.errors === 0, ht: P0.hodgeTheater.errors === 0, gau: true, lat: P0.lattice.errors === 0,
@@ -137,14 +152,24 @@
       U.canvas(function (cv) { DG.lattice(cv, w, { focus: [0, 0], shells: true }); }),
       link && ht00 && ht10 ? U.canvas(function (cv) { DG.thetaLink(cv, ht00, ht10, link, g); }) : null,
       U.table(['v', 'p*', 'log-shell I_v', 'μ_log(I_v)', 'Π_v kept by the log-link'], L.logShells.map(function (s) { return [s.v, s.pstar ? String(s.pstar) : '—', s.p ? 'p^{' + qf(s.radius) + '}·O_v' : 'π-disc', fmt(s.logVolume, 6), s.piShared ? '✓' : '✗']; })),
-      el('p', { class: 'small muted', text: L.vertices + ' Hodge theaters, ' + L.logLinks + ' log-links, ' + (L.thetaLink ? 1 : 0) + ' Θ-link; validator: ' + L.errors + ' error(s) in ' + L.checks + ' checks. The log-shells use e(K_v/Q_p) = 1: the JSON files do not record the local ramification of K = F(E[l]).' })
+      el('p', { class: 'small muted', text: L.vertices + ' Hodge theaters, ' + L.logLinks + ' log-links, ' + (L.thetaLink ? 1 : 0) + ' Θ-link; validator: ' + L.errors + ' error(s) in ' + L.checks + ' checks. I_v = (p*)⁻¹·log(O×) is computed from lower bounds for e(K_v/Q_p) and for the p-power roots of unity in K_v (√−1, μ_3, μ_5, μ_l and q_v^{1/2l} lie in K), so μ_log(I_v) is that of a model field, not of K_v itself.' })
     ]));
     /* 5 */
     var R = P0.multiradial;
     c.appendChild(section('mr', [
       U.canvas(function (cv) { processionBars(cv, R); }),
       U.table(['step', 'value', 'reference'], R.corThreeTwelve.steps.map(function (s) { return [esc(s.label), fmt(s.value, 6), esc(s.ref)]; })),
-      el('p', { class: 'small', html: '(Ind1) |Aut(Prc)| = ' + R.ind1 + ', (Ind2) Ism on ' + R.ind2Summands + ' summands, (Ind3) ' + (R.ind3 ? 'present' : '—') + '; ' + R.packets + ' tensor packets, ' + R.splittingMonoids + ' splitting monoids, ' + R.numberFieldCopies + ' copies of F_mod^×. Cor 3.12 −|log Θ| ≥ −|log q|: <b>' + (R.corThreeTwelve.holds ? 'holds' : 'fails') + '</b>.' })
+      R.hull ? el('p', { class: 'small', html: '<b>The hull bound of [IUTchIV] Thm 1.10, Steps (v)–(vii)</b>, one row per rational prime v_Q: ((l+5)/4)·log d^K_vQ − ((l+1)/24)·log q_vQ + log s_vQ + (l+5)·l*_mod·ι at a distinguished prime, 0 at an unramified one, ((l+5)/4)·log π at the archimedean one; l*_mod = ' + fmt(R.hull.lStarMod, 4) + '.' }) : null,
+      R.hull ? U.table(['v_Q', 'kind', 'why', 'log d^K_vQ', 'from', 'log q_vQ', 'log s_vQ', 'bound'], R.hull.rows.map(function (r) {
+        return [r.p ? String(r.p) : '∞', esc(r.kind), esc(r.why), fmt(r.logDK, 4), esc(r.logDKSource), fmt(r.logQ, 4), fmt(r.logS, 4), fmt(r.bound, 4)];
+      })) : null,
+      R.hull ? U.kv([
+        ['B = Σ over v_Q', fmt(R.hull.total, 4) + '   (per label j: ' + R.hull.perJ.map(function (x) { return fmt(x, 2); }).join(', ') + ')'],
+        ['C_Θ from the bound = B / |log q|', fmt(R.hull.CThetaLocal, 4) + '  ≤  ' + Number(R.hull.CThetaStatement).toExponential(4) + ' (the C_Θ of the statement)  ' + (R.hull.belowStatement ? '✓' : '✗')],
+        ['−|log q| ≤ B', R.hull.consequenceHolds ? 'consistent ✓' : 'not consistent ✗'],
+        R.hull.complete ? null : ['not localized', 'log d^F = ' + fmt(R.hull.unlocalizedLogD, 4) + ' is not attached to a prime: the table is incomplete']
+      ].filter(Boolean)) : null,
+      el('p', { class: 'small', html: '(Ind1) |Aut(Prc)| = ' + R.ind1 + ', (Ind2) Ism on ' + R.ind2Summands + ' summands, (Ind3) ' + (R.ind3 ? 'present' : '—') + '; ' + R.packets + ' tensor packets, ' + R.splittingMonoids + ' splitting monoids, ' + R.numberFieldCopies + ' copies of F_mod^×. Cor 3.12, −|log Θ| ≥ −|log q|, is <b>an input</b> here: the toolkit does not prove it, it checks that the numbers are <b>' + (R.corThreeTwelve.holds ? 'consistent' : 'not consistent') + '</b> with it.' })
     ]));
     /* 6 */
     var B = P0.heightBound, C2 = B.corTwoTwo;
@@ -153,15 +178,19 @@
         ['log q, |log q|', fmt(B.logQ, 6) + ',  ' + fmt(B.absLogQ, 6)],
         ['log d^Ftpd, log f^Ftpd', fmt(B.logDTpd, 6) + ',  ' + fmt(B.logFTpd, 6)],
         ['C_Θ', Number(B.CTheta).toExponential(4) + (B.CTheta >= -1 ? '  (≥ −1 ✓)' : '  (< −1 ✗)')],
+        B.hypotheses ? ['hypotheses of Thm 1.10', 'l ≥ 7 ' + (B.hypotheses.lAtLeastSeven ? '✓' : '✗') + ';  good reduction away from 2l ' + (B.hypotheses.goodAwayFromTwoL ? '✓' : '✗') + ';  F = F_mod(√−1, E[2·3·5]) ' + (B.hypotheses.FIsTripodExtension ? '✓ (asserted)' : '✗') + (B.hypotheses.ok ? '' : '  — the theorem does NOT apply to this data')] : null,
         ['Thm 1.10', '(1/6)·log q = ' + fmt(B.lhs, 6) + '  ≤  ' + Number(B.rhs).toExponential(4) + (B.holds ? '  ✓' : '  ✗')],
-        ['Cor 2.2', 'log q∀ = ' + fmt(C2.logQAll, 6) + ';  (C1) ' + fmt(C2.lMin, 3) + ' ≤ l ≤ ' + Number(C2.lMax).toExponential(3) + ': l = ' + d.l + (C2.lInRange ? ' in range' : ' out of range') + ';  (C2) ' + (C2.holds ? 'holds' : 'fails')]
-      ]),
+        ['Cor 2.2', 'log q∀ = ' + fmt(C2.logQAll, 6) + ';  (C1) ' + fmt(C2.lMin, 3) + ' ≤ l ≤ ' + Number(C2.lMax).toExponential(3) + ': l = ' + d.l + (C2.lInRange ? ' in range' : ' out of range') + ';  (C2) ' + (C2.holds ? 'holds' : 'fails')],
+        B.autoL ? ['l chosen as in Cor 2.2 (P1)–(P3)', 'l = ' + B.autoL + (B.autoL === d.l ? ' (the l in use)' : ' (the data uses l = ' + d.l + ')')] : null
+      ].filter(Boolean)),
       el('p', { class: 'small muted', text: (B.constantDominates ? 'Thm 1.10 holds here only as a comparison with its constant 20(e*_mod·l + η_prm) = ' + Number(B.constTerm).toExponential(2) + ' (main term ' + fmt(B.mainTerm, 4) + '). ' : '') + (B.corTwoTwo && B.corTwoTwo.inExceptionalSet ? 'Cor 2.2 asserts nothing about this curve: it is in the exceptional set (' + (B.corTwoTwo.epsSmall ? '' : 'ε_E > 1') + (B.corTwoTwo.epsSmall || B.corTwoTwo.sOneOk ? '' : '; ') + (B.corTwoTwo.sOneOk ? '' : '(log q∀)^½ < ξ_prm + η_prm') + ').' : '') })
     ]));
     /* 7 */
     if (P0.crossCheck.length) c.appendChild(section('xc', [
       U.table(['', 'quantity', 'toolkit', 'JSON file'], P0.crossCheck.map(function (x) { return [x.ok ? '✓' : '✗', esc(x.what), fmt(x.toolkit, 6), fmt(x.file, 6)]; }))
     ]));
+    var og = gapList(P0, -1);
+    if (og) c.appendChild(el('div', { class: 'card', style: 'margin-top:16px' }, [el('h3', {}, [el('span', { text: 'placeholders outside the stages' }), el('span', { class: 'ref', text: 'iut gaps · docs/GAPS.md' })]), og]));
     var tr = el('details', { style: 'margin-top:16px' }, [el('summary', { text: 'the same run as text (iut pipeline)' })]);
     tr.appendChild(U.transcript(M.pipelineText()));
     c.appendChild(tr);

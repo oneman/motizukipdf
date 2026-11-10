@@ -38,8 +38,9 @@ static void usage(FILE *f)
         "  run        run a process: run <id> [data options]   or   run --all [filter] [data options]\n"
         "  pipeline   the whole pipeline on the data: Def 3.1 → Hodge theaters → Gaussian monoids →\n"
         "             log-theta-lattice → multiradial rep., Cor 3.12 → Thm 1.10 (exit = #problems)\n"
+        "  gaps       what the papers specify and the toolkit does not do: --md | --json | [filter]\n"
         "  tui        interactive ncurses interface\n"
-        "data options: --abc A B C   --l L   --example K (0..5)   --random SEED\n"
+        "data options: --abc A B C   --l L | --l auto (chosen as in [IUTchIV] Cor 2.2)   --example K (0..5)   --random SEED\n"
         "              --theta-json FILE   initial Θ-data from a JSON file (docs/initial-theta-data/*.json)\n"
         "walk options: --rows R (default 3)  --horizontal lgp|LGP|gau|xmu|theta  --json   (pipeline: same, default rows 2)\n");
 }
@@ -56,7 +57,7 @@ int iut_options_parse(iut_options *o, int argc, char **argv, FILE *err)
     for (int i = 0; i < argc; ++i) {
         const char *a = argv[i];
         if (!strcmp(a, "--abc") && i + 3 < argc) { o->a = atoll(argv[i + 1]); o->b = atoll(argv[i + 2]); o->c = atoll(argv[i + 3]); o->have_abc = 1; i += 3; }
-        else if (!strcmp(a, "--l") && i + 1 < argc) { o->l = (unsigned)atoi(argv[++i]); }
+        else if (!strcmp(a, "--l") && i + 1 < argc) { if (!strcmp(argv[i + 1], "auto")) { o->auto_l = 1; ++i; } else o->l = (unsigned)atoi(argv[++i]); }
         else if (!strcmp(a, "--example") && i + 1 < argc) { o->example = atoi(argv[++i]); o->have_example = 1; }
         else if (!strcmp(a, "--random") && i + 1 < argc) { o->seed = (unsigned)atoi(argv[++i]); o->have_seed = 1; }
         else if (!strcmp(a, "--theta-json") && i + 1 < argc) { o->theta_json = argv[++i]; o->have_theta_json = 1; }
@@ -86,7 +87,12 @@ int iut_options_make_data(const iut_options *o, iut_initial_theta_data *d, FILE 
         if (rc) fprintf(err, "could not read initial Θ-data: %s\n", msg);
         return rc;
     }
-    if (o->have_abc) rc = iut_gen_from_abc(d, o->a, o->b, o->c, o->l);
+    if (o->have_abc && o->auto_l) {
+        /* [IUTchIV] Cor 2.2, proof, (P1)–(P3): generate once to learn the local heights, choose l, generate again */
+        rc = iut_gen_from_abc(d, o->a, o->b, o->c, 7);
+        if (!rc) { unsigned l = iut_choose_l(d, NULL); if (!l) { fprintf(err, "--l auto: no prime l ≤ %d satisfies (P1)–(P3) of [IUTchIV] Cor 2.2 for this triple\n", IUT_MAX_L); return -4; } rc = iut_gen_from_abc(d, o->a, o->b, o->c, l); }
+    }
+    else if (o->have_abc) rc = iut_gen_from_abc(d, o->a, o->b, o->c, o->l);
     else if (o->have_seed) rc = iut_gen_random(d, o->seed);
     else rc = iut_gen_example(d, o->example);
     if (rc) fprintf(err, "could not generate initial Θ-data (code %d): need a+b=c coprime positive, l prime ≥ 5 (≤ %d)\n", rc, IUT_MAX_L);
@@ -264,12 +270,14 @@ int iut_selftest(FILE *out)
       CHECK(a->nf.FGt.loc[0].Pi_copy != c->nf.FGt.loc[0].Pi_copy, "Θ-link: Π_v NOT shared (mutually alien copies)");
       CHECK(b->has_incoming_log && b->nshell == d.nV && !iut_lattice_get(lat, 0, -2)->has_incoming_log, "log-shells appear exactly in log-link codomains");
       int v3 = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == 3) v3 = i;
-      int vg = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].kind == IUT_V_NONARCH && d.V[i].red == IUT_RED_GOOD && d.V[i].p > 2) vg = i;
-      CHECK(vg >= 0 && d.V[vg].e_K == 1 && b->shell[vg].radius.num == 0 && fabs(b->shell[vg].log_volume - 0.0) < 1e-9, "log-shell at unramified odd p: I_v = O_v, μ_log = 0");
-      CHECK(v3 >= 0 && d.V[v3].e_K_lower && d.V[v3].e_K == iut_eK_min(d.l, d.V[v3].ordq) && d.V[v3].e_K % d.l == 0
-            && fabs(b->shell[v3].log_volume - (1.0 - 1.0 / d.V[v3].e_K) * log(3.0)) < 1e-9, "bad multiplicative v: q_v^{1/2l} ∈ K_v forces e_K ≥ 2l/gcd(2l, ord q_v); μ_log(I_v) = (1 − 1/e) log p");
-      int v2 = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == 2) v2 = i;
-      CHECK(v2 >= 0 && fabs(b->shell[v2].log_volume - (2.0 - 2.0 / d.V[v2].e_K) * log(2.0)) < 1e-9, "log-shell at p=2: p* = 4, μ_log(I_2) = (2 − 1/e − 1/(e f)) log 2");
+      { iut_valuation w; memset(&w, 0, sizeof w); w.kind = IUT_V_NONARCH; w.p = 7; w.e_K = w.f_K = w.e_mod = w.f_mod = 1;
+        CHECK(fabs(iut_log_shell_volume(&w, 1)) < 1e-12, "log-shell at an unramified odd p without p-power roots of unity: I_v = O_v, μ_log = 0"); }
+      CHECK(v3 >= 0 && d.V[v3].e_K_lower && d.V[v3].e_K == 2 * iut_eK_min(d.l, d.V[v3].ordq) && d.V[v3].e_K % d.l == 0 && d.V[v3].m_K == 1
+            && fabs(b->shell[v3].log_volume - (1.0 - 2.0 / d.V[v3].e_K) * log(3.0)) < 1e-9, "v3 bad multiplicative: q_v^{1/2l} ∈ K_v and μ_3 ⊆ K force e_K ≥ lcm(2l/gcd(2l, ord q_v), 2); μ_log(I_v) = (1 − 1/e − m/(e f)) log p with m = 1");
+      int v2 = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == 2) v2 = (int)i;
+      CHECK(v2 >= 0 && d.V[v2].m_K == 2 && d.V[v2].e_K % 2 == 0 && fabs(b->shell[v2].log_volume - (2.0 - 3.0 / d.V[v2].e_K) * log(2.0)) < 1e-9, "log-shell at p=2: p* = 4, √−1 ∈ F gives m = 2 and e even; μ_log(I_2) = (2 − 1/e − 2/(e f)) log 2");
+      int vl = -1; for (unsigned i = 0; i < d.nV; ++i) if (d.V[i].p == d.l) vl = (int)i;
+      CHECK(vl >= 0 && d.V[vl].e_K % (d.l - 1) == 0 && d.V[vl].m_K == 1 && d.V[vl].e_K_lower, "at p = l: μ_l ⊆ K forces (l − 1) | e_K and m = 1 ([IUTchIV] Thm 1.10, Step (iii))");
       iut_multiradial_rep rep; iut_multiradial_build(lat, 0, &rep);
       CHECK(rep.nsteps == d.lstar + 1 && rep.step[3].perms == 24 && rep.step[3].size == 4, "processions S^±_{j+1}: |S^±_4| = 4, 4! = 24 (Ind1)");
       CHECK(rep.leading_term > 0.5 * iut_leading_term(&d) && rep.leading_term < 2.0 * iut_leading_term(&d), "leading term sum %.3f ≈ (l²/48)(6 log d^K − log q) = %.3f (asymptotic in l)", rep.leading_term, iut_leading_term(&d));
@@ -362,6 +370,12 @@ int main(int argc, char **argv)
     if (!strcmp(cmd, "ids")) return cmd_ids(argc - 2, argv + 2);
     if (!strcmp(cmd, "species")) { iut_view_species(stdout); return 0; }
     if (!strcmp(cmd, "selftest")) return iut_selftest(stdout) ? 1 : 0;
+    if (!strcmp(cmd, "gaps")) {
+        const char *filter = NULL; int md = 0, json = 0;
+        for (int i = 2; i < argc; ++i) { if (!strcmp(argv[i], "--md")) md = 1; else if (!strcmp(argv[i], "--json")) json = 1; else filter = argv[i]; }
+        if (md) iut_md_gaps(stdout); else if (json) { iut_json_gaps(stdout, -2); fputc('\n', stdout); } else iut_view_gaps(stdout, filter);
+        return 0;
+    }
     if (!strcmp(cmd, "procs")) {
         const char *filter = NULL; int md = 0, js = 0, json = 0;
         for (int i = 2; i < argc; ++i) { if (!strcmp(argv[i], "--md")) md = 1; else if (!strcmp(argv[i], "--js")) js = 1; else if (!strcmp(argv[i], "--json")) json = 1; else filter = argv[i]; }
