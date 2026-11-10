@@ -1,0 +1,329 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 1920 1080" font-family="Inter">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0.8L9,5L0,9.2L2.4,5z" fill="#17171c"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0.8L9,5L0,9.2L2.4,5z" fill="#5d5d66"/></marker><pattern id="h450_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-45)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h600_60_10" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-60)"><line x1="0" y1="3" x2="6" y2="3" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h300_60_10" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-30)"><line x1="0" y1="3" x2="6" y2="3" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h900_60_10" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-90)"><line x1="0" y1="3" x2="6" y2="3" stroke="#17171c" stroke-width="1"/></pattern><pattern id="d50_115" patternUnits="userSpaceOnUse" width="5" height="5"><circle cx="1.25" cy="1.25" r="1.15" fill="#17171c"/><circle cx="3.75" cy="3.75" r="1.15" fill="#17171c"/></pattern><pattern id="h1350_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-135)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h0_60_10" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(0)"><line x1="0" y1="3" x2="6" y2="3" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h0_80_10" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(0)"><line x1="0" y1="4" x2="8" y2="4" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h900_80_10" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(-90)"><line x1="0" y1="4" x2="8" y2="4" stroke="#17171c" stroke-width="1"/></pattern><pattern id="d80_115" patternUnits="userSpaceOnUse" width="8" height="8"><circle cx="2" cy="2" r="1.15" fill="#17171c"/><circle cx="6" cy="6" r="1.15" fill="#17171c"/></pattern><pattern id="h450_70_10_d5m4" patternUnits="userSpaceOnUse" width="27" height="7" patternTransform="rotate(-45)"><line x1="0" y1="3.5" x2="27" y2="3.5" stroke="#17171c" stroke-width="1" stroke-dasharray="5 4"/></pattern></defs>
+<rect width="1920" height="1080" fill="#fbfaf4"/>
+<rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#17171c" stroke-width="2.4"/>
+<rect x="27" y="27" width="1866" height="1026" fill="none" stroke="#17171c" stroke-width="0.8"/>
+<text xml:space="preserve" x="52" y="62" font-family="JetBrains Mono" font-size="12" font-weight="500" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke" letter-spacing="1.5">PLATE 2 / 6</text>
+<text xml:space="preserve" x="52" y="98" font-family="Inter" font-size="30" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Inside one theater: the additive eye and the multiplicative eye</text>
+<text xml:space="preserve" x="52" y="124" font-family="Inter" font-size="14.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">One Θ±ell NF-Hodge theater is two species glued along their labels. The Θ±ell side sees a label t with its sign and turns the labels by addition; the ΘNF side sees only j = |t| and</text>
+<text xml:space="preserve" x="52" y="144" font-family="Inter" font-size="14.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">turns them by multiplication. Neither symmetry is visible from the other side.</text>
+<rect x="1508" y="44" width="368" height="78" fill="none" stroke="#17171c" stroke-width="1"/>
+<text xml:space="preserve" x="1520" y="66" font-family="JetBrains Mono" font-size="11.5" font-weight="400" fill="#17171c" text-anchor="start">example   abc(1,2400,2401) l=13</text>
+<text xml:space="preserve" x="1520" y="87" font-family="JetBrains Mono" font-size="11.5" font-weight="400" fill="#17171c" text-anchor="start">curve     Frey y^2=x(x-1)(x+2400)</text>
+<text xml:space="preserve" x="1520" y="108" font-family="JetBrains Mono" font-size="11.5" font-weight="400" fill="#17171c" text-anchor="start">l = 13   l* = 6   l± = 7   |V| = 6</text>
+<path d="M60,168h1800v752h-1800z M74,182v724h1772v-724z" fill="#fbfaf4" fill-rule="evenodd"/>
+<path d="M60,168h1800v752h-1800z M74,182v724h1772v-724z" fill="url(#h450_70_10)" fill-rule="evenodd"/>
+<path d="M60,168h1800v752h-1800z M74,182v724h1772v-724z" fill="none" stroke="#17171c" stroke-width="1.8"/>
+<text xml:space="preserve" x="960" y="210" font-family="DejaVu Sans" font-size="19" font-weight="700" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">†HT  =  Θ±ell-Hodge theater   ⊔   ΘNF-Hodge theater</text>
+<rect x="873.5" y="220" width="173" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="880.5" y="232.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ThetaPmEllNFHodgeTheater</text>
+<text xml:space="preserve" x="960" y="258" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">at (0,0) · universe #1 · every strip here lies in the ring structure of †: hatched near 45°, tilted by the sign of its label</text>
+<path d="M400,730A170,170 0 0 1 321,710.53L351.67,652.09A104,104 0 0 0 400,664z" fill="#fbfaf4"/>
+<path d="M400,730A170,170 0 0 1 321,710.53L351.67,652.09A104,104 0 0 0 400,664z" fill="url(#h300_60_10)"/>
+<path d="M400,730A170,170 0 0 1 321,710.53L351.67,652.09A104,104 0 0 0 400,664z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="367.21" y="698.02" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">−6</text>
+<line x1="380.85" y1="637.68" x2="375.83" y2="658.07" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M321,710.53A170,170 0 0 1 260.09,656.57L314.41,619.08A104,104 0 0 0 351.67,652.09z" fill="#fbfaf4"/>
+<path d="M321,710.53A170,170 0 0 1 260.09,656.57L314.41,619.08A104,104 0 0 0 351.67,652.09z" fill="url(#h300_60_10)"/>
+<path d="M321,710.53A170,170 0 0 1 260.09,656.57L314.41,619.08A104,104 0 0 0 351.67,652.09z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="309.15" y="667.55" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">−5</text>
+<line x1="346.95" y1="619.88" x2="333.02" y2="635.6" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M260.09,656.57A170,170 0 0 1 231.24,580.49L296.76,572.54A104,104 0 0 0 314.41,619.08z" fill="#fbfaf4"/>
+<path d="M260.09,656.57A170,170 0 0 1 231.24,580.49L296.76,572.54A104,104 0 0 0 314.41,619.08z" fill="url(#h300_60_10)"/>
+<path d="M260.09,656.57A170,170 0 0 1 231.24,580.49L296.76,572.54A104,104 0 0 0 314.41,619.08z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="271.9" y="613.58" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">−4</text>
+<line x1="325.2" y1="588.37" x2="305.56" y2="595.82" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M231.24,580.49A170,170 0 0 1 241.05,499.72L302.76,523.12A104,104 0 0 0 296.76,572.54z" fill="#fbfaf4"/>
+<path d="M231.24,580.49A170,170 0 0 1 241.05,499.72L302.76,523.12A104,104 0 0 0 296.76,572.54z" fill="url(#h300_60_10)"/>
+<path d="M231.24,580.49A170,170 0 0 1 241.05,499.72L302.76,523.12A104,104 0 0 0 296.76,572.54z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="264" y="548.49" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">−3</text>
+<line x1="320.58" y1="550.36" x2="299.74" y2="547.83" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M241.05,499.72A170,170 0 0 1 287.27,432.75L331.04,482.15A104,104 0 0 0 302.76,523.12z" fill="#fbfaf4"/>
+<path d="M241.05,499.72A170,170 0 0 1 287.27,432.75L331.04,482.15A104,104 0 0 0 302.76,523.12z" fill="url(#h300_60_10)"/>
+<path d="M241.05,499.72A170,170 0 0 1 287.27,432.75L331.04,482.15A104,104 0 0 0 302.76,523.12z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="287.25" y="487.18" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">−2</text>
+<line x1="334.16" y1="514.55" x2="316.88" y2="502.63" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M287.27,432.75A170,170 0 0 1 359.32,394.94L375.11,459.02A104,104 0 0 0 331.04,482.15z" fill="#fbfaf4"/>
+<path d="M287.27,432.75A170,170 0 0 1 359.32,394.94L375.11,459.02A104,104 0 0 0 331.04,482.15z" fill="url(#h300_60_10)"/>
+<path d="M287.27,432.75A170,170 0 0 1 359.32,394.94L375.11,459.02A104,104 0 0 0 331.04,482.15z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="336.33" y="443.69" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">−1</text>
+<line x1="362.82" y1="489.16" x2="353.06" y2="470.57" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M359.32,394.94A170,170 0 0 1 440.68,394.94L424.89,459.02A104,104 0 0 0 375.11,459.02z" fill="#fbfaf4"/>
+<path d="M359.32,394.94A170,170 0 0 1 440.68,394.94L424.89,459.02A104,104 0 0 0 375.11,459.02z" fill="none" stroke="#17171c" stroke-width="3" stroke-linejoin="round"/>
+<text xml:space="preserve" x="400" y="428" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">0</text>
+<line x1="400" y1="480" x2="400" y2="459" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M440.68,394.94A170,170 0 0 1 512.73,432.75L468.96,482.15A104,104 0 0 0 424.89,459.02z" fill="#fbfaf4"/>
+<path d="M440.68,394.94A170,170 0 0 1 512.73,432.75L468.96,482.15A104,104 0 0 0 424.89,459.02z" fill="url(#h600_60_10)"/>
+<path d="M440.68,394.94A170,170 0 0 1 512.73,432.75L468.96,482.15A104,104 0 0 0 424.89,459.02z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="463.67" y="443.69" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">+1</text>
+<line x1="437.18" y1="489.16" x2="446.94" y2="470.57" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M512.73,432.75A170,170 0 0 1 558.95,499.72L497.24,523.12A104,104 0 0 0 468.96,482.15z" fill="#fbfaf4"/>
+<path d="M512.73,432.75A170,170 0 0 1 558.95,499.72L497.24,523.12A104,104 0 0 0 468.96,482.15z" fill="url(#h600_60_10)"/>
+<path d="M512.73,432.75A170,170 0 0 1 558.95,499.72L497.24,523.12A104,104 0 0 0 468.96,482.15z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="512.75" y="487.18" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">+2</text>
+<line x1="465.84" y1="514.55" x2="483.12" y2="502.63" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M558.95,499.72A170,170 0 0 1 568.76,580.49L503.24,572.54A104,104 0 0 0 497.24,523.12z" fill="#fbfaf4"/>
+<path d="M558.95,499.72A170,170 0 0 1 568.76,580.49L503.24,572.54A104,104 0 0 0 497.24,523.12z" fill="url(#h600_60_10)"/>
+<path d="M558.95,499.72A170,170 0 0 1 568.76,580.49L503.24,572.54A104,104 0 0 0 497.24,523.12z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="536" y="548.49" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">+3</text>
+<line x1="479.42" y1="550.36" x2="500.26" y2="547.83" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M568.76,580.49A170,170 0 0 1 539.91,656.57L485.59,619.08A104,104 0 0 0 503.24,572.54z" fill="#fbfaf4"/>
+<path d="M568.76,580.49A170,170 0 0 1 539.91,656.57L485.59,619.08A104,104 0 0 0 503.24,572.54z" fill="url(#h600_60_10)"/>
+<path d="M568.76,580.49A170,170 0 0 1 539.91,656.57L485.59,619.08A104,104 0 0 0 503.24,572.54z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="528.1" y="613.58" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">+4</text>
+<line x1="474.8" y1="588.37" x2="494.44" y2="595.82" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M539.91,656.57A170,170 0 0 1 479,710.53L448.33,652.09A104,104 0 0 0 485.59,619.08z" fill="#fbfaf4"/>
+<path d="M539.91,656.57A170,170 0 0 1 479,710.53L448.33,652.09A104,104 0 0 0 485.59,619.08z" fill="url(#h600_60_10)"/>
+<path d="M539.91,656.57A170,170 0 0 1 479,710.53L448.33,652.09A104,104 0 0 0 485.59,619.08z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="490.85" y="667.55" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">+5</text>
+<line x1="453.05" y1="619.88" x2="466.98" y2="635.6" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M479,710.53A170,170 0 0 1 400,730L400,664A104,104 0 0 0 448.33,652.09z" fill="#fbfaf4"/>
+<path d="M479,710.53A170,170 0 0 1 400,730L400,664A104,104 0 0 0 448.33,652.09z" fill="url(#h600_60_10)"/>
+<path d="M479,710.53A170,170 0 0 1 400,730L400,664A104,104 0 0 0 448.33,652.09z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="432.79" y="698.02" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">+6</text>
+<line x1="419.15" y1="637.68" x2="424.17" y2="658.07" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M322,560a78,78 0 1 0 156,0a78,78 0 1 0 -156,0z" fill="#fbfaf4"/>
+<path d="M322,560a78,78 0 1 0 156,0a78,78 0 1 0 -156,0z" fill="url(#h900_60_10)"/>
+<path d="M322,560a78,78 0 1 0 156,0a78,78 0 1 0 -156,0z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<rect x="327.98" y="530" width="144.05" height="72" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="335.98" y="552" font-family="DejaVu Sans" font-size="15" font-weight="700" fill="#17171c" text-anchor="start">D_⊚±</text>
+<rect x="335.98" y="558" width="87" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="342.98" y="570.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">DPrimeStrip</text>
+<text xml:space="preserve" x="335.98" y="591" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">'CircDotPm' · Π_{X_K}</text>
+<line x1="400" y1="344" x2="400" y2="752" stroke="#5d5d66" stroke-width="1" stroke-dasharray="7 5" stroke-linecap="butt"/>
+<text xml:space="preserve" x="400" y="338" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">t ↦ −t</text>
+<path d="M446.02,379.78A186,186 0 0 1 576.51,501.35" fill="none" stroke="#17171c" stroke-width="1.6" marker-end="url(#ah)" stroke-linejoin="round"/>
+<text xml:space="preserve" x="576" y="420" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">t ↦ t + 1</text>
+<text xml:space="preserve" x="90" y="300" font-family="DejaVu Sans" font-size="16" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Θ±ell-Hodge theater</text>
+<rect x="90" y="307" width="160" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="97" y="319.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ThetaPmEllHodgeTheater</text>
+<rect x="90" y="328" width="212" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="97" y="340.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_theta_pm_ell_hodge_theater</text>
+<text xml:space="preserve" x="90" y="360" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">symmetry F_l^{⋊±} = F_l ⋊ {±1}</text>
+<text xml:space="preserve" x="90" y="375" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">additive · geometric</text>
+<text xml:space="preserve" x="90" y="766" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">capsule F_T,  t ∈ F_l  (13)</text>
+<rect x="90" y="773" width="133" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="97" y="785.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_capsule_member</text>
+<text xml:space="preserve" x="90" y="805" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">one F-prime-strip per sector,</text>
+<text xml:space="preserve" x="90" y="820" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">each with its own basepoint</text>
+<text xml:space="preserve" x="508" y="726" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Θell-bridge  D_T → D_⊚±</text>
+<line x1="506" y1="722" x2="449.71" y2="637.42" stroke="#5d5d66" stroke-width="0.9" stroke-linecap="butt"/>
+<circle cx="449.71" cy="637.42" r="2.6" fill="#17171c"/>
+<path d="M860,390A170,170 0 0 1 900.68,394.94L884.89,459.02A104,104 0 0 0 860,456z" fill="#fbfaf4"/>
+<path d="M860,390A170,170 0 0 1 900.68,394.94L884.89,459.02A104,104 0 0 0 860,456z" fill="none" stroke="#17171c" stroke-width="3" stroke-linejoin="round"/>
+<text xml:space="preserve" x="876.51" y="429" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">0</text>
+<path d="M900.68,394.94A170,170 0 0 1 972.73,432.75L928.96,482.15A104,104 0 0 0 884.89,459.02z" fill="#fbfaf4"/>
+<path d="M900.68,394.94A170,170 0 0 1 972.73,432.75L928.96,482.15A104,104 0 0 0 884.89,459.02z" fill="url(#h600_60_10)"/>
+<path d="M900.68,394.94A170,170 0 0 1 972.73,432.75L928.96,482.15A104,104 0 0 0 884.89,459.02z" fill="url(#h300_60_10)"/>
+<path d="M900.68,394.94A170,170 0 0 1 972.73,432.75L928.96,482.15A104,104 0 0 0 884.89,459.02z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="923.67" y="443.69" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">1</text>
+<path d="M972.73,432.75A170,170 0 0 1 1018.95,499.72L957.24,523.12A104,104 0 0 0 928.96,482.15z" fill="#fbfaf4"/>
+<path d="M972.73,432.75A170,170 0 0 1 1018.95,499.72L957.24,523.12A104,104 0 0 0 928.96,482.15z" fill="url(#h600_60_10)"/>
+<path d="M972.73,432.75A170,170 0 0 1 1018.95,499.72L957.24,523.12A104,104 0 0 0 928.96,482.15z" fill="url(#h300_60_10)"/>
+<path d="M972.73,432.75A170,170 0 0 1 1018.95,499.72L957.24,523.12A104,104 0 0 0 928.96,482.15z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="972.75" y="487.18" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">2</text>
+<path d="M1018.95,499.72A170,170 0 0 1 1028.76,580.49L963.24,572.54A104,104 0 0 0 957.24,523.12z" fill="#fbfaf4"/>
+<path d="M1018.95,499.72A170,170 0 0 1 1028.76,580.49L963.24,572.54A104,104 0 0 0 957.24,523.12z" fill="url(#h600_60_10)"/>
+<path d="M1018.95,499.72A170,170 0 0 1 1028.76,580.49L963.24,572.54A104,104 0 0 0 957.24,523.12z" fill="url(#h300_60_10)"/>
+<path d="M1018.95,499.72A170,170 0 0 1 1028.76,580.49L963.24,572.54A104,104 0 0 0 957.24,523.12z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="996" y="548.49" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">3</text>
+<path d="M1028.76,580.49A170,170 0 0 1 999.91,656.57L945.59,619.08A104,104 0 0 0 963.24,572.54z" fill="#fbfaf4"/>
+<path d="M1028.76,580.49A170,170 0 0 1 999.91,656.57L945.59,619.08A104,104 0 0 0 963.24,572.54z" fill="url(#h600_60_10)"/>
+<path d="M1028.76,580.49A170,170 0 0 1 999.91,656.57L945.59,619.08A104,104 0 0 0 963.24,572.54z" fill="url(#h300_60_10)"/>
+<path d="M1028.76,580.49A170,170 0 0 1 999.91,656.57L945.59,619.08A104,104 0 0 0 963.24,572.54z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="988.1" y="613.58" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">4</text>
+<path d="M999.91,656.57A170,170 0 0 1 939,710.53L908.33,652.09A104,104 0 0 0 945.59,619.08z" fill="#fbfaf4"/>
+<path d="M999.91,656.57A170,170 0 0 1 939,710.53L908.33,652.09A104,104 0 0 0 945.59,619.08z" fill="url(#h600_60_10)"/>
+<path d="M999.91,656.57A170,170 0 0 1 939,710.53L908.33,652.09A104,104 0 0 0 945.59,619.08z" fill="url(#h300_60_10)"/>
+<path d="M999.91,656.57A170,170 0 0 1 939,710.53L908.33,652.09A104,104 0 0 0 945.59,619.08z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="950.85" y="667.55" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">5</text>
+<path d="M939,710.53A170,170 0 0 1 860,730L860,664A104,104 0 0 0 908.33,652.09z" fill="#fbfaf4"/>
+<path d="M939,710.53A170,170 0 0 1 860,730L860,664A104,104 0 0 0 908.33,652.09z" fill="url(#h600_60_10)"/>
+<path d="M939,710.53A170,170 0 0 1 860,730L860,664A104,104 0 0 0 908.33,652.09z" fill="url(#h300_60_10)"/>
+<path d="M939,710.53A170,170 0 0 1 860,730L860,664A104,104 0 0 0 908.33,652.09z" fill="none" stroke="#17171c" stroke-width="1.6" stroke-linejoin="round"/>
+<text xml:space="preserve" x="892.79" y="698.02" font-family="JetBrains Mono" font-size="13" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">6</text>
+<line x1="860" y1="344" x2="860" y2="752" stroke="#5d5d66" stroke-width="1" stroke-dasharray="7 5" stroke-linecap="butt"/>
+<text xml:space="preserve" x="868" y="338" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">the fold</text>
+<text xml:space="preserve" x="738" y="536" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">|F_l| = F_l / {±1}</text>
+<text xml:space="preserve" x="738" y="554" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">= {0, 1, …, 6}</text>
+<text xml:space="preserve" x="738" y="569" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">both tilts at once:</text>
+<text xml:space="preserve" x="738" y="584" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">the sign is gone</text>
+<line x1="610" y1="560" x2="724" y2="560" stroke="#17171c" stroke-width="2" marker-end="url(#ah)" stroke-linecap="butt"/>
+<text xml:space="preserve" x="667" y="548" font-family="DejaVu Sans" font-size="15" font-weight="700" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">±j ↦ j</text>
+<rect x="630" y="570" width="74" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="637" y="582.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">MapLabels</text>
+<path d="M1245,412.78A170,170 0 0 1 1415,412.78L1382,469.93A104,104 0 0 0 1278,469.93z" fill="#fbfaf4"/>
+<path d="M1245,412.78A170,170 0 0 1 1415,412.78L1382,469.93A104,104 0 0 0 1278,469.93z" fill="url(#h600_60_10)"/>
+<path d="M1245,412.78A170,170 0 0 1 1415,412.78L1382,469.93A104,104 0 0 0 1278,469.93z" fill="url(#h300_60_10)"/>
+<path d="M1245,412.78A170,170 0 0 1 1415,412.78L1382,469.93A104,104 0 0 0 1278,469.93z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1330" y="428" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">1</text>
+<line x1="1330" y1="480" x2="1330" y2="459" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M1415,412.78A170,170 0 0 1 1500,560L1434,560A104,104 0 0 0 1382,469.93z" fill="#fbfaf4"/>
+<path d="M1415,412.78A170,170 0 0 1 1500,560L1434,560A104,104 0 0 0 1382,469.93z" fill="url(#h600_60_10)"/>
+<path d="M1415,412.78A170,170 0 0 1 1500,560L1434,560A104,104 0 0 0 1382,469.93z" fill="url(#h300_60_10)"/>
+<path d="M1415,412.78A170,170 0 0 1 1500,560L1434,560A104,104 0 0 0 1382,469.93z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1448.65" y="496.5" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">2</text>
+<line x1="1399.28" y1="520" x2="1417.47" y2="509.5" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M1500,560A170,170 0 0 1 1415,707.22L1382,650.07A104,104 0 0 0 1434,560z" fill="#fbfaf4"/>
+<path d="M1500,560A170,170 0 0 1 1415,707.22L1382,650.07A104,104 0 0 0 1434,560z" fill="url(#h600_60_10)"/>
+<path d="M1500,560A170,170 0 0 1 1415,707.22L1382,650.07A104,104 0 0 0 1434,560z" fill="url(#h300_60_10)"/>
+<path d="M1500,560A170,170 0 0 1 1415,707.22L1382,650.07A104,104 0 0 0 1434,560z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1448.65" y="633.5" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">4</text>
+<line x1="1399.28" y1="600" x2="1417.47" y2="610.5" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M1415,707.22A170,170 0 0 1 1245,707.22L1278,650.07A104,104 0 0 0 1382,650.07z" fill="#fbfaf4"/>
+<path d="M1415,707.22A170,170 0 0 1 1245,707.22L1278,650.07A104,104 0 0 0 1382,650.07z" fill="url(#h600_60_10)"/>
+<path d="M1415,707.22A170,170 0 0 1 1245,707.22L1278,650.07A104,104 0 0 0 1382,650.07z" fill="url(#h300_60_10)"/>
+<path d="M1415,707.22A170,170 0 0 1 1245,707.22L1278,650.07A104,104 0 0 0 1382,650.07z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1330" y="702" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">5</text>
+<line x1="1330" y1="640" x2="1330" y2="661" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M1245,707.22A170,170 0 0 1 1160,560L1226,560A104,104 0 0 0 1278,650.07z" fill="#fbfaf4"/>
+<path d="M1245,707.22A170,170 0 0 1 1160,560L1226,560A104,104 0 0 0 1278,650.07z" fill="url(#h600_60_10)"/>
+<path d="M1245,707.22A170,170 0 0 1 1160,560L1226,560A104,104 0 0 0 1278,650.07z" fill="url(#h300_60_10)"/>
+<path d="M1245,707.22A170,170 0 0 1 1160,560L1226,560A104,104 0 0 0 1278,650.07z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1211.35" y="633.5" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">3</text>
+<line x1="1260.72" y1="600" x2="1242.53" y2="610.5" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M1160,560A170,170 0 0 1 1245,412.78L1278,469.93A104,104 0 0 0 1226,560z" fill="#fbfaf4"/>
+<path d="M1160,560A170,170 0 0 1 1245,412.78L1278,469.93A104,104 0 0 0 1226,560z" fill="url(#h600_60_10)"/>
+<path d="M1160,560A170,170 0 0 1 1245,412.78L1278,469.93A104,104 0 0 0 1226,560z" fill="url(#h300_60_10)"/>
+<path d="M1160,560A170,170 0 0 1 1245,412.78L1278,469.93A104,104 0 0 0 1226,560z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1211.35" y="496.5" font-family="JetBrains Mono" font-size="15" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">6</text>
+<line x1="1260.72" y1="520" x2="1242.53" y2="509.5" stroke="#17171c" stroke-width="1" marker-start="url(#ah)" stroke-linecap="butt"/>
+<path d="M1252,560a78,78 0 1 0 156,0a78,78 0 1 0 -156,0z" fill="#fbfaf4"/>
+<path d="M1252,560a78,78 0 1 0 156,0a78,78 0 1 0 -156,0z" fill="url(#h450_70_10)"/>
+<path d="M1252,560a78,78 0 1 0 156,0a78,78 0 1 0 -156,0z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<rect x="1230.92" y="530" width="198.15" height="72" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="1238.92" y="552" font-family="DejaVu Sans" font-size="15" font-weight="700" fill="#17171c" text-anchor="start">F_⊛</text>
+<rect x="1238.92" y="558" width="87" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1245.92" y="570.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">FPrimeStrip</text>
+<text xml:space="preserve" x="1238.92" y="591" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">'CircAst' · Π_{C_K} ↷ F_mod^×</text>
+<path d="M1376.02,379.78A186,186 0 0 1 1506.51,501.35" fill="none" stroke="#17171c" stroke-width="1.6" marker-end="url(#ah)" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1506" y="420" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">j ↦ 2·j</text>
+<text xml:space="preserve" x="1506" y="436" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">cycle (1 2 4 5 3 6)</text>
+<text xml:space="preserve" x="1560" y="300" font-family="DejaVu Sans" font-size="16" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">ΘNF-Hodge theater</text>
+<rect x="1560" y="307" width="140" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1567" y="319.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ThetaNFHodgeTheater</text>
+<rect x="1560" y="328" width="186" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1567" y="340.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_theta_nf_hodge_theater</text>
+<text xml:space="preserve" x="1560" y="360" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">symmetry F_l^* = F_l^× / {±1}</text>
+<text xml:space="preserve" x="1560" y="375" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">multiplicative · arithmetic</text>
+<text xml:space="preserve" x="1545" y="470" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">capsule F_J,  j ∈ F_l^*  (6)</text>
+<rect x="1545" y="477" width="133" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1552" y="489.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_capsule_member</text>
+<text xml:space="preserve" x="1545" y="509" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">NF-bridge  F_J → F_⊛</text>
+<text xml:space="preserve" x="1545" y="524" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">(arrows into the centre)</text>
+<line x1="1052" y1="560" x2="1146" y2="560" stroke="#17171c" stroke-width="2" marker-end="url(#ah)" stroke-linecap="butt"/>
+<text xml:space="preserve" x="1099" y="548" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">F_l^× ↠ F_l^*</text>
+<text xml:space="preserve" x="1099" y="582" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">0 ↦ &gt;</text>
+<path d="M250,832h300v50h-300z" fill="#fbfaf4"/>
+<path d="M250,832h300v50h-300z" fill="url(#h450_70_10)"/>
+<path d="M250,832h300v50h-300z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<rect x="348.5" y="835" width="103" height="56" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="356.5" y="857" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#17171c" text-anchor="start">F_⊞</text>
+<rect x="356.5" y="863" width="87" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="363.5" y="875.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">FPrimeStrip</text>
+<line x1="400" y1="754" x2="400" y2="829" stroke="#17171c" stroke-width="1.6" marker-end="url(#ah)" stroke-linecap="butt"/>
+<text xml:space="preserve" x="410" y="802" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Θ±-bridge  F_T → F_⊞</text>
+<path d="M1180,832h300v50h-300z" fill="#fbfaf4"/>
+<path d="M1180,832h300v50h-300z" fill="url(#h450_70_10)"/>
+<path d="M1180,832h300v50h-300z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<rect x="1278.5" y="835" width="103" height="56" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="1286.5" y="857" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#17171c" text-anchor="start">F_&gt;</text>
+<rect x="1286.5" y="863" width="87" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1293.5" y="875.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">FPrimeStrip</text>
+<line x1="1330" y1="734" x2="1330" y2="829" stroke="#17171c" stroke-width="1.6" marker-end="url(#ah)" stroke-linecap="butt"/>
+<text xml:space="preserve" x="1340" y="820" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Θ-bridge  F_J → F_&gt;</text>
+<line x1="550" y1="857" x2="1180" y2="857" stroke="#17171c" stroke-width="5.2" stroke-linecap="butt"/>
+<line x1="550" y1="857" x2="1180" y2="857" stroke="#fbfaf4" stroke-width="2.4" stroke-linecap="butt"/>
+<rect x="787.91" y="836" width="184.18" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="795.91" y="858" font-family="DejaVu Sans" font-size="13.5" font-weight="700" fill="#17171c" text-anchor="start">gluing  0, ⊞ ↦ &gt;</text>
+<text xml:space="preserve" x="795.91" y="875" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">the two targets are identified</text>
+<path d="M1560,640h270v242h-270z" fill="#fbfaf4"/>
+<path d="M1560,640h270v242h-270z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1572" y="662" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Θ-Hodge theater</text>
+<rect x="1572" y="669" width="127" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1579" y="681.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ThetaHodgeTheater</text>
+<rect x="1572" y="690" width="166" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1579" y="702.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_theta_hodge_theater</text>
+<text xml:space="preserve" x="1572" y="722" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Θ̲_v at the label j:  q̲^(j²)</text>
+<path d="M1582,853h26v3h-26z" fill="#fbfaf4"/>
+<path d="M1582,853h26v3h-26z" fill="url(#d50_115)"/>
+<path d="M1582,853h26v3h-26z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1595" y="871" font-family="JetBrains Mono" font-size="11" font-weight="400" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">1</text>
+<path d="M1621,845.33h26v10.67h-26z" fill="#fbfaf4"/>
+<path d="M1621,845.33h26v10.67h-26z" fill="url(#d50_115)"/>
+<path d="M1621,845.33h26v10.67h-26z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1634" y="871" font-family="JetBrains Mono" font-size="11" font-weight="400" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">4</text>
+<path d="M1660,832h26v24h-26z" fill="#fbfaf4"/>
+<path d="M1660,832h26v24h-26z" fill="url(#d50_115)"/>
+<path d="M1660,832h26v24h-26z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1673" y="871" font-family="JetBrains Mono" font-size="11" font-weight="400" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">9</text>
+<path d="M1699,813.33h26v42.67h-26z" fill="#fbfaf4"/>
+<path d="M1699,813.33h26v42.67h-26z" fill="url(#d50_115)"/>
+<path d="M1699,813.33h26v42.67h-26z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1712" y="871" font-family="JetBrains Mono" font-size="11" font-weight="400" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">16</text>
+<path d="M1738,789.33h26v66.67h-26z" fill="#fbfaf4"/>
+<path d="M1738,789.33h26v66.67h-26z" fill="url(#d50_115)"/>
+<path d="M1738,789.33h26v66.67h-26z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1751" y="871" font-family="JetBrains Mono" font-size="11" font-weight="400" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">25</text>
+<path d="M1777,760h26v96h-26z" fill="#fbfaf4"/>
+<path d="M1777,760h26v96h-26z" fill="url(#d50_115)"/>
+<path d="M1777,760h26v96h-26z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1790" y="871" font-family="JetBrains Mono" font-size="11" font-weight="400" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">36</text>
+<line x1="1480" y1="857" x2="1560" y2="857" stroke="#17171c" stroke-width="1.2" marker-start="url(#ah)" stroke-linecap="butt"/>
+<text xml:space="preserve" x="1485" y="848" font-family="DejaVu Sans" font-size="10" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">F_&gt; ⊇ F⊩_tht</text>
+<path d="M102,452Q132,423.4 162,452Q132,480.6 102,452z" fill="#fbfaf4" stroke="#17171c" stroke-width="2"/>
+<circle cx="141" cy="452" r="9.5" fill="#fbfaf4" stroke="#17171c" stroke-width="1.8"/>
+<circle cx="143" cy="452" r="4.4" fill="#17171c"/>
+<text xml:space="preserve" x="84" y="486" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">additive eye: sees t</text>
+<text xml:space="preserve" x="84" y="500" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">with its sign; cannot</text>
+<text xml:space="preserve" x="84" y="514" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">see j ↦ 2·j</text>
+<path d="M1080,400Q1110,371.4 1140,400Q1110,428.6 1080,400z" fill="#fbfaf4" stroke="#17171c" stroke-width="2"/>
+<circle cx="1101" cy="400" r="9.5" fill="#fbfaf4" stroke="#17171c" stroke-width="1.8"/>
+<circle cx="1099" cy="400" r="4.4" fill="#17171c"/>
+<text xml:space="preserve" x="1060" y="346" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">multiplicative eye: sees</text>
+<text xml:space="preserve" x="1060" y="360" font-family="DejaVu Sans" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">only |t|</text>
+<line x1="1076" y1="402" x2="1036" y2="462" stroke="#17171c" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#ah)" stroke-linecap="butt"/>
+<line x1="40" y1="952" x2="1880" y2="952" stroke="#17171c" stroke-width="0.8" stroke-linecap="butt"/>
+<path d="M52,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M52,968h54v54h-54z" fill="url(#h450_70_10)"/>
+<path d="M52,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="116" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">ring structure of †</text>
+<text xml:space="preserve" x="116" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">one universe · (0,0) · #1</text>
+<path d="M280,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M280,968h54v54h-54z" fill="url(#h1350_70_10)"/>
+<path d="M280,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="344" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">ring structure of ‡</text>
+<text xml:space="preserve" x="344" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">another universe · (1,0) · #5</text>
+<path d="M508,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M508,968h54v54h-54z" fill="url(#h900_60_10)"/>
+<path d="M508,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="572" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">étale-like</text>
+<text xml:space="preserve" x="572" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">vertically coric: Π_v, D</text>
+<path d="M736,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M736,968h54v54h-54z" fill="url(#h0_60_10)"/>
+<path d="M736,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="800" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">mono-analytic</text>
+<text xml:space="preserve" x="800" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">horizontally coric: G_v ↷ O×μ</text>
+<path d="M964,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M964,968h54v54h-54z" fill="url(#h0_80_10)"/>
+<path d="M964,968h54v54h-54z" fill="url(#h900_80_10)"/>
+<path d="M964,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1028" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">bi-coric</text>
+<text xml:space="preserve" x="1028" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">D⊢ = {G_v}, shared by all</text>
+<path d="M1192,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M1192,968h54v54h-54z" fill="url(#d80_115)"/>
+<path d="M1192,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1256" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">value group</text>
+<text xml:space="preserve" x="1256" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">O▶, pilot objects</text>
+<path d="M1420,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M1420,968h54v54h-54z" fill="url(#h450_70_10_d5m4)"/>
+<path d="M1420,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1484" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">indeterminate</text>
+<text xml:space="preserve" x="1484" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">up to (Ind1) (Ind2) (Ind3)</text>
+<path d="M1648,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M1648,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1712" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">species</text>
+<text xml:space="preserve" x="1712" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">outline only: a type, not a set</text>
+<text xml:space="preserve" x="52" y="1046" font-family="Inter" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Every chip names a data type of the toolkit (species ids of `iut species`, C structs of src/iut.h). All numbers are read from `iut walk`.</text>
+<text xml:space="preserve" x="1868" y="1046" font-family="JetBrains Mono" font-size="10.5" font-weight="400" fill="#5d5d66" text-anchor="end" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">scripts/infographic/hatched.js</text>
+</svg>

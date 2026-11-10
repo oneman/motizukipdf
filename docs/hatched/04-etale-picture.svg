@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 1920 1080" font-family="Inter">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0.8L9,5L0,9.2L2.4,5z" fill="#17171c"/></marker><marker id="ahg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0.8L9,5L0,9.2L2.4,5z" fill="#5d5d66"/></marker><pattern id="h250_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-25)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h900_60_10" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(-90)"><line x1="0" y1="3" x2="6" y2="3" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h450_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-45)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h650_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-65)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h1550_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-155)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h1350_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-135)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h1150_70_10" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-115)"><line x1="0" y1="3.5" x2="7" y2="3.5" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h0_80_10" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(0)"><line x1="0" y1="4" x2="8" y2="4" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h900_80_10" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(-90)"><line x1="0" y1="4" x2="8" y2="4" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h0_60_10" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(0)"><line x1="0" y1="3" x2="6" y2="3" stroke="#17171c" stroke-width="1"/></pattern><pattern id="h450_60_10_d5m4" patternUnits="userSpaceOnUse" width="27" height="6" patternTransform="rotate(-45)"><line x1="0" y1="3" x2="27" y2="3" stroke="#17171c" stroke-width="1" stroke-dasharray="5 4"/></pattern><pattern id="hm220_120_10_d5-4" patternUnits="userSpaceOnUse" width="27" height="12" patternTransform="rotate(22)"><line x1="0" y1="6" x2="27" y2="6" stroke="#17171c" stroke-width="1" stroke-dasharray="5 4"/></pattern><pattern id="h310_120_10_d5m4" patternUnits="userSpaceOnUse" width="27" height="12" patternTransform="rotate(-31)"><line x1="0" y1="6" x2="27" y2="6" stroke="#17171c" stroke-width="1" stroke-dasharray="5 4"/></pattern><pattern id="h450_70_10_d5m4" patternUnits="userSpaceOnUse" width="27" height="7" patternTransform="rotate(-45)"><line x1="0" y1="3.5" x2="27" y2="3.5" stroke="#17171c" stroke-width="1" stroke-dasharray="5 4"/></pattern><pattern id="d80_115" patternUnits="userSpaceOnUse" width="8" height="8"><circle cx="2" cy="2" r="1.15" fill="#17171c"/><circle cx="6" cy="6" r="1.15" fill="#17171c"/></pattern></defs>
+<rect width="1920" height="1080" fill="#fbfaf4"/>
+<rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#17171c" stroke-width="2.4"/>
+<rect x="27" y="27" width="1866" height="1026" fill="none" stroke="#17171c" stroke-width="0.8"/>
+<text xml:space="preserve" x="52" y="62" font-family="JetBrains Mono" font-size="12" font-weight="500" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke" letter-spacing="1.5">PLATE 4 / 6</text>
+<text xml:space="preserve" x="52" y="98" font-family="Inter" font-size="30" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">The étale picture: looking through the core</text>
+<text xml:space="preserve" x="52" y="124" font-family="Inter" font-size="14.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Forget the Frobenius-like part of every theater and what remains can be laid out as spokes around one shared core, the D⊢-prime-strip. The only line of sight from ‡ to † runs down</text>
+<text xml:space="preserve" x="52" y="144" font-family="Inter" font-size="14.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">a spoke, through the core and up another spoke, and what arrives is known only up to three indeterminacies.</text>
+<rect x="1508" y="44" width="368" height="78" fill="none" stroke="#17171c" stroke-width="1"/>
+<text xml:space="preserve" x="1520" y="66" font-family="JetBrains Mono" font-size="11.5" font-weight="400" fill="#17171c" text-anchor="start">example   abc(1,2400,2401) l=13</text>
+<text xml:space="preserve" x="1520" y="87" font-family="JetBrains Mono" font-size="11.5" font-weight="400" fill="#17171c" text-anchor="start">curve     Frey y^2=x(x-1)(x+2400)</text>
+<text xml:space="preserve" x="1520" y="108" font-family="JetBrains Mono" font-size="11.5" font-weight="400" fill="#17171c" text-anchor="start">l = 13   l* = 6   l± = 7   |V| = 6</text>
+<path d="M595.4,873.08A342,342 0 0 1 357.74,727.11L445.22,667.26A236,236 0 0 0 609.22,767.98z" fill="#fbfaf4"/>
+<path d="M595.4,873.08A342,342 0 0 1 357.74,727.11L445.22,667.26A236,236 0 0 0 609.22,767.98z" fill="url(#h250_70_10)"/>
+<path d="M595.4,873.08A342,342 0 0 1 357.74,727.11L445.22,667.26A236,236 0 0 0 609.22,767.98z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M609.22,767.98A236,236 0 0 1 445.22,667.26L516.2,618.7A150,150 0 0 0 620.44,682.72z" fill="#fbfaf4"/>
+<path d="M609.22,767.98A236,236 0 0 1 445.22,667.26L516.2,618.7A150,150 0 0 0 620.44,682.72z" fill="url(#h900_60_10)"/>
+<path d="M609.22,767.98A236,236 0 0 1 445.22,667.26L516.2,618.7A150,150 0 0 0 620.44,682.72z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="563.07" y1="659.26" x2="584" y2="625.18" stroke="#17171c" stroke-width="1.8" marker-end="url(#ah)" stroke-linecap="butt"/>
+<rect x="448.46" y="758.26" width="80.58" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="456.46" y="780.26" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start">HT (0,-1)</text>
+<text xml:space="preserve" x="456.46" y="797.26" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">#2 · 25°</text>
+<path d="M327.72,673.45A342,342 0 0 1 327.72,394.55L424.51,437.77A236,236 0 0 0 424.51,630.23z" fill="#fbfaf4"/>
+<path d="M327.72,673.45A342,342 0 0 1 327.72,394.55L424.51,437.77A236,236 0 0 0 424.51,630.23z" fill="url(#h450_70_10)"/>
+<path d="M327.72,673.45A342,342 0 0 1 327.72,394.55L424.51,437.77A236,236 0 0 0 424.51,630.23z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M424.51,630.23A236,236 0 0 1 424.51,437.77L503.04,472.84A150,150 0 0 0 503.04,595.16z" fill="#fbfaf4"/>
+<path d="M424.51,630.23A236,236 0 0 1 424.51,437.77L503.04,472.84A150,150 0 0 0 503.04,595.16z" fill="url(#h900_60_10)"/>
+<path d="M424.51,630.23A236,236 0 0 1 424.51,437.77L503.04,472.84A150,150 0 0 0 503.04,595.16z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="493" y1="534" x2="533" y2="534" stroke="#17171c" stroke-width="1.8" marker-end="url(#ah)" stroke-linecap="butt"/>
+<rect x="310.16" y="512" width="81.69" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="318.16" y="534" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start">†HT (0,0)</text>
+<text xml:space="preserve" x="318.16" y="551" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">#1 · 45°</text>
+<path d="M357.74,340.89A342,342 0 0 1 595.4,194.92L609.22,300.02A236,236 0 0 0 445.22,400.74z" fill="#fbfaf4"/>
+<path d="M357.74,340.89A342,342 0 0 1 595.4,194.92L609.22,300.02A236,236 0 0 0 445.22,400.74z" fill="url(#h650_70_10)"/>
+<path d="M357.74,340.89A342,342 0 0 1 595.4,194.92L609.22,300.02A236,236 0 0 0 445.22,400.74z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M445.22,400.74A236,236 0 0 1 609.22,300.02L620.44,385.28A150,150 0 0 0 516.2,449.3z" fill="#fbfaf4"/>
+<path d="M445.22,400.74A236,236 0 0 1 609.22,300.02L620.44,385.28A150,150 0 0 0 516.2,449.3z" fill="url(#h900_60_10)"/>
+<path d="M445.22,400.74A236,236 0 0 1 609.22,300.02L620.44,385.28A150,150 0 0 0 516.2,449.3z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="563.07" y1="408.74" x2="584" y2="442.82" stroke="#17171c" stroke-width="1.8" marker-end="url(#ah)" stroke-linecap="butt"/>
+<rect x="451.15" y="265.74" width="75.19" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="459.15" y="287.74" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start">HT (0,1)</text>
+<text xml:space="preserve" x="459.15" y="304.74" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">#3 · 65°</text>
+<path d="M922.26,727.11A342,342 0 0 1 684.6,873.08L670.78,767.98A236,236 0 0 0 834.78,667.26z" fill="#fbfaf4"/>
+<path d="M922.26,727.11A342,342 0 0 1 684.6,873.08L670.78,767.98A236,236 0 0 0 834.78,667.26z" fill="url(#h1550_70_10)"/>
+<path d="M922.26,727.11A342,342 0 0 1 684.6,873.08L670.78,767.98A236,236 0 0 0 834.78,667.26z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M834.78,667.26A236,236 0 0 1 670.78,767.98L659.56,682.72A150,150 0 0 0 763.8,618.7z" fill="#fbfaf4"/>
+<path d="M834.78,667.26A236,236 0 0 1 670.78,767.98L659.56,682.72A150,150 0 0 0 763.8,618.7z" fill="url(#h900_60_10)"/>
+<path d="M834.78,667.26A236,236 0 0 1 670.78,767.98L659.56,682.72A150,150 0 0 0 763.8,618.7z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="716.93" y1="659.26" x2="696" y2="625.18" stroke="#17171c" stroke-width="1.8" marker-end="url(#ah)" stroke-linecap="butt"/>
+<rect x="750.96" y="758.26" width="80.58" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="758.96" y="780.26" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start">HT (1,-1)</text>
+<text xml:space="preserve" x="758.96" y="797.26" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">#4 · 155°</text>
+<path d="M952.28,394.55A342,342 0 0 1 952.28,673.45L855.49,630.23A236,236 0 0 0 855.49,437.77z" fill="#fbfaf4"/>
+<path d="M952.28,394.55A342,342 0 0 1 952.28,673.45L855.49,630.23A236,236 0 0 0 855.49,437.77z" fill="url(#h1350_70_10)"/>
+<path d="M952.28,394.55A342,342 0 0 1 952.28,673.45L855.49,630.23A236,236 0 0 0 855.49,437.77z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M855.49,437.77A236,236 0 0 1 855.49,630.23L776.96,595.16A150,150 0 0 0 776.96,472.84z" fill="#fbfaf4"/>
+<path d="M855.49,437.77A236,236 0 0 1 855.49,630.23L776.96,595.16A150,150 0 0 0 776.96,472.84z" fill="url(#h900_60_10)"/>
+<path d="M855.49,437.77A236,236 0 0 1 855.49,630.23L776.96,595.16A150,150 0 0 0 776.96,472.84z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="787" y1="534" x2="747" y2="534" stroke="#17171c" stroke-width="1.8" marker-end="url(#ah)" stroke-linecap="butt"/>
+<rect x="888.16" y="512" width="81.69" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="896.16" y="534" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start">‡HT (1,0)</text>
+<text xml:space="preserve" x="896.16" y="551" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">#5 · 135°</text>
+<path d="M684.6,194.92A342,342 0 0 1 922.26,340.89L834.78,400.74A236,236 0 0 0 670.78,300.02z" fill="#fbfaf4"/>
+<path d="M684.6,194.92A342,342 0 0 1 922.26,340.89L834.78,400.74A236,236 0 0 0 670.78,300.02z" fill="url(#h1150_70_10)"/>
+<path d="M684.6,194.92A342,342 0 0 1 922.26,340.89L834.78,400.74A236,236 0 0 0 670.78,300.02z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M670.78,300.02A236,236 0 0 1 834.78,400.74L763.8,449.3A150,150 0 0 0 659.56,385.28z" fill="#fbfaf4"/>
+<path d="M670.78,300.02A236,236 0 0 1 834.78,400.74L763.8,449.3A150,150 0 0 0 659.56,385.28z" fill="url(#h900_60_10)"/>
+<path d="M670.78,300.02A236,236 0 0 1 834.78,400.74L763.8,449.3A150,150 0 0 0 659.56,385.28z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="716.93" y1="408.74" x2="696" y2="442.82" stroke="#17171c" stroke-width="1.8" marker-end="url(#ah)" stroke-linecap="butt"/>
+<rect x="753.66" y="265.74" width="75.19" height="50" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="761.66" y="287.74" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start">HT (1,1)</text>
+<text xml:space="preserve" x="761.66" y="304.74" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">#6 · 115°</text>
+<path d="M536,534a104,104 0 1 0 208,0a104,104 0 1 0 -208,0z" fill="#fbfaf4"/>
+<path d="M536,534a104,104 0 1 0 208,0a104,104 0 1 0 -208,0z" fill="url(#h0_80_10)"/>
+<path d="M536,534a104,104 0 1 0 208,0a104,104 0 1 0 -208,0z" fill="url(#h900_80_10)"/>
+<path d="M536,534a104,104 0 1 0 208,0a104,104 0 1 0 -208,0z" fill="none" stroke="#17171c" stroke-width="2.4" stroke-linejoin="round"/>
+<rect x="567.69" y="494" width="144.63" height="94" fill="#fbfaf4" stroke="#17171c" stroke-width="1.1"/>
+<text xml:space="preserve" x="575.69" y="516" font-family="DejaVu Sans" font-size="14" font-weight="700" fill="#17171c" text-anchor="start">D⊢-prime-strip</text>
+<rect x="575.69" y="522" width="113" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="582.69" y="534.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">DMonoPrimeStrip</text>
+<rect x="575.69" y="544" width="113" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="582.69" y="556.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_prime_strip</text>
+<text xml:space="preserve" x="575.69" y="577" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start">{G_v}, v ∈ V · bi-coric</text>
+<path d="M1011,534Q1044,502.54 1077,534Q1044,565.46 1011,534z" fill="#fbfaf4" stroke="#17171c" stroke-width="2"/>
+<circle cx="1034.1" cy="534" r="10.45" fill="#fbfaf4" stroke="#17171c" stroke-width="1.8"/>
+<circle cx="1031.9" cy="534" r="4.84" fill="#17171c"/>
+<text xml:space="preserve" x="1044" y="574" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">observer in ‡</text>
+<path d="M1008,526L982,472L723.2,472" fill="none" stroke="#17171c" stroke-width="1.3" stroke-dasharray="7 5" stroke-linejoin="round"/>
+<path d="M556.8,472L268,472" fill="none" stroke="#17171c" stroke-width="1.3" stroke-dasharray="7 5" marker-end="url(#ah)" stroke-linejoin="round"/>
+<text xml:space="preserve" x="260" y="476" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="end" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">into †</text>
+<text xml:space="preserve" x="52" y="196" font-family="DejaVu Sans" font-size="13.5" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">outer band: the Frobenius-like part</text>
+<rect x="52" y="203" width="173" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="59" y="215.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ThetaPmEllNFHodgeTheater</text>
+<text xml:space="preserve" x="52" y="235" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">hatched in the ring angle of its own universe;</text>
+<text xml:space="preserve" x="52" y="250" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">no two bands share a ring structure</text>
+<line x1="250" y1="262" x2="408.83" y2="309.84" stroke="#5d5d66" stroke-width="0.9" stroke-linecap="butt"/>
+<circle cx="408.83" cy="309.84" r="2.6" fill="#17171c"/>
+<text xml:space="preserve" x="52" y="840" font-family="DejaVu Sans" font-size="13.5" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">inner band: the étale-like part</text>
+<rect x="52" y="847" width="179" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="59" y="859.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">DThetaPmEllNFHodgeTheater</text>
+<rect x="52" y="868" width="74" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="59" y="880.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ForgetToD</text>
+<text xml:space="preserve" x="52" y="900" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">a D-Θ±ell NF-Hodge theater: Π_v and labels only</text>
+<line x1="250" y1="826" x2="510.78" y2="659.3" stroke="#5d5d66" stroke-width="0.9" stroke-linecap="butt"/>
+<circle cx="510.78" cy="659.3" r="2.6" fill="#17171c"/>
+<text xml:space="preserve" x="1004" y="196" font-family="DejaVu Sans" font-size="13.5" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">arrows into the core</text>
+<rect x="1004" y="203" width="100" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1011" y="215.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">ForgetToDMono</text>
+<rect x="1004" y="224" width="120" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1011" y="236.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">KummerDetachment</text>
+<text xml:space="preserve" x="1004" y="256" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Π_v ↠ G_v: forget the</text>
+<text xml:space="preserve" x="1004" y="271" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">holomorphic structure</text>
+<line x1="1000" y1="250" x2="714.56" y2="427.51" stroke="#5d5d66" stroke-width="0.9" stroke-linecap="butt"/>
+<circle cx="714.56" cy="427.51" r="2.6" fill="#17171c"/>
+<path d="M787.61,864.54A362,362 0 0 1 492.39,864.54" fill="none" stroke="#17171c" stroke-width="1.4" marker-end="url(#ah)" marker-start="url(#ah)" stroke-linejoin="round"/>
+<text xml:space="preserve" x="640" y="916" font-family="DejaVu Sans" font-size="12" font-weight="700" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">spokes may be permuted freely</text>
+<text xml:space="preserve" x="640" y="932" font-family="DejaVu Sans" font-size="11.5" font-weight="400" fill="#5d5d66" text-anchor="middle" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">the core does not know which is which</text>
+<text xml:space="preserve" x="1190" y="196" font-family="DejaVu Sans" font-size="17" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">What the observer in ‡ can rebuild of †</text>
+<rect x="1190" y="206" width="140" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1197" y="218.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_indeterminacies</text>
+<rect x="1336" y="206" width="179" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1343" y="218.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">MultiradialRepresentation</text>
+<path d="M1190,250h670v196h-670z" fill="#fbfaf4"/>
+<path d="M1190,250h670v196h-670z" fill="none" stroke="#17171c" stroke-width="1.2" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1440" y="284" font-family="DejaVu Sans" font-size="16" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">(Ind1)  which is which</text>
+<rect x="1440" y="294" width="173" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1447" y="306.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_indeterminacies.ind1</text>
+<text xml:space="preserve" x="1440" y="336" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">automorphisms of the processions of</text>
+<text xml:space="preserve" x="1440" y="353" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">D⊢-prime-strips: permutations of the labels</text>
+<text xml:space="preserve" x="1440" y="370" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">in S±_(j+1), up to (j+1)!, and Aut(G_v)</text>
+<path d="M1242,288h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1242,288h34v30h-34z" fill="url(#h0_60_10)"/>
+<path d="M1242,288h34v30h-34z" fill="url(#h900_60_10)"/>
+<path d="M1242,288h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1259" y="308" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">0</text>
+<path d="M1276,288h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1276,288h34v30h-34z" fill="url(#h0_60_10)"/>
+<path d="M1276,288h34v30h-34z" fill="url(#h900_60_10)"/>
+<path d="M1276,288h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1293" y="308" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">1</text>
+<path d="M1310,288h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1310,288h34v30h-34z" fill="url(#h0_60_10)"/>
+<path d="M1310,288h34v30h-34z" fill="url(#h900_60_10)"/>
+<path d="M1310,288h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1327" y="308" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">2</text>
+<path d="M1344,288h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1344,288h34v30h-34z" fill="url(#h0_60_10)"/>
+<path d="M1344,288h34v30h-34z" fill="url(#h900_60_10)"/>
+<path d="M1344,288h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1361" y="308" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">3</text>
+<path d="M1242,378h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1242,378h34v30h-34z" fill="url(#h450_60_10_d5m4)"/>
+<path d="M1242,378h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 3"/>
+<text xml:space="preserve" x="1259" y="398" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">2</text>
+<line x1="1327" y1="318" x2="1259" y2="378" stroke="#17171c" stroke-width="1" stroke-linecap="butt"/>
+<path d="M1276,378h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1276,378h34v30h-34z" fill="url(#h450_60_10_d5m4)"/>
+<path d="M1276,378h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 3"/>
+<text xml:space="preserve" x="1293" y="398" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">0</text>
+<line x1="1259" y1="318" x2="1293" y2="378" stroke="#17171c" stroke-width="1" stroke-linecap="butt"/>
+<path d="M1310,378h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1310,378h34v30h-34z" fill="url(#h450_60_10_d5m4)"/>
+<path d="M1310,378h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 3"/>
+<text xml:space="preserve" x="1327" y="398" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">3</text>
+<line x1="1361" y1="318" x2="1327" y2="378" stroke="#17171c" stroke-width="1" stroke-linecap="butt"/>
+<path d="M1344,378h34v30h-34z" fill="#fbfaf4"/>
+<path d="M1344,378h34v30h-34z" fill="url(#h450_60_10_d5m4)"/>
+<path d="M1344,378h34v30h-34z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="5 3"/>
+<text xml:space="preserve" x="1361" y="398" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="#17171c" text-anchor="middle" stroke="#fbfaf4" stroke-width="6" stroke-linejoin="round" paint-order="stroke">1</text>
+<line x1="1293" y1="318" x2="1361" y2="378" stroke="#17171c" stroke-width="1" stroke-linecap="butt"/>
+<path d="M1190,458h670v196h-670z" fill="#fbfaf4"/>
+<path d="M1190,458h670v196h-670z" fill="none" stroke="#17171c" stroke-width="1.2" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1440" y="492" font-family="DejaVu Sans" font-size="16" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">(Ind2)  turned by how much</text>
+<rect x="1440" y="502" width="173" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1447" y="514.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_indeterminacies.ind2</text>
+<text xml:space="preserve" x="1440" y="544" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">the units O×μ are shared only up to an</text>
+<text xml:space="preserve" x="1440" y="561" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">isometry (Ism): the horizontal lines arrive</text>
+<text xml:space="preserve" x="1440" y="578" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">turned by an unknown amount</text>
+<path d="M1240,556a70,70 0 1 0 140,0a70,70 0 1 0 -140,0z" fill="#fbfaf4"/>
+<path d="M1240,556a70,70 0 1 0 140,0a70,70 0 1 0 -140,0z" fill="url(#h0_60_10)"/>
+<path d="M1240,556a70,70 0 1 0 140,0a70,70 0 1 0 -140,0z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M1240,556a70,70 0 1 0 140,0a70,70 0 1 0 -140,0z" fill="url(#hm220_120_10_d5-4)"/>
+<path d="M1240,556a70,70 0 1 0 140,0a70,70 0 1 0 -140,0z" fill="url(#h310_120_10_d5m4)"/>
+<path d="M1240,556a70,70 0 1 0 140,0a70,70 0 1 0 -140,0z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M1190,666h670v196h-670z" fill="#fbfaf4"/>
+<path d="M1190,666h670v196h-670z" fill="none" stroke="#17171c" stroke-width="1.2" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1440" y="700" font-family="DejaVu Sans" font-size="16" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">(Ind3)  no more than this</text>
+<rect x="1440" y="710" width="173" height="18" fill="#fbfaf4" stroke="#17171c" stroke-width="0.9"/>
+<text x="1447" y="722.96" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#17171c">iut_indeterminacies.ind3</text>
+<text xml:space="preserve" x="1440" y="752" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">upper semi-compatibility of the log-Kummer</text>
+<text xml:space="preserve" x="1440" y="769" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">correspondence: the region is only contained</text>
+<text xml:space="preserve" x="1440" y="786" font-family="DejaVu Sans" font-size="12" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">in the log-shell, an upper bound</text>
+<path d="M1236,764a74,74 0 1 0 148,0a74,74 0 1 0 -148,0z" fill="#fbfaf4"/>
+<path d="M1236,764a74,74 0 1 0 148,0a74,74 0 1 0 -148,0z" fill="url(#h450_70_10_d5m4)"/>
+<path d="M1236,764a74,74 0 1 0 148,0a74,74 0 1 0 -148,0z" fill="none" stroke="#17171c" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<path d="M1264,772a34,34 0 1 0 68,0a34,34 0 1 0 -68,0z" fill="#fbfaf4"/>
+<path d="M1264,772a34,34 0 1 0 68,0a34,34 0 1 0 -68,0z" fill="url(#h450_70_10)"/>
+<path d="M1264,772a34,34 0 1 0 68,0a34,34 0 1 0 -68,0z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1350" y="718" font-family="DejaVu Sans" font-size="13" font-weight="700" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">I_v</text>
+<line x1="40" y1="952" x2="1880" y2="952" stroke="#17171c" stroke-width="0.8" stroke-linecap="butt"/>
+<path d="M52,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M52,968h54v54h-54z" fill="url(#h450_70_10)"/>
+<path d="M52,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="116" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">ring structure of †</text>
+<text xml:space="preserve" x="116" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">one universe · (0,0) · #1</text>
+<path d="M280,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M280,968h54v54h-54z" fill="url(#h1350_70_10)"/>
+<path d="M280,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="344" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">ring structure of ‡</text>
+<text xml:space="preserve" x="344" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">another universe · (1,0) · #5</text>
+<path d="M508,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M508,968h54v54h-54z" fill="url(#h900_60_10)"/>
+<path d="M508,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="572" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">étale-like</text>
+<text xml:space="preserve" x="572" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">vertically coric: Π_v, D</text>
+<path d="M736,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M736,968h54v54h-54z" fill="url(#h0_60_10)"/>
+<path d="M736,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="800" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">mono-analytic</text>
+<text xml:space="preserve" x="800" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">horizontally coric: G_v ↷ O×μ</text>
+<path d="M964,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M964,968h54v54h-54z" fill="url(#h0_80_10)"/>
+<path d="M964,968h54v54h-54z" fill="url(#h900_80_10)"/>
+<path d="M964,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1028" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">bi-coric</text>
+<text xml:space="preserve" x="1028" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">D⊢ = {G_v}, shared by all</text>
+<path d="M1192,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M1192,968h54v54h-54z" fill="url(#d80_115)"/>
+<path d="M1192,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1256" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">value group</text>
+<text xml:space="preserve" x="1256" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">O▶, pilot objects</text>
+<path d="M1420,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M1420,968h54v54h-54z" fill="url(#h450_70_10_d5m4)"/>
+<path d="M1420,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1484" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">indeterminate</text>
+<text xml:space="preserve" x="1484" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">up to (Ind1) (Ind2) (Ind3)</text>
+<path d="M1648,968h54v54h-54z" fill="#fbfaf4"/>
+<path d="M1648,968h54v54h-54z" fill="none" stroke="#17171c" stroke-width="1.4" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1712" y="990" font-family="DejaVu Sans" font-size="13" font-weight="600" fill="#17171c" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">species</text>
+<text xml:space="preserve" x="1712" y="1009" font-family="DejaVu Sans" font-size="10.8" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">outline only: a type, not a set</text>
+<text xml:space="preserve" x="52" y="1046" font-family="Inter" font-size="11" font-weight="400" fill="#5d5d66" text-anchor="start" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Every chip names a data type of the toolkit (species ids of `iut species`, C structs of src/iut.h). All numbers are read from `iut walk`.</text>
+<text xml:space="preserve" x="1868" y="1046" font-family="JetBrains Mono" font-size="10.5" font-weight="400" fill="#5d5d66" text-anchor="end" stroke="#fbfaf4" stroke-width="4" stroke-linejoin="round" paint-order="stroke">scripts/infographic/hatched.js</text>
+</svg>
