@@ -268,5 +268,80 @@
   "file": "m-plus-rounded-1c-latin-800-normal.woff2",
   "weight": 800,
   "range": "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
+ },
+ {
+  "file": "m-plus-rounded-1c-99-500-normal.woff2",
+  "weight": 500,
+  "range": "U+2191,U+505c,U+52e4,U+5305,U+535a,U+56e0,U+59bb,U+5acc,U+5b09,U+5b87,U+5c90,U+5df1,U+5e2d,U+5e33,U+5f3e,U+6298,U+6383,U+653b,U+6697,U+6804,U+6a39,U+6cca,U+6e90,U+6f2b,U+702c,U+7206,U+7236,U+7559,U+7565,U+7591,U+75c7,U+75db,U+7b4b,U+7bb1,U+7d99,U+7fbd,U+8131,U+885b,U+8b1d,U+8ff7,U+9003,U+9045,U+96a0,U+9732,U+990a,U+99d0,U+9e97,U+9f62,U+ff25,U+ff2d"
+ },
+ {
+  "file": "m-plus-rounded-1c-93-500-normal.woff2",
+  "weight": 500,
+  "range": "U+21d2,U+25ce,U+300a-300b,U+4e89,U+4e9c,U+4ea1,U+5263,U+53cc,U+5426,U+5869,U+5947,U+598a,U+5999,U+5e55,U+5e72,U+5e79,U+5fae,U+5fb9,U+602a,U+6163,U+624d,U+6749,U+6c5a,U+6cbf,U+6d45,U+6dfb,U+6e7e,U+708e,U+725b,U+7763,U+79c0,U+7bc4,U+7c89,U+7e01,U+7e2e,U+8010,U+8033,U+8c6a,U+8cc3,U+8f1d,U+8f9b,U+8fb2,U+907f,U+90f7,U+9707,U+9818,U+9b3c,U+ff0a,U+ff4d"
+ },
+ {
+  "file": "m-plus-rounded-1c-74-500-normal.woff2",
+  "weight": 500,
+  "range": "U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90"
+ },
+ {
+  "file": "m-plus-rounded-1c-95-500-normal.woff2",
+  "weight": 500,
+  "range": "U+2193,U+25b2,U+4e4b,U+516d,U+51c4,U+529f,U+52c9,U+5360,U+5442,U+5857,U+5915,U+59eb,U+5a9b,U+5c3b,U+6012,U+61b6,U+62b1,U+6311,U+6577,U+65e2,U+65ec,U+6613,U+6790,U+6cb9,U+7372,U+76ae,U+7d5e,U+7fcc,U+88ab,U+88d5,U+8caf,U+8ddd,U+8ecd,U+8f38,U+8f9e,U+8feb,U+9063,U+90f5,U+93e1,U+968a,U+968f,U+98fe,U+9ec4,U+ff1d,U+ff27,U+ff2a,U+ff36,U+ff3b,U+ff3d,U+ffe5"
+ },
+ {
+  "file": "m-plus-rounded-1c-114-500-normal.woff2",
+  "weight": 500,
+  "range": "U+3e,U+3005,U+4e0d,U+4e88,U+4ecb,U+4ee3,U+4ef6,U+4fdd,U+4fe1,U+500b,U+50cf,U+5186,U+5316,U+53d7,U+540c,U+544a,U+54e1,U+5728,U+58f2,U+5973,U+5b89,U+5c71,U+5e02,U+5e97,U+5f15,U+5fc3,U+5fdc,U+601d,U+611b,U+611f,U+671f,U+6728,U+6765,U+683c,U+6b21,U+6ce8,U+6d3b,U+6d77,U+7530,U+7740,U+7acb,U+7d50,U+826f,U+8f09,U+8fbc,U+9001,U+9053,U+91ce,U+9762,U+98df"
+ },
+ {
+  "file": "m-plus-rounded-1c-99-700-normal.woff2",
+  "weight": 700,
+  "range": "U+2191,U+505c,U+52e4,U+5305,U+535a,U+56e0,U+59bb,U+5acc,U+5b09,U+5b87,U+5c90,U+5df1,U+5e2d,U+5e33,U+5f3e,U+6298,U+6383,U+653b,U+6697,U+6804,U+6a39,U+6cca,U+6e90,U+6f2b,U+702c,U+7206,U+7236,U+7559,U+7565,U+7591,U+75c7,U+75db,U+7b4b,U+7bb1,U+7d99,U+7fbd,U+8131,U+885b,U+8b1d,U+8ff7,U+9003,U+9045,U+96a0,U+9732,U+990a,U+99d0,U+9e97,U+9f62,U+ff25,U+ff2d"
+ },
+ {
+  "file": "m-plus-rounded-1c-93-700-normal.woff2",
+  "weight": 700,
+  "range": "U+21d2,U+25ce,U+300a-300b,U+4e89,U+4e9c,U+4ea1,U+5263,U+53cc,U+5426,U+5869,U+5947,U+598a,U+5999,U+5e55,U+5e72,U+5e79,U+5fae,U+5fb9,U+602a,U+6163,U+624d,U+6749,U+6c5a,U+6cbf,U+6d45,U+6dfb,U+6e7e,U+708e,U+725b,U+7763,U+79c0,U+7bc4,U+7c89,U+7e01,U+7e2e,U+8010,U+8033,U+8c6a,U+8cc3,U+8f1d,U+8f9b,U+8fb2,U+907f,U+90f7,U+9707,U+9818,U+9b3c,U+ff0a,U+ff4d"
+ },
+ {
+  "file": "m-plus-rounded-1c-74-700-normal.woff2",
+  "weight": 700,
+  "range": "U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90"
+ },
+ {
+  "file": "m-plus-rounded-1c-95-700-normal.woff2",
+  "weight": 700,
+  "range": "U+2193,U+25b2,U+4e4b,U+516d,U+51c4,U+529f,U+52c9,U+5360,U+5442,U+5857,U+5915,U+59eb,U+5a9b,U+5c3b,U+6012,U+61b6,U+62b1,U+6311,U+6577,U+65e2,U+65ec,U+6613,U+6790,U+6cb9,U+7372,U+76ae,U+7d5e,U+7fcc,U+88ab,U+88d5,U+8caf,U+8ddd,U+8ecd,U+8f38,U+8f9e,U+8feb,U+9063,U+90f5,U+93e1,U+968a,U+968f,U+98fe,U+9ec4,U+ff1d,U+ff27,U+ff2a,U+ff36,U+ff3b,U+ff3d,U+ffe5"
+ },
+ {
+  "file": "m-plus-rounded-1c-114-700-normal.woff2",
+  "weight": 700,
+  "range": "U+3e,U+3005,U+4e0d,U+4e88,U+4ecb,U+4ee3,U+4ef6,U+4fdd,U+4fe1,U+500b,U+50cf,U+5186,U+5316,U+53d7,U+540c,U+544a,U+54e1,U+5728,U+58f2,U+5973,U+5b89,U+5c71,U+5e02,U+5e97,U+5f15,U+5fc3,U+5fdc,U+601d,U+611b,U+611f,U+671f,U+6728,U+6765,U+683c,U+6b21,U+6ce8,U+6d3b,U+6d77,U+7530,U+7740,U+7acb,U+7d50,U+826f,U+8f09,U+8fbc,U+9001,U+9053,U+91ce,U+9762,U+98df"
+ },
+ {
+  "file": "m-plus-rounded-1c-99-800-normal.woff2",
+  "weight": 800,
+  "range": "U+2191,U+505c,U+52e4,U+5305,U+535a,U+56e0,U+59bb,U+5acc,U+5b09,U+5b87,U+5c90,U+5df1,U+5e2d,U+5e33,U+5f3e,U+6298,U+6383,U+653b,U+6697,U+6804,U+6a39,U+6cca,U+6e90,U+6f2b,U+702c,U+7206,U+7236,U+7559,U+7565,U+7591,U+75c7,U+75db,U+7b4b,U+7bb1,U+7d99,U+7fbd,U+8131,U+885b,U+8b1d,U+8ff7,U+9003,U+9045,U+96a0,U+9732,U+990a,U+99d0,U+9e97,U+9f62,U+ff25,U+ff2d"
+ },
+ {
+  "file": "m-plus-rounded-1c-93-800-normal.woff2",
+  "weight": 800,
+  "range": "U+21d2,U+25ce,U+300a-300b,U+4e89,U+4e9c,U+4ea1,U+5263,U+53cc,U+5426,U+5869,U+5947,U+598a,U+5999,U+5e55,U+5e72,U+5e79,U+5fae,U+5fb9,U+602a,U+6163,U+624d,U+6749,U+6c5a,U+6cbf,U+6d45,U+6dfb,U+6e7e,U+708e,U+725b,U+7763,U+79c0,U+7bc4,U+7c89,U+7e01,U+7e2e,U+8010,U+8033,U+8c6a,U+8cc3,U+8f1d,U+8f9b,U+8fb2,U+907f,U+90f7,U+9707,U+9818,U+9b3c,U+ff0a,U+ff4d"
+ },
+ {
+  "file": "m-plus-rounded-1c-74-800-normal.woff2",
+  "weight": 800,
+  "range": "U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90"
+ },
+ {
+  "file": "m-plus-rounded-1c-95-800-normal.woff2",
+  "weight": 800,
+  "range": "U+2193,U+25b2,U+4e4b,U+516d,U+51c4,U+529f,U+52c9,U+5360,U+5442,U+5857,U+5915,U+59eb,U+5a9b,U+5c3b,U+6012,U+61b6,U+62b1,U+6311,U+6577,U+65e2,U+65ec,U+6613,U+6790,U+6cb9,U+7372,U+76ae,U+7d5e,U+7fcc,U+88ab,U+88d5,U+8caf,U+8ddd,U+8ecd,U+8f38,U+8f9e,U+8feb,U+9063,U+90f5,U+93e1,U+968a,U+968f,U+98fe,U+9ec4,U+ff1d,U+ff27,U+ff2a,U+ff36,U+ff3b,U+ff3d,U+ffe5"
+ },
+ {
+  "file": "m-plus-rounded-1c-114-800-normal.woff2",
+  "weight": 800,
+  "range": "U+3e,U+3005,U+4e0d,U+4e88,U+4ecb,U+4ee3,U+4ef6,U+4fdd,U+4fe1,U+500b,U+50cf,U+5186,U+5316,U+53d7,U+540c,U+544a,U+54e1,U+5728,U+58f2,U+5973,U+5b89,U+5c71,U+5e02,U+5e97,U+5f15,U+5fc3,U+5fdc,U+601d,U+611b,U+611f,U+671f,U+6728,U+6765,U+683c,U+6b21,U+6ce8,U+6d3b,U+6d77,U+7530,U+7740,U+7acb,U+7d50,U+826f,U+8f09,U+8fbc,U+9001,U+9053,U+91ce,U+9762,U+98df"
  }
 ]

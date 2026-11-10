@@ -223,6 +223,16 @@ The link kind is stored with the flags `preserves_Pi = 0, preserves_G = 1,
 preserves_units_mod_tors, preserves_ring_structure = 0, full_poly_isomorphism =
 1`, and the validator rejects any link that claims otherwise.
 
+The alien copies are drawn on one vertical page,
+[alienrings-infographic.png](alienrings-infographic.png) (1080 × 1920; SVG master
+[alienrings-infographic.svg](alienrings-infographic.svg)), in the kawaii style:
+a ring as two dances (+ and × on Z[i]), the Θ-link q̲^{j²} ↦ q̲ between two
+universes with the "what crosses" table `iut walk` prints, the log-link at ∞
+(log unrolls C^× into a strip), mono-anabelian transport, the log-shell at ∞
+(the closed disc of radius π) and the Gaussian integral of [Alien] §1, each with
+Japanese pop-culture jokes (`node scripts/infographic/alienrings.js`; numbers from
+`iut walk` and `iut run`, every process required to print `=> ok`).
+
 **Infinite H** (`InfiniteH`, [EssLgc] §3.10, [Alien] §3.11 Fig 3.14): the proof
 of [IUTchIII] Cor 3.12 only uses the two columns (0,◦), (1,◦) and the single
 Θ-link (0,0) → (1,0); `iut_lattice_build_H` builds exactly that, and the
