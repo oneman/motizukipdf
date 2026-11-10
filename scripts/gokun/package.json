@@ -1,0 +1,13 @@
+{
+  "name": "gokun-abc-build",
+  "private": true,
+  "description": "Builds gokun_abc.pdf from docs/gokun_abc/gokun_abc.html (KaTeX for the math, Chromium via Playwright for the PDF)",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@fontsource/noto-serif-jp": "5.2.5",
+    "@fontsource/source-serif-4": "5.3.1",
+    "katex": "0.16.11"
+  }
+}

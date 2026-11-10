@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Gokun Strategy Guide</title>
+<!--
+  Source of gokun_abc.pdf (scripts/gokun/build.js). Math goes between \( … \) and \[ … \] (KaTeX).
+  Placeholders: {{key}} for a number, {{svg:name}} for a figure, {{table:name}} for a table built from
+  docs/initial-theta-data/pipeline/*.json, {{stamp:kind}} for a marking stamp (ok, fix, note, new).
+  The stylesheet is the one of docs/multiradial_guide/parts/00-head.html plus the report-card table.
+  All jokes are text only: no character art, logos or screenshots from any show or game.
+-->
+<style>
+  @page { size: letter; }
+  :root {
+    --ink: #2a2433; --soft: #6b6178; --rule: #e4dcef;
+    --sakura: #e85d8a; --sakura-bg: #fff2f6;
+    --matcha: #3f8f5a; --matcha-bg: #eff8f1;
+    --sora: #3a74c4; --sora-bg: #eef4fc;
+    --yuzu: #c98a10; --yuzu-bg: #fff8e6;
+    --fuji: #7a5cc2; --fuji-bg: #f4f0fc;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0; color: var(--ink); background: #fff;
+    font: 10.2pt/1.5 'Source Serif 4', 'Noto Serif JP', 'DejaVu Serif', serif;
+    hyphens: auto; text-align: justify;
+  }
+  .jp { font-family: 'Noto Serif JP', serif; }
+  h1, h2, h3 { font-family: Inter, 'DejaVu Sans', 'Noto Serif JP', sans-serif; text-align: left; hyphens: none; }
+  h2 {
+    font-size: 14.5pt; margin: 0 0 7pt; padding-bottom: 3pt;
+    border-bottom: 1.5pt solid var(--rule); break-after: avoid;
+  }
+  h2.chapter { margin-top: 20pt; }
+  h2.chapter.newpage { break-before: page; margin-top: 0; }
+  h2 .no { color: var(--sakura); margin-right: 7pt; }
+  h2 .jp { font-size: 10pt; color: var(--soft); font-weight: 400; margin-left: 7pt; }
+  h3 { font-size: 11pt; margin: 13pt 0 3pt; break-after: avoid; }
+  h3 .no { color: var(--sora); margin-right: 5pt; }
+  p { margin: 0 0 6.5pt; }
+  code, .mono { font-family: 'DejaVu Sans Mono', monospace; font-size: 8.2pt; }
+  a { color: var(--sora); text-decoration: none; }
+  b.k { font-family: Inter, 'DejaVu Sans', sans-serif; font-size: 8.8pt; letter-spacing: .03em; }
+
+  .masthead {
+    background: linear-gradient(125deg, #fff0f5 0%, #f1edff 50%, #eaf6ff 100%);
+    border-radius: 10pt; padding: 14pt 22pt 11pt; margin-bottom: 9pt; border: 1pt solid var(--rule);
+  }
+  .kicker { font: 600 8.5pt Inter, 'DejaVu Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--sakura); }
+  .masthead h1 { font-size: 30pt; line-height: 1.04; margin: 4pt 0 4pt; letter-spacing: -.01em; }
+  .masthead h1 .ff { color: var(--sakura); }
+  .masthead .sub { font-size: 11.5pt; color: var(--soft); margin: 0 0 7pt; text-align: left; }
+  .masthead .byline { font: 8.6pt Inter, 'DejaVu Sans', sans-serif; color: var(--soft); }
+  .masthead .jpttl { font-size: 10.5pt; color: var(--soft); }
+
+  .abstract { border-left: 3pt solid var(--sakura); padding: 2pt 0 2pt 10pt; margin: 0 0 8pt; font-size: 9.8pt; color: #3d3546; }
+  .abstract b { font-family: Inter, 'DejaVu Sans', sans-serif; font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--sakura); }
+
+  .box { border-radius: 7pt; padding: 7pt 10pt 4pt; margin: 8pt 0 10pt; break-inside: avoid; font-size: 9.5pt; }
+  .box .tag { font: 700 7.6pt Inter, 'DejaVu Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 2pt; }
+  .otaku { background: var(--sakura-bg); border: 1pt solid #f6c3d4; }
+  .otaku .tag { color: var(--sakura); }
+  .toolkit { background: var(--sora-bg); border: 1pt solid #c6d9f3; }
+  .toolkit .tag { color: var(--sora); }
+  .toolkit pre, pre.run { margin: 2pt 0 5pt; white-space: pre-wrap; font: 6.7pt/1.38 'DejaVu Sans Mono', monospace; color: #213a5e; text-align: left; }
+  .paper { background: var(--matcha-bg); border: 1pt solid #c3e3cc; }
+  .paper .tag { color: var(--matcha); }
+  .warn { background: var(--yuzu-bg); border: 1pt solid #f0d79b; }
+  .warn .tag { color: var(--yuzu); }
+  .analogy { background: var(--fuji-bg); border: 1pt solid #d9cdf3; }
+  .analogy .tag { color: var(--fuji); }
+  .key { background: #fff; border: 1.4pt solid var(--ink); }
+  .key .tag { color: var(--ink); }
+
+  .two { display: flex; gap: 12pt; break-inside: avoid; }
+  .two > * { flex: 1; }
+
+  figure { margin: 10pt 0 12pt; break-inside: avoid; text-align: center; }
+  figure svg { max-width: 100%; height: auto; }
+  figcaption { font-size: 8.7pt; color: var(--soft); margin-top: 4pt; text-align: left; }
+  figcaption b { color: var(--ink); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 8.7pt; margin: 6pt 0 10pt; break-inside: avoid; }
+  th { font: 600 7.8pt Inter, 'DejaVu Sans', sans-serif; text-align: left; color: var(--soft); border-bottom: 1.2pt solid var(--rule); padding: 3pt 5pt; vertical-align: bottom; }
+  td { border-bottom: .6pt solid var(--rule); padding: 3.2pt 5pt; vertical-align: top; text-align: left; hyphens: none; }
+  tr:nth-child(even) td { background: #fbf9fd; }
+  table.wide td:first-child { white-space: nowrap; font-weight: 600; }
+  table.wide { break-inside: auto; }
+  table.wide tr { break-inside: avoid; }
+  table.cast { table-layout: fixed; }
+  table.cast td:first-child { white-space: normal; }
+  table.num td { font-variant-numeric: tabular-nums; }
+
+  .katex { font-size: 1.04em; }
+  .katex-display { margin: 6pt 0 8pt; }
+  ul, ol { margin: 0 0 7pt; padding-left: 16pt; }
+  li { margin-bottom: 2.5pt; }
+  .refs { font-size: 8.7pt; }
+  .refs li { margin-bottom: 3pt; text-align: left; }
+  .toc { columns: 2; column-gap: 18pt; font-size: 9.6pt; line-height: 1.3; margin: 2pt 0 6pt; }
+  .toc div { break-inside: avoid; margin-bottom: 1.5pt; }
+  .toc .n { color: var(--sakura); font-weight: 700; display: inline-block; width: 18pt; font-family: Inter, 'DejaVu Sans', sans-serif; }
+  .step {
+    border: 1pt solid var(--rule); border-left: 4pt solid var(--sakura); border-radius: 6pt;
+    padding: 6pt 10pt 3pt; margin: 9pt 0; break-inside: avoid; background: #fffdfe;
+  }
+  .step .hd { font: 700 9.5pt Inter, 'DejaVu Sans', sans-serif; color: var(--ink); margin-bottom: 3pt; }
+  .step .hd .badge { font-size: 7.4pt; padding: 1pt 5pt; border-radius: 6pt; margin-left: 6pt; color: #fff; vertical-align: 1pt; }
+  .b1 { background: var(--fuji); } .b2 { background: var(--sora); } .b3 { background: var(--sakura); } .b0 { background: var(--matcha); }
+  .step .io { font-size: 8.8pt; color: var(--soft); margin-bottom: 3pt; }
+  .page-break { break-before: page; }
+  .center { text-align: center; }
+  .small { font-size: 8.7pt; color: var(--soft); }
+  .big-quote { font-size: 11.5pt; text-align: center; margin: 10pt 18pt; color: var(--ink); font-style: italic; }
+  figure svg { width: 100%; }
+  table.report td:first-child { width: 30pt; text-align: center; padding: 2pt 2pt; }
+  table.report td:nth-child(4) { width: 92pt; font-size: 8.2pt; color: var(--soft); }
+  table.report td { font-size: 8.6pt; }
+</style>
+
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">ABCPROOF · motizukipdf · strategy-guide review</div>
+  <h1>The <span class="ff">Gokun</span> Strategy Guide</h1>
+  <p class="sub">We read Go Yamashita's {{total}}-page survey <em>A proof of the abc conjecture after Mochizuki</em>
+    and marked our own homework against it: what it taught us, what it confirmed, and what in this
+    repository it shows to be wrong or sloppy. With figures, real numbers, and red-pen stamps.
+    <span class="jp jpttl">（山下サーベイで答え合わせ：攻略本を読んでみた）</span></p>
+  <div class="byline">Paper: version of June 25, 2024, now in <code>pdf/</code> · examples: the {{nex}} sets of initial Θ-data the
+    toolkit builds exactly · every example number comes from <code>iut pipeline</code> · November 2026</div>
+</div>
+
+<div class="abstract"><b>Abstract</b> &nbsp;
+Until now this project read Mochizuki in the original: four IUT papers, [Alien], [EssLgc]. Yamashita's survey
+[Y] is the 攻略本, the thick strategy guide you buy after getting stuck on the same boss for a week. It re-proves
+the whole route from anabelian geometry to the abc inequality in one self-contained document, with its own
+notation and with the elementary computations written out in full. Reading it produced three kinds of result.
+<b>Corrections:</b> four places where our toolkit or earlier articles say something [Y] shows to be wrong or
+empty (§2). <b>Confirmations:</b> eight conventions we had chosen that match (§2). <b>New material:</b>
+seven ideas that none of our earlier write-ups contain, including the “miracle identity”, the reason the
+log-theta-lattice needs infinite columns, and a short proof that the obvious cheat code \(\Theta^N\) cannot work (§3–§9).
+Nothing in the repository other than this article and the paper itself was changed; §10 lists the fixes we
+suggest.</div>
+
+<div class="box warn"><span class="tag">Content notice · ご注意</span>
+<p>All pop-culture references are text only: no character art, logos or screenshots. The stamps and diagrams
+are drawn for this article. Where we say what the survey proves, we cite its numbering. The survey is an
+exposition by a RIMS mathematician who thanks Mochizuki for many discussions; it presents the proof as complete and does not discuss
+the 2018 objection of Scholze and Stix (a text search of all {{total}} pages finds neither name, nor Joshi's).
+As in our earlier guides, we report and adjudicate nothing (§9).</p>
+</div>
+
+<div class="toc">
+  <div><span class="n">1</span>The book on the table</div>
+  <div><span class="n">2</span>The report card: corrections and confirmations</div>
+  <div><span class="n">3</span>The route has three warp pipes we skipped</div>
+  <div><span class="n">4</span>The level cap: our examples are below it</div>
+  <div><span class="n">5</span>The miracle identity</div>
+  <div><span class="n">6</span>Why the lattice needs infinite columns</div>
+  <div><span class="n">7</span>The banned cheat code \(\Theta^N\)</div>
+  <div><span class="n">8</span>Saying goodbye to scheme theory</div>
+  <div><span class="n">9</span>What the survey does not claim</div>
+  <div><span class="n">10</span>Suggested fixes, and a phrasebook</div>
+</div>
+
+<h2 class="chapter"><span class="no">1</span>The book on the table<span class="jp">机の上の一冊</span></h2>
+
+<p>The file that arrived was the text layer of <code>abc2024Jun25.pdf</code>. The same document is public on the
+author's RIMS page, so the PDF itself, {{total}} pages, is what went into <code>pdf/</code>. Its first line of
+content is the abstract, which is two sentences long. The remaining {{total}} pages are the fine print.</p>
+
+<p>The author's e-mail handle is <em>gokun</em>, and we will make the obvious joke exactly once: this is a
+man who went to train under a master on a remote mountain (Kyoto has several), ran an intensive seminar on the
+technique from May to November 2013, and came back with a {{total}}-page scroll. The acknowledgments thank the
+executives of Toyota Central R&amp;D Labs for “a special position that enabled him to concentrate on his
+research in pure mathematics”, and thank Sakichi Toyoda, who died in 1930, for the philanthropic culture
+behind it. This makes [Y] the only survey of the abc conjecture with an automotive sponsor, and explains its
+method, which is <em>kaizen</em>: no single step is hard, there are simply a great many of them and none is skipped.</p>
+
+<figure>{{svg:pages}}
+<figcaption><b>Figure 1.</b> Page budget of [Y], from the running heads of the PDF. The part that mentions
+heights, conductors and the abc conjecture at all is §1, {{p_abc}} pages, {{pct_abc}}% of the book. The index
+alone is {{p_index}} pages.</figcaption></figure>
+
+<p>The introduction opens with a story attributed to Grothendieck: there are two ways to crack a nut. One is a
+nutcracker. The other is to soak it in water “for an extended period of time until its shell dissolves
+naturally”. Japanese cuisine has a third way, which is to bury it in rice bran for three years and call the
+result <span class="jp">糠漬け</span>, and that is closer to what happens here. Yamashita then says something
+none of our earlier write-ups dared to:</p>
+
+<p class="big-quote">“…these numerous trivial constructions, whose exposition occupies literally hundreds of pages,
+allow one to conclude a highly nontrivial consequence … practically effortlessly!”</p>
+
+<p>and, a paragraph later, that if one sets aside the delicate way the pieces are combined, “the only
+nontrivial mathematical ingredient in inter-universal Teichmüller theory is the classical result [pGC],
+which was already known in the last century”. [pGC] is Mochizuki's 1999 theorem on the pro-\(p\) anabelian
+geometry of curves, the subject of our <code>anabelian_guide.pdf</code>. In anime terms the survey is describing
+a slice-of-life series: for eleven episodes the cast makes tea, labels prime-strips and walks to school, and
+then in episode twelve somebody says one sentence and you find you are crying. The sentence is Corollary
+13.13. The tea is §2–§12.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 攻略本あるある</span>
+<p>Every strategy guide has the same three features. A world map on the inside cover: here it is the
+<em>Leitfaden</em> on page 9, with the honest caption that the dependences are “rough (or conceptual)”. A
+bestiary at the back: here Appendix C.6, pages of tables listing every model object, bridge and theatre.
+And one page where the authors admit which side quests you can skip. [Y] §0.1 has two: the archimedean theory
+“does not play a very central role”, and the main reconstruction theorems of the theory of Frobenioids “do
+not play a very central role” either. Our toolkit implements both in loving detail. We regret nothing.</p>
+</div>
+
+<h2 class="chapter"><span class="no">2</span>The report card<span class="jp">通知表</span></h2>
+
+<p>Japanese teachers mark homework with round red stamps. We made four: {{stamp:fix}} <b>correction</b>, something of
+ours is wrong; {{stamp:note}} <b>caution</b>, something of ours is true but misleading; {{stamp:ok}} <b>pass</b>, a
+convention we chose matches the survey; {{stamp:new}} <b>new</b>, not in any earlier write-up of ours. Every
+row cites where in [Y] to look.</p>
+
+<table class="wide report">
+<thead><tr><th></th><th>what we had</th><th>what [Y] says</th><th>where</th></tr></thead>
+<tr><td>{{stamp:fix}}</td><td><code>funfun_iut.pdf</code> §1: \(\log q\) is “the arithmetic degree of the
+\(q\)-parameters at the bad places \(v_2, v_3, v_5, v_7\)”.</td>
+<td>\(\mathbb{V}^{\mathrm{bad}}_{\mathrm{mod}}\) never contains a place over 2. For \(1+2400=2401\) the number we printed,
+\({{ex_logq}} = {{ex_sum}}\), is right and uses only \(v_{3}, v_5, v_7\); the sentence is wrong. The place 2
+counts only in \(\log q^{\forall} = {{ex_logqall}}\).</td><td>Def. 10.1 (3); §1.3 (3); proof of Prop. 1.15</td></tr>
+<tr><td>{{stamp:fix}}</td><td>The toolkit prints ramification index \(e_K = 1\) at every place, including the bad
+ones, and builds log-shells as \(p^0\cdot\mathcal{O}\).</td>
+<td>Impossible at a bad place: \(q_v^{1/2l} \in K_v\), because \(K = F(E[l])\) and \(E[2]\) is rational. So
+\(e(K_v/\mathbb{Q}_p)\) is a multiple of \(2l/\gcd(2l, \operatorname{ord} q_v)\). See §2.1.</td>
+<td>Lemma 1.8; proof of Lemma 1.9 (1)</td></tr>
+<tr><td>{{stamp:fix}}</td><td><code>ComputeThmOneTen</code> and <code>ComputeCorTwoTwo</code> end with
+“holds” for every example.</td>
+<td>The inequality is proved only <em>outside a finite exceptional set</em>, and all our examples are inside it.
+“Holds” here means \(4 \le 10^{22}\). See §4.</td><td>Prop. 1.15, steps (s1) and the last enlargement of Exc</td></tr>
+<tr><td>{{stamp:fix}}</td><td><code>iut pipeline</code> stage 1 prints ✓ for item (a), “\(F/F_{\mathrm{mod}}\) Galois
+of degree prime to \(l\)”, even for \(l = 5\), while <code>iut validate</code> on the same data reports the error.</td>
+<td>The condition is part of the definition, and in the proof \(l = 5\) never occurs: \(5 \le \sqrt h &lt; l\).
+Found while checking this against the code; stage 1 reads only the asserted flag.</td><td>Def. 10.1 (2); Prop. 1.15 (P1)</td></tr>
+<tr><td>{{stamp:note}}</td><td><code>funfun_iut.pdf</code>: IUT “turns the triple into the Frey curve and
+proves a Szpiro / Vojta type inequality”.</td>
+<td>There are two more reductions in between, and the Frey curve of <em>your</em> triple is not what the
+theory is applied to in general. See §3.</td><td>Prop. 1.2, Prop. 1.15</td></tr>
+<tr><td>{{stamp:note}}</td><td>The GUI's <b>auto l</b> and the Θ-data generator choose “the smallest prime
+\(l \ge 5\)” that passes Def. 3.1.</td>
+<td>Legal as initial Θ-data, but not how the proof chooses: \(l\) is taken in a window just above \(\sqrt{h}\)
+so that the two sides of the miracle identity balance. See §5.</td><td>Prop. 1.15 (P1)–(P3)</td></tr>
+<tr><td>{{stamp:ok}}</td><td>\(\underline{\epsilon}\) is a <em>non-zero</em> cusp, label 1 (decided in the pipeline thread).</td>
+<td>“\(\underline{\epsilon}\) is a non-zero cusp of the hyperbolic orbicurve \(\underline{C}_K\)”.</td><td>Def. 10.1 (7)</td></tr>
+<tr><td>{{stamp:ok}}</td><td>Log-shell \(\mathcal{I}_v = (p_v^*)^{-1}\log(\mathcal{O}^\times)\), \(p^*=p\) or 4.</td>
+<td>\(\mathcal{I} = \frac{1}{2p}\log_p(\mathcal{O}^\times)\): the same lattice (2 is a unit for odd \(p\)), in one formula.</td><td>§1.3; §5.1</td></tr>
+<tr><td>{{stamp:ok}}</td><td>Θ-pilot log-volume \(-\frac{l(l+1)}{12}\,|\log q|\).</td>
+<td>\(-\frac{l+1}{24}\log(q)\), which is the same thing since \(|\log q| = \frac{1}{2l}\log q\).</td><td>Lemma 1.10 (1)</td></tr>
+<tr><td>{{stamp:ok}}</td><td>\(F = \mathbb{Q}(\sqrt{-1}, E[2\cdot3\cdot5])\), \(e^*_{\mathrm{mod}} = 2^{12}\cdot3^3\cdot5\cdot e_{\mathrm{mod}} = {{dstar}}\,e_{\mathrm{mod}}\).</td>
+<td>Same field, same constant.</td><td>§1.3 (1)–(2); Prop. 1.15</td></tr>
+<tr><td>{{stamp:ok}}</td><td>Final form \(\frac16\log q \le (1+\frac{20 d_{\mathrm{mod}}}{l})(\log\mathfrak{d}^{F_{\mathrm{tpd}}}+\log\mathfrak{f}^{F_{\mathrm{tpd}}}) + 20(e^*_{\mathrm{mod}}l + \eta_{\mathrm{prm}})\).</td>
+<td>Identical, with the intermediate constants \(1 + \frac{12 d_{\mathrm{mod}}}{l}\) and \(10(\dots)\) that our \(C_\Theta\) uses.</td><td>Prop. 1.12</td></tr>
+<tr><td>{{stamp:ok}}</td><td>The validator warns that \(l = 5\) is excluded when \(F \supseteq \mathbb{Q}(E[5])\).</td>
+<td>Agrees: \(l &gt; \sqrt h \ge 5\).</td><td>Prop. 1.15 (P1)</td></tr>
+<tr><td>{{stamp:ok}}</td><td>Archimedean log-shell: a disc of radius \(\pi\) (the <em>alien rings</em> infographic).</td>
+<td>\(\mathcal{I}_{v_1,\dots,v_n} := \pi^n B\), and the archimedean cost per packet is \(\le (j+1)\log\pi\).</td><td>§1.3; Lemma 1.9 (3)</td></tr>
+<tr><td>{{stamp:ok}}</td><td><code>multiradial_guide.pdf</code> §7: (Ind1), (Ind2) leave log-volumes alone, (Ind3) gives “≤”.</td>
+<td>Same three, under different names; see the phrasebook in §10.</td><td>Thm. 13.12; Rem. 13.13.1</td></tr>
+<tr><td>{{stamp:ok}}</td><td>The log-theta-lattice does not commute.</td><td>With a one-line reason we did not have: §6.</td><td>start of §13</td></tr>
+</table>
+
+<h3><span class="no">2.1</span>Correction two, with numbers: the ramification we forgot</h3>
+
+<p>In the proof of Lemma 1.9, Yamashita needs \(\lambda = \frac{j^2}{2l}\operatorname{ord}(q_{v_j})\) to lie in
+\(\frac{1}{e_{v_j}}\mathbb{Z}\), and notes in passing why it does: \(q_{v}^{1/2l} \in K_{v}\). Read backwards,
+that is a lower bound on the ramification of \(K\) at each bad place, and our data violate it everywhere:</p>
+
+{{table:ram}}
+
+<p>The pipeline prints \(\operatorname{ord}(\underline{q}_v) = 2/7\) and \(e_K = 1\) on adjacent lines of the same
+run, which is the mathematical equivalent of a character whose age is listed as 17 and whose backstory takes
+30 years. The log-volume totals survive, because they are normalised by degree, but two downstream objects do
+not: the log-shell at a ramified place is not \(\mathcal{O}\) (Lemma 1.6 gives the true size, with the term
+\(4(j+1)\,\iota\,\log(e^*_{\mathrm{mod}}l)\) of Lemma 1.9 (1) paying for it), and \(\log\mathfrak{d}^K\) cannot
+be read off an unramified model. For the latter [Y] gives a rigorous ceiling to replace our estimate. Lemma 1.8
+says \(K/F_{\mathrm{tpd}}\) is unramified outside \(2\cdot3\cdot5\cdot l\) and the support of \(q\), with
+\(F/F_{\mathrm{tpd}}\) tame outside \(2\cdot3\cdot5\) and \(K/F\) tame outside \(l\), whence Lemma 1.11 (1):</p>
+
+{{table:diff}}
+
+<p>Our estimates sit inside the bound, so nothing published is contradicted. The bound, not the estimate, is
+what the proof uses.</p>
+
+<h2 class="chapter"><span class="no">3</span>The route has three warp pipes we skipped<span class="jp">ワープ土管</span></h2>
+
+<figure>{{svg:route}}
+<figcaption><b>Figure 2.</b> The whole proof as [Y] organises it. Our earlier articles drew only the first and
+last boxes.</figcaption></figure>
+
+<p>Our earlier description was: take \(a + b = c\), form the Frey curve, apply IUT. The survey's §1 shows
+that this compresses three separate reductions, each of which changes what object the theory is applied to.</p>
+
+<p><b>First pipe (Cor. 0.2 from Thm. 0.1).</b> abc is the case \(X = \mathbb{P}^1\), \(D = \{0,1,\infty\}\),
+\(d = 1\) of Vojta's conjecture for curves, evaluated at the rational point \(-a/b\). The proof is a dozen
+lines and uses nothing but \(|a + b| \le 2\max\{|a|,|b|\}\). This is the tutorial level.</p>
+
+<p><b>Second pipe (Prop. 1.2, from [GenEll]).</b> To prove Vojta for <em>every</em> hyperbolic curve it is
+enough to prove it for \(\mathbb{P}^1\setminus\{0,1,\infty\}\), and only on a <em>compactly bounded subset</em>:
+points that stay a fixed distance from the three cusps at finitely many chosen places. The tool is a
+non-critical Belyi map (Appendix C.2), a map to \(\mathbb{P}^1\) branched only over \(\{0,1,\infty\}\) that sends one
+chosen finite set of points to the cusps while keeping another chosen finite set away from them. This is the step that matters for us. A high-quality abc
+triple is, by its nature, a point <em>close</em> to a cusp at some place; the theory is not asked to handle it
+head-on. The Belyi map carries the problem somewhere else first, like the green pipe that drops you in a
+different world with the same coin count.</p>
+
+<p><b>Third pipe (Prop. 1.15).</b> On a compactly bounded subset whose support contains the place 2 and the
+archimedean place, every point outside a finite set comes, after enlarging the field as in §2, from initial Θ-data. The archimedean place and 2 are
+awkward for the theory, and this is how they are neutralised: the height contribution there
+is bounded by a constant \(C_{\mathcal K}\) depending only on the subset. That is why
+\(\mathbb{V}^{\mathrm{bad}}_{\mathrm{mod}}\) excludes 2 (correction one), and why nobody minds.</p>
+
+<p>Only then does the fourth box, the one all the excitement is about, get used. Yamashita is blunt about the
+first three (Remark 1.15.2): the inequality \(-|\log(q)| \le -|\log(\Theta)|\) “is almost a tautological
+translation of the inequality which we want to show”, and “no deep things happen in these reduction steps”.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 逆から読む</span>
+<p>The survey is organised like a mystery told in reverse. Chapter 1 is the culprit's confession (“it was
+the log-volume, in the log-shell, with the theta values”). Chapters 2 to 13 are the 315-page flashback that
+establishes whether the confession is admissible. The little detective with the bow tie would be done in
+twenty minutes plus commercials, but he has never had to reconstruct a number field from its Galois group.</p>
+</div>
+
+<h2 class="chapter"><span class="no">4</span>The level cap: our examples are below it<span class="jp">レベル不足</span></h2>
+
+<p>Proposition 1.15 does not say the inequality holds for every elliptic curve. It says there is a finite
+exceptional set \(\mathrm{Exc}_{\mathcal K,d,\epsilon}\), enlarged several times during the proof, outside
+which it holds. Two of the enlargements are explicit. Writing \(h = \log(q^{\forall})\) and
+\(d^* = 2^{12}\cdot3^3\cdot5\cdot d\):</p>
+<ul>
+<li><b>(s1)</b> all curves with \(h^{1/2} &lt; \xi_{\mathrm{prm}} + \eta_{\mathrm{prm}}\) are thrown into Exc, where
+\(\xi_{\mathrm{prm}} \ge 5\) and \(\eta_{\mathrm{prm}}\) come from the prime number theorem;</li>
+<li><b>the last step</b> throws in all curves with
+\(\epsilon_E := (60 d^*)^2\, h^{-1/2}\log(2 d^* h) &gt; \min\{1, \epsilon\}\).</li>
+</ul>
+<p>[Y] keeps \(\eta_{\mathrm{prm}}\) abstract. Our toolkit plugs in \(5\cdot10^{20}\), citing [ExpEst]. With that
+value and \(d = 1\):</p>
+
+<figure>{{svg:level}}
+<figcaption><b>Figure 3.</b> The condition \(\epsilon_E \le 1\) alone needs \(h \gtrsim\) {{h_eps1}}. Since
+\(\frac16 h\) is the height up to a bounded error, that is an abc triple whose \(c\) has on the order of
+{{dig_eps1}} decimal digits; condition (s1) with the toolkit's constant asks for about {{dig_s1}}.</figcaption></figure>
+
+{{table:level}}
+
+<p>So the toolkit's “holds” is true and says nothing: the right-hand side it compares against contains
+\(20(e^*_{\mathrm{mod}}l + \eta_{\mathrm{prm}}) \approx 10^{22}\), and the “\(\epsilon\)” in \((1+\epsilon)\) is
+at best {{eps_min}}. This is correction three. It is not a defect of the theory, which only ever promised a
+statement about all but finitely many curves; it is a defect of our printout, which presents a comparison
+with a twenty-two-digit constant as a result.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · レベル上げ</span>
+<p>Every JRPG has the door in the first village that says “you are not yet strong enough”. Our four examples
+are standing in front of it at level 3, holding a wooden sword and the triple \(1 + 8 = 9\). The door opens
+around level \(10^{33}\). There is no amount of grinding on slimes that gets you there, and the gacha does not
+help either: the drop rate of an abc triple with \(10^{33}\) digits and quality above 1 is the thing the
+conjecture is about.</p>
+</div>
+
+<h2 class="chapter"><span class="no">5</span>The miracle identity<span class="jp">奇跡の等式</span></h2>
+
+<p>Why is the constant in front of \((\text{log-diff} + \text{log-cond})\) exactly 1, and not 2, or 6, or
+\(\pi\)? None of our earlier write-ups asked. Remark 1.15.3 answers, and Yamashita names it himself: the
+<em>miracle identity</em>.</p>
+
+<p>The bound on the Θ-pilot (Lemma 1.10) has two competing terms. The theta values \(\underline{q}^{j^2}\)
+shrink the region: averaged over \(j = 1,\dots,l^*\) they contribute \(-\frac{l+1}{24}\log q\). The log-shells
+that hold them grow it: packet \(j\) has \(j + 1\) tensor factors, each costing one \(\log\mathfrak{d}^K\), and
+the average is \(\frac{l+5}{4}\log\mathfrak{d}^K\). Writing the height as \(\frac16\log q\),</p>
+\[ -|\log(\Theta)| \;\le\; \underbrace{\frac{l+1}{4}}_{\text{quadratic, averaged}}\Bigl(-\tfrac16\log q\Bigr)
+   \;+\; \underbrace{\frac{l+5}{4}}_{\text{linear, averaged}}\log\mathfrak{d}^K \;+\; \cdots \]
+<p>and the two coefficients agree to leading order in \(l\). Yamashita factors each into its causes:</p>
+\[ \underbrace{6}_{\lambda\text{-line over } j\text{-line}} \times \underbrace{\tfrac12}_{\text{theta lives on a double cover}}
+   \times \underbrace{\tfrac1{2^2}}_{\text{exponent } j^2} \times \underbrace{\tfrac13}_{\sum j^2 \approx n^3/3}
+   \;=\; \underbrace{\tfrac1{2}}_{\text{differents are linear}} \times \underbrace{\tfrac12}_{\sum j \approx n^2/2}. \]
+
+<figure>{{svg:miracle}}
+<figcaption><b>Figure 4.</b> The ratio of the two coefficients is \((l+5)/(l+1)\): not yet 1 at the small
+primes our examples use (circled), and 1 in the limit. This is why the proof takes \(l\) large, just above
+\(\sqrt h\), and why “the smallest \(l\) that passes Def. 3.1” is legal but beside the point.</figcaption></figure>
+
+{{table:miracle}}
+
+<p>The last two columns are a check on us: the survey's closed form and the number the toolkit computes by
+summing over \(j\) agree to six decimals for all four examples (the build fails if they do not).</p>
+
+<p>Two further remarks in [Y] are worth recording. First, the identity was already visible in Mochizuki's
+Hodge–Arakelov theory of the late 1990s (Appendix A.3), years before there was any framework in which it
+could be used: “Mochizuki firstly observed this equality, and next he established the framework … in which
+these calculations work.” Second, the 1 is sharp. Masser showed by analytic number theory that the main term
+cannot be improved [Mass2], so whatever a proof of abc looks like, it has to land on this coefficient exactly.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · ひとつなぎの</span>
+<p>A certain pirate manga has spent more than a thousand chapters not telling us what the treasure is. IUT
+is kinder. The treasure is \(6\cdot\frac12\cdot\frac14\cdot\frac13 = \frac12\cdot\frac12\), it has been
+sitting in the Hodge–Arakelov papers since around 2000, and the 646 pages of [IUTchI–IV] are the voyage to an island where
+you are allowed to spend it.</p>
+</div>
+
+<h2 class="chapter"><span class="no">6</span>Why the lattice needs infinite columns<span class="jp">縦は無限</span></h2>
+
+<p>Our articles say the log-theta-lattice “does not commute” and cite [IUTchIII] Remark 1.4.1. The opening of
+[Y] §13 gives the reason in six characters: \(\log(a^N) \ne (\log a)^N\). The Θ-link is, on value groups,
+a power map. The log-link is a logarithm. They do not commute for the same reason they do not commute on a
+pocket calculator.</p>
+
+<figure>{{svg:square}}
+<figcaption><b>Figure 5.</b> Left: one Θ-link and one log-link on each side form a square that does not
+commute, so the left log-link cannot be described from the right. Right: an entire column of log-links is
+unchanged when shifted up by one, so the <em>column</em> on the left can be described in terms of the column
+on the right.</figcaption></figure>
+
+<p>This is the cleanest statement we have seen of why the theory needs the whole vertical line and not just
+one step up, and it explains the shape of the three indeterminacies. One wants to see the additive structure on
+the far side of a Θ-link, which only carries multiplicative data. A log-link converts one to the other, but
+breaks the square. Using the full column repairs the square at the cost of no longer knowing <em>which</em>
+row you are on, and that ignorance is precisely the vertical indeterminacy, (Indet ↑), our (Ind3).</p>
+
+<p>The survey also says, concretely, how big the indeterminacies are allowed to be in the final estimate.
+In Lemma 1.9 the region whose volume is bounded is the holomorphic hull of the union of
+\(\phi\bigl(\underline{q}^{j^2}\,\mathcal{I}\bigr)\) over <em>all</em> \(\mathbb{Q}_p\)-linear automorphisms
+\(\phi\) of \(\mathbb{Q}_p\otimes\mathcal{I}\) that preserve the tensor-packet log-shell \(\mathcal{I}\). Our
+guide described (Ind2) as a compact group of isometries and (Ind1) as label permutations. Both are true, and
+both are swallowed in the computation by this far cruder group: anything that maps the lattice to itself. The
+estimate does not need to know what the indeterminacies <em>are</em>, only that they stay inside the
+log-shell. Remark 1.6.1 puts the underlying point memorably: once \(\frac1p\mathfrak{m}_k\) is regarded as a bare
+\(\mathbb{Z}_p\)-module, nothing intrinsic distinguishes \(\frac1p\varpi, \frac1p\varpi^2, \dots, \frac1p\varpi^e\),
+“a kind of differentiation over \(\mathbb{F}_1\)”.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · 壁</span>
+<p>Yamashita calls the Θ-link and the log-link “walls”, and says Frobenius-like objects are what you build
+walls from while étale-like objects are what can “penetrate these walls” (§0.1, §4.3). A long-running series
+about a city behind three concentric walls taught a generation what happens next: the interesting characters
+are the ones who can get through, and the plot is about what, exactly, is on the other side. Here the answer
+is “another copy of the same city, with the addition table missing”.</p>
+</div>
+
+<h2 class="chapter"><span class="no">7</span>The banned cheat code \(\Theta^N\)<span class="jp">禁止コマンド</span></h2>
+
+<p>The Θ-link identifies \(\{\underline{q}^{j^2}\}_{1\le j\le l^*}\) on one side with \(\underline{q}\) on the
+other. An obvious question, which Remark 13.13.3 asks and none of our write-ups did: why those exponents? If
+replacing \(\underline q\) by \(\underline q^{j^2}\) wins a factor of about \(l^2\), replace the theta function
+by its \(N\)-th power and win \(N\) times more.</p>
+
+<table class="wide">
+<tr><th>variant of the Θ-link</th><th>works?</th><th>why (Remark 13.13.3)</th></tr>
+<tr><td>\(\{\underline{q}^{j^2}\} \mapsto \underline{q}^{\lambda}\), \(\lambda &gt; 0\)</td><td>yes, pointlessly</td>
+<td>The left side of the final inequality becomes \(\lambda\cdot 0\). For \(\lambda \ll l\) nothing changes; for
+\(\lambda &gt; l\) the result is weaker.</td></tr>
+<tr><td>\(\{(\underline{q}^{j^2})^N\} \mapsto \underline{q}\), \(N &gt; 1\)</td><td>no</td>
+<td>All three rigidities of the mono-theta environment fail. (a) Cyclotomic rigidity uses that the
+commutator of the theta group is <em>exactly</em> quadratic. (b) Constant-multiple rigidity fails: the \(N\)-th
+power map relates non-isomorphic line bundles. (c) \(\Theta^N\) has a zero of order \(N\) at the cusps, so each
+loop in the log-Kummer correspondence multiplies by \(N\) and it “totally collapses”.</td></tr>
+<tr><td>\(\underline{q} \mapsto \underline{q}^{\lambda}\) with no theta function</td><td>no</td>
+<td>The splitting that makes Kummer theory compatible sends \(\Theta \mapsto 1\) at the zero-labelled point. The
+Kummer class of \(\underline q\) is never trivial, so there is nothing to split along.</td></tr>
+</table>
+
+<p>The second row has a second, independent proof that it must fail, and it is the best paragraph in the
+remark. If \(\Theta^N\) worked, the same computation would give</p>
+\[ \operatorname{ht} \;\lesssim\; \frac{1+\epsilon}{N}\,\bigl(\text{log-diff} + \text{log-cond}\bigr), \qquad N &gt; 1, \]
+<p>which contradicts Masser's lower bound. The theory is therefore under an external constraint: its
+indeterminacies must be exactly as large as they are. A version of IUT that proved more would be wrong. In
+this sense the three rigidities of §7 of the survey are not technical conveniences; they are what stops the
+machine from proving a false theorem.</p>
+
+<div class="box otaku"><span class="tag">Otaku corner · なんでやねん</span>
+<p>Manzai needs two people: the <em>boke</em> who says the absurd thing and the <em>tsukkomi</em> who hits
+him with a paper fan. Remark 13.13.3 is a complete routine. Boke: “If squaring the exponent is good, why not
+raise the whole theta function to the power \(N\)?” Tsukkomi, with fan: “Because then abc would be false,
+Masser proved that in 1990, and also your Heisenberg group stopped being Heisenberg.” <span class="jp">なんでやねん。</span></p>
+</div>
+
+<h2 class="chapter"><span class="no">8</span>Saying goodbye to scheme theory<span class="jp">さよならスキーム論</span></h2>
+
+<p>Appendix A is five pages and is where we would now send anyone who asks what IUT is <em>for</em>. It tells
+the origin story in three comparison theorems: de Rham (periods like \(2\pi i\)), \(p\)-adic Hodge, and
+Mochizuki's Hodge–Arakelov theory, which evaluates sections of a line bundle at the \(l\)-torsion points and
+finds “Gaussian poles” \(q^{j^2/8l}\) on the étale side. Then A.4 makes an argument by wishful thinking.</p>
+
+<p><em>Suppose</em> \(E[l]\) had a global multiplicative subspace, a rank-one submodule that is the canonical
+\(\mu_l\) at every bad place at once. Then Hodge–Arakelov theory would give an inclusion of arithmetic line
+bundles \(\underline{q}\,\mathcal{O}_K \hookrightarrow \underline{q}^{j^2}\mathcal{O}_K\), and comparing degrees,</p>
+\[ 0 \;\lesssim\; -(\text{large number}) \;\approx\; -\operatorname{ht}. \]
+<p>So heights would be bounded, so there would be only finitely many elliptic curves, which is false. Hence
+no such subspace exists in general. A normal mathematician stops here. Yamashita's description of what
+Mochizuki did instead is the sentence of the paper:</p>
+
+<p class="big-quote">“Instead, we respect the inclusion \(\underline{q}\,\mathcal{O}_K \hookrightarrow
+\underline{q}^{j^2}\mathcal{O}_K\), and we say a good-bye to the scheme theory.”</p>
+
+<p>The Θ-link <em>is</em> that inclusion, declared as an identification between two different scheme theories.
+It is not a contradiction because degrees in different scheme theories cannot be compared. The multiradial
+algorithm is what lets them be compared after all, at a price, and “we can calculate that the
+indeterminacies are (roughly) log-diff + log-cond”. Hence \(0 \lesssim -\operatorname{ht} + \text{log-diff} +
+\text{log-cond}\). In the same breath, the definition of initial Θ-data is reinterpreted: \(\underline C_K\) and
+the cusp \(\underline\epsilon\) “behave as though they are a global multiplicative subspace and a canonical
+generator up to \(\{\pm1\}\)” (after Def. 10.1). Our toolkit stores \(\underline\epsilon\) as the integer 1. It
+is in fact the ghost of an object that cannot exist.</p>
+
+<p>Two more ideas from the survey's closing remarks, neither of which we had:</p>
+<ul>
+<li><b>Hyperbolicity of number fields</b> (Remark 13.13.2). In \(p\)-adic Teichmüller theory the derivative of
+the canonical Frobenius lifting gives \((1-p)(2g-2) \le 0\), which says the curve is hyperbolic. The two ways
+of computing the \(q\)-pilot's log-volume are, by analogy, a self-intersection “\(\Delta.\Delta\)” of the
+diagonal in \(\mathbb{Z}\otimes_{\mathbb{F}_1}\mathbb{Z}\), and \(|\log(\Theta)| \le |\log(q)| \approx 0\) “means the
+hyperbolicity of number fields”. The dictionary (end of §3.5): number field ↔ hyperbolic curve in
+characteristic \(p\); log-link ↔ Frobenius; Θ-link ↔ the lifting \(p^n/p^{n+1} \rightsquigarrow p^{n+1}/p^{n+2}\);
+the whole lattice ↔ a canonical lift of Frobenius.</li>
+<li><b>Descent to \(\mathbb{F}_1\)</b> (Remark 13.13.1). The Θ-link behaves like an “absolute Frobenius over
+\(\mathbb{Z}\)”, and the three indeterminacies can be read as “descent data from \(\mathbb{Z}\) to
+\(\mathbb{F}_1\)”. The survey calls the multiradial algorithm “a partial (meaningful) realisation of the
+philosophy of ‘the field of one element’ \(\mathbb{F}_1\)”.</li>
+</ul>
+
+<div class="box otaku"><span class="tag">Otaku corner · 卒業</span>
+<p>Japanese school years end in March with a graduation ceremony, a song everyone cries through, and the
+second button of somebody's uniform. “We say a good-bye to the scheme theory” is a graduation speech. Scheme
+theory was a good school. It taught us étale cohomology and how to behave around a base change. But the
+inclusion we want to respect lives off campus, and so, bowing once to Grothendieck-sensei, we walk out through
+the gate into a universe with no ring structure and a part-time job computing log-volumes.</p>
+</div>
+
+<h2 class="chapter"><span class="no">9</span>What the survey does not claim<span class="jp">書いていないこと</span></h2>
+
+<p>A strategy guide is also useful for what it leaves out. Four things:</p>
+
+<p><b>Uniform abc is not proved</b> (Remark 1.15.5). The bound depends on the degree \(d\) of the field. The
+survey extracts the dependence the proof gives, \(\operatorname{ht} \le H_{\mathrm{unif}}\cdot\min\{1,\epsilon\}^{-3}
+\epsilon_d^{-3}\, d^{\,4+\epsilon_d} + H_{\mathcal K}\), and says plainly that uniformity in \(d\) “is not proved yet”.</p>
+
+<p><b>The \(\epsilon\)-term is only bounded, and hints at something</b> (Remark 1.15.4). Along the way the proof gives
+\(\operatorname{ht} \le \delta + *\,\delta^{1/2}\log\delta\) with \(\delta = \text{log-diff} + \text{log-cond}\).
+Yamashita: “It seems that the exponent \(\frac12\) suggests a possible relation to Riemann hypothesis.” This is
+offered as a suggestion, not a result.</p>
+
+<p><b>No explicit constants.</b> \(\eta_{\mathrm{prm}}\), \(\xi_{\mathrm{prm}}\), \(C_{\mathcal K}\) and the size
+of Exc stay abstract. The level gauge of §4 uses the toolkit's value for \(\eta_{\mathrm{prm}}\), which comes
+from elsewhere.</p>
+
+<p><b>No engagement with the dispute.</b> The author ran seminars on IUT in 2013 and this version is dated
+June 2024; it proves Corollary 13.13 in under a page, by saying that after admitting the three indeterminacies
+the two columns' étale-like objects are isomorphic and that “the holomorphic hull of the union of possible
+images of Θ-pilot objects … contains a region which is isomorphic (not equal) to the region determined by the
+q-pilot objects”. The words “isomorphic (not equal)” are exactly where the disagreement described in
+<code>multiradial_guide.pdf</code> §12 lives: Scholze and Stix argue the step has no content once copies are
+identified; Mochizuki argues that identifying them is the error; Joshi argues a needed property is unproved;
+the LANA formalisation reported in July 2026 that it had not yet reconstructed the required compatibility.
+[Y] neither mentions nor answers any of this. It is a faithful and much more readable account of what the
+proof says, and for that question it leaves the reader where [IUTchIII] does. We are still a toolkit, not a
+referee. <span class="jp">審判ではありません。</span></p>
+
+<h2 class="chapter"><span class="no">10</span>Suggested fixes, and a phrasebook<span class="jp">直すところ・単語帳</span></h2>
+
+<p>Nothing below has been done. Each is small, and whether to do them is the owner's call.</p>
+<table class="wide">
+<tr><th>#</th><th>fix</th><th>where</th></tr>
+<tr><td>1</td><td>Reword the sentence in <code>funfun_iut.pdf</code> §1 to “at the bad places \(v_3, v_5, v_7\) of
+\(\mathbb{V}^{\mathrm{bad}}_{\mathrm{mod}}\)”, and mention \(v_2\) only with \(\log q^{\forall}\).</td><td><code>docs/funfun_iut/funfun_iut.html</code></td></tr>
+<tr><td>2</td><td>Carry a ramification index at bad places of at least \(2l/\gcd(2l,\operatorname{ord} q_v)\), or
+print \(e_K\) as “≥” instead of “1”; replace the \(\log\mathfrak{d}^K\) estimate by, or print it beside, the
+Lemma 1.11 (1) bound.</td><td><code>scripts/infographic/initialtheta-data.js</code>, <code>src/iut_core.c</code></td></tr>
+<tr><td>3</td><td>Change the verdict line of <code>ComputeThmOneTen</code> / <code>ComputeCorTwoTwo</code> from “holds” to
+something like “holds trivially; this curve is in the exceptional set (\(\epsilon_E &gt; 1\))”.</td><td><code>src/iut_ops_iv.c</code></td></tr>
+<tr><td>4</td><td>Make pipeline stage 1 item (a) use the same degree check as the validator.</td><td><code>src/iut_i.c</code></td></tr>
+<tr><td>5</td><td>Add an “auto l (proof window)” choice next to “auto l”: the smallest admissible prime above
+\(\sqrt{\log q^{\forall}}\).</td><td><code>src/gui/</code>, generator</td></tr>
+<tr><td>6</td><td>Cite [Y] in the manual and both guides; its numbering is far easier to point at than step
+(vii) of the proof of [IUTchIV] Theorem 1.10.</td><td>docs</td></tr>
+</table>
+
+<h3><span class="no">10.1</span>Phrasebook: Yamashita ↔ Mochizuki ↔ this repository</h3>
+<table class="wide">
+<tr><th>[Y]</th><th>[IUTchI–IV]</th><th>toolkit / our guides</th><th>meaning</th></tr>
+<tr><td>(Indet ↶↷), permutation</td><td>(Ind1)</td><td><code>ind1</code>, “shuffled seats”</td><td>étale transport: \({}^\dagger G_v \cong {}^\ddagger G_v\), automorphisms of processions</td></tr>
+<tr><td>(Indet →), horizontal</td><td>(Ind2)</td><td><code>ind2Summands</code>, “turning the dial”</td><td>Kummer detachment along the Θ-link: \({}^\dagger\mathcal{O}^{\times\mu} \cong {}^\ddagger\mathcal{O}^{\times\mu}\)</td></tr>
+<tr><td>(Indet ↑), vertical</td><td>(Ind3)</td><td><code>ind3</code>, “only fits inside”</td><td>Kummer detachment along the log-links: upper semi-compatibility</td></tr>
+<tr><td>Hodge theatre</td><td>Hodge theater</td><td><code>HodgeTheater</code></td><td>the same; [Y] spells it the British way</td></tr>
+<tr><td>\(l^{⋇}\)</td><td>\(l^{\divideontimes}\)</td><td><code>LStar</code>, \(l^*\)</td><td>\((l-1)/2\)</td></tr>
+<tr><td>Cor. 13.13 / Thm. 13.12</td><td>[IUTchIII] Cor. 3.12 / Thm. 3.11</td><td>stage 5</td><td>the inequality / the multiradial algorithm</td></tr>
+<tr><td>Prop. 1.12 / Prop. 1.15</td><td>[IUTchIV] Thm. 1.10 / Cor. 2.2</td><td>stages 6–7</td><td>the log-volume computation / the choice of \(l\)</td></tr>
+<tr><td>Def. 10.1 (1)–(7)</td><td>[IUTchI] Def. 3.1 (a)–(f)</td><td>stages 0–1</td><td>initial Θ-data; [Y] splits the conditions into seven items, not six</td></tr>
+<tr><td>⊞ / ⊠</td><td>⊞ / ⊠</td><td>“additive” / “multiplicative”</td><td>\(\mathbb{F}_l^{\rtimes\pm}\)-symmetry (units, log-shells) / \(\mathbb{F}_l^{⋇}\)-symmetry (number field)</td></tr>
+</table>
+
+<div class="box otaku"><span class="tag">Otaku corner · コマンド入力</span>
+<p>Mochizuki numbers his indeterminacies like a bureaucrat: (Ind1), (Ind2), (Ind3). Yamashita draws them as
+arrows: ↶↷, →, ↑. Anyone who grew up in a 1990s arcade recognises the second notation immediately. It is a
+special-move input. Rotate the stick, push forward, push up, and the Θ-pilot's log-volume comes out the other
+side of the screen as an upper bound. The move list in the back of the cabinet is Appendix C.6.</p>
+</div>
+
+<h2 class="chapter"><span class="no"></span>References<span class="jp">参考文献</span></h2>
+<ul class="refs">
+<li><b>[Y]</b> Go Yamashita, <em>A proof of the abc conjecture after Mochizuki</em>, manuscript for RIMS Kôkyûroku Bessatsu, version of
+June 25, 2024, {{total}} pages. In this repository as <code>pdf/A Proof of the abc Conjecture after Mochizuki (Go Yamashita, 2024-06-25).pdf</code>.
+All theorem, lemma and remark numbers without another tag refer to it.</li>
+<li><b>[IUTchI–IV]</b> S. Mochizuki, <em>Inter-universal Teichmüller Theory I–IV</em>, Publ. RIMS 57 (2021). In <code>pdf/</code>.</li>
+<li><b>[GenEll]</b> S. Mochizuki, <em>Arithmetic Elliptic Curves in General Position</em>, Math. J. Okayama Univ. 52 (2010). In <code>pdf/</code>.</li>
+<li><b>[pGC]</b> S. Mochizuki, <em>The Local Pro-p Anabelian Geometry of Curves</em>, Invent. Math. 138 (1999).</li>
+<li><b>[Mass2]</b> D. W. Masser, <em>Note on a conjecture of Szpiro</em>, Astérisque 183 (1990), 19–23.</li>
+<li><b>[Alien], [EssLgc], [ExpEst]</b> as cited in <code>funfun_iut.pdf</code> and <code>multiradial_guide.pdf</code>.</li>
+<li><b>Ours</b> <code>funfun_iut.pdf</code>, <code>multiradial_guide.pdf</code>, <code>anabelian_guide.pdf</code>, <code>docs/PIPELINE.md</code>,
+<code>docs/GUI.md</code>; example data in <code>docs/initial-theta-data/pipeline/</code>.</li>
+</ul>
+
+<p class="small center">Built by <code>node scripts/gokun/build.js</code> from <code>docs/gokun_abc/gokun_abc.html</code>. おつかれさまでした。</p>
+
+</body>
+</html>
