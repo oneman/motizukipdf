@@ -43,6 +43,19 @@ validators, a terminal UI and a web app:
 Everything is grounded in the papers in this repository: each struct, check and
 view carries a citation such as `[IUTchIII] Def 1.1` or `[Alien] §3.7 (iv)`.
 
+## Start here: the guided explorer (`explorer/`)
+
+`explorer/` is a fresh start, written from the text of [IUTchI] with nothing taken from
+`src/` except the table of letters-only identifiers and its naming rule. It walks through
+the constructions of IUT I one step at a time (84 objects, 35 constructions, from the
+initial Θ-data of Def 3.1 to the Θ±ellNF-Hodge theater of Def 6.13), tracks what has been
+built, and computes the finite label combinatorics exactly. Terminal: `make -C explorer/c
+&& explorer/c/iutx`. Browser: open `explorer/web/index.html`. See
+[explorer/README.md](explorer/README.md).
+
+The process functions, pipeline, checks and verdicts described below predate it and were
+written without IUT I; the explorer does not rely on them.
+
 ## Build and run (C)
 
 ```sh
