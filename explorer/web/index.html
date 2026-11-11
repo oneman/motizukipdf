@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IUT explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>IUT explorer</h1>
+    <p>A guided walk through the constructions of <i>Inter-universal Teichmüller Theory I</i>, one step at a time.</p>
+  </div>
+  <form id="config" autocomplete="off">
+    <label>l <select id="cfg-l"></select></label>
+    <label>bad places <input id="cfg-bad" size="8" value="11" inputmode="numeric"></label>
+    <label>good places shown <input id="cfg-good" size="8" value="2,3,5" inputmode="numeric"></label>
+    <button type="submit">Set</button>
+    <span id="cfg-msg" role="status"></span>
+  </form>
+</header>
+<main>
+  <nav id="tour" aria-label="Tour">
+    <div class="controls">
+      <button id="btn-next" class="primary">Next step</button>
+      <button id="btn-undo">Undo</button>
+      <button id="btn-all">Run to end</button>
+      <button id="btn-reset">Start again</button>
+    </div>
+    <div id="progress"></div>
+    <ol id="steps"></ol>
+  </nav>
+  <section id="stage">
+    <div class="tabs" role="tablist">
+      <button id="tab-picture" role="tab" aria-selected="true">Picture</button>
+      <button id="tab-map" role="tab" aria-selected="false">All objects</button>
+    </div>
+    <div id="canvas-wrap"><canvas id="canvas" width="1000" height="560"></canvas></div>
+    <div id="map" hidden></div>
+    <article id="step-card"></article>
+  </section>
+  <aside id="side">
+    <section id="node-card" aria-live="polite"></section>
+    <section id="facts"></section>
+  </aside>
+</main>
+<footer>
+  Every object and step cites its place in [IUTchI]. The label combinatorics shown under “computed” is exact.
+  Fields, curves, fundamental groups and Frobenioids are described, not computed.
+</footer>
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="fmt.js"></script>
+<script src="pictures.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

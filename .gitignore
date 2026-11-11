@@ -14,3 +14,5 @@ lean/.lake/
 scripts/funfun/node_modules/
 scripts/multiradial/node_modules/
 scripts/gokun/node_modules/
+/explorer/c/*.o
+/explorer/c/iutx
